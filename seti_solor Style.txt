@@ -1,0 +1,21 @@
+{
+	"caret_extra_width": 1,
+	"color_scheme": "Packages/User/Color Highlighter/themes/Seti Monokai.tmTheme",
+	"folder_exclude_patterns":
+	[
+		".sass-cache"
+	],
+	"font_size": 12,
+	"ignored_packages":
+	[
+		"EclipseJavaFormatter",
+		"PHP MySQLi connection",
+		"Pretty JSON",
+		"Sass",
+		"SublimeREPL",
+		"Three.js Autocomplete",
+		"Vintage"
+	],
+	"scroll_past_end": true,
+	"theme": "Seti.sublime-theme"
+}

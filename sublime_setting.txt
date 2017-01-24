@@ -1,0 +1,154 @@
+rbenv
+
+sublime text 3:
+import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
+
+sublime text 2:
+import urllib2,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), 'wb' ).write(by) if dh == h else None; print('Error validating download (got %s instead of %s), please try manual install' % (dh, h) if dh != h else 'Please restart Sublime Text to finish installation')
+
+
+Package Control
+BracketHighlighter
+ColorHighlighter
+ColorPicker
+Emmet
+jsFormat
+Nettuts+ Fetch
+SassBeautify
+SCSS
+Seti_UI
+SideBarEnhancement
+Tag
+
+Transparency
+SCSS Expander
+javascript completions
+JQuery
+
+Fetch Manage:
+{
+	"files":
+	{
+		"CSSPlugin": "http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js",
+		"D3": "http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js",
+		"Kinetic": "http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v5.1.0.js",
+		"RWBY_font": "file:///D:/wonder/RWBY_font_css",
+		"Skrollr": "http://prinzhorn.github.io/skrollr/dist/skrollr.min.js",
+		"Skrollr-stylesheets": "https://raw.githubusercontent.com/Prinzhorn/skrollr-stylesheets/master/src/skrollr.stylesheets.js",
+		"TweenMax": "http://cdnjs.cloudflare.com/ajax/libs/gsap/1.12.1/TweenMax.min.js",
+		"blake_symbol_svg": "file:///D:/Downloads/rwby/rwby_svg/blake_symbol_svg",
+		"canvas_basic": "file:///D:/wonder/canvas_base.js",
+		"get_audio": "file:///D:/wonder/get_audio.js",
+		"group": "file:///D:/FlyC%20in%20Pixnet/Canvas/All%20Finish/group",
+		"image": "file:///D:/FlyC%20in%20Pixnet/Canvas/All%20Finish/image.js",
+		"image_loader": "file:///D:/wonder/image_loader.js",
+		"jquery": "http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js",
+		"jquery-parallax": "http://stephband.info/jparallax/js/jquery.parallax.min.js",
+		"paper_text": "file:///D:/wonder/paper_text",
+		"parallax": "https://raw.githubusercontent.com/wagerfield/parallax/master/deploy/parallax.js",
+		"physicsJS": "http://wellcaffeinated.net/PhysicsJS/assets/scripts/vendor/physicsjs-0.6.0/physicsjs-full-0.6.0.min.js",
+		"prettyGitGraph": "git log --graph --full-history --all --color --pretty=format:'%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s'",
+		"ruby_symbol_svg": "file:///D:/Downloads/rwby/rwby_svg/ruby_symbol_svg",
+		"scrollbar_style": "file:///D:/wonder/scrollbar_style.txt",
+		"snap.svg": "http://snapsvg.io/assets/js/snap.svg-min.js",
+		"team_rwby": "file:///D:/wonder/team_rwby",
+		"team_rwby_array": "file:///D:/wonder/team_rwby_array.scss",
+		"three": "http://threejs.org/build/three.min.js",
+		"verletJS": "https://raw.githubusercontent.com/subprotocol/verlet-js/master/js/verlet-1.0.0.js",
+		"weiss_symbol_svg": "file:///D:/Downloads/rwby/rwby_svg/weiss_symbol_svg",
+		"withClip": "file:///D:/FlyC%20in%20Pixnet/Canvas/All%20Finish/withClip",
+		"yang_symbol_svg": "file:///D:/Downloads/rwby/rwby_svg/yang_symbol_svg"
+	},
+	"packages":
+	{
+		"BaseFormat": "https://dl.dropboxusercontent.com/u/92502085/BaseFormat.zip"
+	}
+}
+
+
+key-binding:
+[
+	// Convert to expanded format
+	{
+		"keys": ["ctrl+alt+c"],
+		"command": "css_format",
+		"args": {
+			"action": "expand"
+		}
+	},
+     { "keys": ["f12"], "command": "side_bar_files_open_with",
+             "args": {
+                "paths": [],
+                "application": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+                "extensions":".*" //any file with extension
+            } 
+    },
+    { "keys": ["alt+f12"],
+        "command": "side_bar_open_in_browser",
+        "args":{"paths":[], "type":"production", "browser":""}
+    },
+    {
+        "keys": ["ctrl+t"],
+        "command": "side_bar_new_file2"
+    },
+    {
+        "keys": ["f2"],
+        "command": "side_bar_rename"
+    },
+    { 
+        "keys": ["ctrl+alt+r"], "command": "beautify_ruby" 
+    },
+    { "keys": ["ctrl+."], "command": "erb" },
+
+    {
+        "keys": ["ctrl+alt+f"], "command": "js_format",
+        "context": [{"key": "selector", "operator": "equal", "operand": "source.js,source.json"}]
+    }
+]
+
+color-scheme
+{
+	"caret_extra_width": 1,
+	"color_scheme": "Packages/Seti_UI/Scheme/Seti_monokai.tmTheme",
+	"folder_exclude_patterns":
+	[
+		".sass-cache"
+	],
+	"font_size": 10,
+	"ignored_packages":
+	[
+		"Vintage",
+		"SublimeREPL",
+		"Sass",
+		"JavaScript Completions",
+		"Pretty JSON",
+		"Three.js Autocomplete",
+		"EclipseJavaFormatter",
+		"PHP MySQLi connection"
+	],
+	"theme": "Seti.sublime-theme"
+}
+
+
+{
+	"caret_extra_width": 1,
+	"color_scheme": "Packages/User/Color Highlighter/themes/Seti_monokai.tmTheme",
+	"folder_exclude_patterns":
+	[
+		".sass-cache"
+	],
+	"font_size": 10,
+	"ignored_packages":
+	[
+		"Vintage",
+		"SublimeREPL",
+		"Sass",
+		"JavaScript Completions",
+		"Pretty JSON",
+		"Three.js Autocomplete",
+		"EclipseJavaFormatter",
+		"PHP MySQLi connection"
+	],
+	"theme": "Seti.sublime-theme"
+}
+

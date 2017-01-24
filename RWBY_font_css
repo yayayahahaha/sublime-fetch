@@ -1,0 +1,4 @@
+@font-face {
+    font-family: RWBY;
+    src: url(https://dl.dropboxusercontent.com/u/92502085/rwby_style.ttf) format("truetype");
+}
