@@ -1,0 +1,24 @@
+{
+	"snippets": {
+		"html": {
+			"abbreviations": {
+				"example": "<div class='example' title='Custom element example'>",
+				"vue":"<script type='text/javascript' src='https://vuejs.org/js/vue.js'></script>",
+				"vue_min":"<script type='text/javascript' src='https://vuejs.org/js/vue.min.js'></script>",
+				"$":"<script type='text/javascript' src='https://code.jquery.com/jquery-3.2.1.min.js'></script>",
+				"axios":"<script src='https://unpkg.com/axios/dist/axios.min.js'></script>",
+				"knockout":"<script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js'></script>",
+				"_":"<script src='https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js'></script>",
+				"d3":"<script src='https://d3js.org/d3.v4.js'></script>",
+				"d3_min":"<script src='https://d3js.org/d3.v4.min.js'></script>"
+			},
+			"snippets":{
+				"meta":"<meta property='fb:app_id' content=''>\n<meta property='og:title' content=''>\n<meta property='og:description' content=''>\n<meta property='og:site_name' content=''>\n<meta property='og:type' content=''>\n<meta property='og:url' content=''>\n<meta property='og:image' content=''>\n\n<meta name='keywords' content=''>\n<meta name='description' content=''>\n<meta charset='UTF-8'>\n<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n<meta name='viewport' content='width=device-width, height=device-height, initial-scale=1.0'>\n<!-- <meta name='viewport' content='width=device-width, height=device-height, initial-scale=1.0, user-scalable=no'> -->\n<title>${1:title}</title>\n",
+				"db":"data-bind=\"$1\"",
+				"kfor":"<!-- ko foreach: {data: ${1:array}, as: '${2:item}' } -->\n\t${3:something}\n<!-- /ko -->",
+				"kif":"<!-- ko if: ${1:someExpressionGoesHere} -->\n\t${2:something}\n<!-- /ko -->",
+				"kwith":"<!-- ko with: ${1:object} -->\n\t${2:something}\n<!-- /ko -->"
+			}
+		}
+	}
+}

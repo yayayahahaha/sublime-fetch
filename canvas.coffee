@@ -7,7 +7,7 @@ class Snow
 	constructor: ()->
 
 	update: ()->
-		
+
 init = ()->
 	# init
 

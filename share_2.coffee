@@ -23,12 +23,12 @@ window.onload = ()->
 
 init = ()->
 	twitterBtn = document.querySelectorAll 'a'
-	console.log twitterBtn	
+	console.log twitterBtn
 
 shareTwitter = (shareText, shareUrl)->
 	twitterArray = [
 		"https://twitter.com/intent/tweet?",
-		"ref_src", "twsrc%5Etfw", 
+		"ref_src", "twsrc%5Etfw",
 		"&text", shareText,
 		"&tw_p", "tweetbutton",
 		"&url", encodeURIComponent shareUrl,

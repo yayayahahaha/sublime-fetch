@@ -2,7 +2,7 @@
 	var audio = document.getElementById('myAudio');
 	var audioSrc = ctx.createMediaElementSource(audio);
 	var analyser = ctx.createAnalyser();
-	// we have to connect the MediaElementSource with the analyser 
+	// we have to connect the MediaElementSource with the analyser
 	audioSrc.connect(analyser);
 	audioSrc.connect(ctx.destination);
 	// we could configure the analyser: e.g. analyser.fftSize (for further infos read the spec)

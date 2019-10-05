@@ -1,0 +1,558 @@
+# golang 的部分
+GOPATH="$(go env GOPATH)"
+export PATH="${GOPATH}/bin:${PATH}" # 好像是export golang 的bin ?
+
+# alias 的部分
+local gitlab_path="${GOPATH}/src/gitlab.paradise-soft.com.tw" # 大部分公司的專案位子
+
+# 移動
+alias gbase="cd ${gitlab_path}/web/base"
+alias glv="cd ${gitlab_path}/web/lv"
+alias ghy="cd ${gitlab_path}/web/hy"
+alias gtz="cd ${gitlab_path}/web/tz"
+alias gc7="cd ${gitlab_path}/web/c7"
+alias gc8="cd ${gitlab_path}/web/c8"
+alias gbh="cd ${gitlab_path}/web/bh"
+alias g3h="cd ${gitlab_path}/web/3h"
+alias gls="cd ${gitlab_path}/web/ls"
+alias gcdd="cd ${gitlab_path}/web/cdd"
+alias gsc="cd ${gitlab_path}/web/sc"
+alias gxpj="cd ${gitlab_path}/web/xpj"
+alias gco="cd ${gitlab_path}/web/co"
+alias gad="cd ${gitlab_path}/frontend/admin"
+alias gre="cd ${gitlab_path}/frontend/reseller"
+
+alias gsce="cd ${gitlab_path}/frontend/site_clone_engine"
+alias gxiao-admin="cd ${gitlab_path}/frontend/cpjihua/xiaoshuo-admin"
+alias g51-admin="cd ${gitlab_path}/frontend/cpjihua/cp51-admin"
+alias gbbs="cd ${gitlab_path}/frontend/bbs-backstage"
+
+# 啟動公司的Web 相關
+alias gget='_runGoGetStuff' #go get
+alias ggu='_runGulpStuff' #static files stuff
+alias ggb='_runGoBuildStuff' #build
+alias gma='_runGoMain' #run
+alias rl='_runGulpClean' #run gulp clean only
+# TODO: third-party things' clone and copy
+
+#Git 相關
+alias set-config-work='_set_git_config_of_work'
+alias cbrp='_change_backend_repostory'
+alias fetch_all_frontend_repostory="_fetch_all_frontend_repostory"
+alias clean_all_web_gulp="_clean_all_web_gulp"
+
+_yaitoo_path="$HOME/go/src/gitlab.paradise-soft.com.tw/backend/yaitoo"
+_common_path="$HOME/go/src/gitlab.paradise-soft.com.tw/glob/common"
+_utils_path="$HOME/go/src/gitlab.paradise-soft.com.tw/glob/utils"
+alias gbyat="cd $_yaitoo_path"
+alias gbcom="cd $_common_path"
+alias gbuti="cd $_utils_path"
+
+alias tToS='_change_traditional_to_simplified' #繁體轉簡體的快速commit
+
+# site clone engine 的包板與複製移動等
+alias sceBuild='_sce_build_and_move_to_server'
+# lottery-info 的包板與複製移動等
+alias lottery_info_build='_lottery_168_build_and_push_to_server'
+
+
+
+alias tt='_test_function'
+function _test_function() {
+  local branch_name=master
+  (gbase && fo) & gbase_var=$!
+  (glv   && fo) & glv_var=$!
+  (ghy   && fo) & ghy_var=$!
+  (gtz   && fo) & gtz_var=$!
+  (gc7   && fo) & gc7_var=$!
+  (gc8   && fo) & gc8_var=$!
+  (gbh   && fo) & gbh_var=$!
+  (g3h   && fo) & g3h_var=$!
+  (gls   && fo) & gls_var=$!
+  (gcdd  && fo) & gcdd_var=$!
+  (gsc   && fo) & gsc_var=$!
+  (gxpj  && fo) & gxpj_var=$!
+  (gco   && fo) & gco_var=$!
+  (gad   && fo) & gad_var=$!
+  (gre   && fo) & gre_var=$!
+  (gsce  && fo) & gsce_var=$!
+
+  wait $gbase_var
+  wait $glv_var
+  wait $ghy_var
+  wait $gtz_var
+  wait $gc7_var
+  wait $gc8_var
+  wait $gbh_var
+  wait $g3h_var
+  wait $gls_var
+  wait $gcdd_var
+  wait $gsc_var
+  wait $gxpj_var
+  wait $gco_var
+  wait $gad_var
+  wait $gre_var
+  wait $gsce_var
+
+  echo 'done'
+
+  # typeset -A array
+  # array=(k1 v1 k2 v2 k3 v3)
+
+  # for k in "${(@k)array}"; do
+  #   printf "%s -> %s\n" "$k" "$array[$k]"
+  # done
+
+  # (sleep 1 && cd ~ && echo $pwd) & sleep1=$!
+  # (sleep 2 && cd ~ && echo $pwd) & sleep2=$!
+}
+
+function _novel_admin_build() {
+  local toplevel=(`git rev-parse --show-toplevel`)
+  cd ${toplevel}
+
+  yarn build
+}
+function _novel_admin_package() {
+  local toplevel=(`git rev-parse --show-toplevel`)
+  cd ${toplevel}
+
+  # TODO: 可以在使用此function 的時候就帶入
+  echo '請輸入服務的名稱: '
+  local archive_name
+  read archive_name
+
+  rm -rf release
+  mkdir release
+
+  cp -rf dist release/
+  cp -rf public release/
+  cp -rf package-lock.json release/
+  cp -rf package.json release/
+  cp -rf server.js release/
+  cp -rf vue.config.js release/
+  # .env 要有但每個環境不一樣，所以不能一起覆寫過去
+  # 裡面包含了api 的default domain 和起服務的port
+
+  cd release
+  tar -zcvf $archive_name .
+}
+function _novel_admin_deploy() {
+ local toplevel=(`git rev-parse --show-toplevel`)
+ cd "${toplevel}/release"
+
+ # TODO: 可以在使用此function 的時候就帶入
+ echo '請輸入服務的名稱: '
+ local archive_name
+ read archive_name
+
+ local account="frontend_web"
+ local on_machine_command="
+   cd ~/"${archive_name}"
+   tar -zxvf ${archive_name}
+   sudo npm i
+   rm ${archive_name}
+
+  pm2 restart novel-admin
+ "
+
+ # web_demo
+ local web_demo_IP='10.200.252.163'
+ scp $archive_name ${account}@${web_demo_IP}:~/${archive_name}
+ ssh ${account}@${web_demo_IP} "${on_machine_command}"
+
+ # (scp -i ~/.ssh/frontend_web $archive_name ${account}@${cp_51_CDD_ip}:/usr/local/${archive_name} &&
+ #   ssh -i ~/.ssh/frontend_web ${account}@104.199.221.221 "${on_machine}") & CDD_var=$!
+
+ cd ${toplevel}
+}
+function _novel_admin_ALL() {
+  _novel_admin_build
+  _novel_admin_package
+  _novel_admin_deploy
+}
+
+function _cp51_admin_build() {
+  local toplevel=(`git rev-parse --show-toplevel`)
+  cd ${toplevel}
+
+  yarn build
+}
+function _cp51_admin_package() {
+  local toplevel=(`git rev-parse --show-toplevel`)
+  cd ${toplevel}
+
+  # TODO: 可以在使用此function 的時候就帶入
+  echo '請輸入服務的名稱: '
+  local archive_name
+  read archive_name
+
+  rm -rf release
+  mkdir release
+
+  cp -rf dist release/
+  cp -rf public release/
+  cp -rf package-lock.json release/
+  cp -rf package.json release/
+  cp -rf server.js release/
+  cp -rf vue.config.js release/
+  # .env 要有但每個環境不一樣，所以不能一起覆寫過去
+  # 裡面包含了api 的default domain 和起服務的port
+
+  cd release
+  tar -zcvf $archive_name .
+}
+function _cp51_admin_deploy() {
+  local toplevel=(`git rev-parse --show-toplevel`)
+  cd "${toplevel}/release"
+
+  # TODO: 可以在使用此function 的時候就帶入
+  echo '請輸入服務的名稱: '
+  local archive_name
+  read archive_name
+
+  local account="frontend_web"
+  local on_machine_command="
+    cd /usr/local/"${archive_name}"
+    tar -zxvf ${archive_name}
+    sudo npm i
+    rm ${archive_name}
+
+    #TODO: 看要怎麼判斷服務是否已經存在
+    sudo systemctl restart ${archive_name}
+  "
+
+  # cp_51_CDD
+  local cp_51_CDD_ip='104.199.221.221'
+  scp -i ~/.ssh/frontend_web $archive_name ${account}@${cp_51_CDD_ip}:/usr/local/${archive_name}
+  ssh -i ~/.ssh/frontend_web ${account}@${cp_51_CDD_ip} "${on_machine_command}"
+
+  # cp_51_SC
+  local cp_51_SC_ip='35.201.211.238'
+  scp -i ~/.ssh/frontend_web $archive_name ${account}@${cp_51_SC_ip}:/usr/local/${archive_name}
+  ssh -i ~/.ssh/frontend_web ${account}@${cp_51_SC_ip} "${on_machine_command}"
+
+  # cp_51_CO
+  local cp_51_CO_ip='35.234.27.127'
+  scp -i ~/.ssh/frontend_web $archive_name ${account}@${cp_51_CO_ip}:/usr/local/${archive_name}
+  ssh -i ~/.ssh/frontend_web ${account}@${cp_51_CO_ip} "${on_machine_command}"
+
+  # cp_51_TZ
+  local cp_51_TZ_ip='35.221.136.24'
+  scp -i ~/.ssh/frontend_web $archive_name ${account}@${cp_51_TZ_ip}:/usr/local/${archive_name}
+  ssh -i ~/.ssh/frontend_web ${account}@${cp_51_TZ_ip} "${on_machine_command}"
+
+  # (scp -i ~/.ssh/frontend_web $archive_name ${account}@${cp_51_CDD_ip}:/usr/local/${archive_name} &&
+  #   ssh -i ~/.ssh/frontend_web ${account}@104.199.221.221 "${on_machine}") & CDD_var=$!
+
+  cd ${toplevel}
+}
+function _cp51_admin_ALL() {
+  _cp51_admin_build
+  _cp51_admin_package
+  _cp51_admin_deploy
+}
+
+function _cp51_web_build() {
+  local toplevel=(`git rev-parse --show-toplevel`)
+
+  cd ${toplevel}
+
+  yarn build
+}
+function _cp51_web_package() {
+  local archive_name="xunya-cpjihua-web"
+
+  mkdir release
+  mkdir release/src
+
+  cp -rf .nuxt release/
+  cp -rf src/middleware release/src/
+  cp nuxt.config.js release/
+  cp package-lock.json release/
+  cp package.json release/
+
+  cp -rf src/static release/src/
+  rm -rf release/src/static/config.json # 要有但每個環境不一樣，所以要刪除
+  # .env 要有但每個環境不一樣，所以不能一起覆寫過去
+
+  cd release
+  tar -zcvf $archive_name .
+}
+function _cp51_web_deploy() {
+  local toplevel=(`git rev-parse --show-toplevel`)
+  cd "${toplevel}/release"
+
+  local archive_name="xunya-cpjihua-web"
+  local account="frontend_web"
+
+  local on_machine="cd /usr/local/xunya-cpjihua-web; tar -zxvf ${archive_name};sudo npm i; rm ${archive_name}; sudo systemctl restart xunya-cpjihua-web"
+  local on_machine_TZ_1="cd /usr/local/xunya-cpjihua-web-1; tar -zxvf ${archive_name};sudo npm i; rm ${archive_name}; sudo systemctl restart xunya-cpjihua-web-1"
+  local on_machine_TZ_2="cd /usr/local/xunya-cpjihua-web-2; tar -zxvf ${archive_name};sudo npm i; rm ${archive_name}; sudo systemctl restart xunya-cpjihua-web-2"
+  local on_machine_TZ_3="cd /usr/local/xunya-cpjihua-web-3; tar -zxvf ${archive_name};sudo npm i; rm ${archive_name}; sudo systemctl restart xunya-cpjihua-web-3"
+  local on_machine_TZ_4="cd /usr/local/xunya-cpjihua-web-4; tar -zxvf ${archive_name};sudo npm i; rm ${archive_name}; sudo systemctl restart xunya-cpjihua-web-4"
+
+  # cp-51-CDD
+  # (scp -i ~/.ssh/frontend_web $archive_name ${account}@104.199.221.221:/usr/local/xunya-cpjihua-web &&
+    # ssh -i ~/.ssh/frontend_web ${account}@104.199.221.221 "${on_machine}")
+  # cp-51-SC
+  # (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.201.211.238:/usr/local/xunya-cpjihua-web &&
+    # ssh -i ~/.ssh/frontend_web ${account}@35.201.211.238 "${on_machine}")
+  # cp-51-CO
+  # (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.234.27.127:/usr/local/xunya-cpjihua-web &&
+    # ssh -i ~/.ssh/frontend_web ${account}@35.234.27.127 "${on_machine}")
+
+  # cp-51-TZ-1
+  # (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.221.136.24:/usr/local/xunya-cpjihua-web-1 &&
+    # ssh -i ~/.ssh/frontend_web ${account}@35.221.136.24 "${on_machine_TZ_1}")
+
+  # cp-51-TZ-2
+  # (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.221.136.24:/usr/local/xunya-cpjihua-web-2 &&
+    # ssh -i ~/.ssh/frontend_web ${account}@35.221.136.24 "${on_machine_TZ_2}")
+
+  # cp-51-TZ-3
+  # (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.221.136.24:/usr/local/xunya-cpjihua-web-3 &&
+    # ssh -i ~/.ssh/frontend_web ${account}@35.221.136.24 "${on_machine_TZ_3}")
+
+  # cp-51-TZ-4
+  (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.221.136.24:/usr/local/xunya-cpjihua-web-4 &&
+    ssh -i ~/.ssh/frontend_web ${account}@35.221.136.24 "${on_machine_TZ_4}")
+
+  # wait $CDD_var
+  # wait $SC_var
+  # wait $CO_var
+  # wait $TZ_1_var
+  # wait $TZ_2_var
+  # wait $TZ_3_var
+  # wait $TZ_4_var
+
+  echo 'done!!!'
+
+  rm -rf ${archive_name}
+}
+function _cp51_web_ALL() {
+  _cp51_web_build
+  _cp51_web_package
+  _cp51_web_deploy
+}
+
+function _lottery_168_build() {
+  # 包板
+  yarn build
+
+  # 創建/刪除 壓縮用的資料夾
+  rm -rf output
+  mkdir output
+
+  # 複製
+  # 1. .nuxt/
+  cp -r .nuxt output/
+  # 2. server/
+  cp -r server output/
+  # 3. src/static
+  mkdir output/src
+  cp -r src/static output/src/
+  # 4. nuxt.config.js
+  cp nuxt.config.js output/
+  # 5. package.json
+  cp package.json output/
+
+  # 壓縮
+  tar -C output/ -zcvf output/lottery-info.tar.gz ./
+}
+function _lottery_168_push_to_server() {
+  # 放到server
+  scp output/lottery-info.tar.gz frontend-web-demo:~/lottery-info
+}
+function _lottery_168_build_and_push_to_server() {
+  # 判斷專案位置的方式待優化
+  current_path=$(pwd)
+  match_path='/Users/flyc/go/src/gitlab.paradise-soft.com.tw/frontend/lottery-info'
+  if [[ $current_path != $match_path ]]; then
+    echo "當前目錄: $current_path"
+    echo "指定目錄: $match_path"
+
+    echo ""
+    echo "當前目錄不為lottery-info 目錄"
+    return 1
+  fi
+
+  _lottery_168_build
+  _lottery_168_push_to_server
+}
+function _lottery_168_untar_and_deploy() {
+  # pm2 stuff
+  # pm2 start npm -n "lottery-info" -- run start
+
+  mkdir temp-folder
+  mv lottery-info/lottery-info.tar.gz temp-folder/
+  rm -rf lottery-info
+  mkdir lottery-info
+
+  mv temp-folder/lottery-info.tar.gz lottery-info/
+  cd lottery-info
+  tar -zxvf lottery-info.tar.gz
+  rm lottery-info.tar.gz
+
+  npm install
+}
+
+function _sce_build_and_move_to_server() {
+  # 包版
+  yarn build
+
+  # 創建壓縮用的資料夾
+  mkdir output
+  mkdir output/dist
+
+  # 打包 go
+  GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o "xunya-sceweb" .
+
+  # 複製、移動、壓縮
+  cp -r dist/ output/dist/
+  cp app.config.json output/
+  cp xunya-sceweb output/
+  cd output/
+
+  tar -zcvf xunya-sceweb.tar.gz *
+
+  # 放到server，這裡會要打密碼，現在好像不用
+  scp xunya-sceweb.tar.gz sce-dev:~/
+
+  # 復原與刪除
+  cd ..
+  rm -rf output/
+}
+
+function _change_backend_repostory() {
+  local dir=$(pwd)
+  local branch_to
+  local backend_paths=($_yaitoo_path $_common_path $_utils_path)
+
+  if [[ $1 == '' ]]; then
+      echo "${Orange}backend/yaitoo${NC}"
+      echo "${Orange}glob/common${NC}"
+      echo "${Orange}glob/utils${NC}"
+      echo "${Yellow}更新且切換到哪個分支: ${NC}"
+      read branch_to
+  else
+      branch_to=$1
+  fi
+  echo
+  echo "欲切換到的分支為: ${LightCyan}$branch_to${NC}"
+
+  for backend_path in ${backend_paths[@]}; do
+    echo ""
+    echo $backend_path
+    cd $backend_path
+    fo
+
+    git ch $branch_to
+  done
+
+  # 切回原本資料夾
+  cd $dir
+
+  echo
+  echo "${Yellow}--操作結束--${NC}"
+}
+
+function _clean_all_web_gulp() {
+  local previous_dir=$(pwd)
+
+  # web part, 包含base 和各品牌
+  declare -a web_array # -a: indexed array
+  local web_array=(lv ls c7 c8 bh 3h hy tz cdd sc xpj co)
+  local web_prefix=~/go/src/gitlab.paradise-soft.com.tw/web/
+
+  for web_project in ${web_array[@]}; do
+    cd "$web_prefix$web_project"
+    pwd
+    rl
+    echo ''
+  done
+
+  cd $previous_dir
+}
+
+function _fetch_all_frontend_repostory() {
+  # TODO: 記錄失敗的原因和是否要重新嘗試等
+  # 高併發?
+
+  local dir=$(pwd)
+
+  # web part, 包含base 和各品牌
+  declare -a web_array # -a: indexed array
+  local success_project=''
+  local failed_project=''
+  local web_array=(base lv ls c7 c8 bh 3h hy tz cdd sc xpj co)
+  local web_prefix=~/go/src/gitlab.paradise-soft.com.tw/web/
+
+  for web_project in ${web_array[@]}; do
+    cd "$web_prefix$web_project"
+    pwd
+    fo
+    if [[ $? != 0 ]]; then
+      failed_project="$failed_project $web_project"
+    else
+      success_project="$success_project $web_project"
+    fi
+    echo ''
+  done
+
+  # frontend part, 像是admin 和reseller
+  declare -a frontend_array # -a: indexed array
+  local frontend_array=(admin reseller)
+  local frontend_prefix=~/go/src/gitlab.paradise-soft.com.tw/frontend/
+
+  for fronend_project in ${frontend_array[@]}; do
+    cd "$frontend_prefix$fronend_project"
+    pwd
+    fo
+    if [[ $? != 0 ]]; then
+      failed_project="$failed_project $fronend_project"
+    else
+      success_project="$success_project $fronend_project"
+    fi
+    echo ''
+  done
+
+  echo "Fetch成功的專案: $success_project"
+  echo "Fetch失敗的專案: $failed_project"
+  cd $dir
+}
+
+function _set_git_config_of_work() {
+    git config user.name "flyc_chung"
+    git config user.email "flyc_chung@paradise-soft.com.tw"
+}
+
+function _runGoGetStuff() {
+    go get -u -v --insecure;
+}
+
+function _runGulpClean() {
+    local dir=$(pwd)
+    dir=${dir##*/}
+
+    npm --prefix "../base/scripts/" run gulp-clean ${dir}
+}
+
+function _runGulpStuff() {
+    local dir=$(pwd)
+    dir=${dir##*/}
+
+    npm --prefix "../base/scripts/" run gulp-clean ${dir}
+    npm --prefix "../base/scripts/" run gulp-run ${dir}
+
+    # gulp --gulpfile "../base/scripts/gulpfile.js" clean --brand ${dir};
+    # gulp --gulpfile "../base/scripts/gulpfile.js" run --brand ${dir} --css scss;
+}
+
+function _runGoBuildStuff() {
+    go build main.go
+}
+
+function _runGoMain() {
+    ./main
+}

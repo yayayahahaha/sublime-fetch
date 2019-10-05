@@ -1,0 +1,307 @@
+# color
+Black="\033[0;30m"
+DarkGray="\033[1;30m"
+Red="\033[0;31m"
+LightRed="\033[1;31m"
+Green="\033[0;32m"
+LightGreen="\033[1;32m"
+Orange="\033[0;33m"
+Yellow="\033[1;33m"
+Blue="\033[0;34m"
+LightBlue="\033[1;34m"
+Purple="\033[0;35m"
+LightPurple="\033[1;35m"
+Cyan="\033[0;36m"
+LightCyan="\033[1;36m"
+LightGray="\033[0;37m"
+White="\033[1;37m"
+NC="\033[0m"
+
+# 取消過長的prefix
+
+prompt_context() {
+  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    prompt_segment blue default "%(!.%{%F{yellow}%}.)$USER"
+  fi
+}
+
+# 結尾換行
+prompt_end() {
+  if [[ -n $CURRENT_BG ]]; then
+      print -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+  else
+      print -n "%{%k%}"
+  fi
+
+  print -n "%{%f%}"
+  CURRENT_BG=''
+
+  #Adds the new line and ➜ as the start character.
+  printf "\n ➜";
+}
+
+# 純粹縮短
+alias node6='node --experimental-modules'
+alias ifconfig_ip='_grep_ip_only'
+# 在當前路徑快速啟動sublime text 3
+function s() {
+  if [ "$1" != "" ]; then
+    subl $1
+  else
+    subl $PWD
+  fi
+}
+
+# 重置
+alias rb='exec /usr/local/bin/zsh' # zsh
+
+# 檔案備份相關
+  #sublime-fetch
+alias go_fetch="cd ~/flyc/sublime-fetch"
+alias gs="cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User"
+alias gs_merge="cd ~/Library/Application\ Support/Sublime\ Merge/Packages/User"
+  #sublime-package
+alias us="_update_sublime_fetch"
+alias gsp="_update_sublime_text_package"
+alias gsp_merge="_update_sublime_merge_package"
+alias s_update="us;gsp;gsp_merge;"
+
+# Git相關
+# 引入git 相關的bash shell
+source ~/.bash-git
+
+# Nodejs 相關
+# "n" 是一個nodejs 的版本管理套件
+alias n="sudo n"
+alias npm-list="npm list --depth=0"
+
+# 壓縮相關
+alias f-tar="_tar_with_default_parameter"
+alias f-untar="_untar_with_default_parameter"
+
+# port 號相關
+alias pp='_findPort'
+alias kk='_killPort'
+
+# 時間相關
+alias week='_what_week_is_this_week'
+function _what_week_is_this_week() {
+  date +%V
+}
+
+# 移動相關
+alias wonder="cd ~/flyc/wonder/"
+
+# 壓縮相關
+function _tar_with_default_parameter() {
+  if [[ $# == 2 ]]; then
+    archive_name=$1
+    folder_to_compress=$2
+  elif [[ $# == 1 ]]; then
+    archive_name=$1
+    folder_to_compress="*"
+  else
+    echo "${Red}--tar的格式錯誤--${NC}"
+    echo 'tar *archive_name [folder_to_compress]'
+    return 1
+  fi
+
+  if [[ $# == 1 ]]; then
+    echo '沒有輸入第二個參數，default 值為 * '
+  fi
+
+  # 檢查輸入的輸出參數裡面有沒有 .tar.gz
+  with_tar_gz=$(echo $1 | grep '.tar.gz')
+  if [[ $with_tar_gz != $archive_name ]]; then
+    echo "輸出 ${LightCyan}$archive_name${NC} 沒有.tar.gz 字樣，要自動加在結尾嗎?(Y/n)"
+    read add_tar_end_auto
+    if [[ $add_tar_end_auto != "n" ]]; then
+      archive_name="$archive_name.tar.gz"
+    fi
+  fi
+  echo "${Yellow}--開始壓縮--${NC}"
+  echo "來源: $folder_to_compress"
+  echo "輸出: $archive_name"
+  echo ""
+
+  if [[ $# == 2 ]]; then
+    tar -zcvf $archive_name $folder_to_compress
+  else
+    tar -zcvf $archive_name *
+  fi
+  if [[ $? == 0 ]]; then
+      echo "壓縮成功"
+  else
+      echo "${Red}壓縮失敗!${NC}"
+      echo
+      echo "${Red}----操作終止----${NC}"
+      return
+  fi
+}
+function _untar_with_default_parameter() {
+  tar -zxvf archive_name.tar.gz
+}
+
+#ip 相關function
+function _grep_ip_only() {
+  local command='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\  -f2'
+  echo "${Yellow}執行的指令: ${command}${NC}"
+  local ip=$(ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\  -f2)
+  echo $ip
+  echo $ip | pbcopy
+  echo '已複製進剪貼簿'
+}
+
+# port 號相關的function
+function _findPort() {
+  if [[ $1 == "" ]]; then
+    echo "請輸入欲查找的port 號: "
+    read port
+  else
+    port=$1
+  fi
+
+  echo "想要查找的port 號: ${LightCyan}$port${NC}"
+  echo
+  lsof -i tcp:$port
+  if [[ $? != "0" ]]; then
+    echo "目前沒有port 號為 ${LightCyan}$port${NC} 的執行緒"
+    return
+  fi
+
+  echo
+  echo "請問要執行 kill 嗎? (y/n)"
+  read runKill
+  if [[ $runKill != "y" ]]; then
+    echo "下次見"
+    return
+  fi
+  kk
+}
+function _killPort() {
+  # taskkill //PID $1 //F;
+  # taskkill /PID $1 /F;
+  if [[ $1 == "" ]]; then
+    echo "請輸入欲刪除的PID: "
+    read pid
+  else
+    pid=$1
+  fi
+  echo "輸入的pid 為: ${Green}$pid${NC}"
+  if [[ pid == "" ]]; then
+    echo "輸入的PID 不可為空"
+    echo "${Red}--終止操作--${NC}"
+    return
+  fi
+  kill -9 $pid
+  if [[ $? == "0" ]]; then
+    echo "${Green}刪除成功${NC}"
+  else
+    echo "${Red}刪除失敗!${NC}"
+  fi
+}
+
+# 檔案備份相關的function
+function _update_sublime_fetch() {
+  echo "${Yellow}更新遠端sublime fetch${NC}"
+  dir=$(pwd);
+
+  # bash 相關
+  cp ~/.bashrc ~/flyc/sublime-fetch/.bashrc-for-mac
+  cp ~/.bash-work ~/flyc/sublime-fetch/.bash-work-for-mac
+  cp ~/.bash-git ~/flyc/sublime-fetch/.bash-git-for-mac
+
+  # zsh 相關
+  cp ~/.zshrc ~/flyc/sublime-fetch/.zshrc-for-mac
+  cp ~/.zshrc.pre-oh-my-zsh ~/flyc/sublime-fetch/.zshrc.pre-oh-my-zsh-for-mac
+
+  # git 相關
+  cp ~/.gitconfig ~/flyc/sublime-fetch/.gitconfig-for-mac
+
+  cd ~/flyc/sublime-fetch
+  if [[ $(stashStatus) != "true" ]]; then
+    echo "sublime fetch 沒有異動，不需重新推版"
+    cd ${dir}
+    return
+  fi
+  echo "sublime fetch 有些異動，重新推版ing"
+  echo ""
+
+  git add :/
+  git commit -m "update" --quiet
+  git push --quiet
+  echo "sublime fetch 更新成功"
+
+  cd ${dir}
+}
+function _update_sublime_text_package() {
+  echo "${Yellow}更新遠端sublime-text package${NC}"
+  dir=$(pwd)
+
+  gs
+  if [[ $(stashStatus) != "true" ]]; then
+    echo "sublime-text package 沒有異動，不需重新推版"
+    cd ${dir}
+    return
+  fi
+  echo "sublime-text package 有些異動，重新推版ing"
+  echo ""
+
+  git add :/
+  git commit -m "update" --quiet
+  git push --quiet
+  echo "sublime-text package 更新成功"
+
+  cd ${dir}
+}
+function _update_sublime_merge_package() {
+  echo "${Yellow}更新遠端sublime-merge package${NC}"
+  dir=$(pwd)
+
+  gs_merge
+  if [[ $(stashStatus) != "true" ]]; then
+    echo "sublime-merge package 沒有異動，不需重新推版"
+    cd ${dir}
+    return
+  fi
+  echo "sublime-merge package 有些異動，重新推版ing"
+  echo ""
+
+  git add :/
+  git commit -m "update" --quiet
+  git push --quiet
+  echo "sublime-merge package 更新成功"
+
+  cd ${dir}
+}
+
+#字串操作
+  #indexOf
+stringIndexOf() {
+  x="${1%%$2*}"
+  [[ "$x" = "$1" ]] && echo -1 || echo "${#x}"
+}
+
+# 用來查看支援的色系
+function _show_color() {
+  echo -e "${Black}Hello, Black${NC}";
+  echo -e "${DarkGray}Hello, DarkGray${NC}";
+  echo -e "${Red}Hello, Red${NC}";
+  echo -e "${LightRed}Hello, LightRed${NC}";
+  echo -e "${Green}Hello, Green${NC}";
+  echo -e "${LightGreen}Hello, LightGreen${NC}";
+  echo -e "${Orange}Hello, Orange${NC}";
+  echo -e "${Yellow}Hello, Yellow${NC}";
+  echo -e "${Blue}Hello, Blue${NC}";
+  echo -e "${LightBlue}Hello, LightBlue${NC}";
+  echo -e "${Purple}Hello, Purple${NC}";
+  echo -e "${LightPurple}Hello, LightPurple${NC}";
+  echo -e "${Cyan}Hello, Cyan${NC}";
+  echo -e "${LightCyan}Hello, LightCyan${NC}";
+  echo -e "${Light}Hello, Light${NC}";
+  echo -e "${White}Hello, White${NC}";
+  echo -e "${NC}Hello, NC${NC}"
+}
+
+# 引入公司的 .bash-work
+source ~/.bash-work

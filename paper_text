@@ -1,2 +1,0 @@
-    @include background(linear-gradient(90deg, snow 1px, #f0f0f0 1px));
-    @include background-size(5px 5px);

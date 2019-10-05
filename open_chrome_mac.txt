@@ -1,0 +1,1 @@
+open /Applications/Google\ Chrome.app/ --args --disable-web-security
