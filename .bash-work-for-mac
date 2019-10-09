@@ -59,6 +59,7 @@ alias lottery_info_build='_lottery_168_build_and_push_to_server'
 
 alias tt='_test_function'
 function _test_function() {
+  # TODO: 異步執行的error handler
   local branch_name=master
   (gbase && fo) & gbase_var=$!
   (glv   && fo) & glv_var=$!
