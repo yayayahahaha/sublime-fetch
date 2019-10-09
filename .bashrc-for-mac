@@ -218,6 +218,11 @@ function _update_sublime_fetch() {
   # git 相關
   cp ~/.gitconfig ~/flyc/sublime-fetch/.gitconfig-for-mac
 
+  # eslint 相關
+  cp ~/.eslintrc.js ~/flyc/sublime-fetch/.eslintrc.js
+  cp ~/package.json ~/flyc/sublime-fetch/package.json
+  cp ~/package-lock.json ~/flyc/sublime-fetch/package-lock.json
+
   cd ~/flyc/sublime-fetch
   if [[ $(stashStatus) != "true" ]]; then
     echo "sublime fetch 沒有異動，不需重新推版"
