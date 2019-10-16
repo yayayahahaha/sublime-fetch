@@ -46,6 +46,7 @@ function _git_find_branch_by_hash() {
   else
       branch_hash=$1
   fi
+  # 很厲害的技能呢
   git log $branch_hash..HEAD --ancestry-path --merges --oneline --color | tail -n 1
 }
 
