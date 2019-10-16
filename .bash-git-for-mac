@@ -1,5 +1,5 @@
 export LESS="-F -X $LESS" # 讓所有沒有超過一頁的顯示結果都不會啟用less
-alias greset='git reset --hard; git clean -fd;' # 讓git head回到乾淨無修正的狀態, 被.gitignore 的檔案不會被刪除
+alias greset='git reset --hard; git clean -df;' # 讓git head回到乾淨無修正的狀態, 被.gitignore 的檔案不會被刪除
 alias fo="_git_fetch_and_pull" # 重新從遠端拉取production, master 和qa
 alias gb="_git_create_new_remote_branch" # 從當前位置創建分支並推上遠端
 alias grmF="_git_remove_both_local_and_remote" # 刪除遠端和本地的branch
