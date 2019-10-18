@@ -25,6 +25,7 @@ alias gre="cd ${gitlab_path}/frontend/reseller"
 
 alias gsce="cd ${gitlab_path}/frontend/site_clone_engine"
 alias gxiao-admin="cd ${gitlab_path}/frontend/cpjihua/xiaoshuo-admin"
+alias gxiao-wap="cd ${gitlab_path}/frontend/cpjihua/xiaoshuo-wap"
 alias g51-admin="cd ${gitlab_path}/frontend/cpjihua/cp51-admin"
 alias gbbs="cd ${gitlab_path}/frontend/bbs-backstage"
 

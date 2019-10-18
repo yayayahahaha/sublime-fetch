@@ -7,6 +7,7 @@ alias ggg="_check_branch_merged_or_not" #確認branch 是否已經merged #還沒
 alias g_find_branch_by_hash="_git_find_branch_by_hash" #透過hashkey 找出當初是屬於哪個分支
 alias gen_git_key="ssh-keygen" #常常忘記，寫在這裡
 alias prune_local_branch="_git_remove_remote_gone_branch" # 清除已經合進當前分之且遠端分支已不存在的本地分支
+alias g-root="_git_goto_root"
 # todo: 確認所有遠端branch 是否已經merge 進當前分支
 # todo: 重置qa: 找出目前有合進qa 的所有分支 -> 刪除後從production 重新創建 -> 把master 合進來 -> 把剛剛找到的合過的合進來
 #       !! 由於已經合併過的不會產生commit, 所以不會越來越長
@@ -18,6 +19,12 @@ alias prune_local_branch="_git_remove_remote_gone_branch" # 清除已經合進�
 # git config --global --unset user.name
 # git config --global --unset user.email
 # git config --global --unset credential.helper
+
+# 回到當前git repository 的根目錄
+function _git_goto_root() {
+  local root_path=(`git rev-parse --show-toplevel`)
+  cd "$root_path"
+}
 
 # 列出所有已經合進當前分支、且遠端的線已經gone 的分支
 function _git_remove_remote_gone_branch() {
