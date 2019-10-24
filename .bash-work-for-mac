@@ -27,6 +27,7 @@ alias gsce="cd ${gitlab_path}/frontend/site_clone_engine"
 alias gxiao-admin="cd ${gitlab_path}/frontend/cpjihua/xiaoshuo-admin"
 alias gxiao-wap="cd ${gitlab_path}/frontend/cpjihua/xiaoshuo-wap"
 alias g51-admin="cd ${gitlab_path}/frontend/cpjihua/cp51-admin"
+alias g51-web="cd ${gitlab_path}/frontend/cpjihua/cp51-web"
 alias gbbs="cd ${gitlab_path}/frontend/bbs-backstage"
 
 # 啟動公司的Web 相關
