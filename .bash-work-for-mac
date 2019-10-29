@@ -111,7 +111,7 @@ function _test_function() {
   # (sleep 2 && cd ~ && echo $pwd) & sleep2=$!
 }
 
-# web-demo 專案大部分都可以共用，目前常用的是小說和51
+# web-demo 專案大部分都可以共用，目前常用的是小說和51-admin
 function _novel_admin_build() {
   local toplevel=(`git rev-parse --show-toplevel`)
   cd ${toplevel}
@@ -292,33 +292,47 @@ function _cp51_web_deploy() {
   local account="frontend_web"
 
   local on_machine="cd /usr/local/xunya-cpjihua-web; tar -zxvf ${archive_name};sudo npm i; rm ${archive_name}; sudo systemctl restart xunya-cpjihua-web"
+
+  local on_machine_CDD_1="cd /usr/local/xunya-cpjihua-web-1; tar -zxvf ${archive_name};sudo npm i; rm ${archive_name}; sudo systemctl restart xunya-cpjihua-web-1"
+  local on_machine_CDD_2="cd /usr/local/xunya-cpjihua-web-2; tar -zxvf ${archive_name};sudo npm i; rm ${archive_name}; sudo systemctl restart xunya-cpjihua-web-2"
+  local on_machine_CDD_3="cd /usr/local/xunya-cpjihua-web-3; tar -zxvf ${archive_name};sudo npm i; rm ${archive_name}; sudo systemctl restart xunya-cpjihua-web-3"
+  local on_machine_CDD_4="cd /usr/local/xunya-cpjihua-web-4; tar -zxvf ${archive_name};sudo npm i; rm ${archive_name}; sudo systemctl restart xunya-cpjihua-web-4"
+
   local on_machine_TZ_1="cd /usr/local/xunya-cpjihua-web-1; tar -zxvf ${archive_name};sudo npm i; rm ${archive_name}; sudo systemctl restart xunya-cpjihua-web-1"
   local on_machine_TZ_2="cd /usr/local/xunya-cpjihua-web-2; tar -zxvf ${archive_name};sudo npm i; rm ${archive_name}; sudo systemctl restart xunya-cpjihua-web-2"
   local on_machine_TZ_3="cd /usr/local/xunya-cpjihua-web-3; tar -zxvf ${archive_name};sudo npm i; rm ${archive_name}; sudo systemctl restart xunya-cpjihua-web-3"
   local on_machine_TZ_4="cd /usr/local/xunya-cpjihua-web-4; tar -zxvf ${archive_name};sudo npm i; rm ${archive_name}; sudo systemctl restart xunya-cpjihua-web-4"
 
-  # cp-51-CDD
-  # (scp -i ~/.ssh/frontend_web $archive_name ${account}@104.199.221.221:/usr/local/xunya-cpjihua-web &&
-    # ssh -i ~/.ssh/frontend_web ${account}@104.199.221.221 "${on_machine}")
-  # cp-51-SC
-  # (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.201.211.238:/usr/local/xunya-cpjihua-web &&
-    # ssh -i ~/.ssh/frontend_web ${account}@35.201.211.238 "${on_machine}")
+  # cp-51-3H
+  (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.201.211.238:/usr/local/xunya-cpjihua-web &&
+    ssh -i ~/.ssh/frontend_web ${account}@35.201.211.238 "${on_machine}")
+
   # cp-51-CO
-  # (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.234.27.127:/usr/local/xunya-cpjihua-web &&
-    # ssh -i ~/.ssh/frontend_web ${account}@35.234.27.127 "${on_machine}")
+  (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.234.27.127:/usr/local/xunya-cpjihua-web &&
+    ssh -i ~/.ssh/frontend_web ${account}@35.234.27.127 "${on_machine}")
+
+  # cp-51-CDD-1
+  (scp -i ~/.ssh/frontend_web $archive_name ${account}@104.199.221.221:/usr/local/xunya-cpjihua-web-1 &&
+    ssh -i ~/.ssh/frontend_web ${account}@104.199.221.221 "${on_machine_CDD_1}")
+  # cp-51-CDD-2
+  (scp -i ~/.ssh/frontend_web $archive_name ${account}@104.199.221.221:/usr/local/xunya-cpjihua-web-2 &&
+    ssh -i ~/.ssh/frontend_web ${account}@104.199.221.221 "${on_machine_CDD_2}")
+  # cp-51-CDD-3
+  (scp -i ~/.ssh/frontend_web $archive_name ${account}@104.199.221.221:/usr/local/xunya-cpjihua-web-3 &&
+    ssh -i ~/.ssh/frontend_web ${account}@104.199.221.221 "${on_machine_CDD_3}")
+  # cp-51-CDD-4
+  (scp -i ~/.ssh/frontend_web $archive_name ${account}@104.199.221.221:/usr/local/xunya-cpjihua-web-4 &&
+    ssh -i ~/.ssh/frontend_web ${account}@104.199.221.221 "${on_machine_CDD_4}")
 
   # cp-51-TZ-1
-  # (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.221.136.24:/usr/local/xunya-cpjihua-web-1 &&
-    # ssh -i ~/.ssh/frontend_web ${account}@35.221.136.24 "${on_machine_TZ_1}")
-
+  (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.221.136.24:/usr/local/xunya-cpjihua-web-1 &&
+    ssh -i ~/.ssh/frontend_web ${account}@35.221.136.24 "${on_machine_TZ_1}")
   # cp-51-TZ-2
-  # (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.221.136.24:/usr/local/xunya-cpjihua-web-2 &&
-    # ssh -i ~/.ssh/frontend_web ${account}@35.221.136.24 "${on_machine_TZ_2}")
-
+  (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.221.136.24:/usr/local/xunya-cpjihua-web-2 &&
+    ssh -i ~/.ssh/frontend_web ${account}@35.221.136.24 "${on_machine_TZ_2}")
   # cp-51-TZ-3
-  # (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.221.136.24:/usr/local/xunya-cpjihua-web-3 &&
-    # ssh -i ~/.ssh/frontend_web ${account}@35.221.136.24 "${on_machine_TZ_3}")
-
+  (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.221.136.24:/usr/local/xunya-cpjihua-web-3 &&
+    ssh -i ~/.ssh/frontend_web ${account}@35.221.136.24 "${on_machine_TZ_3}")
   # cp-51-TZ-4
   (scp -i ~/.ssh/frontend_web $archive_name ${account}@35.221.136.24:/usr/local/xunya-cpjihua-web-4 &&
     ssh -i ~/.ssh/frontend_web ${account}@35.221.136.24 "${on_machine_TZ_4}")
