@@ -20,6 +20,7 @@
     tfp = "!git tag -l | xargs git tag -d; git fetch --tags"
     cma = commit -am
 	root-path = "rev-parse --show-toplevel"
+	sw = switch
 
 [merge]
     ff = false
