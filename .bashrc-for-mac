@@ -18,7 +18,6 @@ White="\033[1;37m"
 NC="\033[0m"
 
 # 取消過長的prefix
-
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
     prompt_segment blue default "%(!.%{%F{yellow}%}.)$USER"

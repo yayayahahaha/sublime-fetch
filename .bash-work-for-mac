@@ -30,6 +30,8 @@ alias gxiao-wap="cd ${gitlab_path}/frontend/cpjihua/xiaoshuo-wap"
 alias g51-admin="cd ${gitlab_path}/frontend/cpjihua/cp51-admin"
 alias g51-web="cd ${gitlab_path}/frontend/cpjihua/cp51-web"
 alias gbbs="cd ${gitlab_path}/frontend/bbs-backstage"
+alias gcpt="cd ${gitlab_path}/frontend/webview/cpt-webview"
+alias gco_wap="cd ${gitlab_path}/frontend/webview/co__wap"
 
 # 啟動公司的Web 相關
 alias gget='_runGoGetStuff' #go get
@@ -48,9 +50,11 @@ alias clean_all_web_gulp="_clean_all_web_gulp"
 _yaitoo_path="$HOME/go/src/gitlab.paradise-soft.com.tw/backend/yaitoo"
 _common_path="$HOME/go/src/gitlab.paradise-soft.com.tw/glob/common"
 _utils_path="$HOME/go/src/gitlab.paradise-soft.com.tw/glob/utils"
+_kangaroo_path="$HOME/go/src/gitlab.paradise-soft.com.tw/backend/kangaroo"
 alias gbyat="cd $_yaitoo_path"
 alias gbcom="cd $_common_path"
 alias gbuti="cd $_utils_path"
+alias gkangaroo="cd $_kangaroo_path"
 
 alias tToS='_change_traditional_to_simplified' #繁體轉簡體的快速commit
 
@@ -111,6 +115,59 @@ function _test_function() {
   # (sleep 1 && cd ~ && echo $pwd) & sleep1=$!
   # (sleep 2 && cd ~ && echo $pwd) & sleep2=$!
 }
+
+function _vue_spa_with_server_folder() {
+  echo '請輸入web-demo上的資料夾名稱: '
+  local archive_name
+  read archive_name
+
+  # move to top
+  local toplevel=(`git rev-parse --show-toplevel`)
+  cd ${toplevel}
+
+  # npm install
+  npm install --production
+
+  # npm build
+  npm run build
+
+  # package
+  rm -rf release/
+  mkdir release/
+
+  cp -r dist release/
+  cp -r server release/
+  cp package.json release/
+  cp package-lock.json release/
+
+  cd release/
+
+  tar -zcf $archive_name *
+
+  # TODO
+  # push to remote
+  local account="frontend_web" # 前端團隊的帳號
+  local on_machine_command="
+    cd ~/"${archive_name}"
+    if [[ $? != 0 ]]; then
+      echo "failed"
+    else
+      tar -zxvf ${archive_name}
+    fi
+
+    rm ${archive_name}
+  "
+
+  # web_demo
+  local web_demo_IP='10.200.252.163'
+  scp $archive_name ${account}@${web_demo_IP}:~/${archive_name}/
+  if [[ $? != 0 ]]; then
+    echo "failed!!!!!!"
+  else
+    ssh ${account}@${web_demo_IP} "${on_machine_command}"
+  fi
+}
+
 
 # web-demo 專案大部分都可以共用，目前常用的是小說和51-admin
 function _novel_admin_build() {
@@ -447,7 +504,7 @@ function _sce_build_and_move_to_server() {
 function _change_backend_repostory() {
   local dir=$(pwd)
   local branch_to
-  local backend_paths=($_yaitoo_path $_common_path $_utils_path)
+  local backend_paths=($_yaitoo_path $_common_path $_utils_path $_kangaroo_path)
 
   if [[ $1 == '' ]]; then
       echo "${Orange}backend/yaitoo${NC}"
