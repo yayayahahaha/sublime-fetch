@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # golang 的部分
 GOPATH="$(go env GOPATH)"
 export PATH="${GOPATH}/bin:${PATH}" # 好像是export golang 的bin ?
@@ -25,7 +27,6 @@ alias gre="cd ${gitlab_path}/frontend/reseller"
 
 alias gsce="cd ${gitlab_path}/frontend/site_clone_engine"
 alias gxiao-admin-ps="cd ${gitlab_path}/frontend/xiaoshuo-admin-ps"
-alias gxiao-admin="cd ${gitlab_path}/frontend/cpjihua/xiaoshuo-admin"
 alias gxiao-wap="cd ${gitlab_path}/frontend/cpjihua/xiaoshuo-wap"
 alias g51-admin="cd ${gitlab_path}/frontend/cpjihua/cp51-admin"
 alias g51-web="cd ${gitlab_path}/frontend/cpjihua/cp51-web"
@@ -64,9 +65,19 @@ alias sceBuild='_sce_build_and_move_to_server'
 alias lottery_info_build='_lottery_168_build_and_push_to_server'
 
 
-
 alias tt='_test_function'
 function _test_function() {
+  #!/bin/bash
+
+  local testing_list=('gbase' 'glv' 'ghy' 'gtz' 'gc7' 'gc8' 'gbh' 'g3h' 'gls' 'gcdd' 'gsc' 'gxpj' 'gco' 'gad' 'gre' 'gsce')
+  local testing_list_length=${#testing_list[@]}
+  for (( i = 1; i < testing_list_length + 1; i++ )); do
+    echo $i
+    echo ${testing_list[$i]}
+  done
+
+  return 1
+
   # TODO: 異步執行的error handler
   local branch_name=master
   (gbase && fo) & gbase_var=$!
