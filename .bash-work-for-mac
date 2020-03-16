@@ -76,7 +76,7 @@ function _test_function() {
     echo ${testing_list[$i]}
   done
 
-  return 1
+  # return 1
 
   # TODO: 異步執行的error handler
   local branch_name=master
