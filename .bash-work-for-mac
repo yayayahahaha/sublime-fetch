@@ -33,6 +33,7 @@ alias g51-web="cd ${gitlab_path}/frontend/cpjihua/cp51-web"
 alias gbbs="cd ${gitlab_path}/frontend/bbs-backstage"
 alias gcpt="cd ${gitlab_path}/frontend/webview/cpt-webview"
 alias gco_wap="cd ${gitlab_path}/frontend/webview/co__wap"
+alias gsite-group="cd ${gitlab_path}/frontend/site-group-admin"
 
 # 啟動公司的Web 相關
 alias gget='_runGoGetStuff' #go get
@@ -632,9 +633,6 @@ function _runGulpStuff() {
 
     npm --prefix "../base/scripts/" run gulp-clean ${dir}
     npm --prefix "../base/scripts/" run gulp-run ${dir}
-
-    # gulp --gulpfile "../base/scripts/gulpfile.js" clean --brand ${dir};
-    # gulp --gulpfile "../base/scripts/gulpfile.js" run --brand ${dir} --css scss;
 }
 
 function _runGoBuildStuff() {
