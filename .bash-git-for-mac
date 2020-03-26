@@ -9,9 +9,11 @@ alias gen_git_key="ssh-keygen" #常常忘記，寫在這裡
 alias prune_local_branch="_git_remove_remote_gone_branch" # 清除已經合進當前分之且遠端分支已不存在的本地分支
 alias g-root="_git_goto_root"
 
+# 重置qa 分支
+alias _rq="_reset_qa"
+alias rq="_rq;_rq;"
+
 # todo: 確認所有遠端branch 是否已經merge 進當前分支
-# todo: 重置qa: 找出目前有合進qa 的所有分支 -> 刪除後從production 重新創建 -> 把master 合進來 -> 把剛剛找到的合過的合進來
-#       !! 由於已經合併過的不會產生commit, 所以不會越來越長
 
 # 登出git command line
 # 且視情況看要不要重設user.name 和user.email
@@ -20,6 +22,70 @@ alias g-root="_git_goto_root"
 # git config --global --unset user.name
 # git config --global --unset user.email
 # git config --global --unset credential.helper
+
+function _reset_qa() {
+  git fp
+
+  local qa_first_reference_parent=(`git log --decorate --format="format:%d %h %s" --first-parent | grep -m 2 "\w*) \w* " | sed -n 2p | sed 's/^ (.*) //' | sed 's/ .*//'`)
+  local qa_merged_branch=(`git log "${qa_first_reference_parent}..head" --decorate --format="format:%s" --first-parent --merges | grep "^Merge branch " | sed "s/^Merge branch .//" | sed "s/' into.*//"`)
+  local qa_merged_branch_length=${#qa_merged_branch[@]}
+
+  if [[ $qa_merged_branch_length == 0 ]]; then
+    echo '沒有已經合進 qa 的分支'
+    return
+  fi
+
+  echo "${Yellow}切換到 production 分支${NC}"
+  git checkout production --quiet
+  if [[ $? == 0 ]]; then; echo "切換到 production 分支 成功"; else; echo "${lightRed}切換到 production 分支 失敗!${NC}"; return 1; fi
+  echo "${Yellow}透過hard-reset 同步production 到origin/production 分支${NC}"
+  git reset --hard origin/production --quiet
+  if [[ $? == 0 ]]; then; echo "同步本地與遠端的 production 分支 成功"; else; echo "${lightRed}同步本地與遠端的 production 分支 失敗!${NC}"; return 1; fi
+  echo ''
+
+  echo "${Yellow}切換到 master 分支${NC}"
+  git checkout master --quiet
+  if [[ $? == 0 ]]; then; echo "切換到 master 分支 成功"; else; echo "${lightRed}切換到 master 分支 失敗!${NC}"; return 1; fi
+  echo "${Yellow}透過hard-reset 同步master 到origin/master 分支${NC}"
+  git reset --hard origin/master --quiet
+  if [[ $? == 0 ]]; then; echo "同步本地與遠端的 master 分支 成功"; else; echo "${lightRed}同步本地與遠端的 master 分支 失敗!${NC}"; return 1; fi
+  echo ''
+
+  echo "${Yellow}切換到 qa 分支${NC}"
+  git checkout qa --quiet
+  if [[ $? == 0 ]]; then; echo "切換到 qa 分支 成功"; else; echo "${lightRed}切換到 qa 分支 失敗!${NC}"; return 1; fi
+  echo "${Yellow}透過hard-reset 把qa 重置到production 分支${NC}"
+  git reset --hard production --quiet
+  if [[ $? == 0 ]]; then; echo "重置 qa 分支 成功"; else; echo "${lightRed}重置 qa 分支 失敗!${NC}"; return 1; fi
+
+  echo "${Yellow}合併 master 進 qa 分支${NC}"
+  git merge master --quiet -m "Merge branch 'master' into qa"
+  if [[ $? == 0 ]]; then; echo "合併 master 進 qa 分支 成功"; else; echo "${lightRed}合併 master 進 qa 分支 失敗!${NC}"; return 1; fi
+  echo ''
+
+  echo "${LightCyan}開始合併舊有分支${NC}"
+  echo ''
+
+  for branch_name in ${qa_merged_branch[@]}; do
+    local remote_exist=$(remoteBranchDoesntExist $branch_name)
+    if [[ $remote_exist == true ]]; then
+      echo "${Yellow}切換到 $branch_name 分支${NC}"
+      if [[ $? == 0 ]]; then; echo "切換到 $branch_name 分支 成功"; else; echo "${lightRed}切換到 $branch_name 分支 失敗!${NC}"; return 1; fi
+      git checkout $branch_name --quiet
+      echo "${Yellow}透過hard-reset 同步$branch_name 到origin/$branch_name 分支${NC}"
+      if [[ $? == 0 ]]; then; echo "同步 成功"; else; echo "${lightRed}同步 失敗!${NC}"; return 1; fi
+      git reset --hard ${origin/$branch_name} --quiet
+
+      echo "${Yellow}切換到 qa 分支${NC}"
+      git checkout qa --quiet
+      if [[ $? == 0 ]]; then; echo "切換到 qa 分支 成功"; else; echo "${lightRed}切換到 qa 分支 失敗!${NC}"; return 1; fi
+      echo "${Yellow}合併 $branch_name 到 qa 分支${NC}"
+      git merge $branch_name --quiet -m "Merge branch '$branch_name' into qa"
+      if [[ $? == 0 ]]; then; echo "合併 $branch_name 到 qa 分支 成功"; else; echo "${lightRed}合併 $branch_name 到 qa 分支 失敗!${NC}"; return 1; fi
+      echo '------------------------------'
+    fi
+  done
+}
 
 # 回到當前git repository 的根目錄
 function _git_goto_root() {
