@@ -9,7 +9,7 @@ alias gen_git_key="ssh-keygen" #常常忘記，寫在這裡
 alias prune_local_branch="_git_remove_remote_gone_branch" # 清除已經合進當前分之且遠端分支已不存在的本地分支
 alias g-root="_git_goto_root"
 
-# 重置qa 分支
+# 重置qa 分支: 還沒有寫詳細的錯誤捕捉: stash, base-branch, exist branch, remove merged branch, back to previous branch..
 alias _rq="_reset_qa"
 alias rq="_rq;_rq;"
 
