@@ -34,6 +34,7 @@ alias gbbs="cd ${gitlab_path}/frontend/bbs-backstage"
 alias gcpt="cd ${gitlab_path}/frontend/webview/cpt-webview"
 alias gco_wap="cd ${gitlab_path}/frontend/webview/co__wap"
 alias gsite-group="cd ${gitlab_path}/frontend/site-group-admin"
+alias g168="cd ${gitlab_path}/frontend/cp168-web"
 
 # 啟動公司的Web 相關
 alias gget='_runGoGetStuff' #go get
@@ -45,8 +46,8 @@ alias rl='_runGulpClean' #run gulp clean only
 
 #Git 相關
 alias set-config-work='_set_git_config_of_work'
-alias cbrp='_change_backend_repostory'
-alias fetch_all_frontend_repostory="_fetch_all_frontend_repostory"
+alias cbrp='_change_backend_repository'
+alias fetch_all_frontend_repository="_fetch_all_frontend_repository"
 alias clean_all_web_gulp="_clean_all_web_gulp"
 
 _yaitoo_path="$HOME/go/src/gitlab.paradise-soft.com.tw/backend/yaitoo"
@@ -513,7 +514,7 @@ function _sce_build_and_move_to_server() {
   rm -rf output/
 }
 
-function _change_backend_repostory() {
+function _change_backend_repository() {
   local dir=$(pwd)
   local branch_to
   local backend_paths=($_yaitoo_path $_common_path $_utils_path $_kangaroo_path)
@@ -564,7 +565,7 @@ function _clean_all_web_gulp() {
   cd $previous_dir
 }
 
-function _fetch_all_frontend_repostory() {
+function _fetch_all_frontend_repository() {
   # TODO: 記錄失敗的原因和是否要重新嘗試等
   # 高併發?
 
