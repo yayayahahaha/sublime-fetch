@@ -35,6 +35,7 @@ alias gcpt="cd ${gitlab_path}/frontend/webview/cpt-webview"
 alias gco_wap="cd ${gitlab_path}/frontend/webview/co__wap"
 alias gsite-group="cd ${gitlab_path}/frontend/site-group-admin"
 alias g168="cd ${gitlab_path}/frontend/cp168-web"
+alias g168_wap="cd ${gitlab_path}/frontend/webview/168"
 
 # 啟動公司的Web 相關
 alias gget='_runGoGetStuff' #go get
@@ -54,6 +55,7 @@ _yaitoo_path="$HOME/go/src/gitlab.paradise-soft.com.tw/backend/yaitoo"
 _common_path="$HOME/go/src/gitlab.paradise-soft.com.tw/glob/common"
 _utils_path="$HOME/go/src/gitlab.paradise-soft.com.tw/glob/utils"
 _kangaroo_path="$HOME/go/src/gitlab.paradise-soft.com.tw/backend/kangaroo"
+_shark_path="$HOME/go/src/gitlab.paradise-soft.com.tw/backend/shark"
 alias gbyat="cd $_yaitoo_path"
 alias gbcom="cd $_common_path"
 alias gbuti="cd $_utils_path"
@@ -129,58 +131,29 @@ function _test_function() {
   # (sleep 2 && cd ~ && echo $pwd) & sleep2=$!
 }
 
-function _vue_spa_with_server_folder() {
-  echo '請輸入web-demo上的資料夾名稱: '
-  local archive_name
-  read archive_name
+function _168_project_sync_design() {
+  local dir=$(pwd)
+  g168_wap
+  git fp
+  git ch master
+  git reset --hard origin/master
+  git clean -xdf
+  npm install
+  npm run build:scss
+  npm run build:css
 
-  # move to top
-  local toplevel=(`git rev-parse --show-toplevel`)
-  cd ${toplevel}
+  g168
+  rm -rf assets/style
+  mkdir assets/style
+  g168_wap
 
-  # npm install
-  npm install --production
+  cp -r include/css "${gitlab_path}/frontend/cp168-web/assets/style/"
+  cp -r include/scss "${gitlab_path}/frontend/cp168-web/assets/style/"
+  cp -r include/img "${gitlab_path}/frontend/cp168-web/assets/style/"
+  cp include/main.scss "${gitlab_path}/frontend/cp168-web/assets/style/"
 
-  # npm build
-  npm run build
-
-  # package
-  rm -rf release/
-  mkdir release/
-
-  cp -r dist release/
-  cp -r server release/
-  cp package.json release/
-  cp package-lock.json release/
-
-  cd release/
-
-  tar -zcf $archive_name *
-
-  # TODO
-  # push to remote
-  local account="frontend_web" # 前端團隊的帳號
-  local on_machine_command="
-    cd ~/"${archive_name}"
-    if [[ $? != 0 ]]; then
-      echo "failed"
-    else
-      tar -zxvf ${archive_name}
-    fi
-
-    rm ${archive_name}
-  "
-
-  # web_demo
-  local web_demo_IP='10.200.252.163'
-  scp $archive_name ${account}@${web_demo_IP}:~/${archive_name}/
-  if [[ $? != 0 ]]; then
-    echo "failed!!!!!!"
-  else
-    ssh ${account}@${web_demo_IP} "${on_machine_command}"
-  fi
+  cd $dir
 }
-
 
 # web-demo 專案大部分都可以共用，目前常用的是小說和51-admin
 function _novel_admin_build() {
@@ -517,7 +490,7 @@ function _sce_build_and_move_to_server() {
 function _change_backend_repository() {
   local dir=$(pwd)
   local branch_to
-  local backend_paths=($_yaitoo_path $_common_path $_utils_path $_kangaroo_path)
+  local backend_paths=($_yaitoo_path $_common_path $_utils_path $_kangaroo_path $_shark_path)
 
   if [[ $1 == '' ]]; then
       echo "${Orange}backend/yaitoo${NC}"
