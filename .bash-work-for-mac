@@ -36,6 +36,7 @@ alias gco_wap="cd ${gitlab_path}/frontend/webview/co__wap"
 alias gsite-group="cd ${gitlab_path}/frontend/site-group-admin"
 alias g168="cd ${gitlab_path}/frontend/cp168-web"
 alias g168_wap="cd ${gitlab_path}/frontend/webview/168"
+alias g168_web="cd ${gitlab_path}/design/stationary-website/168"
 
 # 啟動公司的Web 相關
 alias gget='_runGoGetStuff' #go get
@@ -131,6 +132,7 @@ function _test_function() {
   # (sleep 2 && cd ~ && echo $pwd) & sleep2=$!
 }
 
+# 168手機版的設計同步腳本
 function _168_project_sync_design() {
   local dir=$(pwd)
   g168_wap
@@ -151,6 +153,36 @@ function _168_project_sync_design() {
   cp -r include/scss "${gitlab_path}/frontend/cp168-web/assets/style/"
   cp -r include/img "${gitlab_path}/frontend/cp168-web/assets/style/"
   cp include/main.scss "${gitlab_path}/frontend/cp168-web/assets/style/"
+
+  cd $dir
+}
+
+# 168電腦版的設計同步腳本
+function _168_web_project_sync_design() {
+  local dir=$(pwd)
+
+  # 更新168 靜態資源
+  g168_web
+  git fp
+  git ch 新增電腦版
+  git reset --hard origin/新增電腦版
+  git clean -xdf
+
+  # 清空168 資料夾
+  g168
+  rm -rf assets/desktop
+  mkdir assets/desktop
+
+  # 複製到168 專案
+  g168_web
+  cp -r desktop/assets/css "${gitlab_path}/frontend/cp168-web/assets/desktop/"
+  cp -r desktop/assets/scss "${gitlab_path}/frontend/cp168-web/assets/desktop/"
+  cp -r desktop/assets/img "${gitlab_path}/frontend/cp168-web/assets/desktop/"
+
+  # 取代字串
+  g168
+  sed -i -- 's/\/assets\/img\//\.\.\/img\//g' "assets/desktop/css/main.css"
+  rm 'assets/desktop/css/main.css--' # zsh 不知道為什麼zsh 會多一個檔案出來
 
   cd $dir
 }
