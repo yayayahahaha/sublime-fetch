@@ -651,7 +651,7 @@ function fetch_prune_detail() {
   echo
   echo -e "${Yellow}更新本地的遠端分支: git fetch --prune${NC}"
   # git fetch --prune --prune-tags --tags
-  git fetch -Ppt
+  git fetch -Pptf
   if [[ $? == 0 ]]; then
     echo '更新本地的遠端分支成功'
     return 0
