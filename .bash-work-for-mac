@@ -24,6 +24,8 @@ alias gco="cd ${gitlab_path}/web/co"
 alias ghb="cd ${gitlab_path}/web/hb"
 alias gad="cd ${gitlab_path}/frontend/admin"
 alias gre="cd ${gitlab_path}/frontend/reseller"
+alias glottery="cd ${gitlab_path}/web/lottery" # 彩票2.0
+alias ga2="cd ${gitlab_path}/frontend/admin-v2" # admin 不知道幾點0
 
 alias gsce="cd ${gitlab_path}/frontend/site_clone_engine"
 alias gxiao-admin-ps="cd ${gitlab_path}/frontend/xiaoshuo-admin-ps"
