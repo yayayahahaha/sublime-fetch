@@ -221,6 +221,8 @@ function _change_backend_repository() {
       echo "${Orange}backend/yaitoo${NC}"
       echo "${Orange}glob/common${NC}"
       echo "${Orange}glob/utils${NC}"
+      echo "${Orange}backend/kangaroo${NC}"
+      echo "${Orange}backend/shark${NC}"
       echo "${Yellow}更新且切換到哪個分支: ${NC}"
       read branch_to
   else
