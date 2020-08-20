@@ -41,6 +41,7 @@
 [core]
 	ignorecase = false
 	autocrlf = false
+	quotepath = false
 [rerere]
 	enabled = false
 [push]
