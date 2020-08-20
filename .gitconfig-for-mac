@@ -22,6 +22,7 @@
     cma = commit -am
 	root-path = "rev-parse --show-toplevel"
 	sw = switch
+    s = "!GIT_EDITOR=\"subl -n -w\" git "
 
 [merge]
     ff = false
@@ -42,6 +43,7 @@
 	ignorecase = false
 	autocrlf = false
 	quotepath = false
+# editor = subl -n -w
 [rerere]
 	enabled = false
 [push]
