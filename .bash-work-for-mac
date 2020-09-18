@@ -320,14 +320,15 @@ function _runGulpClean() {
     local dir=$(pwd)
     dir=${dir##*/}
 
-    npm --prefix "../base/scripts/" run gulp-clean ${dir}
+    git clean -xdf --exclude=app.conf
+    npm --prefix "../base/scripts/" run gulp-clean ${dir} # 還留著是因為cacheImage 資料夾的關係
 }
 
 function _runGulpStuff() {
     local dir=$(pwd)
     dir=${dir##*/}
 
-    npm --prefix "../base/scripts/" run gulp-clean ${dir}
+    _runGulpClean
     npm --prefix "../base/scripts/" run gulp-run ${dir}
 }
 
