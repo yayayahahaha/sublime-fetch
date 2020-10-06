@@ -22,6 +22,8 @@ alias gsc="cd ${gitlab_path}/web/sc"
 alias gxpj="cd ${gitlab_path}/web/xpj"
 alias gco="cd ${gitlab_path}/web/co"
 alias ghb="cd ${gitlab_path}/web/hb"
+alias gttmj="cd ${gitlab_path}/web/ttmj"
+alias gred="cd ${gitlab_path}/web/red-envelope"
 alias gad="cd ${gitlab_path}/frontend/admin"
 alias gre="cd ${gitlab_path}/frontend/reseller"
 alias glottery="cd ${gitlab_path}/web/lottery" # 彩票2.0
@@ -29,7 +31,7 @@ alias ga2="cd ${gitlab_path}/frontend/admin-v2" # admin 不知道幾點0
 
 alias gsce="cd ${gitlab_path}/frontend/site_clone_engine"
 alias gxiao-admin-ps="cd ${gitlab_path}/frontend/xiaoshuo-admin-ps"
-alias gxiao-wap="cd ${gitlab_path}/frontend/cpjihua/xiaoshuo-wap"
+alias gxiao-wap="cd ${gitlab_path}/frontend/xiaoshuo-wap"
 alias g51-admin="cd ${gitlab_path}/frontend/cpjihua/cp51-admin"
 alias g51-web="cd ${gitlab_path}/frontend/cpjihua/cp51-web"
 alias gbbs="cd ${gitlab_path}/frontend/bbs-backstage"
