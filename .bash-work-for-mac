@@ -26,7 +26,7 @@ alias gttmj="cd ${gitlab_path}/web/ttmj"
 alias gred="cd ${gitlab_path}/web/red-envelope"
 alias gad="cd ${gitlab_path}/frontend/admin"
 alias gre="cd ${gitlab_path}/frontend/reseller"
-alias glottery="cd ${gitlab_path}/web/lottery" # 彩票2.0
+alias glottery_v1="cd ${gitlab_path}/web/lottery-v1" # 彩票1.0-vue
 alias ga2="cd ${gitlab_path}/frontend/admin-v2" # admin 不知道幾點0
 
 alias gsce="cd ${gitlab_path}/frontend/site_clone_engine"
