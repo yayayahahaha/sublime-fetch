@@ -6,12 +6,12 @@
     bra = branch -av
     fp = "fetch --prune --prune-tags --tags --progress"
     au = "add :/ -u"
-    gr = !"git lg1"
-    gra = !"git lg1 --all"
-    gr2 = !"git lg2"
-    gra2 = !"git lg2 --all"
-    lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold cyan)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(red)- %an%C(reset)%C(bold yellow)%d%C(reset)'
-    lg2 = log --graph --abbrev-commit --decorate --date=local --format=format:'%C(bold green)%h%C(reset) - %C(bold cyan)%cd%C(reset) %C(bold cyan)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(red)- %an%C(reset)'
+# gr = !"git lg1" # 不知道哪天起無法auto-complete branch name 了
+# gr2 = !"git lg2" # 不知道哪天起無法auto-complete branch name 了
+    gra = !"git gr --all" # 不知道哪天起無法auto-complete branch name 了
+    gra2 = !"git gr2 --all" # 不知道哪天起無法auto-complete branch name 了
+    gr = log --graph --abbrev-commit --decorate --format=format:'%C(bold cyan)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(red)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+    gr2 = log --graph --abbrev-commit --decorate --date=local --format=format:'%C(bold green)%h%C(reset) - %C(bold cyan)%cd%C(reset) %C(bold cyan)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(red)- %an%C(reset)'
     df = diff HEAD^1 HEAD
     dft = difftool HEAD^1 HEAD
     dm = diff master...head
