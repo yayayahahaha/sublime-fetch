@@ -48,6 +48,7 @@ alias gget='_runGoGetStuff' #go get
 alias ggu='_runGulpStuff' #static files stuff
 alias ggb='_runGoBuildStuff' #build
 alias gma='_runGoMain' #run
+alias grun='ggu && ggb && gma' # run all web stuff
 alias rl='_runGulpClean' #run gulp clean only
 # TODO: third-party things' clone and copy
 
