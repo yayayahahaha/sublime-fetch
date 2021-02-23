@@ -22,7 +22,7 @@
     cma = commit -am
 	root-path = "rev-parse --show-toplevel"
 	sw = switch
-    cb = !"git br --show-current | pbcopy"
+    cb = !"git br --show-current | pbcopy" # git rev-parse --abbrev-ref HEAD
     s = "!GIT_EDITOR=\"subl -n -w\" git " # 透過sublime text 3 開啟git editor
 
 [merge]
