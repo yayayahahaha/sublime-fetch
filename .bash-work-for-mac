@@ -256,7 +256,7 @@ function _clean_all_web_gulp() {
 
   # web part, 包含base 和各品牌
   declare -a web_array # -a: indexed array
-  local web_array=(lv ls c7 c8 bh 3h hy tz cdd sc xpj co)
+  local web_array=(lv hy tz c7 c8 bh 3h ls cdd sc xpj co)
   local web_prefix=~/go/src/gitlab.paradise-soft.com.tw/web/
 
   for web_project in ${web_array[@]}; do

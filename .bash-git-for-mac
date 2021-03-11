@@ -1,19 +1,13 @@
 export LESS="-F -X $LESS" # 讓所有沒有超過一頁的顯示結果都不會啟用less
 alias greset='git reset --hard; git clean -df;' # 讓git head回到乾淨無修正的狀態, 被.gitignore 的檔案不會被刪除
 alias fo="_git_fetch_and_pull" # 重新從遠端拉取production, master 和qa
-alias gb="_git_create_new_remote_branch" # 從當前位置創建分支並推上遠端
-alias grmF="_git_remove_both_local_and_remote" # 刪除遠端和本地的branch
-alias ggg="_check_branch_merged_or_not" #確認branch 是否已經merged #還沒好
 alias g_find_branch_by_hash="_git_find_branch_by_hash" #透過hashkey 找出當初是屬於哪個分支
 alias gen_git_key="ssh-keygen" #常常忘記，寫在這裡
 alias prune_local_branch="_git_remove_remote_gone_branch" # 清除已經合進當前分之且遠端分支已不存在的本地分支
 alias g-root="_git_goto_root"
 
-# 重置qa 分支: 還沒有寫詳細的錯誤捕捉: stash, base-branch, exist branch, remove merged branch, back to previous branch..
-alias _rq="_reset_qa"
-alias rq="_rq;_rq;"
-
 # todo: 確認所有遠端branch 是否已經merge 進當前分支
+# track-all-remote-branches; git branch --merged
 
 # 登出git command line
 # 且視情況看要不要重設user.name 和user.email
@@ -23,77 +17,13 @@ alias rq="_rq;_rq;"
 # git config --global --unset user.email
 # git config --global --unset credential.helper
 
-function _reset_qa() {
-  git fp
-
-  local qa_first_reference_parent=(`git log --decorate --format="format:%d %h %s" --first-parent | grep -m 2 "\w*) \w* " | sed -n 2p | sed 's/^ (.*) //' | sed 's/ .*//'`)
-  local qa_merged_branch=(`git log "${qa_first_reference_parent}..head" --decorate --format="format:%s" --first-parent --merges | grep "^Merge branch " | sed "s/^Merge branch .//" | sed "s/' into.*//"`)
-  local qa_merged_branch_length=${#qa_merged_branch[@]}
-
-  if [[ $qa_merged_branch_length == 0 ]]; then
-    echo '沒有已經合進 qa 的分支'
-    return
-  fi
-
-  echo "${Yellow}切換到 production 分支${NC}"
-  git checkout production --quiet
-  if [[ $? == 0 ]]; then; echo "切換到 production 分支 成功"; else; echo "${lightRed}切換到 production 分支 失敗!${NC}"; return 1; fi
-  echo "${Yellow}透過hard-reset 同步production 到origin/production 分支${NC}"
-  git reset --hard origin/production --quiet
-  if [[ $? == 0 ]]; then; echo "同步本地與遠端的 production 分支 成功"; else; echo "${lightRed}同步本地與遠端的 production 分支 失敗!${NC}"; return 1; fi
-  echo ''
-
-  echo "${Yellow}切換到 master 分支${NC}"
-  git checkout master --quiet
-  if [[ $? == 0 ]]; then; echo "切換到 master 分支 成功"; else; echo "${lightRed}切換到 master 分支 失敗!${NC}"; return 1; fi
-  echo "${Yellow}透過hard-reset 同步master 到origin/master 分支${NC}"
-  git reset --hard origin/master --quiet
-  if [[ $? == 0 ]]; then; echo "同步本地與遠端的 master 分支 成功"; else; echo "${lightRed}同步本地與遠端的 master 分支 失敗!${NC}"; return 1; fi
-  echo ''
-
-  echo "${Yellow}切換到 qa 分支${NC}"
-  git checkout qa --quiet
-  if [[ $? == 0 ]]; then; echo "切換到 qa 分支 成功"; else; echo "${lightRed}切換到 qa 分支 失敗!${NC}"; return 1; fi
-  echo "${Yellow}透過hard-reset 把qa 重置到production 分支${NC}"
-  git reset --hard production --quiet
-  if [[ $? == 0 ]]; then; echo "重置 qa 分支 成功"; else; echo "${lightRed}重置 qa 分支 失敗!${NC}"; return 1; fi
-
-  echo "${Yellow}合併 master 進 qa 分支${NC}"
-  git merge master --quiet -m "Merge branch 'master' into qa"
-  if [[ $? == 0 ]]; then; echo "合併 master 進 qa 分支 成功"; else; echo "${lightRed}合併 master 進 qa 分支 失敗!${NC}"; return 1; fi
-  echo ''
-
-  echo "${LightCyan}開始合併舊有分支${NC}"
-  echo ''
-
-  for branch_name in ${qa_merged_branch[@]}; do
-    local remote_exist=$(remoteBranchDoesntExist $branch_name)
-    if [[ $remote_exist == true ]]; then
-      echo "${Yellow}切換到 $branch_name 分支${NC}"
-      if [[ $? == 0 ]]; then; echo "切換到 $branch_name 分支 成功"; else; echo "${lightRed}切換到 $branch_name 分支 失敗!${NC}"; return 1; fi
-      git checkout $branch_name --quiet
-      echo "${Yellow}透過hard-reset 同步$branch_name 到origin/$branch_name 分支${NC}"
-      if [[ $? == 0 ]]; then; echo "同步 成功"; else; echo "${lightRed}同步 失敗!${NC}"; return 1; fi
-      git reset --hard ${origin/$branch_name} --quiet
-
-      echo "${Yellow}切換到 qa 分支${NC}"
-      git checkout qa --quiet
-      if [[ $? == 0 ]]; then; echo "切換到 qa 分支 成功"; else; echo "${lightRed}切換到 qa 分支 失敗!${NC}"; return 1; fi
-      echo "${Yellow}合併 $branch_name 到 qa 分支${NC}"
-      git merge $branch_name --quiet -m "Merge branch '$branch_name' into qa"
-      if [[ $? == 0 ]]; then; echo "合併 $branch_name 到 qa 分支 成功"; else; echo "${lightRed}合併 $branch_name 到 qa 分支 失敗!${NC}"; return 1; fi
-      echo '------------------------------'
-    fi
-  done
-}
-
 # 回到當前git repository 的根目錄
 function _git_goto_root() {
   local root_path=(`git rev-parse --show-toplevel`)
   cd "$root_path"
 }
 
-# 列出所有已經合進當前分支、且遠端的線已經gone 的分支
+# 清除所有已經合進當前分支、且遠端的線已經gone 的分支
 function _git_remove_remote_gone_branch() {
   local branch_list=(`git br -vv --merged | sed 's/^..//' | awk -F '[][]' '$2~/: gone$/{print $1}' | awk '{print $1}'`)
   local branch_list_length=${#branch_list[@]}
@@ -124,144 +54,6 @@ function _git_find_branch_by_hash() {
   git log $branch_hash..HEAD --ancestry-path --merges --oneline --color | tail -n 1
 }
 
-function _git_remove_both_local_and_remote() {
-  if [[ $1 == '' ]]; then
-      echo "${Yellow}請輸入欲刪除的分支: ${NC}"
-      read branch_be_remove
-  else
-      branch_be_remove=$1
-  fi
-
-  echo "這將會把本地和遠端的 ${LightCyan}$branch_be_remove${NC} 分支刪除，確定執行？(y/N)"
-  read double_confirm
-  if [[ $double_confirm != "y" ]]; then
-    echo "下次見"
-    return
-  fi
-
-  lightBranchName="${LightCyan}$branch_be_remove${NC}"
-
-  clear
-
-  echo
-  echo -e "${LightGreen}--操作開始--${NC}"
-
-  # 檢查是否為git repository
-  isGitRepository_detail
-  if [[ $? != 0 ]]; then
-    return
-  fi
-
-  # 檢查欲刪除的分支是否為production 或master
-  cantBeProductionOrMaster_detail $branch_be_remove
-  if [[ $? != 0 ]]; then
-    return
-  fi
-
-  # 更新本地的遠端分支
-  fetch_prune_detail
-  if [[ $? != 0 ]]; then
-    return
-  fi
-
-  # 檢查欲創建的分支是否已經存在於遠端
-  remoteBranchHasExist_detail $branch_be_remove
-  if [[ $? != 0 ]]; then
-    return
-  fi
-
-  # 檢查欲創建的分支是否已經存在於本地
-  localBranchHasExist_detail $branch_be_remove
-  if [[ $? != 0 ]]; then
-    return
-  fi
-
-  # 開始刪除
-  echo
-  echo "${Yellow}開始刪除${NC}"
-  git ch --quiet master
-  git branch -D $branch_be_remove --quiet
-  if [[ $? != 0 ]]; then
-    echo "本地刪除失敗!"
-    return
-  fi
-  echo "本地刪除成功"
-  git push origin :$branch_be_remove --quiet
-  if [[ $? != 0 ]]; then
-    echo "遠端刪除失敗!"
-    return
-  fi
-  echo "遠端刪除成功"
-
-  echo
-  echo "${LightGreen}---操作結束---${NC}"
-  echo
-}
-
-function _git_create_new_remote_branch() {
-  clear
-
-  if [[ $1 == '' ]]; then
-    echo -e "${Orange}請輸入想要創建的分支名稱${NC}"
-    echo
-    echo -e "${Red}--操作終止--${NC}"
-    return
-  fi
-
-  echo
-  echo -e "${LightGreen}--操作開始--${NC}"
-
-  echo
-  echo -e "欲創建的分支為: ${LightCyan}$1${NC}"
-
-  # 檢查當前目錄是不是git repo
-  isGitRepository_detail
-  if [[ $? != 0 ]]; then
-    return
-  fi
-
-  #先fetch --prune 更新本地的遠端分支
-  fetch_prune_detail
-  if [[ $? != 0 ]]; then
-    return
-  fi
-
-  # 檢查欲創建的分支是否已經存在於遠端
-  remoteBranchDoesntExist_detail $1
-  if [[ $? != 0 ]]; then
-    return
-  fi
-
-  # 檢查欲創建的分支是否已經存在於本地
-  localBranchDoesntExist_detail $1
-  if [[ $? != 0 ]]; then
-    return
-  fi
-
-  # 創建本地分支後推上遠端
-  echo
-  echo -e "${Yellow}創建 ${LightCyan}$1${NC} ${Yellow}分支後推上遠端${NC}"
-  git checkout -b $1 --quiet
-  if [[ $? == 0 ]]; then
-    echo "創建本地分支 ${LightCyan}$1${NC} 成功"
-  else
-    echo -e "${Red}創建本地分支${NC} ${LightCyan}$1${NC} ${Red}失敗${NC}"
-    return
-  fi
-
-  git push origin -u $1 --quiet
-  if [[ $? == 0 ]]; then
-    echo "創建遠端分支 ${LightCyan}$1${NC} 成功"
-  else
-    echo -e "${Red}創建遠端分支${NC} ${LightCyan}$1${NC} ${Red}失敗${NC}"
-    return
-  fi
-
-  echo
-  echo -e "${Green}--操作完成--${NC}"
-  echo
-}
-
 function _git_fetch_and_pull() {
   clear # 清空terminal
 
@@ -272,7 +64,7 @@ function _git_fetch_and_pull() {
   isGitRepository_detail
   if [[ $? != 0 ]]; then; return 1; fi
 
-  current_branch=`git branch | grep \* | cut -d ' ' -f2`
+  current_branch=`git rev-parse --abbrev-ref HEAD`
   echo
   echo -e "當前分支為 ${LightCyan}${current_branch}${NC}"
 
@@ -450,24 +242,6 @@ function _git_fetch_and_pull() {
   return 0 # 0 是操作成功
 }
 
-# 開發中
-function _check_branch_merged_or_not() {
-  random_branch_name="temp-branch-${RANDOM}-${RANDOM}-${RANDOM}"
-  remotes_branch_list=($(git br --remotes | sed -e "s/origin\///"))
-  remotes_branch_list_with_prefix=($(git br --remotes | sed -e "s/origin\//$random_branch_name\//"))
-  remotes_branch_list_with_prefix=(sed -e "$remotes_branch_list_with_prefix")
-
-  echo $remotes_branch_list
-  echo $remotes_branch_list_with_prefix
-  echo $random_branch_name
-
-  length=${#remotes_branch_list[@]}
-  for ((i = 0; i != length; i++)); do
-     echo "remotes_branch_list_with_prefix $i: '${remotes_branch_list_with_prefix[i]}'"
-     echo "remotes_branch_list $i: '${remotes_branch_list[i]}'"
-  done
-}
-
 # 檢查branch 是否存在相關
 function localBranchDoesntExist() {
   temp=`git rev-parse --quiet --verify $1`
@@ -601,23 +375,4 @@ function fetch_prune_detail() {
     echo -e "${LightRed}更新本地的遠端分支失敗! 操作終止${NC}"
     return 1
   fi
-}
-
-# 傳入的分支不可為productoin 或master
-function cantBeProductionOrMaster_detail() {
-  echo
-  echo -e "${Yellow}檢查欲刪除的分支 ${lightBranchName} ${Yellow}是否為production 或master${NC}"
-  if [[ $1 == "production" ]]; then
-    echo "分支 ${lightBranchName} 不能為production!"
-    echo
-    echo "${Red}--操作終止--${NC}"
-    return 1
-  elif [[ $1 == "master" ]]; then
-    echo "分支 ${lightBranchName} 不能為master!"
-    echo
-    echo "${Red}--操作終止--${NC}"
-    return 1
-  fi
-  echo "分支 ${lightBranchName} 不是production或 master"
-  return 0
 }
