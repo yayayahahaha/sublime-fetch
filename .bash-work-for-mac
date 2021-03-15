@@ -28,7 +28,8 @@ alias gad="cd ${gitlab_path}/frontend/admin"
 alias gre="cd ${gitlab_path}/frontend/reseller"
 alias glottery_v1="cd ${gitlab_path}/web/lottery-v1" # 彩票1.0-vue
 alias ga2="cd ${gitlab_path}/frontend/admin-v2" # admin 不知道幾點0
-alias gagent="cd ${gitlab_path}/web/agent" # admin 不知道幾點0
+alias gagent="cd ${gitlab_path}/web/agent"
+alias gstock="cd ${gitlab_path}/web/stock-v1" # lotteryCategory: aa
 
 alias gsce="cd ${gitlab_path}/frontend/site_clone_engine"
 alias gxiao-admin-ps="cd ${gitlab_path}/frontend/xiaoshuo-admin-ps"
