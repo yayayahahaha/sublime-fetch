@@ -51,3 +51,6 @@
 [push]
 # 如果是預設的simple 的話會檢查local 和remote 的upstream 名字是否一致, 改成 upstream 的話就可以透過 --set-upstream-to 設置串連
 	default = simple
+[rebase]
+# 在使用git rebase -i 的時候每一條項目的pattern
+	instructionFormat = (%an <%ae>) %s
