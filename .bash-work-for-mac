@@ -1,4 +1,4 @@
-#!/bin/bash
+  #!/bin/bash
 
 # golang 的部分
 GOPATH="$(go env GOPATH)"
@@ -51,6 +51,7 @@ alias ggb='_runGoBuildStuff' #build
 alias gma='_runGoMain' #run
 alias grun='ggu && ggb && gma' # run all web stuff
 alias rl='_runGulpClean' #run gulp clean only
+alias app_download='_build_n_copy_app_download' # 把靜態app_download 的東西放到
 # TODO: third-party things' clone and copy
 
 #Git 相關
@@ -132,6 +133,39 @@ function _test_function() {
 
   # (sleep 1 && cd ~ && echo $pwd) & sleep1=$!
   # (sleep 2 && cd ~ && echo $pwd) & sleep2=$!
+}
+
+# 靜態app_download 頁面的搬移等
+function _build_n_copy_app_download {
+  local dir=$(pwd)
+  cd "$gitlab_path/design/stationary-website/app-download-page/template-03/m"
+  git fetch --prune --quiet
+  git clean -xdf -e node_modules --quiet
+  git reset --hard --quiet
+  git ch $(git rev-parse HEAD) --quiet
+  git br -D master --quiet
+  git ch -b master origin/master --quiet
+
+  npm run build
+  if [[ $? != 0 ]]; then
+    # 簡易的處理npm install 與否的問題
+    npm install --legacy-peer-deps --no-save
+    npm run build
+    if [[ $? != 0 ]]; then
+      echo 'app_download 靜態資源打包失敗!'
+      return
+    fi
+  fi
+  rm -rf "$gitlab_path/web/base/includes/vue/app_download"
+  mkdir -p "$gitlab_path/web/base/includes/vue/app_download"
+
+  cp -a ./dist "$gitlab_path/web/base/includes/vue/app_download/m"
+  if [[ $? != 0 ]]; then
+    echo 'app_download 靜態資源複製失敗!'
+    return
+  fi
+
+  cd $dir
 }
 
 # 168 專案start
