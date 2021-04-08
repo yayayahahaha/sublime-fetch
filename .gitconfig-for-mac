@@ -24,7 +24,7 @@
 	sw = switch
     cb = !"git br --show-current | pbcopy" # git rev-parse --abbrev-ref HEAD
     s = "!GIT_EDITOR=\"subl -n -w\" git " # 透過sublime text 3 開啟git editor
-    po = !"git push origin -u $(git branch --show-current)"
+    pp = !"git push origin -u $(git branch --show-current)"
 
 [merge]
     ff = false
