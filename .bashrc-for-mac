@@ -17,8 +17,10 @@ LightGray="\033[0;37m"
 White="\033[1;37m"
 NC="\033[0m"
 
-# 取消過長的prefix
+# 限制command歷史長度
+HISTFILESIZE=25
 
+# 取消過長的prefix
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
     prompt_segment blue default "%(!.%{%F{yellow}%}.)$USER"
@@ -60,11 +62,21 @@ alias rb='exec /usr/local/bin/zsh' # zsh
 alias go_fetch="cd ~/flyc/sublime-fetch"
 alias gs="cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User"
 alias gs_merge="cd ~/Library/Application\ Support/Sublime\ Merge/Packages/User"
-  #sublime-package
+# sublime-package
 alias us="_update_sublime_fetch"
 alias gsp="_update_sublime_text_package"
 alias gsp_merge="_update_sublime_merge_package"
 alias s_update="us;gsp;gsp_merge;"
+
+# ftx 開心農場 和 損益計算 (附註: 這script 基本上是寫好玩的)
+alias lending_ftx="_ftx_lending"
+alias earning_ftx="_ftx_earning"
+function _ftx_lending() {
+  node "/Users/flyc/flyc/wonder/ftx/happy_farm.js"
+}
+function _ftx_earning() {
+  node "/Users/flyc/flyc/wonder/ftx/earn_current.js"
+}
 
 # Git相關
 # 引入git 相關的bash shell
@@ -218,6 +230,11 @@ function _update_sublime_fetch() {
   # git 相關
   cp ~/.gitconfig ~/flyc/sublime-fetch/.gitconfig-for-mac
 
+  # eslint 相關
+  cp ~/.eslintrc.js ~/flyc/sublime-fetch/.eslintrc.js
+  cp ~/package.json ~/flyc/sublime-fetch/package.json
+  cp ~/package-lock.json ~/flyc/sublime-fetch/package-lock.json
+
   cd ~/flyc/sublime-fetch
   if [[ $(stashStatus) != "true" ]]; then
     echo "sublime fetch 沒有異動，不需重新推版"
@@ -301,6 +318,22 @@ function _show_color() {
   echo -e "${Light}Hello, Light${NC}";
   echo -e "${White}Hello, White${NC}";
   echo -e "${NC}Hello, NC${NC}"
+}
+
+# 下載影片
+function _download_video_through_youtube-dl() {
+  # m3u8 -> 打開 Network 搜尋 .m3u8 的url 後傳入也可以
+  local video_path="$1"
+  local file_path="$2"
+
+  if [[ $video_path == "" ]]; then
+    echo "請傳入網址!"
+    exit 1
+  elif [[ $file_path == "" ]]; then
+    youtube-dl "$video_path"
+  else
+    youtube-dl "$video_path" -o "$file_path"
+  fi
 }
 
 # 引入公司的 .bash-work

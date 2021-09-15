@@ -6,19 +6,25 @@
     bra = branch -av
     fp = "fetch --prune --prune-tags --tags --progress"
     au = "add :/ -u"
-    gr = !"git lg1"
-    gra = !"git lg1 --all"
-    gr2 = !"git lg2"
-    gra2 = !"git lg2 --all"
-    lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold cyan)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(red)- %an%C(reset)%C(bold yellow)%d%C(reset)'
-    lg2 = log --graph --abbrev-commit --decorate --date=local --format=format:'%C(bold green)%h%C(reset) - %C(bold cyan)%cd%C(reset) %C(bold cyan)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(red)- %an%C(reset)'
+# gr = !"git lg1" # 不知道哪天起無法auto-complete branch name 了
+# gr2 = !"git lg2" # 不知道哪天起無法auto-complete branch name 了
+    gra = !"git gr --all" # 不知道哪天起無法auto-complete branch name 了
+    gra2 = !"git gr2 --all" # 不知道哪天起無法auto-complete branch name 了
+    gr = log --graph --abbrev-commit --decorate --format=format:'%C(bold cyan)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(red)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+    gr2 = log --graph --abbrev-commit --decorate --date=local --format=format:'%C(bold green)%h%C(reset) - %C(bold cyan)%cd%C(reset) %C(bold cyan)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(red)- %an%C(reset)'
     df = diff HEAD^1 HEAD
+    dft = difftool HEAD^1 HEAD
     dm = diff master...head
     ls = !"ls -al"
     brauth2 = "! for branch in `git branch -r | grep -v /HEAD`;do echo `git show --decorate --format=\"%an%C(bold green) %ai %ar by %an\" $branch | head -n 1` \t$branch; done | sort -r"
     brauth = "! for branch in `git branch -r | grep -v /HEAD`;do echo `git show --format=\"%an\" $branch | head -n 1` \t$branch; done | sort -r"
     tfp = "!git tag -l | xargs git tag -d; git fetch --tags"
     cma = commit -am
+	root-path = "rev-parse --show-toplevel"
+	sw = switch
+    cb = !"git br --show-current | pbcopy" # git rev-parse --abbrev-ref HEAD
+    s = "!GIT_EDITOR=\"subl -n -w\" git " # 透過sublime text 3 開啟git editor
+    pp = !"git push origin -u $(git branch --show-current)"
 
 [merge]
     ff = false
@@ -38,8 +44,14 @@
 [core]
 	ignorecase = false
 	autocrlf = false
+	quotepath = false
+    editor = vim
+# editor = subl -n -w # 修改git 的預設編輯器, 像是commit 或是rebase 之類的
 [rerere]
-	enabled = false
+	enabled = false # reuse-recorded-resolution
 [push]
 # 如果是預設的simple 的話會檢查local 和remote 的upstream 名字是否一致, 改成 upstream 的話就可以透過 --set-upstream-to 設置串連
 	default = simple
+[rebase]
+# 在使用git rebase -i 的時候每一條項目的pattern
+	instructionFormat = (%an <%ae>) %s
