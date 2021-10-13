@@ -324,7 +324,6 @@ function _fetch_all_frontend_repository() {
 
   for web_project in ${web_array[@]}; do
     cd "$web_prefix$web_project"
-    pwd
     fo
     if [[ $? != 0 ]]; then
       failed_project="$failed_project $web_project"
@@ -341,7 +340,6 @@ function _fetch_all_frontend_repository() {
 
   for fronend_project in ${frontend_array[@]}; do
     cd "$frontend_prefix$fronend_project"
-    pwd
     fo
     if [[ $? != 0 ]]; then
       failed_project="$failed_project $fronend_project"

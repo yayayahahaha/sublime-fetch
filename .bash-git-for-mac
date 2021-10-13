@@ -60,6 +60,10 @@ function _git_fetch_and_pull() {
   echo
   echo -e "${LightGreen}--操作開始--${NC}"
 
+  echo
+  echo -e "${Yellow}操作路徑${NC}"
+  pwd
+
   # 檢查當前目錄是不是git repo
   isGitRepository_detail
   if [[ $? != 0 ]]; then; return 1; fi
