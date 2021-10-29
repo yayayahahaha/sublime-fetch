@@ -548,6 +548,17 @@
 			</array>
 			<key>Keyboard Map</key>
 			<dict>
+				<key>0xf702-0x240000-0x7b</key>
+				<dict>
+					<key>Action</key>
+					<integer>10</integer>
+					<key>Label</key>
+					<string></string>
+					<key>Text</key>
+					<string>b</string>
+					<key>Version</key>
+					<integer>1</integer>
+				</dict>
 				<key>0xf702-0x280000-0x7b</key>
 				<dict>
 					<key>Action</key>
@@ -556,6 +567,17 @@
 					<string></string>
 					<key>Text</key>
 					<string>b</string>
+					<key>Version</key>
+					<integer>1</integer>
+				</dict>
+				<key>0xf703-0x240000-0x7c</key>
+				<dict>
+					<key>Action</key>
+					<integer>10</integer>
+					<key>Label</key>
+					<string></string>
+					<key>Text</key>
+					<string>f</string>
 					<key>Version</key>
 					<integer>1</integer>
 				</dict>
