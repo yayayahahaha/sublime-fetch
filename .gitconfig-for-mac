@@ -3,7 +3,7 @@
     stt = status -sb
     ch = checkout
     br = branch
-    bra = branch -av
+    bra = branch --all
     fp = "fetch --prune --prune-tags --tags --progress"
     au = "add :/ -u"
 # gr = !"git lg1" # 不知道哪天起無法auto-complete branch name 了
