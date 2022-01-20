@@ -69,9 +69,13 @@ _common_path="$HOME/go/src/gitlab.paradise-soft.com.tw/glob/common"
 _utils_path="$HOME/go/src/gitlab.paradise-soft.com.tw/glob/utils"
 _kangaroo_path="$HOME/go/src/gitlab.paradise-soft.com.tw/backend/kangaroo"
 _shark_path="$HOME/go/src/gitlab.paradise-soft.com.tw/backend/shark"
+_pdsbe_i18n_path="$HOME/go/src/gitlab.paradise-soft.com.tw/pdsbe/i18n"
+_geetestsdk_path="$HOME/go/src/gitlab.paradise-soft.com.tw/glob/geetestsdk"
 alias gbyat="cd $_yaitoo_path"
 alias gbcom="cd $_common_path"
 alias gbuti="cd $_utils_path"
+alias gbi18n="cd $_pdsbe_i18n_path"
+alias ggeetestsdk="cd $_geetestsdk_path"
 alias gkangaroo="cd $_kangaroo_path"
 
 # site clone engine 的包板與複製移動等
@@ -259,7 +263,7 @@ function _sce_build_and_move_to_server() {
 function _change_backend_repository() {
   local dir=$(pwd)
   local branch_to
-  local backend_paths=($_yaitoo_path $_common_path $_utils_path $_kangaroo_path $_shark_path)
+  local backend_paths=($_yaitoo_path $_common_path $_utils_path $_kangaroo_path $_shark_path $_pdsbe_i18n_path $_geetestsdk_path)
 
   if [[ $1 == '' ]]; then
       echo "${Orange}backend/yaitoo${NC}"
@@ -267,6 +271,7 @@ function _change_backend_repository() {
       echo "${Orange}glob/utils${NC}"
       echo "${Orange}backend/kangaroo${NC}"
       echo "${Orange}backend/shark${NC}"
+      echo "${Orange}pdsbe/i18n${NC}"
       echo "${Yellow}更新且切換到哪個分支: ${NC}"
       read branch_to
   else
