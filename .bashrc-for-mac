@@ -60,7 +60,7 @@ alias rb='exec /usr/local/bin/zsh' # zsh
 # 檔案備份相關
   #sublime-fetch
 alias go_fetch="cd ~/flyc/sublime-fetch"
-alias gs="cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User"
+alias gs="cd ~/Library/Application\ Support/Sublime\ Text/Packages/User"
 alias gs_merge="cd ~/Library/Application\ Support/Sublime\ Merge/Packages/User"
 # sublime-package
 alias us="_update_sublime_fetch"
