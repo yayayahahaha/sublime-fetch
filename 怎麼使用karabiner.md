@@ -43,3 +43,7 @@
 調整 `option + 2` -> `option + f2`
 
 > 用來在使用 sublime text 的時候可以更順利地叫出右鍵選單
+
+調整 `option + esc` -> `` option + ` ``
+
+> 用來在使用 Edge 瀏覽器 devtool 的時候可以快速跳到 console panel
