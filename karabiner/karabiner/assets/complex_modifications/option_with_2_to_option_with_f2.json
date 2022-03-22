@@ -1,0 +1,25 @@
+{
+  "title": "Option + 2 to Option + f2",
+  "rules": [
+    {
+      "description": "Option + 2 to Option + f2",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "2",
+            "modifiers": {
+              "mandatory": ["left_option"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f2",
+              "modifiers": ["left_option"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
