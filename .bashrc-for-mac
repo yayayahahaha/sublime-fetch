@@ -238,7 +238,7 @@ function _update_sublime_fetch() {
   cp ~/package-lock.json ~/flyc/sublime-fetch/package-lock.json
 
   # karabiner 相關
-  cp ~/.config/karabiner ~/flyc/sublime-fetch/karabiner
+  cp -r ~/.config/karabiner ~/flyc/sublime-fetch/karabiner
 
   cd ~/flyc/sublime-fetch
   if [[ $(stashStatus) != "true" ]]; then
