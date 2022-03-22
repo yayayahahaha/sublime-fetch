@@ -68,6 +68,8 @@ alias gsp="_update_sublime_text_package"
 alias gsp_merge="_update_sublime_merge_package"
 alias s_update="us;gsp;gsp_merge;"
 
+# cp ~/.bashrc ~/flyc/sublime-fetch/.bashrc-for-mac
+
 # ftx 開心農場 和 損益計算 (附註: 這script 基本上是寫好玩的)
 alias lending_ftx="_ftx_lending"
 alias earning_ftx="_ftx_earning"
@@ -234,6 +236,9 @@ function _update_sublime_fetch() {
   cp ~/.eslintrc.js ~/flyc/sublime-fetch/.eslintrc.js
   cp ~/package.json ~/flyc/sublime-fetch/package.json
   cp ~/package-lock.json ~/flyc/sublime-fetch/package-lock.json
+
+  # karabiner 相關
+  cp ~/.config/karabiner ~/flyc/sublime-fetch/karabiner
 
   cd ~/flyc/sublime-fetch
   if [[ $(stashStatus) != "true" ]]; then
