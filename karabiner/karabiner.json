@@ -278,6 +278,16 @@
                                     "apple_vendor_top_case_key_code": "keyboard_fn"
                                 }
                             ]
+                        },
+                        {
+                            "from": {
+                                "key_code": "home"
+                            },
+                            "to": [
+                                {
+                                    "key_code": "f4"
+                                }
+                            ]
                         }
                     ]
                 },

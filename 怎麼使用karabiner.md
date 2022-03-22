@@ -23,6 +23,10 @@
 > 左右開弓
 > 由於 keychron 鍵盤本身便支援 Mac ，所以不用修改左手邊如 `alt` 或 `windows` 的鍵位
 
+調整右邊的功能鍵變成 `f4`
+
+> 用來在使用 sublime text 的時候可以快速跳去搜尋結果所在的位置
+
 ##### 複雜調整 Comple Modifications
 
 > 複雜調整的詳細文件看[這裡](https://karabiner-elements.pqrs.org/docs/manual/configuration/configure-complex-modifications/)  
