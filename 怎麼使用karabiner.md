@@ -20,7 +20,7 @@
 
 調整最右手邊的各式功能鍵變成 `right-option` 、 `right-control`
 
-> 左右開弓
+> 左右開弓  
 > 由於 keychron 鍵盤本身便支援 Mac ，所以不用修改左手邊如 `alt` 或 `windows` 的鍵位
 
 調整右邊的功能鍵變成 `f4`
