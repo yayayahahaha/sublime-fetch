@@ -16,7 +16,7 @@
             {
               "repeat": true,
               "key_code": "grave_accent_and_tilde",
-              "modifiers": ["left_shift"]
+              "modifiers": ["shift"]
             }
           ]
         }

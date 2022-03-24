@@ -9,17 +9,33 @@
           "from": {
             "key_code": "escape",
             "modifiers": {
-              "mandatory": [
-                "left_command"
-              ]
+              "mandatory": ["command"]
             }
           },
           "to": [
             {
               "key_code": "grave_accent_and_tilde",
-              "modifiers": [
-                "left_command"
-              ]
+              "modifiers": ["command"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Command + shift +  Esc to Command + shift + `",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "escape",
+            "modifiers": {
+              "mandatory": ["command", "shift"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "grave_accent_and_tilde",
+              "modifiers": ["command", "shift"]
             }
           ]
         }
