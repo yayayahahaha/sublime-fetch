@@ -47,3 +47,8 @@
 調整 `option + esc` -> `` option + ` ``
 
 > 用來在使用 Edge 瀏覽器 devtool 的時候可以快速跳到 console panel
+
+調整 `command + option + F1` -> `command + option + 1`
+
+> F1 ~ F5, 依此類推到 1 ~ 5
+> 由於右邊的 option 原本是 fn2, 所以按數字鍵的時候會變成 F1 等 F 鍵，所以要改成數字鍵的區塊切割功能
