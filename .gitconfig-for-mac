@@ -36,6 +36,9 @@
 [diff]
     tool = vimdiff
 
+[submodule]
+    recurse = true
+
 [includeIf "gitdir:~/go/src/gitlab.paradise-soft.com.tw/web/"]
     path = ~/go/src/gitlab.paradise-soft.com.tw/web/.gitconfig
 [includeIf "gitdir:~/go/src/gitlab.paradise-soft.com.tw/frontend/"]
