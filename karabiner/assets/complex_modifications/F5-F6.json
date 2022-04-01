@@ -2,7 +2,7 @@
   "title": "還我 F5 F6",
   "rules": [
     {
-      "description": "還我 F5 F6",
+      "description": "還我 F5",
       "manipulators": [
         {
           "type": "basic",
@@ -15,6 +15,26 @@
           "to": [
             {
               "key_code": "f5",
+              "modifiers": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "還我 F6",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f6",
+            "modifiers": {
+              "mandatory": ["option"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f6",
               "modifiers": []
             }
           ]

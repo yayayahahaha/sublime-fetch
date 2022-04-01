@@ -395,7 +395,7 @@
                         ]
                     },
                     {
-                        "description": "還我 F5 F6",
+                        "description": "還我 F5",
                         "manipulators": [
                             {
                                 "from": {
@@ -409,6 +409,28 @@
                                 "to": [
                                     {
                                         "key_code": "f5",
+                                        "modifiers": []
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "還我 F6",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "f6",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "option"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "f6",
                                         "modifiers": []
                                     }
                                 ],
