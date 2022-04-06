@@ -25,7 +25,8 @@ function _git_goto_root() {
 
 # 清除所有已經合進當前分支、且遠端的線已經gone 的分支
 function _git_remove_remote_gone_branch() {
-  local branch_list=(`git br -vv --merged | sed 's/^..//' | awk -F '[][]' '$2~/: gone$/{print $1}' | awk '{print $1}'`)
+
+  local branch_list=(`git branch -vv --merged | grep -E '.+\s+\[.+\/.+: gone\]' | sed -e 's/^..//g'  | sed -e 's/ \{1,\}.\{1,\}//g'`)
   local branch_list_length=${#branch_list[@]}
 
   if [[ $branch_list_length == 0 ]]; then
@@ -34,12 +35,13 @@ function _git_remove_remote_gone_branch() {
   fi
 
   for branch_name in ${branch_list[@]}; do
-    git br --quiet -d $branch_name
+    git branch --quiet -d $branch_name
     if [[ $? != 0 ]]; then
       echo "${LightRed}分支 $branch_name 刪除失敗！${NC}"
       continue
     fi
     echo "分支 $branch_name 刪除成功"
+
   done
 }
 
