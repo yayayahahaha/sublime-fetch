@@ -233,7 +233,6 @@ function _update_sublime_fetch() {
   cp ~/.gitconfig ~/flyc/sublime-fetch/.gitconfig-for-mac
 
   # eslint 相關
-  cp ~/.eslintrc.js ~/flyc/sublime-fetch/.eslintrc.js
   cp ~/package.json ~/flyc/sublime-fetch/package.json
   cp ~/package-lock.json ~/flyc/sublime-fetch/package-lock.json
 
