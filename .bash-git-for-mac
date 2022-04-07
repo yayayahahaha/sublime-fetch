@@ -25,7 +25,7 @@ function _git_goto_root() {
 
 # 清除所有已經合進當前分支、且遠端的線已經gone 的分支
 function _git_remove_remote_gone_branch() {
-
+  # TODO 這個如果 branch name 裡面有中文的話會沒辦法找到對應的 branch name
   local branch_list=(`git branch -vv --merged | grep -E '.+\s+\[.+\/.+: gone\]' | sed -e 's/^..//g'  | sed -e 's/ \{1,\}.\{1,\}//g'`)
   local branch_list_length=${#branch_list[@]}
 
