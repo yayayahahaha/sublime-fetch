@@ -535,16 +535,6 @@
                     "simple_modifications": [
                         {
                             "from": {
-                                "key_code": "end"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "right_control"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
                                 "key_code": "left_command"
                             },
                             "to": [
@@ -565,16 +555,6 @@
                         },
                         {
                             "from": {
-                                "key_code": "page_up"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "f4"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
                                 "key_code": "right_control"
                             },
                             "to": [
@@ -590,6 +570,36 @@
                             "to": [
                                 {
                                     "key_code": "right_command"
+                                }
+                            ]
+                        },
+                        {
+                            "from": {
+                                "key_code": "end"
+                            },
+                            "to": [
+                                {
+                                    "key_code": "right_control"
+                                }
+                            ]
+                        },
+                        {
+                            "from": {
+                                "key_code": "home"
+                            },
+                            "to": [
+                                {
+                                    "key_code": "page_up"
+                                }
+                            ]
+                        },
+                        {
+                            "from": {
+                                "key_code": "page_up"
+                            },
+                            "to": [
+                                {
+                                    "key_code": "home"
                                 }
                             ]
                         }
