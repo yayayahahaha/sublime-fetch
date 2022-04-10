@@ -592,6 +592,16 @@
                                     "key_code": "right_command"
                                 }
                             ]
+                        },
+                        {
+                            "from": {
+                                "key_code": "page_down"
+                            },
+                            "to": [
+                                {
+                                    "key_code": "f4"
+                                }
+                            ]
                         }
                     ]
                 }
