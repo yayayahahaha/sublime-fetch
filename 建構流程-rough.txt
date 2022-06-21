@@ -1,0 +1,39 @@
+建構流程
+
+Mac 本身設定:
+如取消各種手勢、觸控板方向調整、拖拉方式修改、快捷鍵調整、繁簡轉換等
+還沒找，不過數量不多應該還好
+
+karabiner-element: 複製資料夾即可, 這個可以寫到怎麼使用 karabiner element 那裏
+/Users/flycchung/.config/karabiner
+
+sublime text: 複製資料夾即可, 不過在另一個 repo 就是了
+
+edge: 登入即可, 不過好像很多設定不會一起同步有夠..
+
+終端機:
+
+安裝 brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+安裝 iterm2: 可以透過 brew 但好像也可以不用?
+profile 的不份可以複製 profile 可以同步好 iterm 本身的設定
+
+安裝 oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+接著是rc那些:
+1. 複製 .zshrc-for-mac 到 ~/.zshrc
+2. 複製 .zshrc.pre-oh-my-zsh-for-mac 到 ~/.zshrc.pre-oh-my-zsh
+3. 複製 .bashrc-for-mac 到 ~/.bashrc
+4. 複製 .bash-git-for-mac-for-mac 到 ~/.bash-git
+5. 複製 .git-completion.bash 到 ~/.git-completion.bash
+6. 複製 .gitconfig-for-mac 到 ~/.gitconfig
+7. 創建新的/複製舊的 .bash-work-for-mac 到 ~/.bash-work
+8. 創建 .vimrc -> 內容很少，所以還好 ( nu, autoindent, tabstop=2, hlsearch)
+9. 把 s 綁到環境變數裡面 ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/.
+10. 安裝字體: brew tap homebrew/cask-fonts && brew install --cask font-sauce-code-pro-nerd-font
+11. 調整 preference -> profiles -> text -> font -> 選擇 SauceCodePro Nerd Font 開頭的應該都可以
+12. 重啟 iterm
+
+TODO 這些看要不要寫成腳本?
