@@ -6,21 +6,33 @@ Mac 本身設定:
 
 karabiner-element: 複製資料夾即可, 這個可以寫到怎麼使用 karabiner element 那裏
 /Users/flycchung/.config/karabiner
+如果 Mac 預設找不到需要的權限的話，到這裡找
+/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_grabber
+/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_observer
+Karabiner-EventViewer # 這個在 applicatoin 應用程式裡面就可以找到
+source: https://github.com/pqrs-org/Karabiner-Elements/issues/1867
 
 sublime text: 複製資料夾即可, 不過在另一個 repo 就是了
 
 edge: 登入即可, 不過好像很多設定不會一起同步有夠..
+要調整的項目: tra 和 tras 的快捷鍵, 調整預設的搜尋引擎 Bing -> Google
 
 終端機:
+安裝 git
+直接輸入 git 之後，他會自己開始跑
 
-安裝 brew
+安裝 brew, 安裝之前要裝 git, brew 在安裝的時候會需要
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-安裝 iterm2: 可以透過 brew 但好像也可以不用?
-profile 的不份可以複製 profile 可以同步好 iterm 本身的設定
+安裝 iterm2: 可以透過 brew 但好像也可以不用? 通常都是直接從官網下載了
+profile 的同步方式: 可以直接透過 Preferences -> General -> Preferences 裡面的 Load preferences from a custom folder or URL 直接和備份的 profile 同步即可
+com.googlecode.iterm2.plist 要複製過去的地方是 
+cp com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
 安裝 oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+NEXT 目前設定階段停在這裡，安裝/同步完上述的項目後 iterm2 應該已經可以用 option 按鍵左右移動 helloWorld 等的字串單位了
 
 接著是rc那些:
 1. 複製 .zshrc-for-mac 到 ~/.zshrc
@@ -37,3 +49,13 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 12. 重啟 iterm
 
 TODO 這些看要不要寫成腳本?
+
+git 的權限部分，原本以為只要用 ssh-keygen 就可以了
+沒想到還要設定一個 known_host 的項目
+```bash
+ssh-keygen -t rsa -C "yayayahahahaooii@gmail.com"
+ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+cat ~/.ssh/id_rsa.pub | pbcopy
+```
+然後到 github 上面設定就可以了
+source: https://stackoverflow.com/questions/13363553/git-error-host-key-verification-failed-when-connecting-to-remote-repository
