@@ -116,9 +116,11 @@ sudo apt-get install fonts-powerline
 直接執行腳本後即可
 
 ```bash
-sh set-rc-files.sh
+# 到這裡應該已經安裝好 `zsh` 了，所以在使用的時候要用 zsh 來呼叫
+zsh set-rc-files.sh
 ```
 
+TODO 
 設定完後要手動處理的部分:
 git 的公司子層 repo email 設定, 在 `.gitconfig` 裡
 
@@ -155,3 +157,6 @@ plugins=(
 )
 # ...
 ```
+
+TODO 製作一個各種 rc 檔案的捷徑資料夾，這個應該也可以用腳本去跑就可以了
+TODO 裝完之後，目前的 git diff 是壞的.. 再看看是發生什麼事了
