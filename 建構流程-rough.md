@@ -121,10 +121,9 @@ zsh set-rc-files.sh
 ```
 
 TODO 
-設定完後要手動處理的部分:
+設定完後要手動處理的部分:  
 git 的公司子層 repo email 設定, 在 `.gitconfig` 裡
-
-> TODO 有一個叫 `.git-completion.bash` 的不知道用不用得到?
+這裡要每一個 zshrc 再去看一下, 更新這些項目的東東也要整理一下
 
 > 同步的項目:
 
@@ -133,6 +132,8 @@ git 的公司子層 repo email 設定, 在 `.gitconfig` 裡
 > - `.bash-git`: 自己寫的 `git` 相關指令
 > - `.gitconfig`: `git` 設定檔
 > - `.vimrc`: `vim` 設定檔
+
+> TODO 有一個叫 `.git-completion.bash` 的不知道用不用得到?
 
 ##### 對 `.zshrc` 的調整
 
@@ -158,5 +159,5 @@ plugins=(
 # ...
 ```
 
-TODO 製作一個各種 rc 檔案的捷徑資料夾，這個應該也可以用腳本去跑就可以了
-TODO 裝完之後，目前的 git diff 是壞的.. 再看看是發生什麼事了
+TODO 製作一個各種 rc 檔案的捷徑資料夾，這個應該也可以用腳本去跑就可以了  
+TODO 裝完之後，目前的 git diff 是壞的.. 再看看是發生什麼事了, 我猜是和 .bashrc 寫成了 .zprofile 有關?
