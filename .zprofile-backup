@@ -1,3 +1,6 @@
+# 在安裝完 brew 後會出現的 TODO: 還沒去找這三小
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # color
 Black="\033[0;30m"
 DarkGray="\033[1;30m"
