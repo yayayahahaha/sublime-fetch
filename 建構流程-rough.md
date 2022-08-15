@@ -113,8 +113,26 @@ sudo apt-get install fonts-powerline
 
 ### rc 相關設定
 
-##### 對 `.zshrc` 的調整
+直接執行腳本後即可
 
+```bash
+sh set-rc-files.sh
+```
+
+設定完後要手動處理的部分:
+git 的公司子層 repo email 設定, 在 `.gitconfig` 裡
+
+> TODO 有一個叫 `.git-completion.bash` 的不知道用不用得到?
+
+> 同步的項目:
+
+> - `.zshrc`: zsh 主檔
+> - `.zprofile`: profile 檔
+> - `.bash-git`: 自己寫的 `git` 相關指令
+> - `.gitconfig`: `git` 設定檔
+> - `.vimrc`: `vim` 設定檔
+
+##### 對 `.zshrc` 的調整
 
 ###### Theme 樣式
 
@@ -137,17 +155,3 @@ plugins=(
 )
 # ...
 ```
-
-接著是rc那些:
-1. 複製 .zshrc-for-mac 到 ~/.zshrc # oh-my-zsh 如果不用複製的話，可以寫成"如何調整"的那種文件好像就可以了? 這次可以重新開始
-2. 複製 .zshrc.pre-oh-my-zsh-for-mac	 到 ~/.zshrc.pre-oh-my-zsh # 同
-3. 複製 .bashrc-for-mac 到 ~/.bashrc
-4. 複製 .bash-git-for-mac 到 ~/.bash-git
-5. 複製 .git-completion.bash 到 ~/.git-completion.bash # ?
-6. 複製 .gitconfig-for-mac 到 ~/.gitconfig
-7. 創建新的/複製舊的 .bash-work-for-mac 到 ~/.bash-work
-8. 創建 .vimrc -> 內容很少，所以還好 (nu, autoindent, tabstop=2, hlsearch)
-9. 把 s 綁到環境變數裡面 ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/.
-10. 重啟 iterm
-
-TODO 這些看要不要寫成腳本?	

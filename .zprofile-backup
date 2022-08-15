@@ -58,7 +58,7 @@ function s() {
 }
 
 # 重置
-alias rb='exec /usr/local/bin/zsh' # zsh
+alias rb='source ~/.zshrc' # zsh
 
 # 檔案備份相關
   #sublime-fetch
