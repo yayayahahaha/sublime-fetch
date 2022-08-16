@@ -31,11 +31,20 @@ cp ./karabiner $HOME/.config/karabiner
 sh set-sublime-text-user.sh
 ```
 
+> TODO 像是開啟同一個檔案然後可以看上下文的那種快捷鍵還沒有記得很熟  
+> 或是把當前檔案移動到新的視窗的快捷鍵?  
 > TODO 還沒處理掉 package 會噴的錯誤訊息  
 > It appears a package is trying to ignore itself, causing a loop.
 Please resolve by removing the offending ignored_packages setting.
 > ---
 > 1 missing dependency was just installed. Sublime Text should be restarted, otherwise one or more of the installed packages may not function properly.
+
+## Sublime Merge
+
+> TODO 還沒寫
+> 感覺也可以寫個自動化的腳本去拉這些檔案後把它們放到正確的位置?
+
+
 
 ## Edge 瀏覽器
 
@@ -135,6 +144,7 @@ sudo apt-get install fonts-powerline
 
 > TODO 安裝 pnpm、共用 prettier、還有 eslint 等東西的預設值  
 > 感覺這些項目要和 sublime text 相關的設定之類的東西一起寫? 像是 SublimeLinter 和 jsPrettier 之類的做搭配解說  
+> 還有安裝 n 或是看有沒有其他更好用的切換版本裝置
 
 
 ### rc 相關設定
@@ -146,12 +156,13 @@ sudo apt-get install fonts-powerline
 zsh set-rc-files.sh
 ```
 
-TODO 
+TODO  
 設定完後要手動處理的部分還沒寫:  
 git 的公司子層 repo email 設定, 在 `.gitconfig` 裡  
 TODO 整理: 這裡要每一個 zshrc 再去看一下, 更新這些項目的東東也要整理一下  
-TODO 製作一個各種 rc 檔案的捷徑資料夾，這個應該也可以用腳本去跑就可以了  
+TODO 製作一個各種 rc 檔案的捷徑(ln ?)資料夾，這個應該也可以用腳本去跑就可以了  
 TODO 裝完之後，目前的 git diff 是壞的.. 再看看是發生什麼事了, 我猜是和 .bashrc 寫成了 .zprofile 有關?  
+-> 實測之後有關，判斷應該是顏色的部分受到影響了  
 
 > 同步的項目:
 
@@ -177,7 +188,7 @@ ZSH_THEME="agnoster"
 
 ###### Plugins 套件
 
-調整 `plugins=( 這裡 )` 的項目，預設有 `git`
+調整 `plugins=( 這裡 )` 的項目，預設有 `git`。[官方文件在這裡](https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins)
 
 ```bash
 # ...
@@ -187,4 +198,24 @@ plugins=(
 # ...
 ```
 
+> TODO 不知道 zsh 到底有哪些 plugins? 可以看一下
+
+---
+
 > TODO 撰寫自己的 tech center 吧  
+> 筆記: sublime text 把特定副檔名指定成特定 syntax 的方式?  
+> sublime text 使用 eslint 的方式 -> sublimeLinter? default setting? home path setting?  
+> sublime text 使用 prettier 的方式  
+> sublime text 使用 LSP 的方式  
+> 自己客製化 eslint 的方式? 換行、空白、提示等  
+> pnpm 如果在安裝的時候當前目錄下沒有 package.json 的話東西會去哪裡?  
+> pnpm 的快取檔案在哪裡?  
+> 除了 n 以外有沒有更好用的切換版本方式?  
+> vue3 + vite + windicss && vue2 + vite + windicss  相關的各種設定等  
+> 參考 BBDS 的那個客製化的 vite plugins ?  
+> 試試看 telport, vue3 的一個概念, 作用於想把 dialog 的層級拉到動 body 等的這種需求會用到  
+> 搞懂 custom component 的 v-model 概念  
+> 重新整理 package.json 的方式  
+> 將當前 git commit 變成 javascript global variable 的方式  
+> git commit 前要做的事情? 或是 push 或 merge 前要做的事情  
+> sublime text 好像有一個叫 better select 之類的東西? 像是可以雙向反白的  
