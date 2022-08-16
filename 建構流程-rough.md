@@ -3,7 +3,8 @@
 ## Mac 本身設定
 
 如取消各種手勢、觸控板方向調整、拖拉方式修改、快捷鍵調整、繁簡轉換等  
-還沒找如何匯出 or 詳細的每個步驟，不過數量不多應該還好
+
+> TODO 還沒找如何匯出 or 詳細的每個步驟，不過數量不多應該還好
 
 ## Karabiner Element 鍵盤鍵位修改程式
 
@@ -13,13 +14,13 @@
 cp ./karabiner $HOME/.config/karabiner
 ```
 
-> 這個可以寫到[`怎麼使用 karabiner element`](./怎麼使用karabiner.md) 那裏
-
 > 如果 Mac 預設找不到需要的權限的話，到這裡找  
 > karabiner_grabber: `/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_grabber`  
 > karabiner_observer: `/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_observer`  
 > Karabiner-EventViewer: 在 `applicatoin 應用程式` 裡面就可以找到  
 > source https://github.com/pqrs-org/Karabiner-Elements/issues/1867
+
+> TODO 這個可以寫到[`怎麼使用 karabiner element`](./怎麼使用karabiner.md) 那裏
 
 ## Sublime Text 編輯器
 
@@ -30,6 +31,12 @@ cp ./karabiner $HOME/.config/karabiner
 sh set-sublime-text-user.sh
 ```
 
+> TODO 還沒處理掉 package 會噴的錯誤訊息  
+> It appears a package is trying to ignore itself, causing a loop.
+Please resolve by removing the offending ignored_packages setting.
+> ---
+> 1 missing dependency was just installed. Sublime Text should be restarted, otherwise one or more of the installed packages may not function properly.
+
 ## Edge 瀏覽器
 
 登入即可同步大部分如書籤等等的設定，其他要調整的項目如下:
@@ -37,6 +44,9 @@ sh set-sublime-text-user.sh
 - `tra` 和 `tras` 的 `Google Translator` 快捷鍵  
 - 調整預設的搜尋引擎 Bing -> Google  
 - Snippets 的相關檔案  
+
+> TODO 直接寫出來要怎麼調整吧，還有那些 `tra` 什麼的也就直接寫出來可以用複製的吧
+> Snippet 的部分直接放進來這個資料夾算了
 
 ## Terminal 終端機
 
@@ -73,6 +83,9 @@ cat ~/.ssh/id_rsa.pub | pbcopy
 然後到 [`github`](https://github.com/settings/keys) 上新增一組金鑰就可以了  
 > [參考資料](https://stackoverflow.com/questions/13363553/git-error-host-key-verification-failed-when-connecting-to-remote-repository)
 
+> TODO 要不要這整個流程也寫成腳本算了..
+> 或是把 ssh-keygen 的部分補上就好?
+
 ### 安裝 brew
 
 > 安裝 `brew` 之前要裝 `git`, `brew` 在安裝的時候會需要
@@ -80,6 +93,9 @@ cat ~/.ssh/id_rsa.pub | pbcopy
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
+
+> TODO 安裝 `brew` 的時候似乎會動到 `.zprofile` ? 因為裡面多了一個檔案
+> 這個也要去查
 
 ### 安裝 oh-my-zsh
 
@@ -108,7 +124,6 @@ sudo apt-get install fonts-powerline
 ```
 > [https://github.com/powerline/fonts](https://github.com/powerline/fonts)
 
-
 > 安裝/同步完上述的項目後 `iterm2` 應該已經可以用 `option` 按鍵左右移動像是 `helloWorld` 等的字串單位了
 
 ### rc 相關設定
@@ -121,9 +136,11 @@ zsh set-rc-files.sh
 ```
 
 TODO 
-設定完後要手動處理的部分:  
-git 的公司子層 repo email 設定, 在 `.gitconfig` 裡
-這裡要每一個 zshrc 再去看一下, 更新這些項目的東東也要整理一下
+設定完後要手動處理的部分還沒寫:  
+git 的公司子層 repo email 設定, 在 `.gitconfig` 裡  
+TODO 整理: 這裡要每一個 zshrc 再去看一下, 更新這些項目的東東也要整理一下  
+TODO 製作一個各種 rc 檔案的捷徑資料夾，這個應該也可以用腳本去跑就可以了  
+TODO 裝完之後，目前的 git diff 是壞的.. 再看看是發生什麼事了, 我猜是和 .bashrc 寫成了 .zprofile 有關?  
 
 > 同步的項目:
 
@@ -158,6 +175,3 @@ plugins=(
 )
 # ...
 ```
-
-TODO 製作一個各種 rc 檔案的捷徑資料夾，這個應該也可以用腳本去跑就可以了  
-TODO 裝完之後，目前的 git diff 是壞的.. 再看看是發生什麼事了, 我猜是和 .bashrc 寫成了 .zprofile 有關?
