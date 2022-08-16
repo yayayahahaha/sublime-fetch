@@ -1,7 +1,3 @@
-> TODO 還沒寫 Nodejs 的安裝:
-> 看到底是要下載安裝檔呢
-> 還是要透過 brew 安裝呢
-
 # 新 Mac 建構流程
 
 ## Mac 本身設定
@@ -130,6 +126,17 @@ sudo apt-get install fonts-powerline
 
 > 安裝/同步完上述的項目後 `iterm2` 應該已經可以用 `option` 按鍵左右移動像是 `helloWorld` 等的字串單位了
 
+### NodeJs
+
+直接從[官網](https://nodejs.org/en/)安裝吧
+
+> /usr/local/bin/node  
+> /usr/local/bin/npm  
+
+> TODO 安裝 pnpm、共用 prettier、還有 eslint 等東西的預設值  
+> 感覺這些項目要和 sublime text 相關的設定之類的東西一起寫? 像是 SublimeLinter 和 jsPrettier 之類的做搭配解說  
+
+
 ### rc 相關設定
 
 直接執行腳本後即可
@@ -179,3 +186,5 @@ plugins=(
 )
 # ...
 ```
+
+> TODO 撰寫自己的 tech center 吧  
