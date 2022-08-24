@@ -251,4 +251,5 @@ plugins=(
 > sublime text 好像有一個叫 better select 之類的東西? 像是可以雙向反白的  
 > host ? 用於綁架自己的網站的那個東東要怎麼設定  
 > ssh config 裡要幫 domain 命名或自動帶上金鑰的部分該怎麼處理  
-> ssh-keygen 好像可以產出很多組的公私鑰?    
+> ssh-keygen 好像可以產出很多組的公私鑰?  
+> prune sublime text user folder, 裡面累積太多奇怪的東西  
