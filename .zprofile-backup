@@ -65,7 +65,7 @@ function s() {
 alias rb='source ~/.zshrc' # zsh
 
 # 檔案備份相關
-  #sublime-fetch
+# sublime-fetch
 alias go_fetch="cd ~/flyc/sublime-fetch"
 alias gs="cd ~/Library/Application\ Support/Sublime\ Text/Packages/User"
 alias gs_merge="cd ~/Library/Application\ Support/Sublime\ Merge/Packages/User"

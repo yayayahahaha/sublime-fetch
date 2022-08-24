@@ -1,2 +1,6 @@
 **/karabiner/automatic_backups/
 **/.DS_Store
+
+# config-link 是像 .zshrc 等的 ln 過來的設定檔統一放的一個資料夾
+**/config-link/*
+!**/config-link/.gitkeep
