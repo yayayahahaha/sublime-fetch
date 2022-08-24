@@ -1,4 +1,6 @@
-export LESS="-F -X $LESS" # 讓所有沒有超過一頁的顯示結果都不會啟用less
+# TODO 這行會害顏色壞掉，bug why?
+# export LESS="-F -X $LESS" # 讓所有沒有超過一頁的顯示結果都不會啟用less
+
 alias greset='git reset --hard; git clean -df;' # 讓git head回到乾淨無修正的狀態, 被.gitignore 的檔案不會被刪除
 alias fo="_git_fetch_and_pull" # 重新從遠端拉取production, master 和qa
 alias g_find_branch_by_hash="_git_find_branch_by_hash" #透過hashkey 找出當初是屬於哪個分支
