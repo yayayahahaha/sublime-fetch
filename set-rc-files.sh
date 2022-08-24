@@ -35,19 +35,19 @@ function set_rc_files() {
   rm -rf "./$config_path/.gitconfig"
   rm -rf "./$config_path/.vimrc"
 
-  ln "$HOME/.zshrc" "./$config_path/.zshrc"
+  ln -s "$HOME/.zshrc" "./$config_path/.zshrc"
   if [[ $? != 0 ]]; then return; fi
 
-  ln "$HOME/.zprofile" "./$config_path/.zprofile"
+  ln -s "$HOME/.zprofile" "./$config_path/.zprofile"
   if [[ $? != 0 ]]; then return; fi
 
-  ln "$HOME/.bash-git" "./$config_path/.bash-git"
+  ln -s "$HOME/.bash-git" "./$config_path/.bash-git"
   if [[ $? != 0 ]]; then return; fi
 
-  ln "$HOME/.gitconfig" "./$config_path/.gitconfig"
+  ln -s "$HOME/.gitconfig" "./$config_path/.gitconfig"
   if [[ $? != 0 ]]; then return; fi
 
-  ln "$HOME/.vimrc" "./$config_path/.vimrc"
+  ln -s "$HOME/.vimrc" "./$config_path/.vimrc"
   if [[ $? != 0 ]]; then return; fi
 
 
