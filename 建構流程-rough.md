@@ -31,7 +31,7 @@ sh set-sublime-text-user.sh
 
 > TODO 像是開啟同一個檔案然後可以看上下文的那種快捷鍵還沒有記得很熟  
 > 或是把當前檔案移動到新的視窗的快捷鍵?  cmd + k + up?  
-> TODO 還沒處理掉 package 會噴的錯誤訊息  
+> 還沒處理掉 package 會噴的錯誤訊息  
 > It appears a package is trying to ignore itself, causing a loop.
 Please resolve by removing the offending ignored_packages setting.
 > ---
@@ -51,7 +51,7 @@ sh set-sublime-merge-user.sh
 
 登入即可同步大部分如書籤等等的設定，其他要調整的項目如下:
 
-`cmd + ,` 啟動 Preference -> 隱私權、搜尋與服務 -> 最下方的服務 -> 網址列和搜尋 -> 管理搜尋引擎  
+**`cmd + ,` 啟動 Preference** -> **隱私權、搜尋與服務** -> 最下方的**服務** -> **網址列和搜尋** -> **管理搜尋引擎**  
 
 添加以下 `Google Translator` 的快捷鍵
 
@@ -63,6 +63,7 @@ sh set-sublime-merge-user.sh
 - Snippets 的相關檔案  
 
 > TODO Snippet 的部分直接放進來這個資料夾算了
+> 可以參考[這裡](https://neotan.github.io/chrome-dev-tools-snippets/#step-2-export-backup-existing-snippets)
 
 ## Terminal 終端機
 
@@ -88,9 +89,15 @@ cp com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 開啟 `iterm2` 後直接輸入 `git` 按確認，他會自己開始跑
 
 ##### git 權限設定
-原本以為只要用 `ssh-keygen` 就可以了，沒想到還要設定一個 `known_host` 的項目
+除了 `ssh-keygen` 以外，還要設定一個 `known_host` 項目，參見以下流程
 
 ```bash
+# keygen 的部分
+ssh-keygen
+# 接著會問一堆問題，基本上一直 enter 就好
+# 結束後會在 .ssh 底下產一組私鑰和金鑰
+
+# known_host 的部分
 ssh-keygen -t rsa -C "yayayahahahaooii@gmail.com"
 ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 cat ~/.ssh/id_rsa.pub | pbcopy
@@ -99,8 +106,7 @@ cat ~/.ssh/id_rsa.pub | pbcopy
 然後到 [`github`](https://github.com/settings/keys) 上新增一組金鑰就可以了  
 > [參考資料](https://stackoverflow.com/questions/13363553/git-error-host-key-verification-failed-when-connecting-to-remote-repository)
 
-> TODO 要不要這整個流程也寫成腳本算了..
-> 或是把 ssh-keygen 的部分補到上面的程式碼 + 註解就好?
+> TODO .ssh 底下我記得有個 config 還什麼的東西可以產好 ssh {custom-name} 外加帶上金鑰什麼的?
 
 ### 安裝 brew
 
@@ -156,14 +162,14 @@ sudo apt-get install fonts-powerline
 
 ### rc 相關設定
 
-直接執行腳本後即可
+先執行此腳本，可以完成大部分
 
 ```bash
 # 到這裡應該已經安裝好 `zsh` 了，所以在使用的時候要用 zsh 來呼叫
 zsh set-rc-files.sh
 ```
 
-> 同步的項目:
+> `set-rc-files.sh` 同步的項目:
 
 > - `.zshrc`: zsh 主檔
 > - `.zprofile`: profile 檔
@@ -173,9 +179,26 @@ zsh set-rc-files.sh
 
 > TODO 有一個叫 `.git-completion.bash` 的不知道用不用得到?
 
+接著，動處理以下項目
+
+##### 資料層級的 git config
+
+用於把某資料夾以下的所有專案套用該資料夾裡的 `.gitconfig`, 在切分公私 `email` 和 `user name` 的時候很好用。  
+開啟 `~/.gitconfig` 後，添加如下的設定
+
+```bash
+[includeIf "gitdir:{資料夾路徑}/"]
+  path = {資料夾路徑}/.gitconfig
+
+# 實際範例，可以多個
+[includeIf "gitdir:~/go/src/gitlab.paradise-soft.com.tw/web/"]
+  path = ~/web/.gitconfig
+[includeIf "gitdir:~/go/src/gitlab.paradise-soft.com.tw/frontend/"]
+  path = ~/frontend/.gitconfig
+```
+
 TODO  
 設定完後要手動處理的部分還沒寫:  
-git 的公司子層 repo email 設定, 在 `.gitconfig` 裡  
 TODO 整理: 這裡要每一個 zshrc 再去看一下, 更新這些項目的東東也要整理一下  
 TODO 製作一個各種 rc 檔案的捷徑(ln ?)資料夾，這個應該也可以用腳本去跑就可以了  
 TODO 裝完之後，目前的 git diff 是壞的.. 再看看是發生什麼事了, 我猜是和 .bashrc 寫成了 .zprofile 有關?  
@@ -226,3 +249,6 @@ plugins=(
 > 將當前 git commit 變成 javascript global variable 的方式  
 > git commit 前要做的事情? 或是 push 或 merge 前要做的事情  
 > sublime text 好像有一個叫 better select 之類的東西? 像是可以雙向反白的  
+> host ? 用於綁架自己的網站的那個東東要怎麼設定  
+> ssh config 裡要幫 domain 命名或自動帶上金鑰的部分該怎麼處理  
+> ssh-keygen 好像可以產出很多組的公私鑰?    
