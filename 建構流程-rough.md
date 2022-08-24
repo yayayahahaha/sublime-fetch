@@ -2,7 +2,7 @@
 
 ## Mac 本身設定
 
-如取消各種手勢、觸控板方向調整、拖拉方式修改、快捷鍵調整、繁簡轉換等  
+如取消各種手勢、觸控板方向調整、拖拉方式修改、快捷鍵如繁簡轉換調整等  
 
 > TODO 還沒找如何匯出 or 詳細的每個步驟，不過數量不多應該還好
 
@@ -39,10 +39,13 @@ Please resolve by removing the offending ignored_packages setting.
 
 ## Sublime Merge
 
-> TODO 還沒寫
-> 感覺也可以寫個自動化的腳本去拉這些檔案後把它們放到正確的位置?
+[官網](https://www.sublimemerge.com/) 安裝後，執行以下腳本
 
+```bash
+sh set-sublime-merge-user.sh
+```
 
+接著開啟 `Sublime Merge`, 嘗試看看 `ctrl + cmd + b` 有沒有辦法觸發 `Create Branch From Remote Branch` 即可
 
 ## Edge 瀏覽器
 
