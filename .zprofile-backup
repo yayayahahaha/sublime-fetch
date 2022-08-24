@@ -3,6 +3,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # TODO 這邊也要切分出來哪些只能放在 .zshrc 裡、哪些可以放在 profile 裡
 # 如果全都放在這裡的話有一些像是 prompt 或是顏色之類的就不會作用了
+# !! 處理結束後也要記得更新當前電腦使用的
 
 # color
 Black="\033[0;30m"
