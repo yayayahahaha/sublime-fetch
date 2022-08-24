@@ -106,8 +106,6 @@ cat ~/.ssh/id_rsa.pub | pbcopy
 然後到 [`github`](https://github.com/settings/keys) 上新增一組金鑰就可以了  
 > [參考資料](https://stackoverflow.com/questions/13363553/git-error-host-key-verification-failed-when-connecting-to-remote-repository)
 
-> TODO .ssh 底下我記得有個 config 還什麼的東西可以產好 ssh {custom-name} 外加帶上金鑰什麼的?
-
 ### 安裝 brew
 
 > 安裝 `brew` 之前要裝 `git`, `brew` 在安裝的時候會需要
@@ -200,10 +198,9 @@ zsh set-rc-files.sh
   path = ~/frontend/.gitconfig
 ```
 
-TODO 也要處理備份的東西, 也就是 `zsh set-rc-files.sh` 的反向, 還有上述那些設定檔的反向..  
-TODO 整理: 這裡要每一個 zshrc 再去看一下, 更新這些項目的東東也要整理一下  
-TODO 裝完之後，目前的 git diff 是壞的.. 再看看是發生什麼事了, 我猜是和 .bashrc 寫成了 .zprofile 有關?  
--> 實測之後有關，判斷應該是顏色的部分受到影響了  
+> TODO 也要處理備份的東西, 也就是 `zsh set-rc-files.sh` 的反向, 還有上述那些設定檔的反向..  
+> 整理: 這裡要每一個 zshrc 再去看一下, 更新這些項目的東東也要整理一下  
+> 如果使用 `.zprofile` 的話，prompt 相關的項目好像都不會起作用?  也不會換行之類的  
 
 ##### 對 `.zshrc` 的調整
 
@@ -229,8 +226,6 @@ plugins=(
 # ...
 ```
 
-> TODO 不知道 zsh 到底有哪些 plugins? 可以看一下
-
 ---
 
 > TODO 撰寫自己的 tech center 吧  
@@ -254,3 +249,4 @@ plugins=(
 > ssh config 裡要幫 domain 命名或自動帶上金鑰的部分該怎麼處理  
 > ssh-keygen 好像可以產出很多組的公私鑰?  
 > prune sublime text user folder, 裡面累積太多奇怪的東西  
+> zsh 到底有哪些 plugins? 可以看一下
