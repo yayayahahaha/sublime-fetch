@@ -1,0 +1,1 @@
+curl "https://guard.fashionguide.com.tw/actives/2017/cosmed/user/shared" -X POST -d '{"eventId":19,""abcdefghijklmn"}' -H "Accept: application/json" -H "Content-type: application/json"

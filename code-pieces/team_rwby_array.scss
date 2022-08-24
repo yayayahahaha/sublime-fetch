@@ -1,0 +1,3 @@
+$team_rwby: "http://puu.sh/oXDLO/7b5a932ef1.jpg", "http://puu.sh/oXDNd/169a74d36c.jpg", "http://puu.sh/oXDNQ/bec8c790e4.jpg", "http://puu.sh/oXDO9/3c169032d0.jpg";
+$team_rwby: "./R.jpg", "./W.jpg", "./B.jpg", "./Y.jpg";
+unquote(nth($team_rwby, number ));
