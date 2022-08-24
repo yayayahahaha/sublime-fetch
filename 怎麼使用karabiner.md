@@ -57,3 +57,14 @@
 
 > 由於鍵盤的 fn1 + 5, fn1 + 6 會是調整燈光  
 > 所以要透過這種方式把 f5 和 f6 的功能叫回來
+
+#### 權限設定
+
+如果 Mac 預設找不到需要的權限的話，到下列這些地方找  
+
+- karabiner_grabber: `/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_grabber`  
+
+- karabiner_observer: `/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_observer`  
+
+- Karabiner-EventViewer: 在 `applicatoin 應用程式` 裡面就可以找到  
+> source https://github.com/pqrs-org/Karabiner-Elements/issues/1867

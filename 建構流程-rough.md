@@ -20,8 +20,6 @@ cp ./karabiner $HOME/.config/karabiner
 > Karabiner-EventViewer: 在 `applicatoin 應用程式` 裡面就可以找到  
 > source https://github.com/pqrs-org/Karabiner-Elements/issues/1867
 
-> TODO 這個可以寫到[`怎麼使用 karabiner element`](./怎麼使用karabiner.md) 那裏
-
 ## Sublime Text 編輯器
 
 依照 [這裡](https://github.com/yayayahahaha/sublime3_package_backup) 的流程去處理  
@@ -32,7 +30,7 @@ sh set-sublime-text-user.sh
 ```
 
 > TODO 像是開啟同一個檔案然後可以看上下文的那種快捷鍵還沒有記得很熟  
-> 或是把當前檔案移動到新的視窗的快捷鍵?  
+> 或是把當前檔案移動到新的視窗的快捷鍵?  cmd + k + up?  
 > TODO 還沒處理掉 package 會噴的錯誤訊息  
 > It appears a package is trying to ignore itself, causing a loop.
 Please resolve by removing the offending ignored_packages setting.
@@ -50,12 +48,18 @@ Please resolve by removing the offending ignored_packages setting.
 
 登入即可同步大部分如書籤等等的設定，其他要調整的項目如下:
 
-- `tra` 和 `tras` 的 `Google Translator` 快捷鍵  
-- 調整預設的搜尋引擎 Bing -> Google  
+`cmd + ,` 啟動 Preference -> 隱私權、搜尋與服務 -> 最下方的服務 -> 網址列和搜尋 -> 管理搜尋引擎  
+
+添加以下 `Google Translator` 的快捷鍵
+
+| 名稱          | 關鍵字         | URL
+| ------------- | ------------- | ---
+| 英文 to 中文   | tra           | `https://translate.google.com/?sl=en&tl=zh-TW&text=%s`
+| 中文 to 英文   | tras          | `https://translate.google.com/?sl=zh-CN&tl=en&text=%s`
+
 - Snippets 的相關檔案  
 
-> TODO 直接寫出來要怎麼調整吧，還有那些 `tra` 什麼的也就直接寫出來可以用複製的吧
-> Snippet 的部分直接放進來這個資料夾算了
+> TODO Snippet 的部分直接放進來這個資料夾算了
 
 ## Terminal 終端機
 
@@ -93,7 +97,7 @@ cat ~/.ssh/id_rsa.pub | pbcopy
 > [參考資料](https://stackoverflow.com/questions/13363553/git-error-host-key-verification-failed-when-connecting-to-remote-repository)
 
 > TODO 要不要這整個流程也寫成腳本算了..
-> 或是把 ssh-keygen 的部分補上就好?
+> 或是把 ssh-keygen 的部分補到上面的程式碼 + 註解就好?
 
 ### 安裝 brew
 
@@ -156,14 +160,6 @@ sudo apt-get install fonts-powerline
 zsh set-rc-files.sh
 ```
 
-TODO  
-設定完後要手動處理的部分還沒寫:  
-git 的公司子層 repo email 設定, 在 `.gitconfig` 裡  
-TODO 整理: 這裡要每一個 zshrc 再去看一下, 更新這些項目的東東也要整理一下  
-TODO 製作一個各種 rc 檔案的捷徑(ln ?)資料夾，這個應該也可以用腳本去跑就可以了  
-TODO 裝完之後，目前的 git diff 是壞的.. 再看看是發生什麼事了, 我猜是和 .bashrc 寫成了 .zprofile 有關?  
--> 實測之後有關，判斷應該是顏色的部分受到影響了  
-
 > 同步的項目:
 
 > - `.zshrc`: zsh 主檔
@@ -173,6 +169,14 @@ TODO 裝完之後，目前的 git diff 是壞的.. 再看看是發生什麼事�
 > - `.vimrc`: `vim` 設定檔
 
 > TODO 有一個叫 `.git-completion.bash` 的不知道用不用得到?
+
+TODO  
+設定完後要手動處理的部分還沒寫:  
+git 的公司子層 repo email 設定, 在 `.gitconfig` 裡  
+TODO 整理: 這裡要每一個 zshrc 再去看一下, 更新這些項目的東東也要整理一下  
+TODO 製作一個各種 rc 檔案的捷徑(ln ?)資料夾，這個應該也可以用腳本去跑就可以了  
+TODO 裝完之後，目前的 git diff 是壞的.. 再看看是發生什麼事了, 我猜是和 .bashrc 寫成了 .zprofile 有關?  
+-> 實測之後有關，判斷應該是顏色的部分受到影響了  
 
 ##### 對 `.zshrc` 的調整
 
