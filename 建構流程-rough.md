@@ -179,6 +179,9 @@ zsh set-rc-files.sh
 
 > TODO 有一個叫 `.git-completion.bash` 的不知道用不用得到?
 
+同時這個步驟也已經將上述檔案們都 `ln` 一份到這個 `repo` 下的 `config-link` 資料夾裡了  
+可以直接在這個資料夾裡修改，各自位置的檔案都會一起連動修改  
+
 接著，動處理以下項目
 
 ##### 資料層級的 git config
@@ -197,11 +200,8 @@ zsh set-rc-files.sh
   path = ~/frontend/.gitconfig
 ```
 
-TODO  
-設定完後要手動處理的部分還沒寫:  
-TODO 整理: 這裡要每一個 zshrc 再去看一下, 更新這些項目的東東也要整理一下  
-TODO 製作一個各種 rc 檔案的捷徑(ln ?)資料夾，這個應該也可以用腳本去跑就可以了  
 TODO 也要處理備份的東西, 也就是 `zsh set-rc-files.sh` 的反向, 還有上述那些設定檔的反向..  
+TODO 整理: 這裡要每一個 zshrc 再去看一下, 更新這些項目的東東也要整理一下  
 TODO 裝完之後，目前的 git diff 是壞的.. 再看看是發生什麼事了, 我猜是和 .bashrc 寫成了 .zprofile 有關?  
 -> 實測之後有關，判斷應該是顏色的部分受到影響了  
 
