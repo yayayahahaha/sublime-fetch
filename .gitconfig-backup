@@ -20,8 +20,8 @@
     brauth = "! for branch in `git branch -r | grep -v /HEAD`;do echo `git show --format=\"%an\" $branch | head -n 1` \t$branch; done | sort -r"
     tfp = "!git tag -l | xargs git tag -d; git fetch --tags"
     cma = commit -am
-	root-path = "rev-parse --show-toplevel"
-	sw = switch
+    root-path = "rev-parse --show-toplevel"
+    sw = switch
     cb = !"git br --show-current | pbcopy" # git rev-parse --abbrev-ref HEAD
     s = "!GIT_EDITOR=\"subl -n -w\" git " # 透過sublime text 3 開啟git editor
     pp = !"git push origin -u $(git branch --show-current)"
@@ -45,16 +45,17 @@
     path = ~/go/src/gitlab.paradise-soft.com.tw/frontend/.gitconfig
 
 [core]
-	ignorecase = false
-	autocrlf = false
-	quotepath = false
+    ignorecase = false
+    autocrlf = false
+    quotepath = false
     editor = vim
+    pager = less -F -X # 讓 git diff, git show 等如果沒有超出畫面的話不會啟用 less
 # editor = subl -n -w # 修改git 的預設編輯器, 像是commit 或是rebase 之類的
 [rerere]
-	enabled = false # reuse-recorded-resolution
+    enabled = false # reuse-recorded-resolution
 [push]
 # 如果是預設的simple 的話會檢查local 和remote 的upstream 名字是否一致, 改成 upstream 的話就可以透過 --set-upstream-to 設置串連
-	default = simple
+    default = simple
 [rebase]
 # 在使用git rebase -i 的時候每一條項目的pattern
-	instructionFormat = (%an <%ae>) %s
+    instructionFormat = (%an <%ae>) %s
