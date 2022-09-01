@@ -1,3 +1,5 @@
+# TODO 我也不知道這個是哪來的、也不知道是用來做什麼的
+
 # bash/zsh completion support for core Git.
 #
 # Copyright (C) 2006,2007 Shawn O. Pearce <spearce@spearce.org>

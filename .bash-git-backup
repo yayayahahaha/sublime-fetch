@@ -1,0 +1,383 @@
+alias greset='git reset --hard; git clean -df;' # 讓git head回到乾淨無修正的狀態, 被.gitignore 的檔案不會被刪除
+alias fo="_git_fetch_and_pull" # 重新從遠端拉取production, master 和qa
+alias g_find_branch_by_hash="_git_find_branch_by_hash" #透過hashkey 找出當初是屬於哪個分支
+alias gen_git_key="ssh-keygen" #常常忘記，寫在這裡
+alias prune_local_branch="_git_remove_remote_gone_branch" # 清除已經合進當前分之且遠端分支已不存在的本地分支
+alias g-root="_git_goto_root"
+
+# todo: 確認所有遠端branch 是否已經merge 進當前分支
+# track-all-remote-branches; git branch --merged
+
+# 登出git command line
+# 且視情況看要不要重設user.name 和user.email
+# Mac 還需要將KeyChain 裡的git 帳號密碼清掉才不會一直被保存
+# 同時，如果不是透過KeyChain 的話會存在 ~/.git-credential 裡
+# git config --global --unset user.name
+# git config --global --unset user.email
+# git config --global --unset credential.helper
+
+# 回到當前git repository 的根目錄
+function _git_goto_root() {
+  local root_path=(`git rev-parse --show-toplevel`)
+  cd "$root_path"
+}
+
+# 清除所有已經合進當前分支、且遠端的線已經gone 的分支
+function _git_remove_remote_gone_branch() {
+  # TODO 這個如果 branch name 裡面有中文的話會沒辦法找到對應的 branch name
+  local branch_list=(`git branch -vv --merged | grep -E '.+\s+\[.+\/.+: gone\]' | sed -e 's/^..//g'  | sed -e 's/ \{1,\}.\{1,\}//g'`)
+  local branch_list_length=${#branch_list[@]}
+
+  if [[ $branch_list_length == 0 ]]; then
+    echo '沒有要刪除的分支'
+    return
+  fi
+
+  for branch_name in ${branch_list[@]}; do
+    git branch --quiet -d $branch_name
+    if [[ $? != 0 ]]; then
+      echo "${LightRed}分支 $branch_name 刪除失敗！${NC}"
+      continue
+    fi
+    echo "分支 $branch_name 刪除成功"
+
+  done
+}
+
+function _git_find_branch_by_hash() {
+  if [[ $1 == '' ]]; then
+      echo "${Yellow}請輸入欲查詢的hash: ${NC}"
+      read branch_hash
+  else
+      branch_hash=$1
+  fi
+  # 很厲害的技能呢
+  git log $branch_hash..HEAD --ancestry-path --merges --oneline --color | tail -n 1
+}
+
+function _git_fetch_and_pull() {
+  clear # 清空terminal
+
+  echo
+  echo -e "${LightGreen}--操作開始--${NC}"
+
+  echo
+  echo -e "${Yellow}操作路徑${NC}"
+  pwd
+
+  # 檢查當前目錄是不是git repo
+  isGitRepository_detail
+  if [[ $? != 0 ]]; then; return 1; fi
+
+  current_branch=`git rev-parse --abbrev-ref HEAD`
+  echo
+  echo -e "當前分支為 ${LightCyan}${current_branch}${NC}"
+
+  #先fetch --prune 更新本地的遠端分支
+  fetch_prune_detail
+  if [[ $? != 0 ]]; then
+    return 1
+  fi
+
+  echo
+  echo -e "${Yellow}檢查git working tree 是否需要stash${NC}"
+  have_to_stash=$( stashStatus )
+  if [[ ${have_to_stash} == true ]]; then
+    echo -e "${Cyan}需要 stash${NC}: $(pwd)"
+    toggleStash ${have_to_stash} "stash"
+    if [[ $? == 0 ]]; then
+        echo "stash 成功"
+    else
+        echo "stash 失敗!"
+        echo
+        echo -e "${LightRed}--操作終止--${NC}"
+        return 1
+    fi
+  else
+    echo "不用 stash"
+  fi
+
+  echo ""
+  echo -e "${Yellow}hard-reset production, master 和qa 分支:${NC}"
+  # 檢查遠端是否有production, master 和qa 分支
+  production_remote_branch_exist=$(remoteBranchDoesntExist production)
+  master_remote_branch_exist=$(remoteBranchDoesntExist master)
+  qa_remote_branch_exist=$(remoteBranchDoesntExist qa)
+  #檢查本地是否有production, master 和qa 分支
+  production_local_branch_exist=$(localBranchDoesntExist production)
+  master_local_branch_exist=$(localBranchDoesntExist master)
+  qa_local_branch_exist=$(localBranchDoesntExist qa)
+
+  # production branch
+  if [[ ${production_remote_branch_exist} == "false" ]]; then
+    echo -e "${Purple}production 分支不存在遠端分支，故不檢查/移動本地的production 分支${NC}"
+  else
+    if [[ ${production_local_branch_exist} == "false" ]]; then
+      echo '本地沒有production 分支，直接track 遠端分支'
+      git checkout --quiet -b production origin/production
+      if [[ $? == 0 ]]; then
+        echo '分支production tracking 成功'
+      else
+        echo -e "${LightRed}track production 遠端分支失敗!${NC}"
+        echo
+        echo '--操作終止--'
+        return 1
+      fi
+    else
+      git checkout --quiet production
+      git reset --quiet --hard origin/production
+      if [[ $? == 0 ]]; then
+        echo '分支production hard-reset 遠端分支成功'
+      else
+        echo -e "${LightRed}分支production hard-reset 遠端分支失敗!${NC}"
+        echo
+        echo '--操作終止--'
+        return 1
+      fi
+    fi
+  fi
+  # master branch
+  if [[ ${master_remote_branch_exist} == "false" ]]; then
+    echo -e "${Purple}master 分支不存在遠端分支，故不檢查/移動本地的master 分支${NC}"
+  else
+    if [[ ${master_local_branch_exist} == "false" ]]; then
+      echo '本地沒有master 分支，直接track 遠端分支'
+      git checkout --quiet -b master origin/master
+      if [[ $? == 0 ]]; then
+        echo '分支master tracking 成功'
+      else
+        echo -e "${LightRed}track master 遠端分支失敗!${NC}"
+        echo
+        echo '--操作終止--'
+        return 1
+      fi
+    else
+      git checkout --quiet master
+      git reset --quiet --hard origin/master
+      if [[ $? == 0 ]]; then
+        echo '分支master hard-reset 遠端分支成功'
+      else
+        echo -e "${LightRed}分支master hard-reset 遠端分支失敗!${NC}"
+        echo
+        echo '--操作終止--'
+        return 1
+      fi
+    fi
+  fi
+  # qa branch
+  if [[ ${qa_remote_branch_exist} == "false" ]]; then
+    echo -e "${Purple}qa 分支不存在遠端分支，故不檢查/移動本地的qa 分支${NC}"
+  else
+    if [[ ${qa_local_branch_exist} == "false" ]]; then
+      echo '本地沒有qa 分支，直接track 遠端分支'
+      git checkout --quiet -b qa origin/qa
+      if [[ $? == 0 ]]; then
+        echo '分支qa tracking 成功'
+      else
+        echo -e "${LightRed}track qa 遠端分支失敗!${NC}"
+        echo
+        echo '--操作終止--'
+        return 1
+      fi
+    else
+      git checkout --quiet qa
+      git reset --quiet --hard origin/qa
+      if [[ $? == 0 ]]; then
+        echo '分支qa hard-reset 遠端分支成功'
+      else
+        echo -e "${LightRed}分支qa hard-reset 遠端分支失敗!${NC}"
+        echo
+        echo '--操作終止--'
+        return 1
+      fi
+    fi
+  fi
+
+  # 放到後面
+  echo ""
+  echo -e "${Yellow}刪除遠端已不存在且已合進去主線的本地分支${NC}"
+  if [[ ${production_remote_branch_exist} != "false" ]]; then
+    git checkout --quiet production
+  elif [[ ${master_remote_branch_exist} != "false" ]]; then
+    git checkout --quiet master
+  fi
+  prune_local_branch
+  if [[ $? == 0 ]]; then
+  else
+    echo -e "${LightRed}刪除失敗!${NC}"
+    echo
+    echo '--操作終止--'
+    return 1
+  fi
+
+  echo
+  echo -e "${Yellow}切回原本分支${NC} ${LightCyan}${current_branch}${NC}"
+  git ch --quiet ${current_branch}
+  if [[ $? == 0 ]]; then
+      echo "切回 ${current_branch} 成功"
+  else
+      echo "切回 ${current_branch} 失敗!"
+      echo
+      echo -e "${LightRed}--操作終止--${NC}"
+      return 1
+  fi
+
+  echo
+  echo -e "${Yellow}檢查是否有需要將stash 的檔案stash pop 回來${NC}"
+  # 結尾，如果一開始有stash 的話，pop 回來
+  if [[ ${have_to_stash} == "true" ]]; then
+    echo -e "${Cyan}需要 stash pop${NC}: $(pwd)"
+    toggleStash ${have_to_stash} "pop"
+    if [[ $? == 0 ]]; then
+        echo "stash pop成功"
+    else
+        echo "stash pop失敗!"
+        echo
+        echo -e "${LightRed}--操作終止--${NC}"
+        return 1
+    fi
+  else
+    echo "不需要 stash pop"
+  fi
+
+  echo
+  echo -e "${LightGreen}--操作結束--${NC}"
+  echo
+
+  return 0 # 0 是操作成功
+}
+
+# 檢查branch 是否存在相關
+function localBranchDoesntExist() {
+  temp=`git rev-parse --quiet --verify $1`
+  if [[ $? == 0 ]]; then
+    echo "true"
+  else
+    echo "false"
+  fi
+}
+function localBranchDoesntExist_detail() {
+  echo
+  echo -e "${Yellow}檢查本地是否已經存在 ${LightCyan}$1${NC} ${Yellow}分支${NC}"
+  local_branch_already_exist=$(localBranchDoesntExist $1)
+  if [[ ${local_branch_already_exist} == "true" ]]; then
+    echo -e "${Red}本地已經存在欲創建的分支 ${LightCyan}$1${NC}，${Red}請重新確認後再執行${NC}"
+    echo
+    echo -e "${Red}--終止操作--${NC}"
+    return 1
+  fi
+  echo "本地不存在 ${LightCyan}$1${NC} 分支"
+  return 0
+}
+function localBranchHasExist_detail() {
+  echo
+  echo -e "${Yellow}檢查本地是否存在著 ${LightCyan}$1${NC} ${Yellow}分支${NC}"
+  local_branch_already_exist=$(localBranchDoesntExist $1)
+  if [[ ${local_branch_already_exist} == "true" ]]; then
+    echo "本地存在分支 ${LightCyan}$1${NC}"
+    return 0
+  fi
+  echo "本地不存在 ${LightCyan}$1${NC} 分支"
+  echo
+  echo -e "${Red}--終止操作--${NC}"
+  return 1
+}
+
+function remoteBranchDoesntExist() {
+  temp=`git rev-parse --quiet --verify origin/$1`
+  if [[ $? == 0 ]]; then
+    echo "true"
+  else
+    echo "false"
+  fi
+}
+function remoteBranchDoesntExist_detail() {
+  echo
+  echo -e "${Yellow}檢查遠端是否已經存在 ${LightCyan}$1${NC} ${Yellow}分支${NC}"
+  remote_branch_already_exist=$(remoteBranchDoesntExist $1)
+  if [[ ${remote_branch_already_exist} == "true" ]]; then
+    echo -e "${Red}遠端已經存在欲創建的分支 ${LightCyan}$1${NC}，${Red}請重新確認後再執行${NC}"
+    echo
+    echo -e "${Red}--終止操作--${NC}"
+    return 1
+  fi
+  echo "遠端不存在 ${LightCyan}$1${NC} 分支"
+  return 0
+}
+function remoteBranchHasExist_detail() {
+  echo
+  echo -e "${Yellow}檢查遠端是否已經存在 ${LightCyan}$1${NC} ${Yellow}分支${NC}"
+  remote_branch_already_exist=$(remoteBranchDoesntExist $1)
+  if [[ ${remote_branch_already_exist} == "true" ]]; then
+    echo "遠端存在分支 ${LightCyan}$1${NC}"
+    return 0
+  fi
+  echo "遠端不存在 ${LightCyan}$1${NC} 分支"
+  echo
+  echo -e "${Red}--終止操作--${NC}"
+  return 1
+}
+
+#stash 相關
+function toggleStash() {
+  if [[ $1 == 'false' ]]; then
+    return
+  fi
+
+  if [[ $2 == 'stash' ]]; then
+    git add :/
+    git stash
+  elif [[ $2 == 'pop' ]]; then
+    git stash pop
+    git reset
+  fi
+}
+function stashStatus() {
+  # stash 的狀態，用於檢查是否有unstaged 或untracked 的檔案
+  git_status=`git status 2> /dev/null`;
+  if [[ "${git_status}" != *"nothing to commit, working tree clean"* ]]; then
+      echo "true"
+  else
+      echo "false"
+  fi
+}
+
+# 檢查是否為git repository
+function isGitRepository() {
+  if [[ -d .git ]]; then
+    echo "true"
+  else
+    echo "false"
+  fi
+}
+function isGitRepository_detail() {
+    echo ""
+    echo -e "${Yellow}檢查當前目錄是不是git repository${NC}"
+    is_git_repository=$( isGitRepository )
+    if [[ ${is_git_repository} != "true" ]]; then
+      echo -e "${LightRed}當前目錄缺少.git ，判斷不是git repository${NC}"
+      echo ""
+      echo "--終止操作--"
+
+      return 1
+    else
+      echo "當前目錄有.git ，判斷為git repository"
+
+      return 0
+    fi
+}
+
+# fetch_prune 的共用function
+function fetch_prune_detail() {
+  echo
+  echo -e "${Yellow}更新本地的遠端分支: git fetch --prune${NC}"
+  # git fetch --prune --prune-tags --tags
+  git fetch -Pptf
+  if [[ $? == 0 ]]; then
+    echo '更新本地的遠端分支成功'
+    return 0
+  else
+    echo -e "${LightRed}更新本地的遠端分支失敗! 操作終止${NC}"
+    return 1
+  fi
+}

@@ -1,0 +1,388 @@
+  #!/bin/bash
+
+# golang 的部分
+GOPATH="$(go env GOPATH)"
+export PATH="${GOPATH}/bin:${PATH}" # 好像是export golang 的bin ?
+
+# alias 的部分
+local gitlab_path="${GOPATH}/src/gitlab.paradise-soft.com.tw" # 大部分公司的專案位子
+
+# 移動
+alias gbase="cd ${gitlab_path}/web/base"
+alias glv="cd ${gitlab_path}/web/lv"
+alias ghy="cd ${gitlab_path}/web/hy"
+alias gtz="cd ${gitlab_path}/web/tz"
+alias gc7="cd ${gitlab_path}/web/c7"
+alias gc8="cd ${gitlab_path}/web/c8"
+alias gbh="cd ${gitlab_path}/web/bh"
+alias g3h="cd ${gitlab_path}/web/3h"
+alias gls="cd ${gitlab_path}/web/ls"
+alias gcdd="cd ${gitlab_path}/web/cdd"
+alias gsc="cd ${gitlab_path}/web/sc"
+alias gxpj="cd ${gitlab_path}/web/xpj"
+alias gco="cd ${gitlab_path}/web/co"
+alias ghb="cd ${gitlab_path}/web/hb"
+alias gttmj="cd ${gitlab_path}/web/ttmj"
+alias gred="cd ${gitlab_path}/web/red-envelope-v1"
+alias gad="cd ${gitlab_path}/frontend/admin"
+alias gre="cd ${gitlab_path}/frontend/reseller"
+alias glottery_v1="cd ${gitlab_path}/web/lottery-v1" # 彩票1.0-vue
+alias ga2="cd ${gitlab_path}/frontend/admin-v2" # admin 不知道幾點0
+alias gr2="cd ${gitlab_path}/frontend/reseller-v2" # reseller vue version
+alias gagent="cd ${gitlab_path}/web/agent"
+alias gstock="cd ${gitlab_path}/web/stock-v1" # lotteryCategory: aa
+alias gbuild="cd ${gitlab_path}/frontend/frontend-build"
+alias gconfig="cd ${gitlab_path}/configuration"
+
+alias gsce="cd ${gitlab_path}/frontend/site_clone_engine"
+alias gxiao-admin-ps="cd ${gitlab_path}/frontend/xiaoshuo-admin-ps"
+alias gxiao-wap="cd ${gitlab_path}/frontend/xiaoshuo-wap"
+alias g51-admin="cd ${gitlab_path}/frontend/cpjihua/cp51-admin"
+alias g51-web="cd ${gitlab_path}/frontend/cpjihua/cp51-web"
+alias gbbs="cd ${gitlab_path}/frontend/bbs-backstage"
+alias gcpt="cd ${gitlab_path}/frontend/webview/cpt-webview"
+alias gco_wap="cd ${gitlab_path}/frontend/webview/co__wap"
+alias gsite-group="cd ${gitlab_path}/frontend/site-group-admin"
+alias g168="cd ${gitlab_path}/frontend/cp168-web"
+alias g168_wap="cd ${gitlab_path}/frontend/webview/168"
+alias g168_web="cd ${gitlab_path}/design/stationary-website/168"
+alias gsbk-web="cd ${gitlab_path}/frontend/sbk/sbk-web"
+alias gsbk-admin="cd ${gitlab_path}/frontend/sbk/sbk-admin"
+
+# 啟動公司的Web 相關
+alias gget='_runGoGetStuff' #go get
+alias ggu='_runGulpStuff' #static files stuff
+alias ggb='_runGoBuildStuff' #build
+alias gma='_runGoMain' #run
+alias grun='ggu && ggb && gma' # run all web stuff
+alias rl='_runGulpClean' #run gulp clean only
+alias app_download='_build_n_copy_app_download' # 把靜態app_download 的東西放到
+# TODO: third-party things' clone and copy
+
+#Git 相關
+alias cbrp='_change_backend_repository'
+alias fetch_all_frontend_repository="_fetch_all_frontend_repository"
+alias clean_all_web_gulp="_clean_all_web_gulp"
+
+_yaitoo_path="$HOME/go/src/gitlab.paradise-soft.com.tw/backend/yaitoo"
+_common_path="$HOME/go/src/gitlab.paradise-soft.com.tw/glob/common"
+_utils_path="$HOME/go/src/gitlab.paradise-soft.com.tw/glob/utils"
+_kangaroo_path="$HOME/go/src/gitlab.paradise-soft.com.tw/backend/kangaroo"
+_shark_path="$HOME/go/src/gitlab.paradise-soft.com.tw/backend/shark"
+_pdsbe_i18n_path="$HOME/go/src/gitlab.paradise-soft.com.tw/pdsbe/i18n"
+_geetestsdk_path="$HOME/go/src/gitlab.paradise-soft.com.tw/glob/geetestsdk"
+alias gbyat="cd $_yaitoo_path"
+alias gbcom="cd $_common_path"
+alias gbuti="cd $_utils_path"
+alias gbi18n="cd $_pdsbe_i18n_path"
+alias ggeetestsdk="cd $_geetestsdk_path"
+alias gkangaroo="cd $_kangaroo_path"
+
+# site clone engine 的包板與複製移動等
+alias sceBuild='_sce_build_and_move_to_server'
+
+
+alias tt='_test_function'
+function _test_function() {
+  #!/bin/bash
+
+  local testing_list=('gbase' 'glv' 'ghy' 'gtz' 'gc7' 'gc8' 'gbh' 'g3h' 'gls' 'gcdd' 'gsc' 'gxpj' 'gco' 'gad' 'gre' 'gsce')
+  local testing_list_length=${#testing_list[@]}
+  for (( i = 1; i < testing_list_length + 1; i++ )); do
+    echo $i
+    echo ${testing_list[$i]}
+  done
+
+  # return 1
+
+  # TODO: 異步執行的error handler
+  local branch_name=master
+  (gbase && fo) & gbase_var=$!
+  (glv   && fo) & glv_var=$!
+  (ghy   && fo) & ghy_var=$!
+  (gtz   && fo) & gtz_var=$!
+  (gc7   && fo) & gc7_var=$!
+  (gc8   && fo) & gc8_var=$!
+  (gbh   && fo) & gbh_var=$!
+  (g3h   && fo) & g3h_var=$!
+  (gls   && fo) & gls_var=$!
+  (gcdd  && fo) & gcdd_var=$!
+  (gsc   && fo) & gsc_var=$!
+  (gxpj  && fo) & gxpj_var=$!
+  (gco   && fo) & gco_var=$!
+  (gad   && fo) & gad_var=$!
+  (gre   && fo) & gre_var=$!
+  (gsce  && fo) & gsce_var=$!
+
+  wait $gbase_var
+  wait $glv_var
+  wait $ghy_var
+  wait $gtz_var
+  wait $gc7_var
+  wait $gc8_var
+  wait $gbh_var
+  wait $g3h_var
+  wait $gls_var
+  wait $gcdd_var
+  wait $gsc_var
+  wait $gxpj_var
+  wait $gco_var
+  wait $gad_var
+  wait $gre_var
+  wait $gsce_var
+
+  echo 'done'
+
+  # typeset -A array
+  # array=(k1 v1 k2 v2 k3 v3)
+
+  # for k in "${(@k)array}"; do
+  #   printf "%s -> %s\n" "$k" "$array[$k]"
+  # done
+
+  # (sleep 1 && cd ~ && echo $pwd) & sleep1=$!
+  # (sleep 2 && cd ~ && echo $pwd) & sleep2=$!
+}
+
+# 靜態app_download 頁面的搬移等
+function _build_n_copy_app_download {
+  local dir=$(pwd)
+  cd "$gitlab_path/design/stationary-page/app-download-page/template-03/m"
+  git fetch --prune --quiet
+  git clean -xdf -e node_modules --quiet
+  git reset --hard --quiet
+  git ch $(git rev-parse HEAD) --quiet
+  git br -D master --quiet
+  git ch -b master origin/master --quiet
+
+  npm run build
+  if [[ $? != 0 ]]; then
+    # 簡易的處理npm install 與否的問題
+    npm install --legacy-peer-deps --no-save
+    npm run build
+    if [[ $? != 0 ]]; then
+      echo 'app_download 靜態資源打包失敗!'
+      return
+    fi
+  fi
+  rm -rf "$gitlab_path/web/base/includes/vue/app_download"
+  mkdir -p "$gitlab_path/web/base/includes/vue/app_download"
+
+  cp -a ./dist "$gitlab_path/web/base/includes/vue/app_download/m"
+  if [[ $? != 0 ]]; then
+    echo 'app_download 靜態資源複製失敗!'
+    return
+  fi
+
+  cd $dir
+}
+
+# 168 專案start
+# 168手機版的設計同步腳本
+function _168_project_sync_design() {
+  local dir=$(pwd)
+  g168_wap
+  git fp
+  git ch master
+  git reset --hard origin/master
+  git clean -xdf
+  npm install
+  npm run build:scss
+  npm run build:css
+
+  g168
+  rm -rf assets/style
+  mkdir assets/style
+  g168_wap
+
+  cp -r include/css "${gitlab_path}/frontend/cp168-web/assets/style/"
+  cp -r include/scss "${gitlab_path}/frontend/cp168-web/assets/style/"
+  cp -r include/img "${gitlab_path}/frontend/cp168-web/assets/style/"
+  cp include/main.scss "${gitlab_path}/frontend/cp168-web/assets/style/"
+
+  cd $dir
+}
+# 168電腦版的設計同步腳本
+function _168_web_project_sync_design() {
+  local dir=$(pwd)
+
+  # 更新168 靜態資源
+  g168_web
+  git fp
+  git ch 新增電腦版
+  git reset --hard origin/新增電腦版
+  git clean -xdf
+
+  # 清空168 資料夾
+  g168
+  rm -rf assets/desktop
+  mkdir assets/desktop
+
+  # 複製到168 專案
+  g168_web
+  cp -r desktop/assets/css "${gitlab_path}/frontend/cp168-web/assets/desktop/"
+  cp -r desktop/assets/scss "${gitlab_path}/frontend/cp168-web/assets/desktop/"
+  cp -r desktop/assets/img "${gitlab_path}/frontend/cp168-web/assets/desktop/"
+
+  # 取代字串
+  g168
+  sed -i -- 's/\/assets\/img\//\.\.\/img\//g' "assets/desktop/css/main.css"
+  rm 'assets/desktop/css/main.css--' # zsh 不知道為什麼zsh 會多一個檔案出來
+
+  cd $dir
+}
+# 168 專案end
+
+function _sce_build_and_move_to_server() {
+  # 包版
+  yarn build
+
+  # 創建壓縮用的資料夾
+  mkdir output
+  mkdir output/dist
+
+  # 打包 go
+  GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o "xunya-sceweb" .
+
+  # 複製、移動、壓縮
+  cp -r dist/ output/dist/
+  cp app.config.json output/
+  cp xunya-sceweb output/
+  cd output/
+
+  tar -zcvf xunya-sceweb.tar.gz *
+
+  # 放到server，這裡會要打密碼，現在好像不用
+  scp xunya-sceweb.tar.gz sce-dev:~/
+
+  # 復原與刪除
+  cd ..
+  rm -rf output/
+}
+
+function _change_backend_repository() {
+  local dir=$(pwd)
+  local branch_to
+  local backend_paths=($_yaitoo_path $_common_path $_utils_path $_kangaroo_path $_shark_path $_pdsbe_i18n_path $_geetestsdk_path)
+
+  if [[ $1 == '' ]]; then
+      echo "${Orange}backend/yaitoo${NC}"
+      echo "${Orange}glob/common${NC}"
+      echo "${Orange}glob/utils${NC}"
+      echo "${Orange}backend/kangaroo${NC}"
+      echo "${Orange}backend/shark${NC}"
+      echo "${Orange}pdsbe/i18n${NC}"
+      echo "${Yellow}更新且切換到哪個分支: ${NC}"
+      read branch_to
+  else
+      branch_to=$1
+  fi
+  echo
+  echo "欲切換到的分支為: ${LightCyan}$branch_to${NC}"
+
+  for backend_path in ${backend_paths[@]}; do
+    echo ""
+    echo $backend_path
+    cd $backend_path
+    fo
+
+    git ch $branch_to
+  done
+
+  # 切回原本資料夾
+  cd $dir
+
+  echo
+  echo "${Yellow}--操作結束--${NC}"
+}
+
+function _clean_all_web_gulp() {
+  local previous_dir=$(pwd)
+
+  # web part, 包含base 和各品牌
+  declare -a web_array # -a: indexed array
+  local web_array=(lv hy tz c7 c8 bh 3h ls cdd sc xpj co)
+  local web_prefix=~/go/src/gitlab.paradise-soft.com.tw/web/
+
+  for web_project in ${web_array[@]}; do
+    cd "$web_prefix$web_project"
+    pwd
+    rl
+    echo ''
+  done
+
+  cd $previous_dir
+}
+
+function _fetch_all_frontend_repository() {
+  # TODO: 記錄失敗的原因和是否要重新嘗試等
+  # 高併發?
+
+  local dir=$(pwd)
+
+  # web part, 包含base 和各品牌
+  declare -a web_array # -a: indexed array
+  local success_project=''
+  local failed_project=''
+  local web_array=(base lv ls c7 c8 bh 3h hy tz cdd sc xpj co)
+  local web_prefix=~/go/src/gitlab.paradise-soft.com.tw/web/
+
+  for web_project in ${web_array[@]}; do
+    cd "$web_prefix$web_project"
+    fo
+    if [[ $? != 0 ]]; then
+      failed_project="$failed_project $web_project"
+    else
+      success_project="$success_project $web_project"
+    fi
+    echo ''
+  done
+
+  # frontend part, 像是admin 和reseller
+  declare -a frontend_array # -a: indexed array
+  local frontend_array=(admin reseller)
+  local frontend_prefix=~/go/src/gitlab.paradise-soft.com.tw/frontend/
+
+  for fronend_project in ${frontend_array[@]}; do
+    cd "$frontend_prefix$fronend_project"
+    fo
+    if [[ $? != 0 ]]; then
+      failed_project="$failed_project $fronend_project"
+    else
+      success_project="$success_project $fronend_project"
+    fi
+    echo ''
+  done
+
+  echo "Fetch成功的專案: $success_project"
+  echo "Fetch失敗的專案: $failed_project"
+  cd $dir
+}
+
+function _runGoGetStuff() {
+    go get -u -v --insecure;
+}
+
+function _runGulpClean() {
+    local dir=$(pwd)
+    dir=${dir##*/}
+
+    git clean -xdf --exclude=app.conf
+    npm --prefix "../base/scripts/" run gulp-clean ${dir} # 還留著是因為cacheImage 資料夾的關係
+}
+
+function _runGulpStuff() {
+    local dir=$(pwd)
+    dir=${dir##*/}
+
+    _runGulpClean
+    npm --prefix "../base/scripts/" run gulp-run ${dir}
+}
+
+function _runGoBuildStuff() {
+    go build main.go
+}
+
+function _runGoMain() {
+    ./main
+}
