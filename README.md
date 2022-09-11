@@ -249,4 +249,8 @@ plugins=(
 > ssh config 裡要幫 domain 命名或自動帶上金鑰的部分該怎麼處理  
 > ssh-keygen 好像可以產出很多組的公私鑰?  
 > prune sublime text user folder, 裡面累積太多奇怪的東西  
-> zsh 到底有哪些 plugins? 可以看一下
+> zsh 到底有哪些 plugins? 可以看一下  
+> mono repo 用的什麼 bazel 這東西可以看一下? 他可以用 npm 安裝一個叫 bazelisk 的東西  
+> 不知道裝到哪裡去了、也不知道怎麼移除，這些可能得留意  
+> git 單獨 clone 一個 commit 的方式 / 單獨 clone 後，要把其他的部分也 clone 回來的方式  
+> -> 這個 Alex.C 有貼一個 stackoverflow 了，try try  
