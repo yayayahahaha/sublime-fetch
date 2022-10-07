@@ -1,0 +1,632 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ssjs",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"selectcolor",
+				"UI: Select Color Scheme"
+			],
+			[
+				"colorsublimeinstalltheme",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"about",
+				"Help: About"
+			],
+			[
+				"renamefile",
+				"Rename File"
+			],
+			[
+				"ssvue",
+				"Set Syntax: Vue Component"
+			],
+			[
+				"ssbash",
+				"Set Syntax: Bash"
+			],
+			[
+				"ssbasj",
+				"LSP: Disable Language Server in Project"
+			],
+			[
+				"rename",
+				"Rename File"
+			],
+			[
+				"gitcheckout ",
+				"Git: Checkout Current File"
+			],
+			[
+				"emmetkey",
+				"Preferences: Emmet Key Bindings"
+			],
+			[
+				"emmetsetting",
+				"Preferences: Emmet Settings"
+			],
+			[
+				"delete",
+				"File: Delete"
+			],
+			[
+				"sscoffee",
+				"Set Syntax: Gulpfile Coffee"
+			],
+			[
+				"browse",
+				"Preferences: Browse Packages"
+			],
+			[
+				"removepackage",
+				"Package Control: Remove Package"
+			],
+			[
+				"fetch",
+				"Fetch: Manage"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"git diff",
+				"Git: Diff Current File"
+			],
+			[
+				"duplica",
+				"File: Duplicate"
+			],
+			[
+				"format",
+				"JsPrettier: Format Code"
+			],
+			[
+				"sideby",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"clorsublime",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"selectclor",
+				"UI: Select Color Scheme"
+			],
+			[
+				"gitcus",
+				"Git: Custom Command"
+			],
+			[
+				"gitcommit",
+				"Git: Commit"
+			],
+			[
+				"gitaddall",
+				"Git: Add All"
+			],
+			[
+				"gitdiffallfiles",
+				"Git: Diff All Files"
+			],
+			[
+				"gitadd",
+				"Git: Add All"
+			],
+			[
+				"custom",
+				"Git: Custom Command"
+			],
+			[
+				"gitpush",
+				"Git: Push"
+			],
+			[
+				"gitallfiles",
+				"Git: Diff All Files"
+			],
+			[
+				"gitdiffall",
+				"Git: Diff All Files"
+			],
+			[
+				"newfile",
+				"File: New File Relative to Project Root"
+			],
+			[
+				"ssbas",
+				"Set Syntax: Bash"
+			],
+			[
+				"gitdifcurr",
+				"Git: Diff Current File"
+			],
+			[
+				"git diffcurrentfile",
+				"Git: Diff Current File"
+			],
+			[
+				"sidebyside",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"seletcolor",
+				"UI: Select Color Scheme"
+			],
+			[
+				"selectoc",
+				"UI: Select Color Scheme"
+			],
+			[
+				"ssmarkdown",
+				"Set Syntax: Markdown"
+			],
+			[
+				"installtheme",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"pacakge",
+				"Install Package Control"
+			],
+			[
+				"brow",
+				"Preferences: Browse Packages"
+			],
+			[
+				"ssplaintext",
+				"Set Syntax: Plain Text"
+			],
+			[
+				"ssmd",
+				"Set Syntax: Markdown"
+			],
+			[
+				"newf",
+				"File: New View into File"
+			],
+			[
+				"package",
+				"Preferences: Browse Packages"
+			],
+			[
+				"selecttheme",
+				"UI: Select Theme"
+			],
+			[
+				"selectcolr",
+				"UI: Select Color Scheme"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 456.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/flyc/flyc/wonder/Wanderer"
+	],
+	"file_history":
+	[
+		"/Users/flyc/flyc/sublime-fetch/config-link/.bash-git",
+		"/Users/flyc/flyc/sublime-fetch/set-rc-files.sh",
+		"/Users/flyc/flyc/sublime-fetch/config-link/.zprofile",
+		"/Users/flyc/flyc/sublime-fetch/compass-帳號轉移之可以順利付款的方式.md",
+		"/Users/flyc/flyc/sublime-fetch/.zprofile-backup",
+		"/Users/flyc/flyc/sublime-fetch/README.md",
+		"/Users/flyc/flyc/sublime-fetch/.gitconfig-backup",
+		"/Users/flyc/flyc/sublime-fetch/.bash-git-backup",
+		"/Users/flyc/flyc/sublime-fetch/config-link/.gitconfig",
+		"/Users/flyc/.gitconfig",
+		"/Users/flyc/flyc/sublime-fetch/config-link/.zshrc",
+		"/Users/flyc/flyc/sublime-fetch/hello.txt",
+		"/Users/flyc/flyc/sublime-fetch/test.txt",
+		"/Users/flyc/flyc/sublime-fetch/.gitignore",
+		"/Users/flyc/flyc/sublime-fetch/.zshrc-backup",
+		"/Users/flyc/flyc/sublime-fetch/.git-completion.bash",
+		"/Users/flyc/flyc/sublime-fetch/.eslintrc.js",
+		"/Users/flyc/flyc/sublime-fetch/建構流程-rough.md",
+		"/Users/flyc/flyc/sublime-fetch/package.json",
+		"/Users/flyc/flyc/sublime-fetch/shift_with_esc_to_波浪符.json",
+		"/Users/flyc/flyc/sublime-fetch/image_loader.js",
+		"/Users/flyc/Library/Application Support/Sublime Text/Packages/User/Fetch.sublime-settings",
+		"/Users/flyc/flyc/sublime-fetch/set-sublime-merge-user.sh",
+		"/Users/flyc/flyc/sublime-fetch/set-sublime-text-user.sh",
+		"/Users/flyc/flyc/sublime-fetch/怎麼使用karabiner.md",
+		"/Users/flyc/flyc/sublime-fetch/DELETE_THIS_.bashrc",
+		"/Users/flyc/.zprofile",
+		"/Users/flyc/.vimrc",
+		"/Users/flyc/flyc/sublime-fetch/.bashrc",
+		"/Users/flyc/flyc/sublime-fetch/.bashrc-for-mac",
+		"/Users/flyc/flyc/sublime-fetch/.vimrc",
+		"/Users/flyc/flyc/sublime-fetch/.gitconfig-for-mac",
+		"/Users/flyc/flyc/sublime-fetch/.zshrc-for-mac",
+		"/Users/flyc/flyc/sublime-fetch/.bash-git-for-mac",
+		"/Users/flyc/flyc/sublime-fetch/.zshrc.pre-oh-my-zsh-for-mac",
+		"/Users/flyc/flyc/sublime-fetch/com.googlecode.iterm2.plist"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 103.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/Users/flyc/flyc/wonder/Wanderer"
+		}
+	],
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.diagnostics":
+	{
+		"height": 120.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 498.0
+	},
+	"output.language servers":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"zprofile",
+				"config-link/.zprofile"
+			],
+			[
+				"readme",
+				"README.md"
+			],
+			[
+				".bash",
+				"config-link/.bash-git"
+			],
+			[
+				"compass",
+				"compass-帳號轉移之可以順利付款的方式.md"
+			],
+			[
+				"setrc",
+				"set-rc-files.sh"
+			],
+			[
+				"zpro",
+				".zprofile-backup"
+			],
+			[
+				"bashgit",
+				".bash-git-backup"
+			],
+			[
+				"gitconf",
+				".gitconfig-backup"
+			],
+			[
+				"gitconfig",
+				"config-link/.gitconfig"
+			],
+			[
+				".gitcon",
+				".gitconfig-backup"
+			],
+			[
+				"gitconfg",
+				"config-link/.gitconfig"
+			],
+			[
+				"gitback",
+				".bash-git-backup"
+			],
+			[
+				".bash-git",
+				"config-link/.bash-git"
+			],
+			[
+				".zprofile",
+				"config-link/.zprofile"
+			],
+			[
+				"git",
+				"config-link/.bash-git"
+			],
+			[
+				"setrcfile",
+				"set-rc-files.sh"
+			],
+			[
+				"set",
+				"set-rc-files.sh"
+			],
+			[
+				".zpr",
+				"config-link/.zprofile"
+			],
+			[
+				"setrcfiles",
+				"set-rc-files.sh"
+			],
+			[
+				"test",
+				"test.txt"
+			],
+			[
+				"hello.t",
+				"hello.txt"
+			],
+			[
+				".giti",
+				".gitignore"
+			],
+			[
+				"rough",
+				"建構流程-rough.md"
+			],
+			[
+				"-git",
+				".bash-git-backup"
+			],
+			[
+				"set-sublime-text-user",
+				"set-sublime-text-user.sh"
+			],
+			[
+				"karabiner",
+				"怎麼使用karabiner.md"
+			],
+			[
+				"package.json",
+				"package.json"
+			],
+			[
+				".zshrc",
+				".zshrc-backup"
+			],
+			[
+				".gitignore",
+				".gitignore"
+			],
+			[
+				"giti",
+				".gitignore"
+			],
+			[
+				".bashrc",
+				".bashrc"
+			],
+			[
+				".zsh",
+				".zshrc-for-mac"
+			],
+			[
+				"bash",
+				".bashrc-for-mac"
+			],
+			[
+				"bas",
+				".bashrc"
+			],
+			[
+				"bashrcmac",
+				".bashrc-for-mac"
+			],
+			[
+				"bashrc",
+				".bashrc"
+			],
+			[
+				".zshrc-for-mac",
+				".zshrc-for-mac"
+			],
+			[
+				"vimrc",
+				".vimrc"
+			],
+			[
+				".gitconfig-for-mac",
+				".gitconfig-for-mac"
+			],
+			[
+				".git-completion.bash",
+				".git-completion.bash"
+			],
+			[
+				"bashrc-for-mac",
+				".bashrc-for-mac"
+			],
+			[
+				"setsublime",
+				"set-sublime-text-user.sh"
+			],
+			[
+				"zshrc",
+				".zshrc-for-mac"
+			],
+			[
+				".bash-git-for-mac",
+				".bash-git-for-mac"
+			],
+			[
+				".bashrc-for-mac",
+				".bashrc-for-mac"
+			],
+			[
+				".zshrc.pre-oh-my-zsh-for-mac",
+				".zshrc.pre-oh-my-zsh-for-mac"
+			],
+			[
+				"com",
+				"com.googlecode.iterm2.plist"
+			],
+			[
+				".txt",
+				"建構流程-rough.txt"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ft",
+				"~/flyc/sublime-project/ftx-tools.sublime-workspace"
+			],
+			[
+				"",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 317.0,
+		"last_filter": "rb",
+		"selected_items":
+		[
+			[
+				"rb",
+				"rb"
+			]
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 205.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

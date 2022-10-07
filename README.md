@@ -2,7 +2,7 @@
 
 ## Mac 本身設定
 
-如取消各種手勢、觸控板方向調整、拖拉方式修改、快捷鍵如繁簡轉換調整等  
+如取消各種手勢、觸控板方向調整、拖拉方式修改、快捷鍵如繁簡轉換調整等
 
 > TODO 還沒找如何匯出 or 詳細的每個步驟，不過數量不多應該還好
 
@@ -30,11 +30,13 @@ sh set-sublime-text-user.sh
 ```
 
 > TODO 像是開啟同一個檔案然後可以看上下文的那種快捷鍵還沒有記得很熟  
-> 或是把當前檔案移動到新的視窗的快捷鍵?  cmd + k + up?  
+> 或是把當前檔案移動到新的視窗的快捷鍵? cmd + k + up?  
 > 還沒處理掉 package 會噴的錯誤訊息  
 > It appears a package is trying to ignore itself, causing a loop.
-Please resolve by removing the offending ignored_packages setting.
+> Please resolve by removing the offending ignored_packages setting.
+>
 > ---
+>
 > 1 missing dependency was just installed. Sublime Text should be restarted, otherwise one or more of the installed packages may not function properly.
 
 ## Sublime Merge
@@ -51,16 +53,16 @@ sh set-sublime-merge-user.sh
 
 登入即可同步大部分如書籤等等的設定，其他要調整的項目如下:
 
-**`cmd + ,` 啟動 Preference** -> **隱私權、搜尋與服務** -> 最下方的**服務** -> **網址列和搜尋** -> **管理搜尋引擎**  
+**`cmd + ,` 啟動 Preference** -> **隱私權、搜尋與服務** -> 最下方的**服務** -> **網址列和搜尋** -> **管理搜尋引擎**
 
 添加以下 `Google Translator` 的快捷鍵
 
-| 名稱          | 關鍵字         | URL
-| ------------- | ------------- | ---
-| 英文 to 中文   | tra           | `https://translate.google.com/?sl=en&tl=zh-TW&text=%s`
-| 中文 to 英文   | tras          | `https://translate.google.com/?sl=zh-CN&tl=en&text=%s`
+| 名稱         | 關鍵字 | URL                                                    |
+| ------------ | ------ | ------------------------------------------------------ |
+| 英文 to 中文 | tra    | `https://translate.google.com/?sl=en&tl=zh-TW&text=%s` |
+| 中文 to 英文 | tras   | `https://translate.google.com/?sl=zh-CN&tl=en&text=%s` |
 
-- Snippets 的相關檔案  
+- Snippets 的相關檔案
 
 > TODO Snippet 的部分直接放進來這個資料夾算了
 > 可以參考[這裡](https://neotan.github.io/chrome-dev-tools-snippets/#step-2-export-backup-existing-snippets)
@@ -68,13 +70,14 @@ sh set-sublime-merge-user.sh
 ## Terminal 終端機
 
 ### 安裝 iterm2
-直接從[官網](https://iterm2.com/)下載  
+
+直接從[官網](https://iterm2.com/)下載
 
 #### 如何同步 profile
 
 ###### 自動
 
-`Preferences -> General -> Preferences -> Load preferences from a custom folder or URL` 選擇此 repo 的位置即可  
+`Preferences -> General -> Preferences -> Load preferences from a custom folder or URL` 選擇此 repo 的位置即可
 
 > 該行為會把此 `repo` 和 `iterm2` 當前的 `profile` 檔案同步
 
@@ -89,6 +92,7 @@ cp com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 開啟 `iterm2` 後直接輸入 `git` 按確認，他會自己開始跑
 
 ##### git 權限設定
+
 除了 `ssh-keygen` 以外，還要設定一個 `known_host` 項目，參見以下流程
 
 ```bash
@@ -103,7 +107,8 @@ ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 cat ~/.ssh/id_rsa.pub | pbcopy
 ```
 
-然後到 [`github`](https://github.com/settings/keys) 上新增一組金鑰就可以了  
+然後到 [`github`](https://github.com/settings/keys) 上新增一組金鑰就可以了
+
 > [參考資料](https://stackoverflow.com/questions/13363553/git-error-host-key-verification-failed-when-connecting-to-remote-repository)
 
 ### 安裝 brew
@@ -128,20 +133,22 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ###### Theme 設定
 
 官方: [https://github.com/ohmyzsh/ohmyzsh/wiki/Themes](https://github.com/ohmyzsh/ohmyzsh/wiki/Themes)  
-第三方: [https://github.com/ohmyzsh/ohmyzsh/wiki/External-themes](https://github.com/ohmyzsh/ohmyzsh/wiki/External-themes)  
+第三方: [https://github.com/ohmyzsh/ohmyzsh/wiki/External-themes](https://github.com/ohmyzsh/ohmyzsh/wiki/External-themes)
 
 要使用官方文件裡的 `theme` 的話只要將 `$HOME/.zshrc` 裡的 ZSH_THEME='這裡' 填上想要的 `theme` 名稱後重啟即可  
-如果要使用第三方的 `theme` 的話就參考每一個 repo 裡獨立的 README 即可  
+如果要使用第三方的 `theme` 的話就參考每一個 repo 裡獨立的 README 即可
 
 > TODO 感覺要備份整個 ~/.oh-my-zsh/custom 資料夾?  
-> 如果有備份的話，重啟備份的順序就是 1. 先安裝 .oh-my-zsh   2. 把整個 custom 資料夾放進去  
+> 如果有備份的話，重啟備份的順序就是 1. 先安裝 .oh-my-zsh 2. 把整個 custom 資料夾放進去
 
 ###### 字型設定
 
-如果要使用 [`agnoster`](https://github.com/agnoster/agnoster-zsh-theme) 這個 `theme` 的話會要額外安裝字型  
+如果要使用 [`agnoster`](https://github.com/agnoster/agnoster-zsh-theme) 這個 `theme` 的話會要額外安裝字型
+
 ```bash
 sudo apt-get install fonts-powerline
 ```
+
 > [https://github.com/powerline/fonts](https://github.com/powerline/fonts)
 
 > 安裝/同步完上述的項目後 `iterm2` 應該已經可以用 `option` 按鍵左右移動像是 `helloWorld` 等的字串單位了
@@ -151,7 +158,7 @@ sudo apt-get install fonts-powerline
 直接從[官網](https://nodejs.org/en/)安裝吧
 
 > /usr/local/bin/node  
-> /usr/local/bin/npm  
+> /usr/local/bin/npm
 
 安裝完 NodeJs 後，就安裝 `pnpm` 和 `n` 吧
 
@@ -159,10 +166,39 @@ sudo apt-get install fonts-powerline
 sudo npm install --global pnpm n
 ```
 
-> TODO 共用 prettier、還有 eslint 等東西的預設值  
-> 感覺這些項目要和 sublime text 相關的設定之類的東西一起寫? 像是 SublimeLinter 和 jsPrettier 之類的做搭配解說  
-> 還有安裝 n 或是看有沒有其他更好用的切換版本裝置
+#### 關於 Prettier
 
+Sublime Text 使用的 `Prettier` plugins 是 [JsPrettier](https://packagecontrol.io/packages/JsPrettier), 如果照著跑的話已經有安裝了  
+其 `node_modules` 跟著專案走會比較 ok, 所以直接安裝在每個 project 很不錯
+
+```bash
+pnpm install prettier
+# npm install prettier
+```
+
+當然如果要 global 安裝 prettier 也可以, 很適合在測試的時候只要存擋就可以快速排版
+
+```bash
+sudo npm install --global prettier
+
+# command 完成後，透過以下指令確認安裝完成
+npm list --depth=0 --global
+
+# 可以看到安裝的相依版本號碼
+```
+
+只是如果是要推送出去的項目的話還是推薦安裝在專案層級, 這樣其他人才可以知道用的是 `prettier` 排版
+
+設定檔的部分推薦直接複製這裡的 `.prettierrc.js` 放到家目錄下，  
+不論是搭配專案內安裝的 `prettier` 或是 global 安裝的都可以，再搭配 `JsPrettier` 就可以運作了
+當然也是推薦專案內也要有一個專案用的 `.prettierrc.js`, 這樣在與其他人協作的時候才可以共用同一份排版設定
+
+> 如果專案內有 `.prettierrc.js` 的話，會以專案內的設定為主  
+> _不會堆疊_ , 意思是如果 $HOME 的設定了 singleQuote 是 true, 但 $PROJECT 沒有設定的話  
+> singleQuote 在執行時的設定會是預設的 false
+
+> TODO 還有 eslint 等東西的 $HOME / $PROJECT 預設值  
+> 感覺這些項目要和 sublime text 相關的設定之類的東西一起寫? 像是 SublimeLinter 之類的
 
 ### rc 相關設定
 
@@ -184,7 +220,7 @@ zsh set-rc-files.sh
 > TODO 有一個叫 `.git-completion.bash` 的不知道用不用得到?
 
 同時這個步驟也已經將上述檔案們都 `ln` 一份到這個 `repo` 下的 `config-link` 資料夾裡了  
-可以直接在這個資料夾裡修改，各自位置的檔案都會一起連動修改  
+可以直接在這個資料夾裡修改，各自位置的檔案都會一起連動修改
 
 接著，動處理以下項目
 
@@ -206,7 +242,7 @@ zsh set-rc-files.sh
 
 > TODO 也要處理備份的東西, 也就是 `zsh set-rc-files.sh` 的反向, 還有上述那些設定檔的反向..  
 > 整理: 這裡要每一個 zshrc 再去看一下, 更新這些項目的東東也要整理一下  
-> 如果使用 `.zprofile` 的話，prompt 相關的項目好像都不會起作用?  也不會換行之類的  
+> 如果使用 `.zprofile` 的話，prompt 相關的項目好像都不會起作用? 也不會換行之類的
 
 ##### 對 `.zshrc` 的調整
 
@@ -243,7 +279,7 @@ plugins=(
 > pnpm 如果在安裝的時候當前目錄下沒有 package.json 的話東西會去哪裡?  
 > pnpm 的快取檔案在哪裡?  
 > 除了 n 以外有沒有更好用的切換版本方式?  
-> vue3 + vite + windicss && vue2 + vite + windicss  相關的各種設定等  
+> vue3 + vite + windicss && vue2 + vite + windicss 相關的各種設定等  
 > 參考 BBDS 的那個客製化的 vite plugins ?  
 > 試試看 telport, vue3 的一個概念, 作用於想把 dialog 的層級拉到動 body 等的這種需求會用到  
 > 搞懂 custom component 的 v-model 概念  
@@ -259,4 +295,4 @@ plugins=(
 > mono repo 用的什麼 bazel 這東西可以看一下? 他可以用 npm 安裝一個叫 bazelisk 的東西  
 > 不知道裝到哪裡去了、也不知道怎麼移除，這些可能得留意  
 > git 單獨 clone 一個 commit 的方式 / 單獨 clone 後，要把其他的部分也 clone 回來的方式  
-> -> 這個 Alex.C 有貼一個 stackoverflow 了，try try  
+> -> 這個 Alex.C 有貼一個 stackoverflow 了，try try
