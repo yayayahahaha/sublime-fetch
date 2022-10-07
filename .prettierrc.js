@@ -31,4 +31,10 @@ module.exports = {
    * @document https://prettier.io/docs/en/options.html#quotes
    * */
   singleQuote: true,
+
+  /**
+   * @description 多少長度要換行
+   * @document https://prettier.io/docs/en/options.html#print-width
+   * */
+  printWidth: 120,
 }

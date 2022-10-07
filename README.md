@@ -270,6 +270,7 @@ plugins=(
 
 ---
 
+> TODO jsDoc 的 正確 撰寫方式
 > TODO 撰寫自己的 tech center 吧  
 > 筆記: sublime text 把特定副檔名指定成特定 syntax 的方式?  
 > sublime text 使用 eslint 的方式 -> sublimeLinter? default setting? home path setting?  
