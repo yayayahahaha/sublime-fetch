@@ -153,7 +153,13 @@ sudo apt-get install fonts-powerline
 > /usr/local/bin/node  
 > /usr/local/bin/npm  
 
-> TODO 安裝 pnpm、共用 prettier、還有 eslint 等東西的預設值  
+安裝完 NodeJs 後，就安裝 `pnpm` 和 `n` 吧
+
+```bash
+sudo npm install --global pnpm n
+```
+
+> TODO 共用 prettier、還有 eslint 等東西的預設值  
 > 感覺這些項目要和 sublime text 相關的設定之類的東西一起寫? 像是 SublimeLinter 和 jsPrettier 之類的做搭配解說  
 > 還有安裝 n 或是看有沒有其他更好用的切換版本裝置
 
