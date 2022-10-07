@@ -17,7 +17,17 @@ file_name='Nodejs.sublime-build'
 4. 裡面有一行 `"encoding": "cp1252",`, 將 `"cp1252"` 改成 `"utf8"`
 5. 重啟 Sublime Text 後即可
 
+##### 注意事項
+
+為了不改動到原本的 `Nodejs.sublime-build`, 也可以自己創一個 `Nodejs-utf8.sublime-build` 並複製貼上原本的內容再調整之類的  
+只是這樣的話在執行 build 的時候就會出現一個選擇框來選擇要用哪個 build system
+
 ##### 參考文件
 
 > https://blog.51cto.com/u_15216366/2833337  
 > https://ithelp.ithome.com.tw/questions/10193486
+
+##### TODO
+
+不論是用複製的還是用原本的 Node build system  
+在 Build 過後 LSP 的 typescript server 都會掛掉
