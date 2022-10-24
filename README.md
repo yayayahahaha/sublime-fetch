@@ -91,25 +91,7 @@ cp com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
 開啟 `iterm2` 後直接輸入 `git` 按確認，他會自己開始跑
 
-##### git 權限設定
-
-除了 `ssh-keygen` 以外，還要設定一個 `known_host` 項目，參見以下流程
-
-```bash
-# keygen 的部分
-ssh-keygen
-# 接著會問一堆問題，基本上一直 enter 就好
-# 結束後會在 .ssh 底下產一組私鑰和金鑰
-
-# known_host 的部分
-ssh-keygen -t rsa -C "yayayahahahaooii@gmail.com"
-ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-cat ~/.ssh/id_rsa.pub | pbcopy
-```
-
-然後到 [`github`](https://github.com/settings/keys) 上新增一組金鑰就可以了
-
-> [參考資料](https://stackoverflow.com/questions/13363553/git-error-host-key-verification-failed-when-connecting-to-remote-repository)
+`git` 權限的部分參考[這裡](./git-tech-center.md)
 
 ### 安裝 brew
 
@@ -270,7 +252,8 @@ plugins=(
 
 ---
 
-> TODO jsDoc 的 正確 撰寫方式
+> Sublime text 撰寫 api 文件的工具? 包含定義跳轉等  
+> TODO jsDoc 的 正確 撰寫方式  
 > TODO 撰寫自己的 tech center 吧  
 > 筆記: sublime text 把特定副檔名指定成特定 syntax 的方式?  
 > sublime text 使用 eslint 的方式 -> sublimeLinter? default setting? home path setting?  
