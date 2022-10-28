@@ -34,6 +34,7 @@ prompt_context() {
 }
 
 # 結尾換行
+# source: https://stackoverflow.com/questions/41017917/add-newline-to-oh-my-zsh-theme
 prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
       print -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
