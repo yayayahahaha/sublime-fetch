@@ -1,4 +1,6 @@
 function set_rc_files() {
+  __copy_and_backup
+
   # 複製的部分
   cp ./.zshrc-backup "$HOME/.zshrc"
   if [[ $? != 0 ]]; then return; fi
@@ -52,5 +54,41 @@ function set_rc_files() {
 
 
   echo '操作成功, 請重新開一個 iterm2 視窗'
+}
+
+function __copy_and_backup() {
+  if [ -f "$HOME/.zshrc" ]; then
+    echo "$HOME/.zshrc 已經存在，複製到 $HOME/.fetch-profile-backup"
+    mkdir -p "$HOME/.fetch-profile-backup"
+    cp "$HOME/.zshrc" "$HOME/.fetch-profile-backup"
+  fi
+
+
+  if [ -f "$HOME/.zprofile" ]; then
+    echo "$HOME/.zprofile 已經存在，複製到 $HOME/.fetch-profile-backup"
+    mkdir -p "$HOME/.fetch-profile-backup"
+    cp "$HOME/.zprofile" "$HOME/.fetch-profile-backup"
+  fi
+
+
+  if [ -f "$HOME/.bash-git" ]; then
+    echo "$HOME/.bash-git 已經存在，複製到 $HOME/.fetch-profile-backup"
+    mkdir -p "$HOME/.fetch-profile-backup"
+    cp "$HOME/.bash-git" "$HOME/.fetch-profile-backup"
+  fi
+
+
+  if [ -f "$HOME/.gitconfig" ]; then
+    echo "$HOME/.gitconfig 已經存在，複製到 $HOME/.fetch-profile-backup"
+    mkdir -p "$HOME/.fetch-profile-backup"
+    cp "$HOME/.gitconfig" "$HOME/.fetch-profile-backup"
+  fi
+
+
+  if [ -f "$HOME/.vimrc" ]; then
+    echo "$HOME/.vimrc 已經存在，複製到 $HOME/.fetch-profile-backup"
+    mkdir -p "$HOME/.fetch-profile-backup"
+    cp "$HOME/.vimrc" "$HOME/.fetch-profile-backup"
+  fi
 }
 set_rc_files
