@@ -280,3 +280,4 @@ plugins=(
 > 不知道裝到哪裡去了、也不知道怎麼移除，這些可能得留意  
 > git 單獨 clone 一個 commit 的方式 / 單獨 clone 後，要把其他的部分也 clone 回來的方式  
 > -> 這個 Alex.C 有貼一個 stackoverflow 了，try try
+> 要看一下 pnpm 的包 global 到底安裝到哪裡去了? 這部分也要備份會比較好? 還是就按照一步一步再去安裝好像也沒有不行

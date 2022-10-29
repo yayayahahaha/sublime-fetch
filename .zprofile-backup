@@ -2,7 +2,6 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # TODO 這邊也要切分出來哪些只能放在 .zshrc 裡、哪些可以放在 profile 裡
-# 如果全都放在這裡的話有一些像是 prompt 或是顏色之類的就不會作用了
 # !! 處理結束後也要記得更新當前電腦使用的
 
 # color
@@ -63,7 +62,7 @@ function s() {
 }
 
 # 重置
-alias rb='source ~/.zshrc' # zsh
+alias rb='source ~/.zshrc; source ~/.zprofile' # zsh
 
 # 檔案備份相關
 # sublime-fetch
@@ -76,16 +75,14 @@ alias gsp="_update_sublime_text_package"
 alias gsp_merge="_update_sublime_merge_package"
 alias s_update="us;gsp;gsp_merge;"
 
-# cp ~/.bashrc ~/flyc/sublime-fetch/.bashrc-for-mac
-
 # ftx 開心農場 和 損益計算 (附註: 這script 基本上是寫好玩的)
 alias lending_ftx="_ftx_lending"
 alias earning_ftx="_ftx_earning"
 function _ftx_lending() {
-  node "/Users/flyc/flyc/wonder/ftx/happy_farm.js" --subAccount=開心農場
+  node "/Users/flyc/flyc/wonder/ftx-tools/happy_farm.js" --subAccount=開心農場
 }
 function _ftx_earning() {
-  node "/Users/flyc/flyc/wonder/ftx/earn_current.js"
+  node "/Users/flyc/flyc/wonder/ftx-tools/earn_current.js"
 }
 
 # Git相關
@@ -229,20 +226,17 @@ function _update_sublime_fetch() {
   dir=$(pwd);
 
   # bash 相關
-  cp ~/.bashrc ~/flyc/sublime-fetch/.bashrc-for-mac
-  cp ~/.bash-work ~/flyc/sublime-fetch/.bash-work-for-mac
-  cp ~/.bash-git ~/flyc/sublime-fetch/.bash-git-for-mac
+  cp ~/.bash-git ~/flyc/sublime-fetch/.bash-git-backup
 
   # zsh 相關
-  cp ~/.zshrc ~/flyc/sublime-fetch/.zshrc-for-mac
-  cp ~/.zshrc.pre-oh-my-zsh ~/flyc/sublime-fetch/.zshrc.pre-oh-my-zsh-for-mac
+  cp ~/.zshrc ~/flyc/sublime-fetch/.zshrc-backup
+  cp ~/.zprofile ~/flyc/sublime-fetch/.zprofile-backup
 
   # git 相關
-  cp ~/.gitconfig ~/flyc/sublime-fetch/.gitconfig-for-mac
+  cp ~/.gitconfig ~/flyc/sublime-fetch/.gitconfig-backup
 
-  # eslint 相關
-  cp ~/package.json ~/flyc/sublime-fetch/package.json
-  cp ~/package-lock.json ~/flyc/sublime-fetch/package-lock.json
+  # vim 相關
+  cp ~/.vimrc ~/flyc/sublime-fetch/.vimrc-backup
 
   # karabiner 相關
   cp -r ~/.config/karabiner ~/flyc/sublime-fetch/
