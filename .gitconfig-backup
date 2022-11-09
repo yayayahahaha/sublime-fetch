@@ -51,6 +51,7 @@
 	autocrlf = false
 	quotepath = false
     editor = vim
+	pager = less -F -X
 # editor = subl -n -w # 修改git 的預設編輯器, 像是commit 或是rebase 之類的
 [rerere]
 	enabled = false # reuse-recorded-resolution
