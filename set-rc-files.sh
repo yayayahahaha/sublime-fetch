@@ -36,6 +36,7 @@ function set_rc_files() {
   rm -rf "./$config_path/.bash-git"
   rm -rf "./$config_path/.gitconfig"
   rm -rf "./$config_path/.vimrc"
+  rm -rf "./$config_path/.bash-work"
 
   ln -s "$HOME/.zshrc" "./$config_path/.zshrc"
   if [[ $? != 0 ]]; then return; fi
@@ -50,6 +51,9 @@ function set_rc_files() {
   if [[ $? != 0 ]]; then return; fi
 
   ln -s "$HOME/.vimrc" "./$config_path/.vimrc"
+  if [[ $? != 0 ]]; then return; fi
+
+  ln -s "$HOME/.bash-work" "./$config_path/.bash-work"
   if [[ $? != 0 ]]; then return; fi
 
 
