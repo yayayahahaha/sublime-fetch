@@ -6,8 +6,6 @@
 
 除了 `ssh-keygen` 以外，還要設定一個 `known_host` 項目，參見以下流程
 
-> 不太確定是不是只要加了 `ssh-add` 之後就不用執行 `known_host` 那段了?
-
 ```bash
 # keygen  的部分, 可以一直按 enter 或是輸入自己想要的名字
 # 結束後會在 .ssh 底下產一組私鑰和金鑰
@@ -63,4 +61,10 @@ ssh-add -l
 > [參考資料 1](https://gist.github.com/jexchan/2351996)  
 > [參考資料 2](https://superuser.com/questions/232373/how-to-tell-git-which-private-key-to-use) 的 nyxz 的解答
 
-> TODO 研究一下是不是只要 `ssh-add` 和 `config` 設定過後就可以直接 `ssh` 請求、或是其實兩個完全是在說不同的事情
+### Q/A
+
+##### Q: 是不是只要加了 `ssh-add` 之後就不用執行 `known_host` 那段了?  
+A: 經過測試很殘念還是需要 `known_host` 那段才行
+
+##### Q: 是不是只要 `ssh-add` 和 `config` 設定過後就可以直接 `ssh` 請求或是其實兩個完全是在說不同的事情
+A: `keygen` 那部分依舊是必要的, 不過這個還可以再去細查
