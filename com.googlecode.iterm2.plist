@@ -1472,7 +1472,7 @@
 		</dict>
 	</dict>
 	<key>Default Bookmark Guid</key>
-	<string>ED9A29C8-969B-4AD8-9399-7BA5EEA694D8</string>
+	<string>10526074-96B8-4010-B70A-43F91FDA451F</string>
 	<key>DimBackgroundWindows</key>
 	<false/>
 	<key>DimInactiveSplitPanes</key>
@@ -1765,7 +1765,7 @@
 				<real>1</real>
 			</dict>
 			<key>Blend</key>
-			<real>0.098699331974637677</real>
+			<real>0.16813151041666666</real>
 			<key>Blinking Cursor</key>
 			<false/>
 			<key>Blur</key>
@@ -1868,7 +1868,7 @@
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Use Transparency</key>
-			<true/>
+			<false/>
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
@@ -2192,7 +2192,7 @@
 			<key>Background Image Is Tiled</key>
 			<false/>
 			<key>Background Image Location</key>
-			<string>/Users/flycchung/Downloads/21526312_p0.jpeg</string>
+			<string>/Users/flyc/Downloads/pixiv/40122045_p0-for-terminal.jpeg</string>
 			<key>Background Image Mode</key>
 			<integer>2</integer>
 			<key>Badge Color</key>
