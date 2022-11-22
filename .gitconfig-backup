@@ -9,8 +9,8 @@
 
     gr = log --graph --abbrev-commit --decorate --format=format:'%C(magenta)%h%C(reset) - %C(green)(%ar)%C(reset) %C(blue)%s%C(reset) %C(red)- %an%C(reset)%C(yellow)%d%C(reset)'
     gr2 = log --graph --abbrev-commit --decorate --date=local --format=format:'%C(magenta)%h%C(reset) - %C(green)%cd%C(reset) %C(blue)(%ar)%C(reset)%C(yellow)%d%C(reset)%n''          %C(blue)%s%C(reset) %C(red)- %an%C(reset)'
-    gra = !"git gr --all" # 不知道哪天起無法auto-complete branch name 了
-    gra2 = !"git gr2 --all" # 不知道哪天起無法auto-complete branch name 了
+    gra = !"git gr --all" # 不知道哪天起無法 auto-complete branch name 了
+    gra2 = !"git gr2 --all" # 不知道哪天起無法 auto-complete branch name 了
 
     df = diff HEAD^1 HEAD
     dft = difftool HEAD^1 HEAD
@@ -23,7 +23,7 @@
 	root-path = "rev-parse --show-toplevel"
 	sw = switch
     cb = !"git br --show-current | pbcopy" # git rev-parse --abbrev-ref HEAD
-    s = "!GIT_EDITOR=\"subl -n -w\" git " # 透過sublime text 3 開啟git editor
+    s = "!GIT_EDITOR=\"subl -n -w\" git " # 透過 sublime text 3 開啟 git editor
     pp = !"git push origin -u $(git branch --show-current)"
 
 [merge]
@@ -39,6 +39,7 @@
 [submodule]
     recurse = true
 
+# 層級管理 git config, paradise-soft 是個雖然最後並不愉快，但仍是個給了我很多的地方
 [includeIf "gitdir:~/go/src/gitlab.paradise-soft.com.tw/web/"]
     path = ~/go/src/gitlab.paradise-soft.com.tw/web/.gitconfig
 [includeIf "gitdir:~/go/src/gitlab.paradise-soft.com.tw/frontend/"]
@@ -50,16 +51,19 @@
 	ignorecase = false
 	autocrlf = false
 	quotepath = false
+# editor = subl -n -w # 修改 git 的預設編輯器, 像是 commit 或是 rebase 之類的
     editor = vim
-# editor = subl -n -w # 修改git 的預設編輯器, 像是commit 或是rebase 之類的
+	pager = less -F -X # 讓 git 在用 diff 或 log 等會用到 LESS 時不會額外佔用一個頁面
 [rerere]
 	enabled = false # reuse-recorded-resolution
 [push]
-# 如果是預設的simple 的話會檢查local 和remote 的upstream 名字是否一致, 改成 upstream 的話就可以透過 --set-upstream-to 設置串連
+# 如果是預設的 simple 的話會檢查 local 和 remote 的 upstream 名字是否一致, 改成 upstream 的話就可以透過 --set-upstream-to 設置
 	default = simple
 [rebase]
-# 在使用git rebase -i 的時候每一條項目的pattern
+# 在使用 git rebase -i 的時候每一條項目的 pattern
 	instructionFormat = (%an <%ae>) %s
+
+# 因應 git 的 repo 如果太大的話會掛掉的設定?
 [http]
 	postBuffer = 524288000
 	version = HTTP/1.1
