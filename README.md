@@ -29,9 +29,7 @@ cp ./karabiner $HOME/.config/karabiner
 sh set-sublime-text-user.sh
 ```
 
-> TODO 像是開啟同一個檔案然後可以看上下文的那種快捷鍵還沒有記得很熟  
-> 或是把當前檔案移動到新的視窗的快捷鍵? cmd + k + up?  
-> 還沒處理掉 package 會噴的錯誤訊息  
+> 還沒處理掉 package 會噴的錯誤訊息:  
 > It appears a package is trying to ignore itself, causing a loop.
 > Please resolve by removing the offending ignored_packages setting.
 >
