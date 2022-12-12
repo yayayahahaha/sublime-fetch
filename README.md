@@ -180,6 +180,8 @@ npm list --depth=0 --global
 > TODO 還有 eslint 等東西的 $HOME / $PROJECT 預設值  
 > 感覺這些項目要和 sublime text 相關的設定之類的東西一起寫? 像是 SublimeLinter 之類的
 
+請注意! `Prettier` 的設定檔如果是 `.prettierrc.js` 的話，會預設 `.js` 的檔案都是 `CommonJs`, 所以如果 `package.json` 裡有寫 `type` 是 `module` 的話, `prettier` 在執行的時候會噴錯。改法是把 `.prettierrc.js` 改成 `.prettierrc.cjs` 或將 `type` 使用成 `commonjs` 即可
+
 ### rc 相關設定
 
 先執行此腳本，可以完成大部分
@@ -280,5 +282,3 @@ plugins=(
 > -> 這個 Alex.C 有貼一個 stackoverflow 了，try try
 > 要看一下 pnpm 的包 global 到底安裝到哪裡去了? 這部分也要備份會比較好? 還是就按照一步一步再去安裝好像也沒有不行
 > javascript 精度的那個問題， CJ 花了一些時間介紹的那個
-
-
