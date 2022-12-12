@@ -1748,7 +1748,7 @@
 			<key>Background Image Is Tiled</key>
 			<false/>
 			<key>Background Image Location</key>
-			<string>/Users/flyc/Downloads/pixiv/84385310_p5.jpeg</string>
+			<string>/Users/flyc/Downloads/twitter/ERYPefkVAAEmu6x-for-browser.jpeg</string>
 			<key>Background Image Mode</key>
 			<integer>2</integer>
 			<key>Badge Color</key>
@@ -1765,7 +1765,7 @@
 				<real>1</real>
 			</dict>
 			<key>Blend</key>
-			<real>0.16813151041666666</real>
+			<real>0.096195086050724632</real>
 			<key>Blinking Cursor</key>
 			<false/>
 			<key>Blur</key>
@@ -2451,6 +2451,8 @@
 		</dict>
 	</array>
 	<key>OpenArrangementAtStartup</key>
+	<false/>
+	<key>OpenBookmark</key>
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
 	<true/>
