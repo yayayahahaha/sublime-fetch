@@ -212,11 +212,15 @@ pnpm create @eslint/config
 
 不過
 
-由於後續都已經在使用 `pnpm` 安裝專案內的 `eslint` 了，由於 `pnpm` 是使用 `hard-link` 的方式來做到快取，而這個 `ESLint Fix` 其實有個 bug: 他會找不到 `pnpm` `hard-link` 的 `eslint` 執行檔, 所以在執行的時候 `eslint` 本身不會回傳 `output`, 導致 `eslint-fix` 在 `parse JSON` 的時候會壞掉，讓 `fix` 沒辦法順利進行。
+由於後續都已經在使用 `pnpm` 安裝專案內的 `eslint` 了，由於 `pnpm` 是使用 `hard-link` 的方式來做到快取，而這個 `ESLint Fix` 其實有個 bug: 他會找不到 `pnpm` `hard-link` 的 `eslint` 執行檔, 所以在執行的時候 `eslint` 本身不會回傳 `output`, 導致 `eslint-fix` 在 `parse JSON` 的時候會壞掉，讓 `fix` 沒辦法順利進行。  
 
-目前預計的修復方式是透過 `eslint-fix` 原本的設定去寫上實際的 `eslint` 的所在位置，不過這就牽涉到了到底 `eslint` 的安裝檔要裝在哪裡，還有 `eslint-fix` 本身的設定檔要保存在哪裡、如何版控的問題
+預計的修復方式是透過 `eslint-fix` 原本的設定去寫上實際的 `eslint` 的所在位置，不過這就牽涉到了到底 `eslint` 的安裝檔要裝在哪裡，還有 `eslint-fix`   本身的設定檔要保存在哪裡、如何版控的問題  
 
-> WIP 還沒處理，有點晚了，所以這也是一個 TODO
+已經有測試過在家目錄下添加一個叫 `for-sublime-eslint-fix-eslint` 的資料夾，然後在裡面 `pnpm install` 後，把 `eslint-fix` 的設定指向到該資料夾下的 `eslint` 的話  
+是會動的。 接著只要把那個資料夾也放到這個專案裡下，然後把複製這個資料夾的 `shell` 也寫進去腳本裡面就沒問題了。  
+
+> TODO 沒錯，只要把腳本完成就沒問題了  
+> WIP 還沒處理，有點晚了，所以這也是一個 TODO  
 
 ##### 推薦安裝的 eslint plugins
 
