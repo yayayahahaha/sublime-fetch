@@ -1,0 +1,1 @@
+> the very first obsidian file
