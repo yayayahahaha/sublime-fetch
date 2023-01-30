@@ -29,9 +29,7 @@ cp ./karabiner $HOME/.config/karabiner
 sh set-sublime-text-user.sh
 ```
 
-> TODO 像是開啟同一個檔案然後可以看上下文的那種快捷鍵還沒有記得很熟  
-> 或是把當前檔案移動到新的視窗的快捷鍵? cmd + k + up?  
-> 還沒處理掉 package 會噴的錯誤訊息  
+> 還沒處理掉 package 會噴的錯誤訊息:  
 > It appears a package is trying to ignore itself, causing a loop.
 > Please resolve by removing the offending ignored_packages setting.
 >
@@ -148,6 +146,9 @@ sudo apt-get install fonts-powerline
 sudo npm install --global pnpm n
 ```
 
+> TODO 有另外一個叫 [`fnm`](https://github.com/Schniz/fnm) 的 node-version 管理套件，工作的電腦有在使用，很不錯  
+> 可以透過 .node-version 檔案設定每個目錄下的 node 版本，切換資料夾的時候就會自動切換
+
 #### 關於 Prettier
 
 Sublime Text 使用的 `Prettier` plugins 是 [JsPrettier](https://packagecontrol.io/packages/JsPrettier), 如果照著跑的話已經有安裝了  
@@ -181,6 +182,52 @@ npm list --depth=0 --global
 
 > TODO 還有 eslint 等東西的 $HOME / $PROJECT 預設值  
 > 感覺這些項目要和 sublime text 相關的設定之類的東西一起寫? 像是 SublimeLinter 之類的
+
+請注意! `Prettier` 的設定檔如果是 `.prettierrc.js` 的話，會預設 `.js` 的檔案都是 `CommonJs`, 所以如果 `package.json` 裡有寫 `type` 是 `module` 的話, `prettier` 在執行的時候會噴錯。改法是把 `.prettierrc.js` 改成 `.prettierrc.cjs` 或將 `type` 使用成 `commonjs` 即可
+
+### 關於 Eslint
+
+> WIP `.eslintrc.js` 的詳細設定, 還有如何客製化 `eslint rules` 之類的
+
+`Sublime Text` 使用的 `Eslint` 的 plugins 是 [SublimeLinter](https://packagecontrol.io/packages/SublimeLinter) 和 [SublineLinter-eslint](https://packagecontrol.io/packages/SublimeLinter-eslint), 如果照著跑的話已經有安裝了  
+其中的 `node_modules` 比 `prettier` 還強烈建議跟著專案走，實在太可怕了
+
+```bash
+pnpm install eslint --save-dev
+# npm install eslint --save-dev
+```
+
+安裝完畢後可以直接使用 `eslint` 的 `cli` 指令來快速生成需要的 `.eslintrc.js`
+
+```bash
+pnpm create @eslint/config
+# 會根據執行結果自行安裝需要的 node_modules
+```
+
+生成之後，如果產出的 `.eslintrc.js` 本身會跳一個什麼 `module is not defined` 的錯誤，將產生的 `.eslintrc.js` 裡面的 `env` 添加一個 `node: true` 即可
+
+> 有關於 `eslint` 的設定檔 `.eslintrc.js` 的設定比較複雜，目前還沒有實際下去邊操作邊寫文檔，這是一個 TODO
+
+##### 關於 ESLint Fix
+
+接著要先提的是，`Subline text` 在使用 `eslint` 的時候如果要自動修復的話，會需要多額外安裝一個 plugin [ESLint Fix](https://packagecontrol.io/packages/ESLint%20Fix)  
+當然如果照著安裝的話已經有了。
+
+不過
+
+由於後續都已經在使用 `pnpm` 安裝專案內的 `eslint` 了，由於 `pnpm` 是使用 `hard-link` 的方式來做到快取，而這個 `ESLint Fix` 其實有個 bug: 他會找不到 `pnpm` `hard-link` 的 `eslint` 執行檔, 所以在執行的時候 `eslint` 本身不會回傳 `output`, 導致 `eslint-fix` 在 `parse JSON` 的時候會壞掉，讓 `fix` 沒辦法順利進行。
+
+預計的修復方式是透過 `eslint-fix` 原本的設定去寫上實際的 `eslint` 的所在位置，不過這就牽涉到了到底 `eslint` 的安裝檔要裝在哪裡，還有 `eslint-fix` 本身的設定檔要保存在哪裡、如何版控的問題
+
+已經有測試過在家目錄下添加一個叫 `for-sublime-eslint-fix-eslint` 的資料夾，然後在裡面 `pnpm install` 後，把 `eslint-fix` 的設定指向到該資料夾下的 `eslint` 的話  
+是會動的。 接著只要把那個資料夾也放到這個專案裡下，然後把複製這個資料夾的 `shell` 也寫進去腳本裡面就沒問題了。
+
+> TODO 沒錯，只要把腳本完成就沒問題了  
+> WIP 還沒處理，有點晚了，所以這也是一個 TODO
+
+##### 推薦安裝的 eslint plugins
+
+> TODO 像是 `vue` 的啦、 `javascript` 的啦等等等等等，基本上是跟著 `.eslintrc.js` 那邊的 TODO 是一樣的東西
 
 ### rc 相關設定
 
@@ -259,11 +306,14 @@ plugins=(
 > sublime text 使用 eslint 的方式 -> sublimeLinter? default setting? home path setting?  
 > sublime text 使用 prettier 的方式  
 > sublime text 使用 LSP 的方式  
+> sublime text 讓特定副檔名可以有 syntax 的方式?
 > 自己客製化 eslint 的方式? 換行、空白、提示等  
 > pnpm 如果在安裝的時候當前目錄下沒有 package.json 的話東西會去哪裡?  
 > pnpm 的快取檔案在哪裡?  
 > 除了 n 以外有沒有更好用的切換版本方式?  
-> vue3 + vite + windicss && vue2 + vite + windicss 相關的各種設定等  
+> vue3 + vite + [windicss](https://windicss.org/) && vue2 + vite + windicss 相關的各種設定等  
+> -> 要單純的 vite + vue + typescript 的話，只要 `pnpm create vite` 然後照著走就可以了，超方便  
+> -> 但還是要看一下 vue router 、 vuex 或 [pinia](https://pinia.vuejs.org/) 那些東西該怎麼安裝之類的
 > 參考 BBDS 的那個客製化的 vite plugins ?  
 > 試試看 telport, vue3 的一個概念, 作用於想把 dialog 的層級拉到動 body 等的這種需求會用到  
 > 搞懂 custom component 的 v-model 概念  
@@ -279,5 +329,7 @@ plugins=(
 > mono repo 用的什麼 bazel 這東西可以看一下? 他可以用 npm 安裝一個叫 bazelisk 的東西  
 > 不知道裝到哪裡去了、也不知道怎麼移除，這些可能得留意  
 > git 單獨 clone 一個 commit 的方式 / 單獨 clone 後，要把其他的部分也 clone 回來的方式  
-> -> 這個 Alex.C 有貼一個 stackoverflow 了，try try
-> 要看一下 pnpm 的包 global 到底安裝到哪裡去了? 這部分也要備份會比較好? 還是就按照一步一步再去安裝好像也沒有不行
+> -> 這個 Alex.C 有貼一個 stackoverflow 了，try try  
+> 要看一下 pnpm 的包 global 到底安裝到哪裡去了? 這部分也要備份會比較好? 還是就按照一步一步再去安裝好像也沒有不行  
+> javascript 精度的那個問題， CJ 花了一些時間介紹的那個  
+> 如果 sublime text 的套件怪怪的，可以透過 [這裡](https://packagecontrol.io/docs/customizing_packages) 寫的方式來客製化除錯
