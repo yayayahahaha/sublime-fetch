@@ -8,7 +8,7 @@
     au = "add :/ -u"
 
     gr = log --graph --abbrev-commit --decorate --format=format:'%C(magenta)%h%C(reset) - %C(green)(%ar)%C(reset) %C(blue)%s%C(reset) %C(red)- %an%C(reset)%C(yellow)%d%C(reset)'
-    gr2 = log --graph --abbrev-commit --decorate --date=format:'%a %Y/%m/%d %H:%M:%S%z %s' --format=format:'%C(magenta)%h%C(reset) - ''%C(green)Author Date: %ad (%ar)%C(reset)%n''          %C(blue)Commit Date: %cd (%cr)%C(reset)%n''          %C(blue)%s%C(reset) %C(red)- %an%C(reset)%C(yellow)%d%C(reset)%n'
+    gr2 = log --graph --abbrev-commit --decorate --date=format:'%a %Y/%m/%d %H:%M:%S%z %s' --format=format:'%C(magenta)%h%C(reset) - ''%C(green)Author Date: %ad (%ar)%C(reset)%n''          %C(blue)Commit Date: %cd (%cr)%C(reset)%n''          %C(Cyan)%s%C(reset) %C(red)- %an%C(reset)%C(yellow)%d%C(reset)%n'
     gr3 = log --graph --abbrev-commit --decorate --date=format:'[ %Y/%m/%d %H:%M:%S%z %s ]' --format=fuller
     gra = !"git gr --all" # 不知道哪天起無法 auto-complete branch name 了
     gra2 = !"git gr2 --all" # 不知道哪天起無法 auto-complete branch name 了
