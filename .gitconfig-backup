@@ -8,9 +8,11 @@
     au = "add :/ -u"
 
     gr = log --graph --abbrev-commit --decorate --format=format:'%C(magenta)%h%C(reset) - %C(green)(%ar)%C(reset) %C(blue)%s%C(reset) %C(red)- %an%C(reset)%C(yellow)%d%C(reset)'
-    gr2 = log --graph --abbrev-commit --decorate --date=local --format=format:'%C(magenta)%h%C(reset) - %C(green)%cd%C(reset) %C(blue)(%ar)%C(reset)%C(yellow)%d%C(reset)%n''          %C(blue)%s%C(reset) %C(red)- %an%C(reset)'
+    gr2 = log --graph --abbrev-commit --decorate --date=format:'%a %Y/%m/%d %H:%M:%S%z %s' --format=format:'%C(magenta)%h%C(reset) - ''%C(green)Author Date: %ad (%ar)%C(reset)%n''          %C(blue)Commit Date: %cd (%cr)%C(reset)%n''          %C(Cyan)%s%C(reset) %C(red)- %an%C(reset)%C(yellow)%d%C(reset)%n'
+    gr3 = log --graph --abbrev-commit --decorate --date=format:'[ %Y/%m/%d %H:%M:%S%z %s ]' --format=fuller
     gra = !"git gr --all" # 不知道哪天起無法 auto-complete branch name 了
     gra2 = !"git gr2 --all" # 不知道哪天起無法 auto-complete branch name 了
+    gra3 = !"git gr3 --all" # 不知道哪天起無法 auto-complete branch name 了
 
     df = diff HEAD^1 HEAD
     dft = difftool HEAD^1 HEAD
@@ -20,8 +22,8 @@
     brauth = "! for branch in `git branch -r | grep -v /HEAD`;do echo `git show --format=\"%an\" $branch | head -n 1` \t$branch; done | sort -r"
     tfp = "!git tag -l | xargs git tag -d; git fetch --tags"
     cma = commit -am
-	root-path = "rev-parse --show-toplevel"
-	sw = switch
+    root-path = "rev-parse --show-toplevel"
+    sw = switch
     cb = !"git br --show-current | pbcopy" # git rev-parse --abbrev-ref HEAD
     s = "!GIT_EDITOR=\"subl -n -w\" git " # 透過 sublime text 3 開啟 git editor
     pp = !"git push origin -u $(git branch --show-current)"
@@ -48,22 +50,22 @@
     path = ~/binance-risk/.gitconfig
 
 [core]
-	ignorecase = false
-	autocrlf = false
-	quotepath = false
+    ignorecase = false
+    autocrlf = false
+    quotepath = false
 # editor = subl -n -w # 修改 git 的預設編輯器, 像是 commit 或是 rebase 之類的
     editor = vim
-	pager = less -F -X # 讓 git 在用 diff 或 log 等會用到 LESS 時不會額外佔用一個頁面
+    pager = less -F -X # 讓 git 在用 diff 或 log 等會用到 LESS 時不會額外佔用一個頁面
 [rerere]
-	enabled = false # reuse-recorded-resolution
+    enabled = false # reuse-recorded-resolution
 [push]
 # 如果是預設的 simple 的話會檢查 local 和 remote 的 upstream 名字是否一致, 改成 upstream 的話就可以透過 --set-upstream-to 設置
-	default = simple
+    default = simple
 [rebase]
 # 在使用 git rebase -i 的時候每一條項目的 pattern
-	instructionFormat = (%an <%ae>) %s
+    instructionFormat = (%an <%ae>) %s
 
 # 因應 git 的 repo 如果太大的話會掛掉的設定?
 [http]
-	postBuffer = 524288000
-	version = HTTP/1.1
+    postBuffer = 524288000
+    version = HTTP/1.1

@@ -121,6 +121,11 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 > TODO 感覺要備份整個 ~/.oh-my-zsh/custom 資料夾?  
 > 如果有備份的話，重啟備份的順序就是 1. 先安裝 .oh-my-zsh 2. 把整個 custom 資料夾放進去
 
+###### Color 設定
+
+Iterm 的 `主題` 和 `顏色` 是可以分開設定的。顏色可以從 [這裡](https://iterm2colorschemes.com/) 挑選  
+挑選完畢後只要將 color scheme 下載下來、再從 iterm 的 Profile -> Color 的右下角做 Import 就可以了
+
 ###### 字型設定
 
 如果要使用 [`agnoster`](https://github.com/agnoster/agnoster-zsh-theme) 這個 `theme` 的話會要額外安裝字型
