@@ -10,6 +10,10 @@ First of all, find out which network device is used currently by `ifconfig -a`
 ifconfig -a
 ```
 
+Output:
+
+![ifconfig-result](./img/ifconfig-result.png)
+
 `ifconfig` will list all network devices of this machine. Find out which device status is `active`.
 
 Then, use `tcpdump` to monitor it by its name.
