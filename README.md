@@ -151,8 +151,47 @@ sudo apt-get install fonts-powerline
 sudo npm install --global pnpm n
 ```
 
-> TODO 有另外一個叫 [`fnm`](https://github.com/Schniz/fnm) 的 node-version 管理套件，工作的電腦有在使用，很不錯  
-> 可以透過 .node-version 檔案設定每個目錄下的 node 版本，切換資料夾的時候就會自動切換
+#### 關於 n 和 fnm
+
+[`n`](https://www.npmjs.com/package/n) 的細節待補上。
+
+[`fnm`](https://github.com/Schniz/fnm) 可以透過在目錄底下添加一個 `.node-version` 的檔案，裡面直接就是 `nodejs` 版本號，
+
+在切換進該目錄後會自動把 `NodeJs` 的版本切換到該版本下，非常方便。
+
+安裝與設定方式如下:
+
+```bash
+brew install fnm
+
+echo 16 > .node-version
+# 創建一個 .node-version 的檔案，裡面寫 16
+# fnm 配置設定完成後，切換到這個目錄時就會自動切換 NodeJs 的版本到 16
+```
+
+修改 修改 `.zprofile`, 添加以下指令
+
+```bash
+# ...
+eval "$(fnm env --use-on-cd)"
+# ...
+```
+
+完成
+
+![fnm-example](./readme-images/fnm-example.png)
+
+> 經過測試，在 `.zshrc` 和 `.zshprofile` 裡面添加都沒問題
+
+其他一些 fnm 的指令介紹:
+
+```bash
+# Switch to specific version
+fnm use {NODE_JS_VERSION} # If the NodeJs version is not installed, fnm will ask.
+
+# Install specific version
+fnm install {NODE_JS_VERSION}
+```
 
 #### 關於 Prettier
 
