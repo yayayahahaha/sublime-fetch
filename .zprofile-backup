@@ -344,3 +344,7 @@ function _download_video_through_youtube-dl() {
 
 # 引入公司的 .bash-work
 source ~/.bash-work
+
+# fnm: 切換目錄時會自動切換 Nodejs 的版本到該目錄下 .node-version 裡面寫的版本
+# https://github.com/Schniz/fnm
+eval "$(fnm env --use-on-cd)"
