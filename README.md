@@ -217,7 +217,7 @@ npm list --depth=0 --global
 只是如果是要推送出去的項目的話還是推薦安裝在專案層級, 這樣其他人才可以知道用的是 `prettier` 排版
 
 設定檔的部分推薦直接複製這裡的 `.prettierrc.js` 放到家目錄下，  
-不論是搭配專案內安裝的 `prettier` 或是 global 安裝的都可以，再搭配 `JsPrettier` 就可以運作了
+不論是搭配專案內安裝的 `prettier` 或是 global 安裝的都可以，再搭配 `JsPrettier` 就可以運作了  
 當然也是推薦專案內也要有一個專案用的 `.prettierrc.js`, 這樣在與其他人協作的時候才可以共用同一份排版設定
 
 > 如果專案內有 `.prettierrc.js` 的話，會以專案內的設定為主  
@@ -225,16 +225,22 @@ npm list --depth=0 --global
 > singleQuote 在執行時的設定會是預設的 false
 
 > TODO 還有 eslint 等東西的 $HOME / $PROJECT 預設值  
-> 感覺這些項目要和 sublime text 相關的設定之類的東西一起寫? 像是 SublimeLinter 之類的
+> 感覺這些項目要和 sublime text 相關的設定之類的東西一起寫? 像是 SublimeLinter 之類的  
+> 可以參考[這裡](https://pjchender.dev/webdev/note-shareable-eslint-config/)
 
 請注意! `Prettier` 的設定檔如果是 `.prettierrc.js` 的話，會預設 `.js` 的檔案都是 `CommonJs`, 所以如果 `package.json` 裡有寫 `type` 是 `module` 的話, `prettier` 在執行的時候會噴錯。改法是把 `.prettierrc.js` 改成 `.prettierrc.cjs` 或將 `type` 使用成 `commonjs` 即可
+
+要設定 `prettier` 在 Sublime 上的設定的話，使用 `cmd + shift + p` 呼叫出控制面板後，  
+輸入 `Preferences: Jsprettier Settings - Side-by-Side` 即可調整相關設定。  
+要調整的參數為 `"auto_format_on_save": true/false`
+
 
 ### 關於 Eslint
 
 > WIP `.eslintrc.js` 的詳細設定, 還有如何客製化 `eslint rules` 之類的
 
 `Sublime Text` 使用的 `Eslint` 的 plugins 是 [SublimeLinter](https://packagecontrol.io/packages/SublimeLinter) 和 [SublineLinter-eslint](https://packagecontrol.io/packages/SublimeLinter-eslint), 如果照著跑的話已經有安裝了  
-其中的 `node_modules` 比 `prettier` 還強烈建議跟著專案走，實在太可怕了
+強烈建議要安裝專案層級的 eslint, 比 `prettier` 還強烈建議，實在太可怕了
 
 ```bash
 pnpm install eslint --save-dev
