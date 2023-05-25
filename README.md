@@ -354,19 +354,16 @@ plugins=(
 > TODO 撰寫自己的 tech center 吧  
 > 筆記: sublime text 把特定副檔名指定成特定 syntax 的方式?  
 > sublime text 使用 eslint 的方式 -> sublimeLinter? default setting? home path setting?  
-> sublime text 使用 prettier 的方式  
 > sublime text 使用 LSP 的方式  
 > sublime text 讓特定副檔名可以有 syntax 的方式?
 > 自己客製化 eslint 的方式? 換行、空白、提示等  
 > pnpm 如果在安裝的時候當前目錄下沒有 package.json 的話東西會去哪裡?  
 > pnpm 的快取檔案在哪裡?  
-> 除了 n 以外有沒有更好用的切換版本方式?  
 > vue3 + vite + [windicss](https://windicss.org/) && vue2 + vite + windicss 相關的各種設定等  
 > -> 要單純的 vite + vue + typescript 的話，只要 `pnpm create vite` 然後照著走就可以了，超方便  
 > -> 但還是要看一下 vue router 、 vuex 或 [pinia](https://pinia.vuejs.org/) 那些東西該怎麼安裝之類的
 > 參考 BBDS 的那個客製化的 vite plugins ?  
 > 試試看 telport, vue3 的一個概念, 作用於想把 dialog 的層級拉到動 body 等的這種需求會用到  
-> 搞懂 custom component 的 v-model 概念  
 > 重新整理 package.json 的方式  
 > 將當前 git commit 變成 javascript global variable 的方式  
 > git commit 前要做的事情? 或是 push 或 merge 前要做的事情  
