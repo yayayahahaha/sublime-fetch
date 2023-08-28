@@ -378,3 +378,4 @@ plugins=(
 > javascript 精度的那個問題， CJ 花了一些時間介紹的那個  
 > 如果 sublime text 的套件怪怪的，可以透過 [這裡](https://packagecontrol.io/docs/customizing_packages) 寫的方式來客製化除錯  
 > 撰寫 [raycast](https://www.raycast.com/) 的安裝部分，應該還會有 plugin 同步的問題之類的
+> 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程
