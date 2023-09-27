@@ -379,3 +379,6 @@ plugins=(
 > 如果 sublime text 的套件怪怪的，可以透過 [這裡](https://packagecontrol.io/docs/customizing_packages) 寫的方式來客製化除錯  
 > 撰寫 [raycast](https://www.raycast.com/) 的安裝部分，應該還會有 plugin 同步的問題之類的
 > 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程
+> CSS 用於 theme 改變的東西看一下: prefers-color-scheme
+> 取代 padding 去撐 width size 的方法
+> 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法
