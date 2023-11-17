@@ -11,7 +11,7 @@
 複製資料夾即可
 
 ```bash
-cp ./karabiner $HOME/.config/karabiner
+cp -r ./karabiner $HOME/.config/karabiner
 ```
 
 > 如果 Mac 預設找不到需要的權限的話，到這裡找  
@@ -377,8 +377,9 @@ plugins=(
 > 要看一下 pnpm 的包 global 到底安裝到哪裡去了? 這部分也要備份會比較好? 還是就按照一步一步再去安裝好像也沒有不行  
 > javascript 精度的那個問題， CJ 花了一些時間介紹的那個  
 > 如果 sublime text 的套件怪怪的，可以透過 [這裡](https://packagecontrol.io/docs/customizing_packages) 寫的方式來客製化除錯  
-> 撰寫 [raycast](https://www.raycast.com/) 的安裝部分，應該還會有 plugin 同步的問題之類的
-> 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程
-> CSS 用於 theme 改變的東西看一下: prefers-color-scheme
-> 取代 padding 去撐 width size 的方法
-> 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法
+> 撰寫 [raycast](https://www.raycast.com/) 的安裝部分，應該還會有 plugin 同步的問題之類的  
+> 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程  
+> CSS 用於 theme 改變的東西看一下: prefers-color-scheme  
+> 取代 padding 去撐 width size 的方法  
+> 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法  
+> Raycast 的好用翻譯功能?  
