@@ -1,8 +1,10 @@
 {
   "global": {
+    "ask_for_confirmation_before_quitting": true,
     "check_for_updates_on_startup": true,
     "show_in_menu_bar": true,
-    "show_profile_name_in_menu_bar": false
+    "show_profile_name_in_menu_bar": false,
+    "unsafe_ui": false
   },
   "profiles": [
     {
@@ -161,26 +163,6 @@
           "mouse_motion_to_scroll.speed": 100
         },
         "rules": [
-          {
-            "description": "Command + Esc to Command + `",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "escape",
-                  "modifiers": {
-                    "mandatory": ["left_command"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "grave_accent_and_tilde",
-                    "modifiers": ["left_command"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
           {
             "description": "Option + 2 to Option + f2",
             "manipulators": [
@@ -381,6 +363,46 @@
                 "type": "basic"
               }
             ]
+          },
+          {
+            "description": "Command + Esc to Command + ` (for window switching)",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "escape",
+                  "modifiers": {
+                    "mandatory": ["command"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "grave_accent_and_tilde",
+                    "modifiers": ["command"]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Command + Shift + Esc to Command + ~ (for reverse window switching)",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "escape",
+                  "modifiers": {
+                    "mandatory": ["command", "shift"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "grave_accent_and_tilde",
+                    "modifiers": ["command", "shift"]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
           }
         ]
       },
@@ -437,7 +459,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "treat_as_built_in_keyboard": false
         },
         {
           "disable_built_in_keyboard_if_exists": false,
@@ -450,7 +473,8 @@
           },
           "ignore": false,
           "manipulate_caps_lock_led": true,
-          "simple_modifications": []
+          "simple_modifications": [],
+          "treat_as_built_in_keyboard": false
         },
         {
           "disable_built_in_keyboard_if_exists": false,
@@ -463,7 +487,8 @@
           },
           "ignore": false,
           "manipulate_caps_lock_led": true,
-          "simple_modifications": []
+          "simple_modifications": [],
+          "treat_as_built_in_keyboard": false
         },
         {
           "disable_built_in_keyboard_if_exists": false,
@@ -509,6 +534,16 @@
             },
             {
               "from": {
+                "key_code": "page_down"
+              },
+              "to": [
+                {
+                  "key_code": "f4"
+                }
+              ]
+            },
+            {
+              "from": {
                 "key_code": "page_up"
               },
               "to": [
@@ -536,18 +571,37 @@
                   "key_code": "right_command"
                 }
               ]
-            },
-            {
-              "from": {
-                "key_code": "page_down"
-              },
-              "to": [
-                {
-                  "key_code": "f4"
-                }
-              ]
             }
-          ]
+          ],
+          "treat_as_built_in_keyboard": false
+        },
+        {
+          "disable_built_in_keyboard_if_exists": false,
+          "fn_function_keys": [],
+          "identifiers": {
+            "is_keyboard": true,
+            "is_pointing_device": false,
+            "product_id": 834,
+            "vendor_id": 1452
+          },
+          "ignore": false,
+          "manipulate_caps_lock_led": true,
+          "simple_modifications": [],
+          "treat_as_built_in_keyboard": false
+        },
+        {
+          "disable_built_in_keyboard_if_exists": false,
+          "fn_function_keys": [],
+          "identifiers": {
+            "is_keyboard": false,
+            "is_pointing_device": true,
+            "product_id": 834,
+            "vendor_id": 1452
+          },
+          "ignore": true,
+          "manipulate_caps_lock_led": false,
+          "simple_modifications": [],
+          "treat_as_built_in_keyboard": false
         }
       ],
       "fn_function_keys": [
