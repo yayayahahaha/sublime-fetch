@@ -383,3 +383,4 @@ plugins=(
 > 取代 padding 去撐 width size 的方法  
 > 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法  
 > Raycast 的好用翻譯功能?  
+> 透過指令 or 其他方式快速建成一個 vite + vue + router + eslint + prettier + gitignore 等等等等等的資料夾結構
