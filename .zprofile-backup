@@ -350,23 +350,36 @@ function _create_nodejs_with_eslint_prettier_gitignore() {
   # 創建 Nodejs 會用到的各種東西
 
   # node-version for fnm
+  echo ''
+  echo '## Create .node-version file ##'
   echo 18 > .node-version
+  rb
 
   # init package.json
+  echo ''
+  echo '## Pnpm init ##'
   pnpm init
 
   # install prettier ans eslint
+  echo ''
+  echo '## Install Prettier and Eslint ##'
   pnpm install prettier eslint --save-dev
 
   # .gitignore
+  echo ''
+  echo '## Create Nodejs .gitignore ##'
   pnpm dlx create-gitignore node
   # append .DS_Store to .gitignore file
   echo "\n # Mac cache  \n .DS_Store" >> .gitignore
 
   # copy prettierrc.cjs from home path
-  cp "$HOME/.prettierrc.cjs" .
+  echo ''
+  echo '## Copy .prettierrc.js from home path ##'
+  cp "$HOME/.prettierrc.js" .
 
   # 最後這個做完就結束了
+  echo ''
+  echo '## Create eslint config process ##'
   pnpm create @eslint/config
 
   # vite 要不要直接用這個甚至更快? 但應該還沒有包含 vue-router 和 store 什麼的部分
