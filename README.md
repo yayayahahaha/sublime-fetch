@@ -391,7 +391,5 @@ plugins=(
 > 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法  
 > Raycast 的好用翻譯功能?  
 > 透過指令 or 其他方式快速建成一個 vite + vue + router + eslint + prettier + gitignore 等等等等等的資料夾結構
-> -> pnpm dls (直接執行, 就像 npx)
-> 或是透過指令做一個只有 eslint + prettier + gitignore 的就可以了，這個也很常用到
 > 找出怎麼整理 package.json 的 script
 > 看看什麼是 node-gyp
