@@ -33,6 +33,7 @@ sh set-sublime-text-user.sh
 > 請在該資料夾下新增的對 .sh 檔案的權限
 
 > ```bash
+> # https://andy6804tw.github.io/2020/07/21/linux-shell-script/
 > chmod u+x *.sh
 > ```
 
@@ -393,3 +394,5 @@ plugins=(
 > 透過指令 or 其他方式快速建成一個 vite + vue + router + eslint + prettier + gitignore 等等等等等的資料夾結構
 > 找出怎麼整理 package.json 的 script
 > 看看什麼是 node-gyp
+
+> opencv backup: https://github.com/justadudewhohacks/opencv4nodejs/issues/733#issuecomment-1723519550
