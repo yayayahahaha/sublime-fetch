@@ -362,7 +362,6 @@ plugins=(
 > 自己客製化 eslint 的方式? 換行、空白、提示等  
 > pnpm 如果在安裝的時候當前目錄下沒有 package.json 的話東西會去哪裡?  
 > pnpm 的快取檔案在哪裡?  
-> 除了 n 以外有沒有更好用的切換版本方式?  
 > vue3 + vite + [windicss](https://windicss.org/) && vue2 + vite + windicss 相關的各種設定等  
 > -> 要單純的 vite + vue + typescript 的話，只要 `pnpm create vite` 然後照著走就可以了，超方便  
 > -> 但還是要看一下 vue router 、 vuex 或 [pinia](https://pinia.vuejs.org/) 那些東西該怎麼安裝之類的
