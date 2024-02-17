@@ -393,5 +393,5 @@ plugins=(
 > 透過指令 or 其他方式快速建成一個 vite + vue + router + eslint + prettier + gitignore 等等等等等的資料夾結構
 > 找出怎麼整理 package.json 的 script
 > 看看什麼是 node-gyp
-
+> css grid 的 snippet, 還有 css flex 的也可以
 > opencv backup: https://github.com/justadudewhohacks/opencv4nodejs/issues/733#issuecomment-1723519550
