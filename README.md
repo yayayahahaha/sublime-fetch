@@ -351,6 +351,14 @@ plugins=(
 # ...
 ```
 
+### 其他文件
+
+##### Mac 如何連接上 Windows 的共享資料夾
+
+1. windows 電腦對資料夾右鍵 -> 內容 -> 共用 -> 進階共用 -> 共用此資料夾 -> 權限全開 -> 確定
+2. windows 電腦 `cmd` -> `ipconfig /all` -> 找到 IPv4 的 IP 位置
+3. Mac 電腦 finder -> `command + k` -> 輸入 IP -> 會要輸入使用者帳號和密碼，這邊要輸入的是 **windows 那邊的帳號密碼** -> 選擇想要的資料夾 -> 成功
+
 ---
 
 > Sublime text 撰寫 api 文件的工具? 包含定義跳轉等  
