@@ -55,7 +55,7 @@ sh set-sublime-merge-user.sh
 
 接著開啟 `Sublime Merge`, 嘗試看看 `ctrl + cmd + b` 有沒有辦法觸發 `Create Branch From Remote Branch` 即可
 
-## Edge 瀏覽器
+## Chrome 瀏覽器
 
 登入即可同步大部分如書籤等等的設定，其他要調整的項目如下:
 
@@ -67,6 +67,8 @@ sh set-sublime-merge-user.sh
 | ------------ | ------ | ------------------------------------------------------ |
 | 英文 to 中文 | tra    | `https://translate.google.com/?sl=en&tl=zh-TW&text=%s` |
 | 中文 to 英文 | tras   | `https://translate.google.com/?sl=zh-CN&tl=en&text=%s` |
+
+> 之前是用 Edge 瀏覽器，基本上只要登入 Chrome 後，設定就會有了
 
 - Snippets 的相關檔案
 
@@ -389,9 +391,10 @@ plugins=(
 > CSS 用於 theme 改變的東西看一下: prefers-color-scheme  
 > 取代 padding 去撐 width size 的方法  
 > 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法  
-> Raycast 的好用翻譯功能?  
 > 透過指令 or 其他方式快速建成一個 vite + vue + router + eslint + prettier + gitignore 等等等等等的資料夾結構
 > 找出怎麼整理 package.json 的 script
 > 看看什麼是 node-gyp
 > css grid 的 snippet, 還有 css flex 的也可以
 > opencv backup: https://github.com/justadudewhohacks/opencv4nodejs/issues/733#issuecomment-1723519550
+> 練習一下各種 es6 的 class 場景 https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes#%E9%A1%9E%E5%88%A5%E4%B8%BB%E9%AB%94%E8%88%87%E6%96%B9%E6%B3%95%E5%AE%9A%E7%BE%A9
+> css 的 prefers-color-scheme 要怎麼作用
