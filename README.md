@@ -359,6 +359,15 @@ plugins=(
 2. windows 電腦 `cmd` -> `ipconfig /all` -> 找到 IPv4 的 IP 位置
 3. Mac 電腦 finder -> `command + k` -> 輸入 IP -> 會要輸入使用者帳號和密碼，這邊要輸入的是 **windows 那邊的帳號密碼** -> 選擇想要的資料夾 -> 成功
 
+##### Mac 上 Facebook 的 Messenger 的桌面應用程式如果卡在 Getting Started 該怎麼處理
+
+1. 透過 `spotlight` 或其他方式開啟 `Mac` 的 `KeyChain` ，也就是鑰匙圈
+2. 在搜尋框輸入 `Messenger` ，找到儲存的登入狀態，右鍵按移除
+3. 重啟 Messenger ，此時應該已經沒問題、可以重新登入 Messenger 了
+
+> 在步驟 2 的時候可能會遇到雖然已經右鍵點選刪除了，但 KeyChain 的項目刪不掉的情況，  
+> 通常這種情況，只要**不使用搜尋功能**、直接用肉眼在列表裡找到欲刪除的項目再刪除的話，就可以順利刪除
+
 ---
 
 > Sublime text 撰寫 api 文件的工具? 包含定義跳轉等  
