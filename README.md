@@ -368,6 +368,33 @@ plugins=(
 > 在步驟 2 的時候可能會遇到雖然已經右鍵點選刪除了，但 KeyChain 的項目刪不掉的情況，  
 > 通常這種情況，只要**不使用搜尋功能**、直接用肉眼在列表裡找到欲刪除的項目再刪除的話，就可以順利刪除
 
+##### 如何安裝 `yarn` 版本 `3` 或以上?
+
+直接下 `corepack` 的指令
+
+```bash
+corepack enable
+```
+
+接著在終端機上就可以使用 `yarn` 了
+
+```bash
+yarn -v
+# 3.5.0 或其他版本號
+```
+
+> [reference Link](https://yarnpkg.com/getting-started/install)
+
+##### SublimeText 無法使用 `ctrl+left/right` 移動 subword
+
+> e.g. `helloWorld` 可以在 `hello` 和 `World` 間移動
+
+檢查 Mac 的鍵盤快捷鍵設定:
+
+Mac 設定 -> 鍵盤 -> 鍵盤快捷鍵 -> 指揮中心 -> 指揮中心 -> `向左/右移動一個空間`
+
+將其移除 or 設定成不衝突的快捷鍵即可
+
 ---
 
 ## TODO LIST
@@ -417,3 +444,4 @@ plugins=(
 > opencv backup: https://github.com/justadudewhohacks/opencv4nodejs/issues/733#issuecomment-1723519550
 > 練習一下各種 es6 的 class 場景 https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes#%E9%A1%9E%E5%88%A5%E4%B8%BB%E9%AB%94%E8%88%87%E6%96%B9%E6%B3%95%E5%AE%9A%E7%BE%A9
 > css 的 prefers-color-scheme 要怎麼作用
+> 看看 npm 的 `corepack` 是什麼
