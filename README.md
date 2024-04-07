@@ -445,3 +445,4 @@ Mac 設定 -> 鍵盤 -> 鍵盤快捷鍵 -> 指揮中心 -> 指揮中心 -> `向�
 > 練習一下各種 es6 的 class 場景 https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes#%E9%A1%9E%E5%88%A5%E4%B8%BB%E9%AB%94%E8%88%87%E6%96%B9%E6%B3%95%E5%AE%9A%E7%BE%A9
 > css 的 prefers-color-scheme 要怎麼作用
 > 看看 npm 的 `corepack` 是什麼
+> sublime text 的 LSP 在 `.vue` 裡如果 import 的 path 沒有後綴、或是是使用 folder/index.vue 的話會跳不過去該怎麼處理
