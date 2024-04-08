@@ -370,7 +370,7 @@ function _create_nodejs_with_eslint_prettier_gitignore() {
   echo '## Create Nodejs .gitignore ##'
   pnpm dlx create-gitignore node
   # append .DS_Store to .gitignore file
-  echo "\n # Mac cache  \n .DS_Store" >> .gitignore
+  echo "\n# Mac cache\n.DS_Store" >> .gitignore
 
   # copy prettierrc.cjs from home path
   echo ''

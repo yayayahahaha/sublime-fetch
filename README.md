@@ -33,6 +33,7 @@ sh set-sublime-text-user.sh
 > 請在該資料夾下新增的對 .sh 檔案的權限
 
 > ```bash
+> # https://andy6804tw.github.io/2020/07/21/linux-shell-script/
 > chmod u+x *.sh
 > ```
 
@@ -54,7 +55,7 @@ sh set-sublime-merge-user.sh
 
 接著開啟 `Sublime Merge`, 嘗試看看 `ctrl + cmd + b` 有沒有辦法觸發 `Create Branch From Remote Branch` 即可
 
-## Edge 瀏覽器
+## Chrome 瀏覽器
 
 登入即可同步大部分如書籤等等的設定，其他要調整的項目如下:
 
@@ -66,6 +67,8 @@ sh set-sublime-merge-user.sh
 | ------------ | ------ | ------------------------------------------------------ |
 | 英文 to 中文 | tra    | `https://translate.google.com/?sl=en&tl=zh-TW&text=%s` |
 | 中文 to 英文 | tras   | `https://translate.google.com/?sl=zh-CN&tl=en&text=%s` |
+
+> 之前是用 Edge 瀏覽器，基本上只要登入 Chrome 後，設定就會有了
 
 - Snippets 的相關檔案
 
@@ -348,7 +351,53 @@ plugins=(
 # ...
 ```
 
+### 其他文件
+
+##### Mac 如何連接上 Windows 的共享資料夾
+
+1. windows 電腦對資料夾右鍵 -> 內容 -> 共用 -> 進階共用 -> 共用此資料夾 -> 權限全開 -> 確定
+2. windows 電腦 `cmd` -> `ipconfig /all` -> 找到 IPv4 的 IP 位置
+3. Mac 電腦 finder -> `command + k` -> 輸入 IP -> 會要輸入使用者帳號和密碼，這邊要輸入的是 **windows 那邊的帳號密碼** -> 選擇想要的資料夾 -> 成功
+
+##### Mac 上 Facebook 的 Messenger 的桌面應用程式如果卡在 Getting Started 該怎麼處理
+
+1. 透過 `spotlight` 或其他方式開啟 `Mac` 的 `KeyChain` ，也就是鑰匙圈
+2. 在搜尋框輸入 `Messenger` ，找到儲存的登入狀態，右鍵按移除
+3. 重啟 Messenger ，此時應該已經沒問題、可以重新登入 Messenger 了
+
+> 在步驟 2 的時候可能會遇到雖然已經右鍵點選刪除了，但 KeyChain 的項目刪不掉的情況，  
+> 通常這種情況，只要**不使用搜尋功能**、直接用肉眼在列表裡找到欲刪除的項目再刪除的話，就可以順利刪除
+
+##### 如何安裝 `yarn` 版本 `3` 或以上?
+
+直接下 `corepack` 的指令
+
+```bash
+corepack enable
+```
+
+接著在終端機上就可以使用 `yarn` 了
+
+```bash
+yarn -v
+# 3.5.0 或其他版本號
+```
+
+> [reference Link](https://yarnpkg.com/getting-started/install)
+
+##### SublimeText 無法使用 `ctrl+left/right` 移動 subword
+
+> e.g. `helloWorld` 可以在 `hello` 和 `World` 間移動
+
+檢查 Mac 的鍵盤快捷鍵設定:
+
+Mac 設定 -> 鍵盤 -> 鍵盤快捷鍵 -> 指揮中心 -> 指揮中心 -> `向左/右移動一個空間`
+
+將其移除 or 設定成不衝突的快捷鍵即可
+
 ---
+
+## TODO LIST
 
 > Sublime text 撰寫 api 文件的工具? 包含定義跳轉等  
 > TODO jsDoc 的 正確 撰寫方式  
@@ -361,7 +410,6 @@ plugins=(
 > 自己客製化 eslint 的方式? 換行、空白、提示等  
 > pnpm 如果在安裝的時候當前目錄下沒有 package.json 的話東西會去哪裡?  
 > pnpm 的快取檔案在哪裡?  
-> 除了 n 以外有沒有更好用的切換版本方式?  
 > vue3 + vite + [windicss](https://windicss.org/) && vue2 + vite + windicss 相關的各種設定等  
 > -> 要單純的 vite + vue + typescript 的話，只要 `pnpm create vite` 然後照著走就可以了，超方便  
 > -> 但還是要看一下 vue router 、 vuex 或 [pinia](https://pinia.vuejs.org/) 那些東西該怎麼安裝之類的
@@ -389,7 +437,12 @@ plugins=(
 > CSS 用於 theme 改變的東西看一下: prefers-color-scheme  
 > 取代 padding 去撐 width size 的方法  
 > 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法  
-> Raycast 的好用翻譯功能?  
 > 透過指令 or 其他方式快速建成一個 vite + vue + router + eslint + prettier + gitignore 等等等等等的資料夾結構
 > 找出怎麼整理 package.json 的 script
 > 看看什麼是 node-gyp
+> css grid 的 snippet, 還有 css flex 的也可以
+> opencv backup: https://github.com/justadudewhohacks/opencv4nodejs/issues/733#issuecomment-1723519550
+> 練習一下各種 es6 的 class 場景 https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes#%E9%A1%9E%E5%88%A5%E4%B8%BB%E9%AB%94%E8%88%87%E6%96%B9%E6%B3%95%E5%AE%9A%E7%BE%A9
+> css 的 prefers-color-scheme 要怎麼作用
+> 看看 npm 的 `corepack` 是什麼
+> sublime text 的 LSP 在 `.vue` 裡如果 import 的 path 沒有後綴、或是是使用 folder/index.vue 的話會跳不過去該怎麼處理

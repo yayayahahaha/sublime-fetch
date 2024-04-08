@@ -26,6 +26,7 @@ cat ~/.ssh/id_rsa.pub | pbcopy
 
 ```bash
 # 首先是 keygen, 這時要記得輸入的名字，這邊都以 flyc-mac 為例子
+cd ~/.ssh
 ssh-keygen -t rsa -C "yayayahahahaooii@gmail.com"
 # 接著在第一個步驟輸入 flyc-mac
 
@@ -63,8 +64,10 @@ ssh-add -l
 
 ### Q/A
 
-##### Q: 是不是只要加了 `ssh-add` 之後就不用執行 `known_host` 那段了?  
+##### Q: 是不是只要加了 `ssh-add` 之後就不用執行 `known_host` 那段了?
+
 A: 經過測試很殘念還是需要 `known_host` 那段才行
 
 ##### Q: 是不是只要 `ssh-add` 和 `config` 設定過後就可以直接 `ssh` 請求或是其實兩個完全是在說不同的事情
+
 A: `keygen` 那部分依舊是必要的, 不過這個還可以再去細查
