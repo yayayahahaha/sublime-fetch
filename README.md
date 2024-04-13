@@ -446,3 +446,6 @@ Mac 設定 -> 鍵盤 -> 鍵盤快捷鍵 -> 指揮中心 -> 指揮中心 -> `向�
 > css 的 prefers-color-scheme 要怎麼作用
 > 看看 npm 的 `corepack` 是什麼
 > sublime text 的 LSP 在 `.vue` 裡如果 import 的 path 沒有後綴、或是是使用 folder/index.vue 的話會跳不過去該怎麼處理
+> serverless 的部署方式?
+> spa 靜態專案部署到 github 上的方式
+> nuxt 有提供 server 功能了，可以玩的東西更多了 w
