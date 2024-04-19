@@ -237,7 +237,12 @@ npm list --depth=0 --global
 > TODO 還有 eslint 等東西的 $HOME / $PROJECT 預設值  
 > 感覺這些項目要和 sublime text 相關的設定之類的東西一起寫? 像是 SublimeLinter 之類的
 
-請注意! `Prettier` 的設定檔如果是 `.prettierrc.js` 的話，會預設 `.js` 的檔案都是 `CommonJs`, 所以如果 `package.json` 裡有寫 `type` 是 `module` 的話, `prettier` 在執行的時候會噴錯。改法是把 `.prettierrc.js` 改成 `.prettierrc.cjs` 或將 `type` 使用成 `commonjs` 即可
+請注意! `Prettier` 的設定檔如果是 `.prettierrc.js` 的話，會預設 `.js` 的檔案都是 `CommonJs`, 所以如果 `package.json` 裡有寫 `type` 是 `module` 的話, `prettier` 在執行的時候會噴錯。改法是把 `.prettierrc.js` 改成 `.prettierrc.cjs` 或將 `type` 使用成 `commonjs` 即可  
+  
+prettier sublime text package 會需要透過執行 npm 的 prettier package 才能執行，不過如果是透過 `pnpm` 安裝的話，  
+會因為 pnpm 的 hard-link 的關係，在專案內找不到 prettier 的 npm package, 所以會跳出找不到的提示。  
+workaround 的解法是在 %HOME 底下創一個 package.json 裡面安裝 prettier npm package,  
+這樣 prettier sublime text package 在專案下找不到的時候會往上找，就可以找到了  
 
 ### 關於 Eslint
 
@@ -424,7 +429,6 @@ Mac 設定 -> 鍵盤 -> 鍵盤快捷鍵 -> 指揮中心 -> 指揮中心 -> `向�
 > TODO jsDoc 的 正確 撰寫方式  
 > TODO 撰寫自己的 tech center 吧  
 > sublime text 使用 eslint 的方式 -> sublimeLinter? default setting? home path setting?  
-> sublime text 使用 prettier 的方式  
 > sublime text 使用 LSP 的方式  
 > sublime text 讓特定副檔名可以有 syntax 的方式?
 > 自己客製化 eslint 的方式? 換行、空白、提示等  
