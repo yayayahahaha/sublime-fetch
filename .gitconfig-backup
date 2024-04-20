@@ -41,13 +41,18 @@
 [submodule]
     recurse = true
 
-# 層級管理 git config, paradise-soft 是個雖然最後並不愉快，但仍是個給了我很多的地方
+# 層級管理 git config
+# paradise-soft 是個雖然最後並不愉快，但仍是個給了我很多的地方
 [includeIf "gitdir:~/go/src/gitlab.paradise-soft.com.tw/web/"]
     path = ~/go/src/gitlab.paradise-soft.com.tw/web/.gitconfig
 [includeIf "gitdir:~/go/src/gitlab.paradise-soft.com.tw/frontend/"]
     path = ~/go/src/gitlab.paradise-soft.com.tw/frontend/.gitconfig
+# 在 binance 的日子很特別，全遠端的生活，想去哪裡就去哪裡的自由，遺憾的是我沒能好好把握
 [includeIf "gitdir:~/binance-risk/"]
     path = ~/binance-risk/.gitconfig
+# 現在在這裡
+[includeIf "gitdir:~/btse/"]
+    path = ~/btse/.gitconfig
 
 [core]
     ignorecase = false
