@@ -61,6 +61,12 @@ function s() {
   fi
 }
 
+# 開啟當前路徑
+alias o='open .'
+
+# 更新 brew 本身和安裝的套件和 omz 後重取 source
+alias uuu='brew update;brew upgrade;brew cleanup;omz update;rb'
+
 # 重置
 alias rb='source ~/.zshrc; source ~/.zprofile' # zsh
 
@@ -390,3 +396,9 @@ function _create_nodejs_with_eslint_prettier_gitignore() {
 # fnm: 切換目錄時會自動切換 Nodejs 的版本到該目錄下 .node-version 裡面寫的版本
 # https://github.com/Schniz/fnm
 eval "$(fnm env --use-on-cd)"
+
+# 在透過 pnpm 安裝 opencv4nodejs 的時候，為了避免他自動構建而加的這行。
+# 在這之前，已經透過 brew 安裝了 opencv
+export OPENCV4NODEJS_DISABLE_AUTOBUILD=1
+export OPENCV_LIB_DIR=/opt/homebrew/opt/opencv@4/lib
+
