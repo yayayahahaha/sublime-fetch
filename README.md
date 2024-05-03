@@ -473,3 +473,4 @@ Mac 設定 -> 鍵盤 -> 鍵盤快捷鍵 -> 指揮中心 -> 指揮中心 -> `向�
 > 看看 npm 的 `corepack` 是什麼
 > sublime text 的 LSP 在 `.vue` 裡如果 import 的 path 沒有後綴、或是是使用 folder/index.vue 的話會跳不過去該怎麼處理
 > 看一下 application/ld+json 這個東西
+> const resources = window.performance.getEntriesByType('resource'); // 酷東西
