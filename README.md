@@ -423,6 +423,14 @@ Mac 設定 -> 鍵盤 -> 鍵盤快捷鍵 -> 指揮中心 -> 指揮中心 -> `向�
 
 將其移除 or 設定成不衝突的快捷鍵即可
 
+##### 自己寫的 `.sh` 檔案沒辦法執行
+
+添加執行的權限給該檔案即可
+
+```bash
+chmod +x your-bash-filename.sh
+```
+
 ---
 
 ## TODO LIST
@@ -463,16 +471,18 @@ Mac 設定 -> 鍵盤 -> 鍵盤快捷鍵 -> 指揮中心 -> 指揮中心 -> `向�
 > CSS 用於 theme 改變的東西看一下: prefers-color-scheme  
 > 取代 padding 去撐 width size 的方法  
 > 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法  
-> 透過指令 or 其他方式快速建成一個 vite + vue + router + eslint + prettier + gitignore 等等等等等的資料夾結構
-> 找出怎麼整理 package.json 的 script
-> 看看什麼是 node-gyp
-> css grid 的 snippet, 還有 css flex 的也可以
-> opencv backup: https://github.com/justadudewhohacks/opencv4nodejs/issues/733#issuecomment-1723519550
-> 練習一下各種 es6 的 class 場景 https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes#%E9%A1%9E%E5%88%A5%E4%B8%BB%E9%AB%94%E8%88%87%E6%96%B9%E6%B3%95%E5%AE%9A%E7%BE%A9
-> css 的 prefers-color-scheme 要怎麼作用
-> 看看 npm 的 `corepack` 是什麼
-> sublime text 的 LSP 在 `.vue` 裡如果 import 的 path 沒有後綴、或是是使用 folder/index.vue 的話會跳不過去該怎麼處理
-> serverless 的部署方式?
-> spa 靜態專案部署到 github 上的方式
-> nuxt 有提供 server 功能了，可以玩的東西更多了 w
-> 看一下 application/ld+json 這個東西
+> 透過指令 or 其他方式快速建成一個 vite + vue + router + eslint + prettier + gitignore 等等等等等的資料夾結構  
+> 找出怎麼整理 package.json 的 script  
+> 看看什麼是 node-gyp  
+> css grid 的 snippet, 還有 css flex 的也可以  
+> opencv backup: https://github.com/justadudewhohacks/opencv4nodejs/issues/733#issuecomment-1723519550  
+> 練習一下各種 es6 的 class 場景 https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes#%E9%A1%9E%E5%88%A5%E4%B8%BB%E9%AB%94%E8%88%87%E6%96%B9 %E6%B3%95%E5%AE%9A%E7%BE%A9  
+> css 的 prefers-color-scheme 要怎麼作用  
+> 看看 npm 的 `corepack` 是什麼  
+> sublime text 的 LSP 在 `.vue` 裡如果 import 的 path 沒有後綴、或是是使用 folder/index.vue 的話會跳不過去該怎麼處理  
+> serverless 的部署方式?  
+> spa 靜態專案部署到 github 上的方式  
+> nuxt 有提供 server 功能了，可以玩的東西更多了 w  
+> 看一下 application/ld+json 這個東西  
+> const resources = window.performance.getEntriesByType('resource'); // 酷東西  
+> zip 壓縮的時候出現錯誤 zip warning: Local Entry CRC does not match CD
