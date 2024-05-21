@@ -431,6 +431,18 @@ Mac 設定 -> 鍵盤 -> 鍵盤快捷鍵 -> 指揮中心 -> 指揮中心 -> `向�
 chmod +x your-bash-filename.sh
 ```
 
+##### Sublime Text 在透過 Regexp 做 replace 的時候，如何保留對應的字串
+
+直接舉例  
+
+Find pattern: `hello (\d+) world!`  
+會匹配到 `hello 123 world!` 和 `hello 456 world!`  
+
+Replace pattern: `你 $1 好!`  
+就會變成 `你 123 好!` 和 `你 456 好!`  
+
+> https://stackoverflow.com/questions/11491954/is-it-possible-to-use-regexp-as-variables-to-do-find-and-replace-in-sublime-text
+
 ---
 
 ## TODO LIST
