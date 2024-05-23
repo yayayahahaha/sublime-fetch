@@ -497,3 +497,5 @@ Replace pattern: `你 $1 好!`
 > zip 壓縮的時候出現錯誤 zip warning: Local Entry CRC does not match CD  
 > nodejs 的 `vm` package  
 > nodejs 的 `os` package 裡的 tmpdir  
+> vue3 v-model 的異動  
+> vue3  
