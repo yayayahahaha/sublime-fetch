@@ -237,12 +237,12 @@ npm list --depth=0 --global
 > TODO 還有 eslint 等東西的 $HOME / $PROJECT 預設值  
 > 感覺這些項目要和 sublime text 相關的設定之類的東西一起寫? 像是 SublimeLinter 之類的
 
-請注意! `Prettier` 的設定檔如果是 `.prettierrc.js` 的話，會預設 `.js` 的檔案都是 `CommonJs`, 所以如果 `package.json` 裡有寫 `type` 是 `module` 的話, `prettier` 在執行的時候會噴錯。改法是把 `.prettierrc.js` 改成 `.prettierrc.cjs` 或將 `type` 使用成 `commonjs` 即可  
-  
+請注意! `Prettier` 的設定檔如果是 `.prettierrc.js` 的話，會預設 `.js` 的檔案都是 `CommonJs`, 所以如果 `package.json` 裡有寫 `type` 是 `module` 的話, `prettier` 在執行的時候會噴錯。改法是把 `.prettierrc.js` 改成 `.prettierrc.cjs` 或將 `type` 使用成 `commonjs` 即可
+
 ~~prettier sublime text package 會需要透過執行 npm 的 prettier package 才能執行，不過如果是透過 `pnpm` 安裝的話，~~  
 ~~會因為 pnpm 的 hard-link 的關係，在專案內找不到 prettier 的 npm package, 所以會跳出找不到的提示。~~  
 ~~workaround 的解法是在 %HOME 底下創一個 package.json 裡面安裝 prettier npm package,~~  
-~~這樣 prettier sublime text package 在專案下找不到的時候會往上找，就可以找到了~~  
+~~這樣 prettier sublime text package 在專案下找不到的時候會往上找，就可以找到了~~
 
 > 總覺得這段我好像寫錯地方了，剛剛在下面 eslint 的地方發現一樣的
 
@@ -433,13 +433,13 @@ chmod +x your-bash-filename.sh
 
 ##### Sublime Text 在透過 Regexp 做 replace 的時候，如何保留對應的字串
 
-直接舉例  
+直接舉例
 
 Find pattern: `hello (\d+) world!`  
-會匹配到 `hello 123 world!` 和 `hello 456 world!`  
+會匹配到 `hello 123 world!` 和 `hello 456 world!`
 
 Replace pattern: `你 $1 好!`  
-就會變成 `你 123 好!` 和 `你 456 好!`  
+就會變成 `你 123 好!` 和 `你 456 好!`
 
 > https://stackoverflow.com/questions/11491954/is-it-possible-to-use-regexp-as-variables-to-do-find-and-replace-in-sublime-text
 
@@ -488,10 +488,13 @@ Replace pattern: `你 $1 好!`
 > 看看什麼是 node-gyp  
 > css grid 的 snippet, 還有 css flex 的也可以  
 > opencv backup: https://github.com/justadudewhohacks/opencv4nodejs/issues/733#issuecomment-1723519550  
-> 練習一下各種 es6 的 class 場景 https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes#%E9%A1%9E%E5%88%A5%E4%B8%BB%E9%AB%94%E8%88%87%E6%96%B9%E6%B3%95%E5%AE%9A%E7%BE%A9  
+> 練習一下各種 es6 的 class 場景 https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes#%E9%A1%9E%E5%88%A5%E4%B8%BB%E9%AB%94%E8%88%87%E6%96%B9 %E6%B3%95%E5%AE%9A%E7%BE%A9  
 > css 的 prefers-color-scheme 要怎麼作用  
 > 看看 npm 的 `corepack` 是什麼  
 > sublime text 的 LSP 在 `.vue` 裡如果 import 的 path 沒有後綴、或是是使用 folder/index.vue 的話會跳不過去該怎麼處理  
+> serverless 的部署方式?  
+> spa 靜態專案部署到 github 上的方式  
+> nuxt 有提供 server 功能了，可以玩的東西更多了 w  
 > 看一下 application/ld+json 這個東西  
 > const resources = window.performance.getEntriesByType('resource'); // 酷東西  
 > zip 壓縮的時候出現錯誤 zip warning: Local Entry CRC does not match CD  
@@ -499,3 +502,4 @@ Replace pattern: `你 $1 好!`
 > nodejs 的 `os` package 裡的 tmpdir  
 > vue3 v-model 的異動  
 > vue3  
+> nodejs 的 `vm` package  
