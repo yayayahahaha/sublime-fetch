@@ -360,6 +360,45 @@ plugins=(
 
 ### 其他文件
 
+##### SublimeLinter 啟動 stylelint 的方式
+
+透過 package controller 安裝 `SublimeLinter` 和 `SublimeLinter-stylelint`  
+安裝 npm 相關的 packages  
+```
+# 後面的 stylelint-less 等可以依照使用的 style lang 做調整
+npm install --save-dev stylelint stylelint-config-standard stylelint-less
+```
+配置 `.stylelintrc` 文件，可以參考[官方文件](https://stylelint.io/user-guide/configure/)  
+```json
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-less"
+  ],
+  "rules": {
+    // 規則
+    // https://stylelint.io/user-guide/rules
+  }
+}
+```
+
+接著要調整 `SublimeLinter` 的設定  
+指標停在 `vue-component` 的 `<style>` 區隔裡面，透過 `cmd+option+p` 開啟 ScopeName 的 dialog  
+可以看到他的 Scope Name 是 `text.html.vue`  
+因此，在 `SublineLinterSetting` 裡就要將他的作用域設定好，如下  
+
+```json
+"linters": {
+  "eslint": {},
+  "stylelint": {
+    "selector": "source.css, source.less, source.scss, text.html.vue"
+  }
+},
+```
+
+設定好後即可在 SulbimeText 的 Vue style 作用域下看到 lint 的結果
+
+
 ##### Sublime text 如何自定義指定的 extension 有指定的 syntax
 
 1. 開啟那個想要被指定的檔案，例如 `.env.prod`
