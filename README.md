@@ -360,6 +360,29 @@ plugins=(
 
 ### 其他文件
 
+##### 透過 Terminus 執行 terminal command 的方式
+
+[Terminus](https://github.com/randy3k/Terminus) 可以非常簡單的就在 sublime text 裡面執行 terminal 環境，  
+可以是開啟一個 terminal 視窗，或是直接執行 command 都可以。  
+
+目前有用到的是執行 stylelint 的 fix 指令
+```
+npx stylelint ${file} --fix
+```
+寫法也非常簡單，已經綁定了 shortcut 如下:
+```json
+{
+  "keys": ["ctrl+s", "ctrl+s"],
+  "command": "terminus_open",
+  "args": {
+    "cmd": ["bash", "-c", "echo '[FC]執行 stylelint fix: ${file}';npx stylelint ${file} --fix"],
+    "cwd": "${file_path:${folder}}",
+    "auto_close": false
+  }
+}
+```
+
+
 ##### SublimeLinter 啟動 stylelint 的方式
 
 透過 package controller 安裝 `SublimeLinter` 和 `SublimeLinter-stylelint`  
