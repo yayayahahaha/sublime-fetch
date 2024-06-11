@@ -361,6 +361,17 @@ plugins=(
 
 ### 其他文件
 
+##### 在 SublimeText 的 console 顯示 log 的指令
+
+```python
+sublime.log_commands(True)
+```
+
+> 要關閉的話改成 False 即可
+
+接著執行操作都會有個 log, 但仍然不齊全  
+stackoverflow 上有在[討論](https://stackoverflow.com/questions/60804670/how-to-log-commands-that-are-run-through-command-palette-in-sublime-text-3)這件事情
+
 ##### SublimeText 第三方套件的除錯方式
 
 可以透過 [這裡](https://packagecontrol.io/docs/customizing_packages) 寫的方式來客製化除錯  
