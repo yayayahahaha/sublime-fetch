@@ -360,6 +360,13 @@ plugins=(
 
 ### 其他文件
 
+##### Iterm 裡的中文變成亂碼
+
+包含 `git diff` 或是其他地方變成各式亂碼的場景，  
+可以調整 Settings -> Profile -> Terminal -> Environment 成 utf8 相關的編碼方式即可
+
+![iterm-lang](./readme-images/iterm-lang.png)
+
 ##### 點擊到 iterm 的時候會有一個 outline 框住選擇的區塊
 
 此功能是讓 find 和 filter 的功能可以 focus 在所選區塊使用，從畫面的這個地方關掉即可
