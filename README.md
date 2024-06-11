@@ -205,7 +205,7 @@ fnm install {NODE_JS_VERSION}
 
 #### 關於 Prettier
 
-Sublime Text 使用的 `Prettier` plugins 是 [JsPrettier](https://packagecontrol.io/packages/JsPrettier), 如果照著跑的話已經有安裝了  
+Sublime Text 使用的 `Prettier` plugins 是 [JsPrettier][jsprettier-link], 如果照著跑的話已經有安裝了  
 其 `node_modules` 跟著專案走會比較 ok, 所以直接安裝在每個 project 很不錯
 
 ```bash
@@ -234,23 +234,14 @@ npm list --depth=0 --global
 > _不會堆疊_ , 意思是如果 $HOME 的設定了 singleQuote 是 true, 但 $PROJECT 沒有設定的話  
 > singleQuote 在執行時的設定會是預設的 false
 
-> TODO 還有 eslint 等東西的 $HOME / $PROJECT 預設值  
-> 感覺這些項目要和 sublime text 相關的設定之類的東西一起寫? 像是 SublimeLinter 之類的
-
 請注意! `Prettier` 的設定檔如果是 `.prettierrc.js` 的話，會預設 `.js` 的檔案都是 `CommonJs`, 所以如果 `package.json` 裡有寫 `type` 是 `module` 的話, `prettier` 在執行的時候會噴錯。改法是把 `.prettierrc.js` 改成 `.prettierrc.cjs` 或將 `type` 使用成 `commonjs` 即可
 
-~~prettier sublime text package 會需要透過執行 npm 的 prettier package 才能執行，不過如果是透過 `pnpm` 安裝的話，~~  
-~~會因為 pnpm 的 hard-link 的關係，在專案內找不到 prettier 的 npm package, 所以會跳出找不到的提示。~~  
-~~workaround 的解法是在 %HOME 底下創一個 package.json 裡面安裝 prettier npm package,~~  
-~~這樣 prettier sublime text package 在專案下找不到的時候會往上找，就可以找到了~~
-
-> 總覺得這段我好像寫錯地方了，剛剛在下面 eslint 的地方發現一樣的
+> SublimeText 要叫出 prettier 的設定檔的指令是 `preferences: jsPrettier settings - side-by-side`  
+> TODO Global 安裝的 jsPrettier 執行檔的部分的還沒有處理
 
 ### 關於 Eslint
 
-> WIP `.eslintrc.js` 的詳細設定, 還有如何客製化 `eslint rules` 之類的
-
-`Sublime Text` 使用的 `Eslint` 的 plugins 是 [SublimeLinter](https://packagecontrol.io/packages/SublimeLinter) 和 [SublineLinter-eslint](https://packagecontrol.io/packages/SublimeLinter-eslint), 如果照著跑的話已經有安裝了  
+`Sublime Text` 使用的 `Eslint` 的 plugins 是 [SublimeLinter][sublimelinter-link] 和 [SublineLinter-eslint][sublimelinter-eslint-link], 如果照著跑的話已經有安裝了  
 其中的 `node_modules` 比 `prettier` 還強烈建議跟著專案走，實在太可怕了
 
 ```bash
@@ -271,24 +262,34 @@ pnpm create @eslint/config
 
 ##### 關於 ESLint Fix
 
-接著要先提的是，`Subline text` 在使用 `eslint` 的時候如果要自動修復的話，會需要多額外安裝一個 plugin [ESLint Fix](https://packagecontrol.io/packages/ESLint%20Fix)  
-當然如果照著安裝的話已經有了。
+接著要先提的是，`Subline text` 在使用 `eslint` 的時候如果要自動修復的話，會需要多額外安裝一個 plugin [ESLint Fix][eslint-fix-link]  
+如果照著安裝的話已經有了。
 
 不過
 
-由於後續都已經在使用 `pnpm` 安裝專案內的 `eslint` 了，由於 `pnpm` 是使用 `hard-link` 的方式來做到快取，而這個 `ESLint Fix` 其實有個 bug: 他會找不到 `pnpm` `hard-link` 的 `eslint` 執行檔, 所以在執行的時候 `eslint` 本身不會回傳 `output`, 導致 `eslint-fix` 在 `parse JSON` 的時候會壞掉，讓 `fix` 沒辦法順利進行。
+如果是使用 `pnpm` 安裝專案內的 `eslint` ，由於 `pnpm` 是使用 `hard-link` 的方式來做到快取，而這個 `ESLint Fix` 其實有個 bug: 他會找不到 `pnpm` `hard-link` 的 `eslint` 執行檔, 所以在執行的時候 `eslint` 本身不會回傳 `output`, 導致 `eslint-fix` 在 `parse JSON` 的時候會壞掉，讓 `fix` 沒辦法順利進行。
 
-預計的修復方式是透過 `eslint-fix` 原本的設定去寫上實際的 `eslint` 的所在位置，不過這就牽涉到了到底 `eslint` 的安裝檔要裝在哪裡，還有 `eslint-fix` 本身的設定檔要保存在哪裡、如何版控的問題
+預計的修復方式是透過 `eslint-fix` 原本的設定去寫上實際的 `eslint` 的所在位置，  
+不過這就牽涉到了到底 `eslint` 的安裝檔要裝在哪裡，還有 `eslint-fix` 本身的設定檔要保存在哪裡、如何版控的問題
 
-已經有測試過在家目錄下添加一個叫 `for-sublime-eslint-fix-eslint` 的資料夾，然後在裡面 `pnpm install` 後，把 `eslint-fix` 的設定指向到該資料夾下的 `eslint` 的話  
-是會動的。 接著只要把那個資料夾也放到這個專案裡下，然後把複製這個資料夾的 `shell` 也寫進去腳本裡面就沒問題了。
+處理的方式是在家目錄下添加一個叫 `for-sublime-eslint-fix-eslint` 的資料夾，然後在裡面 `pnpm install` 後，  
+把 `eslint-fix` 的設定指向到該資料夾下的 `eslint` 就可以順利運行
 
-> TODO 沒錯，只要把腳本完成就沒問題了  
-> WIP 還沒處理，有點晚了，所以這也是一個 TODO
+`eslint-fix` 本身沒有提供 command 呼叫出 setting panel 的方式，需要透過 menu 去翻找
+
+> Settings -> Package Settings -> ESLintFix -> Settings
+
+![eslint-fix-setting](./readme-images/eslint-fix-setting.png)
+
+裡面有一個 `local_eslint_path` 參數，將此參數指向到實際有安裝 `eslint.js`，也就是 eslint 的執行檔即可
+
+![eslint-setting-path](./readme-images/eslint-setting-path.png)
+
+> !!請注意: eslint 的版本如果到 ^9 以上的話， `.eslintrc.js` 的寫法會有大幅度的變化，目前依舊使用 ^8 版本的即可
 
 ##### 推薦安裝的 eslint plugins
 
-> TODO 像是 `vue` 的啦、 `javascript` 的啦等等等等等，基本上是跟著 `.eslintrc.js` 那邊的 TODO 是一樣的東西
+> 基本上如果沒有極度客製化的需求，用指令創建出來的 eslint 就可以 cover 絕大部分的需求
 
 ### rc 相關設定
 
@@ -359,6 +360,101 @@ plugins=(
 ```
 
 ### 其他文件
+
+##### 在 SublimeText 的 console 顯示 log 的指令
+
+```python
+sublime.log_commands(True)
+```
+
+> 要關閉的話改成 False 即可
+
+接著執行操作都會有個 log, 但仍然不齊全  
+stackoverflow 上有在[討論](https://stackoverflow.com/questions/60804670/how-to-log-commands-that-are-run-through-command-palette-in-sublime-text-3)這件事情
+
+##### SublimeText 第三方套件的除錯方式
+
+可以透過 [這裡](https://packagecontrol.io/docs/customizing_packages) 寫的方式來客製化除錯  
+大概念是把 plugin clone 下來 + 本地安裝
+
+> TODO 把流程記錄下來吧
+
+##### Iterm 裡的中文變成亂碼
+
+包含 `git diff` 或是其他地方變成各式亂碼的場景，  
+可以調整 Settings -> Profile -> Terminal -> Environment 成 utf8 相關的編碼方式即可
+
+![iterm-lang](./readme-images/iterm-lang.png)
+
+##### 點擊到 iterm 的時候會有一個 outline 框住選擇的區塊
+
+此功能是讓 find 和 filter 的功能可以 focus 在所選區塊使用，從畫面的這個地方關掉即可
+
+![iterm-select-outline](./readme-images/iterm-select-outline.png)
+
+##### 透過 Terminus 執行 terminal command 的方式
+
+[Terminus](https://github.com/randy3k/Terminus) 可以非常簡單的就在 sublime text 裡面執行 terminal 環境，  
+可以是開啟一個 terminal 視窗，或是直接執行 command 都可以。
+
+目前有用到的是執行 stylelint 的 fix 指令
+
+```
+npx stylelint ${file} --fix
+```
+
+寫法也非常簡單，已經綁定了 shortcut 如下:
+
+```json
+{
+  "keys": ["ctrl+s", "ctrl+s"],
+  "command": "terminus_open",
+  "args": {
+    "cmd": ["bash", "-c", "echo '[FC]執行 stylelint fix: ${file}';npx stylelint ${file} --fix"],
+    "cwd": "${file_path:${folder}}",
+    "auto_close": false
+  }
+}
+```
+
+##### SublimeLinter 啟動 stylelint 的方式
+
+透過 package controller 安裝 `SublimeLinter` 和 `SublimeLinter-stylelint`  
+安裝 npm 相關的 packages
+
+```
+# 後面的 stylelint-less 等可以依照使用的 style lang 做調整
+npm install --save-dev stylelint stylelint-config-standard stylelint-less
+```
+
+配置 `.stylelintrc` 文件，可以參考[官方文件](https://stylelint.io/user-guide/configure/)
+
+```json
+{
+  "extends": "stylelint-config-standard",
+  "plugins": ["stylelint-less"],
+  "rules": {
+    // 規則
+    // https://stylelint.io/user-guide/rules
+  }
+}
+```
+
+接著要調整 `SublimeLinter` 的設定  
+指標停在 `vue-component` 的 `<style>` 區隔裡面，透過 `cmd+option+p` 開啟 ScopeName 的 dialog  
+可以看到他的 Scope Name 是 `text.html.vue`  
+因此，在 `SublineLinterSetting` 裡就要將他的作用域設定好，如下
+
+```json
+"linters": {
+  "eslint": {},
+  "stylelint": {
+    "selector": "source.css, source.less, source.scss, text.html.vue"
+  }
+},
+```
+
+設定好後即可在 SulbimeText 的 Vue style 作用域下看到 lint 的結果
 
 ##### Sublime text 如何自定義指定的 extension 有指定的 syntax
 
@@ -450,45 +546,40 @@ Replace pattern: `你 $1 好!`
 > Sublime text 撰寫 api 文件的工具? 包含定義跳轉等  
 > TODO jsDoc 的 正確 撰寫方式  
 > TODO 撰寫自己的 tech center 吧  
-> sublime text 使用 eslint 的方式 -> sublimeLinter? default setting? home path setting?  
+> eslint 自定義 plugin 的方法: 換行、空白、提示、vue properties 的順序等  
 > sublime text 使用 LSP 的方式  
-> sublime text 讓特定副檔名可以有 syntax 的方式?
-> 自己客製化 eslint 的方式? 換行、空白、提示等  
 > pnpm 如果在安裝的時候當前目錄下沒有 package.json 的話東西會去哪裡?  
 > pnpm 的快取檔案在哪裡?  
-> vue3 + vite + [windicss](https://windicss.org/) && vue2 + vite + windicss 相關的各種設定等  
+> pnpm 的包 global 到底安裝到哪裡去了? 這部分也要備份會比較好? 還是就按照一步一步再去安裝好像也沒有不行
+> vue3 + vite + [windicss](https://windicss.org/)/[tailwindcss](https://tailwindcss.com/) 相關的各種設定等  
 > -> 要單純的 vite + vue + typescript 的話，只要 `pnpm create vite` 然後照著走就可以了，超方便  
-> -> 但還是要看一下 vue router 、 vuex 或 [pinia](https://pinia.vuejs.org/) 那些東西該怎麼安裝之類的
-> 參考 BBDS 的那個客製化的 vite plugins ?  
+> -> 但還是要看一下 vue router 、 vuex 或 [pinia](https://pinia.vuejs.org/) 那些東西該怎麼安裝之類的  
+> -> 透過指令 or 其他方式快速建成一個 vite + vue + router + eslint + prettier + gitignore 等等等等等的資料夾結構  
+> 客製化的 vite plugins  
 > 試試看 telport, vue3 的一個概念, 作用於想把 dialog 的層級拉到動 body 等的這種需求會用到  
-> 搞懂 custom component 的 v-model 概念  
+> 搞懂 vue2/3 custom component 的 v-model 概念 + 實作  
 > 重新整理 package.json 的方式  
-> 將當前 git commit 變成 javascript global variable 的方式  
-> git commit 前要做的事情? 或是 push 或 merge 前要做的事情  
+> 將當前 git commit 變成 javascript global variable 的方式: 放到 `window.__git_commit__` 等等  
+> git commit 前要做的事情? 或是 push 或 merge 前要做的事情: git hook?  
 > sublime text 好像有一個叫 better select 之類的東西? 像是可以雙向反白的  
 > host ? 用於綁架自己的網站的那個東東要怎麼設定  
 > ssh config 裡要幫 domain 命名或自動帶上金鑰的部分該怎麼處理  
-> ssh-keygen 好像可以產出很多組的公私鑰?  
-> prune sublime text user folder, 裡面累積太多奇怪的東西  
-> zsh 到底有哪些 plugins? 可以看一下  
+> 清理一下 sublime text user folder, 裡面累積太多奇怪的東西  
+> zsh 有哪些好用 plugins  
 > mono repo 用的什麼 bazel 這東西可以看一下? 他可以用 npm 安裝一個叫 bazelisk 的東西  
-> 不知道裝到哪裡去了、也不知道怎麼移除，這些可能得留意  
+> -> 不知道裝到哪裡去了、也不知道怎麼移除，這些可能得留意  
 > git 單獨 clone 一個 commit 的方式 / 單獨 clone 後，要把其他的部分也 clone 回來的方式  
 > -> 這個 Alex.C 有貼一個 stackoverflow 了，try try  
-> 要看一下 pnpm 的包 global 到底安裝到哪裡去了? 這部分也要備份會比較好? 還是就按照一步一步再去安裝好像也沒有不行  
 > javascript 精度的那個問題， CJ 花了一些時間介紹的那個  
-> 如果 sublime text 的套件怪怪的，可以透過 [這裡](https://packagecontrol.io/docs/customizing_packages) 寫的方式來客製化除錯  
 > 撰寫 [raycast](https://www.raycast.com/) 的安裝部分，應該還會有 plugin 同步的問題之類的  
 > 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程  
 > CSS 用於 theme 改變的東西看一下: prefers-color-scheme  
 > 取代 padding 去撐 width size 的方法  
 > 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法  
-> 透過指令 or 其他方式快速建成一個 vite + vue + router + eslint + prettier + gitignore 等等等等等的資料夾結構  
-> 找出怎麼整理 package.json 的 script  
 > 看看什麼是 node-gyp  
 > css grid 的 snippet, 還有 css flex 的也可以  
-> opencv backup: https://github.com/justadudewhohacks/opencv4nodejs/issues/733#issuecomment-1723519550  
-> 練習一下各種 es6 的 class 場景 https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes#%E9%A1%9E%E5%88%A5%E4%B8%BB%E9%AB%94%E8%88%87%E6%96%B9 %E6%B3%95%E5%AE%9A%E7%BE%A9  
+> [opencv backup][opencv-link]  
+> 練習一下各種 es6 的 class 場景 [reference][es6-class-senario-link]  
 > css 的 prefers-color-scheme 要怎麼作用  
 > 看看 npm 的 `corepack` 是什麼  
 > sublime text 的 LSP 在 `.vue` 裡如果 import 的 path 沒有後綴、或是是使用 folder/index.vue 的話會跳不過去該怎麼處理  
@@ -500,6 +591,11 @@ Replace pattern: `你 $1 好!`
 > zip 壓縮的時候出現錯誤 zip warning: Local Entry CRC does not match CD  
 > nodejs 的 `vm` package  
 > nodejs 的 `os` package 裡的 tmpdir  
-> vue3 v-model 的異動  
-> vue3  
-> nodejs 的 `vm` package  
+> vue3 重讀...
+
+[opencv-link]: https://github.com/justadudewhohacks/opencv4nodejs/issues/733#issuecomment-1723519550
+[es6-class-senario-link]: https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes#%E9%A1%9E%E5%88%A5%E4%B8%BB%E9%AB%94%E8%88%87%E6%96%B9%E6%B3%95%E5%AE%9A%E7%BE%A9
+[eslint-fix-link]: https://packagecontrol.io/packages/ESLint%20Fix
+[jsprettier-link]: https://packagecontrol.io/packages/JsPrettier
+[sublimelinter-link]: https://packagecontrol.io/packages/SublimeLinter
+[sublimelinter-eslint-link]: https://packagecontrol.io/packages/SublimeLinter-eslint

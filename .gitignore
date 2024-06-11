@@ -8,3 +8,5 @@
 # just-run 用來放給 sublime-text 的 build-system 使用的檔案們
 **/just-run/*
 !**/config-link/.gitkeep
+
+node_modules/
