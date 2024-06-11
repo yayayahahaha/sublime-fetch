@@ -205,7 +205,7 @@ fnm install {NODE_JS_VERSION}
 
 #### 關於 Prettier
 
-Sublime Text 使用的 `Prettier` plugins 是 [JsPrettier](https://packagecontrol.io/packages/JsPrettier), 如果照著跑的話已經有安裝了  
+Sublime Text 使用的 `Prettier` plugins 是 [JsPrettier][jsprettier-link], 如果照著跑的話已經有安裝了  
 其 `node_modules` 跟著專案走會比較 ok, 所以直接安裝在每個 project 很不錯
 
 ```bash
@@ -234,23 +234,14 @@ npm list --depth=0 --global
 > _不會堆疊_ , 意思是如果 $HOME 的設定了 singleQuote 是 true, 但 $PROJECT 沒有設定的話  
 > singleQuote 在執行時的設定會是預設的 false
 
-> TODO 還有 eslint 等東西的 $HOME / $PROJECT 預設值  
-> 感覺這些項目要和 sublime text 相關的設定之類的東西一起寫? 像是 SublimeLinter 之類的
-
 請注意! `Prettier` 的設定檔如果是 `.prettierrc.js` 的話，會預設 `.js` 的檔案都是 `CommonJs`, 所以如果 `package.json` 裡有寫 `type` 是 `module` 的話, `prettier` 在執行的時候會噴錯。改法是把 `.prettierrc.js` 改成 `.prettierrc.cjs` 或將 `type` 使用成 `commonjs` 即可
 
-~~prettier sublime text package 會需要透過執行 npm 的 prettier package 才能執行，不過如果是透過 `pnpm` 安裝的話，~~  
-~~會因為 pnpm 的 hard-link 的關係，在專案內找不到 prettier 的 npm package, 所以會跳出找不到的提示。~~  
-~~workaround 的解法是在 %HOME 底下創一個 package.json 裡面安裝 prettier npm package,~~  
-~~這樣 prettier sublime text package 在專案下找不到的時候會往上找，就可以找到了~~
-
-> 總覺得這段我好像寫錯地方了，剛剛在下面 eslint 的地方發現一樣的
+> SublimeText 要叫出 prettier 的設定檔的指令是 `preferences: jsPrettier settings - side-by-side`  
+> TODO Global 安裝的 jsPrettier 執行檔的部分的還沒有處理
 
 ### 關於 Eslint
 
-> WIP `.eslintrc.js` 的詳細設定, 還有如何客製化 `eslint rules` 之類的
-
-`Sublime Text` 使用的 `Eslint` 的 plugins 是 [SublimeLinter](https://packagecontrol.io/packages/SublimeLinter) 和 [SublineLinter-eslint](https://packagecontrol.io/packages/SublimeLinter-eslint), 如果照著跑的話已經有安裝了  
+`Sublime Text` 使用的 `Eslint` 的 plugins 是 [SublimeLinter][sublimelinter-link] 和 [SublineLinter-eslint][sublimelinter-eslint-link], 如果照著跑的話已經有安裝了  
 其中的 `node_modules` 比 `prettier` 還強烈建議跟著專案走，實在太可怕了
 
 ```bash
@@ -271,24 +262,37 @@ pnpm create @eslint/config
 
 ##### 關於 ESLint Fix
 
-接著要先提的是，`Subline text` 在使用 `eslint` 的時候如果要自動修復的話，會需要多額外安裝一個 plugin [ESLint Fix](https://packagecontrol.io/packages/ESLint%20Fix)  
-當然如果照著安裝的話已經有了。
+接著要先提的是，`Subline text` 在使用 `eslint` 的時候如果要自動修復的話，會需要多額外安裝一個 plugin [ESLint Fix][eslint-fix-link]  
+如果照著安裝的話已經有了。
 
 不過
 
-由於後續都已經在使用 `pnpm` 安裝專案內的 `eslint` 了，由於 `pnpm` 是使用 `hard-link` 的方式來做到快取，而這個 `ESLint Fix` 其實有個 bug: 他會找不到 `pnpm` `hard-link` 的 `eslint` 執行檔, 所以在執行的時候 `eslint` 本身不會回傳 `output`, 導致 `eslint-fix` 在 `parse JSON` 的時候會壞掉，讓 `fix` 沒辦法順利進行。
+如果是使用 `pnpm` 安裝專案內的 `eslint` ，由於 `pnpm` 是使用 `hard-link` 的方式來做到快取，而這個 `ESLint Fix` 其實有個 bug: 他會找不到 `pnpm` `hard-link` 的 `eslint` 執行檔, 所以在執行的時候 `eslint` 本身不會回傳 `output`, 導致 `eslint-fix` 在 `parse JSON` 的時候會壞掉，讓 `fix` 沒辦法順利進行。
 
-預計的修復方式是透過 `eslint-fix` 原本的設定去寫上實際的 `eslint` 的所在位置，不過這就牽涉到了到底 `eslint` 的安裝檔要裝在哪裡，還有 `eslint-fix` 本身的設定檔要保存在哪裡、如何版控的問題
+預計的修復方式是透過 `eslint-fix` 原本的設定去寫上實際的 `eslint` 的所在位置，  
+不過這就牽涉到了到底 `eslint` 的安裝檔要裝在哪裡，還有 `eslint-fix` 本身的設定檔要保存在哪裡、如何版控的問題
 
-已經有測試過在家目錄下添加一個叫 `for-sublime-eslint-fix-eslint` 的資料夾，然後在裡面 `pnpm install` 後，把 `eslint-fix` 的設定指向到該資料夾下的 `eslint` 的話  
-是會動的。 接著只要把那個資料夾也放到這個專案裡下，然後把複製這個資料夾的 `shell` 也寫進去腳本裡面就沒問題了。
+處理的方式是在家目錄下添加一個叫 `for-sublime-eslint-fix-eslint` 的資料夾，然後在裡面 `pnpm install` 後，  
+把 `eslint-fix` 的設定指向到該資料夾下的 `eslint` 就可以順利運行
 
-> TODO 沒錯，只要把腳本完成就沒問題了  
+> TODO 把 `for-sublime-eslint-fix-eslint` 那個資料夾也放到這個專案裡下，然後把複製這個資料夾的 `shell` 也寫進去腳本裡面就沒問題了。
 > WIP 還沒處理，有點晚了，所以這也是一個 TODO
+
+`eslint-fix` 本身沒有提供 command 呼叫出 setting panel 的方式，需要透過 menu 去翻找
+
+> Settings -> Package Settings -> ESLintFix -> Settings
+
+![eslint-fix-setting](./readme-images/eslint-fix-setting.png)
+
+裡面有一個 `local_eslint_path` 參數，將此參數指向到實際有安裝 `eslint.js`，也就是 eslint 的執行檔即可
+
+![eslint-setting-path](./readme-images/eslint-setting-path.png)
+
+> !!請注意: eslint 的版本如果到 ^9 以上的話， `.eslintrc.js` 的寫法會有大幅度的變化，目前依舊使用 ^8 版本的即可
 
 ##### 推薦安裝的 eslint plugins
 
-> TODO 像是 `vue` 的啦、 `javascript` 的啦等等等等等，基本上是跟著 `.eslintrc.js` 那邊的 TODO 是一樣的東西
+> 基本上如果沒有極度客製化的需求，用指令創建出來的 eslint 就可以 cover 絕大部分的需求
 
 ### rc 相關設定
 
@@ -580,3 +584,8 @@ Replace pattern: `你 $1 好!`
 > vue3 v-model 的異動  
 > vue3  
 > nodejs 的 `vm` package
+
+[eslint-fix-link]: https://packagecontrol.io/packages/ESLint%20Fix
+[jsprettier-link]: https://packagecontrol.io/packages/JsPrettier
+[sublimelinter-link]: https://packagecontrol.io/packages/SublimeLinter
+[sublimelinter-eslint-link]: https://packagecontrol.io/packages/SublimeLinter-eslint
