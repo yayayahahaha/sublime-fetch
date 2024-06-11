@@ -360,16 +360,25 @@ plugins=(
 
 ### 其他文件
 
+##### 點擊到 iterm 的時候會有一個 outline 框住選擇的區塊
+
+此功能是讓 find 和 filter 的功能可以 focus 在所選區塊使用，從畫面的這個地方關掉即可
+
+![iterm-select-outline](./readme-images/iterm-select-outline.png)
+
 ##### 透過 Terminus 執行 terminal command 的方式
 
 [Terminus](https://github.com/randy3k/Terminus) 可以非常簡單的就在 sublime text 裡面執行 terminal 環境，  
-可以是開啟一個 terminal 視窗，或是直接執行 command 都可以。  
+可以是開啟一個 terminal 視窗，或是直接執行 command 都可以。
 
 目前有用到的是執行 stylelint 的 fix 指令
+
 ```
 npx stylelint ${file} --fix
 ```
+
 寫法也非常簡單，已經綁定了 shortcut 如下:
+
 ```json
 {
   "keys": ["ctrl+s", "ctrl+s"],
@@ -382,22 +391,22 @@ npx stylelint ${file} --fix
 }
 ```
 
-
 ##### SublimeLinter 啟動 stylelint 的方式
 
 透過 package controller 安裝 `SublimeLinter` 和 `SublimeLinter-stylelint`  
-安裝 npm 相關的 packages  
+安裝 npm 相關的 packages
+
 ```
 # 後面的 stylelint-less 等可以依照使用的 style lang 做調整
 npm install --save-dev stylelint stylelint-config-standard stylelint-less
 ```
-配置 `.stylelintrc` 文件，可以參考[官方文件](https://stylelint.io/user-guide/configure/)  
+
+配置 `.stylelintrc` 文件，可以參考[官方文件](https://stylelint.io/user-guide/configure/)
+
 ```json
 {
   "extends": "stylelint-config-standard",
-  "plugins": [
-    "stylelint-less"
-  ],
+  "plugins": ["stylelint-less"],
   "rules": {
     // 規則
     // https://stylelint.io/user-guide/rules
@@ -408,7 +417,7 @@ npm install --save-dev stylelint stylelint-config-standard stylelint-less
 接著要調整 `SublimeLinter` 的設定  
 指標停在 `vue-component` 的 `<style>` 區隔裡面，透過 `cmd+option+p` 開啟 ScopeName 的 dialog  
 可以看到他的 Scope Name 是 `text.html.vue`  
-因此，在 `SublineLinterSetting` 裡就要將他的作用域設定好，如下  
+因此，在 `SublineLinterSetting` 裡就要將他的作用域設定好，如下
 
 ```json
 "linters": {
@@ -420,7 +429,6 @@ npm install --save-dev stylelint stylelint-config-standard stylelint-less
 ```
 
 設定好後即可在 SulbimeText 的 Vue style 作用域下看到 lint 的結果
-
 
 ##### Sublime text 如何自定義指定的 extension 有指定的 syntax
 
@@ -564,4 +572,4 @@ Replace pattern: `你 $1 好!`
 > nodejs 的 `os` package 裡的 tmpdir  
 > vue3 v-model 的異動  
 > vue3  
-> nodejs 的 `vm` package  
+> nodejs 的 `vm` package
