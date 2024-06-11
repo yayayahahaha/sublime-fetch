@@ -592,6 +592,8 @@ Replace pattern: `你 $1 好!`
 > nodejs 的 `vm` package  
 > nodejs 的 `os` package 裡的 tmpdir  
 > vue3 重讀...
+> 要安裝的 app: 像是 snippet 和 rectangle 什麼的之類的
+> 排查: git detected dubious ownership in repository
 
 [opencv-link]: https://github.com/justadudewhohacks/opencv4nodejs/issues/733#issuecomment-1723519550
 [es6-class-senario-link]: https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes#%E9%A1%9E%E5%88%A5%E4%B8%BB%E9%AB%94%E8%88%87%E6%96%B9%E6%B3%95%E5%AE%9A%E7%BE%A9
