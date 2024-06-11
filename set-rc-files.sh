@@ -1,6 +1,9 @@
 function set_rc_files() {
   __copy_and_backup
 
+  local dir=$(pwd)
+  echo "當前執行的路徑: $dir"
+
   # 複製的部分
   cp ./.zshrc-backup "$HOME/.zshrc"
   if [[ $? != 0 ]]; then return; fi
@@ -16,6 +19,13 @@ function set_rc_files() {
 
   cp ./.vimrc-backup "$HOME/.vimrc"
   if [[ $? != 0 ]]; then return; fi
+
+  cp ./for-sublime-eslint-fix-eslint "$HOME/for-sublime-eslint-fix-eslint"
+  if [[ $? != 0 ]]; then return; fi
+  cd "$HOME/for-sublime-eslint-fix-eslint"
+  npm install
+  if [[ $? != 0 ]]; then return; fi
+  cd $dir
 
 
   # 把 sublime text 的啟動檔綁定成綁到環境變數 bin 資料夾下的 subl
@@ -55,7 +65,6 @@ function set_rc_files() {
 
   ln -s "$HOME/.bash-work" "./$config_path/.bash-work"
   if [[ $? != 0 ]]; then return; fi
-
 
   echo '操作成功, 請重新開一個 iterm2 視窗'
 }

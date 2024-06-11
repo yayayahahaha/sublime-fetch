@@ -275,9 +275,6 @@ pnpm create @eslint/config
 處理的方式是在家目錄下添加一個叫 `for-sublime-eslint-fix-eslint` 的資料夾，然後在裡面 `pnpm install` 後，  
 把 `eslint-fix` 的設定指向到該資料夾下的 `eslint` 就可以順利運行
 
-> TODO 把 `for-sublime-eslint-fix-eslint` 那個資料夾也放到這個專案裡下，然後把複製這個資料夾的 `shell` 也寫進去腳本裡面就沒問題了。
-> WIP 還沒處理，有點晚了，所以這也是一個 TODO
-
 `eslint-fix` 本身沒有提供 command 呼叫出 setting panel 的方式，需要透過 menu 去翻找
 
 > Settings -> Package Settings -> ESLintFix -> Settings
