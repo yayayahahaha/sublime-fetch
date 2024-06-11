@@ -361,6 +361,13 @@ plugins=(
 
 ### 其他文件
 
+##### SublimeText 第三方套件的除錯方式
+
+可以透過 [這裡](https://packagecontrol.io/docs/customizing_packages) 寫的方式來客製化除錯  
+大概念是把 plugin clone 下來 + 本地安裝
+
+> TODO 把流程記錄下來吧
+
 ##### Iterm 裡的中文變成亂碼
 
 包含 `git diff` 或是其他地方變成各式亂碼的場景，  
@@ -528,45 +535,40 @@ Replace pattern: `你 $1 好!`
 > Sublime text 撰寫 api 文件的工具? 包含定義跳轉等  
 > TODO jsDoc 的 正確 撰寫方式  
 > TODO 撰寫自己的 tech center 吧  
-> sublime text 使用 eslint 的方式 -> sublimeLinter? default setting? home path setting?  
+> eslint 自定義 plugin 的方法: 換行、空白、提示、vue properties 的順序等  
 > sublime text 使用 LSP 的方式  
-> sublime text 讓特定副檔名可以有 syntax 的方式?
-> 自己客製化 eslint 的方式? 換行、空白、提示等  
 > pnpm 如果在安裝的時候當前目錄下沒有 package.json 的話東西會去哪裡?  
 > pnpm 的快取檔案在哪裡?  
-> vue3 + vite + [windicss](https://windicss.org/) && vue2 + vite + windicss 相關的各種設定等  
+> pnpm 的包 global 到底安裝到哪裡去了? 這部分也要備份會比較好? 還是就按照一步一步再去安裝好像也沒有不行
+> vue3 + vite + [windicss](https://windicss.org/)/[tailwindcss](https://tailwindcss.com/) 相關的各種設定等  
 > -> 要單純的 vite + vue + typescript 的話，只要 `pnpm create vite` 然後照著走就可以了，超方便  
-> -> 但還是要看一下 vue router 、 vuex 或 [pinia](https://pinia.vuejs.org/) 那些東西該怎麼安裝之類的
-> 參考 BBDS 的那個客製化的 vite plugins ?  
+> -> 但還是要看一下 vue router 、 vuex 或 [pinia](https://pinia.vuejs.org/) 那些東西該怎麼安裝之類的  
+> -> 透過指令 or 其他方式快速建成一個 vite + vue + router + eslint + prettier + gitignore 等等等等等的資料夾結構  
+> 客製化的 vite plugins  
 > 試試看 telport, vue3 的一個概念, 作用於想把 dialog 的層級拉到動 body 等的這種需求會用到  
-> 搞懂 custom component 的 v-model 概念  
+> 搞懂 vue2/3 custom component 的 v-model 概念 + 實作  
 > 重新整理 package.json 的方式  
-> 將當前 git commit 變成 javascript global variable 的方式  
-> git commit 前要做的事情? 或是 push 或 merge 前要做的事情  
+> 將當前 git commit 變成 javascript global variable 的方式: 放到 `window.__git_commit__` 等等  
+> git commit 前要做的事情? 或是 push 或 merge 前要做的事情: git hook?  
 > sublime text 好像有一個叫 better select 之類的東西? 像是可以雙向反白的  
 > host ? 用於綁架自己的網站的那個東東要怎麼設定  
 > ssh config 裡要幫 domain 命名或自動帶上金鑰的部分該怎麼處理  
-> ssh-keygen 好像可以產出很多組的公私鑰?  
-> prune sublime text user folder, 裡面累積太多奇怪的東西  
-> zsh 到底有哪些 plugins? 可以看一下  
+> 清理一下 sublime text user folder, 裡面累積太多奇怪的東西  
+> zsh 有哪些好用 plugins  
 > mono repo 用的什麼 bazel 這東西可以看一下? 他可以用 npm 安裝一個叫 bazelisk 的東西  
-> 不知道裝到哪裡去了、也不知道怎麼移除，這些可能得留意  
+> -> 不知道裝到哪裡去了、也不知道怎麼移除，這些可能得留意  
 > git 單獨 clone 一個 commit 的方式 / 單獨 clone 後，要把其他的部分也 clone 回來的方式  
 > -> 這個 Alex.C 有貼一個 stackoverflow 了，try try  
-> 要看一下 pnpm 的包 global 到底安裝到哪裡去了? 這部分也要備份會比較好? 還是就按照一步一步再去安裝好像也沒有不行  
 > javascript 精度的那個問題， CJ 花了一些時間介紹的那個  
-> 如果 sublime text 的套件怪怪的，可以透過 [這裡](https://packagecontrol.io/docs/customizing_packages) 寫的方式來客製化除錯  
 > 撰寫 [raycast](https://www.raycast.com/) 的安裝部分，應該還會有 plugin 同步的問題之類的  
 > 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程  
 > CSS 用於 theme 改變的東西看一下: prefers-color-scheme  
 > 取代 padding 去撐 width size 的方法  
 > 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法  
-> 透過指令 or 其他方式快速建成一個 vite + vue + router + eslint + prettier + gitignore 等等等等等的資料夾結構  
-> 找出怎麼整理 package.json 的 script  
 > 看看什麼是 node-gyp  
 > css grid 的 snippet, 還有 css flex 的也可以  
-> opencv backup: https://github.com/justadudewhohacks/opencv4nodejs/issues/733#issuecomment-1723519550  
-> 練習一下各種 es6 的 class 場景 https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes#%E9%A1%9E%E5%88%A5%E4%B8%BB%E9%AB%94%E8%88%87%E6%96%B9 %E6%B3%95%E5%AE%9A%E7%BE%A9  
+> [opencv backup][opencv-link]  
+> 練習一下各種 es6 的 class 場景 [reference][es6-class-senario-link]  
 > css 的 prefers-color-scheme 要怎麼作用  
 > 看看 npm 的 `corepack` 是什麼  
 > sublime text 的 LSP 在 `.vue` 裡如果 import 的 path 沒有後綴、或是是使用 folder/index.vue 的話會跳不過去該怎麼處理  
@@ -578,10 +580,10 @@ Replace pattern: `你 $1 好!`
 > zip 壓縮的時候出現錯誤 zip warning: Local Entry CRC does not match CD  
 > nodejs 的 `vm` package  
 > nodejs 的 `os` package 裡的 tmpdir  
-> vue3 v-model 的異動  
-> vue3  
-> nodejs 的 `vm` package
+> vue3 重讀...
 
+[opencv-link]: https://github.com/justadudewhohacks/opencv4nodejs/issues/733#issuecomment-1723519550
+[es6-class-senario-link]: https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes#%E9%A1%9E%E5%88%A5%E4%B8%BB%E9%AB%94%E8%88%87%E6%96%B9%E6%B3%95%E5%AE%9A%E7%BE%A9
 [eslint-fix-link]: https://packagecontrol.io/packages/ESLint%20Fix
 [jsprettier-link]: https://packagecontrol.io/packages/JsPrettier
 [sublimelinter-link]: https://packagecontrol.io/packages/SublimeLinter
