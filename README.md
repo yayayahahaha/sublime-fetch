@@ -2,9 +2,23 @@
 
 ## Mac 本身設定
 
-如取消各種手勢、觸控板方向調整、拖拉方式修改、快捷鍵如繁簡轉換調整等
+1. 取消各種手勢(如五指收合、三指向上等等)
+   > Setting -> Trackpad
+2. 取消 Hot Corners 的行為(滑鼠移動到畫面角落的行為)
+   > Setting -> Desktop & Dock -> Mission Control -> Hot Coners
+3. Dock 縮小 + 放到左邊 + 自動隱藏
+   > Setting -> Desktop & Dock -> Dock -> Position on screen: Left
+4. 觸控板捲動方向調整(跟 windows 一樣)
+   > Setting -> Trackpad
+5. 拖拉方式修改(雙擊拖拉)
+   > Setting -> Accessibility -> Pointer Control -> Trackpad Options -> Use Trackpad for dragging -> Dragging style: With Drag Lock
+6. app 清單位置調整(setting 放第一個，狀態放最後一個等)
+7. F1-F12 功能鍵變成不用搭配 fn
+   > Setting -> Keyboard -> Press and fold fn key to: Show Expanded Control Strip
+8. 快捷鍵: 勿擾模式(opt+s), app 清單(opt+q), spotlight/raycast 快捷鍵, 繁簡轉換, subWord 位移等
+   > Setting -> Keyboard -> Keyboard shortcut
 
-> TODO 還沒找如何匯出 or 詳細的每個步驟，不過數量不多應該還好
+會根據不同的 Mac 型號 (如有沒有 touchbar 等) 有些不同
 
 ## Karabiner Element 鍵盤鍵位修改程式
 
@@ -544,16 +558,16 @@ Replace pattern: `你 $1 好!`
 ## TODO LIST
 
 > Sublime text 撰寫 api 文件的工具? 包含定義跳轉等  
-> TODO jsDoc 的 正確 撰寫方式  
-> TODO 撰寫自己的 tech center 吧  
+> jsDoc 的 正確 撰寫方式  
+> 撰寫自己的 tech center 吧  
 > eslint 自定義 plugin 的方法: 換行、空白、提示、vue properties 的順序等  
 > sublime text 使用 LSP 的方式  
 > pnpm 如果在安裝的時候當前目錄下沒有 package.json 的話東西會去哪裡?  
 > pnpm 的快取檔案在哪裡?  
 > pnpm 的包 global 到底安裝到哪裡去了? 這部分也要備份會比較好? 還是就按照一步一步再去安裝好像也沒有不行
-> vue3 + vite + [windicss](https://windicss.org/)/[tailwindcss](https://tailwindcss.com/) 相關的各種設定等  
+> vue3 + vite + [windicss][windicss-link]/[tailwindcss][tailwindcss-link] 相關的各種設定等  
 > -> 要單純的 vite + vue + typescript 的話，只要 `pnpm create vite` 然後照著走就可以了，超方便  
-> -> 但還是要看一下 vue router 、 vuex 或 [pinia](https://pinia.vuejs.org/) 那些東西該怎麼安裝之類的  
+> -> 但還是要看一下 vue router 、 vuex 或 [pinia][pinia-link] 那些東西該怎麼安裝之類的  
 > -> 透過指令 or 其他方式快速建成一個 vite + vue + router + eslint + prettier + gitignore 等等等等等的資料夾結構  
 > 客製化的 vite plugins  
 > 試試看 telport, vue3 的一個概念, 作用於想把 dialog 的層級拉到動 body 等的這種需求會用到  
@@ -571,7 +585,7 @@ Replace pattern: `你 $1 好!`
 > git 單獨 clone 一個 commit 的方式 / 單獨 clone 後，要把其他的部分也 clone 回來的方式  
 > -> 這個 Alex.C 有貼一個 stackoverflow 了，try try  
 > javascript 精度的那個問題， CJ 花了一些時間介紹的那個  
-> 撰寫 [raycast](https://www.raycast.com/) 的安裝部分，應該還會有 plugin 同步的問題之類的  
+> 撰寫 [raycast][raycast-link] 的安裝部分，應該還會有 plugin 同步的問題之類的  
 > 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程  
 > CSS 用於 theme 改變的東西看一下: prefers-color-scheme  
 > 取代 padding 去撐 width size 的方法  
@@ -594,6 +608,10 @@ Replace pattern: `你 $1 好!`
 > vue3 重讀...  
 > git config 的各種像是查閱等等的方式
 
+[windicss-link]: https://windicss.org/
+[tailwindcss-link]: https://tailwindcss.com/
+[pinia-link]: https://pinia.vuejs.org/
+[raycast-link]: https://www.raycast.com/
 [opencv-link]: https://github.com/justadudewhohacks/opencv4nodejs/issues/733#issuecomment-1723519550
 [es6-class-senario-link]: https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes#%E9%A1%9E%E5%88%A5%E4%B8%BB%E9%AB%94%E8%88%87%E6%96%B9%E6%B3%95%E5%AE%9A%E7%BE%A9
 [eslint-fix-link]: https://packagecontrol.io/packages/ESLint%20Fix
