@@ -17,10 +17,12 @@ fi
 SHOULD_NOT_BE_COMMIT=$(printf "%s\n" "${BRANCHES_SHOULD_NOT_BE_COMMIT[@]}" | grep -c "^$BRANCH_NAME$")
 
 
+# 不論怎樣都先來個額外訊息
+echo "\n# [額外訊息] [$(date +'%Y-%m-%d %H:%M:%S')] [$(date +'%s')]" >> "$COMMIT_MSG_FILE"
+
 if [[ "$COMMIT_SOURCE" =~ ^(merge|rebase|commit)$ ]]; then
   # 哪些行為不用額外添加 commit message, 像是 amend, rebase 和 merge 等都不用
 
-  echo "\n# [額外訊息]" >> "$COMMIT_MSG_FILE"
   echo "# 當前的 commit 行為是 ${COMMIT_SOURCE}, 跳過 prepare-commit-msg" >> "$COMMIT_MSG_FILE"
 
 elif ! [[ $SHOULD_NOT_BE_COMMIT -eq 0 ]]; then
@@ -39,13 +41,10 @@ elif ! [[ -z $JIRA_TICKET ]]; then
   sed -i.bak -e "1s|^|[$JIRA_TICKET]|" $COMMIT_MSG_FILE
   sed -i.bak -e "2s|^|\n\n|" $COMMIT_MSG_FILE
   sed -i.bak -e "3s|^|From ${BRANCH_NAME}\n|" $COMMIT_MSG_FILE
-  echo "\n# [額外訊息]" >> "$COMMIT_MSG_FILE"
   echo "# COMMIT_SOURCE: ${COMMIT_SOURCE}" >> "$COMMIT_MSG_FILE"
 
 else
   # 都沒有的話，還是寫一下額外的訊息
-
-  echo "\n# [額外訊息] [$(date +'%Y-%m-%d %H:%M:%S')] [$(date +'%s')]" >> "$COMMIT_MSG_FILE"
   echo "# COMMIT_SOURCE: ${COMMIT_SOURCE}" >> "$COMMIT_MSG_FILE"
 
 fi

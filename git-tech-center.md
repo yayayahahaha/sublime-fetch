@@ -77,7 +77,7 @@ A: `keygen` 那部分依舊是必要的, 不過這個還可以再去細查
 ### Git 在 commit 前添加 commit message 的預設值
 
 可以透過直接修改專案裡的 `.git/hooks/prepare-commit-msg`，或是透過 git config 指定 hooks 的位置來處理。  
-範例請見專案內的 `git-example-code-folder/_githooks/prepare-commit-msg`
+範例請見專案內的 [`git-example-code-folder/_githooks/prepare-commit-msg`](./git-example-code-folder)
 
 ##### 具體流程
 
