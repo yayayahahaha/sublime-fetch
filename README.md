@@ -20,6 +20,22 @@
 
 會根據不同的 Mac 型號 (如有沒有 touchbar 等) 有些不同
 
+## 常用開發工具
+
+[Snipaste](https://www.snipaste.com/): 強大的截圖程式
+
+> Shortcut: 截圖: cmd+f1
+
+[Karabiner Element](https://karabiner-elements.pqrs.org/): 外接鍵盤鍵位修改
+
+[Rectangle](https://rectangleapp.com/): 快速移動視窗/最大化視窗
+
+[Magnet](https://apps.apple.com/us/app/magnet/id441258766): 快速移動視窗/最大化視窗
+
+> 全螢幕: ctrl + opt + super + enter  
+> 位移螢幕: ctrl + shift + opt + arrow  
+> 回去原本的尺寸: ctrl + shift + opt + enter
+
 ## Karabiner Element 鍵盤鍵位修改程式
 
 複製資料夾即可
