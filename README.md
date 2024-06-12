@@ -622,7 +622,8 @@ Replace pattern: `你 $1 好!`
 > nodejs 的 `vm` package  
 > nodejs 的 `os` package 裡的 tmpdir  
 > vue3 重讀...  
-> git config 的各種像是查閱等等的方式
+> git config 的各種像是查閱等等的方式  
+> window.history.replaceState
 
 [windicss-link]: https://windicss.org/
 [tailwindcss-link]: https://tailwindcss.com/
