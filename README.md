@@ -591,7 +591,8 @@ Replace pattern: `你 $1 好!`
 > zip 壓縮的時候出現錯誤 zip warning: Local Entry CRC does not match CD  
 > nodejs 的 `vm` package  
 > nodejs 的 `os` package 裡的 tmpdir  
-> vue3 重讀...
+> vue3 重讀...  
+> git 的 `prepare-commit-msg` 的調適方式
 
 [opencv-link]: https://github.com/justadudewhohacks/opencv4nodejs/issues/733#issuecomment-1723519550
 [es6-class-senario-link]: https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes#%E9%A1%9E%E5%88%A5%E4%B8%BB%E9%AB%94%E8%88%87%E6%96%B9%E6%B3%95%E5%AE%9A%E7%BE%A9
