@@ -621,9 +621,11 @@ Replace pattern: `你 $1 好!`
 > zip 壓縮的時候出現錯誤 zip warning: Local Entry CRC does not match CD  
 > nodejs 的 `vm` package  
 > nodejs 的 `os` package 裡的 tmpdir  
-> vue3 重讀...  
+> 排查: git detected dubious ownership in repository  
+> 重新看一次 vue3  
 > git config 的各種像是查閱等等的方式  
-> window.history.replaceState
+> window.history.replaceState  
+> nodejs select + 多選 功能, (Y/n) 功能: 可以寫成 snippet 之類的
 
 [windicss-link]: https://windicss.org/
 [tailwindcss-link]: https://tailwindcss.com/
