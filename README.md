@@ -40,6 +40,8 @@
 
 複製資料夾即可
 
+> 額外補充: [調整鍵盤背光快捷鍵設定方式][karabiner-keyboard-back-link]
+
 ```bash
 cp -r ./karabiner $HOME/.config/karabiner
 ```
@@ -637,3 +639,4 @@ Replace pattern: `你 $1 好!`
 [jsprettier-link]: https://packagecontrol.io/packages/JsPrettier
 [sublimelinter-link]: https://packagecontrol.io/packages/SublimeLinter
 [sublimelinter-eslint-link]: https://packagecontrol.io/packages/SublimeLinter-eslint
+[karabiner-keyboard-back-link]: https://github.com/pqrs-org/Karabiner-Elements/issues/2645
