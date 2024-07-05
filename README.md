@@ -627,7 +627,9 @@ Replace pattern: `你 $1 好!`
 > 重新看一次 vue3  
 > git config 的各種像是查閱等等的方式  
 > window.history.replaceState  
-> nodejs select + 多選 功能, (Y/n) 功能: 可以寫成 snippet 之類的
+> nodejs select + 多選 功能, (Y/n) 功能: 可以寫成 snippet 之類的  
+> .call(), .bind() 和 .apply() 的 snippet, 這樣隨時可以提醒
+> gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個
 
 [windicss-link]: https://windicss.org/
 [tailwindcss-link]: https://tailwindcss.com/
