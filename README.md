@@ -571,6 +571,14 @@ Replace pattern: `你 $1 好!`
 
 > https://stackoverflow.com/questions/11491954/is-it-possible-to-use-regexp-as-variables-to-do-find-and-replace-in-sublime-text
 
+##### Sublime Text 在寫 snippet 的時候的作用域該怎麼寫
+
+在非選擇任何字串的情況下，將光標移到想要作用的區域後，  
+輸入 `cmd + opt + p`, 就會挑出一個寫著 `Scope Name` 的彈框  
+可以直接用複製的將內容貼到 `<trigger></trigger>` 標籤內即可
+
+> 由於有寫了一個客製化的 shortcut 用來快速前往路徑的關係，所以才需要在非選擇的情況下使用快捷鍵
+
 ---
 
 ## TODO LIST
