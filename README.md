@@ -636,8 +636,9 @@ Replace pattern: `你 $1 好!`
 > git config 的各種像是查閱等等的方式  
 > window.history.replaceState  
 > nodejs select + 多選 功能, (Y/n) 功能: 可以寫成 snippet 之類的  
-> .call(), .bind() 和 .apply() 的 snippet, 這樣隨時可以提醒
-> gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個
+> .call(), .bind() 和 .apply() 的 snippet, 這樣隨時可以提醒  
+> gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個  
+> 把奶茶初音電腦的 fn + F5/F6 調整鍵盤底光的 karabiner 的設定檔 export 出來存在這裡
 
 [windicss-link]: https://windicss.org/
 [tailwindcss-link]: https://tailwindcss.com/
