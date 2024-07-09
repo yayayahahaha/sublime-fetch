@@ -40,6 +40,8 @@
 
 複製資料夾即可
 
+> 額外補充: [調整鍵盤背光快捷鍵設定方式][karabiner-keyboard-back-link]
+
 ```bash
 cp -r ./karabiner $HOME/.config/karabiner
 ```
@@ -569,6 +571,14 @@ Replace pattern: `你 $1 好!`
 
 > https://stackoverflow.com/questions/11491954/is-it-possible-to-use-regexp-as-variables-to-do-find-and-replace-in-sublime-text
 
+##### Sublime Text 在寫 snippet 的時候的作用域該怎麼寫
+
+在非選擇任何字串的情況下，將光標移到想要作用的區域後，  
+輸入 `cmd + opt + p`, 就會挑出一個寫著 `Scope Name` 的彈框  
+可以直接用複製的將內容貼到 `<trigger></trigger>` 標籤內即可
+
+> 由於有寫了一個客製化的 shortcut 用來快速前往路徑的關係，所以才需要在非選擇的情況下使用快捷鍵
+
 ---
 
 ## TODO LIST
@@ -626,8 +636,9 @@ Replace pattern: `你 $1 好!`
 > git config 的各種像是查閱等等的方式  
 > window.history.replaceState  
 > nodejs select + 多選 功能, (Y/n) 功能: 可以寫成 snippet 之類的  
-> .call(), .bind() 和 .apply() 的 snippet, 這樣隨時可以提醒
-> gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個
+> .call(), .bind() 和 .apply() 的 snippet, 這樣隨時可以提醒  
+> gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個  
+> 把奶茶初音電腦的 fn + F5/F6 調整鍵盤底光的 karabiner 的設定檔 export 出來存在這裡
 
 [windicss-link]: https://windicss.org/
 [tailwindcss-link]: https://tailwindcss.com/
@@ -639,3 +650,4 @@ Replace pattern: `你 $1 好!`
 [jsprettier-link]: https://packagecontrol.io/packages/JsPrettier
 [sublimelinter-link]: https://packagecontrol.io/packages/SublimeLinter
 [sublimelinter-eslint-link]: https://packagecontrol.io/packages/SublimeLinter-eslint
+[karabiner-keyboard-back-link]: https://github.com/pqrs-org/Karabiner-Elements/issues/2645
