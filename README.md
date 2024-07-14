@@ -638,7 +638,8 @@ Replace pattern: `你 $1 好!`
 > window.history.replaceState  
 > nodejs select + 多選 功能, (Y/n) 功能: 可以寫成 snippet 之類的  
 > .call(), .bind() 和 .apply() 的 snippet, 這樣隨時可以提醒  
-> gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個
+> gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個  
+> 開發一個 chrome 的套件: 取得所有 tabs 的資訊
 
 [windicss-link]: https://windicss.org/
 [tailwindcss-link]: https://tailwindcss.com/
