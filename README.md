@@ -405,12 +405,17 @@ sublime.log_commands(True)
 接著執行操作都會有個 log, 但仍然不齊全  
 stackoverflow 上有在[討論](https://stackoverflow.com/questions/60804670/how-to-log-commands-that-are-run-through-command-palette-in-sublime-text-3)這件事情
 
-##### SublimeText 第三方套件的除錯方式
+##### Sublime Text 第三方套件的除錯方式
 
 可以透過 [這裡](https://packagecontrol.io/docs/customizing_packages) 寫的方式來客製化除錯  
 大概念是把 plugin clone 下來 + 本地安裝
 
-> TODO 把流程記錄下來吧
+> TODO 把流程記錄下來吧  
+> 細節上有區分 Packed 和 Unpacked ，  
+> 如果是比較可以直接複製在 `~/Library/Application Support/Sublime Text/Packages` 底下的資料夾的話，  
+> 基本上就是直接複製一份、然後修改就可以了，對 package 的操作模式也和一般透過 `package control` 的方式一樣  
+> 例子: 將 Nodejs 套件裡的 snippet 裡後面全部的 `;` 都去除，就要修改他裡面的 `Nodejs.sublime-completions` 這個檔案  
+> 目前已經將他的 snippets 直接複製出來了，可以定期手動複製 + 修改來做更新，或是寫個 script 什麼的都可以
 
 ##### Iterm 裡的中文變成亂碼
 
@@ -639,6 +644,7 @@ Replace pattern: `你 $1 好!`
 > nodejs select + 多選 功能, (Y/n) 功能: 可以寫成 snippet 之類的  
 > 開發一個 chrome 的套件: 取得所有 tabs 的資訊  
 > gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個  
+> 直接將 Sublime Text 的 User 資料夾改成再往上一層的 `Packages` 層級吧，多了一些像是 `Nodejs-adjust` 的異動要存起來  
 > 創建更詳細的 sublime snippet 檔案: 在 js 的 `return { /* 這裡 */ }` 的宣告部分不用觸發 `cons`, 在該可觸發的地方才觸發等等
 
 [windicss-link]: https://windicss.org/
