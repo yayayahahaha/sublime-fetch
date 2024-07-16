@@ -637,6 +637,7 @@ Replace pattern: `你 $1 好!`
 > git config 的各種像是查閱等等的方式  
 > window.history.replaceState  
 > nodejs select + 多選 功能, (Y/n) 功能: 可以寫成 snippet 之類的  
+> 開發一個 chrome 的套件: 取得所有 tabs 的資訊  
 > gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個  
 > 創建更詳細的 sublime snippet 檔案: 在 js 的 `return { /* 這裡 */ }` 的宣告部分不用觸發 `cons`, 在該可觸發的地方才觸發等等
 
