@@ -607,6 +607,10 @@ const colors = require('colors/safe')
 console.log(colors.green('hello')) // outputs green text
 ```
 
+##### Nodejs 的 input, select, checkbox 等等的寫法
+
+推薦直接使用套件 [Inquirer][inquirer-link], 詳細使用方式可以參考 [這裡](./node-select-demo/index.js)
+
 ---
 
 ## TODO LIST
@@ -663,7 +667,6 @@ console.log(colors.green('hello')) // outputs green text
 > 重新看一次 vue3  
 > git config 的各種像是查閱等等的方式  
 > window.history.replaceState  
-> nodejs select + 多選 功能, (Y/n) 功能: 可以寫成 snippet 之類的  
 > 開發一個 chrome 的套件: 取得所有 tabs 的資訊  
 > gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個  
 > 直接將 Sublime Text 的 User 資料夾改成再往上一層的 `Packages` 層級吧，多了一些像是 `Nodejs-adjust` 的異動要存起來  
@@ -681,3 +684,4 @@ console.log(colors.green('hello')) // outputs green text
 [sublimelinter-eslint-link]: https://packagecontrol.io/packages/SublimeLinter-eslint
 [karabiner-keyboard-back-link]: https://github.com/pqrs-org/Karabiner-Elements/issues/2645
 [npm-package-colors-link]: https://github.com/Marak/colors.js
+[inquirer-link]: https://github.com/SBoudrias/Inquirer.js
