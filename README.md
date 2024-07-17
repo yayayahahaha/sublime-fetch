@@ -36,6 +36,8 @@
 > 位移螢幕: ctrl + shift + opt + arrow  
 > 回去原本的尺寸: ctrl + shift + opt + enter
 
+[Tweak](https://tweak-extension.com/): 簡潔好用的 Mock Data 用 Chrome 套件
+
 ## Karabiner Element 鍵盤鍵位修改程式
 
 複製資料夾即可
@@ -633,7 +635,6 @@ console.log(colors.green('hello')) // outputs green text
 > 重新整理 package.json 的方式  
 > 將當前 git commit 變成 javascript global variable 的方式: 放到 `window.__git_commit__` 等等  
 > git commit 前要做的事情? 或是 push 或 merge 前要做的事情: git hook?  
-> sublime text 好像有一個叫 better select 之類的東西? 像是可以雙向反白的  
 > host ? 用於綁架自己的網站的那個東東要怎麼設定  
 > ssh config 裡要幫 domain 命名或自動帶上金鑰的部分該怎麼處理  
 > 清理一下 sublime text user folder, 裡面累積太多奇怪的東西  
@@ -670,6 +671,7 @@ console.log(colors.green('hello')) // outputs green text
 > 開發一個 chrome 的套件: 取得所有 tabs 的資訊  
 > gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個  
 > 直接將 Sublime Text 的 User 資料夾改成再往上一層的 `Packages` 層級吧，多了一些像是 `Nodejs-adjust` 的異動要存起來  
+> openDialog 那種酷酷寫法的實作  
 > 創建更詳細的 sublime snippet 檔案: 在 js 的 `return { /* 這裡 */ }` 的宣告部分不用觸發 `cons`, 在該可觸發的地方才觸發等等
 
 [windicss-link]: https://windicss.org/
