@@ -585,6 +585,28 @@ Replace pattern: `你 $1 好!`
 
 > 由於有寫了一個客製化的 shortcut 用來快速前往路徑的關係，所以才需要在非選擇的情況下使用快捷鍵
 
+##### 讓 Nodejs 的 console.log 有顏色
+
+推薦直接使用 npm package [Colors][npm-package-colors-link]
+
+```bash
+pnpm install colors
+```
+
+比較簡易的話可以這樣寫
+
+```js
+require('colors')
+console.log('hello world'.red)
+```
+
+但由於上述寫法會異動到 String 的 prototype, 所以有其他比較安全的寫法
+
+```js
+const colors = require('colors/safe')
+console.log(colors.green('hello')) // outputs green text
+```
+
 ---
 
 ## TODO LIST
@@ -658,3 +680,4 @@ Replace pattern: `你 $1 好!`
 [sublimelinter-link]: https://packagecontrol.io/packages/SublimeLinter
 [sublimelinter-eslint-link]: https://packagecontrol.io/packages/SublimeLinter-eslint
 [karabiner-keyboard-back-link]: https://github.com/pqrs-org/Karabiner-Elements/issues/2645
+[npm-package-colors-link]: https://github.com/Marak/colors.js
