@@ -36,6 +36,8 @@
 > 位移螢幕: ctrl + shift + opt + arrow  
 > 回去原本的尺寸: ctrl + shift + opt + enter
 
+[Tweak](https://tweak-extension.com/): 簡潔好用的 Mock Data 用 Chrome 套件
+
 ## Karabiner Element 鍵盤鍵位修改程式
 
 複製資料夾即可
@@ -585,6 +587,32 @@ Replace pattern: `你 $1 好!`
 
 > 由於有寫了一個客製化的 shortcut 用來快速前往路徑的關係，所以才需要在非選擇的情況下使用快捷鍵
 
+##### 讓 Nodejs 的 console.log 有顏色
+
+推薦直接使用 npm package [Colors][npm-package-colors-link]
+
+```bash
+pnpm install colors
+```
+
+比較簡易的話可以這樣寫
+
+```js
+require('colors')
+console.log('hello world'.red)
+```
+
+但由於上述寫法會異動到 String 的 prototype, 所以有其他比較安全的寫法
+
+```js
+const colors = require('colors/safe')
+console.log(colors.green('hello')) // outputs green text
+```
+
+##### Nodejs 的 input, select, checkbox 等等的寫法
+
+推薦直接使用套件 [Inquirer][inquirer-link], 詳細使用方式可以參考 [這裡](./node-select-demo/index.js)
+
 ---
 
 ## TODO LIST
@@ -607,7 +635,6 @@ Replace pattern: `你 $1 好!`
 > 重新整理 package.json 的方式  
 > 將當前 git commit 變成 javascript global variable 的方式: 放到 `window.__git_commit__` 等等  
 > git commit 前要做的事情? 或是 push 或 merge 前要做的事情: git hook?  
-> sublime text 好像有一個叫 better select 之類的東西? 像是可以雙向反白的  
 > host ? 用於綁架自己的網站的那個東東要怎麼設定  
 > ssh config 裡要幫 domain 命名或自動帶上金鑰的部分該怎麼處理  
 > 清理一下 sublime text user folder, 裡面累積太多奇怪的東西  
@@ -641,10 +668,10 @@ Replace pattern: `你 $1 好!`
 > 重新看一次 vue3  
 > git config 的各種像是查閱等等的方式  
 > window.history.replaceState  
-> nodejs select + 多選 功能, (Y/n) 功能: 可以寫成 snippet 之類的  
 > 開發一個 chrome 的套件: 取得所有 tabs 的資訊  
 > gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個  
 > 直接將 Sublime Text 的 User 資料夾改成再往上一層的 `Packages` 層級吧，多了一些像是 `Nodejs-adjust` 的異動要存起來  
+> openDialog 那種酷酷寫法的實作  
 > 創建更詳細的 sublime snippet 檔案: 在 js 的 `return { /* 這裡 */ }` 的宣告部分不用觸發 `cons`, 在該可觸發的地方才觸發等等
 
 [windicss-link]: https://windicss.org/
@@ -658,3 +685,5 @@ Replace pattern: `你 $1 好!`
 [sublimelinter-link]: https://packagecontrol.io/packages/SublimeLinter
 [sublimelinter-eslint-link]: https://packagecontrol.io/packages/SublimeLinter-eslint
 [karabiner-keyboard-back-link]: https://github.com/pqrs-org/Karabiner-Elements/issues/2645
+[npm-package-colors-link]: https://github.com/Marak/colors.js
+[inquirer-link]: https://github.com/SBoudrias/Inquirer.js
