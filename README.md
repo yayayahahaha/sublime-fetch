@@ -673,6 +673,7 @@ console.log(colors.green('hello')) // outputs green text
 > 直接將 Sublime Text 的 User 資料夾改成再往上一層的 `Packages` 層級吧，多了一些像是 `Nodejs-adjust` 的異動要存起來  
 > openDialog 那種酷酷寫法的實作  
 > prettier 升上 3 之後， sublime 這邊就會壞掉了..  
+> eslint 升上 9 之後， sublime 這邊也會壞掉...  
 > 創建更詳細的 sublime snippet 檔案: 在 js 的 `return { /* 這裡 */ }` 的宣告部分不用觸發 `cons`, 在該可觸發的地方才觸發等等
 
 [windicss-link]: https://windicss.org/
