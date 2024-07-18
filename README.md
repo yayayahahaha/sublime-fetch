@@ -674,7 +674,8 @@ console.log(colors.green('hello')) // outputs green text
 > openDialog 那種酷酷寫法的實作  
 > prettier 升上 3 之後， sublime 這邊就會壞掉了..  
 > eslint 升上 9 之後， sublime 這邊也會壞掉...  
-> 創建更詳細的 sublime snippet 檔案: 在 js 的 `return { /* 這裡 */ }` 的宣告部分不用觸發 `cons`, 在該可觸發的地方才觸發等等
+> 創建更詳細的 sublime snippet 檔案: 在 js 的 `return { /* 這裡 */ }` 的宣告部分不用觸發 `cons`, 在該可觸發的地方才觸發等等  
+> 在現有 color scheme 的基礎下繼續往上疊客製化 color scheme setting 的方式
 
 [windicss-link]: https://windicss.org/
 [tailwindcss-link]: https://tailwindcss.com/
