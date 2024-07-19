@@ -648,7 +648,7 @@ console.log(colors.green('hello')) // outputs green text
 > 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程  
 > CSS 用於 theme 改變的東西看一下: prefers-color-scheme  
 > 取代 padding 去撐 width size 的方法  
-> 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法  
+> 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法: object-fit  
 > 看看什麼是 node-gyp  
 > css grid 的 snippet, 還有 css flex 的也可以  
 > [opencv backup][opencv-link]  
