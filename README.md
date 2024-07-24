@@ -38,6 +38,9 @@
 
 [Tweak](https://tweak-extension.com/): 簡潔好用的 Mock Data 用 Chrome 套件
 
+[Raycast][raycast-link]: 用於取代 Mac Spotlight 的工具，他多了像是 Google Translation 和快速啟動 Bookmark 的功能等  
+同步的話可以直接登入 Google 帳號即可
+
 ## Karabiner Element 鍵盤鍵位修改程式
 
 複製資料夾即可
@@ -627,10 +630,10 @@ console.log(colors.green('hello')) // outputs green text
 ## TODO LIST
 
 > Sublime text 撰寫 api 文件的工具? 包含定義跳轉等  
-> jsDoc 的 正確 撰寫方式  
 > 撰寫自己的 tech center 吧  
 > eslint 自定義 plugin 的方法: 換行、空白、提示、vue properties 的順序等  
 > sublime text 使用 LSP 的方式  
+> sublime text 的 LSP 在 `.vue` 裡如果 import 的 path 沒有後綴、或是是使用 folder/index.vue 的話會跳不過去該怎麼處理  
 > pnpm 如果在安裝的時候當前目錄下沒有 package.json 的話東西會去哪裡?  
 > pnpm 的快取檔案在哪裡?  
 > pnpm 的包 global 到底安裝到哪裡去了? 這部分也要備份會比較好? 還是就按照一步一步再去安裝好像也沒有不行
@@ -648,7 +651,6 @@ console.log(colors.green('hello')) // outputs green text
 > mono repo 用的什麼 bazel 這東西可以看一下? 他可以用 npm 安裝一個叫 bazelisk 的東西  
 > -> 不知道裝到哪裡去了、也不知道怎麼移除，這些可能得留意  
 > javascript 精度的那個問題， CJ 花了一些時間介紹的那個  
-> 撰寫 [raycast][raycast-link] 的安裝部分，應該還會有 plugin 同步的問題之類的  
 > 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程  
 > CSS 用於 theme 改變的東西看一下: prefers-color-scheme  
 > 取代 padding 去撐 width size 的方法  
@@ -657,9 +659,7 @@ console.log(colors.green('hello')) // outputs green text
 > css grid 的 snippet, 還有 css flex 的也可以  
 > [opencv backup][opencv-link]  
 > 練習一下各種 es6 的 class 場景 [reference][es6-class-senario-link]  
-> css 的 prefers-color-scheme 要怎麼作用  
 > 看看 npm 的 `corepack` 是什麼  
-> sublime text 的 LSP 在 `.vue` 裡如果 import 的 path 沒有後綴、或是是使用 folder/index.vue 的話會跳不過去該怎麼處理  
 > serverless 的部署方式?  
 > spa 靜態專案部署到 github 上的方式  
 > nuxt 有提供 server 功能了，可以玩的東西更多了 w  
