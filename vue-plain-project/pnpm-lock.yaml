@@ -11,6 +11,9 @@ dependencies:
   vue:
     specifier: ^3.4.31
     version: 3.4.33
+  vue-router:
+    specifier: ^4.4.0
+    version: 4.4.0(vue@3.4.33)
   vuex:
     specifier: ^4.1.0
     version: 4.1.0(vue@3.4.33)
@@ -1342,6 +1345,15 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /vue-router@4.4.0(vue@3.4.33):
+    resolution: {integrity: sha512-HB+t2p611aIZraV2aPSRNXf0Z/oLZFrlygJm+sZbdJaW6lcFqEDQwnzUBXn+DApw+/QzDU/I9TeWx9izEjTmsA==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': 6.6.3
+      vue: 3.4.33
+    dev: false
 
   /vue@3.4.33:
     resolution: {integrity: sha512-VdMCWQOummbhctl4QFMcW6eNtXHsFyDlX60O/tsSQuCcuDOnJ1qPOhhVla65Niece7xq/P2zyZReIO5mP+LGTQ==}
