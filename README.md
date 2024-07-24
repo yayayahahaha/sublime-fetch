@@ -669,7 +669,6 @@ console.log(colors.green('hello')) // outputs green text
 > 取代 padding 去撐 width size 的方法  
 > 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法: object-fit  
 > 看看什麼是 node-gyp  
-> css grid 的 snippet, 還有 css flex 的也可以  
 > [opencv backup][opencv-link]  
 > 練習一下各種 es6 的 class 場景 [reference][es6-class-senario-link]  
 > 看看 npm 的 `corepack` 是什麼  
