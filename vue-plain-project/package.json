@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "prettier": "2",
+    "sass": "^1.77.8",
     "vue": "^3.4.31",
     "vue-router": "^4.4.0",
     "vuex": "^4.1.0"

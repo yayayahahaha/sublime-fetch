@@ -1,5 +1,7 @@
 <template>
-  <h1>This is {{ $options.name }} Page</h1>
+  <h1>
+    This is <span>{{ $options.name }}</span> Page
+  </h1>
   <router-link to="/about">about</router-link>
 </template>
 
@@ -8,3 +10,13 @@ export default {
   name: 'HomeView',
 }
 </script>
+
+<style lang="scss" scoped>
+h1 {
+  text-decoration: underline;
+
+  span {
+    text-decoration: line-through;
+  }
+}
+</style>
