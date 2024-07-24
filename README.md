@@ -613,6 +613,15 @@ console.log(colors.green('hello')) // outputs green text
 
 推薦直接使用套件 [Inquirer][inquirer-link], 詳細使用方式可以參考 [這裡](./node-select-demo/index.js)
 
+##### 快速創建一個 vite + vue3 + vue-router + vuex + windicss + eslint + prettier 的方法
+
+如果只要單純用 vite 起專案: `pnpm create vite`  
+如果只要單純的起 vue 的專案: `pnpm create vue`  
+如果要比較複雜的，就直接複製這個 repo 裡的 `vue-plain-project` 整個 project 出去吧
+
+> [windicss][windicss-link]  
+> [tailwindcss][tailwindcss-link]
+
 ---
 
 ## TODO LIST
@@ -625,10 +634,7 @@ console.log(colors.green('hello')) // outputs green text
 > pnpm 如果在安裝的時候當前目錄下沒有 package.json 的話東西會去哪裡?  
 > pnpm 的快取檔案在哪裡?  
 > pnpm 的包 global 到底安裝到哪裡去了? 這部分也要備份會比較好? 還是就按照一步一步再去安裝好像也沒有不行
-> vue3 + vite + [windicss][windicss-link]/[tailwindcss][tailwindcss-link] 相關的各種設定等  
-> -> 要單純的 vite + vue + typescript 的話，只要 `pnpm create vite` 然後照著走就可以了，超方便  
-> -> 但還是要看一下 vue router 、 vuex 或 [pinia][pinia-link] 那些東西該怎麼安裝之類的  
-> -> 透過指令 or 其他方式快速建成一個 vite + vue + router + eslint + prettier + gitignore 等等等等等的資料夾結構  
+> 寫個 storybook  
 > 客製化的 vite plugins  
 > 試試看 telport, vue3 的一個概念, 作用於想把 dialog 的層級拉到動 body 等的這種需求會用到  
 > 搞懂 vue2/3 custom component 的 v-model 概念 + 實作  
