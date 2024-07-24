@@ -114,3 +114,28 @@ echo "\n# [額外訊息]" >> "$COMMIT_MSG_FILE"
 ```
 
 即可透過撰寫 shell 檔案來決定要呈現什麼樣的訊息在 commit message 裡
+
+### 單獨 clone 一個 commit 的方式
+
+由於 repo 的大小可能大到無法一次 clone 下來，或是會花太多時間  
+所以有時候會需要用到淺層複製
+
+```bash
+git clone --depth 1 <repository-url>
+```
+
+在這樣之後，也可以透過類似的方式逐步取得所有的 git commits
+
+```bash
+git fetch --depth=10
+
+git fetch --shallow-since="2024-01-01"
+
+git fetch --shallow-exclude=<commit-hash>
+```
+
+或是直接把剩下的全都拉回來
+
+```bash
+git fetch --unshallow
+```

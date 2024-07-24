@@ -647,8 +647,6 @@ console.log(colors.green('hello')) // outputs green text
 > zsh 有哪些好用 plugins  
 > mono repo 用的什麼 bazel 這東西可以看一下? 他可以用 npm 安裝一個叫 bazelisk 的東西  
 > -> 不知道裝到哪裡去了、也不知道怎麼移除，這些可能得留意  
-> git 單獨 clone 一個 commit 的方式 / 單獨 clone 後，要把其他的部分也 clone 回來的方式  
-> -> 這個 Alex.C 有貼一個 stackoverflow 了，try try  
 > javascript 精度的那個問題， CJ 花了一些時間介紹的那個  
 > 撰寫 [raycast][raycast-link] 的安裝部分，應該還會有 plugin 同步的問題之類的  
 > 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程  
