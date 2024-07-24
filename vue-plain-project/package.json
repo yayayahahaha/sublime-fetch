@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "prettier": "2",
-    "vue": "^3.4.31"
+    "vue": "^3.4.31",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.7.0",
