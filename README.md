@@ -329,6 +329,21 @@ pnpm create @eslint/config
 
 > 基本上如果沒有極度客製化的需求，用指令創建出來的 eslint 就可以 cover 絕大部分的需求
 
+### 關於 LSP
+
+> language server protocol  
+> 使用 vscode 的人很常誤會他們的保存會自動除錯是 eslint, 但很督說後其實是 LSP 在幫他們處理這部分。  
+> https://en.wikipedia.org/wiki/Language_Server_Protocol
+
+LSP 除了除錯以外，還包含了像是 F12 可以跳轉到定義的 variable 或是 import 的檔案等等功能。  
+還有使用 `cmd + shift + o` 可以叫出所謂的 `outline` 的功能: 透過樹狀結構跳轉到指定的區塊等
+
+Sublime Text 要安裝使用的話就是裝 [LSP][lsp-link] 作為主要的套件，  
+接著，安裝如 [LSP-vue][lsp-vue-link] 或是 [LSP-typescript][lsp-typescript-link] 等等，就會有作用了  
+每一個環境的 lsp 套件都會有各自的設定檔，已經有在安裝流程裡面了
+
+> TODO sublime text 的 LSP 在 `.vue` 裡如果 import 的 path 沒有後綴、或是是使用 folder/index.vue 的話會跳不過去該怎麼處理
+
 ### rc 相關設定
 
 先執行此腳本，可以完成大部分
@@ -632,8 +647,6 @@ console.log(colors.green('hello')) // outputs green text
 > Sublime text 撰寫 api 文件的工具? 包含定義跳轉等  
 > 撰寫自己的 tech center 吧  
 > eslint 自定義 plugin 的方法: 換行、空白、提示、vue properties 的順序等  
-> sublime text 使用 LSP 的方式  
-> sublime text 的 LSP 在 `.vue` 裡如果 import 的 path 沒有後綴、或是是使用 folder/index.vue 的話會跳不過去該怎麼處理  
 > pnpm 如果在安裝的時候當前目錄下沒有 package.json 的話東西會去哪裡?  
 > pnpm 的快取檔案在哪裡?  
 > pnpm 的包 global 到底安裝到哪裡去了? 這部分也要備份會比較好? 還是就按照一步一步再去安裝好像也沒有不行
@@ -694,3 +707,6 @@ console.log(colors.green('hello')) // outputs green text
 [karabiner-keyboard-back-link]: https://github.com/pqrs-org/Karabiner-Elements/issues/2645
 [npm-package-colors-link]: https://github.com/Marak/colors.js
 [inquirer-link]: https://github.com/SBoudrias/Inquirer.js
+[lsp-link]: https://packagecontrol.io/packages/LSP
+[lsp-vue-link]: https://packagecontrol.io/packages/LSP-vue
+[lsp-typescript-link]: https://packagecontrol.io/packages/LSP-typescript
