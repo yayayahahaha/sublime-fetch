@@ -38,6 +38,9 @@
 
 [Tweak](https://tweak-extension.com/): 簡潔好用的 Mock Data 用 Chrome 套件
 
+[Raycast][raycast-link]: 用於取代 Mac Spotlight 的工具，他多了像是 Google Translation 和快速啟動 Bookmark 的功能等  
+同步的話可以直接登入 Google 帳號即可
+
 ## Karabiner Element 鍵盤鍵位修改程式
 
 複製資料夾即可
@@ -325,6 +328,21 @@ pnpm create @eslint/config
 ##### 推薦安裝的 eslint plugins
 
 > 基本上如果沒有極度客製化的需求，用指令創建出來的 eslint 就可以 cover 絕大部分的需求
+
+### 關於 LSP
+
+> language server protocol  
+> 使用 vscode 的人很常誤會他們的保存會自動除錯是 eslint, 但很督說後其實是 LSP 在幫他們處理這部分。  
+> https://en.wikipedia.org/wiki/Language_Server_Protocol
+
+LSP 除了除錯以外，還包含了像是 F12 可以跳轉到定義的 variable 或是 import 的檔案等等功能。  
+還有使用 `cmd + shift + o` 可以叫出所謂的 `outline` 的功能: 透過樹狀結構跳轉到指定的區塊等
+
+Sublime Text 要安裝使用的話就是裝 [LSP][lsp-link] 作為主要的套件，  
+接著，安裝如 [LSP-vue][lsp-vue-link] 或是 [LSP-typescript][lsp-typescript-link] 等等，就會有作用了  
+每一個環境的 lsp 套件都會有各自的設定檔，已經有在安裝流程裡面了
+
+> TODO sublime text 的 LSP 在 `.vue` 裡如果 import 的 path 沒有後綴、或是是使用 folder/index.vue 的話會跳不過去該怎麼處理
 
 ### rc 相關設定
 
@@ -626,62 +644,70 @@ console.log(colors.green('hello')) // outputs green text
 
 ## TODO LIST
 
+### TODO: Sublime Text
+
 > Sublime text 撰寫 api 文件的工具? 包含定義跳轉等  
-> jsDoc 的 正確 撰寫方式  
-> 撰寫自己的 tech center 吧  
-> eslint 自定義 plugin 的方法: 換行、空白、提示、vue properties 的順序等  
-> sublime text 使用 LSP 的方式  
-> pnpm 如果在安裝的時候當前目錄下沒有 package.json 的話東西會去哪裡?  
-> pnpm 的快取檔案在哪裡?  
-> pnpm 的包 global 到底安裝到哪裡去了? 這部分也要備份會比較好? 還是就按照一步一步再去安裝好像也沒有不行
-> 寫個 storybook  
+> 清理一下 sublime text user folder, 裡面累積太多奇怪的東西  
+> 直接將 Sublime Text 的 User 資料夾改成再往上一層的 `Packages` 層級吧，多了一些像是 `Nodejs-adjust` 的異動要存起來  
+> 創建更詳細的 sublime snippet 檔案: 在 js 的 `return { /* 這裡 */ }` 的宣告部分不用觸發 `cons`, 在該可觸發的地方才觸發等等  
+> 在現有 color scheme 的基礎下繼續往上疊客製化 color scheme setting 的方式  
+> 將 color picker 的 shortcut 移除，改為只靠 panel 呼叫即可。移除後的 shortcut 可以給 git change branch  
+> prettier 升上 3 之後， sublime text 這邊就會壞掉了..  
+> eslint 升上 9 之後， sublime text 這邊也會壞掉...
+
+### TODO: Git
+
+> 將當前 git commit 變成 javascript global variable 的方式: 放到 `window.__git_commit__` 等等  
+> git commit 前要做的事情? 或是 push 或 merge 前要做的事情: git hook?  
+> spa 靜態專案部署到 github 上的方式  
+> 排查: git detected dubious ownership in repository  
+> git config 的各種像是查閱等等的方式  
+> gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個
+
+### TODO: Vue
+
 > 客製化的 vite plugins  
 > 試試看 telport, vue3 的一個概念, 作用於想把 dialog 的層級拉到動 body 等的這種需求會用到  
 > 搞懂 vue2/3 custom component 的 v-model 概念 + 實作  
+> 寫個 storybook  
+> nuxt 有提供 server 功能了  
+> 重新看一次 vue3
+
+### TODO: NodeJs, Javascript and packages
+
+> pnpm 如果在安裝的時候當前目錄下沒有 package.json 的話東西會去哪裡?  
+> pnpm 的快取檔案在哪裡?  
+> pnpm 的包 global 到底安裝到哪裡去了? 這部分也要備份會比較好? 還是就按照一步一步再去安裝好像也沒有不行  
+> nodejs 的 `vm` package  
+> nodejs 的 `os` package 裡的 tmpdir  
 > 重新整理 package.json 的方式  
-> 將當前 git commit 變成 javascript global variable 的方式: 放到 `window.__git_commit__` 等等  
-> git commit 前要做的事情? 或是 push 或 merge 前要做的事情: git hook?  
-> host ? 用於綁架自己的網站的那個東東要怎麼設定  
+> 看看什麼是 node-gyp  
+> 練習一下各種 es6 的 class 場景 [reference][es6-class-senario-link]  
+> 看看 npm 的 `corepack` 是什麼  
+> 看一下 application/ld+json 這個東西  
+> 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程  
+> const resources = window.performance.getEntriesByType('resource'); // 酷東西  
+> window.history.replaceState  
+> eslint 自定義 plugin 的方法: 換行、空白、提示、vue properties 的順序等
+
+### TODO: CSS
+
+> CSS 用於 theme 改變的東西看一下: prefers-color-scheme  
+> 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法: object-fit  
+> 取代 padding 去撐 width size 的方法
+
+### TODO: Others
+
+> 用於綁架自己的網站的那個東東要怎麼設定: host?  
 > ssh config 裡要幫 domain 命名或自動帶上金鑰的部分該怎麼處理  
-> 清理一下 sublime text user folder, 裡面累積太多奇怪的東西  
 > zsh 有哪些好用 plugins  
 > mono repo 用的什麼 bazel 這東西可以看一下? 他可以用 npm 安裝一個叫 bazelisk 的東西  
 > -> 不知道裝到哪裡去了、也不知道怎麼移除，這些可能得留意  
-> git 單獨 clone 一個 commit 的方式 / 單獨 clone 後，要把其他的部分也 clone 回來的方式  
-> -> 這個 Alex.C 有貼一個 stackoverflow 了，try try  
 > javascript 精度的那個問題， CJ 花了一些時間介紹的那個  
-> 撰寫 [raycast][raycast-link] 的安裝部分，應該還會有 plugin 同步的問題之類的  
-> 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程  
-> CSS 用於 theme 改變的東西看一下: prefers-color-scheme  
-> 取代 padding 去撐 width size 的方法  
-> 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法: object-fit  
-> 看看什麼是 node-gyp  
-> css grid 的 snippet, 還有 css flex 的也可以  
 > [opencv backup][opencv-link]  
-> 練習一下各種 es6 的 class 場景 [reference][es6-class-senario-link]  
-> css 的 prefers-color-scheme 要怎麼作用  
-> 看看 npm 的 `corepack` 是什麼  
-> sublime text 的 LSP 在 `.vue` 裡如果 import 的 path 沒有後綴、或是是使用 folder/index.vue 的話會跳不過去該怎麼處理  
 > serverless 的部署方式?  
-> spa 靜態專案部署到 github 上的方式  
-> nuxt 有提供 server 功能了，可以玩的東西更多了 w  
-> 看一下 application/ld+json 這個東西  
-> const resources = window.performance.getEntriesByType('resource'); // 酷東西  
 > zip 壓縮的時候出現錯誤 zip warning: Local Entry CRC does not match CD  
-> nodejs 的 `vm` package  
-> nodejs 的 `os` package 裡的 tmpdir  
-> 排查: git detected dubious ownership in repository  
-> 重新看一次 vue3  
-> git config 的各種像是查閱等等的方式  
-> window.history.replaceState  
-> 開發一個 chrome 的套件: 取得所有 tabs 的資訊  
-> gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個  
-> 直接將 Sublime Text 的 User 資料夾改成再往上一層的 `Packages` 層級吧，多了一些像是 `Nodejs-adjust` 的異動要存起來  
-> openDialog 那種酷酷寫法的實作  
-> prettier 升上 3 之後， sublime 這邊就會壞掉了..  
-> eslint 升上 9 之後， sublime 這邊也會壞掉...  
-> 創建更詳細的 sublime snippet 檔案: 在 js 的 `return { /* 這裡 */ }` 的宣告部分不用觸發 `cons`, 在該可觸發的地方才觸發等等  
-> 在現有 color scheme 的基礎下繼續往上疊客製化 color scheme setting 的方式
+> 開發一個 chrome 的套件: 取得所有 tabs 的資訊
 
 [windicss-link]: https://windicss.org/
 [tailwindcss-link]: https://tailwindcss.com/
@@ -696,3 +722,6 @@ console.log(colors.green('hello')) // outputs green text
 [karabiner-keyboard-back-link]: https://github.com/pqrs-org/Karabiner-Elements/issues/2645
 [npm-package-colors-link]: https://github.com/Marak/colors.js
 [inquirer-link]: https://github.com/SBoudrias/Inquirer.js
+[lsp-link]: https://packagecontrol.io/packages/LSP
+[lsp-vue-link]: https://packagecontrol.io/packages/LSP-vue
+[lsp-typescript-link]: https://packagecontrol.io/packages/LSP-typescript
