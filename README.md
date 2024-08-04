@@ -707,7 +707,8 @@ console.log(colors.green('hello')) // outputs green text
 > [opencv backup][opencv-link]  
 > serverless 的部署方式?  
 > zip 壓縮的時候出現錯誤 zip warning: Local Entry CRC does not match CD  
-> 開發一個 chrome 的套件: 取得所有 tabs 的資訊
+> 開發一個 chrome 的套件: 取得所有 tabs 的資訊  
+> 更新一下 keychron k7 max 的文件: https://launcher.keychron.com/
 
 [windicss-link]: https://windicss.org/
 [tailwindcss-link]: https://tailwindcss.com/
