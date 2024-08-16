@@ -653,7 +653,7 @@ console.log(colors.green('hello')) // outputs green text
 > 在現有 color scheme 的基礎下繼續往上疊客製化 color scheme setting 的方式  
 > 將 color picker 的 shortcut 移除，改為只靠 panel 呼叫即可。移除後的 shortcut 可以給 git change branch  
 > prettier 升上 3 之後， sublime text 這邊就會壞掉了..  
-> eslint 升上 9 之後， sublime text 這邊也會壞掉...
+> eslint 升上 9 之後， sublime text 雖然可以顯示錯誤，卻沒辦法自動修復
 
 ### TODO: Git
 
