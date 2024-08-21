@@ -653,7 +653,7 @@ console.log(colors.green('hello')) // outputs green text
 > 在現有 color scheme 的基礎下繼續往上疊客製化 color scheme setting 的方式  
 > 將 color picker 的 shortcut 移除，改為只靠 panel 呼叫即可。移除後的 shortcut 可以給 git change branch  
 > prettier 升上 3 之後， sublime text 這邊就會壞掉了..  
-> eslint 升上 9 之後， sublime text 這邊也會壞掉...
+> eslint 升上 9 之後， sublime text 這邊也會壞掉, 看看 fix 的部分要不要改成執行 terminal 腳本之類的? 但感覺會很慢
 
 ### TODO: Git
 
@@ -708,7 +708,8 @@ console.log(colors.green('hello')) // outputs green text
 > serverless 的部署方式?  
 > zip 壓縮的時候出現錯誤 zip warning: Local Entry CRC does not match CD  
 > 開發一個 chrome 的套件: 取得所有 tabs 的資訊  
-> 更新一下 keychron k7 max 的文件: https://launcher.keychron.com/
+> 更新一下 keychron k7 max 的文件: https://launcher.keychron.com/  
+> 清理一下電腦的 wonder 資料夾吧，有點不 wonder 了
 
 [windicss-link]: https://windicss.org/
 [tailwindcss-link]: https://tailwindcss.com/
