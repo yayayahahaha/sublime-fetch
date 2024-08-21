@@ -709,6 +709,7 @@ console.log(colors.green('hello')) // outputs green text
 > zip 壓縮的時候出現錯誤 zip warning: Local Entry CRC does not match CD  
 > 開發一個 chrome 的套件: 取得所有 tabs 的資訊  
 > 更新一下 keychron k7 max 的文件: https://launcher.keychron.com/  
+> 還有如果是有 touchbar 的 MacBook 的話，Fn 的行為會比沒有的多打一個勾: https://superuser.com/questions/1755750/how-can-i-toggle-between-fn-and-function-f-keys-on-mac  
 > 清理一下電腦的 wonder 資料夾吧，有點不 wonder 了
 
 [windicss-link]: https://windicss.org/

@@ -29,6 +29,8 @@
     s = "!GIT_EDITOR=\"subl -n -w\" git " # 透過 sublime text 3 開啟 git editor
     pp = !"git push origin -u $(git branch --show-current)"
 
+    cc = "!git checkout $(git rev-parse HEAD)"
+
 [merge]
     ff = false
 
