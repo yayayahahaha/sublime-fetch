@@ -1,0 +1,107 @@
+# color
+Black="\033[0;30m"
+DarkGray="\033[1;30m"
+Red="\033[0;31m"
+LightRed="\033[1;31m"
+Green="\033[0;32m"
+LightGreen="\033[1;32m"
+Orange="\033[0;33m"
+Yellow="\033[1;33m"
+Blue="\033[0;34m"
+LightBlue="\033[1;34m"
+Purple="\033[0;35m"
+LightPurple="\033[1;35m"
+Cyan="\033[0;36m"
+LightCyan="\033[1;36m"
+LightGray="\033[0;37m"
+White="\033[1;37m"
+NC="\033[0m"
+
+# BTSE frontend project eslit start
+# 找出 staged 的檔案，然後根據 ext 執行對應的 lint function
+vue_staged_files=$(git diff --staged --name-only -- \*.vue | tr '\n' ' ' | sed 's/ $//')
+js_staged_files=$(git diff --staged --name-only -- \*.js | tr '\n' ' ' | sed 's/ $//')
+jsx_staged_files=$(git diff --staged --name-only -- \*.jsx | tr '\n' ' ' | sed 's/ $//')
+less_staged_files=$(git diff --staged --name-only -- \*.less | tr '\n' ' ' | sed 's/ $//')
+
+eslint_files=$"${vue_staged_files} ${js_staged_files} ${jsx_staged_files}"
+stylelint_files=$"${vue_staged_files} ${less_staged_files}"
+echo "${LightBlue}===== 執行 eslint =====${NC}"
+if [[ "$eslint_files" =~ ^[[:space:]]*$ ]]; then
+  echo '> 沒有需要 eslint 檢查的檔案'
+else
+  npx eslint $eslint_files --max-warnings=0 --no-ignore
+fi
+eslint_result=$(echo $?)
+echo '> eslint 檢查結束'
+echo
+
+echo "${LightBlue}===== 執行 stylelint =====${NC}"
+if [[ "$stylelint_files" =~ ^[[:space:]]*$ ]]; then
+  echo '> 沒有需要 stylelint 檢查的檔案'
+else
+  npx stylelint $stylelint_files
+fi
+stylelint_result=$(echo $?)
+echo '> stylelint 檢查結束'
+
+echo
+if [[ $eslint_result == 0 && $stylelint_result == 0 ]]; then
+  echo "${LightGreen}過了唷，ㄏㄏ${NC}"
+else
+  echo "${LightRed}沒過，ㄎㄎ${NC}"
+  exit 1
+fi
+echo
+# BTSE frontend project eslint end
+
+# Git commit add Jira ID
+COMMIT_MSG_FILE=$1
+# 'commit' 代表正在 ammend
+# message 代表在 -m 或是 squash 或是 rebase-continue
+# template 代表使用了模板
+COMMIT_SOURCE=$2 # commit, message(-m), template, squash, merge, rebase
+BRANCH_NAME=$(git branch --show-current)
+
+# 取出 jira 的單號 + 變成大寫
+JIRA_TICKET=$(echo $BRANCH_NAME | grep -oip "PLAT-\d*")
+JIRA_TICKET=$(echo $JIRA_TICKET | tr '[:lower:]' '[:upper:]')
+
+# 哪些 branch 會跳出「不該直接 commit」的警告
+if [ -z "$BRANCHES_SHOULD_NOT_BE_COMMIT" ]; then
+  BRANCHES_SHOULD_NOT_BE_COMMIT=(master develop dev staging)
+fi
+SHOULD_NOT_BE_COMMIT=$(printf "%s\n" "${BRANCHES_SHOULD_NOT_BE_COMMIT[@]}" | grep -c "^$BRANCH_NAME$")
+
+
+# 不論怎樣都先來個額外訊息
+echo "\n# [額外訊息] [$(date +'%Y-%m-%d %H:%M:%S')] [$(date +'%s')]" >> "$COMMIT_MSG_FILE"
+
+if [[ "$COMMIT_SOURCE" =~ ^(merge|rebase|commit)$ ]]; then
+  # 哪些行為不用額外添加 commit message, 像是 amend, rebase 和 merge 等都不用
+
+  echo "# 當前的 commit 行為是 ${COMMIT_SOURCE}, 跳過 prepare-commit-msg" >> "$COMMIT_MSG_FILE"
+
+elif ! [[ $SHOULD_NOT_BE_COMMIT -eq 0 ]]; then
+  # 如果想要直接 commit 在不該 commit 的 branch 上
+
+  echo "# 💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥" >> "$COMMIT_MSG_FILE"
+  echo "# 💥💥💥 你不該直接 commit 在 $BRANCH_NAME 上 💥💥💥" >> "$COMMIT_MSG_FILE"
+  echo "# 💥💥💥 你不該直接 commit 在 $BRANCH_NAME 上 💥💥💥" >> "$COMMIT_MSG_FILE"
+  echo "# 💥💥💥 你不該直接 commit 在 $BRANCH_NAME 上 💥💥💥" >> "$COMMIT_MSG_FILE"
+  echo "# 💥💥💥 你不該直接 commit 在 $BRANCH_NAME 上 💥💥💥" >> "$COMMIT_MSG_FILE"
+  echo "# 💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥" >> "$COMMIT_MSG_FILE"
+
+elif ! [[ -z $JIRA_TICKET ]]; then
+  # 添加吧
+
+  sed -i.bak -e "1s|^|[$JIRA_TICKET]|" $COMMIT_MSG_FILE
+  sed -i.bak -e "2s|^|\n\n|" $COMMIT_MSG_FILE
+  sed -i.bak -e "3s|^|From ${BRANCH_NAME}\n|" $COMMIT_MSG_FILE
+  echo "# COMMIT_SOURCE: ${COMMIT_SOURCE}" >> "$COMMIT_MSG_FILE"
+
+else
+  # 都沒有的話，還是寫一下額外的訊息
+  echo "# COMMIT_SOURCE: ${COMMIT_SOURCE}" >> "$COMMIT_MSG_FILE"
+
+fi
