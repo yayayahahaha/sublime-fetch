@@ -14,6 +14,7 @@
     gra2 = !"git gr2 --all" # 不知道哪天起無法 auto-complete branch name 了
     gra3 = !"git gr3 --all" # 不知道哪天起無法 auto-complete branch name 了
 
+    dfs = diff --staged
     df = diff HEAD^1 HEAD
     dft = difftool HEAD^1 HEAD
     dm = diff master...head
