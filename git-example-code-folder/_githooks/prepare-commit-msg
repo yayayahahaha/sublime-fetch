@@ -1,4 +1,55 @@
 # Git commit add Jira ID
+
+# color
+Black="\033[0;30m"
+DarkGray="\033[1;30m"
+Red="\033[0;31m"
+LightRed="\033[1;31m"
+Green="\033[0;32m"
+LightGreen="\033[1;32m"
+Orange="\033[0;33m"
+Yellow="\033[1;33m"
+Blue="\033[0;34m"
+LightBlue="\033[1;34m"
+Purple="\033[0;35m"
+LightPurple="\033[1;35m"
+Cyan="\033[0;36m"
+LightCyan="\033[1;36m"
+LightGray="\033[0;37m"
+White="\033[1;37m"
+NC="\033[0m"
+
+
+echo "${LightPurple}執行原專案內的 npx lint-staged${NC}"
+
+# 檢查要不要執行
+lint_folders=("frontend" "mjml_email_template")
+current_dir_name=$(basename $(pwd))
+do_lint=false
+for folder in "${lint_folders[@]}"; do
+  if [[ "$current_dir_name" == "$folder" ]]; then
+    do_lint=true
+  fi
+done
+if [[ $do_lint == false  ]]; then
+  echo "${Cyan}> 當前路徑是 $current_dir_name, 無需執行腳本☃️\n ${NC}"
+  exit 0
+fi
+
+npx lint-staged
+lintRes=$?
+
+if [[ $lintRes != 0 ]]; then
+  echo "${LightRed} 🚷 👹 🚷 👹 🚷 👹 🚷 👹 🚷 👹 🚷 \n${NC}"
+  echo "${LightRed}👹 🚷 👹 YOU SHALL NOT PASS 🚷 👹 🚷 \n${NC}"
+  echo "${LightRed} 🚷 👹 🚷 👹 🚷 👹 🚷 👹 🚷 👹 🚷 \n${NC}"
+  exit 1
+else
+  echo "${LightBlue}  🐋 🐳 🐋 🐳 🐋 🐳  \n${NC}"
+  echo "${LightBlue}🐋 🐳 🐋 好耶 🐳 🐋 🐳 \n${NC}"
+  echo "${LightBlue}  🐋 🐳 🐋 🐳 🐋 🐳 \n${NC}"
+fi
+
 COMMIT_MSG_FILE=$1
 # 'commit' 代表正在 ammend
 # message 代表在 -m 或是 squash 或是 rebase-continue
