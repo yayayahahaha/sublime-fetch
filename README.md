@@ -425,6 +425,34 @@ sublime.log_commands(True)
 接著執行操作都會有個 log, 但仍然不齊全  
 stackoverflow 上有在[討論](https://stackoverflow.com/questions/60804670/how-to-log-commands-that-are-run-through-command-palette-in-sublime-text-3)這件事情
 
+##### Sublime Text 想要把原本需透過指令才能使用的 command 綁上快捷鍵
+
+1. 透過 [PackageResourceViewer](https://github.com/skuroda/PackageResourceViewer) 的 `Extract Package` 指令  
+把打包好的 package 的 package 解開成比較好讀的模式
+
+2. 使用指令後，會在 `~/Library/Application Support/Sublime Text/Packages` 這層看到解開的 package 的資料夾  
+
+3. 直接在這個資料夾全域搜尋想要客製化 shortcut 的 command, 沒意外的話會找到類似這樣的東西
+
+```json
+// 檔名會像是 Default.sublime-commands 這種
+[
+// ...
+  {
+    "caption": "這裡是平常在 panel 輸入的指令",
+    "command": "這裡會是實際執行的 python command",
+    "args": "其他可能的 arguments"
+  },
+// ...
+]
+```
+
+4. 把上面找到的 `"command"` 的值複製起來, 就可以在 `preferences: Key Bindings` 裡直接使用了
+
+> 如果有 "args" 的話也要一併使用
+
+目前有的範例是 package `Git` 的 `Git: Change Branch`, 可以在 key bindings 那邊看到已經改好的東西
+
 ##### Sublime Text 第三方套件的除錯方式
 
 可以透過 [這裡](https://packagecontrol.io/docs/customizing_packages) 寫的方式來客製化除錯  
