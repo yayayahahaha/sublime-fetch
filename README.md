@@ -662,7 +662,8 @@ console.log(colors.green('hello')) // outputs green text
 > spa 靜態專案部署到 github 上的方式  
 > 排查: git detected dubious ownership in repository  
 > git config 的各種像是查閱等等的方式  
-> gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個
+> gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個  
+> Windows 和 Mac 電腦的換行符號問題 [參考](https://medium.com/@okesseko/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E9%96%8B%E7%99%BC-%E6%8F%9B%E8%A1%8C%E7%AC%A6%E8%99%9F-a313d96346c8)
 
 ### TODO: Vue
 
