@@ -14,6 +14,7 @@
     gra2 = !"git gr2 --all" # 不知道哪天起無法 auto-complete branch name 了
     gra3 = !"git gr3 --all" # 不知道哪天起無法 auto-complete branch name 了
 
+    ds = diff --staged
     df = diff HEAD^1 HEAD
     dft = difftool HEAD^1 HEAD
     dm = diff master...head
@@ -24,7 +25,7 @@
     cma = commit -am
     root-path = "rev-parse --show-toplevel"
     sw = switch
-    cb = !"git br --show-current | pbcopy" # git rev-parse --abbrev-ref HEAD
+    cb = !"git br --show-current | tr '\n' ' ' | sed 's/ $//' | pbcopy" # git rev-parse --abbrev-ref HEAD
     cs = !"git rev-parse HEAD | pbcopy"
     s = "!GIT_EDITOR=\"subl -n -w\" git " # 透過 sublime text 3 開啟 git editor
     pp = !"git push origin -u $(git branch --show-current)"
