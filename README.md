@@ -723,7 +723,11 @@ console.log(colors.green('hello')) // outputs green text
 
 > CSS 用於 theme 改變的東西看一下: prefers-color-scheme  
 > 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法: object-fit  
-> 取代 padding 去撐 width size 的方法
+> 取代 padding 去撐 width size 的方法  
+> linear-gradient 的四個角落漸層的方式 [參考](https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient)  
+> > background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+            linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
+            linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
 
 ### TODO: Others
 
