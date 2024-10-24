@@ -428,22 +428,22 @@ stackoverflow 上有在[討論](https://stackoverflow.com/questions/60804670/how
 ##### Sublime Text 想要把原本需透過指令才能使用的 command 綁上快捷鍵
 
 1. 透過 [PackageResourceViewer](https://github.com/skuroda/PackageResourceViewer) 的 `Extract Package` 指令  
-把打包好的 package 的 package 解開成比較好讀的模式
+   把打包好的 package 的 package 解開成比較好讀的模式
 
-2. 使用指令後，會在 `~/Library/Application Support/Sublime Text/Packages` 這層看到解開的 package 的資料夾  
+2. 使用指令後，會在 `~/Library/Application Support/Sublime Text/Packages` 這層看到解開的 package 的資料夾
 
 3. 直接在這個資料夾全域搜尋想要客製化 shortcut 的 command, 沒意外的話會找到類似這樣的東西
 
 ```json
 // 檔名會像是 Default.sublime-commands 這種
 [
-// ...
+  // ...
   {
     "caption": "這裡是平常在 panel 輸入的指令",
     "command": "這裡會是實際執行的 python command",
     "args": "其他可能的 arguments"
-  },
-// ...
+  }
+  // ...
 ]
 ```
 
@@ -717,15 +717,18 @@ console.log(colors.green('hello')) // outputs green text
 > 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程  
 > const resources = window.performance.getEntriesByType('resource'); // 酷東西  
 > window.history.replaceState  
-> eslint 自定義 plugin 的方法: 換行、空白、提示、vue properties 的順序等
+> eslint 自定義 plugin 的方法: 換行、空白、提示、vue properties 的順序等  
+> 家目錄下的 .pnp.cjs, .pnp.js 是什麼東西
 
 ### TODO: CSS
 
 > CSS 用於 theme 改變的東西看一下: prefers-color-scheme  
 > 不需要用 background-image 也可以讓 image 變成 contain 或是 cover 的方法: object-fit  
 > 取代 padding 去撐 width size 的方法  
-> linear-gradient 的四個角落漸層的方式 [參考](https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient)  
+> linear-gradient 的四個角落漸層的方式 [參考](https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient)
+>
 > > background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+
             linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
             linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
 
