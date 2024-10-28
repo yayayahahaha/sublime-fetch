@@ -17,6 +17,9 @@
     ds = diff --staged
     df = diff HEAD^1 HEAD
     dft = difftool HEAD^1 HEAD
+    dr = !"git diff origin/$(git branch --show-current)...$(git branch --show-current)"
+    drr = !"git diff $(git branch --show-current) origin/$(git branch --show-current)"
+
     dm = diff master...head
     ls = !"ls -al"
     brauth2 = "! for branch in `git branch -r | grep -v /HEAD`;do echo `git show --decorate --format=\"%an%C(bold green) %ai %ar by %an\" $branch | head -n 1` \t$branch; done | sort -r"
