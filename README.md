@@ -691,7 +691,8 @@ console.log(colors.green('hello')) // outputs green text
 > spa 靜態專案部署到 github 上的方式  
 > 排查: git detected dubious ownership in repository  
 > git config 的各種像是查閱等等的方式  
-> gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個
+> gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個  
+> Windows 和 Mac 電腦的換行符號問題 [參考](https://medium.com/@okesseko/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E9%96%8B%E7%99%BC-%E6%8F%9B%E8%A1%8C%E7%AC%A6%E8%99%9F-a313d96346c8)
 
 ### TODO: Vue
 
@@ -717,7 +718,8 @@ console.log(colors.green('hello')) // outputs green text
 > 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程  
 > const resources = window.performance.getEntriesByType('resource'); // 酷東西  
 > window.history.replaceState  
-> eslint 自定義 plugin 的方法: 換行、空白、提示、vue properties 的順序等
+> eslint 自定義 plugin 的方法: 換行、空白、提示、vue properties 的順序等  
+> 家目錄下的 .pnp.cjs, .pnp.js 是什麼東西
 
 ### TODO: CSS
 
@@ -745,6 +747,7 @@ console.log(colors.green('hello')) // outputs green text
 > 開發一個 chrome 的套件: 取得所有 tabs 的資訊  
 > 更新一下 keychron k7 max 的文件: https://launcher.keychron.com/  
 > 還有如果是有 touchbar 的 MacBook 的話，Fn 的行為會比沒有的多打一個勾: https://superuser.com/questions/1755750/how-can-i-toggle-between-fn-and-function-f-keys-on-mac  
+> 可以看到 code 的 token 的酷東西: https://astexplorer.net/  
 > 清理一下電腦的 wonder 資料夾吧，有點不 wonder 了
 
 [windicss-link]: https://windicss.org/
