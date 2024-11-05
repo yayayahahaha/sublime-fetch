@@ -414,6 +414,13 @@ plugins=(
 
 ### 其他文件
 
+##### 如果遇到按下鍵盤按鍵後會重複輸入(e.g. 只按一次 backspace 但執行了兩次刪除)
+
+可以試試看用 [Unshaky](https://github.com/aahung/Unshaky) 增加鍵盤的延遲，約莫 40ms 之類的  
+還沒有實際測試過
+
+> [參考文章](https://mrmad.com.tw/unshaky)
+
 ##### 在 SublimeText 的 console 顯示 log 的指令
 
 ```python
