@@ -434,7 +434,7 @@ stackoverflow 上有在[討論](https://stackoverflow.com/questions/60804670/how
 
 ##### Sublime Text 想要把原本需透過指令才能使用的 command 綁上快捷鍵
 
-1. 透過 [PackageResourceViewer](https://github.com/skuroda/PackageResourceViewer) 的 `Extract Package` 指令  
+1. 透過 [PackageResourceViewer][package-resource-viewer-link] 的 `Extract Package` 指令  
    把打包好的 package 的 package 解開成比較好讀的模式
 
 2. 使用指令後，會在 `~/Library/Application Support/Sublime Text/Packages` 這層看到解開的 package 的資料夾
@@ -471,6 +471,14 @@ stackoverflow 上有在[討論](https://stackoverflow.com/questions/60804670/how
 > 基本上就是直接複製一份、然後修改就可以了，對 package 的操作模式也和一般透過 `package control` 的方式一樣  
 > 例子: 將 Nodejs 套件裡的 snippet 裡後面全部的 `;` 都去除，就要修改他裡面的 `Nodejs.sublime-completions` 這個檔案  
 > 目前已經將他的 snippets 直接複製出來了，可以定期手動複製 + 修改來做更新，或是寫個 script 什麼的都可以
+
+###### 延伸: 把 [color picker][color-picker-package-link] 複製出來，釋放出被它綁架的快捷鍵
+
+由於之前 color-picker 的快捷鍵是 `cmd+shift+c`, 算是個很熱門的快捷鍵  
+就透過 [PackageResourceViewer][package-resource-viewer-link] 把 color-picker 解開，  
+再一樣把 git 的 package 解開後，看到裡面的 command, 然後把這個 command 綁上快捷鍵
+
+> 詳情可以看 SublimeText 的 KeyBindings, 裡面有寫註解
 
 ##### Iterm 裡的中文變成亂碼
 
@@ -692,7 +700,6 @@ console.log(colors.green('hello')) // outputs green text
 > 清理一下 sublime text user folder, 裡面累積太多奇怪的東西  
 > 直接將 Sublime Text 的 User 資料夾改成再往上一層的 `Packages` 層級吧，多了一些像是 `Nodejs-adjust` 的異動要存起來  
 > 在現有 color scheme 的基礎下繼續往上疊客製化 color scheme setting 的方式  
-> 將 color picker 的 shortcut 移除，改為只靠 panel 呼叫即可。移除後的 shortcut 可以給 git change branch  
 > prettier 升上 3 之後， sublime text 這邊就會壞掉了..  
 > eslint 升上 9 之後， sublime text 這邊也會壞掉, 看看 fix 的部分要不要改成執行 terminal 腳本之類的? 但感覺會很慢  
 > 如何調整 extension 的預設 LSP 的方式: typescrupt -> volar 這種
@@ -780,3 +787,5 @@ console.log(colors.green('hello')) // outputs green text
 [lsp-vue-link]: https://packagecontrol.io/packages/LSP-vue
 [lsp-typescript-link]: https://packagecontrol.io/packages/LSP-typescript
 [ast-wiki-link]: https://zh.wikipedia.org/zh-tw/%E6%8A%BD%E8%B1%A1%E8%AA%9E%E6%B3%95%E6%A8%B9
+[color-picker-package-link]: https://packagecontrol.io/packages/ColorPicker
+[package-resource-viewer-link]: https://github.com/skuroda/PackageResourceViewer
