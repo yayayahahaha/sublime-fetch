@@ -1,6 +1,7 @@
 ## 怎麼使用 karabiner
 
-> 用於重新綁定自己鍵盤的配置使用
+> 用於重新綁定自己鍵盤的配置使用  
+> 現在使用的 keychron max 更靈活了，可以參考 README 裡面的介紹
 
 網站: https://karabiner-elements.pqrs.org/
 
@@ -60,11 +61,11 @@
 
 #### 權限設定
 
-如果 Mac 預設找不到需要的權限的話，到下列這些地方找  
+如果 Mac 預設找不到需要的權限的話，到下列這些地方找
 
-- karabiner_grabber: `/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_grabber`  
+- karabiner_grabber: `/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_grabber`
 
-- karabiner_observer: `/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_observer`  
+- karabiner_observer: `/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_observer`
 
-- Karabiner-EventViewer: 在 `applicatoin 應用程式` 裡面就可以找到  
-> source https://github.com/pqrs-org/Karabiner-Elements/issues/1867
+- Karabiner-EventViewer: 在 `applicatoin 應用程式` 裡面就可以找到
+  > source https://github.com/pqrs-org/Karabiner-Elements/issues/1867

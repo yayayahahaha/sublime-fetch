@@ -692,6 +692,17 @@ console.log(colors.green('hello')) // outputs green text
 > [windicss][windicss-link]  
 > [tailwindcss][tailwindcss-link]
 
+##### Keychron 7 Max 的鍵位設定介紹
+
+請使用這個網站: https://launcher.keychron.com  
+和前幾代的 Keychron 7 相比， Max 版支援了 QMK/VIA, 可以更為靈活地客製化每個案件的行為  
+在連上實體線後訪問上面的網站，就可以透過各種 layer 的設定來設定相對應的按鍵要是什麼功能。
+
+目前自己最右排的設定，從上而下分別是 `delete`, `F4`, `fn2` 和 `right-control`  
+空白鍵右邊 3 顆的設定是 `right-cmd`, `fn1` 和 `right-option`  
+fn1 的功能是按著的話，最上排的數字鍵會變成 F1 ~ F12,  
+fn2 的功能是按著的話，最上排的數字鍵會變成 亮度、鍵盤亮度、音量等等
+
 ---
 
 ## TODO LIST
@@ -765,7 +776,6 @@ console.log(colors.green('hello')) // outputs green text
 > serverless 的部署方式?  
 > zip 壓縮的時候出現錯誤 zip warning: Local Entry CRC does not match CD  
 > 開發一個 chrome 的套件: 取得所有 tabs 的資訊  
-> 更新一下 keychron k7 max 的文件: https://launcher.keychron.com/  
 > 可以看到 code 的 token 的酷東西: https://astexplorer.net/  
 > 清理一下電腦的 wonder 資料夾吧，有點不 wonder 了
 
