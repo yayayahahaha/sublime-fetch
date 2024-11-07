@@ -139,3 +139,21 @@ git fetch --shallow-exclude=<commit-hash>
 ```bash
 git fetch --unshallow
 ```
+
+### Git config 相關指令
+
+##### 查閱全部的設定，從 global 到 project 全都列出來
+
+```bash
+git config --list
+```
+
+越下面的優先級越大，在 `~/.gitconfig` 裡的 `includeif` 是 **有** 順序性的，  
+如果直接在某個有 `.git` 資料夾底下下指令的話，會跑到 `.git/config` 裡面  
+可以在後面添加 `--global` 或 `--local` 等來看到指定範圍的設定
+
+##### 查看當前設定檔是從哪邊設定的
+
+```bash
+git config --show-origin --list
+```
