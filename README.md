@@ -17,6 +17,8 @@
    > Setting -> Keyboard -> Press and fold fn key to: Show Expanded Control Strip
 8. 快捷鍵: 勿擾模式(opt+s), app 清單(opt+q), spotlight/raycast 快捷鍵, 繁簡轉換, subWord 位移等
    > Setting -> Keyboard -> Keyboard shortcut
+9. 如果是有 touchbar 的 MacBook 的話，Fn 的行為會比沒有的多打一個勾
+   > https://superuser.com/questions/1755750/how-can-i-toggle-between-fn-and-function-f-keys-on-mac
 
 會根據不同的 Mac 型號 (如有沒有 touchbar 等) 有些不同
 
@@ -332,7 +334,7 @@ pnpm create @eslint/config
 ### 關於 LSP
 
 > language server protocol  
-> 使用 vscode 的人很常誤會他們的保存會自動除錯是 eslint, 但很督說後其實是 LSP 在幫他們處理這部分。  
+> 使用 vscode 的人很常誤會他們的保存會自動除錯是 eslint, 但多半其實是 LSP 處理了這部分。  
 > https://en.wikipedia.org/wiki/Language_Server_Protocol
 
 LSP 除了除錯以外，還包含了像是 F12 可以跳轉到定義的 variable 或是 import 的檔案等等功能。  
@@ -414,6 +416,13 @@ plugins=(
 
 ### 其他文件
 
+##### 如果遇到按下鍵盤按鍵後會重複輸入(e.g. 只按一次 backspace 但執行了兩次刪除)
+
+可以試試看用 [Unshaky](https://github.com/aahung/Unshaky) 增加鍵盤的延遲，約莫 40ms 之類的  
+還沒有實際測試過
+
+> [參考文章](https://mrmad.com.tw/unshaky)
+
 ##### 在 SublimeText 的 console 顯示 log 的指令
 
 ```python
@@ -427,7 +436,7 @@ stackoverflow 上有在[討論](https://stackoverflow.com/questions/60804670/how
 
 ##### Sublime Text 想要把原本需透過指令才能使用的 command 綁上快捷鍵
 
-1. 透過 [PackageResourceViewer](https://github.com/skuroda/PackageResourceViewer) 的 `Extract Package` 指令  
+1. 透過 [PackageResourceViewer][package-resource-viewer-link] 的 `Extract Package` 指令  
    把打包好的 package 的 package 解開成比較好讀的模式
 
 2. 使用指令後，會在 `~/Library/Application Support/Sublime Text/Packages` 這層看到解開的 package 的資料夾
@@ -464,6 +473,14 @@ stackoverflow 上有在[討論](https://stackoverflow.com/questions/60804670/how
 > 基本上就是直接複製一份、然後修改就可以了，對 package 的操作模式也和一般透過 `package control` 的方式一樣  
 > 例子: 將 Nodejs 套件裡的 snippet 裡後面全部的 `;` 都去除，就要修改他裡面的 `Nodejs.sublime-completions` 這個檔案  
 > 目前已經將他的 snippets 直接複製出來了，可以定期手動複製 + 修改來做更新，或是寫個 script 什麼的都可以
+
+###### 延伸: 把 [color picker][color-picker-package-link] 複製出來，釋放出被它綁架的快捷鍵
+
+由於之前 color-picker 的快捷鍵是 `cmd+shift+c`, 算是個很熱門的快捷鍵  
+就透過 [PackageResourceViewer][package-resource-viewer-link] 把 color-picker 解開，  
+再一樣把 git 的 package 解開後，看到裡面的 command, 然後把這個 command 綁上快捷鍵
+
+> 詳情可以看 SublimeText 的 KeyBindings, 裡面有寫註解
 
 ##### Iterm 裡的中文變成亂碼
 
@@ -633,6 +650,13 @@ Replace pattern: `你 $1 好!`
 
 > 由於有寫了一個客製化的 shortcut 用來快速前往路徑的關係，所以才需要在非選擇的情況下使用快捷鍵
 
+###### 延伸: 更細節的觸發位置
+
+像是想在 js 的 `return { /* 這裡 */ }` 的宣告部分不用觸發 `cons`, 在該可觸發的地方才觸發等等  
+由於目前 sublime 的 scope 選擇範圍還沒有像 eslint 那般有完整的 [AST][ast-wiki-link], 所以很遺憾無法實作
+
+> 2024/11/07
+
 ##### 讓 Nodejs 的 console.log 有顏色
 
 推薦直接使用 npm package [Colors][npm-package-colors-link]
@@ -668,6 +692,17 @@ console.log(colors.green('hello')) // outputs green text
 > [windicss][windicss-link]  
 > [tailwindcss][tailwindcss-link]
 
+##### Keychron 7 Max 的鍵位設定介紹
+
+請使用這個網站: https://launcher.keychron.com  
+和前幾代的 Keychron 7 相比， Max 版支援了 QMK/VIA, 可以更為靈活地客製化每個案件的行為  
+在連上實體線後訪問上面的網站，就可以透過各種 layer 的設定來設定相對應的按鍵要是什麼功能。
+
+目前自己最右排的設定，從上而下分別是 `delete`, `F4`, `fn2` 和 `right-control`  
+空白鍵右邊 3 顆的設定是 `right-cmd`, `fn1` 和 `right-option`  
+fn1 的功能是按著的話，最上排的數字鍵會變成 F1 ~ F12,  
+fn2 的功能是按著的話，最上排的數字鍵會變成 亮度、鍵盤亮度、音量等等
+
 ---
 
 ## TODO LIST
@@ -677,9 +712,7 @@ console.log(colors.green('hello')) // outputs green text
 > Sublime text 撰寫 api 文件的工具? 包含定義跳轉等  
 > 清理一下 sublime text user folder, 裡面累積太多奇怪的東西  
 > 直接將 Sublime Text 的 User 資料夾改成再往上一層的 `Packages` 層級吧，多了一些像是 `Nodejs-adjust` 的異動要存起來  
-> 創建更詳細的 sublime snippet 檔案: 在 js 的 `return { /* 這裡 */ }` 的宣告部分不用觸發 `cons`, 在該可觸發的地方才觸發等等  
 > 在現有 color scheme 的基礎下繼續往上疊客製化 color scheme setting 的方式  
-> 將 color picker 的 shortcut 移除，改為只靠 panel 呼叫即可。移除後的 shortcut 可以給 git change branch  
 > prettier 升上 3 之後， sublime text 這邊就會壞掉了..  
 > eslint 升上 9 之後， sublime text 這邊也會壞掉, 看看 fix 的部分要不要改成執行 terminal 腳本之類的? 但感覺會很慢  
 > 如何調整 extension 的預設 LSP 的方式: typescrupt -> volar 這種
@@ -687,10 +720,8 @@ console.log(colors.green('hello')) // outputs green text
 ### TODO: Git
 
 > 將當前 git commit 變成 javascript global variable 的方式: 放到 `window.__git_commit__` 等等  
-> git commit 前要做的事情? 或是 push 或 merge 前要做的事情: git hook?  
 > spa 靜態專案部署到 github 上的方式  
 > 排查: git detected dubious ownership in repository  
-> git config 的各種像是查閱等等的方式  
 > gitlab/github 的 CI/CD 的撰寫方式: `gitlab-ci.yml` 的那個  
 > Windows 和 Mac 電腦的換行符號問題 [參考](https://medium.com/@okesseko/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E9%96%8B%E7%99%BC-%E6%8F%9B%E8%A1%8C%E7%AC%A6%E8%99%9F-a313d96346c8)
 
@@ -718,7 +749,6 @@ console.log(colors.green('hello')) // outputs green text
 > 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程  
 > const resources = window.performance.getEntriesByType('resource'); // 酷東西  
 > window.history.replaceState  
-> eslint 自定義 plugin 的方法: 換行、空白、提示、vue properties 的順序等  
 > 家目錄下的 .pnp.cjs, .pnp.js 是什麼東西
 
 ### TODO: CSS
@@ -745,9 +775,6 @@ console.log(colors.green('hello')) // outputs green text
 > serverless 的部署方式?  
 > zip 壓縮的時候出現錯誤 zip warning: Local Entry CRC does not match CD  
 > 開發一個 chrome 的套件: 取得所有 tabs 的資訊  
-> 更新一下 keychron k7 max 的文件: https://launcher.keychron.com/  
-> 還有如果是有 touchbar 的 MacBook 的話，Fn 的行為會比沒有的多打一個勾: https://superuser.com/questions/1755750/how-can-i-toggle-between-fn-and-function-f-keys-on-mac  
-> 可以看到 code 的 token 的酷東西: https://astexplorer.net/  
 > 清理一下電腦的 wonder 資料夾吧，有點不 wonder 了
 
 [windicss-link]: https://windicss.org/
@@ -766,3 +793,6 @@ console.log(colors.green('hello')) // outputs green text
 [lsp-link]: https://packagecontrol.io/packages/LSP
 [lsp-vue-link]: https://packagecontrol.io/packages/LSP-vue
 [lsp-typescript-link]: https://packagecontrol.io/packages/LSP-typescript
+[ast-wiki-link]: https://zh.wikipedia.org/zh-tw/%E6%8A%BD%E8%B1%A1%E8%AA%9E%E6%B3%95%E6%A8%B9
+[color-picker-package-link]: https://packagecontrol.io/packages/ColorPicker
+[package-resource-viewer-link]: https://github.com/skuroda/PackageResourceViewer
