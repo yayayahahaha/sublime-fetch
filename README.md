@@ -334,7 +334,7 @@ pnpm create @eslint/config
 ### 關於 LSP
 
 > language server protocol  
-> 使用 vscode 的人很常誤會他們的保存會自動除錯是 eslint, 但很督說後其實是 LSP 在幫他們處理這部分。  
+> 使用 vscode 的人很常誤會他們的保存會自動除錯是 eslint, 但多半其實是 LSP 處理了這部分。  
 > https://en.wikipedia.org/wiki/Language_Server_Protocol
 
 LSP 除了除錯以外，還包含了像是 F12 可以跳轉到定義的 variable 或是 import 的檔案等等功能。  
@@ -749,7 +749,6 @@ fn2 的功能是按著的話，最上排的數字鍵會變成 亮度、鍵盤亮
 > 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程  
 > const resources = window.performance.getEntriesByType('resource'); // 酷東西  
 > window.history.replaceState  
-> eslint 自定義 plugin 的方法: 換行、空白、提示、vue properties 的順序等  
 > 家目錄下的 .pnp.cjs, .pnp.js 是什麼東西
 
 ### TODO: CSS
@@ -776,7 +775,6 @@ fn2 的功能是按著的話，最上排的數字鍵會變成 亮度、鍵盤亮
 > serverless 的部署方式?  
 > zip 壓縮的時候出現錯誤 zip warning: Local Entry CRC does not match CD  
 > 開發一個 chrome 的套件: 取得所有 tabs 的資訊  
-> 可以看到 code 的 token 的酷東西: https://astexplorer.net/  
 > 清理一下電腦的 wonder 資料夾吧，有點不 wonder 了
 
 [windicss-link]: https://windicss.org/

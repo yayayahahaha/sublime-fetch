@@ -1,6 +1,7 @@
 # 創建屬於自己的 eslint-plugins
 
-> 當前的 version: `^8.29.0`
+> 當前的 version: `^8.29.0`  
+> 寫完了，但只是搬移過來，還沒有實際嘗試 demo codes 有沒有 bug
 
 ### 基礎建設
 
@@ -107,3 +108,111 @@ module.exports = {
 
 > 這邊僅會介紹比較常用的部分，  
 > 詳細文件請參考[官網](https://eslint.org/docs/v8.x/extend/custom-rule-tutorial#the-custom-rule)
+
+程式碼會被 parser 轉換成 AST, 然後再透過撰寫解析 AST 的 code 來達到 eslint 要做的事情。  
+而解析後的 AST 長什麼樣子，可以透過 https://astexplorer.net/ 這個網站來看。  
+這邊以 js 先做例子:
+
+![](./readme-images/custom-eslint/ast-example.png)
+
+可以看到在經過 parser 的轉換後，每一個位子都會有對應的樹狀關係，這個關係就叫做 AST,  
+而在 eslint 的 rules 裡撰寫的就是這個 **名字**: `CallExpression` 就是 function call, `MemberExpression` 就是 object.key 等等  
+所以在上面的例子才會讓所有的 function call 都回報一個錯誤訊息。
+
+知道了這件事情之後，剩下的就是如何撰寫適合的邏輯了。
+
+#### 常見問題
+
+##### 怎麼回報錯誤?
+
+```js
+'error-report-demo': {
+  create(context) {
+    return {
+      CallExpression(node) {
+        context.report({ node, message: '這裡是錯誤訊息' })
+      },
+    }
+  }
+},
+```
+
+紅框框起來的範圍就是傳進去的 node 範圍，所以可以 selector 是 `CallExpression`, 但紅框是其 `node.parent` 之類的
+
+##### 自動修復
+
+自動修復要在 rules 除了 create 以外，多添加 meta 等訊息告訴 eslint 這個可以修,  
+這裡的例子是檢查 `<i18n-t></i18n-t>` 這個 `vue-component` 的 attributes 有沒有缺,  
+有的話自動補上
+
+```js
+module.exports = {
+  rules: {
+    'fix-demo': {
+      meta: {
+        fixable: 'code', // 這裡
+      },
+
+      create(context) {
+        const sourceCode = context.getSourceCode() // 用於取得原始碼的 constance
+
+        return context.parserServices.defineTemplateBodyVisitor({
+          // 找到檔案中的 <i18n-t></i18n-t>
+          'VElement[name="i18n-t"]'(node) {
+            // 檢查 <i18n-t></i18n-t> 的 startTag, 有沒有 key 是 global 然後 value 是 global 的屬性
+            const hasScopeAttr = node.startTag.attributes.some(
+              (attr) => attr.key.name === 'scope' && attr.value.value === 'global'
+            )
+
+            // 如果沒找到的話跳提示，同時提供修復的方式
+            if (!hasScopeAttr) {
+              return context.report({
+                node: node.startTag, // 讓紅框僅限於 start-tag 的位置
+                message: '這裡是錯誤訊息',
+
+                // 修復方式: 取出 node.startTag 的原始碼，然後在最後面添加需要的屬性
+                fix(fixer) {
+                  const code = sourceCode.getText(node.startTag)
+                  const computedCode = `${code.slice(0, -1)} scope="global">`
+
+                  // fixer 本身有提供許多 methods 可以使用, 詳見附註
+                  return fixer.replaceText(node.startTag, computedCode)
+                },
+              })
+            }
+          },
+        })
+      },
+    },
+  },
+}
+```
+
+> fixer 文件: https://eslint.org/docs/latest/extend/custom-rules#applying-fixes
+
+##### Vue 的 parser 是什麼?
+
+> https://eslint.vuejs.org/developer-guide/  
+> https://github.com/vuejs/vue-eslint-parser/blob/master/docs/ast.md
+
+Vue 的 template 和 script 用的 parser 是不一樣的，所以在 rule 裡的 `create` 要多加這層才可以取得對應的 AST 節點,  
+這邊用的 parser 是 [`vue-eslint-parser`](https://eslint.vuejs.org/)
+
+```js
+'my-vue-template-rule': {
+  create(context) {
+    return context.parserServices.defineTemplateBodyVisitor({
+
+      // 這裡就是一樣的了
+      CallExpression(node) { /* ... */ },
+
+      // 也可以透過這種方式直接找到 <my-component></my-component>
+      'VElement[name="my-component"]'(node) { /* ... */ }
+    })
+  }
+},
+```
+
+### Reference
+
+https://chihyang41.github.io/2021/06/29/AST-and-ESLint-Introduction-part-2/
