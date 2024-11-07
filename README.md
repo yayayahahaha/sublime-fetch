@@ -640,6 +640,13 @@ Replace pattern: `你 $1 好!`
 
 > 由於有寫了一個客製化的 shortcut 用來快速前往路徑的關係，所以才需要在非選擇的情況下使用快捷鍵
 
+###### 延伸: 更細節的觸發位置
+
+像是想在 js 的 `return { /* 這裡 */ }` 的宣告部分不用觸發 `cons`, 在該可觸發的地方才觸發等等  
+由於目前 sublime 的 scope 選擇範圍還沒有像 eslint 那般有完整的 [AST][ast-wiki-link], 所以很遺憾無法實作
+
+> 2024/11/07
+
 ##### 讓 Nodejs 的 console.log 有顏色
 
 推薦直接使用 npm package [Colors][npm-package-colors-link]
@@ -684,7 +691,6 @@ console.log(colors.green('hello')) // outputs green text
 > Sublime text 撰寫 api 文件的工具? 包含定義跳轉等  
 > 清理一下 sublime text user folder, 裡面累積太多奇怪的東西  
 > 直接將 Sublime Text 的 User 資料夾改成再往上一層的 `Packages` 層級吧，多了一些像是 `Nodejs-adjust` 的異動要存起來  
-> 創建更詳細的 sublime snippet 檔案: 在 js 的 `return { /* 這裡 */ }` 的宣告部分不用觸發 `cons`, 在該可觸發的地方才觸發等等  
 > 在現有 color scheme 的基礎下繼續往上疊客製化 color scheme setting 的方式  
 > 將 color picker 的 shortcut 移除，改為只靠 panel 呼叫即可。移除後的 shortcut 可以給 git change branch  
 > prettier 升上 3 之後， sublime text 這邊就會壞掉了..  
@@ -773,3 +779,4 @@ console.log(colors.green('hello')) // outputs green text
 [lsp-link]: https://packagecontrol.io/packages/LSP
 [lsp-vue-link]: https://packagecontrol.io/packages/LSP-vue
 [lsp-typescript-link]: https://packagecontrol.io/packages/LSP-typescript
+[ast-wiki-link]: https://zh.wikipedia.org/zh-tw/%E6%8A%BD%E8%B1%A1%E8%AA%9E%E6%B3%95%E6%A8%B9
