@@ -749,7 +749,8 @@ fn2 的功能是按著的話，最上排的數字鍵會變成 亮度、鍵盤亮
 > 從 browser 上取得一個 network 的 request 後可以快速透過 nodejs 復現 + 調整的流程  
 > const resources = window.performance.getEntriesByType('resource'); // 酷東西  
 > window.history.replaceState  
-> 家目錄下的 .pnp.cjs, .pnp.js 是什麼東西
+> 家目錄下的 .pnp.cjs, .pnp.js 是什麼東西  
+> js 新的那個 Proxy 是什麼東西
 
 ### TODO: CSS
 
@@ -774,7 +775,7 @@ fn2 的功能是按著的話，最上排的數字鍵會變成 亮度、鍵盤亮
 > [opencv backup][opencv-link]  
 > serverless 的部署方式?  
 > zip 壓縮的時候出現錯誤 zip warning: Local Entry CRC does not match CD  
-> 開發一個 chrome 的套件: 取得所有 tabs 的資訊  
+> 開發一個 chrome 的套件: 取得所有 tabs 的資訊: 已經有透過 GPT 寫好的範本了，還沒整理  
 > 清理一下電腦的 wonder 資料夾吧，有點不 wonder 了
 
 [windicss-link]: https://windicss.org/
