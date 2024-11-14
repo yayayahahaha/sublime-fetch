@@ -48,6 +48,7 @@ function generateQuery(sourceBranch, { projectId = PROJECT_ID_MAP.FRONTEND, targ
     'merge_request[target_project_id]': projectId,
     'merge_request[target_branch]': targetBranch,
     'merge_request[description]': '掛上 draft 避免誤觸',
+    'merge_request[assignee_ids][]': '397', // 這個是我自己
     'merge_request[title]': `Draft: ${title}` // 讓 PR 是 draft
   }
 
