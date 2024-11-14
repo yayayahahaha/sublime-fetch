@@ -47,6 +47,8 @@ function generateQuery(sourceBranch, { projectId = PROJECT_ID_MAP.FRONTEND, targ
     'merge_request[source_branch]': sourceBranch,
     'merge_request[target_project_id]': projectId,
     'merge_request[target_branch]': targetBranch,
+    'merge_request[description]': '掛上 draft 避免誤觸',
+    'merge_request[assignee_ids][]': '397', // 這個是我自己
     'merge_request[title]': `Draft: ${title}` // 讓 PR 是 draft
   }
 
@@ -54,9 +56,9 @@ function generateQuery(sourceBranch, { projectId = PROJECT_ID_MAP.FRONTEND, targ
 }
 
 function branchNameToPrTitle(branchName) {
-  const [, num, originalName] = branchName.match(/(PLAT-\d+)_(.+)/)
+  const [, num, originalName] = branchName.match(/(PLAT-\d+)_(.+)/) || ['','','']
 
-  const { keys, last } = originalName.split('-').reduce((payload, str) => {
+  const { keys, last } = (originalName || branchName).split('-').reduce((payload, str) => {
     switch (true) {
       case str === 'FE':
       case WHITE_LABEL_LIST.includes(str.toLocaleLowerCase()):
