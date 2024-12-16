@@ -1,9 +1,5 @@
 const { exec } = require('child_process')
 
-const PROJECT_ID_MAP = {
-  FRONTEND: '43',
-}
-
 const WHITE_LABEL_LIST = [
   'btse',
   'storybook',
@@ -33,22 +29,33 @@ const WHITE_LABEL_LIST = [
   'autotrader',
 ]
 
-const BASE_URL = 'https://gitlab01.oa.btse.io/btse/frontend/-/merge_requests/new'
-
-function generateUrl(sourceBranch, { baseUrl = BASE_URL } = {}) {
-  return `${baseUrl}?${generateQuery(sourceBranch)}`
+const BASE_URL_FN = (repo) => {
+  return `https://gitlab01.oa.btse.io/${repo}/-/merge_requests/new`
 }
 
-function generateQuery(
-  sourceBranch,
-  { projectId = PROJECT_ID_MAP.FRONTEND, targetBranch = 'develop', title: originalTitle = null } = {}
-) {
+function guessTargetBranch(repo) {
+  switch (repo) {
+    case 'frontend/btse-static-resource':
+      return 'master'
+
+    default:
+      return 'develop'
+  }
+}
+
+function generateUrl(sourceBranch, { baseUrl, repo } = {}) {
+  return `${baseUrl}?${generateQuery(sourceBranch, { targetBranch: guessTargetBranch(repo) })}`
+}
+
+function generateQuery(sourceBranch, { targetBranch, title: originalTitle = null } = {}) {
   const title = originalTitle ?? branchNameToPrTitle(sourceBranch)
 
   const payload = {
-    'merge_request[source_project_id]': projectId,
+    // 透過 git remote 取得 project 資訊
+    // 'merge_request[source_project_id]': projectId,
+    // 'merge_request[target_project_id]': projectId,
+
     'merge_request[source_branch]': sourceBranch,
-    'merge_request[target_project_id]': projectId,
     'merge_request[target_branch]': targetBranch,
     'merge_request[description]': '掛上 draft 避免誤觸',
     'merge_request[assignee_ids][]': '397', // 這個是我自己
@@ -86,11 +93,13 @@ function branchNameToPrTitle(branchName) {
 
 // start here
 ;(function () {
-  const [, , branchName] = process.argv
+  const [, , branchName, remoteInfo] = process.argv
 
   if (branchName == null) return void console.log('branchName 不可為空')
 
-  const prUrl = generateUrl(branchName)
+  const repo = remoteInfo.match(/.+:(.+)\./)[1]
+  const baseUrl = BASE_URL_FN(repo)
+  const prUrl = generateUrl(branchName, { baseUrl, repo })
 
   exec(`open '${prUrl}'`)
 })()
