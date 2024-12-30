@@ -586,6 +586,13 @@ npm install --save-dev stylelint stylelint-config-standard stylelint-less
 2. windows 電腦 `cmd` -> `ipconfig /all` -> 找到 IPv4 的 IP 位置
 3. Mac 電腦 finder -> `command + k` -> 輸入 IP -> 會要輸入使用者帳號和密碼，這邊要輸入的是 **windows 那邊的帳號密碼** -> 選擇想要的資料夾 -> 成功
 
+請注意! 輸入的 widnows 的 **名稱** 和在 windows 電腦上登入的名稱可能會不一樣！  
+正確的名稱是在 windows 的 `cmd` 輸入 `whoami` 後出現的名字才是真正要輸入的
+
+```bash
+whoami
+```
+
 ##### Mac 上 Facebook 的 Messenger 的桌面應用程式如果卡在 Getting Started 該怎麼處理
 
 1. 透過 `spotlight` 或其他方式開啟 `Mac` 的 `KeyChain` ，也就是鑰匙圈
