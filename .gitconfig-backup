@@ -36,7 +36,7 @@
     cc = "!git checkout $(git rev-parse HEAD)"
 
     # 這個是寫給 BTSE 的，可以看看怎麼寫得通俗些
-    pr = "!node $HOME/flyc/sublime-fetch/global-node-script/btse-pr.js $(git branch --show-current)"
+    pr = "!node $HOME/flyc/sublime-fetch/global-node-script/btse-pr.js $(git branch --show-current) $(git remote get-url --all origin)"
 
 [merge]
     ff = false
