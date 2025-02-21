@@ -784,6 +784,7 @@ fn2 的功能是按著的話，最上排的數字鍵會變成 亮度、鍵盤亮
 > zip 壓縮的時候出現錯誤 zip warning: Local Entry CRC does not match CD  
 > 開發一個 chrome 的套件: 取得所有 tabs 的資訊: 已經有透過 GPT 寫好的範本了，還沒整理  
 > 清理一下電腦的 wonder 資料夾吧，有點不 wonder 了
+> 看一下什麼是 n8n
 
 [windicss-link]: https://windicss.org/
 [tailwindcss-link]: https://tailwindcss.com/
