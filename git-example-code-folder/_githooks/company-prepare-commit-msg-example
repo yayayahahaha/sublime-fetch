@@ -1,3 +1,5 @@
+# Git commit add Jira ID
+
 # color
 Black="\033[0;30m"
 DarkGray="\033[1;30m"
@@ -17,45 +19,39 @@ LightGray="\033[0;37m"
 White="\033[1;37m"
 NC="\033[0m"
 
-# BTSE frontend project eslit start
-# 找出 staged 的檔案，然後根據 ext 執行對應的 lint function
-vue_staged_files=$(git diff --staged --name-only -- \*.vue | tr '\n' ' ' | sed 's/ $//')
-js_staged_files=$(git diff --staged --name-only -- \*.js | tr '\n' ' ' | sed 's/ $//')
-jsx_staged_files=$(git diff --staged --name-only -- \*.jsx | tr '\n' ' ' | sed 's/ $//')
-less_staged_files=$(git diff --staged --name-only -- \*.less | tr '\n' ' ' | sed 's/ $//')
 
-eslint_files=$"${vue_staged_files} ${js_staged_files} ${jsx_staged_files}"
-stylelint_files=$"${vue_staged_files} ${less_staged_files}"
-echo "${LightBlue}===== 執行 eslint =====${NC}"
-if [[ "$eslint_files" =~ ^[[:space:]]*$ ]]; then
-  echo '> 沒有需要 eslint 檢查的檔案'
-else
-  npx eslint $eslint_files --max-warnings=0 --no-ignore
+echo "${LightPurple}執行原專案內的 npx lint-staged${NC}"
+
+# 檢查要不要執行
+# lint_folders=("frontend" "mjml_email_template" "ff-worktree")
+lint_folders=("frontend" "ff-worktree" "ww")
+# lint_folders=("frontend")
+current_dir_name=$(basename $(pwd))
+do_lint=false
+for folder in "${lint_folders[@]}"; do
+  if [[ "$current_dir_name" == "$folder" ]]; then
+    do_lint=true
+  fi
+done
+if [[ $do_lint == false  ]]; then
+  echo "${Cyan}> 當前路徑是 $current_dir_name, 無需執行腳本☃️\n ${NC}"
+  exit 0
 fi
-eslint_result=$(echo $?)
-echo '> eslint 檢查結束'
-echo
 
-echo "${LightBlue}===== 執行 stylelint =====${NC}"
-if [[ "$stylelint_files" =~ ^[[:space:]]*$ ]]; then
-  echo '> 沒有需要 stylelint 檢查的檔案'
-else
-  npx stylelint $stylelint_files
-fi
-stylelint_result=$(echo $?)
-echo '> stylelint 檢查結束'
+npx lint-staged
+lintRes=$?
 
-echo
-if [[ $eslint_result == 0 && $stylelint_result == 0 ]]; then
-  echo "${LightGreen}過了唷，ㄏㄏ${NC}"
-else
-  echo "${LightRed}沒過，ㄎㄎ${NC}"
+if [[ $lintRes != 0 ]]; then
+  echo "${LightRed} 🚷 👹 🚷 👹 🚷 👹 🚷 👹 🚷 👹 🚷 \n${NC}"
+  echo "${LightRed}👹 🚷 👹 YOU SHALL NOT PASS 🚷 👹 🚷 \n${NC}"
+  echo "${LightRed} 🚷 👹 🚷 👹 🚷 👹 🚷 👹 🚷 👹 🚷 \n${NC}"
   exit 1
+else
+  echo "${LightBlue}  🐋 🐳 🐋 🐳 🐋 🐳  \n${NC}"
+  echo "${LightBlue}🐋 🐳 🐋 好耶 🐳 🐋 🐳 \n${NC}"
+  echo "${LightBlue}  🐋 🐳 🐋 🐳 🐋 🐳 \n${NC}"
 fi
-echo
-# BTSE frontend project eslint end
 
-# Git commit add Jira ID
 COMMIT_MSG_FILE=$1
 # 'commit' 代表正在 ammend
 # message 代表在 -m 或是 squash 或是 rebase-continue
@@ -81,6 +77,7 @@ if [[ "$COMMIT_SOURCE" =~ ^(merge|rebase|commit)$ ]]; then
   # 哪些行為不用額外添加 commit message, 像是 amend, rebase 和 merge 等都不用
 
   echo "# 當前的 commit 行為是 ${COMMIT_SOURCE}, 跳過 prepare-commit-msg" >> "$COMMIT_MSG_FILE"
+  : # for empty if-else block
 
 elif ! [[ $SHOULD_NOT_BE_COMMIT -eq 0 ]]; then
   # 如果想要直接 commit 在不該 commit 的 branch 上
@@ -103,5 +100,10 @@ elif ! [[ -z $JIRA_TICKET ]]; then
 else
   # 都沒有的話，還是寫一下額外的訊息
   echo "# COMMIT_SOURCE: ${COMMIT_SOURCE}" >> "$COMMIT_MSG_FILE"
+  : # for empty if-else block
 
 fi
+
+# 手動清除 # 後面的所有訊息
+grep -v '^#' "$COMMIT_MSG_FILE" > "$COMMIT_MSG_FILE.tmp" && mv "$COMMIT_MSG_FILE.tmp" "$COMMIT_MSG_FILE"
+
