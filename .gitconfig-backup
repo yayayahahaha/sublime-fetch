@@ -6,6 +6,8 @@
     bra = branch --all
     fp = "fetch --prune --prune-tags --tags --progress"
     au = "add :/ -u"
+    dd = "diff --color-words"
+    ddd = "diff --word-diff=color --word-diff-regex='[^[:space:]]'"
 
     gr = log --graph --abbrev-commit --decorate --format=format:'%C(magenta)%h%C(reset) - %C(green)(%ar)%C(reset) %C(blue)%s%C(reset) %C(red)- %an%C(reset)%C(yellow)%d%C(reset)'
     gr2 = log --graph --abbrev-commit --decorate --date=format:'%a %Y/%m/%d %H:%M:%S%z %s' --format=format:'%C(magenta)%h%C(reset) - ''%C(green)Author Date: %ad (%ar)%C(reset)%n''          %C(blue)Commit Date: %cd (%cr)%C(reset)%n''          %C(Cyan)%s%C(reset) %C(red)- %an%C(reset)%C(yellow)%d%C(reset)%n'
@@ -16,6 +18,8 @@
 
     ds = diff --staged
     df = diff HEAD^1 HEAD
+    dfd = diff HEAD^1 HEAD --color-words
+    dfdd = diff HEAD^1 HEAD --word-diff=color --word-diff-regex='[^[:space:]]'
     dft = difftool HEAD^1 HEAD
     dr = !"git diff origin/$(git branch --show-current)...$(git branch --show-current)"
     drr = !"git diff $(git branch --show-current) origin/$(git branch --show-current)"
