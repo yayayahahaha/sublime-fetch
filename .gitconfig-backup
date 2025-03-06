@@ -6,6 +6,7 @@
     bra = branch --all
     fp = "fetch --prune --prune-tags --tags --progress"
     au = "add :/ -u"
+    dd = "diff --color-words"
 
     gr = log --graph --abbrev-commit --decorate --format=format:'%C(magenta)%h%C(reset) - %C(green)(%ar)%C(reset) %C(blue)%s%C(reset) %C(red)- %an%C(reset)%C(yellow)%d%C(reset)'
     gr2 = log --graph --abbrev-commit --decorate --date=format:'%a %Y/%m/%d %H:%M:%S%z %s' --format=format:'%C(magenta)%h%C(reset) - ''%C(green)Author Date: %ad (%ar)%C(reset)%n''          %C(blue)Commit Date: %cd (%cr)%C(reset)%n''          %C(Cyan)%s%C(reset) %C(red)- %an%C(reset)%C(yellow)%d%C(reset)%n'
