@@ -18,6 +18,8 @@
 
     ds = diff --staged
     df = diff HEAD^1 HEAD
+    dfd = diff HEAD^1 HEAD --color-words
+    dfdd = diff HEAD^1 HEAD --word-diff=color --word-diff-regex='[^[:space:]]'
     dft = difftool HEAD^1 HEAD
     dr = !"git diff origin/$(git branch --show-current)...$(git branch --show-current)"
     drr = !"git diff $(git branch --show-current) origin/$(git branch --show-current)"
