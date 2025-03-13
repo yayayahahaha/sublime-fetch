@@ -1,0 +1,35 @@
+<template>
+  <Icon
+    :width="width"
+    :height="height"
+    fill="none"
+    aria-label="___REPLACE_ARIA_LABEL___"
+  >
+    ___REPLACE_SVG_CONTENT___
+  </Icon>
+</template>
+
+<script>
+import Icon from '@/components/icons/Icon'
+___REPLACE_UTILS_IMPORT___
+
+export default {
+  name: '___REPLACE_VUE_COMPONENT_NAME___',
+  components: { Icon },
+  props: {
+    width: {
+      type: [Number, String],
+      default: ___REPLACE_ICON_WIDTH___
+    },
+    height: {
+      type: [Number, String],
+      default: ___REPLACE_ICON_HEIGHT___
+    }
+  },
+  data() {
+    return {
+      ___REPLACE_ID_LIST___
+    }
+  }
+}
+</script>
