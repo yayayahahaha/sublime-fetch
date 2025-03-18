@@ -50,6 +50,8 @@ prompt_end() {
 }
 
 # 純粹縮短
+alias esfix='npx eslint --fix -- $(git diff --name-only)'
+alias esfix-stage='npx eslint --fix -- $(git diff --name-only)'
 alias node6='node --experimental-modules'
 alias ifconfig_ip='_grep_ip_only'
 # 在當前路徑快速啟動sublime text 3
