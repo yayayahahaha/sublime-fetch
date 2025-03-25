@@ -46,6 +46,7 @@
 
     # 這個是寫給 BTSE 的，可以看看怎麼寫得通俗些
     pr = "!node $HOME/flyc/sublime-fetch/global-node-script/btse-pr.js $(git branch --show-current) $(git remote get-url --all origin)"
+    jira = "!node $HOME/flyc/sublime-fetch/global-node-script/btse-goto-jira.js $(git branch --show-current)"
 
 [merge]
     ff = false
