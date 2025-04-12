@@ -1,0 +1,6 @@
+{
+  "frontend-repo-path": "/Users/flyc.chung/btse/frontend",
+  "new-images-folder": "./new-images",
+  "target-brand": "這裡要放 brand name, e.g. \"lmex\"",
+  "figma-token": null
+}
