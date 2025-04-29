@@ -14,7 +14,7 @@
       }
 
       .container {
-        width: 100px;
+        width: 500px;
         display: flex;
         flex-direction: column;
       }
@@ -36,6 +36,29 @@
       .container .button:active {
         background: #567;
       }
+
+      table td {
+        text-align: center;
+        padding: 12px 0;
+      }
+
+      .icon-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 6px;
+      }
+
+      .icon {
+        cursor: pointer;
+        font-size: 24px;
+        box-shadow: 1px 1px 2px 2px #9ab;
+      }
+
+      [demo-field] {
+        display: none;
+      }
+
     </style>
   </head>
 
@@ -44,6 +67,39 @@
     <div class="container">
       <input type="text" id="jira-branch-input" placeholder="英文名字" />
       <div class="button" id="jira-branch-btn">從 Jira 產生 branch name</div>
+
+      <div>---</div>
+
+      <h3>取得與儲存當前畫面 token</h3>
+      <table token>
+        <thead>
+          <tr>
+            <th>brand name</th>
+            <th>
+              Behavior
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr demo-field>
+            <td name-field>
+              <input type="text">
+            </td>
+            <td behavior-field>
+              <div class="icon-container">
+                <div class="icon icon-delete">🗡️</div>
+                <div class="icon icon-set">🌠</div>
+                <div class="icon icon-take">🙌</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div id="copy-token" class="icon icon-add">➕</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </body>
   <script src="popup.js"></script>
