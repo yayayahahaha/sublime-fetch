@@ -757,7 +757,14 @@ fn2 的功能是按著的話，最上排的數字鍵會變成 亮度、鍵盤亮
 > const resources = window.performance.getEntriesByType('resource'); // 酷東西  
 > window.history.replaceState  
 > 家目錄下的 .pnp.cjs, .pnp.js 是什麼東西  
-> js 新的那個 Proxy 是什麼東西
+> js 新的那個 Proxy 是什麼東西  
+> 特殊的 toString 寫法
+
+```js
+get [Symbol.toStringTag]() {
+  return `MyClass { name: "${this.#name}" }`
+}
+```
 
 ### TODO: CSS
 
