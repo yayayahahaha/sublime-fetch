@@ -703,11 +703,12 @@ console.log(colors.green('hello')) // outputs green text
 
 請使用這個網站: https://launcher.keychron.com  
 和前幾代的 Keychron 7 相比， Max 版支援了 QMK/VIA, 可以更為靈活地客製化每個案件的行為  
-在連上實體線後訪問上面的網站，就可以透過各種 layer 的設定來設定相對應的按鍵要是什麼功能。
+在連上實體線後訪問上面的網站，就可以透過各種 layer 的設定來設定相對應的按鍵要是什麼功能。  
+可以 import `Keymap-K7 Max ANSI.json` 這個檔案處理
 
 目前自己最右排的設定，從上而下分別是 `delete`, `F4`, `fn2` 和 `right-control`  
 空白鍵右邊 3 顆的設定是 `right-cmd`, `fn1` 和 `right-option`  
-fn1 的功能是按著的話，最上排的數字鍵會變成 F1 ~ F12,  
+fn1 的功能是按著的話，最上排的數字鍵會變成 F1 ~ F12, 然後 F4 的那個位置會變成滑鼠右鍵(MouseBtn2)
 fn2 的功能是按著的話，最上排的數字鍵會變成 亮度、鍵盤亮度、音量等等
 
 ---
