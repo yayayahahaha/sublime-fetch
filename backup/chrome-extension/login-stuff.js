@@ -3,7 +3,6 @@ import { get, post } from './request-stuff.js'
 import { gen2FaCode } from './2fa.js'
 import { showBase64Image } from './captcha-stuff.js'
 const { sha3_256: Hash } = jsSha3
-import { input } from '@inquirer/prompts'
 
 /**
  * 處理登入相關的類別，提供完整的登入流程管理，包含驗證碼驗證和二階段驗證(2FA)
@@ -168,51 +167,50 @@ export class LoginNeeded {
     return post(url, new URLSearchParams(params).toString(), headers)
   }
 
-  /**
-   * 處理完整的登入流程
-   *
-   * @async
-   * @param {import('.').LoginNeeded} payload - LoginNeeded 實例
-   * @returns {Promise<{token: string, websiteLink: string}|void>}
-   *          成功時返回包含最終令牌和網站連結的物件，失敗時返回 void
-   * @throws {Error} 當 payload 不是 LoginNeeded 類別的實例時拋出錯誤
-   */
-  async login(payload) {
+  async checkTokenHealth(token = this.token) {
+    if (!token) {
+      console.log('⚠️ 缺少 token，無法進行健康檢查')
+      return { isHealthy: false }
+    }
+
+    try {
+      const { error, data } = await get(`${this.apiBaseUrl}/api/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      // TODO: 可以在這裡添加更多健康檢查的邏輯
+      const healthCheckResult = {
+        isHealthy: !error && data?.success,
+        statusCode: data?.status,
+        error,
+        // 未來可以擴展更多檢查結果
+        // 例如：token 過期時間、用戶權限等
+      }
+
+      return healthCheckResult
+    } catch (error) {
+      console.error('❌ Token 健康檢查失敗:', error)
+      return { isHealthy: false, error: error.message }
+    }
+  }
+
+  static async login(payload) {
     if (!(payload instanceof LoginNeeded)) throw new Error('要是 LoginNeeded instance')
 
-    // TODO(flyc): 這邊要做 health check
+    // 先檢查 token 是否健康
     const { token: currentToken } = payload ?? {}
-    !console && currentToken
+    if (currentToken) {
+      const { isHealthy } = await payload.checkTokenHealth(currentToken)
 
-    /**
-     * 處理登入流程，包含驗證碼驗證和 2FA 認證
-     * @param {LoginNeeded} payload - LoginNeeded 實例，包含登入憑證和方法
-     * @param {Object} payload.email - 用戶電子郵件
-     * @param {string} payload.brandName - 用於獲取 OTP 的品牌名稱
-     * @param {string} [payload.secretCode2Fa] - 生成 2FA 的密鑰
-     * @param {string} [payload.current2FaCode] - 若無密鑰時的當前 2FA 代碼
-     * @param {string} payload.websiteLink - 網站 URL
-     * @param {Function} payload.loginApi - 初始登入的 API 方法
-     * @param {Function} payload.getCaptchaImage - 獲取驗證碼圖片的 API 方法
-     * @param {Function} payload.resendOtp - 重新發送 OTP 的 API 方法
-     * @param {Function} payload.getOtp - 從 redis 獲取 OTP 的 API 方法
-     * @param {Function} payload.finalPass - 最終認證的 API 方法
-     * @throws {Error} 如果 payload 不是 LoginNeeded 實例則拋出錯誤
-     * @returns {Promise<{token: string, websiteLink: string}|void>} 成功時返回 token 和網站連結，失敗時返回 void
-     *
-     * @example
-     * const loginPayload = new LoginNeeded({
-     *   email: 'user@example.com',
-     *   brandName: 'brand',
-     *   // ... 其他必要屬性
-     * });
-     * const result = await login(loginPayload);
-     *
-     * @description 內部 _login 函數接受:
-     * @param {Object} [otherPayload] - 額外的驗證碼相關資料
-     * @param {string} [otherPayload.captchaId] - 驗證碼 ID
-     * @param {string} [otherPayload.captchaNumber] - 用戶輸入的驗證碼
-     */
+      if (isHealthy) {
+        console.log('🏥 Token 健康檢查通過')
+        return { token: currentToken, websiteLink: payload.websiteLink }
+      }
+      console.log('⚠️ Token 已失效，需要重新登入')
+    }
+
     async function _login(otherPayload = {}) {
       // TODO(flyc): login 可以整理一下
       const {

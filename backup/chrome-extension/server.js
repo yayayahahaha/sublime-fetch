@@ -2,11 +2,13 @@ import express from 'express'
 import { connectRedis } from './redis.js'
 import { Response } from './request-stuff.js'
 import { setting } from './WL.js'
-import { login } from './login-stuff.js'
+import { LoginNeeded } from './login-stuff.js'
 const app = express()
 const port = 9999
 
 const settingMapping = Object.fromEntries(setting.map((item) => [item.pk, item]))
+// 添加暫存登入結果的物件
+const loginCache = new Map()
 
 const redis = connectRedis()
 
@@ -41,9 +43,22 @@ app.get('/login-by-pk', async (req, res) => {
   const payload = settingMapping[pk]
   if (payload == null) return res.send(new Response({ error: `pk 沒有在 setting 裡` }))
 
-  const reseult = await login(payload)
+  // 檢查是否有暫存的登入結果
+  const cachedResult = loginCache.get(pk)
+  if (cachedResult) {
+    console.log(`🔄 使用暫存的登入結果，pk: ${pk}`)
+    payload.token = cachedResult.token
+  }
 
-  res.send(new Response({ data: reseult }))
+  const result = await LoginNeeded.login(payload)
+
+  // 如果登入成功，儲存結果到暫存
+  if (result?.token) {
+    console.log(`💾 儲存登入結果到暫存，pk: ${pk}`)
+    loginCache.set(pk, result)
+  }
+
+  res.send(new Response({ data: result }))
 })
 
 app.get('/getOtp', async (req, res) => {

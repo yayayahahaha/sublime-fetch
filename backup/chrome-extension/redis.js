@@ -13,7 +13,7 @@ class StagingRedis {
     }
 
     const key = `OTP_MAIL_LOGIN_NEW_DEVICE_${username}@${brandName}`
-    console.log(`🫙 redis key: ${key}`)
+    console.log(`🫙 Redis 金鑰: ${key}`)
 
     return this.#redis
       .get(key)
@@ -31,7 +31,7 @@ class StagingRedis {
     }
 
     const key = `USER_CAPTCHA_${captchaId}`
-    console.log(`🫙 redis key: ${key}`)
+    console.log(`🫙 Redis 金鑰: ${key}`)
 
     return this.#redis
       .get(key)
@@ -52,15 +52,15 @@ export function connectRedis() {
   }])
 
   redis.on('connect', () => {
-    console.log('Redis cluster connected!')
+    console.log('Redis 叢集連線成功！')
   })
 
   redis.on('error', (err) => {
-    console.error('Redis cluster error:', err)
+    console.error('Redis 叢集錯誤:', err)
   })
 
   process.on('SIGINT', async () => {
-    console.log('\n斷開與 redis 的連線...')
+    console.log('\n正在斷開與 Redis 的連線...')
     await redis.quit() // 或 redis.disconnect()
     process.exit(0)
   })
