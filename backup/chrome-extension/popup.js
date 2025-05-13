@@ -1,20 +1,51 @@
 const message = document.querySelector('#message')
+
 function setMessage(value, { type = 'info' } = {}) {
   message.classList = ['message']
 
   message.innerHTML = value
+
   switch (type) {
     case 'error':
       message.classList.add('error')
+      break
   }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
   copyBranchNameByJira()
   tokenStorage()
+  quickLogin()
 })
 
-function  tokenStorage() {
+function quickLogin() {
+  const buttons = document.querySelectorAll('.quick-login')
+  ;[...buttons].forEach((dom) => {
+    dom.addEventListener('click', async function () {
+      const pk = dom.getAttribute('pk')
+
+      const quickLoginUrl = `http://localhost:9999/login-by-pk?pk=${pk}`
+
+      const { error, data: { token, websiteLink } = {} } = await fetch(quickLoginUrl).then((res) => res.json())
+      if (error) {
+        console.error(error)
+        return void setMessage('錯啦, 可以看看 extension 的 inspect 或 server', { type: 'error' })
+      }
+
+      if (!websiteLink || !token) {
+        return void setMessage('錯啦, 可以看看 extension 的 inspect 或 server', { type: 'error' })
+      }
+
+      chrome.runtime.sendMessage({
+        action: 'openTabWithToken',
+        token,
+        url: websiteLink,
+      })
+    })
+  })
+}
+
+function tokenStorage() {
   const tokenTable = document.querySelector('table[token]')
   const tbody = tokenTable.querySelector('tbody')
   const demoField = document.querySelector('[demo-field]')
@@ -35,28 +66,36 @@ function  tokenStorage() {
 
     const input = newItem.querySelector('input')
     input.value = name
-    input.addEventListener('input', function(event) {
-      localStorage.setItem('token-list', JSON.stringify(list.map(item => {
-        if (item.id === id) item.name = event.target.value
-        return item
-      }), null, 2))
+    input.addEventListener('input', function (event) {
+      localStorage.setItem(
+        'token-list',
+        JSON.stringify(
+          list.map((item) => {
+            if (item.id === id) item.name = event.target.value
+            return item
+          }),
+          null,
+          2
+        )
+      )
     })
     const deleteBtn = newItem.querySelector('.icon.icon-delete')
     deleteBtn.addEventListener('click', () => {
       newItem.remove()
-      list = list.filter(item => item.id !== id)
+      list = list.filter((item) => item.id !== id)
       localStorage.setItem('token-list', JSON.stringify(list, null, 2))
     })
     const setBtn = newItem.querySelector('.icon.icon-set')
-    setBtn.addEventListener('click', async function() {
+    setBtn.addEventListener('click', async function () {
       const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
       const [{ result }] = await chrome.scripting.executeScript({
         target: { tabId: tab.id },
         function: function (token) {
           localStorage.setItem('token', token)
+          window.location = window.location.href
           return localStorage.getItem('token')
         },
-        args: [token]
+        args: [token],
       })
     })
     const takeBtn = newItem.querySelector('.icon.icon-take')
@@ -68,11 +107,11 @@ function  tokenStorage() {
     return newItem
   }
 
-  const storageItems = list.map(item => genNewItem(item))
-  storageItems.forEach(dom => tbody.appendChild(dom))
+  const storageItems = list.map((item) => genNewItem(item))
+  storageItems.forEach((dom) => tbody.appendChild(dom))
 
   const button = document.querySelector('#copy-token')
-  button.addEventListener('click', async function() {
+  button.addEventListener('click', async function () {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
     const [{ result }] = await chrome.scripting.executeScript({
       target: { tabId: tab.id },
@@ -100,8 +139,10 @@ function  tokenStorage() {
     localStorage.setItem('token-list', JSON.stringify(list, null, 2))
 
     await copyString(token)
-    setMessage(`複製成功`)
   })
+
+  const buttonExortToken = document.querySelector('#exort-token')
+  buttonExortToken.addEventListener('click', () => copyString(JSON.stringify(list, null, 2)))
 }
 
 function copyBranchNameByJira() {

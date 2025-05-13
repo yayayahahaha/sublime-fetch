@@ -59,7 +59,7 @@ function generateQuery(sourceBranch, { targetBranch, title: originalTitle = null
 
     'merge_request[source_branch]': sourceBranch,
     'merge_request[target_branch]': targetBranch,
-    'merge_request[description]': '掛上 draft 避免誤觸',
+    'merge_request[description]': '#### 背景\n\n\n#### 怎麼處理\n\n\n#### 其他\n掛上 draft 避免誤觸',
     'merge_request[assignee_ids][]': '397', // 這個是我自己
     'merge_request[title]': `Draft: ${title}`, // 讓 PR 是 draft
   }
