@@ -1,8 +1,8 @@
 import { authenticator } from 'otplib'
+import { loadSettings } from './settings-loader.js'
 
-// 你的 Google Authenticator 的 secret code
-// const secret = 'TBLGEDVCFKTNY7TH' // base32 格式
-
-export function gen2FaCode(secret) {
-  return typeof secret === 'string' ? authenticator.generate(secret) : null
+export function gen2FaCode(userPk) {
+  const settings = loadSettings()
+  const user = settings.users.find(u => u.pk === userPk)
+  return user ? authenticator.generate(user.secretCode2Fa) : null
 }

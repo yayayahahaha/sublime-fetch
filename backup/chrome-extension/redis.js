@@ -1,4 +1,5 @@
 import { Cluster } from 'ioredis'
+import { loadSettings } from './settings-loader.js'
 
 class StagingRedis {
   #redis
@@ -23,10 +24,32 @@ class StagingRedis {
         error,
       }))
   }
+
+  getCaptcha(captchaId) {
+    if (captchaId == null) {
+      throw new Error(`[${this.constructor.name}] getCaptcha: captchaId 為必填`)
+    }
+
+    const key = `USER_CAPTCHA_${captchaId}`
+    console.log(`🫙 redis key: ${key}`)
+
+    return this.#redis
+      .get(key)
+      .then((value) => ({ ok: true, value, error: null }))
+      .catch((error) => ({
+        ok: false,
+        value: null,
+        error,
+      }))
+  }
 }
 
 export function connectRedis() {
-  const redis = new Cluster([{ host: REDIS_HOST, port: 6379 }])
+  const settings = loadSettings()
+  const redis = new Cluster([{
+    host: settings.redis.host,
+    port: settings.redis.port
+  }])
 
   redis.on('connect', () => {
     console.log('Redis cluster connected!')

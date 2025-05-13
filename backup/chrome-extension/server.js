@@ -57,6 +57,17 @@ app.get('/getOtp', async (req, res) => {
   res.send(new Response({ data: value }))
 })
 
+app.get('/getCaptcha', async (req, res) => {
+  const { captchaId } = req.query
+  if (!captchaId) {
+    return res.send(new Response({ error: 'captchaId is required' }))
+  }
+
+  const { error, value } = await redis.getCaptcha(captchaId)
+  if (error != null) return res.send(new Response({ error, data: value }))
+  res.send(new Response({ data: value }))
+})
+
 // 啟動伺服器
 app.listen(port, () => {
   console.log(`Express 伺服器已啟動，監聽 port ${port}`)

@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "pk": "fc",
+      "email": "fc1@mailto.plus",
+      "brandName": "lmex",
+      "password": "__PUT_YOUR_PASSWORD_HERE__",
+      "secretCode2Fa": "TBLGEDVCFKTNY7TH",
+      "deviceFingerprint": "my-finger-print-test-2"
+    },
+    {
+      "pk": "matoi",
+      "email": "fc1@mailto.plus",
+      "brandName": "traiex",
+      "password": "__PUT_YOUR_PASSWORD_HERE__",
+      "secretCode2Fa": "LBNWTLGLIUKYJ2XJ",
+      "deviceFingerprint": "my-finger-print-test-2"
+    }
+  ],
+  "redis": {
+    "host": "__PUT_YOUR_REDIS_HOST_HERE__",
+    "port": 6379
+  }
+}
