@@ -3,63 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Tab and Fetch Plugin</title>
-
-    <style>
-      .message {
-        color: #123;
-        margin-bottom: 6px;
-      }
-
-      .message.error {
-        color: red;
-      }
-
-      .container {
-        width: 500px;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .container .button {
-        margin-top: 6px;
-        border-radius: 5px;
-        background: #456;
-        color: white;
-        text-align: center;
-        padding: 5px;
-        cursor: pointer;
-      }
-
-      .container .button:hover {
-        background: #678;
-      }
-
-      .container .button:active {
-        background: #567;
-      }
-
-      table td {
-        text-align: center;
-        padding: 12px 0;
-      }
-
-      .icon-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 6px;
-      }
-
-      .icon {
-        cursor: pointer;
-        font-size: 24px;
-        box-shadow: 1px 1px 2px 2px #9ab;
-      }
-
-      [demo-field] {
-        display: none;
-      }
-    </style>
+    <link rel="stylesheet" href="popup.css" />
   </head>
 
   <body>
@@ -67,6 +11,11 @@
     <div class="container">
       <input type="text" id="jira-branch-input" placeholder="英文名字" />
       <div class="button" id="jira-branch-btn">從 Jira 產生 branch name</div>
+
+      <div>---</div>
+      <h3>半自動登入</h3>
+      <button id="addBtn">添加半自動登入</button>
+      <div id="container"></div>
 
       <div>---</div>
 
@@ -135,4 +84,5 @@
     </div>
   </body>
   <script src="popup.js"></script>
+  <script src="semi-auto-login.js"></script>
 </html>

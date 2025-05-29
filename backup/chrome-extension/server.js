@@ -2,6 +2,7 @@ import express from 'express'
 import { connectRedis } from './redis.js'
 import { Response } from './request-stuff.js'
 import { setting } from './WL.js'
+import bodyParser from 'body-parser'
 import { LoginNeeded } from './login-stuff.js'
 const app = express()
 const port = 9999
@@ -26,9 +27,49 @@ app.use((req, res, next) => {
 
 // 解析 JSON 請求體
 app.use(express.json())
+app.use(express.json())
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+)
 
 // 設定基本路由
 app.get('/', (req, res) => res.send('turn BACK 🚶‍♂️'))
+
+app.post('/login', async (req, res) => {
+  const {
+    email = null,
+    brandName = null,
+    password = null,
+    secretCode2Fa = null,
+    deviceFingerprint = null,
+  } = req.body ?? {}
+  switch (true) {
+    case email == null:
+    case password == null:
+      res.send(new Response({ error: 'email 和 password 為必填' }))
+      return
+  }
+
+  let payload
+  try {
+    payload = new LoginNeeded({
+      email,
+      brandName,
+      password,
+      secretCode2Fa,
+      deviceFingerprint: deviceFingerprint ?? `${brandName}-${email}-fingerprint-mock`,
+    })
+  } catch (e) {
+    res.send(new Response({ error: e.message }))
+    return
+  }
+  const result = await payload.login()
+
+  res.send(new Response({ data: result, error: result.error }))
+  console.log('\n\n')
+})
 
 app.get('/login-by-pk', async (req, res) => {
   const { pk } = req.query

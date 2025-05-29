@@ -181,7 +181,7 @@ export class LoginNeeded {
   async checkTokenHealth(token = this.token) {
     if (!token) {
       console.log('⚠️ 缺少 token，無法進行健康檢查')
-      return { isHealthy: false }
+      return { isHealthy: false, error: null }
     }
 
     try {
@@ -210,38 +210,46 @@ export class LoginNeeded {
     const { error: resendError } = await this.resendOtp(firstToken)
     if (resendError != null) {
       errorConsole('在 resendError 發生錯誤', this)
-      return void errorConsole(resendError)
+      errorConsole(resendError)
+      return { error: resendError }
     } else console.log('✅ 重新寄送 otp 成功')
 
     subTitleConsole(`嘗試從 redis 裡取得 OTP:`)
     const { error: redisError, data: { data: otpCode } = {} } = await this.getOtp(username)
     if (redisError != null || otpCode == null) {
       errorConsole('在 redisError 發生錯誤', this)
-      return void errorConsole(redisError)
+      errorConsole(redisError)
+      return { error: redisError }
     } else console.log('✅ 取得 redis otp 成功')
     console.log('🕵️ otp: ', otpCode)
-    return otpCode
+    return { otpCode }
   }
 
   '2faFlow'() {
     titleConsole('需要 2FA')
     subTitleConsole(`嘗試從 secret 計算出 2fa code:`)
-    const code2Fa = function () {
-      let code = ''
-      if (this.secretCode2Fa != null) {
-        code = gen2FaCode(this.secretCode2Fa)
-        console.log('📶 2fa code:', code)
-      } else if (this.current2FaCode != null) {
-        code = this.current2FaCode
-        console.log('📶 使用者提供的 2fa code:', code)
-      } else {
-        errorConsole('沒有足夠的資訊產生 2fa code')
-        return null
-      }
 
-      return code
-    }.call(this)
-    return code2Fa
+    try {
+      const code2Fa = function () {
+        let code = ''
+        if (this.secretCode2Fa != null) {
+          code = gen2FaCode(this.secretCode2Fa)
+          console.log('📶 2fa code:', code)
+        } else if (this.current2FaCode != null) {
+          code = this.current2FaCode
+          console.log('📶 使用者提供的 2fa code:', code)
+        } else {
+          errorConsole('沒有足夠的資訊產生 2fa code')
+          return null
+        }
+
+        return code
+      }.call(this)
+      return { code2Fa }
+    } catch (e) {
+      errorConsole(e)
+      return { error: e }
+    }
   }
 
   async healthCheckFlow() {
@@ -250,7 +258,8 @@ export class LoginNeeded {
 
     const { token: currentToken } = this
     if (currentToken) {
-      const { isHealthy } = await this.checkTokenHealth(currentToken)
+      const { isHealthy, error } = await this.checkTokenHealth(currentToken)
+      if (error) return { error }
 
       if (isHealthy) {
         console.log('  > 🏥 Token 健康檢查通過')
@@ -261,7 +270,7 @@ export class LoginNeeded {
       console.log('  > ❤️‍🩹 不存在既有 token, 不進行健康檢查')
     }
 
-    return null
+    return { isHealthy: false, error: null }
   }
 
   // loginProcess: 這邊會有 recursive 後取得的 captchaId 和 captchaNumber
@@ -303,14 +312,25 @@ export class LoginNeeded {
     return { username, firstToken }
   }
 
+  get LoginResult() {
+    return class LoginResult {
+      constructor({ error, token, websiteLink } = {}) {
+        this.error = error
+        this.token = token
+        this.websiteLink = websiteLink
+      }
+    }
+  }
+
   async login() {
     // 先檢查 token 是否健康
     const healthResult = await this.healthCheckFlow()
-    if (healthResult != null) return healthResult
+    if (healthResult.error != null) return new this.LoginResult({ error: '健康檢查的過程出錯了' })
+    if (healthResult.isHealthy) return new this.LoginResult(healthResult)
 
     titleConsole(`開始登入流程: `)
     const { error: loginError, username, firstToken } = await this.loginProcess()
-    if (loginError != null) return
+    if (loginError != null) return new this.LoginResult({ error: loginError })
 
     console.log('📧 email:', this.email)
     console.log('💂 username:', username)
@@ -322,21 +342,23 @@ export class LoginNeeded {
       !LoginNeeded.regexpLoginToken.test(firstToken) // 僅需要 2FA
     ) {
       tokenConsole('這個 token 已經可以用囉', firstToken)
-      return { token: firstToken, websiteLink: this.websiteLink }
+      return new this.LoginResult({ token: firstToken, websiteLink: this.websiteLink })
     }
 
     // 如果有需要 deviceOTP 的話
     let otpCode = null
     if (!LoginNeeded.regexpLoginToken.test(firstToken)) {
-      otpCode = await this.otpFlow({ firstToken, username })
-      if (otpCode == null) return null
+      const { otpCode: resOtpCode, error: otpError } = await this.otpFlow({ firstToken, username })
+      if (otpError != null) return new this.LoginResult({ error: otpError })
+      otpCode = resOtpCode
     }
 
     // 如果有需要 2FA 的話
     let code2Fa = null
     if (!LoginNeeded.regexpDevice.test(firstToken)) {
-      code2Fa = this['2faFlow']()
-      if (code2Fa == null) return null
+      const { code2Fa: resCode2Fa, error: error2fa } = this['2faFlow']()
+      if (error2fa != null) return new this.LoginResult({ error: error2fa })
+      code2Fa = resCode2Fa
     }
 
     titleConsole(`正要開始最終驗證: `)
@@ -344,18 +366,19 @@ export class LoginNeeded {
       deviceFingerprint: this.deviceFingerprint,
       token: firstToken,
       otpCode,
-      code2Fa,
+      code2Fa: code2Fa || '999999',
     }
     console.log('最終驗證的參數:', JSON.stringify(finalParams))
     const { error: finalPassError, ...others } = await this.finalPass(finalParams)
     if (finalPassError != null || !others.data.success) {
       errorConsole('在 finalPassError 發生錯誤', this)
-      return void errorConsole(finalPassError ?? others.data.msg)
+      errorConsole(finalPassError ?? others.data.msg)
+      return new this.LoginResult({ error: finalPassError ?? others.data.msg })
     } else console.log('✅ 最終驗證成功')
 
     tokenConsole('收到的 token', others.data.data.token)
 
-    return { token: others.data.data.token, websiteLink: this.websiteLink }
+    return new this.LoginResult({ token: others.data.data.token, websiteLink: this.websiteLink })
   }
 }
 
