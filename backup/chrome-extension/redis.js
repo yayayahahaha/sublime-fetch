@@ -7,12 +7,14 @@ class StagingRedis {
     this.#redis = redis
   }
 
-  getUserOtp(username, brandName) {
-    if (username == null || brandName == null) {
-      throw new Error(`[${this.constructor.name}] getUserOtp: username 和 brandName 皆為必填`)
+  getUserOtp(username, brandName = null) {
+    if (username == null) {
+      throw new Error(`[${this.constructor.name}] getUserOtp: username 為必填`)
     }
 
-    const key = `OTP_MAIL_LOGIN_NEW_DEVICE_${username}@${brandName}`
+    const key = brandName
+      ? `OTP_MAIL_LOGIN_NEW_DEVICE_${username}@${brandName}`
+      : `OTP_MAIL_LOGIN_NEW_DEVICE_${username}`
     console.log(`🫙 Redis 金鑰: ${key}`)
 
     return this.#redis
@@ -46,13 +48,15 @@ class StagingRedis {
 
 export function connectRedis() {
   const settings = loadSettings()
-  const redis = new Cluster([{
-    host: settings.redis.host,
-    port: settings.redis.port
-  }])
+  const redis = new Cluster([
+    {
+      host: settings.redis.host,
+      port: settings.redis.port,
+    },
+  ])
 
   redis.on('connect', () => {
-    console.log('Redis 叢集連線成功！')
+    console.log('Redis 叢集連線成功！\n')
   })
 
   redis.on('error', (err) => {

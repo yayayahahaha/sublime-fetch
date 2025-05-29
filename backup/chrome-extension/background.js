@@ -8,7 +8,11 @@ chrome.runtime.onMessage.addListener((message /*, sender, sendResponse*/) => {
       chrome.scripting.executeScript({
         target: { tabId },
         func: (tokenArg) => {
-          localStorage.setItem('token', tokenArg)
+          Object.keys(window.localStorage).forEach((key) => {
+            window.localStorage.removeItem(key)
+          })
+
+          window.localStorage.setItem('token', tokenArg)
           window.location = window.location.href
         },
         args: [message.token],

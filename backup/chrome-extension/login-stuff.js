@@ -44,9 +44,9 @@ export class LoginNeeded {
       throw new Error(`[${this.constructor.name}] email 和 password 都為必填`)
     }
 
-    this.brandName = brandName
-    if (!LoginNeeded.checkBrandName.call(this, brandName)) {
-      throw new Error(`[${this.constructor.name}] brandName 沒通過 checkBrandName`)
+    this.brandName = brandName ?? null
+    if (this.brandName && !LoginNeeded.checkBrandName.call(this, this.brandName)) {
+      throw new Error(`[${this.constructor.name}] brandName: ${brandName} 沒通過 checkBrandName`)
     }
 
     this.pk = pk
@@ -55,7 +55,7 @@ export class LoginNeeded {
     this.secretCode2Fa = secretCode2Fa ?? null
     this.current2FaCode = current2FaCode ?? null
     this.token = token ?? null
-    this.deviceFingerprint = deviceFingerprint ?? '_wpqeke1744701766089'
+    this.deviceFingerprint = deviceFingerprint ?? null
   }
 
   static checkBrandName() {
@@ -63,44 +63,56 @@ export class LoginNeeded {
 
     switch (this.brandName) {
       case 'lmex':
+      case 'btse':
       case 'bitkub':
       case 'traiex':
+      case 'paradise':
+      case 'bitmarkets':
+      case 'bitmarkets1':
+      case 'b2z':
+      case 'interpay':
+      case 'trans':
+      case 'bullstreetex':
+      case 'btse-li':
+      case 'btse-gi':
+      case 'altex':
+      case 'crypto':
+      case 'btse-lt':
+      case 'binoex':
+      case 'nvx':
+      case 'autotrader':
+      case 'bitqik':
+      case 'coinwise':
+      case 'obot':
+      case 'fedhabit':
+      case 'btzo':
+      case 'traxex':
         return true
     }
 
-    // TODO(flyc): 白牌的 mapping 表
     return false
   }
 
   get websiteLink() {
-    switch (this.brandName) {
-      case 'lmex':
-        return 'https://lmex.btse.co/en'
-      case 'bitkub':
-        return 'https://bitkub.btse.co/en'
-      case 'traiex':
-        return 'https://traiex.btse.co/en'
-    }
+    const websiteLink = `https://${this.brandName ?? 'staging'}.btse.co/en`
 
-    console.error(`[${this.constructor.name}]websiteLink 匹配失敗`, this.brandName)
-    return ''
+    // console.log(`🔗 websiteLink: ${websiteLink}`)
+
+    return websiteLink
   }
 
   get apiBaseUrl() {
-    switch (this.brandName) {
-      case 'lmex':
-        return 'https://lmex-api.btse.co'
-      case 'bitkub':
-        return 'https://bitkub-api.btse.co'
-      case 'traiex':
-        return 'https://traiex-api.btse.co'
+    let apiBaseUrl = `https://${this.brandName}-api.btse.co`
+    if (this.brandName == null) {
+      apiBaseUrl = 'https://api.btse.co'
     }
 
-    console.error(`[${this.constructor.name}]apiBaseUrl 匹配失敗`, this.brandName)
-    return ''
+    // console.log(`🤙 apiBaseUrl: ${apiBaseUrl}`)
+
+    return apiBaseUrl
   }
 
-  loginApi(otherPayload = {}) {
+  loginApi(loginParams = {}) {
     const url = `${this.apiBaseUrl}/api/login`
     const formData = new FormData()
 
@@ -109,7 +121,7 @@ export class LoginNeeded {
     formData.append('loginName', this.email)
     formData.append('keepLogin', true)
 
-    Object.keys(otherPayload).forEach((key) => formData.append(key, otherPayload[key]))
+    Object.keys(loginParams).forEach((key) => formData.append(key, loginParams[key]))
 
     return post(url, formData)
   }
@@ -127,8 +139,8 @@ export class LoginNeeded {
     return post(url, new URLSearchParams(formData).toString(), headers)
   }
 
-  getOtp(username, brandName) {
-    const params = { username, brandName }
+  getOtp(username) {
+    const params = { username, brandName: this.brandName ?? '' }
     const queryString = new URLSearchParams(params).toString()
     return get(`http://localhost:9999/getOtp?${queryString}`)
   }
@@ -150,16 +162,15 @@ export class LoginNeeded {
   static regexp2Fa = /^USER_2FA_DEVICE_CHECK_TOKEN_KEY_/
   static regexpLoginToken = /^USER_2FA_LOGIN_TOKEN_KEY/
 
-  finalPass({ token, otpCode, passCode }) {
+  finalPass({ deviceFingerprint, token, otpCode, code2Fa }) {
     const deviceOnlyUrl = `${this.apiBaseUrl}/api/user/check/userDevice`
     const passCodeUrl = `${this.apiBaseUrl}/api/user/check/2FA`
 
     const url = LoginNeeded.regexpDevice.test(token) ? deviceOnlyUrl : passCodeUrl
-    const deviceFingerprint = this.deviceFingerprint
 
     const params = LoginNeeded.regexpDevice.test(token)
       ? { token, deviceFingerprint, passCode: otpCode }
-      : { token, deviceFingerprint, otpCode, passCode }
+      : { token, deviceFingerprint, otpCode: code2Fa, passCode: otpCode }
     const headers = { 'content-type': 'application/x-www-form-urlencoded;charset=UTF-8' }
 
     console.log('🔗 finall passd 的 url: ', url)
@@ -174,146 +185,192 @@ export class LoginNeeded {
     }
 
     try {
-      const { error, data } = await get(`${this.apiBaseUrl}/api/user`, {
+      const { error, data } = await get(`${this.apiBaseUrl}/api/user/userStatus`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
 
-      // TODO: 可以在這裡添加更多健康檢查的邏輯
       const healthCheckResult = {
-        isHealthy: !error && data?.success,
+        isHealthy: !error && data?.success && data?.data === 'ONLINE',
         statusCode: data?.status,
         error,
-        // 未來可以擴展更多檢查結果
-        // 例如：token 過期時間、用戶權限等
       }
 
       return healthCheckResult
     } catch (error) {
-      console.error('❌ Token 健康檢查失敗:', error)
+      errorConsole('❌ Token 健康檢查失敗:', error)
       return { isHealthy: false, error: error.message }
     }
   }
 
-  static async login(payload) {
-    if (!(payload instanceof LoginNeeded)) throw new Error('要是 LoginNeeded instance')
-
-    // 先檢查 token 是否健康
-    const { token: currentToken } = payload ?? {}
-    if (currentToken) {
-      const { isHealthy } = await payload.checkTokenHealth(currentToken)
-
-      if (isHealthy) {
-        console.log('🏥 Token 健康檢查通過')
-        return { token: currentToken, websiteLink: payload.websiteLink }
-      }
-      console.log('⚠️ Token 已失效，需要重新登入')
-    }
-
-    async function _login(otherPayload = {}) {
-      // TODO(flyc): login 可以整理一下
-      const {
-        error: loginError,
-        data: { success, msg, data: { username, token: firstToken } = {} },
-      } = await payload.loginApi(otherPayload)
-      if (loginError != null || !success) {
-        if (msg === 'Wrong captcha code') {
-          console.log('🏞️ 需要輸入 captcha')
-          const { error: captchaError, data: captchaData } = await payload.getCaptchaImage()
-          if (captchaError != null) {
-            console.error('在 get captcha 發生錯誤', payload)
-            console.error(captchaError ?? msg)
-            return { error: captchaError }
-          }
-          const {
-            data: { img, captchaId },
-          } = captchaData
-          await showBase64Image(img)
-
-          // Get the captcha value from redis using the new API
-          const { error: redisCaptchaError, data: { data: captchaNumber } = {} } = await payload.getCaptcha(captchaId)
-          if (redisCaptchaError != null || captchaNumber == null) {
-            console.error('在取得 redis captcha 發生錯誤', payload)
-            console.error(redisCaptchaError)
-            return { error: redisCaptchaError }
-          }
-
-          return _login({ captchaId, captchaNumber })
-        } else {
-          console.error('在 loginError 發生錯誤', payload)
-          console.error(loginError ?? msg)
-          return { error: loginError ?? msg }
-        }
-      } else console.log('✅ 登入成功')
-
-      return { username, firstToken }
-    }
-
-    console.log(`⁉️ 正要開始嘗試登入: `)
-    const { error: loginError, username, firstToken } = await _login()
-    if (loginError != null) return
-
-    console.log('📧 email:', payload.email)
-    console.log('💂 username:', username)
-    console.log('🔑 token:', firstToken)
-
-    // TODO(flyc): 這個的檢查可以調整一下
-    if (
-      !LoginNeeded.regexpDevice.test(firstToken) &&
-      !LoginNeeded.regexp2Fa.test(firstToken) &&
-      !LoginNeeded.regexpLoginToken.test(firstToken)
-    ) {
-      console.log('🗝️ 這個 token 已經可以用囉')
-      return { token: firstToken, websiteLink: payload.websiteLink }
-    }
-
-    console.log()
-    console.log(`⁉️ 正要開始重新寄送 OTP: `)
-    const { error: resendError } = await payload.resendOtp(firstToken)
+  async otpFlow({ firstToken, username }) {
+    titleConsole('需要 OTP')
+    subTitleConsole(`重新寄送 OTP: `)
+    const { error: resendError } = await this.resendOtp(firstToken)
     if (resendError != null) {
-      console.error('在 resendError 發生錯誤', payload)
-      return void console.error(resendError)
+      errorConsole('在 resendError 發生錯誤', this)
+      return void errorConsole(resendError)
     } else console.log('✅ 重新寄送 otp 成功')
 
-    console.log()
-    console.log(`⁉️ 正要開始嘗試從 redis 裡取得 OTP:`)
-    const { error: redisError, data: { data: redisData } = {} } = await payload.getOtp(username, payload.brandName)
-    if (redisError != null || redisData == null) {
-      console.error('在 redisError 發生錯誤', payload)
-      return void console.error(redisError)
+    subTitleConsole(`嘗試從 redis 裡取得 OTP:`)
+    const { error: redisError, data: { data: otpCode } = {} } = await this.getOtp(username)
+    if (redisError != null || otpCode == null) {
+      errorConsole('在 redisError 發生錯誤', this)
+      return void errorConsole(redisError)
     } else console.log('✅ 取得 redis otp 成功')
+    console.log('🕵️ otp: ', otpCode)
+    return otpCode
+  }
 
-    console.log('🕵️ otp: ', redisData)
-
-    console.log()
-    console.log(`⁉️ 正要開始嘗試取得 2fa code:`)
-    const code2Fa = (function () {
+  '2faFlow'() {
+    titleConsole('需要 2FA')
+    subTitleConsole(`嘗試從 secret 計算出 2fa code:`)
+    const code2Fa = function () {
       let code = ''
-      if (payload.secretCode2Fa != null) {
-        code = gen2FaCode(payload.secretCode2Fa)
+      if (this.secretCode2Fa != null) {
+        code = gen2FaCode(this.secretCode2Fa)
         console.log('📶 2fa code:', code)
-      } else if (payload.current2FaCode != null) {
-        code = payload.current2FaCode
+      } else if (this.current2FaCode != null) {
+        code = this.current2FaCode
         console.log('📶 使用者提供的 2fa code:', code)
       } else {
-        console.error('沒有足夠的資訊產生 2fa code')
-        return void 0
+        errorConsole('沒有足夠的資訊產生 2fa code')
+        return null
       }
 
       return code
-    })()
+    }.call(this)
+    return code2Fa
+  }
 
-    if (code2Fa == null) return
+  async healthCheckFlow() {
+    titleConsole('健康檢查流程')
+    subTitleConsole('👩‍⚕️ 開始執行既有 token 的健康檢查: ')
 
-    console.log()
-    console.log(`⁉️ 正要開始最終驗證: `)
-    const { error: finalPassError } = await payload.finalPass({ token: firstToken, otpCode: redisData, passCode: code2Fa })
-    if (finalPassError != null) {
-      console.error('在 finalPassError 發生錯誤', payload)
-      return void console.error(finalPassError)
+    const { token: currentToken } = this
+    if (currentToken) {
+      const { isHealthy } = await this.checkTokenHealth(currentToken)
+
+      if (isHealthy) {
+        console.log('  > 🏥 Token 健康檢查通過')
+        tokenConsole('通過健康檢查的 token', currentToken)
+        return { token: currentToken, websiteLink: this.websiteLink }
+      } else console.log('🤕 Token 已失效，需要重新登入')
+    } else {
+      console.log('  > ❤️‍🩹 不存在既有 token, 不進行健康檢查')
+    }
+
+    return null
+  }
+
+  // loginProcess: 這邊會有 recursive 後取得的 captchaId 和 captchaNumber
+  async loginProcess(otherPayload = {}) {
+    const {
+      error: loginError,
+      data: { success, msg, data: { username, token: firstToken } = {} },
+    } = await this.loginApi(otherPayload)
+    if (loginError != null || !success) {
+      if (msg === 'Wrong captcha code') {
+        console.log('🏞️ 需要輸入 captcha')
+        const { error: captchaError, data: captchaData } = await this.getCaptchaImage()
+        if (captchaError != null) {
+          errorConsole('在 get captcha 發生錯誤', this)
+          errorConsole(captchaError ?? msg)
+          return { error: captchaError }
+        }
+        const {
+          data: { img, captchaId },
+        } = captchaData
+        await showBase64Image(img)
+
+        // Get the captcha value from redis
+        const { error: redisCaptchaError, data: { data: captchaNumber } = {} } = await this.getCaptcha(captchaId)
+        if (redisCaptchaError != null || captchaNumber == null) {
+          errorConsole('在取得 redis captcha 發生錯誤', this)
+          errorConsole(redisCaptchaError)
+          return { error: redisCaptchaError }
+        }
+
+        return this.loginProcess({ captchaId, captchaNumber })
+      } else {
+        errorConsole('在 loginError 發生錯誤', this)
+        errorConsole(loginError ?? msg)
+        return { error: loginError ?? msg }
+      }
+    } else console.log('✅ 登入成功')
+
+    return { username, firstToken }
+  }
+
+  async login() {
+    // 先檢查 token 是否健康
+    const healthResult = await this.healthCheckFlow()
+    if (healthResult != null) return healthResult
+
+    titleConsole(`開始登入流程: `)
+    const { error: loginError, username, firstToken } = await this.loginProcess()
+    if (loginError != null) return
+
+    console.log('📧 email:', this.email)
+    console.log('💂 username:', username)
+    console.log('🔑 token:', firstToken)
+
+    if (
+      !LoginNeeded.regexpDevice.test(firstToken) && // 僅需要 deviceOTP
+      !LoginNeeded.regexp2Fa.test(firstToken) && // 需要 2FA 和 deviceOTP
+      !LoginNeeded.regexpLoginToken.test(firstToken) // 僅需要 2FA
+    ) {
+      tokenConsole('這個 token 已經可以用囉', firstToken)
+      return { token: firstToken, websiteLink: this.websiteLink }
+    }
+
+    // 如果有需要 deviceOTP 的話
+    let otpCode = null
+    if (!LoginNeeded.regexpLoginToken.test(firstToken)) {
+      otpCode = await this.otpFlow({ firstToken, username })
+      if (otpCode == null) return null
+    }
+
+    // 如果有需要 2FA 的話
+    let code2Fa = null
+    if (!LoginNeeded.regexpDevice.test(firstToken)) {
+      code2Fa = this['2faFlow']()
+      if (code2Fa == null) return null
+    }
+
+    titleConsole(`正要開始最終驗證: `)
+    const finalParams = {
+      deviceFingerprint: this.deviceFingerprint,
+      token: firstToken,
+      otpCode,
+      code2Fa,
+    }
+    console.log('最終驗證的參數:', JSON.stringify(finalParams))
+    const { error: finalPassError, ...others } = await this.finalPass(finalParams)
+    if (finalPassError != null || !others.data.success) {
+      errorConsole('在 finalPassError 發生錯誤', this)
+      return void errorConsole(finalPassError ?? others.data.msg)
     } else console.log('✅ 最終驗證成功')
 
-    return { token: firstToken, websiteLink: payload.websiteLink }
+    tokenConsole('收到的 token', others.data.data.token)
+
+    return { token: others.data.data.token, websiteLink: this.websiteLink }
   }
+}
+
+function errorConsole(...params) {
+  console.log(`\x1b[1m\x1b[31m`, ...params, `\x1b[0m`)
+}
+
+function titleConsole(...params) {
+  console.log(`\x1b[1m\x1b[34m`, ...params, `\x1b[0m`)
+}
+
+function subTitleConsole(...params) {
+  console.log(`\x1b[34m`, ...params, `\x1b[0m`)
+}
+
+function tokenConsole(str, token) {
+  console.log(`💖 ${str}: `, '\x1b[1m\x1b[43m', token, '\x1b[0m')
 }

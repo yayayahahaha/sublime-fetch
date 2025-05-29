@@ -21,12 +21,19 @@ function doFetch(url, config = {}) {
     })
 }
 
-export function get(url) {
-  return doFetch(url)
+export function get(url, ...other) {
+  return doFetch(url, ...other)
 }
 
 export function post(url, params = null, headers = {}) {
   const body = params instanceof FormData ? params : typeof params === 'string' ? params : JSON.stringify(params)
+
+  if (!console) {
+    console.log('post 收到的參數們: ')
+    console.log('\turl: ', url)
+    console.log('\tbody: ', body)
+    console.log('\theaders: ', headers)
+  }
 
   return doFetch(url, { method: 'post', body, headers })
 }
