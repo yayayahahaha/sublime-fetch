@@ -1,3 +1,5 @@
+// TODO(flyc): device fingerprint 看能不能自動生成和 browser 一樣的?
+
 import jsSha3 from 'js-sha3'
 import { get, post } from './request-stuff.js'
 import { gen2FaCode } from './2fa.js'

@@ -2,10 +2,8 @@ import express from 'express'
 import { connectRedis } from './redis.js'
 import { Response } from './request-stuff.js'
 import { setting } from './WL.js'
-import bodyParser from 'body-parser'
 import { LoginNeeded } from './login-stuff.js'
 const app = express()
-const port = 9999
 
 const settingMapping = Object.fromEntries(setting.map((item) => [item.pk, item]))
 // 添加暫存登入結果的物件
@@ -35,7 +33,7 @@ app.use(
 )
 
 // 設定基本路由
-app.get('/', (req, res) => res.send('turn BACK 🚶‍♂️'))
+app.get('/', (req, res) => res.send(new Response({ data: 'turn BACK 🚶‍♂️' })))
 
 app.post('/login', async (req, res) => {
   const {
@@ -60,6 +58,7 @@ app.post('/login', async (req, res) => {
       password,
       secretCode2Fa,
       deviceFingerprint: deviceFingerprint ?? `${brandName}-${email}-fingerprint-mock`,
+      // deviceFingerprint: deviceFingerprint ?? `_oaanym1747972414766`,
     })
   } catch (e) {
     res.send(new Response({ error: e.message }))
@@ -124,6 +123,20 @@ app.get('/getCaptcha', async (req, res) => {
   if (error != null) return res.send(new Response({ error, data: value }))
   res.send(new Response({ data: value }))
 })
+
+// 處理未定義的路由
+app.use((req, res) => {
+  res.status(404).send(new Response({ data: 'turn BACK 🚶‍♂️' }))
+})
+// 處理錯誤
+app.use((err, req, res, next) => {
+  console.error('伺服器錯誤:', err)
+  res.status(500).send(new Response({ error: '伺服器內部錯誤' }))
+})
+// 設定伺服器監聽的 port
+const port = process.env.PORT || 9999
+// 設定伺服器監聽的 port
+app.set('port', port)
 
 // 啟動伺服器
 app.listen(port, () => {

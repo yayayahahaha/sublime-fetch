@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>Tab and Fetch Plugin</title>
     <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="semi-auto-login.css" />
   </head>
 
   <body>
@@ -14,41 +15,12 @@
 
       <div>---</div>
       <h3>半自動登入</h3>
-      <button id="addBtn">添加半自動登入</button>
-      <div id="container"></div>
-
-      <div>---</div>
-
-      <h3>快速登入</h3>
-      <!-- <button id="quick-login-test">測試用</button> -->
-      <!-- TODO(flyc): 這裡要改成透過呼叫 api 取得 -->
-      <button class="quick-login" pk="btse-staging">登入 btse-staging</button>
-      <button class="quick-login" pk="paradise-staging">登入 paradise-staging</button>
-      <button class="quick-login" pk="bitmarkets-staging">登入 bitmarkets-staging</button>
-      <button class="quick-login" pk="bitmarkets1-staging">登入 bitmarkets1-staging</button>
-      <button class="quick-login" pk="b2z-staging">登入 b2z-staging</button>
-      <button class="quick-login" pk="lmex-staging">登入 lmex-staging</button>
-      <button class="quick-login" pk="interpay-staging">登入 interpay-staging</button>
-      <button class="quick-login" pk="trans-staging">登入 trans-staging</button>
-      <button class="quick-login" pk="bullstreetex-staging">登入 bullstreetex-staging</button>
-      <button class="quick-login" pk="btse-gi-staging">登入 btse-gi-staging</button>
-      <button class="quick-login" pk="btse-lt-staging">登入 btse-lt-staging</button>
-      <button class="quick-login" pk="altex-staging">登入 altex-staging</button>
-      <button class="quick-login" pk="crypto-staging">登入 crypto-staging</button>
-      <button class="quick-login" pk="btse-li-staging">登入 btse-li-staging</button>
-      <button class="quick-login" pk="binoex-staging">登入 binoex-staging</button>
-      <button class="quick-login" pk="nvx-staging">登入 nvx-staging</button>
-      <button class="quick-login" pk="traiex-staging">登入 traiex-staging</button>
-      <button class="quick-login" pk="autotrader-staging">登入 autotrader-staging</button>
-      <button class="quick-login" pk="bitkub-staging">登入 bitkub-staging</button>
-      <button class="quick-login" pk="bitqik-staging">登入 bitqik-staging</button>
-      <button class="quick-login" pk="coinwise-staging">登入 coinwise-staging</button>
-      <button class="quick-login" pk="obot-staging">登入 obot-staging</button>
-      <button class="quick-login" pk="fedhabit-staging">登入 fedhabit-staging</button>
-      <button class="quick-login" pk="btzo-staging">登入 btzo-staging</button>
-      <button class="quick-login" pk="traxex-staging">登入 traxex-staging</button>
-      <button class="quick-login" pk="lmex-staging">登入 lmex-staging</button>
-      <button class="quick-login" pk="traiex-staging">登入 traiex-staging</button>
+      <button id="semi-auto-login-addBtn">添加半自動登入</button>
+      <button id="semi-auto-login-sort">重新排序</button>
+      <div id="semi-auto-login-container"></div>
+      <div id="semi-auto-login-des">
+        <p>* port 號為空的話會開啟 staging 環境的網址</p>
+      </div>
 
       <div>---</div>
 
