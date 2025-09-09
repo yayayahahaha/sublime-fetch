@@ -32,7 +32,7 @@ const WHITE_LABEL_LIST = [
 ]
 
 const BASE_URL_FN = (repo) => {
-  return `https://gitlab01.oa.btse.io/${repo}/-/merge_requests/new`
+  return `https://gitlab.com/${repo}/-/merge_requests/new`
 }
 
 function guessTargetBranch(repo) {
