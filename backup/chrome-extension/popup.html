@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Tab and Fetch Plugin</title>
     <link rel="stylesheet" href="popup.css" />
-    <link rel="stylesheet" href="semi-auto-login.css" />
+    <link rel="stylesheet" href="semi-auto-login/semi-auto-login.css" />
   </head>
 
   <body>
@@ -13,8 +13,14 @@
       <input type="text" id="jira-branch-input" placeholder="英文名字" />
       <div class="button" id="jira-branch-btn">從 Jira 產生 branch name</div>
 
-      <div>---</div>
-      <h3>半自動登入</h3>
+      <h2 style="color: red">以下功能都為半殘 Beta 版</h2>
+
+      <h3>
+        半自動登入
+        <span style="color: gray; font-size: 12px; font-weight: normal"
+          >需要在本地啟動 localhost:9999 作為 redis 的跳板</span
+        >
+      </h3>
       <button id="semi-auto-login-addBtn">添加半自動登入</button>
       <button id="semi-auto-login-sort">重新排序</button>
       <div id="semi-auto-login-container"></div>
@@ -25,7 +31,7 @@
       <div>---</div>
 
       <h3>取得與儲存當前畫面 token</h3>
-      <button id="exort-token">exort</button>
+      <button id="exort-token">export</button>
       <table token>
         <thead>
           <tr>
@@ -40,9 +46,9 @@
             </td>
             <td behavior-field>
               <div class="icon-container">
-                <div class="icon icon-delete">🗡️</div>
-                <div class="icon icon-set">🌠</div>
-                <div class="icon icon-take">🙌</div>
+                <div class="icon icon-delete">🗡️刪除</div>
+                <div class="icon icon-set">🌠替換掉當前頁面的 token</div>
+                <div class="icon icon-take">🙌複製</div>
               </div>
             </td>
           </tr>
@@ -55,6 +61,8 @@
       </table>
     </div>
   </body>
-  <script src="popup.js"></script>
-  <script src="semi-auto-login.js"></script>
+  <script src="global-utils/global-utils.js"></script>
+  <script src="semi-auto-login/semi-auto-login.js"></script>
+  <script src="copy-branch-name-by-jira/copy-branch-name-by-jira.js"></script>
+  <script src="token-storage/token-storage.js"></script>
 </html>

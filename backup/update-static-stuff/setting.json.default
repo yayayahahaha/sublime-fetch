@@ -1,6 +1,8 @@
 {
   "frontend-repo-path": "/Users/flyc.chung/btse/frontend",
+  "s3-repo-path": "/Users/flyc.chung/btse/btse-static-resource",
   "new-images-folder": "./new-images",
+  "figma-images-folders": "./figma-images/裡面要放直接從 figma 的 icon & assets 拖選後 export 的 6 個 layer",
   "target-brand": "這裡要放 brand name, e.g. \"lmex\"",
   "figma-token": null
 }

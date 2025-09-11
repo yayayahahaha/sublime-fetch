@@ -1,20 +1,168 @@
 import path from 'path'
 import fs from 'fs'
+import select from '@inquirer/select'
 import { JSDOM } from 'jsdom'
-import { consoleRed } from './utils.js'
-import { high } from './console-utils.js'
+import { checkSetting, consoleRed, high, isDir, readSetting } from './utils.js'
 
 const logoLightInfo = {
   fileName: 'logo-light.svg',
+  pngFileName: 'logo-light.png',
   componentName: 'LogoLight',
 }
 const logoDarkInfo = {
   fileName: 'logo-dark.svg',
+  pngFileName: 'logo-dark.png',
   componentName: 'LogoDark',
 }
 const logos = [logoLightInfo, logoDarkInfo]
 
-export async function syncLogoLightAndDark(logoInstanceList, { targetBrand, frontendRepoPath } = {}) {
+export async function svgLogoStuff() {
+  const settings = readSetting()
+  if (settings == null) return
+
+  const { ok, frontendRepoPath, newImagesFolder, targetBrand } = checkSetting(settings)
+  if (!ok) return
+
+  if (!isDir(newImagesFolder)) {
+    return void consoleRed(`${newImagesFolder} 需為一個資料夾!`)
+  }
+
+  const logoInstanceList = checkLogoLightAndLogoDark(newImagesFolder, {
+    frontendRepoPath,
+    targetBrand,
+  })
+  if (logoInstanceList.length === 0) return
+
+  const makeSure = await select({
+    message: '檢查完畢，即將開始修改 LogoLight 和 LogoDark 相關的檔案，請確認清空 frontend repo 的 git status',
+    choices: [
+      {
+        name: '我還沒清完，等等再做',
+        value: false,
+      },
+      {
+        name: '清除完畢，開始吧',
+        value: true,
+      },
+    ],
+  }).catch(() => false)
+  if (!makeSure) return
+
+  await syncLogoLightAndDark(logoInstanceList, {
+    targetBrand,
+    frontendRepoPath,
+  })
+
+  console.log('完成!')
+}
+
+// S3 那邊的
+export async function s3LogStuff() {
+  const settings = readSetting()
+  if (settings == null) return
+
+  const { ok, s3RepoPath, newImagesFolder, targetBrand } = checkSetting(settings)
+  if (!ok) return
+
+  if (!isDir(newImagesFolder)) {
+    return void consoleRed(`${newImagesFolder} 需為一個資料夾!`)
+  }
+
+  const logoInstanceList = _checkS3Logos(newImagesFolder, {
+    s3RepoPath,
+    targetBrand,
+  })
+  if (logoInstanceList.length === 0) return
+
+  const makeSure = await select({
+    message: '檢查完畢，即將開始修改 LogoLight 和 LogoDark 相關的檔案，請確認清空 frontend repo 的 git status',
+    choices: [
+      {
+        name: '我還沒清完，等等再做',
+        value: false,
+      },
+      {
+        name: '清除完畢，開始吧',
+        value: true,
+      },
+    ],
+  }).catch(() => false)
+  if (!makeSure) return
+
+  logoInstanceList.forEach((payload) => {
+    const { extraBehavior } = payload
+
+    extraBehavior.forEach((behavior) => behavior())
+  })
+
+  console.log('完成!')
+
+  function _checkS3Logos(newImagesFolder, { s3RepoPath, targetBrand } = {}) {
+    if (typeof s3RepoPath !== 'string') {
+      consoleRed('缺少參數 s3RepoPath')
+      return []
+    }
+    if (typeof targetBrand !== 'string') {
+      consoleRed('缺少參數 targetBrand')
+      return []
+    }
+
+    const formatedLogoInfo = logos.reduce((acc, logoInfo) => {
+      const logoPath = path.resolve('.', newImagesFolder, 'logos', logoInfo.pngFileName)
+      const logoPathSvg = path.resolve('.', newImagesFolder, 'logos', logoInfo.fileName)
+      const exist = fs.existsSync(logoPath)
+      const existSvg = fs.existsSync(logoPathSvg)
+      if (!exist) {
+        consoleRed(`${logoInfo.pngFileName} 不存在於 ${newImagesFolder} !`)
+      }
+      if (!existSvg) {
+        consoleRed(`${logoInfo.fileName} 不存在於 ${newImagesFolder} !`)
+      }
+
+      const newFilePath = logoPath
+      const newFilePathSvg = logoPathSvg
+      const targetPath = path.resolve(s3RepoPath, targetBrand, logoInfo.pngFileName)
+      const targetPathSvg = path.resolve(s3RepoPath, targetBrand, logoInfo.fileName)
+      const targetPathEmail = path.resolve(s3RepoPath, targetBrand, 'email', logoInfo.pngFileName)
+
+      const extraBehavior = [
+        () => fs.copyFileSync(newFilePath, targetPath),
+        () => fs.copyFileSync(newFilePath, targetPathEmail),
+        () => fs.copyFileSync(newFilePathSvg, targetPathSvg),
+      ]
+
+      acc.push(
+        new LogoInstance({
+          ...logoInfo,
+          extraBehavior,
+          newFilePath,
+          exist,
+          targetPath,
+        })
+      )
+
+      return acc
+    }, [])
+
+    const exist = formatedLogoInfo.every((logoInfo) => logoInfo.exist)
+    const { widthList, heightList } = formatedLogoInfo.reduce(
+      (acc, item) => {
+        acc.widthList.push(item.width)
+        acc.heightList.push(item.height)
+        return acc
+      },
+      { widthList: [], heightList: [] }
+    )
+    const sameSize = [...new Set(widthList)].length === 1 && [...new Set(heightList)].length === 1
+    if (!sameSize) {
+      consoleRed('Logo 的尺寸不一致!')
+    }
+
+    return exist && sameSize ? formatedLogoInfo : []
+  }
+}
+
+async function syncLogoLightAndDark(logoInstanceList, { targetBrand, frontendRepoPath } = {}) {
   const infoList = logoInstanceList.map((logoInfo) => {
     const { svgDom } = logoInfo
 
@@ -105,7 +253,7 @@ export async function syncLogoLightAndDark(logoInstanceList, { targetBrand, fron
   fs.writeFileSync(generalConfigPath, configContent)
 }
 
-export function checkLogoLightAndLogoDark(newImagesFolder, { frontendRepoPath, targetBrand } = {}) {
+function checkLogoLightAndLogoDark(newImagesFolder, { frontendRepoPath, targetBrand } = {}) {
   if (typeof frontendRepoPath !== 'string') {
     consoleRed('缺少參數 frontendRepoPath')
     return []
@@ -116,7 +264,7 @@ export function checkLogoLightAndLogoDark(newImagesFolder, { frontendRepoPath, t
   }
 
   const formatedLogoInfo = logos.reduce((acc, logoInfo) => {
-    const logoPath = path.resolve('.', newImagesFolder, logoInfo.fileName)
+    const logoPath = path.resolve('.', newImagesFolder, 'logos', logoInfo.fileName)
     const exist = fs.existsSync(logoPath)
     if (!exist) {
       consoleRed(`${logoInfo.fileName} 不存在於 ${newImagesFolder} !`)
@@ -129,14 +277,14 @@ export function checkLogoLightAndLogoDark(newImagesFolder, { frontendRepoPath, t
       'component',
       `${logoInfo.componentName}.vue`
     )
-    const content = fs.readFileSync(logoPath, 'utf8')
-    const svgDom = new JSDOM(content).window.document.querySelector('svg')
-    if (svgDom == null) {
+    const content = exist ? fs.readFileSync(logoPath, 'utf8') : ''
+    const svgDom = exist ? new JSDOM(content).window.document.querySelector('svg') : null
+    if (exist && svgDom == null) {
       consoleRed(`${logoPath} 不為 SVG!`)
     }
 
-    const width = svgDom.getAttribute('width')
-    const height = svgDom.getAttribute('height')
+    const width = exist ? svgDom.getAttribute('width') : null
+    const height = exist ? svgDom.getAttribute('height') : null
 
     acc.push(
       new LogoInstance({
@@ -171,8 +319,22 @@ export function checkLogoLightAndLogoDark(newImagesFolder, { frontendRepoPath, t
 
 class LogoInstance {
   constructor(payload) {
-    const { componentName, fileName, targetPath, exist, width, height, svgDom, content, ids } = payload
+    const {
+      componentName,
+      fileName,
+      newFilePath,
+      targetPath,
+      extraBehavior,
+      exist,
+      width,
+      height,
+      svgDom,
+      content,
+      ids,
+    } = payload
 
+    this.extraBehavior = extraBehavior ?? []
+    this.newFilePath = newFilePath ?? ''
     this.componentName = componentName ?? ''
     this.fileName = fileName ?? ''
     this.targetPath = targetPath ?? ''
