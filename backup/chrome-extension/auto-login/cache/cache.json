@@ -1,0 +1,72 @@
+{
+  "autotrader-fc@mailto.plus-!QAZ1qaz--autotrader-fc@mailto.plus-!QAZ1qaz": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NTQ1NjA0MjMsImV4cCI6MTc1NzE1MjQyMywiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZjMWF1dG90cmFkZXJAY29weXdpc2UiLCJjbGllbnRJZCI6ImNvcHl3aXNlIiwicmFuZG9tIjoiMC43MzAxNjMwODM5NzEwMTI4IiwiZGV2aWNlVHlwZSI6IndlYiIsImRldmljZUlkIjoiYXV0b3RyYWRlci1mY0BtYWlsdG8ucGx1cy0hUUFaMXFheiIsInNjb3BlcyI6WyJ0cnVzdGVkIl19.es2r0yr1nnD1vkSDg2rVXhHm-v986JmxOrsPdfMEGks",
+    "deviceFingerprint": "autotrader-fc@mailto.plus-!QAZ1qaz",
+    "isInProgress": false,
+    "inProgressTimestamp": null,
+    "inProgressToken": null
+  },
+  "bitkub-flyc.chung@btse.com-!QAZ1qaz--bitkub-flyc.chung@btse.com-!QAZ1qaz": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NTYxMTczODcsImV4cCI6MTc1ODcwOTM4NywiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWNjaHVuZ2JpdGt1YkBiaXRrdWIiLCJjbGllbnRJZCI6ImJpdGt1YiIsInJhbmRvbSI6IjAuMzE0MjEzMTA0NDg1NDM2NSIsImRldmljZVR5cGUiOiJ3ZWIiLCJkZXZpY2VJZCI6ImJpdGt1Yi1mbHljLmNodW5nQGJ0c2UuY29tLSFRQVoxcWF6Iiwic2NvcGVzIjpbInRydXN0ZWQiXX0.yjQ9b1v_qWODb8IQX0rIdsdMlIcREs_fxF1nZQVnJK8",
+    "deviceFingerprint": "bitkub-flyc.chung@btse.com-!QAZ1qaz",
+    "isInProgress": false,
+    "inProgressTimestamp": null,
+    "inProgressToken": null
+  },
+  "btse-flyc.chung@btse.com-!QAZ1qaz-4IEPN4HOPRIMWHXB-btse-staging-fingerprint": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NTczMjY2NzcsImV4cCI6MTc1OTkxODY3NywiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWNjaHVuZyIsImNsaWVudElkIjoiYnRzZSIsInJhbmRvbSI6IjAuMDg1NTY4MjQwMjU5ODU2NDMiLCJkZXZpY2VUeXBlIjoid2ViIiwiZGV2aWNlSWQiOiJidHNlLXN0YWdpbmctZmluZ2VycHJpbnQiLCJzY29wZXMiOlsidHJ1c3RlZCJdfQ.OC7qEc5URUBlr4brettJJC4cR4xRdVsLQfCKYi6ly-4",
+    "deviceFingerprint": "btse-staging-fingerprint",
+    "isInProgress": false,
+    "inProgressTimestamp": null,
+    "inProgressToken": null
+  },
+  "btzo-flyc.chung@btse.com-!QAZ1qaz--btzo-flyc.chung@btse.com-!QAZ1qaz": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NTMwNjk0MTUsImV4cCI6MTc1NTY2MTQxNSwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWNidHpvc3RhZ2VAYnR6byIsImNsaWVudElkIjoiYnR6byIsInJhbmRvbSI6IjAuMzAxNDEwMDEyNzE1MDI2NjUiLCJkZXZpY2VUeXBlIjoid2ViIiwiZGV2aWNlSWQiOiJidHpvLWZseWMuY2h1bmdAYnRzZS5jb20tIVFBWjFxYXoiLCJzY29wZXMiOlsidHJ1c3RlZCJdfQ.btqh2j0INT-Psfr2wp0sNizu7rk3UY3iJFeHiam8gDo",
+    "deviceFingerprint": "btzo-flyc.chung@btse.com-!QAZ1qaz",
+    "isInProgress": false,
+    "inProgressTimestamp": null,
+    "inProgressToken": null
+  },
+  "btse-fc1@mailto.plus-!QAZ1qaz--btse-staging-fingerprint": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NTY4OTM0MDMsImV4cCI6MTc1OTQ4NTQwMywiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZjMWJ0c2VzdGFnaW5nIiwiY2xpZW50SWQiOiJidHNlIiwicmFuZG9tIjoiMC42MzQ4MjU4NzUxNDMzNzIiLCJkZXZpY2VUeXBlIjoid2ViIiwiZGV2aWNlSWQiOiJidHNlLXN0YWdpbmctZmluZ2VycHJpbnQiLCJzY29wZXMiOlsidHJ1c3RlZCJdfQ.6HXs2n1qUMab0-n8lgUoyf5-Zq2PM8FRsLNGb6aHxpc",
+    "deviceFingerprint": "btse-staging-fingerprint",
+    "isInProgress": false,
+    "inProgressTimestamp": null,
+    "inProgressToken": null
+  },
+  "fedhabit-flyc.chung@btse.com-!QAZ1qaz--fedhabit-flyc.chung@btse.com-!QAZ1qaz": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NTQ4ODE1NTcsImV4cCI6MTc1NzQ3MzU1NywiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWNmZWRoYWJpdEBmZWRoYWJpdCIsImNsaWVudElkIjoiZmVkaGFiaXQiLCJyYW5kb20iOiIwLjY0MjM2NjA2MzUzNzI1MzkiLCJkZXZpY2VUeXBlIjoid2ViIiwiZGV2aWNlSWQiOiJmZWRoYWJpdC1mbHljLmNodW5nQGJ0c2UuY29tLSFRQVoxcWF6Iiwic2NvcGVzIjpbInRydXN0ZWQiXX0.m2fsq0G_q1l3SOV2ldkQnVVBFGuPaLKzLXEcfX-SXlQ",
+    "deviceFingerprint": "fedhabit-flyc.chung@btse.com-!QAZ1qaz",
+    "isInProgress": false,
+    "inProgressTimestamp": null,
+    "inProgressToken": null
+  },
+  "atpro-flyc.chung@btse.com-!QAZ1qaz--atpro-flyc.chung@btse.com-!QAZ1qaz": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NTUxNjA1ODksImV4cCI6MTc1Nzc1MjU4OSwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWNjaHVuZ2F0cHJvQGF0cHJvIiwiY2xpZW50SWQiOiJhdHBybyIsInJhbmRvbSI6IjAuMDA0MzE4ODk1OTk2MTU2NTM1IiwiZGV2aWNlVHlwZSI6IndlYiIsImRldmljZUlkIjoiYXRwcm8tZmx5Yy5jaHVuZ0BidHNlLmNvbS0hUUFaMXFheiIsInNjb3BlcyI6WyJ0cnVzdGVkIl19.AwJ9do7r7NTTUxyrh32bx1Vw64-wGF4S5UxKAFG9YIw",
+    "deviceFingerprint": "atpro-flyc.chung@btse.com-!QAZ1qaz",
+    "isInProgress": false,
+    "inProgressTimestamp": null,
+    "inProgressToken": null
+  },
+  "freedx-flyc.chung@btse.com-!QAZ1qaz--freedx-flyc.chung@btse.com-!QAZ1qaz": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NTY0NjAwMDcsImV4cCI6MTc1OTA1MjAwNywiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWNmcmVlZHhzdGFnaW5nQGZyZWVkeCIsImNsaWVudElkIjoiZnJlZWR4IiwicmFuZG9tIjoiMC45Nzk1MzE5NjkzOTcwMTU0IiwiZGV2aWNlVHlwZSI6IndlYiIsImRldmljZUlkIjoiZnJlZWR4LWZseWMuY2h1bmdAYnRzZS5jb20tIVFBWjFxYXoiLCJzY29wZXMiOlsidHJ1c3RlZCJdfQ.2KHEJZnvuWo1wHSONyy64PZXHNoHuQSbKxLQp7JiRRc",
+    "deviceFingerprint": "freedx-flyc.chung@btse.com-!QAZ1qaz",
+    "isInProgress": false,
+    "inProgressTimestamp": null,
+    "inProgressToken": null
+  },
+  "nvx-flyc.chung@btse.com-!QAZ1qaz--nvx-flyc.chung@btse.com-!QAZ1qaz": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NTc0MTAwNzUsImV4cCI6MTc2MDAwMjA3NSwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWNudm1AbnZ4IiwiY2xpZW50SWQiOiJudngiLCJyYW5kb20iOiIwLjQxMTYzMTQzNDk0MjUzMDQiLCJkZXZpY2VUeXBlIjoid2ViIiwiZGV2aWNlSWQiOiJudngtZmx5Yy5jaHVuZ0BidHNlLmNvbS0hUUFaMXFheiIsInNjb3BlcyI6WyJ0cnVzdGVkIl19.IMY7IiNogfotwHwRUfPtaVW-DJPBYZRr0glDNOffcBY",
+    "deviceFingerprint": "nvx-flyc.chung@btse.com-!QAZ1qaz",
+    "isInProgress": false,
+    "inProgressTimestamp": null,
+    "inProgressToken": null
+  },
+  "nvx-btseidstg4-Aa123123@-U7GKG4BZNDELUHMT-nvx-btseidstg4-Aa123123@-U7GKG4BZNDELUHMT": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NTc0MTEzODEsImV4cCI6MTc2MDAwMzM4MSwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImJ0c2VpZHN0ZzRAbnZ4IiwiY2xpZW50SWQiOiJudngiLCJyYW5kb20iOiIwLjA5MzkwMzQxODU3MzE4NTYzIiwiZGV2aWNlVHlwZSI6IndlYiIsImRldmljZUlkIjoibnZ4LWJ0c2VpZHN0ZzQtQWExMjMxMjNALVU3R0tHNEJaTkRFTFVITVQiLCJzY29wZXMiOlsidHJ1c3RlZCJdfQ.a2DqITLPG-vDOjJsl1RdEzBI1eKG35D26HtE7J4x9lE",
+    "deviceFingerprint": "nvx-btseidstg4-Aa123123@-U7GKG4BZNDELUHMT",
+    "isInProgress": false,
+    "inProgressTimestamp": null,
+    "inProgressToken": null
+  }
+}

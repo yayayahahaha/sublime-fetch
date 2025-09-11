@@ -15,35 +15,7 @@ function setMessage(value, { type = 'info' } = {}) {
 document.addEventListener('DOMContentLoaded', function () {
   copyBranchNameByJira()
   tokenStorage()
-  quickLogin()
 })
-
-function quickLogin() {
-  const buttons = document.querySelectorAll('.quick-login')
-  ;[...buttons].forEach((dom) => {
-    dom.addEventListener('click', async function () {
-      const pk = dom.getAttribute('pk')
-
-      const quickLoginUrl = `http://localhost:9999/login-by-pk?pk=${pk}`
-
-      const { error, data: { token, websiteLink } = {} } = await fetch(quickLoginUrl).then((res) => res.json())
-      if (error) {
-        console.error(error)
-        return void setMessage('錯啦, 可以看看 extension 的 inspect 或 server', { type: 'error' })
-      }
-
-      if (!websiteLink || !token) {
-        return void setMessage('錯啦, 可以看看 extension 的 inspect 或 server', { type: 'error' })
-      }
-
-      chrome.runtime.sendMessage({
-        action: 'openTabWithToken',
-        token,
-        url: websiteLink,
-      })
-    })
-  })
-}
 
 function tokenStorage() {
   const tokenTable = document.querySelector('table[token]')

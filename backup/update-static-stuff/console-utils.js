@@ -1,9 +1,5 @@
-import { STATIC_IMAGES } from './utils.js'
-const hStart = '\x1b[34m'
-const hEnd = '\x1b[0m'
-export function high(msg) {
-  return `${hStart}${msg}${hEnd}`
-}
+import { STATIC_IMAGES } from './static-files-utils.js'
+import { high } from './utils.js'
 
 export function 修改白牌會動到的東西() {
   consoleTitle('總共需要處理的東西')
@@ -70,6 +66,12 @@ export function 修改白牌會動到的東西() {
   console.log()
   consoleSub('Legal')
   console.log('Legal 頁面基本上會要全部重新盤點一次')
+
+  // S3
+  console.log()
+  consoleSub('S3')
+  console.log('S3 那邊會需要上傳 png 和 svg 的 Logo, 還會有一些像是 referral 的 banner(login/not-login)')
+  console.log('task-and-reward, copy-trading 等等')
 }
 
 function consoleTitle(msg) {

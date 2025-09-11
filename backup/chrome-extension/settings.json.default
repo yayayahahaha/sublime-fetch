@@ -1,0 +1,20 @@
+{
+  "loginProfiles": [
+    {
+      "displayName": "__PUT_OPTION_DISPLAY_NAME_HERE__",
+      "brandName": "__PUT_YOUR_BRAND_NAME_HERE__, null means btse",
+      "email": "__PUT_YOUR_EMAIL_HERE__",
+      "password": "__PUT_YOUR_PASSWORD_HERE__",
+      "secretCode2Fa": "__PUT_YOUR_2FA_CODE_HERE_"
+    }
+  ],
+
+  "brand-list": ["// 可以透過執行 node auto-login/generate-brand-info.js 來生成這裡的東西"],
+
+  "frontend-repo-path": "// 絕對路徑, 用於讓 auto-login/generate-brand-info.js 抓取 api 所需資訊",
+
+  "redis": {
+    "host": "10.1.34.152",
+    "port": 6379
+  }
+}
