@@ -18,8 +18,8 @@ importers:
         specifier: ^3.693.0
         version: 3.693.0(@aws-sdk/client-sso-oidc@3.696.0(@aws-sdk/client-sts@3.696.0))
       '@inquirer/checkbox':
-        specifier: ^4.0.2
-        version: 4.0.2(@types/node@22.9.0)
+        specifier: ^4.3.0
+        version: 4.3.0(@types/node@22.9.0)
       '@inquirer/select':
         specifier: ^4.0.2
         version: 4.0.2(@types/node@22.9.0)
@@ -359,14 +359,34 @@ packages:
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
     deprecated: Use @eslint/object-schema instead
 
-  '@inquirer/checkbox@4.0.2':
-    resolution: {integrity: sha512-+gznPl8ip8P8HYHYecDtUtdsh1t2jvb+sWCD72GAiZ9m45RqwrLmReDaqdC0umQfamtFXVRoMVJ2/qINKGm9Tg==}
+  '@inquirer/ansi@1.0.1':
+    resolution: {integrity: sha512-yqq0aJW/5XPhi5xOAL1xRCpe1eh8UFVgYFpFsjEqmIR8rKLyP+HINvFXwUaxYICflJrVlxnp7lLN6As735kVpw==}
+    engines: {node: '>=18'}
+
+  '@inquirer/checkbox@4.3.0':
+    resolution: {integrity: sha512-5+Q3PKH35YsnoPTh75LucALdAxom6xh5D1oeY561x4cqBuH24ZFVyFREPe14xgnrtmGu3EEt1dIi60wRVSnGCw==}
     engines: {node: '>=18'}
     peerDependencies:
       '@types/node': '>=18'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
 
   '@inquirer/core@10.1.0':
     resolution: {integrity: sha512-I+ETk2AL+yAVbvuKx5AJpQmoaWhpiTFOg/UJb7ZkMAK4blmtG8ATh5ct+T/8xNld0CZG/2UhtkdMwpgvld92XQ==}
+    engines: {node: '>=18'}
+
+  '@inquirer/core@10.3.0':
+    resolution: {integrity: sha512-Uv2aPPPSK5jeCplQmQ9xadnFx2Zhj9b5Dj7bU6ZeCdDNNY11nhYy4btcSdtDguHqCT2h5oNeQTcUNSGGLA7NTA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@types/node': '>=18'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
+  '@inquirer/figures@1.0.14':
+    resolution: {integrity: sha512-DbFgdt+9/OZYFM+19dbpXOSeAstPy884FPy1KjDu4anWwymZeOYhMY1mdFri172htv6mvc/uvIAAi7b7tvjJBQ==}
     engines: {node: '>=18'}
 
   '@inquirer/figures@1.0.8':
@@ -384,6 +404,15 @@ packages:
     engines: {node: '>=18'}
     peerDependencies:
       '@types/node': '>=18'
+
+  '@inquirer/type@3.0.9':
+    resolution: {integrity: sha512-QPaNt/nmE2bLGQa9b7wwyRJoLZ7pN6rcyXvzU0YCmivmJyq1BVo94G98tStRWkoD1RgDX5C+dPlhhHzNdu/W/w==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@types/node': '>=18'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2068,14 +2097,17 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
-  '@inquirer/checkbox@4.0.2(@types/node@22.9.0)':
+  '@inquirer/ansi@1.0.1': {}
+
+  '@inquirer/checkbox@4.3.0(@types/node@22.9.0)':
     dependencies:
-      '@inquirer/core': 10.1.0(@types/node@22.9.0)
-      '@inquirer/figures': 1.0.8
-      '@inquirer/type': 3.0.1(@types/node@22.9.0)
-      '@types/node': 22.9.0
-      ansi-escapes: 4.3.2
+      '@inquirer/ansi': 1.0.1
+      '@inquirer/core': 10.3.0(@types/node@22.9.0)
+      '@inquirer/figures': 1.0.14
+      '@inquirer/type': 3.0.9(@types/node@22.9.0)
       yoctocolors-cjs: 2.1.2
+    optionalDependencies:
+      '@types/node': 22.9.0
 
   '@inquirer/core@10.1.0(@types/node@22.9.0)':
     dependencies:
@@ -2091,6 +2123,21 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
+  '@inquirer/core@10.3.0(@types/node@22.9.0)':
+    dependencies:
+      '@inquirer/ansi': 1.0.1
+      '@inquirer/figures': 1.0.14
+      '@inquirer/type': 3.0.9(@types/node@22.9.0)
+      cli-width: 4.1.0
+      mute-stream: 2.0.0
+      signal-exit: 4.1.0
+      wrap-ansi: 6.2.0
+      yoctocolors-cjs: 2.1.2
+    optionalDependencies:
+      '@types/node': 22.9.0
+
+  '@inquirer/figures@1.0.14': {}
+
   '@inquirer/figures@1.0.8': {}
 
   '@inquirer/select@4.0.2(@types/node@22.9.0)':
@@ -2104,6 +2151,10 @@ snapshots:
 
   '@inquirer/type@3.0.1(@types/node@22.9.0)':
     dependencies:
+      '@types/node': 22.9.0
+
+  '@inquirer/type@3.0.9(@types/node@22.9.0)':
+    optionalDependencies:
       '@types/node': 22.9.0
 
   '@nodelib/fs.scandir@2.1.5':

@@ -5,6 +5,8 @@ import util from 'util'
 
 import select, { Separator } from '@inquirer/select'
 import checkbox from '@inquirer/checkbox'
+import { getProfile } from './profile-utils.js'
+export const SELECT_ALL_OPTION_VALUE = 'select-all'
 
 import {
   S3Client,
@@ -12,31 +14,60 @@ import {
   ListObjectsV2Command,
   GetObjectCommand
 } from '@aws-sdk/client-s3'
+import {
+  CloudFrontClient,
+  GetFunctionCommand
+} from '@aws-sdk/client-cloudfront'
 import { fromIni } from '@aws-sdk/credential-providers'
 import { loadingBar, loadingSpinner } from './loading-utils.js'
 
+export const PROJECT_ROOT = '/Users/flyc.chung/btse/aws-tools'
 const STDOUT_DIR_NAME = 'result'
-const STDOUT_DIR_PATH = path.resolve('.', STDOUT_DIR_NAME)
-const FOLDER_OPTIONS = [
-  {
-    value: 'webpages',
-    name: 'webpages',
+const STDOUT_DIR_PATH = path.resolve(PROJECT_ROOT, STDOUT_DIR_NAME)
+const FOLDER_METADATA = {
+  webpages: {
+    sort: 1,
     checked: true,
     description: '打包出來且可以運行的檔案，可以直接 host 看結果'
   },
-  {
-    value: 'static_resource',
-    name: 'static_resource',
+  static_resource: {
+    sort: 2,
     checked: false,
     description:
       '2024/11: 目前 static_resource 的機制還沒好，但有些 brand 有放測試用的檔案在這裡'
+  },
+  logs: {
+    checked: false,
+    description: 'logs 檔案，很多，不推薦勾選'
   }
-]
+}
+
+export async function getTopLevelFolders(Bucket) {
+  const client = generateAwsS3Client()
+  let allPrefixes = []
+  let ContinuationToken = undefined
+  let IsTruncated = true
+
+  while (IsTruncated) {
+    const command = new ListObjectsV2Command({
+      Bucket,
+      Delimiter: '/',
+      ContinuationToken
+    })
+    const response = await client.send(command)
+    if (response.CommonPrefixes) {
+      allPrefixes = allPrefixes.concat(response.CommonPrefixes)
+    }
+    IsTruncated = response.IsTruncated
+    ContinuationToken = response.NextContinuationToken
+  }
+  return allPrefixes.map(p => p.Prefix.slice(0, -1)) // remove trailing '/'
+}
 
 export function generateAwsS3Client() {
   return new S3Client({
     region: 'ap-northeast-1',
-    credentials: fromIni({ profile: 'staging' })
+    credentials: fromIni({ profile: getProfile() })
   })
 }
 
@@ -46,12 +77,55 @@ export function interruptOperation() {
 }
 
 export async function selectFolders({
-  options = FOLDER_OPTIONS,
+  bucket,
   message = '選擇想要下載的資料夾'
-} = {}) {
+}) {
+  if (!bucket) {
+    return { error: new Error('Bucket name is required to fetch folders.') }
+  }
+  const spinner = loadingSpinner()
+  const folderOptionsResult = await getTopLevelFolders(bucket)
+    .then(folders => {
+      const options = folders.map(folderName => {
+        const metadata = FOLDER_METADATA[folderName] || {}
+        return {
+          name: folderName,
+          value: folderName,
+          checked: metadata.checked || false,
+          description: metadata.description,
+          sort: metadata.sort
+        }
+      })
+
+      options.sort((a, b) => {
+        const aHasSort = a.sort != null
+        const bHasSort = b.sort != null
+
+        if (aHasSort && bHasSort) {
+          if (a.sort !== b.sort) return a.sort - b.sort
+        } else if (aHasSort) {
+          return -1
+        } else if (bHasSort) {
+          return 1
+        }
+
+        if (a.checked !== b.checked) {
+          return a.checked ? -1 : 1
+        }
+
+        return a.name.localeCompare(b.name)
+      })
+
+      return options
+    })
+    .catch(error => ({ error }))
+  spinner.stop()
+
+  if (folderOptionsResult.error) return folderOptionsResult
+
   const result = await checkbox({
     message,
-    choices: options
+    choices: folderOptionsResult
   }).catch(error => ({ error }))
 
   if (result.error) return result
@@ -80,7 +154,7 @@ export async function selectBrand() {
   const stagingBucketList = result.Buckets?.map(({ Name }) => Name) || []
 
   return select({
-    message: '選擇一個白牌',
+    message: '選擇一個 s3 bucket',
     pageSize: 30,
     choices: [
       {
@@ -126,18 +200,42 @@ export function labelConsole(title, content) {
 
 export async function handleBrandOperation(
   Bucket,
-  {
-    isDownload = false,
-    folderList = FOLDER_OPTIONS.map(payload => payload.value)
-  } = {}
+  { isDownload = false, folderList, excludeFolders = [] } = {}
 ) {
-  console.log(`\x1b[34m${'從 s3 拉取資料..'}\x1b[0m`)
-
   const client = generateAwsS3Client()
+  const effectiveFolderList =
+    folderList === undefined ? SELECT_ALL_OPTION_VALUE : folderList
+
+  console.log(`\x1b[34m${'從 s3 拉取資料..'}\x1b[0m`)
+  ;(function () {
+    const detailMsg =
+      effectiveFolderList === SELECT_ALL_OPTION_VALUE
+        ? `拉取全部的資料夾, 會過濾掉 ${excludeFolders}`
+        : Array.isArray(effectiveFolderList)
+        ? `要拉取的資料夾: ${effectiveFolderList.join(', ')}`
+        : '出錯了, 拉取全部的資料夾吧'
+    console.log(detailMsg)
+    if (excludeFolders.length > 0) {
+      console.log(`要排除的資料夾: ${excludeFolders.join(', ')}`)
+    }
+  })()
+
+  let prefixList
+  if (effectiveFolderList === SELECT_ALL_OPTION_VALUE) {
+    const allFolders = await getTopLevelFolders(Bucket)
+    const foldersToExclude =
+      excludeFolders && excludeFolders.length > 0 ? excludeFolders : ['logs']
+    prefixList = allFolders.filter(folder => !foldersToExclude.includes(folder))
+  } else if (Array.isArray(effectiveFolderList)) {
+    prefixList = effectiveFolderList
+  } else {
+    prefixList = [null]
+  }
 
   const spinner = loadingSpinner()
+
   let result = await Promise.all(
-    folderList.map(Prefix => _recursive([], { Prefix }))
+    prefixList.map(Prefix => _recursive([], { Prefix }))
   ).catch(error => ({ error }))
   spinner.stop()
 
@@ -212,6 +310,12 @@ export async function handleBrandOperation(
     )
 
     const list = result.concat(Contents)
+    ;(function () {
+      // console.log()
+      // console.log(`'${Prefix ?? '全部'}' 新增的檔案數量: `, Contents.length)
+      // console.log(`'${Prefix ?? '全部'}' 累計的檔案數量: `, list.length)
+      // console.log('NextContinuationToken: ', NextContinuationToken)
+    })()
 
     if (IsTruncated)
       return await _recursive(list, {
@@ -219,5 +323,57 @@ export async function handleBrandOperation(
         Prefix
       })
     return list
+  }
+}
+
+// 新增 generateAwsCloudFrontClient 函式
+export function generateAwsCloudFrontClient() {
+  return new CloudFrontClient({
+    region: 'us-east-1', // CloudFront Functions 必須部署在 us-east-1 區域
+    credentials: fromIni({ profile: getProfile() })
+  })
+}
+
+/**
+ * 根據 FunctionARN 獲取 CloudFront Function 的詳細資訊。
+ * CloudFront Functions 必須部署在 us-east-1 區域。
+ *
+ * @param {string} functionArn - CloudFront Function 的 ARN (例如: "arn:aws:cloudfront::ACCOUNT_ID:function/FUNCTION_NAME")
+ * @returns {Promise<{result?: object, error?: Error}>} 包含 Function 詳細資訊的物件，或錯誤資訊。
+ */
+export async function getCloudFrontFunctionDetails(functionArn) {
+  if (!functionArn) return { error: new Error('Function ARN is required.') }
+
+  const spinner = loadingSpinner()
+  try {
+    const client = generateAwsCloudFrontClient()
+
+    // 從 ARN 中提取 Function Name。ARN 格式為 arn:aws:cloudfront::ACCOUNT_ID:function/FUNCTION_NAME[:VERSION]
+    const functionNameMatch = functionArn.match(/function\/(.*?)(?::\d+)?$/)
+    if (!functionNameMatch || !functionNameMatch[1]) {
+      throw new Error(`Invalid Function ARN format: ${functionArn}`)
+    }
+    const functionName = functionNameMatch[1]
+
+    const command = new GetFunctionCommand({
+      Name: functionName,
+      Stage: 'LIVE' // CloudFront Functions 通常有 LIVE 或 DEVELOPMENT 階段
+    })
+    const response = await client.send(command)
+    spinner.stop()
+    let functionCodeString = ''
+    if (response && response.FunctionCode) {
+      functionCodeString = new TextDecoder('utf-8').decode(
+        response.FunctionCode
+      )
+    }
+    return { result: response, functionCodeString } // 返回 Function 物件和程式碼字串
+  } catch (error) {
+    spinner.stop()
+    console.error(
+      `\x1b[1m\x1b[31m${'獲取 CloudFront Function 詳情失敗!'}\x1b[0m`,
+      error.message
+    )
+    return { error }
   }
 }

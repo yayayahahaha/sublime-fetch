@@ -5,12 +5,13 @@ import {
   GetDistributionCommand
 } from '@aws-sdk/client-cloudfront'
 import { loadingSpinner } from './loading-utils.js'
+import { getProfile } from './profile-utils.js'
 
 function generateAwsCloudfrontClient() {
   const cloudFrontClient = new CloudFrontClient({
     // region: 'us-east-1',
     region: 'ap-northeast-1',
-    credentials: fromIni({ profile: 'staging' })
+    credentials: fromIni({ profile: getProfile() })
   })
 
   return cloudFrontClient
