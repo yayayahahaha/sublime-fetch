@@ -1,7 +1,7 @@
 chrome.runtime.onMessage.addListener((message /*, sender, sendResponse*/) => {
   if (message.action !== 'openTabWithToken') return
 
-  const { token, url } = message
+  const { token, url, toCookie = false } = message
   if (url == null) return
   if (token == null) return
 
@@ -11,15 +11,33 @@ chrome.runtime.onMessage.addListener((message /*, sender, sendResponse*/) => {
 
       chrome.scripting.executeScript({
         target: { tabId },
-        func: (tokenArg) => {
-          Object.keys(window.localStorage).forEach((key) => {
-            window.localStorage.removeItem(key)
-          })
+        func: (tokenArg, toCookieArg, urlArg) => {
+          if (toCookieArg) return void tokenInCookie()
+          else return void tokenInLocalStorage()
 
-          window.localStorage.setItem('token', tokenArg)
-          window.location = window.location.href
+          async function tokenInCookie() {
+            await delay(1500)
+            window.location = urlArg
+            await delay(1500)
+            const encoded = encodeURIComponent(tokenArg)
+            document.cookie = `admin-token=${encoded}`
+            await delay(2000)
+            window.location = urlArg
+          }
+
+          function tokenInLocalStorage() {
+            Object.keys(window.localStorage).forEach((key) => {
+              window.localStorage.removeItem(key)
+            })
+            window.localStorage.setItem('token', tokenArg)
+            window.location = urlArg
+          }
+
+          function delay(sec = 500) {
+            return new Promise((resolve) => setTimeout(resolve, sec))
+          }
         },
-        args: [token],
+        args: [token, toCookie, url],
       })
       chrome.tabs.onUpdated.removeListener(listener)
     }

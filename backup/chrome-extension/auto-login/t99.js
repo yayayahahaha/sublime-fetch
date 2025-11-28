@@ -4,18 +4,17 @@ import { errorConsole, loginDisposable, warnConsole } from './t99-utils.js'
 import select, { Separator } from '@inquirer/select'
 import { input, confirm } from '@inquirer/prompts'
 import { generateBrandInfo } from './generate-brand-info.js'
+import { loginStagingAdmin } from './login-staging-admin.js'
 import { parseArgs } from './args-parser.js'
-
-function colorMessage(message) {
-  return `\x1b[34m${message}\x1b[0m`
-}
-function redMessage(message) {
-  return `\x1b[31m${message}\x1b[0m`
-}
+import { blue } from '../color.js'
+import { clearEmailCache } from '../admin-related/admin-utils.js'
 
 const GET_WHITELABEL_INFO = 'GET_WHITELABEL_INFO'
+const LOGIN_STAGING_ADIN = 'LOGIN_STAGING_ADIN'
+const CLEAR_EMAIL_CACHE = 'CLEAR_EMAIL_CACHE'
 const supportedCmdArgs = ['port', 'profile']
 
+start()
 async function start() {
   const config = { getRedisBy: 'disposableFn' }
   const cmdArgs = parseArgs()
@@ -51,6 +50,8 @@ async function start() {
       }
     })
     .filter(Boolean)
+    .sort((a, b) => a.displayName.localeCompare(b.displayName))
+
   const profileMap = Object.fromEntries(loginProfiles.map((item) => [item.displayName, item.value]))
 
   if (loginProfiles.length === 0) {
@@ -77,16 +78,26 @@ async function start() {
           description: '從 frontend repo 取得 WL 的 api path 等資訊',
         },
         new Separator(),
+        {
+          name: '登入 Staging Admin',
+          value: LOGIN_STAGING_ADIN,
+          description: '登入 Staging 環境的 Admin 帳號',
+        },
+        {
+          name: '清除 Email Staging 環境的 Cache',
+          value: CLEAR_EMAIL_CACHE,
+          description: '由於 Email 樣板是靜態資源，上完 Staging 後要手動清除 Cache',
+        },
+        new Separator(),
         ...loginProfiles.map((item) => ({ name: `${item.displayName}`, value: item.displayName })),
       ],
       loop: false,
     }).catch(() => null)
-    if (answer == null) return void console.log(redMessage('使用者取消'))
+    if (answer == null) return void console.log(errorConsole('使用者取消'))
 
-    if (answer === GET_WHITELABEL_INFO) {
-      generateBrandInfo()
-      return
-    }
+    if (answer === GET_WHITELABEL_INFO) return void generateBrandInfo()
+    if (answer === LOGIN_STAGING_ADIN) return void loginStagingAdmin()
+    if (answer === CLEAR_EMAIL_CACHE) return void clearEmailCache()
 
     profileKey = answer
   }
@@ -106,7 +117,7 @@ async function start() {
         return result || '請輸入正確的 port 號'
       },
     }).catch(() => ({ error: '使用者取消' }))
-    if (portInput?.error != null) return void console.log(redMessage(portInput?.error))
+    if (portInput?.error != null) return void console.log(errorConsole(portInput?.error))
     port = portInput
   }
 
@@ -117,15 +128,17 @@ async function start() {
   console.log()
 
   const go = await confirm({ message: '開始登入囉?' }).catch(() => null)
-  if (!go) return void console.log(redMessage('使用者取消'))
+  if (!go) return void console.log(errorConsole('使用者取消'))
   console.log()
 
   const payload = profileMap[profileKey]
-  if (payload == null) return console.error('Setting not found:', profileKey)
+  if (payload == null) return console.error(errorConsole('沒有找到匹配的 profile:', profileKey))
 
   loginDisposable(payload, { port }).catch((err) => {
-    console.error('Error during login:', err)
+    console.log(errorConsole('Error during login:', err))
   })
 }
 
-start()
+function colorMessage(message) {
+  return blue(message)
+}

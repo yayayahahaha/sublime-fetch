@@ -22,19 +22,20 @@
     }
   }
 
-  const EXAMPLE_HOST = 'example.com'
+  const EXAMPLE_HOST = 'www.google.com'
 
   if (window.location.host !== EXAMPLE_HOST) return
 
   const { _ } = Object.fromEntries(new URLSearchParams(new URL(window.location.href).search))
-  const { token, url } = EncodeDecode.decode(EncodeDecode.decode(_, 5), 10)
+  const { token, url, toCookie } = EncodeDecode.decode(EncodeDecode.decode(_, 5), 10)
 
   if (token == null) return
   if (url == null) return
 
   chrome.runtime.sendMessage({
     action: 'openTabWithToken',
-    token: token,
+    token,
     url,
+    toCookie,
   })
 })()

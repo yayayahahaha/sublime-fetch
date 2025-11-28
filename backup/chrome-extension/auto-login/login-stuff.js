@@ -1,29 +1,43 @@
 // TODO(flyc): device fingerprint 看能不能自動生成和 browser 一樣的?
+// TODO(flyc): 如果在使用者沒有傳入 secretCode 但是又需要 2FA 的時候，要可以讓使用者輸入
 
 import jsSha3 from 'js-sha3'
 import { get, post, Response } from './request-stuff.js'
 import { gen2FaCode } from './2fa.js'
 import { showBase64Image } from './captcha-stuff.js'
 import { connectRedis } from './redis.js'
-import { errorConsole, titleConsole, subTitleConsole, tokenConsole } from './t99-utils.js'
+import { errorConsole, subTitleConsole, tokenConsole } from './t99-utils.js'
 import { loadSettings } from './settings-loader.js'
+import { blue, green, lightBlue, lightCyan, lightGreen } from '../color.js'
 
 const { sha3_256: Hash } = jsSha3
 
-const genMockFingerprint = (payload = {}, { prefix = 'staging', suffix = null } = {}) => {
-  const keys = [prefix, 'brandName', 'email', 'password', 'secretCode2Fa', suffix].filter(Boolean)
-  return keys
+// 這個看起來是有格式的，不能隨意調整
+const genMockFingerprint = (oriPayload) => {
+  const payload = { ...oriPayload } // TODO(flyc): 還要查說為什麼會多這一手? 如果沒有複製的話會出錯
+
+  const keys = ['brandName', 'email', 'password', 'secretCode2Fa']
+  const keychain = keys
     .map((key) => payload[key] ?? null)
     .filter(Boolean)
     .join('-')
+
+  const fingerprintNumber = Hash(keychain).replace(/[^\d]/g, '').slice(0, 13)
+  const fingerprintPrefix = Hash(keychain).replace(/\d/g, '').slice(0, 5)
+  const fingerprint = `_${fingerprintPrefix}${fingerprintNumber}`
+
+  return fingerprint
+  // return `_ompzy${Date.now()}`
 }
 
 export class CacheInstance {
   static inProgressExpiredDuration = 1000 * 60 * 5
 
-  constructor(cache) {
+  constructor(cache, instancePayload) {
     this.token = cache?.token ?? null
-    this.deviceFingerprint = cache?.deviceFingerprint ? cache.deviceFingerprint : genMockFingerprint(cache)
+    this.deviceFingerprint = cache?.deviceFingerprint
+      ? cache.deviceFingerprint
+      : (instancePayload?.deviceFingerprint ?? genMockFingerprint(instancePayload))
     this.isInProgress = cache?.isInProgress ?? false // 是否正在進行登入流程: 可能是 2FA 或 OTP 失效等
     this.inProgressTimestamp = cache?.inProgressTimestamp ?? null // 正在進行登入流程的 timestamp
     this.inProgressToken = cache?.inProgressToken ?? null // 正在進行登入流程的 token
@@ -120,9 +134,28 @@ export class LoginNeeded {
 
   get websiteLink() {
     // TODO(flyc): 這邊可以改成去取 frontend repo 的 yaml 檔
-    const websiteLink = `https://${this.brandName === 'btse' ? 'staging' : this.brandName}.btse.co/en`
+    const domainPrefix = (() => {
+      switch (this.brandName) {
+        case 'btse':
+          return 'staging'
 
-    // console.log(`🔗 websiteLink: ${websiteLink}`)
+        case 'btsegi':
+          return 'btse-gi'
+
+        case 'bullstreet':
+          return 'bullstreetex'
+
+        case 'btseag':
+          return 'btse-li'
+
+        default:
+          return this.brandName
+      }
+    })()
+
+    const websiteLink = `https://${domainPrefix}.btse.co/en`
+
+    console.log(`🔗 websiteLink: ${websiteLink}`)
 
     return websiteLink
   }
@@ -135,7 +168,7 @@ export class LoginNeeded {
       return null
     }
 
-    console.log(`🤙 apiBaseUrl: ${apiBaseUrl}`)
+    // console.log(`\n🤙 apiBaseUrl: ${apiBaseUrl}`)
     return apiBaseUrl
   }
 
@@ -149,8 +182,6 @@ export class LoginNeeded {
     formData.append('keepLogin', true)
 
     Object.keys(loginParams).forEach((key) => formData.append(key, loginParams[key]))
-
-    console.log('formData:', formData)
 
     console.log('登入的 formData:', formData)
 
@@ -263,7 +294,7 @@ export class LoginNeeded {
   }
 
   async otpFlow({ firstToken, username }) {
-    titleConsole('需要 OTP')
+    lightBlue('需要 OTP')
     /*
     // TODO(flyc)
     // 這裡在重複登入的時候，會因為已經是用帳號密碼重新登入過一次了，所以 otp 會換，但 redis 裡的沒有同步到，所以會取到舊的.
@@ -310,7 +341,7 @@ export class LoginNeeded {
   }
 
   '2faFlow'() {
-    titleConsole('需要 2FA')
+    lightBlue('需要 2FA')
     subTitleConsole(`嘗試從 secret 計算出 2fa code:`)
 
     try {
@@ -337,7 +368,7 @@ export class LoginNeeded {
   }
 
   async healthCheckFlow() {
-    titleConsole('健康檢查流程')
+    lightBlue('健康檢查流程')
     subTitleConsole('👩‍⚕️ 開始執行既有 token 的健康檢查: ')
 
     const { token: currentToken } = this
@@ -351,17 +382,38 @@ export class LoginNeeded {
         return { isHealthy: true, token: currentToken, websiteLink: this.websiteLink }
       } else console.log('🤕 Token 已失效，需要重新登入')
     } else {
-      console.log('  > ❤️‍🩹 不存在既有 token, 不進行健康檢查')
+      console.log('❤️‍🩹 不存在既有 token, 不進行健康檢查')
     }
 
     return { isHealthy: false, error: null }
   }
 
   // loginAccountPasswdCaptcha: 這邊會有 recursive 後取得的 captchaId 和 captchaNumber
-  async loginAccountPasswdCaptcha(otherPayload = {}) {
-    const { error: loginError, data: originData } = await this.loginApi(otherPayload)
+  async loginAccountPasswdCaptcha(otherPayload = {}, { isRecursive = false } = {}) {
+    if (!isRecursive) {
+      console.log()
+      console.log(blue('初次嘗試登入'))
+    } else {
+      console.log()
+      console.log(blue('取得 captcha 後的再次登入'))
+    }
 
-    const { success, msg, data: { username, token: firstToken } = {} } = originData ?? {}
+    const result = await this.loginApi(otherPayload)
+    const { error: loginError, data: originData } = result
+
+    const {
+      success: successFromSuccess,
+      msg: successMessage,
+      data: { username, token: firstToken } = {},
+    } = originData ?? {}
+    const { success: successFromError, msg: errorMessage } = loginError ?? {}
+
+    const success = successFromSuccess ?? successFromError
+    const msg = successMessage ?? errorMessage
+
+    console.log('loginAccountPasswdCaptcha 的 response: ', result)
+    console.log('loginAccountPasswdCaptcha 的 msg: ', msg)
+    console.log('loginAccountPasswdCaptcha 的 success: ', success)
 
     if (loginError != null || !success) {
       if (msg === 'Wrong captcha code') {
@@ -372,6 +424,7 @@ export class LoginNeeded {
           errorConsole(captchaError ?? msg)
           return { error: captchaError }
         }
+
         const {
           data: { img, captchaId },
         } = captchaData
@@ -388,13 +441,13 @@ export class LoginNeeded {
         console.log('captchaId: ', captchaId)
         console.log('captchaNumber: ', captchaNumber)
 
-        return this.loginAccountPasswdCaptcha({ captchaId, captchaNumber })
+        return this.loginAccountPasswdCaptcha({ captchaId, captchaNumber }, { isRecursive: true })
       } else {
         errorConsole('在 loginError 發生錯誤', this)
         errorConsole(loginError ?? msg)
         return { error: loginError ?? msg }
       }
-    } else console.log('✅ 登入成功')
+    } else console.log(green('✅ 登入成功'))
 
     return { username, firstToken }
   }
@@ -428,13 +481,16 @@ export class LoginNeeded {
     if (healthResult.error != null) return new this.LoginResult({ error: '健康檢查的過程出錯了' })
     if (healthResult.isHealthy) return new this.LoginResult(healthResult)
 
-    titleConsole(`開始登入流程: `)
+    lightBlue(`開始登入流程: `)
     const { error: loginError, username, firstToken } = await this.loginAccountPasswdCaptcha()
     if (loginError != null) return new this.LoginResult({ error: loginError })
 
-    console.log('📧 email:', this.email)
-    console.log('💂 username:', username)
-    console.log('🔑 token:', firstToken)
+    console.log()
+    console.log(lightCyan('取得的資訊'))
+    console.log('📧 email:', blue(this.email))
+    console.log('💂 username:', blue(username))
+    console.log('🔑 token:', blue(firstToken))
+    console.log()
 
     if (this.checkIsAlreadyOkToken(firstToken)) {
       tokenConsole('這個 token 已經可以用囉', firstToken)
@@ -444,6 +500,7 @@ export class LoginNeeded {
     // 如果有需要 deviceOTP 的話
     let otpCode = null
     if (!LoginNeeded.regexpLoginToken.test(firstToken)) {
+      console.log(lightBlue('需要 OTP'))
       const { otpCode: resOtpCode, error: otpError } = await this.otpFlow({ firstToken, username })
       if (otpError != null) return new this.LoginResult({ error: otpError })
       otpCode = resOtpCode
@@ -452,26 +509,29 @@ export class LoginNeeded {
     // 如果有需要 2FA 的話
     let code2Fa = null
     if (!LoginNeeded.regexpDevice.test(firstToken)) {
+      console.log(lightBlue('需要 2FA'))
       const { code2Fa: resCode2Fa, error: error2fa } = this['2faFlow']()
       if (error2fa != null) return new this.LoginResult({ error: error2fa })
       code2Fa = resCode2Fa
     }
 
-    titleConsole(`正要開始最終驗證: `)
+    console.log()
+    console.log(lightBlue(`正要開始最終驗證: `))
     const finalParams = {
       deviceFingerprint: this.deviceFingerprint,
       token: firstToken,
       otpCode,
       code2Fa: code2Fa || '999999',
     }
-    console.log('最終驗證的參數:', JSON.stringify(finalParams))
+    console.log('最終驗證的參數:', finalParams)
     const { error: finalPassError, ...others } = await this.finalPass(finalParams)
     if (finalPassError != null || !others.data.success) {
       errorConsole('在 finalPassError 發生錯誤', this)
       errorConsole(finalPassError ?? others.data.msg)
       return new this.LoginResult({ error: finalPassError ?? others.data.msg })
-    } else console.log('✅ 最終驗證成功')
+    } else console.log(lightGreen('✅ 最終驗證成功'))
 
+    console.log()
     tokenConsole('收到的 token', others.data.data.token)
 
     return new this.LoginResult({ token: others.data.data.token, websiteLink: this.websiteLink })

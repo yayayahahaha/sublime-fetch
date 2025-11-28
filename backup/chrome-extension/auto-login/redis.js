@@ -1,5 +1,7 @@
 import { Cluster } from 'ioredis'
 import { loadSettings } from './settings-loader.js'
+import { green } from '../color.js'
+import { errorConsole } from './t99-utils.js'
 
 class StagingRedis {
   #redis
@@ -10,7 +12,7 @@ class StagingRedis {
   disconnect() {
     this.#redis.quit()
     this.#redis.disconnect()
-    console.log('已中斷 redis 連線')
+    console.log(green('已中斷 redis 連線'))
   }
 
   getUserOtp(username, brandName = null) {
@@ -74,11 +76,11 @@ export function connectRedis() {
   ])
 
   redis.on('connect', () => {
-    console.log('Redis 叢集連線成功！\n')
+    console.log(green('Redis 叢集連線成功'))
   })
 
   redis.on('error', (err) => {
-    console.error('Redis 叢集錯誤:', err)
+    console.error(errorConsole('Redis 叢集錯誤:', err))
   })
 
   if (process.env.AWS_LAMBDA_FUNCTION_NAME) {

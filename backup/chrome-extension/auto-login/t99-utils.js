@@ -6,9 +6,10 @@ const dirname = path.dirname(filename)
 
 import { exec } from 'child_process'
 import { CacheInstance, LoginNeeded } from './login-stuff.js'
+import { blue, lightCyan, lightGreen, red } from '../color.js'
 
 // 目前先用複製的
-class EncodeDecode {
+export class EncodeDecode {
   static spliceLength = 10
 
   static genRegexp(spliceLength) {
@@ -30,9 +31,9 @@ class EncodeDecode {
   }
 }
 
-const exampleDomain = 'https://example.com'
+const exampleDomain = 'https://www.google.com/'
 const cacheFolder = path.resolve(dirname, 'cache')
-const cacheFile = path.resolve(cacheFolder, 'cache.json')
+const cacheFilePath = path.resolve(cacheFolder, 'cache.json')
 
 function generateNeededFolders() {
   if (!fs.existsSync(cacheFolder)) {
@@ -41,18 +42,18 @@ function generateNeededFolders() {
 }
 
 function generateNeededFiles() {
-  if (!fs.existsSync(cacheFile)) {
-    fs.writeFileSync(cacheFile, JSON.stringify({}), 'utf8')
+  if (!fs.existsSync(cacheFilePath)) {
+    fs.writeFileSync(cacheFilePath, JSON.stringify({}), 'utf8')
   }
 }
 
 function generateCacheData() {
-  if (!fs.existsSync(cacheFile)) return {}
+  if (!fs.existsSync(cacheFilePath)) return {}
 
   try {
-    return JSON.parse(fs.readFileSync(cacheFile, 'utf8'))
-  } catch (e) {
-    console.error('Failed to parse cache file:', e)
+    return JSON.parse(fs.readFileSync(cacheFilePath, 'utf8'))
+  } catch (error) {
+    console.log(red('解析 cache 檔案失敗: ', error))
     return {}
   }
 }
@@ -63,12 +64,12 @@ export async function loginDisposable(payload, { port = null } = {}) {
   const cache = generateCacheData()
 
   if (!(payload instanceof LoginNeeded)) {
-    console.error('Payload must be an instance of LoginNeeded')
+    console.log(errorConsole('payload 需為 LoginNeeded 的實例!', payload))
     throw new Error('Invalid payload type')
   }
 
   // TODO(flyc): 這裡要有不使用 cache 的選項
-  const currentUseCache = new CacheInstance(cache[payload.potentialPk])
+  const currentUseCache = new CacheInstance(cache[payload.potentialPk], payload)
 
   payload.mergeCache(currentUseCache)
 
@@ -82,18 +83,28 @@ export async function loginDisposable(payload, { port = null } = {}) {
     }
   }
 
+  // 更新存入 cache 等
+  console.log()
+  console.log(lightCyan('開始存入 Cache'))
   currentUseCache.update({ ...payload, token })
   cache[payload.potentialPk] = currentUseCache
-  fs.writeFileSync(cacheFile, JSON.stringify(cache, null, 2), 'utf8')
-  const url = port ? `http://localhost:${port}` : websiteLink
+  fs.writeFileSync(cacheFilePath, JSON.stringify(cache, null, 2), 'utf8')
+  console.log('Cache 儲存成功')
 
+  // 開啟瀏覽器的部分
+  console.log()
+  console.log(lightCyan('開啟瀏覽器..'))
+  const url = port ? `http://localhost:${port}` : websiteLink
   let encodedCode = EncodeDecode.encode({ token, url }, 10)
   encodedCode = EncodeDecode.encode(encodedCode, 5)
   exec(`open '${exampleDomain}?_=${encodedCode}'`)
+
+  console.log(lightGreen('\n 🌠 結束囉'))
 }
 
+// 看能不能有不需要 JSON.stringify 的寫法
 export function errorConsole(...params) {
-  console.log(`\x1b[1m\x1b[31m`, ...params, `\x1b[0m`)
+  console.log(...params.map((str) => red(typeof str === 'object' ? JSON.stringify(str) : str)))
 }
 
 export function warnConsole(...params) {
@@ -104,8 +115,9 @@ export function titleConsole(...params) {
   console.log(`\x1b[1m\x1b[34m`, ...params, `\x1b[0m`)
 }
 
+// 看能不能有不需要 JSON.stringify 的寫法
 export function subTitleConsole(...params) {
-  console.log(`\x1b[34m`, ...params, `\x1b[0m`)
+  console.log(...params.map((str) => blue(typeof str === 'object' ? JSON.stringify(str) : str)))
 }
 
 export function tokenConsole(str, token) {
