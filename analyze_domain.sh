@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# --- Domain Analysis Script (v9 - Final) ---
+# --- Domain Analysis Script (v10 - Final) ---
 # This script performs a multi-layered analysis of a given domain.
-# v9 fixes a cosmetic bug in the HTTP header output due to carriage returns.
+# v10 fixes the NS/CNAME logic bug and improves DNS provider display.
 
 # --- Configuration ---
 # Color codes for better readability
@@ -121,7 +121,7 @@ main() {
     echo -e "\n    * ${GREEN}分析:${NC} 最終的 IP 位址歸屬於 **$org_name**。"
   fi
 
-  # 4. DNS Delegation Chain Analysis
+  # 4. DNS Delegation Chain Analysis (v10 - Bugfix for NS/CNAME confusion)
   print_section "3. DNS 委派鏈分析 (DNS Delegation Chain)"
   local current_domain_delegation="$DOMAIN"
   local levels=()
@@ -138,21 +138,36 @@ main() {
 
   for (( i=0; i<${#levels[@]}; i++ )) ; do
     local level="${levels[$i]}"
-    local ns_records
-    ns_records=$(dig +short NS "$level")
     
     local analysis_line=""
-    if [ -n "$ns_records" ]; then
-        local first_ns=$(echo "$ns_records" | head -n 1)
-        local dns_provider="未知"
-        if echo "$first_ns" | grep -q "awsdns"; then dns_provider="Amazon Route 53";
-        elif echo "$first_ns" | grep -q "cloudflare"; then dns_provider="Cloudflare";
-        elif echo "$first_ns" | grep -q "domaincontrol"; then dns_provider="GoDaddy";
-        elif echo "$first_ns" | grep -q "googledomains"; then dns_provider="Google Cloud DNS";
-        fi
-        analysis_line="- 層級 '${level}' 是一個**委派**的 DNS Zone，由 ${GREEN}$dns_provider${NC} 管理。"
+    # FIX: First check if the level itself is a CNAME. If so, it cannot have NS records.
+    local cname_check
+    cname_check=$(dig +short CNAME "$level")
+    if [ -n "$cname_check" ]; then
+      analysis_line="- 層級 '${level}' ${YELLOW}繼承了${NC}其父層的 DNS 管理 (因其本身為 CNAME)。"
     else
-        analysis_line="- 層級 '${level}' ${YELLOW}繼承了${NC}其父層的 DNS 管理。"
+      local ns_records
+      ns_records=$(dig +short NS "$level")
+      
+      if [ -n "$ns_records" ]; then
+          local first_ns=$(echo "$ns_records" | head -n 1)
+          local dns_provider_friendly="未知"
+          
+          if echo "$first_ns" | grep -q "awsdns"; then dns_provider_friendly="Amazon Route 53";
+          elif echo "$first_ns" | grep -q "cloudflare"; then dns_provider_friendly="Cloudflare";
+          elif echo "$first_ns" | grep -q "domaincontrol"; then dns_provider_friendly="GoDaddy";
+          elif echo "$first_ns" | grep -q "googledomains"; then dns_provider_friendly="Google Cloud DNS";
+          fi
+          
+          if [ "$dns_provider_friendly" != "未知" ]; then
+              analysis_line="- 層級 '${level}' 是一個**委派**的 DNS Zone，由 ${GREEN}$dns_provider_friendly (${first_ns})${NC} 管理。"
+          else
+              # If provider is not in our list, just show the raw NS record
+              analysis_line="- 層級 '${level}' 是一個**委派**的 DNS Zone，由 ${GREEN}${first_ns}${NC} 管理。"
+          fi
+      else
+          analysis_line="- 層級 '${level}' ${YELLOW}繼承了${NC}其父層的 DNS 管理。"
+      fi
     fi
     summary_lines+="$analysis_line\n"
   done
@@ -168,7 +183,7 @@ main() {
   else
     local final_url=$(echo "$curl_output" | tail -n 1)
     local all_headers=$(echo "$curl_output" | sed '$d')
-    local final_headers=$(echo "$all_headers" | awk '/^HTTP\// {buffer=""} {buffer=buffer $0 "\n"} END {printf "%s", buffer}' | sed 's/\r//g') # Clean carriage returns
+    local final_headers=$(echo "$all_headers" | awk '/^HTTP\// {buffer=""} {buffer=buffer $0 "\n"} END {printf "%s", buffer}' | sed 's/\r//g')
     
     local status_code=$(echo "$final_headers" | head -n 1 | awk '{for (i=2; i<=NF; i++) printf $i " "; print ""}' | xargs)
     local server_header=$(echo "$final_headers" | grep -i '^server:' | awk '{$1=""; print $0}' | xargs)
