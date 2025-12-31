@@ -148,6 +148,9 @@ export class LoginNeeded {
         case 'btseag':
           return 'btse-li'
 
+        case 'transexchange':
+          return 'trans-exchange'
+
         default:
           return this.brandName
       }
@@ -212,7 +215,8 @@ export class LoginNeeded {
 
       case 'disposableFn': {
         const redis = connectRedis()
-        const { error, value } = await redis.getUserOtp(params.username, params.brandName)
+
+        const { error, value } = await redis.getOtp(params.username, { brandName: params.brandName })
         redis.disconnect()
 
         return new Response({ error, data: { data: value } })

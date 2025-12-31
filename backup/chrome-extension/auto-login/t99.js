@@ -8,10 +8,13 @@ import { loginStagingAdmin } from './login-staging-admin.js'
 import { parseArgs } from './args-parser.js'
 import { blue } from '../color.js'
 import { clearEmailCache } from '../admin-related/admin-utils.js'
+import { registerByList } from './register-stuff.js'
 
 const GET_WHITELABEL_INFO = 'GET_WHITELABEL_INFO'
+const REGISTER_BY_LIST = 'REGISTER_BY_LIST'
 const LOGIN_STAGING_ADIN = 'LOGIN_STAGING_ADIN'
 const CLEAR_EMAIL_CACHE = 'CLEAR_EMAIL_CACHE'
+
 const supportedCmdArgs = ['port', 'profile']
 
 start()
@@ -79,6 +82,12 @@ async function start() {
         },
         new Separator(),
         {
+          name: '批量註冊帳號',
+          value: REGISTER_BY_LIST,
+          description: '批量註冊帳號',
+        },
+        new Separator(),
+        {
           name: '登入 Staging Admin',
           value: LOGIN_STAGING_ADIN,
           description: '登入 Staging 環境的 Admin 帳號',
@@ -96,6 +105,7 @@ async function start() {
     if (answer == null) return void console.log(errorConsole('使用者取消'))
 
     if (answer === GET_WHITELABEL_INFO) return void generateBrandInfo()
+    if (answer === REGISTER_BY_LIST) return void registerByList()
     if (answer === LOGIN_STAGING_ADIN) return void loginStagingAdmin()
     if (answer === CLEAR_EMAIL_CACHE) return void clearEmailCache()
 

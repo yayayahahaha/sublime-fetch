@@ -15,9 +15,9 @@ class StagingRedis {
     console.log(green('已中斷 redis 連線'))
   }
 
-  getUserOtp(username, brandName = null) {
+  getOtp(username, { brandName = null, type = 'LOGIN' } = {}) {
     if (username == null) {
-      throw new Error(`[${this.constructor.name}] getUserOtp: username 為必填`)
+      throw new Error(`[${this.constructor.name}] getOtp: username 為必填`)
     }
 
     let redisBrandName = brandName
@@ -31,20 +31,30 @@ class StagingRedis {
         break
     }
 
-    const key =
-      redisBrandName != null
-        ? `OTP_MAIL_LOGIN_NEW_DEVICE_${username}@${redisBrandName}`
-        : `OTP_MAIL_LOGIN_NEW_DEVICE_${username}`
+    let key = ''
+    let keyPrefix = ''
+    switch (type.toUpperCase()) {
+      case 'LOGIN':
+        keyPrefix = 'OTP_MAIL_LOGIN_NEW_DEVICE_'
+        key = redisBrandName != null ? `${keyPrefix}${username}@${redisBrandName}` : `${keyPrefix}${username}`
+        break
+      case 'SIGNUP':
+        keyPrefix = 'OTP_MAIL__key_' // 註冊用的前綴
+        key = `${keyPrefix}${username}`
+        break
+      default:
+        // 直接拋出錯誤而不是返回一個 promise a catch
+        throw new Error(`不支援的 OTP 類型: ${type}`)
+    }
+
     console.log(`🫙 Redis 金鑰: ${key}`)
 
-    return this.#redis
-      .get(key)
-      .then((value) => ({ ok: true, value, error: null }))
-      .catch((error) => ({
-        ok: false,
-        value: null,
-        error,
-      }))
+    return this.#redis.get(key).then((value) => {
+      if (value == null) {
+        throw new Error('在 Redis 中找不到 OTP，可能已過期或從未發送。')
+      }
+      return { ok: true, value, error: null }
+    })
   }
 
   getCaptcha(captchaId) {

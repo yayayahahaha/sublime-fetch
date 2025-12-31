@@ -1,0 +1,4 @@
+register - OTP_MAIL__key_{email}
+change pwd - OTP_MAIL_CHANGE_PWD_BTSE_{email}
+reset pwd - OTP_MAIL_RESET_PWD_BTSE_{email}
+new device - OTP_MAIL_LOGIN_NEW_DEVICE_{username}
