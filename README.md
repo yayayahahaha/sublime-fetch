@@ -495,6 +495,13 @@ stackoverflow 上有在[討論](https://stackoverflow.com/questions/60804670/how
 
 ![iterm-select-outline](./readme-images/iterm-select-outline.png)
 
+##### iterm 在打字或是切換 tabs 的時候畫面偶爾會閃爍或出現從右上到左下的不明三角形區塊
+
+不確定實際發生的原因，但只要取消勾選 Settings > General > Magic > GPU Renderer 後狀況就會消失
+
+![iterm-select-outline](./readme-images/iterm-flashing.png)
+![iterm-select-outline](./readme-images/iterm-gpu-renderer.png)
+
 ##### 透過 Terminus 執行 terminal command 的方式
 
 [Terminus](https://github.com/randy3k/Terminus) 可以非常簡單的就在 sublime text 裡面執行 terminal 環境，  
