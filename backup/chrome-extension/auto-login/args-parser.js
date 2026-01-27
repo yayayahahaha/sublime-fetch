@@ -1,5 +1,5 @@
 /**
- * 解析命令行參數 - 支援動態參數 ex: --port 8080 --profile btse
+ * 解析命令行參數 - 支援動態參數 ex: --port 8080
  * @returns {Object} 解析後的參數物件
  */
 export function parseArgs() {

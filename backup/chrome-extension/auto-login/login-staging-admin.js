@@ -26,20 +26,20 @@ function encryptPassword(username, password, random) {
 async function loginAdmin(adminLoginInfo, { getTokenOnly } = {}) {
   const { error: randomCodeError, ...randomCodeRes } = await getRandomCode(adminLoginInfo)
   if (randomCodeError != null) {
-    return void console.log(errorConsole('初次 login 取得 random code 失敗!', randomCodeError))
+    return void errorConsole('初次 login 取得 random code 失敗!', randomCodeError)
   }
 
   const randomCode = randomCodeRes.msg
 
   const { error: firstLoginError, ...firstLoginRes } = await firstLogin(adminLoginInfo, randomCode)
-  if (firstLoginError != null) return void console.log(errorConsole('初次 login 失敗!', firstLoginError))
+  if (firstLoginError != null) return void errorConsole('初次 login 失敗!', firstLoginError)
   const { msg: firstLoginToken } = firstLoginRes
 
   const { error: finalError, ...finalRes } = await loginWith2faAndFirstToken(
     firstLoginToken,
     adminLoginInfo.secretCode2Fa
   )
-  if (finalError != null) return void console.log(errorConsole('最後的 login 失敗!', finalError))
+  if (finalError != null) return void errorConsole('最後的 login 失敗!', finalError)
 
   const token = finalRes.data.adminToken
   console.log(lightGreen(`登入成功! 取得的 token 是 ${token}`))

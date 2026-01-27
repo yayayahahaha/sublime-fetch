@@ -64,7 +64,7 @@ export async function loginDisposable(payload, { port = null } = {}) {
   const cache = generateCacheData()
 
   if (!(payload instanceof LoginNeeded)) {
-    console.log(errorConsole('payload 需為 LoginNeeded 的實例!', payload))
+    errorConsole('payload 需為 LoginNeeded 的實例!', payload)
     throw new Error('Invalid payload type')
   }
 

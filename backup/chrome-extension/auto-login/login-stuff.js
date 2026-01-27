@@ -482,8 +482,11 @@ export class LoginNeeded {
   async login() {
     // 先檢查 token 是否健康
     const healthResult = await this.healthCheckFlow()
-    if (healthResult.error != null) return new this.LoginResult({ error: '健康檢查的過程出錯了' })
     if (healthResult.isHealthy) return new this.LoginResult(healthResult)
+
+    if (healthResult.error != null) {
+      console.log('健康檢查的流程出錯了，直接繼續過')
+    }
 
     lightBlue(`開始登入流程: `)
     const { error: loginError, username, firstToken } = await this.loginAccountPasswdCaptcha()

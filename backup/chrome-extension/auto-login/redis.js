@@ -85,13 +85,9 @@ export function connectRedis() {
     },
   ])
 
-  redis.on('connect', () => {
-    console.log(green('Redis 叢集連線成功'))
-  })
+  redis.on('connect', () => console.log(green('Redis 叢集連線成功')))
 
-  redis.on('error', (err) => {
-    console.error(errorConsole('Redis 叢集錯誤:', err))
-  })
+  redis.on('error', (err) => errorConsole('Redis 叢集錯誤:', err))
 
   if (process.env.AWS_LAMBDA_FUNCTION_NAME) {
     console.log('在 AWS Lambda 環境中運行，無法處理 SIGINT 信號。')

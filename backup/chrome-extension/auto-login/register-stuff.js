@@ -1,6 +1,6 @@
-import { loadSettings, saveSettings } from './settings-loader.js'
+import { loadSettings } from './settings-loader.js'
 import { confirm, select } from '@inquirer/prompts'
-import { blue, lightCyan, lightGreen, red, lightYellow } from '../color.js'
+import { lightCyan, lightGreen, red, lightYellow } from '../color.js'
 import { errorConsole, subTitleConsole, titleConsole } from './t99-utils.js'
 import { connectRedis } from './redis.js'
 import { WL } from './WL.js'
@@ -182,7 +182,7 @@ export async function registerByList() {
   console.log()
 
   const go = await confirm({ message: '是否開始進行批量註冊?' }).catch(() => null)
-  if (!go) return void console.log(errorConsole('使用者取消'))
+  if (!go) return void errorConsole('使用者取消')
   console.log()
 
   const successes = []

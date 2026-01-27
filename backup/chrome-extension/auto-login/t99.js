@@ -57,60 +57,47 @@ async function start() {
 
   const profileMap = Object.fromEntries(loginProfiles.map((item) => [item.displayName, item.value]))
 
-  if (loginProfiles.length === 0) {
-    warnConsole('👽警告👽 settings.json 裡的 loginProfiles 為空\n')
-  }
-
   // 檢查是否從命令列提供了 profile 參數
   let profileKey = null
-  if (cmdArgs.profile != null) {
-    if (profileMap[cmdArgs.profile] == null) {
-      warnConsole('透過 cmd 傳入的 profile 參數沒有匹配到 settings.json 裡的 profile 清單')
-    } else {
-      profileKey = cmdArgs.profile
-    }
-  }
 
-  if (profileKey == null) {
-    const answer = await select({
-      message: '你要做什麼? ',
-      choices: [
-        {
-          name: '重新生成 WL 的資訊',
-          value: GET_WHITELABEL_INFO,
-          description: '從 frontend repo 取得 WL 的 api path 等資訊',
-        },
-        new Separator(),
-        {
-          name: '批量註冊帳號',
-          value: REGISTER_BY_LIST,
-          description: '批量註冊帳號',
-        },
-        new Separator(),
-        {
-          name: '登入 Staging Admin',
-          value: LOGIN_STAGING_ADIN,
-          description: '登入 Staging 環境的 Admin 帳號',
-        },
-        {
-          name: '清除 Email Staging 環境的 Cache',
-          value: CLEAR_EMAIL_CACHE,
-          description: '由於 Email 樣板是靜態資源，上完 Staging 後要手動清除 Cache',
-        },
-        new Separator(),
-        ...loginProfiles.map((item) => ({ name: `${item.displayName}`, value: item.displayName })),
-      ],
-      loop: false,
-    }).catch(() => null)
-    if (answer == null) return void console.log(errorConsole('使用者取消'))
+  const answer = await select({
+    message: '你要做什麼? ',
+    choices: [
+      {
+        name: '重新生成 WL 的資訊',
+        value: GET_WHITELABEL_INFO,
+        description: '從 frontend repo 取得 WL 的 api path 等資訊',
+      },
+      new Separator(),
+      {
+        name: '批量註冊帳號',
+        value: REGISTER_BY_LIST,
+        description: '批量註冊帳號',
+      },
+      new Separator(),
+      {
+        name: '登入 Staging Admin',
+        value: LOGIN_STAGING_ADIN,
+        description: '登入 Staging 環境的 Admin 帳號',
+      },
+      {
+        name: '清除 Email Staging 環境的 Cache',
+        value: CLEAR_EMAIL_CACHE,
+        description: '由於 Email 樣板是靜態資源，上完 Staging 後要手動清除 Cache',
+      },
+      new Separator(),
+      ...loginProfiles.map((item) => ({ name: `${item.displayName}`, value: item.displayName })),
+    ],
+    loop: false,
+  }).catch(() => null)
+  if (answer == null) return void errorConsole('使用者取消')
 
-    if (answer === GET_WHITELABEL_INFO) return void generateBrandInfo()
-    if (answer === REGISTER_BY_LIST) return void registerByList()
-    if (answer === LOGIN_STAGING_ADIN) return void loginStagingAdmin()
-    if (answer === CLEAR_EMAIL_CACHE) return void clearEmailCache()
+  if (answer === GET_WHITELABEL_INFO) return void generateBrandInfo()
+  if (answer === REGISTER_BY_LIST) return void registerByList()
+  if (answer === LOGIN_STAGING_ADIN) return void loginStagingAdmin()
+  if (answer === CLEAR_EMAIL_CACHE) return void clearEmailCache()
 
-    profileKey = answer
-  }
+  profileKey = answer
 
   // 檢查是否從命令行提供了 port 參數
   let port
@@ -127,7 +114,7 @@ async function start() {
         return result || '請輸入正確的 port 號'
       },
     }).catch(() => ({ error: '使用者取消' }))
-    if (portInput?.error != null) return void console.log(errorConsole(portInput?.error))
+    if (portInput?.error != null) return void errorConsole(portInput?.error)
     port = portInput
   }
 
@@ -138,15 +125,13 @@ async function start() {
   console.log()
 
   const go = await confirm({ message: '開始登入囉?' }).catch(() => null)
-  if (!go) return void console.log(errorConsole('使用者取消'))
+  if (!go) return void errorConsole('使用者取消')
   console.log()
 
   const payload = profileMap[profileKey]
-  if (payload == null) return console.error(errorConsole('沒有找到匹配的 profile:', profileKey))
+  if (payload == null) return errorConsole('沒有找到匹配的 profile:', profileKey)
 
-  loginDisposable(payload, { port }).catch((err) => {
-    console.log(errorConsole('Error during login:', err))
-  })
+  loginDisposable(payload, { port }).catch((err) => errorConsole('Error during login:', err))
 }
 
 function colorMessage(message) {
