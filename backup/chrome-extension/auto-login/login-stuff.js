@@ -148,6 +148,9 @@ export class LoginNeeded {
         case 'btseag':
           return 'btse-li'
 
+        case 'btseuab':
+          return 'btse-lt'
+
         case 'transexchange':
           return 'trans-exchange'
 

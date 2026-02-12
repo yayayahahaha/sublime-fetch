@@ -1,14 +1,15 @@
 import { loadSettings } from './settings-loader.js'
 import { confirm, select } from '@inquirer/prompts'
-import { lightCyan, lightGreen, red, lightYellow } from '../color.js'
+import { lightCyan, lightGreen, red, lightYellow, blue } from '../color.js'
 import { errorConsole, subTitleConsole, titleConsole } from './t99-utils.js'
 import { connectRedis } from './redis.js'
 import { WL } from './WL.js'
 import jsSha3 from 'js-sha3'
-import { post } from './request-stuff.js'
+import { post, Response, get } from './request-stuff.js'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { showBase64Image } from './captcha-stuff.js'
 
 const { sha3_256: Hash } = jsSha3
 const filename = fileURLToPath(import.meta.url)
@@ -51,18 +52,89 @@ class RegistrationNeeded {
     this.userName = `${emailPrefix}${this.brandName}stg`
   }
 
-  get potentialPk() {
-    return `${this.brandName}-${this.email}-${this.password}-${this.secretCode2Fa}-${this.deviceFingerprint}`
+  async getCaptchaImage() {
+    const apiUrl = this.wl.getApiUrl()
+    const url = `${apiUrl}/api/user/captcha/image`
+    return get(url)
+  }
+
+  async getCaptcha(captchaId) {
+    const params = { captchaId }
+
+    switch (this.config.getRedisBy) {
+      case 'api': {
+        const queryString = new URLSearchParams(params).toString()
+        return get(`http://localhost:9999/getCaptcha?${queryString}`)
+      }
+
+      case 'disposableFn': {
+        const redis = connectRedis()
+        try {
+          const { error, value } = await redis.getCaptcha(params.captchaId)
+          return new Response({ error, data: { data: value } })
+        } finally {
+          redis.disconnect()
+        }
+      }
+    }
+  }
+
+  get #ConfigInstance() {
+    return class ConfigInstance {
+      static GET_REDIS_BY__ENUM = ['api', 'disposableFn']
+
+      get GET_REDIS_BY__MAP() {
+        return Object.fromEntries(this.constructor.GET_REDIS_BY__ENUM.map((key) => [key, true]))
+      }
+
+      errorMessage(type) {
+        let message = ''
+        switch (type) {
+          case 'wrong-getRedisBy':
+            message = ` 'getRedisBy' should be one of these following: ${this.constructor.GET_REDIS_BY__ENUM.join(', ')}`
+            break
+        }
+
+        return `[${this.constructor.name}]${message}`
+      }
+
+      constructor(config) {
+        const { getRedisBy = 'api' } = config ?? {}
+
+        if (this.GET_REDIS_BY__MAP[getRedisBy] == null) {
+          throw new Error(this.errorMessage('wrong-getRedisBy'))
+        }
+
+        this.getRedisBy = getRedisBy
+      }
+    }
   }
 
   async register() {
-    const redis = connectRedis()
     try {
-      const apiUrl = this.wl.getApiUrl()
+      return await this.#doRegister({}, { isRecursive: false, stepToRetry: 'all' })
+    } finally {
+      // Redis disconnection is handled by registerByList
+    }
+  }
 
-      // Step 1: Pre-registration call to get OTP sent
-      const preRegUrl = `${apiUrl}/api/v2/user/otpEmail`
-      console.log(lightCyan(`[${this.email}] 步驟 1: 請求 OTP -> ${preRegUrl}`)) // Keep this line
+  async #doRegister(otherPayload = {}, { isRecursive = false, stepToRetry = 'all' } = {}) {
+    try {
+      if (!isRecursive) {
+        console.log()
+        console.log(blue('初次嘗試註冊'))
+      } else {
+        console.log()
+        console.log(blue('取得 captcha 後的再次註冊'))
+      }
+
+      const apiUrl = this.wl.getApiUrl()
+      let preRegResponse = null // Declare preRegResponse here to make it accessible later
+
+      if (stepToRetry === 'all' || stepToRetry === 'otp_email') {
+        // Step 1: Pre-registration call to get OTP sent
+        const preRegUrl = `${apiUrl}/api/v2/user/otpEmail`
+      console.log(lightCyan(`[${this.email}] 步驟 1: 請求 OTP -> ${preRegUrl}`))
       const preRegFormData = new FormData()
       preRegFormData.append('lang', 'en')
       preRegFormData.append('password', this.sha256Password)
@@ -70,29 +142,73 @@ class RegistrationNeeded {
       preRegFormData.append('email', this.email)
       preRegFormData.append('userName', this.userName)
 
+      // Add captcha to preRegFormData if present
+      if (otherPayload.captchaId && otherPayload.captchaNumber) {
+        preRegFormData.append('captchaId', otherPayload.captchaId)
+        preRegFormData.append('captchaNumber', otherPayload.captchaNumber)
+      }
+
       const preRegResponse = await post(preRegUrl, preRegFormData)
       if (preRegResponse.error) {
         const errorDetails = preRegResponse.error.message || JSON.stringify(preRegResponse.error)
+        if (errorDetails.includes('Captcha is required')) {
+          console.log('🏞️ 需要輸入 captcha')
+          const { error: captchaError, data: captchaData } = await this.getCaptchaImage()
+          if (captchaError != null) {
+            errorConsole('在 get captcha 發生錯誤', this)
+            errorConsole(captchaError ?? errorDetails)
+            return { error: captchaError }
+          }
+          // Note: The previous detailed checks for captchaData.data, img, captchaId are now implicit in destructuring.
+          // If they are null/undefined, destructuring will throw an error caught by the outer try/catch.
+          const {
+            data: { img, captchaId },
+          } = captchaData
+          await showBase64Image(img)
+
+          const { error: redisCaptchaError, data: { data: captchaNumber } = {} } = await this.getCaptcha(captchaId)
+          if (redisCaptchaError != null || captchaNumber == null) {
+            errorConsole('在取得 redis captcha 發生錯誤', this)
+            errorConsole(redisCaptchaError)
+            return { error: redisCaptchaError }
+          }
+          console.log('📸 取得 captcha 成功: ')
+          console.log('captchaId: ', captchaId)
+          console.log('captchaNumber: ', captchaNumber)
+
+          return await this.#doRegister({ captchaId, captchaNumber }, { isRecursive: true, stepToRetry: 'otp_email' })
+        }
         throw new Error(`請求 OTP 失敗: ${errorDetails}`)
       }
       console.log(lightGreen(`[${this.email}] 步驟 1: 請求 OTP 發送成功`))
+      }
 
       // Step 2: Get OTP from Redis
       console.log(lightCyan(`[${this.email}] 步驟 2: 從 Redis 獲取 OTP...`))
-      const { value: otpCode, error: otpError } = await redis
-        .getOtp(this.email, {
-          brandName: this.brandName,
-          type: 'SIGNUP',
-        })
-        .catch((err) => ({ error: err })) // catch promise rejection from getOtp
+      const redis = connectRedis()
+      let otpCode, otpError
+      try {
+        const result = await redis
+          .getOtp(this.email, {
+            brandName: this.brandName,
+            type: 'SIGNUP',
+          })
+          .catch((err) => ({ error: err }))
+        otpCode = result.value
+        otpError = result.error
+      } finally {
+        redis.disconnect()
+      }
+      
       if (otpError) {
         throw new Error(`從 Redis 獲取 OTP 失敗: ${otpError.message}`)
       }
       console.log(lightGreen(`[${this.email}] 步驟 2: 成功獲取 OTP: ${otpCode}`))
 
-      // Step 3: Final registration call with OTP
-      const signUpUrl = `${apiUrl}/api/v2/signup`
-      console.log(lightCyan(`[${this.email}] 步驟 3: 最終註冊 -> ${signUpUrl}`)) // Keep this line
+      if (stepToRetry === 'all' || stepToRetry === 'signup') {
+        // Step 3: Final registration call with OTP
+        const signUpUrl = `${apiUrl}/api/v2/signup`
+      console.log(lightCyan(`[${this.email}] 步驟 3: 最終註冊 -> ${signUpUrl}`))
       const signUpFormData = new FormData()
       signUpFormData.append('userName', this.userName)
       signUpFormData.append('email', this.email)
@@ -102,15 +218,49 @@ class RegistrationNeeded {
       signUpFormData.append('lang', 'en')
       signUpFormData.append('deviceFingerprint', this.deviceFingerprint)
 
+      // Add captcha to signUpFormData if present
+      if (otherPayload.captchaId && otherPayload.captchaNumber) {
+        signUpFormData.append('captchaId', otherPayload.captchaId)
+        signUpFormData.append('captchaNumber', otherPayload.captchaNumber)
+      }
+
       const signUpResponse = await post(signUpUrl, signUpFormData)
       if (signUpResponse.error) {
         const errorDetails = signUpResponse.error.message || JSON.stringify(signUpResponse.error)
+        if (errorDetails.includes('Captcha is required')) {
+          console.log('🏞️ 需要輸入 captcha')
+          const { error: captchaError, data: captchaData } = await this.getCaptchaImage()
+          if (captchaError != null) {
+            errorConsole('在 get captcha 發生錯誤', this)
+            errorConsole(captchaError ?? errorDetails)
+            return { error: captchaError }
+          }
+          // Note: The previous detailed checks for captchaData.data, img, captchaId are now implicit in destructuring.
+          // If they are null/undefined, destructuring will throw an error caught by the outer try/catch.
+          const {
+            data: { img, captchaId },
+          } = captchaData
+          await showBase64Image(img)
+
+          const { error: redisCaptchaError, data: { data: captchaNumber } = {} } = await this.getCaptcha(captchaId)
+          if (redisCaptchaError != null || captchaNumber == null) {
+            errorConsole('在取得 redis captcha 發生錯誤', this)
+            errorConsole(redisCaptchaError)
+            return { error: redisCaptchaError }
+          }
+          console.log('📸 取得 captcha 成功: ')
+          console.log('captchaId: ', captchaId)
+          console.log('captchaNumber: ', captchaNumber)
+
+          return await this.#doRegister({ captchaId, captchaNumber }, { isRecursive: true, stepToRetry: 'signup' })
+        }
         throw new Error(`註冊失敗: ${errorDetails}`)
       }
       console.log(lightGreen(`[${this.email}] 步驟 3: 註冊成功!`))
       return signUpResponse
+      }
     } finally {
-      redis.disconnect()
+      // No disconnect here, it's handled by the public register method
     }
   }
 }
@@ -161,7 +311,7 @@ async function updateSettingsFile(profilesToAdd) {
 }
 
 export async function registerByList() {
-  const config = {}
+  const config = { getRedisBy: 'disposableFn' }
   try {
     const settings = loadSettings()
     config.registrationList = settings?.registrationList ?? []
@@ -191,8 +341,9 @@ export async function registerByList() {
   const successfulProfilesForSettings = []
 
   for (const account of config.registrationList) {
+    let registration = null // Declare registration outside try block
     try {
-      const registration = new RegistrationNeeded(account, config)
+      registration = new RegistrationNeeded(account, config)
       const signUpResponse = await registration.register()
       const token = signUpResponse?.data?.data?.token
 
@@ -219,6 +370,9 @@ export async function registerByList() {
       })
     } catch (error) {
       failures.push({ email: account.email, error: error.message })
+    } finally {
+      // Redis connection management is now handled inside RegistrationNeeded methods.
+      // No need to disconnect here.
     }
     console.log() // Add a blank line for readability between accounts
   }

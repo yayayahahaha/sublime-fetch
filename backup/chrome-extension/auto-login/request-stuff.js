@@ -7,17 +7,26 @@ export class Response {
 
 function doFetch(url, config = {}) {
   return fetch(url, config)
-    .then((res) => {
-      const resClone = res.clone()
+    .then(async (res) => {
+      let data = null
+      let error = null
+
       try {
-        if (res.ok) return Promise.all([res.json(), null])
-        return Promise.all([null, res.json()])
-      } catch {
-        return Promise.all([null, resClone.text()])
+        if (res.ok) {
+          data = await res.json()
+        } else {
+          error = await res.json() // Attempt to parse error as JSON
+        }
+      } catch (e) {
+        // If parsing as JSON fails, try as text
+        error = await res.text()
       }
+
+      return new Response({ data, error })
     })
-    .then((data) => {
-      return new Response({ data: data[0], error: data[1] })
+    .catch((e) => {
+      // Catch network errors or other errors before the .then chain
+      return new Response({ error: e.message || 'Network error' })
     })
 }
 
