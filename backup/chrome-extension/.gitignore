@@ -1,3 +1,7 @@
+cache/
+# 用於快速測試的場景
+just-run.js
+
 # Reference: https://www.npmjs.com/package/create-gitignore
 
 # MacOS
@@ -133,3 +137,5 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+settings.json

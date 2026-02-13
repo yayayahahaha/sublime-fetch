@@ -1,8 +1,6 @@
 import { authenticator } from 'otplib'
 
-// 你的 Google Authenticator 的 secret code
-// const secret = 'TBLGEDVCFKTNY7TH' // base32 格式
-
-export function gen2FaCode(secret) {
-  return typeof secret === 'string' ? authenticator.generate(secret) : null
+export function gen2FaCode(secretCode2Fa) {
+  console.log(`gen2FaCode: 收到的參數: ${secretCode2Fa}, 生成的參數: ${authenticator.generate(secretCode2Fa)}`)
+  return authenticator.generate(secretCode2Fa) ?? null
 }

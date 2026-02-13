@@ -1,119 +1,97 @@
-import fs from 'fs'
-import select from '@inquirer/select'
+import select, { Separator } from '@inquirer/select'
 
-import { checkStaticImages, checkSetting, consoleRed, isDir, readSetting } from './utils.js'
 import { 修改白牌會動到的東西 } from './console-utils.js'
-import { checkLogoLightAndLogoDark, syncLogoLightAndDark } from './logo-svg-format-utils.js'
+import { s3LogStuff, svgLogoStuff } from './logo-svg-format-utils.js'
+import { staticStuff } from './static-files-utils.js'
+import { consoleRed } from './utils.js'
+import { assetsStuff } from './assets-files-utils.js'
+import { figmaStuff } from './figma-utils.js'
 
-修改白牌會動到的東西()
+const CHOICES_LIST = [
+  'LIST_ITEMS_LOG',
+  'ASSETS_FILES',
+  'SVG_LOGO',
+  'S3_LOGO',
+  'STATIC_FILES',
+  'GENERATE_NEW_IMAGES_FROM_FIGMA_FOLDER',
+]
+const CHOICES_MAP = Object.fromEntries(CHOICES_LIST.map((item) => [item, item]))
+
 start()
 
 async function start() {
   console.log()
 
   const 現在要做啥 = await select({
-    message: '選擇想要做的事情: ',
+    message: '你想做什麼: ',
+    loop: false,
+    pageSize: 10,
     choices: [
+      {
+        name: '我想要看白牌要調整的項目的清單',
+        value: CHOICES_MAP.LIST_ITEMS_LOG,
+        description: '列出各種需要留意的地方，但可能還是沒辦法齊全',
+      },
+
+      new Separator(),
+
+      {
+        name: '同步 assets 相關的檔案',
+        value: CHOICES_MAP.ASSETS_FILES,
+        description: '首頁相關的那些',
+      },
+
+      new Separator(),
+
       {
         name: '同步 LogoLight 和 LogoDark',
-        value: 'SvgLogo',
+        value: CHOICES_MAP.SVG_LOGO,
+        description: '將 SVG 的 Logo 轉成可用的 .vue 的形式並放到正確的位置',
       },
+
+      {
+        name: '同步 S3 那裡的 LogoLight 和 LogoDark',
+        value: CHOICES_MAP.S3_LOGO,
+        description: '將 Logo 的圖片放到 S3 的正確位置, 不含其它如 referral, task-and-reward 等等',
+      },
+
+      new Separator(),
+
+      {
+        name: '將從 figma 上載下來的檔案直接轉換到 new-images/static 資料夾中',
+        value: CHOICES_MAP.GENERATE_NEW_IMAGES_FROM_FIGMA_FOLDER,
+        description: '解壓縮相關的檔案到指定路徑，就可以動態產生可用的 static 靜態檔案',
+      },
+
       {
         name: '同步 static 相關的靜態檔案',
-        value: 'static',
+        value: CHOICES_MAP.STATIC_FILES,
+        description:
+          '各種尺寸的 logo, 像是 PWA 和 favicon 等等, 在執行之前推薦執行「將從 figma 上載下來的檔案直接轉換到 new-images/static 資料夾中」',
       },
     ],
-  })
+  }).catch(Function.prototype)
 
   switch (現在要做啥) {
-    case 'static':
-      return staticStuff()
+    case CHOICES_MAP.LIST_ITEMS_LOG:
+      return void 修改白牌會動到的東西()
 
-    case 'SvgLogo':
-      return svgLogoStuff()
+    case CHOICES_MAP.ASSETS_FILES:
+      return void assetsStuff()
+
+    case CHOICES_MAP.SVG_LOGO:
+      return void svgLogoStuff()
+
+    case CHOICES_MAP.S3_LOGO:
+      return void s3LogStuff()
+
+    case CHOICES_MAP.GENERATE_NEW_IMAGES_FROM_FIGMA_FOLDER:
+      return void figmaStuff()
+
+    case CHOICES_MAP.STATIC_FILES:
+      return void staticStuff()
+
+    default:
+      consoleRed('使用者取消')
   }
-}
-
-async function svgLogoStuff() {
-  const settings = readSetting()
-  if (settings == null) return
-
-  const { ok, frontendRepoPath, newImagesFolder, targetBrand } = checkSetting(settings)
-  if (!ok) return
-
-  if (!isDir(newImagesFolder)) {
-    return void consoleRed('new-images-folder 需為一個資料夾!')
-  }
-
-  const logoInstanceList = checkLogoLightAndLogoDark(newImagesFolder, {
-    frontendRepoPath,
-    targetBrand,
-  })
-  if (logoInstanceList.length === 0) return
-
-  const makeSure = await select({
-    message: '檢查完畢，即將開始修改 LogoLight 和 LogoDark 相關的檔案，請確認清空 frontend repo 的 git status',
-    choices: [
-      {
-        name: '我還沒清完，等等再做',
-        value: false,
-      },
-      {
-        name: '清除完畢，開始吧',
-        value: true,
-      },
-    ],
-  }).catch(() => false)
-  if (!makeSure) return
-
-  await syncLogoLightAndDark(logoInstanceList, {
-    targetBrand,
-    frontendRepoPath,
-  })
-
-  console.log('完成!')
-}
-
-async function staticStuff() {
-  const settings = readSetting()
-  if (settings == null) return
-
-  const { ok, frontendRepoPath, newImagesFolder, targetBrand } = checkSetting(settings)
-  if (!ok) return
-
-  if (!isDir(newImagesFolder)) {
-    return void consoleRed('new-images-folder 需為一個資料夾!')
-  }
-
-  const checkNeededImages = await checkStaticImages(newImagesFolder, {
-    frontendRepoPath,
-    targetBrand,
-  })
-  if (checkNeededImages.some((img) => !img.passFormat)) return
-
-  const makeSure = await select({
-    message: '檢查完畢，即將開始覆蓋 static 相關的檔案，請確認清空 frontend repo 的 git status',
-    choices: [
-      {
-        name: '我還沒清完，等等再做',
-        value: false,
-      },
-      {
-        name: '清除完畢，開始吧',
-        value: true,
-      },
-    ],
-  }).catch(() => false)
-  if (!makeSure) return
-
-  checkNeededImages.forEach((payload) => {
-    const {
-      newImageInfo: { filePath: newImgPath },
-      targetPath,
-    } = payload
-
-    fs.copyFileSync(newImgPath, targetPath)
-  })
-
-  console.log(`\x1b[32m共 ${checkNeededImages.length} 張圖片處理完畢!\x1b[0m`)
 }

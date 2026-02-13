@@ -1,0 +1,54 @@
+.message {
+  color: #123;
+  margin-bottom: 6px;
+}
+
+.message.error {
+  color: red;
+}
+
+.container {
+  width: 775px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container .button {
+  margin-top: 6px;
+  border-radius: 5px;
+  background: #456;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.container .button:hover {
+  background: #678;
+}
+
+.container .button:active {
+  background: #567;
+}
+
+table td {
+  text-align: center;
+  padding: 12px 0;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 24px;
+  box-shadow: 1px 1px 2px 2px #9ab;
+}
+
+[demo-field] {
+  display: none;
+}

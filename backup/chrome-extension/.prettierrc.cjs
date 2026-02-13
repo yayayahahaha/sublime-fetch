@@ -1,12 +1,3 @@
-// 文件:
-// https://prettier.io/docs/en/configuration.html
-// https://prettier.io/docs/en/options.html
-
-// 推薦放在家目錄下，這是還蠻預設的東西
-// 如果專案內有 .prettierrc.js 的話，會以專案內的設定為主
-// *不會堆疊* , 意思是如果 $HOME 的設定了 singleQuote 是 true, 但 $PROJECT 沒有設定的話
-// singleQuote 在執行時的設定會是預設的 false
-
 module.exports = {
   /**
    * @description object 結尾的東西要不要加上 ","
