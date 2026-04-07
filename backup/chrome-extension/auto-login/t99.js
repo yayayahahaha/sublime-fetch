@@ -9,11 +9,13 @@ import { parseArgs } from './args-parser.js'
 import { blue } from '../color.js'
 import { clearEmailCache } from '../admin-related/admin-utils.js'
 import { registerByList } from './register-stuff.js'
+import { twoFaHelper } from './2fa-helper.js'
 
 const GET_WHITELABEL_INFO = 'GET_WHITELABEL_INFO'
 const REGISTER_BY_LIST = 'REGISTER_BY_LIST'
 const LOGIN_STAGING_ADIN = 'LOGIN_STAGING_ADIN'
 const CLEAR_EMAIL_CACHE = 'CLEAR_EMAIL_CACHE'
+const TWO_FA_HELPER = 'TWO_FA_HELPER'
 
 const supportedCmdArgs = ['port', 'profile']
 
@@ -53,7 +55,7 @@ async function start() {
       }
     })
     .filter(Boolean)
-    .sort((a, b) => a.displayName.localeCompare(b.displayName))
+    .sort((a, b) => a.displayName.localeCompare(b.displayName, undefined, { numeric: true }))
 
   const profileMap = Object.fromEntries(loginProfiles.map((item) => [item.displayName, item.value]))
 
@@ -67,6 +69,11 @@ async function start() {
         name: '重新生成 WL 的資訊',
         value: GET_WHITELABEL_INFO,
         description: '從 frontend repo 取得 WL 的 api path 等資訊',
+      },
+      {
+        name: '2FA 助手',
+        value: TWO_FA_HELPER,
+        description: '讀取或生成 2FA Code',
       },
       new Separator(),
       {
@@ -96,6 +103,11 @@ async function start() {
   if (answer === REGISTER_BY_LIST) return void registerByList()
   if (answer === LOGIN_STAGING_ADIN) return void loginStagingAdmin()
   if (answer === CLEAR_EMAIL_CACHE) return void clearEmailCache()
+  
+  if (answer === TWO_FA_HELPER) {
+    await twoFaHelper()
+    return // 直接結束
+  }
 
   profileKey = answer
 
@@ -110,12 +122,12 @@ async function start() {
       default: null,
       validate(value) {
         if (value == null) return true
-        const result = /^\d+$/.test(value)
+        const result = !value || /^\d+$/.test(value)
         return result || '請輸入正確的 port 號'
       },
     }).catch(() => ({ error: '使用者取消' }))
     if (portInput?.error != null) return void errorConsole(portInput?.error)
-    port = portInput
+    port = portInput || null
   }
 
   console.log()
