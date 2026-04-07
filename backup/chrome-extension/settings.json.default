@@ -1,4 +1,6 @@
 {
+  "useExtension": true,
+
   "loginProfiles": [
     {
       "displayName": "__PUT_OPTION_DISPLAY_NAME_HERE__",

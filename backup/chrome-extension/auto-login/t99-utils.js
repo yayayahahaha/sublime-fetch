@@ -6,7 +6,8 @@ const dirname = path.dirname(filename)
 
 import { exec } from 'child_process'
 import { CacheInstance, LoginNeeded } from './login-stuff.js'
-import { blue, lightCyan, lightGreen, red } from '../color.js'
+import { loadSettings } from './settings-loader.js'
+import { blue, lightCyan, lightGreen, lightMagenta, red } from '../color.js'
 
 // 目前先用複製的
 export class EncodeDecode {
@@ -91,13 +92,46 @@ export async function loginDisposable(payload, { port = null } = {}) {
   fs.writeFileSync(cacheFilePath, JSON.stringify(cache, null, 2), 'utf8')
   console.log('Cache 儲存成功')
 
+  // 讀取設定判斷是否使用 extension
+  const settings = loadSettings()
+  const useExtension = settings.useExtension ?? true
+
+  console.log()
+  console.log(blue('⚙️  讀取到的設定:'), { useExtension: settings.useExtension })
+  console.log(blue('🚀 最終判定模式:'), useExtension ? 'Extension 模式' : '手動模式 (Console 貼上)')
+
   // 開啟瀏覽器的部分
   console.log()
   console.log(lightCyan('開啟瀏覽器..'))
   const url = port ? `http://localhost:${port}` : websiteLink
-  let encodedCode = EncodeDecode.encode({ token, url }, 10)
-  encodedCode = EncodeDecode.encode(encodedCode, 5)
-  exec(`open '${exampleDomain}?_=${encodedCode}'`)
+
+  if (useExtension) {
+    let encodedCode = EncodeDecode.encode({ token, url }, 10)
+    encodedCode = EncodeDecode.encode(encodedCode, 5)
+    exec(`open '${exampleDomain}?_=${encodedCode}'`)
+  } else {
+    // 手動模式
+    const manualScript = `localStorage.clear(); localStorage.setItem('token', '${token}'); location.reload();`
+
+    console.log(lightMagenta('--------------------------------------------------'))
+    console.log(lightMagenta('請在瀏覽器 Console 執行以下指令：'))
+    console.log()
+    console.log(manualScript)
+    console.log()
+    console.log(lightMagenta('--------------------------------------------------'))
+
+    // 自動複製到剪貼簿 (macOS)
+    try {
+      const copyProcess = exec('pbcopy')
+      copyProcess.stdin.write(manualScript)
+      copyProcess.stdin.end()
+      console.log(lightGreen('📋 已將指令自動複製到剪貼簿！'))
+    } catch (e) {
+      console.log(red('無法自動複製到剪貼簿'))
+    }
+
+    exec(`open '${url}'`)
+  }
 
   console.log(lightGreen('\n 🌠 結束囉'))
 }

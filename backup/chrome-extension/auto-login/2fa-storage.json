@@ -1,0 +1,13 @@
+[
+  "otpauth://totp/lmex-stage:?secret=TBLGEDVCFKTNY7TH&issuer=lmex-stage",
+  "otpauth://totp/CleverTap%20Production:frontend%40btse.com?secret=GMVGYNDWFYRWCJRBFRHVGL3CNZRCQN3C&issuer=CleverTap%20Production",
+  "otpauth://totp/Fedhabit-staging:?secret=GWGQ4HLLGZ67ERPM&issuer=Fedhabit-staging",
+  "otpauth://totp/fedhabit-fc1-staging:?secret=APR4OTATZ2ZL3FJN&issuer=fedhabit-fc1-staging",
+  "otpauth://totp/freedx.btse.co:flycfreedxstaging?secret=V2F5UKBX4WGBDEJL&issuer=freedx.btse.co",
+  "otpauth://totp/traiex-stage:?secret=LBNWTLGLIUKYJ2XJ&issuer=traiex-stage",
+  "otpauth://totp/BTSE-Admin:flycflyc?secret=DZQGM743HEQ5LYDV&issuer=BTSE-Admin",
+  "otpauth://totp/btse-gi.btse.co:flycchungbtsegi?secret=Q6FN4SO4TT6RJ2BU&issuer=btse-gi.btse.co",
+  "otpauth://totp/autotrader-staging:?secret=64QQGREKNEAVGUIA&issuer=autotrader-staging",
+  "otpauth://totp/btse.dev:flycchung?secret=TN5Z3HOBPMGAP7AC&issuer=btse.dev",
+  "otpauth://totp/staging.btse.co:flycchung?secret=4IEPN4HOPRIMWHXB&issuer=staging.btse.co"
+]

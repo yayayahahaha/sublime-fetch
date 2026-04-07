@@ -7,3 +7,7 @@ export function gen2FaCode(secretCode2Fa, { verbose = true } = {}) {
 
   return authenticator.generate(secretCode2Fa) ?? null
 }
+
+export function get2FaTimeRemaining() {
+  return authenticator.timeRemaining()
+}
