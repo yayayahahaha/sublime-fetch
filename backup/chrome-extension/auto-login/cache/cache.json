@@ -1,112 +1,35 @@
 {
-  "b2z-fc4@mailto.plus-!QAZ1qaz--_adbcb4655519435412": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzM2NDY4NDIsImV4cCI6MTc3NjIzODg0MiwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZjNGIyenN0Z0BiMnoiLCJjbGllbnRJZCI6ImIyeiIsInJhbmRvbSI6IjAuODM5MTkxODUxMDMzMTM5NiIsImRldmljZVR5cGUiOiJ3ZWIiLCJkZXZpY2VJZCI6Il9hZGJjYjQ2NTU1MTk0MzU0MTIiLCJzY29wZXMiOlsidHJ1c3RlZCJdfQ.exj7aXZ0kIrMW4DPkTgN09Aac-rl3DzkS_ak3ViNdKU",
-    "deviceFingerprint": "_adbcb4655519435412",
-    "isInProgress": false,
-    "inProgressTimestamp": null,
-    "inProgressToken": null
-  },
-  "undefined": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzE4MzM2MDQsImV4cCI6MTc3MTkyMDA2NCwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZjMTF0cmFuc2V4Y2hhbmdlc3RnQHRyYW5zZXhjaGFuZ2UiLCJjbGllbnRJZCI6InRyYW5zZXhjaGFuZ2UiLCJyYW5kb20iOiIwLjE1MjA3MTg1MzU0MzU5OTIiLCJkZXZpY2VUeXBlIjoid2ViIiwiZGV2aWNlSWQiOiJfZGNlZmM0NzUyOTk2NDQzMTczIiwic2NvcGVzIjpbInRydXN0ZWQiXX0.XDpNaGRkf7VGQbowuUr_jOQkgszkUxpqlxpkdIxnhrs",
-    "deviceFingerprint": "_dcefc4752996443173",
-    "isInProgress": false,
-    "inProgressTimestamp": null,
-    "inProgressToken": null
-  },
-  "lmex-fc3@mailto.plus-!QAZ1qaz--_ffadd8883968439680": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzA4NzA2NTcsImV4cCI6MTc3MzQ2MjY1NywiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZjM2xtZXhzdGdAbG1leCIsImNsaWVudElkIjoibG1leCIsInJhbmRvbSI6IjAuMjU1NzgxNzcwNTY0MDI1MDciLCJkZXZpY2VUeXBlIjoid2ViIiwiZGV2aWNlSWQiOiJfZmZhZGQ4ODgzOTY4NDM5NjgwIiwic2NvcGVzIjpbInRydXN0ZWQiXX0.KVZTiKcHr1Wnzw4DtWOOlaaouNNCGY21TCvjMa5nXdw",
-    "deviceFingerprint": "_ffadd8883968439680",
-    "isInProgress": false,
-    "inProgressTimestamp": null,
-    "inProgressToken": null
-  },
-  "lmex-natestlmex01@mailto.plus-!Aa12345678--_eddac2788644074436": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzA4NzA3MTQsImV4cCI6MTc3MzQ2MjcxNCwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6Im5hdGVzdGxtZXgwMUBsbWV4IiwiY2xpZW50SWQiOiJsbWV4IiwicmFuZG9tIjoiMC41MjE5NjU0NzMyNTAwODQ1IiwiZGV2aWNlVHlwZSI6IndlYiIsImRldmljZUlkIjoiX2VkZGFjMjc4ODY0NDA3NDQzNiIsInNjb3BlcyI6WyJ0cnVzdGVkIl19.NThsxUk6qvxbi2RudwVqs2wUp8kjqK3zz99a3Ov_57A",
-    "deviceFingerprint": "_eddac2788644074436",
-    "isInProgress": false,
-    "inProgressTimestamp": null,
-    "inProgressToken": null
-  },
-  "lmex-fc9@mailto.plus-!QAZ1qaz--_bccff6122806924222": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzA4NzA3NjEsImV4cCI6MTc3MzQ2Mjc2MSwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZjOWxtZXhzdGdAbG1leCIsImNsaWVudElkIjoibG1leCIsInJhbmRvbSI6IjAuMDk4MDk2NjU5MTE2NDU5MDQiLCJkZXZpY2VUeXBlIjoid2ViIiwiZGV2aWNlSWQiOiJfYmNjZmY2MTIyODA2OTI0MjIyIiwic2NvcGVzIjpbInRydXN0ZWQiXX0.QSGzMaEY2UYsHuNPkMTMPpGkLiKnKw0SC6Nb4Vd-dSU",
-    "deviceFingerprint": "_bccff6122806924222",
-    "isInProgress": false,
-    "inProgressTimestamp": null,
-    "inProgressToken": null
-  },
-  "lmex-kimistglmex0724-Aa12345678@--_ecfcc0010858276769": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzA5NTM5NTcsImV4cCI6MTc3MzU0NTk1NywiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImtpbWlzdGdsbWV4MDcyNEBsbWV4IiwiY2xpZW50SWQiOiJsbWV4IiwicmFuZG9tIjoiMC4yNDA2ODkxODQxNjAyMzMxIiwiZGV2aWNlVHlwZSI6IndlYiIsImRldmljZUlkIjoiX2VjZmNjMDAxMDg1ODI3Njc2OSIsInNjb3BlcyI6WyJ0cnVzdGVkIl19.RUCfXJW0p2qhvUfnAmouasmT2ZSpXw5c6ZGDDz75CcU",
-    "deviceFingerprint": "_ecfcc0010858276769",
-    "isInProgress": false,
-    "inProgressTimestamp": null,
-    "inProgressToken": null
-  },
-  "lmex-natestlmex02@mailto.plus-!Aa12345678--_fcbfc9859746908453": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzE4MTc3MzUsImV4cCI6MTc3NDQwOTczNSwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6Im5hdGVzdGxtZXgwMkBsbWV4IiwiY2xpZW50SWQiOiJsbWV4IiwicmFuZG9tIjoiMC40MDM2NDcwMDY4OTMxMjgyNyIsImRldmljZVR5cGUiOiJ3ZWIiLCJkZXZpY2VJZCI6Il9mY2JmYzk4NTk3NDY5MDg0NTMiLCJzY29wZXMiOlsidHJ1c3RlZCJdfQ.nW_IHp407Ccgyre1iEfhzVAMqKwXCsAsxutSh1ZJBJY",
-    "deviceFingerprint": "_fcbfc9859746908453",
-    "isInProgress": false,
-    "inProgressTimestamp": null,
-    "inProgressToken": null
-  },
-  "lmex-fc11@mailto.plus-!QAZ1qaz--_ecfab6468524294495": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzE4MTgwNzAsImV4cCI6MTc3NDQxMDA3MCwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZjMTFsbWV4c3RnQGxtZXgiLCJjbGllbnRJZCI6ImxtZXgiLCJyYW5kb20iOiIwLjYyMzU3MjMxMDQ4MjQxNjYiLCJkZXZpY2VUeXBlIjoid2ViIiwiZGV2aWNlSWQiOiJfZWNmYWI2NDY4NTI0Mjk0NDk1Iiwic2NvcGVzIjpbInRydXN0ZWQiXX0.a3YJM9lUPZ1uMKQFoqKBNjLI2QHhDyOmfPtzWZC-6QQ",
-    "deviceFingerprint": "_ecfab6468524294495",
-    "isInProgress": false,
-    "inProgressTimestamp": null,
-    "inProgressToken": null
-  },
-  "lmex-flyc.chung@btse.com-!QAZ1qaz-TBLGEDVCFKTNY7TH-my-finger-print-test-2": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzQ1MTIzOTIsImV4cCI6MTc3NzEwNDM5MiwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWNsbWV4c3RhZ2luZ0BsbWV4IiwiY2xpZW50SWQiOiJsbWV4IiwicmFuZG9tIjoiMC4xMjU4NjQ4Mjg3ODE1MTY5NSIsImRldmljZVR5cGUiOiJ3ZWIiLCJkZXZpY2VJZCI6Im15LWZpbmdlci1wcmludC10ZXN0LTIiLCJzY29wZXMiOlsidHJ1c3RlZCJdfQ.PQooICqr09WHjWsH2VzlC7xnldh-C-RI7my8oFyyvRs",
-    "deviceFingerprint": "my-finger-print-test-2",
-    "isInProgress": false,
-    "inProgressTimestamp": null,
-    "inProgressToken": null
-  },
-  "transexchange-fc11@mailto.plus-!QAZ1qaz--_dcefc4752996443173": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzE4MzM3MTMsImV4cCI6MTc3NDQyNTcxMywiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZjMTF0cmFuc2V4Y2hhbmdlc3RnQHRyYW5zZXhjaGFuZ2UiLCJjbGllbnRJZCI6InRyYW5zZXhjaGFuZ2UiLCJyYW5kb20iOiIwLjA2NDEwMzk3ODYyMTQwNzA0IiwiZGV2aWNlVHlwZSI6IndlYiIsImRldmljZUlkIjoiX2RjZWZjNDc1Mjk5NjQ0MzE3MyIsInNjb3BlcyI6WyJ0cnVzdGVkIl19.uQOBu8z23UyXFUUdye2bKngJDjVpejNl2LJ_9pP7Vlw",
-    "deviceFingerprint": "_dcefc4752996443173",
-    "isInProgress": false,
-    "inProgressTimestamp": null,
-    "inProgressToken": null
-  },
   "btse-flyc.chung@btse.com-!QAZ1qaz-4IEPN4HOPRIMWHXB-btse-staging-fingerprint": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzQ1ODIyMjksImV4cCI6MTc3NzE3NDIyOSwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWNjaHVuZyIsImNsaWVudElkIjoiYnRzZSIsInJhbmRvbSI6IjAuOTQyNTc2NTA1NTkxNTAwMSIsImRldmljZVR5cGUiOiJ3ZWIiLCJkZXZpY2VJZCI6ImJ0c2Utc3RhZ2luZy1maW5nZXJwcmludCIsInNjb3BlcyI6WyJ0cnVzdGVkIl19.FFRHqUA-wceeAV-zGqJpuMA_LDgrEr2k-wvPjeoRAtE",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzU1MzM5MTIsImV4cCI6MTc3ODEyNTkxMiwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWNjaHVuZyIsImNsaWVudElkIjoiYnRzZSIsInJhbmRvbSI6IjAuNDMzNjA2OTg2OTM4ODgwNTYiLCJkZXZpY2VUeXBlIjoid2ViIiwiZGV2aWNlSWQiOiJidHNlLXN0YWdpbmctZmluZ2VycHJpbnQiLCJzY29wZXMiOlsidHJ1c3RlZCJdfQ.oYvXxVyTCThVvkLPLInRV4H4wbf2Sf3dXyK5KYV50II",
     "deviceFingerprint": "btse-staging-fingerprint",
     "isInProgress": false,
     "inProgressTimestamp": null,
     "inProgressToken": null
   },
-  "freedx-fc1@mailto.plus-!QAZ1qaz--_fceac3518993291246": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzE5MDgzNDksImV4cCI6MTc3NDUwMDM0OSwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZjMWZyZWVkeHN0YWdpbmdAZnJlZWR4IiwiY2xpZW50SWQiOiJmcmVlZHgiLCJyYW5kb20iOiIwLjQ4Mjk5ODM2NjQwNDQ4MzciLCJkZXZpY2VUeXBlIjoid2ViIiwiZGV2aWNlSWQiOiJfZmNlYWMzNTE4OTkzMjkxMjQ2Iiwic2NvcGVzIjpbInRydXN0ZWQiXX0.aWY-VZSUL7uEUxzW5mCMzgHEFWAA0pwx3xxWaP0fOw4",
-    "deviceFingerprint": "_fceac3518993291246",
-    "isInProgress": false,
-    "inProgressTimestamp": null,
-    "inProgressToken": null
-  },
   "freedx-flyc.chung@btse.com-!QAZ1qaz-V2F5UKBX4WGBDEJL-_cdaea0387453352707": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzQ0MTk5ODIsImV4cCI6MTc3NzAxMTk4MiwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWNmcmVlZHhzdGFnaW5nQGZyZWVkeCIsImNsaWVudElkIjoiZnJlZWR4IiwicmFuZG9tIjoiMC45MjE0NDc0MDM3MTQ0OTExIiwiZGV2aWNlVHlwZSI6IndlYiIsImRldmljZUlkIjoiX2NkYWVhMDM4NzQ1MzM1MjcwNyIsInNjb3BlcyI6WyJ0cnVzdGVkIl19.6Amo_LTv_wACFPZU8711F5uruyWr4B54sEv8xPaEQXM",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzU2MTg4NDUsImV4cCI6MTc3ODIxMDg0NSwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWNmcmVlZHhzdGFnaW5nQGZyZWVkeCIsImNsaWVudElkIjoiZnJlZWR4IiwicmFuZG9tIjoiMC4zMDU0Njk0NDM1ODM3NjE2IiwiZGV2aWNlVHlwZSI6IndlYiIsImRldmljZUlkIjoiX2NkYWVhMDM4NzQ1MzM1MjcwNyIsInNjb3BlcyI6WyJ0cnVzdGVkIl19.wl1s4D3jYi6IaMjIafVbS64ovzsdcIhXrNZl-sPbIcU",
     "deviceFingerprint": "_cdaea0387453352707",
     "isInProgress": false,
     "inProgressTimestamp": null,
     "inProgressToken": null
   },
-  "nexu-nexuann001@mailto.plus-P@ssword123-OQQ6KLJBMTU3Q3FI-_cafee8159969295300": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzE5MjczNjIsImV4cCI6MTc3NDUxOTM2MiwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6Im5leHVhbm4wMDFAbmV4dSIsImNsaWVudElkIjoibmV4dSIsInJhbmRvbSI6IjAuMDYyMzIxNjYxNTAyMDIyODk2IiwiZGV2aWNlVHlwZSI6IndlYiIsImRldmljZUlkIjoiX2NhZmVlODE1OTk2OTI5NTMwMCIsInNjb3BlcyI6WyJ0cnVzdGVkIl19.ZbQ3XgJVr20PyHAd4MGC055GJxgEiNPDDmSAu0F-qHw",
-    "deviceFingerprint": "_cafee8159969295300",
+  "btse-fc1@mailto.plus-!QAZ1qaz--btse-staging-fingerprint": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzU3MDQ1MDEsImV4cCI6MTc3ODI5NjUwMSwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZjMWJ0c2VzdGFnaW5nIiwiY2xpZW50SWQiOiJidHNlIiwicmFuZG9tIjoiMC45MjM1Mjk2NDAzNzc4MDA3IiwiZGV2aWNlVHlwZSI6IndlYiIsImRldmljZUlkIjoiYnRzZS1zdGFnaW5nLWZpbmdlcnByaW50Iiwic2NvcGVzIjpbInRydXN0ZWQiXX0.4GH8QT30hBx3m0QmmdoG1vMixvyAyHlsIQxNlJNBlQE",
+    "deviceFingerprint": "btse-staging-fingerprint",
     "isInProgress": false,
     "inProgressTimestamp": null,
     "inProgressToken": null
   },
-  "transexchange-flyc.chung@btse.com-!QAZ1qaz--_dbfdc4798533179596": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzMxMzg3MzcsImV4cCI6MTc3NTczMDczNywiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWN0cmFuc2V4Y2hhbmdlQHRyYW5zZXhjaGFuZ2UiLCJjbGllbnRJZCI6InRyYW5zZXhjaGFuZ2UiLCJyYW5kb20iOiIwLjI0MDM0NTA3MTkxMDEwODIzIiwiZGV2aWNlVHlwZSI6IndlYiIsImRldmljZUlkIjoiX2RiZmRjNDc5ODUzMzE3OTU5NiIsInNjb3BlcyI6WyJ0cnVzdGVkIl19.9EVqYEpXgjRQ5_AMLKHhLLBT7EfVkU-sjVFcJgnCpgw",
-    "deviceFingerprint": "_dbfdc4798533179596",
+  "btse-fc4@mailto.plus-!QAZ1qaz--_bdfba7702495300706": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzU3MDQ1MTcsImV4cCI6MTc3ODI5NjUxNywiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZjNGJ0c2VzdGFnaW5nIiwiY2xpZW50SWQiOiJidHNlIiwicmFuZG9tIjoiMC4wMjQxMTc1MTUxMzIwODYyNjUiLCJkZXZpY2VUeXBlIjoid2ViIiwiZGV2aWNlSWQiOiJfYmRmYmE3NzAyNDk1MzAwNzA2Iiwic2NvcGVzIjpbInRydXN0ZWQiXX0.Pq0IQU8W0zItSb5DphbaPqqzYcGcfZ5vzoAFPDJct78",
+    "deviceFingerprint": "_bdfba7702495300706",
     "isInProgress": false,
     "inProgressTimestamp": null,
     "inProgressToken": null
   },
-  "nexu-flyc.chung@btse.com-!QAZ1qaz--_adade6215693809533": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzQ1MTIzNzMsImV4cCI6MTc3NzEwNDM3MywiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWNuZXh1c3RhZ2luZ0BuZXh1IiwiY2xpZW50SWQiOiJuZXh1IiwicmFuZG9tIjoiMC44NTcyMzc5ODI2OTg0MTI3IiwiZGV2aWNlVHlwZSI6IndlYiIsImRldmljZUlkIjoiX2FkYWRlNjIxNTY5MzgwOTUzMyIsInNjb3BlcyI6WyJ0cnVzdGVkIl19.HPGI8Q4GdJ5PXTLllXsVj9ItEqsWv0UYva1T7wanXpw",
-    "deviceFingerprint": "_adade6215693809533",
+  "ctx98-flyc.chung@btse.com-!QAZ1qaz--_fdacd7028354503633": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NzU4MDYwODAsImV4cCI6MTc3ODM5ODA4MCwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWNjaHVuZ2J0eDk4QGN0eDk4IiwiY2xpZW50SWQiOiJjdHg5OCIsInJhbmRvbSI6IjAuMDI1MzU5MTY3Mjg3MjMxMzEiLCJkZXZpY2VUeXBlIjoid2ViIiwiZGV2aWNlSWQiOiJfZmRhY2Q3MDI4MzU0NTAzNjMzIiwic2NvcGVzIjpbInRydXN0ZWQiXX0.1lwcXTl8I1BkCpythfBRrRTrkwwozn9R_UYgzuOJwDQ",
+    "deviceFingerprint": "_fdacd7028354503633",
     "isInProgress": false,
     "inProgressTimestamp": null,
     "inProgressToken": null

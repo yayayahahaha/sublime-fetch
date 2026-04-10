@@ -51,6 +51,10 @@ async function loginAdmin(adminLoginInfo, { getTokenOnly } = {}) {
     return token
   }
 
+  // 讀取設定判斷是否使用 extension
+  const settings = loadSettings()
+  const useExtension = settings.useExtension ?? true
+
   // 開啟瀏覽器的部分
   console.log()
   console.log(lightCyan('開啟瀏覽器..'))
@@ -58,12 +62,37 @@ async function loginAdmin(adminLoginInfo, { getTokenOnly } = {}) {
   const exampleDomain = 'https://www.google.com/'
   const url = 'https://admin.btse.co/login'
 
-  let encodedCode = EncodeDecode.encode({ token, url, toCookie: true }, 10)
-  encodedCode = EncodeDecode.encode(encodedCode, 5)
+  if (useExtension) {
+    let encodedCode = EncodeDecode.encode({ token, url, toCookie: true }, 10)
+    encodedCode = EncodeDecode.encode(encodedCode, 5)
 
-  console.log('瀏覽器跳轉的 encode: ', cyan(encodedCode))
+    console.log('瀏覽器跳轉的 encode: ', cyan(encodedCode))
 
-  exec(`open '${exampleDomain}?_=${encodedCode}'`)
+    exec(`open '${exampleDomain}?_=${encodedCode}'`)
+  } else {
+    // 手動模式
+    const manualScript = `document.cookie='admin-token=${encodeURIComponent(token)}; path=/'; location.reload();`
+
+    console.log()
+    console.log(lightCyan('--------------------------------------------------'))
+    console.log(lightCyan('請在 Admin 登入頁面的 Console 執行以下指令：'))
+    console.log()
+    console.log(manualScript)
+    console.log()
+    console.log(lightCyan('--------------------------------------------------'))
+
+    // 自動複製到剪貼簿 (macOS)
+    try {
+      const copyProcess = exec('pbcopy')
+      copyProcess.stdin.write(manualScript)
+      copyProcess.stdin.end()
+      console.log(lightGreen('📋 已將指令自動複製到剪貼簿！'))
+    } catch (e) {
+      console.log(red('無法自動複製到剪貼簿'))
+    }
+
+    exec(`open '${url}'`)
+  }
 
   console.log(lightGreen('🌠 成功'))
 }

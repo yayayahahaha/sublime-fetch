@@ -1,155 +1,67 @@
 import express from 'express'
-import { connectRedis } from './redis.js'
-import { Response } from './request-stuff.js'
-import { loginProfiles } from './WL.js'
-import { LoginNeeded } from './login-stuff.js'
-import { parseArgs } from './args-parser.js'
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { gen2FaCode, get2FaTimeRemaining } from './2fa.js'
+
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
+const filePath = path.resolve(dirname, '2fa-storage.json')
+
 const app = express()
+const PORT = 9999
 
-const settingMapping = Object.fromEntries(loginProfiles.map((item) => [item.displayName, item]))
-// 添加暫存登入結果的物件
-const loginCache = new Map()
-
-const redis = connectRedis()
-
-// 添加 CORS 中間件，支援所有來源
+// 允許跨網域存取 (CORS)
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-
-  // 處理 OPTIONS 請求
-  if (req.method === 'OPTIONS') return res.sendStatus(200)
-
+  res.header('Access-Control-Allow-Methods', 'GET')
   next()
 })
 
-// 解析 JSON 請求體
-app.use(express.json())
-app.use(express.json())
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-)
-
-// 設定基本路由
-app.get('/', (req, res) => res.send(new Response({ data: 'turn BACK 🚶‍♂️' })))
-
-app.post('/login', async (req, res) => {
-  const {
-    email = null,
-    brandName = null,
-    password = null,
-    secretCode2Fa = null,
-    deviceFingerprint = null,
-  } = req.body ?? {}
-  switch (true) {
-    case email == null:
-    case password == null:
-      res.send(new Response({ error: 'email 和 password 為必填' }))
-      return
-  }
-
-  let payload
+function load2FaStorage() {
+  if (!fs.existsSync(filePath)) return []
   try {
-    payload = new LoginNeeded({
-      email,
-      brandName,
-      password,
-      secretCode2Fa,
-      deviceFingerprint: deviceFingerprint ?? `${brandName}-${email}-fingerprint-mock`,
-      // deviceFingerprint: deviceFingerprint ?? `_oaanym1747972414766`,
-    })
-  } catch (e) {
-    res.send(new Response({ error: e.message }))
-    return
+    return JSON.parse(fs.readFileSync(filePath, 'utf8'))
+  } catch {
+    return []
   }
-  const result = await payload.login()
-
-  res.send(new Response({ data: result, error: result.error }))
-  console.log('\n\n')
-})
-
-// TODO(flyc): 等待重構
-app.get('/login-by-pk', async (req, res) => {
-  const { pk } = req.query
-  if (!pk) {
-    return res.send(new Response({ error: 'pk are required' }))
-  }
-
-  const payload = settingMapping[pk]
-  if (payload == null) return res.send(new Response({ error: `pk 沒有在 loginProfiles 裡` }))
-
-  console.log(`\x1b[1m\x1b[36m${'事前參數準備'}\x1b[0m`)
-  console.log('🌠 檢查是否有暫存的登入 token:')
-  const cachedResult = loginCache.get(pk)
-  if (cachedResult) {
-    console.log('  > 存在暫存的 token: ', cachedResult)
-    console.log(`🔄 使用暫存的登入結果, 對應的 pk: ${pk}`)
-    payload.token = cachedResult.token
-  } else {
-    console.log('  > 不存在暫存的 token')
-  }
-
-  const result = await payload.login()
-
-  // 如果登入成功，儲存結果到暫存
-  if (result?.token) {
-    console.log(`💾 儲存登入結果到暫存，pk: ${pk}`)
-    loginCache.set(pk, result)
-  }
-  console.log('\n\n')
-
-  res.send(new Response({ data: result }))
-})
-
-app.get('/getOtp', async (req, res) => {
-  const { username, brandName = null } = req.query
-  if (!username) {
-    return res.send(new Response({ error: 'username is required' }))
-  }
-
-  const { error, value } = await redis.getUserOtp(username, brandName)
-  if (error != null) return res.send(new Response({ error, data: value }))
-  res.send(new Response({ data: value }))
-})
-
-app.get('/getCaptcha', async (req, res) => {
-  const { captchaId } = req.query
-  if (!captchaId) {
-    return res.send(new Response({ error: 'captchaId is required' }))
-  }
-
-  const { error, value } = await redis.getCaptcha(captchaId)
-  if (error != null) return res.send(new Response({ error, data: value }))
-  res.send(new Response({ data: value }))
-})
-
-// 處理未定義的路由
-app.use((req, res) => {
-  res.status(404).send(new Response({ data: 'turn BACK 🚶‍♂️' }))
-})
-// 處理錯誤
-app.use((err, req, res, next) => {
-  console.error('伺服器錯誤:', err)
-  res.status(500).send(new Response({ error: '伺服器內部錯誤' }))
-})
-
-// 設定伺服器監聽的 port
-const cmdArgs = parseArgs()
-const port = cmdArgs.port || process.env.PORT || 9999
-
-// 驗證 port 是否有效
-if (isNaN(port) || port < 1 || port > 65535) {
-  console.error('錯誤：port 必須是 1-65535 之間的數字')
-  process.exit(1)
 }
 
-// 設定伺服器監聽的 port
-app.set('port', port)
+function parseOtpauth(line) {
+  try {
+    const url = new URL(line)
+    const secret = url.searchParams.get('secret')
+    const issuer = url.searchParams.get('issuer')
+    const label = decodeURIComponent(url.pathname.split(':').pop() || '')
+    return { secret, issuer, label }
+  } catch {
+    return null
+  }
+}
 
-// 啟動伺服器
-app.listen(port, () => {
-  console.log(`Express 伺服器已啟動，監聽 port ${port}`)
+app.get('/api/2fa', (req, res) => {
+  const storage = load2FaStorage()
+  const results = storage.map(line => {
+    const parsed = parseOtpauth(line)
+    if (!parsed) return null
+    return {
+      name: `${parsed.issuer} (${parsed.label})`,
+      code: gen2FaCode(parsed.secret, { verbose: false }),
+      remaining: get2FaTimeRemaining()
+    }
+  }).filter(Boolean)
+
+  res.json(results)
 })
+
+export function startServer() {
+  app.listen(PORT, () => {
+    console.log(`\n🚀 2FA API Server 啟動於 http://localhost:${PORT}`)
+    console.log(`🔗 API 端點: http://localhost:${PORT}/api/2fa`)
+  })
+}
+
+// 如果直接執行此檔案
+if (process.argv[1] === filename) {
+  startServer()
+}

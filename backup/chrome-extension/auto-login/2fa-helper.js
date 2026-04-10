@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { exec } from 'child_process'
 import { gen2FaCode, get2FaTimeRemaining } from './2fa.js'
 import select, { Separator } from '@inquirer/select'
 import { input, confirm } from '@inquirer/prompts'
@@ -85,6 +86,16 @@ async function readMode() {
     console.log(`🔐 2FA Code: `, '\x1b[1m\x1b[43m', code, '\x1b[0m', ` (剩餘約 ${remaining} 秒)`)
     console.log(lightCyan('----------------------------------'))
     console.log()
+
+    // 自動複製到剪貼簿 (macOS)
+    try {
+      const copyProcess = exec('pbcopy')
+      copyProcess.stdin.write(code)
+      copyProcess.stdin.end()
+      console.log(lightGreen('📋 已將 2FA Code 自動複製到剪貼簿！'))
+    } catch (e) {
+      console.log(red('無法自動複製到剪貼簿'))
+    }
   }
 }
 
