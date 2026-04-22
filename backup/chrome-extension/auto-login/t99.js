@@ -11,6 +11,7 @@ import { clearEmailCache } from '../admin-related/admin-utils.js'
 import { registerByList } from './register-stuff.js'
 import { twoFaHelper } from './2fa-helper.js'
 import { jiraBranchHelper } from './jira-helper.js'
+import { chromeWindowHelper } from './refresh-tabs-helper.js'
 
 const GET_WHITELABEL_INFO = 'GET_WHITELABEL_INFO'
 const REGISTER_BY_LIST = 'REGISTER_BY_LIST'
@@ -18,6 +19,7 @@ const LOGIN_STAGING_ADIN = 'LOGIN_STAGING_ADIN'
 const CLEAR_EMAIL_CACHE = 'CLEAR_EMAIL_CACHE'
 const TWO_FA_HELPER = 'TWO_FA_HELPER'
 const JIRA_BRANCH_HELPER = 'JIRA_BRANCH_HELPER'
+const CHROME_WINDOW_HELPER = 'CHROME_WINDOW_HELPER'
 
 const supportedCmdArgs = ['port', 'profile']
 
@@ -83,6 +85,11 @@ async function start() {
         value: JIRA_BRANCH_HELPER,
         description: '透過 Jira 標題生成 Git Branch 名稱',
       },
+      {
+        name: 'Chrome 視窗助手',
+        value: CHROME_WINDOW_HELPER,
+        description: '列出 Chrome 視窗並執行刷新、複製 URL 或執行 JS',
+      },
       new Separator(),
       {
         name: '批量註冊帳號',
@@ -114,12 +121,17 @@ async function start() {
   
   if (answer === TWO_FA_HELPER) {
     await twoFaHelper()
-    return // 直接結束
+    return 
   }
 
   if (answer === JIRA_BRANCH_HELPER) {
     await jiraBranchHelper()
-    return // 直接結束
+    return 
+  }
+
+  if (answer === CHROME_WINDOW_HELPER) {
+    await chromeWindowHelper()
+    return
   }
 
   profileKey = answer

@@ -78,14 +78,17 @@ async function readMode() {
     loop: false,
   }).catch(() => null)
 
-  if (secret) {
+  if (!secret) return
+
+  let keepRunning = true
+  while (keepRunning) {
     const code = gen2FaCode(secret, { verbose: false })
     const remaining = get2FaTimeRemaining()
-    console.log()
+    
+    console.log('\n' + lightCyan('----------------------------------'))
+    console.log(`🔐 2FA Code: `, '\x1b[1m\x1b[43m', code, '\x1b[0m', 
+      remaining <= 5 ? yellow(` (快過期了！剩餘 ${remaining} 秒)`) : ` (剩餘約 ${remaining} 秒)`)
     console.log(lightCyan('----------------------------------'))
-    console.log(`🔐 2FA Code: `, '\x1b[1m\x1b[43m', code, '\x1b[0m', ` (剩餘約 ${remaining} 秒)`)
-    console.log(lightCyan('----------------------------------'))
-    console.log()
 
     // 自動複製到剪貼簿 (macOS)
     try {
@@ -95,6 +98,19 @@ async function readMode() {
       console.log(lightGreen('📋 已將 2FA Code 自動複製到剪貼簿！'))
     } catch (e) {
       console.log(red('無法自動複製到剪貼簿'))
+    }
+
+    const action = await select({
+      message: 'Code 已產生，接下來要?',
+      choices: [
+        { name: '刷新 (重新計算並複製)', value: 'REFRESH' },
+        { name: '結束並返回主選單', value: 'END' },
+      ],
+      default: 'REFRESH'
+    }).catch(() => 'END')
+
+    if (action === 'END') {
+      keepRunning = false
     }
   }
 }
