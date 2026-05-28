@@ -9,6 +9,12 @@ import { connectRedis } from './redis.js'
 import { errorConsole, subTitleConsole, tokenConsole } from './t99-utils.js'
 import { loadSettings } from './settings-loader.js'
 import { blue, green, lightBlue, lightCyan, lightGreen } from '../color.js'
+import { brandNeedsEncryption, getClientPemForBrand } from './encryption-config.js'
+import {
+  getAesKeyForBrand,
+  encryptAesGcm,
+  decryptResponseInPlace,
+} from './encrypt-ecdh-aes-gcm.js'
 
 const { sha3_256: Hash } = jsSha3
 
@@ -178,16 +184,46 @@ export class LoginNeeded {
     return apiBaseUrl
   }
 
-  loginApi(loginParams = {}) {
+  get _needsEncryption() {
+    return brandNeedsEncryption(this.brandName)
+  }
+
+  async _ensureAesKey() {
+    return getAesKeyForBrand(this.brandName, {
+      apiBaseUrl: this.apiBaseUrl,
+      clientPem: getClientPemForBrand(this.brandName),
+    })
+  }
+
+  // 加密後 POST { iv, message }，content-type 用 url-encoded（與 FedHabit 前端攔截器一致）
+  async _encryptedPost(url, payload, extraHeaders = {}) {
+    const aesKey = await this._ensureAesKey()
+    const { iv, ciphertext } = await encryptAesGcm(aesKey, payload)
+    const body = new URLSearchParams({ iv, message: ciphertext }).toString()
+    const headers = {
+      'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      ...extraHeaders,
+    }
+    const response = await post(url, body, headers)
+    return decryptResponseInPlace(aesKey, response)
+  }
+
+  async loginApi(loginParams = {}) {
     const url = `${this.apiBaseUrl}/api/login`
+    const payload = {
+      password: Hash(Hash(this.password)),
+      deviceFingerprint: this.deviceFingerprint,
+      loginName: this.email,
+      keepLogin: true,
+      ...loginParams,
+    }
+
+    if (this._needsEncryption) {
+      return this._encryptedPost(url, payload)
+    }
+
     const formData = new FormData()
-
-    formData.append('password', Hash(Hash(this.password)))
-    formData.append('deviceFingerprint', this.deviceFingerprint)
-    formData.append('loginName', this.email)
-    formData.append('keepLogin', true)
-
-    Object.keys(loginParams).forEach((key) => formData.append(key, loginParams[key]))
+    Object.entries(payload).forEach(([k, v]) => formData.append(k, v))
 
     console.log('登入的 formData:', formData)
 
@@ -196,15 +232,9 @@ export class LoginNeeded {
 
   resendOtp(token) {
     const url = `${this.apiBaseUrl}/api/userDevice/verification`
-    const deviceFingerprint = this.deviceFingerprint
-
-    const formData = new FormData()
-    formData.append('token', token)
-    formData.append('deviceFingerprint', deviceFingerprint)
-
+    const payload = { token, deviceFingerprint: this.deviceFingerprint }
     const headers = { 'content-type': 'application/x-www-form-urlencoded;charset=UTF-8' }
-
-    return post(url, new URLSearchParams(formData).toString(), headers)
+    return post(url, new URLSearchParams(payload).toString(), headers)
   }
 
   async getOtp(username) {
@@ -266,11 +296,11 @@ export class LoginNeeded {
     const params = LoginNeeded.regexpDevice.test(token)
       ? { token, deviceFingerprint, passCode: otpCode }
       : { token, deviceFingerprint, otpCode: code2Fa, passCode: otpCode }
-    const headers = { 'content-type': 'application/x-www-form-urlencoded;charset=UTF-8' }
 
     console.log('🔗 finall passd 的 url: ', url)
     console.log('final 的參數: ', params)
 
+    const headers = { 'content-type': 'application/x-www-form-urlencoded;charset=UTF-8' }
     return post(url, new URLSearchParams(params).toString(), headers)
   }
 

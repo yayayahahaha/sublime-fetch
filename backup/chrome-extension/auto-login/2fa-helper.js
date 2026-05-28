@@ -66,6 +66,7 @@ async function readMode() {
       }
     })
     .filter(Boolean)
+    .sort((a, b) => a.name.localeCompare(b.name))
 
   if (profiles.length === 0) {
     console.log(red('檔案中沒有有效的 2FA 資訊'))

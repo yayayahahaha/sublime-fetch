@@ -10,5 +10,7 @@
   "otpauth://totp/autotrader-staging:?secret=64QQGREKNEAVGUIA&issuer=autotrader-staging",
   "otpauth://totp/btse.dev:flycchung?secret=TN5Z3HOBPMGAP7AC&issuer=btse.dev",
   "otpauth://totp/nexu-staging-flycchung:nexu-staging-flycchung?secret=SWEEBNLEUTVPLVVB&issuer=nexu-staging-flycchung",
-  "otpauth://totp/btse-flycchung-staging:btse-flycchung-staging?secret=3SP26Y3YRF64FTN6&issuer=btse-flycchung-staging"
+  "otpauth://totp/btse-flycchung-staging:btse-flycchung-staging?secret=3SP26Y3YRF64FTN6&issuer=btse-flycchung-staging",
+  "otpauth://totp/zmo-tiffany2-staging:zmo-tiffany2-staging?secret=76X2TOFLHRAFQOCN&issuer=zmo-tiffany2-staging",
+  "otpauth://totp/fedhabit-nathan:fedhabit-nathan?secret=W4YJV66OROEEGOI3&issuer=fedhabit-nathan"
 ]
