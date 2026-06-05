@@ -16,9 +16,15 @@
 7. F1-F12 功能鍵變成不用搭配 fn
    > Setting -> Keyboard -> Press and fold fn key to: Show Expanded Control Strip
 8. 快捷鍵: 勿擾模式(opt+s), app 清單(opt+q), spotlight/raycast 快捷鍵, 繁簡轉換, subWord 位移等
+
    > Setting -> Keyboard -> Keyboard shortcut
-9. 如果是有 touchbar 的 MacBook 的話，Fn 的行為會比沒有的多打一個勾
-   > https://superuser.com/questions/1755750/how-can-i-toggle-between-fn-and-function-f-keys-on-mac
+
+9. 按著 ctrl + scroll 可以 zoom in
+
+   > Setting -> Accessibility -> Zoom -> Use Scroll gesture with modifier keys to zoom
+
+10. 如果是有 touchbar 的 MacBook 的話，Fn 的行為會比沒有的多打一個勾
+    > https://superuser.com/questions/1755750/how-can-i-toggle-between-fn-and-function-f-keys-on-mac
 
 會根據不同的 Mac 型號 (如有沒有 touchbar 等) 有些不同
 
