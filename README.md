@@ -150,6 +150,10 @@ cp com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
 `git` 權限的部分參考[這裡](./git-tech-center.md)
 
+有可能會出現像是 `xcode-select: No developer tools were found` 的錯誤訊息，運行這個 command 即可: `xcode-select --install`.
+
+> 會跳出一個 GUI 執行安裝流程
+
 ### 安裝 brew
 
 > 安裝 `brew` 之前要裝 `git`, `brew` 在安裝的時候會需要
