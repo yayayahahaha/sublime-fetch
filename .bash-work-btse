@@ -1,0 +1,54 @@
+# node 記憶體相關
+export NODE_OPTIONS=--max_old_space_size=8192
+
+alias prettierExecPermission='chmod +x ./node_modules/prettier/bin/prettier.cjs'
+
+# 清除 node_modules 裡的 .vite folder
+alias rrrvvv='rm -rf ./node_modules/.vite;echo "刪除 node_modules 裡的 .vite 成功"'
+
+# 快速使用查找檔案相關連結的腳本: btse
+alias yyyaffected='yarn affected-paths --brand btse --trace --target'
+
+# 移動相關
+alias fe='cd ~/btse/frontend' # go to frontend project root
+alias ff='cd ~/btse/ff-worktree' # go to frontend worktree
+alias ww='cd ~/btse/ww' # go to frontend worktree
+alias ee='cd ~/btse/mjml_email_template' # go to email project root
+alias fd='cd ~/btse/freshdesk-btse-theme' # go to freshdesk-btse-them
+alias ddnnss='~/flyc/sublime-fetch/analyze_domain.sh' # dns 小工具 by AI
+alias bstatic='cd ~/btse/btse-static-resource' # go to btse-static-resource
+alias deeplink='cd ~/btse/app' # go to app deeplink folder
+alias deeplink-btzo='cd ~/btse/app/btzo' # go to app deeplink folder - btzo
+alias deeplink-btse='cd ~/btse/app/btse' # go to app deeplink folder - btse
+alias deeplink-bullstreetex='cd ~/btse/app/bullstreetex' # go to app deeplink folder - bullstreetex
+alias atat='cd ~/btse/aws-tools' # go to aws-tools
+alias o='open .' # open current path
+alias eeff=_eeff # 透過 npx 執行 eslint 自動修復
+alias diff_copy='git diff origin/develop...HEAD | pbcopy' # 透過 npx 執行 eslint 自動修復
+
+function _eeff () {
+  npx eslint --fix $(git diff --name-only) $(git diff --staged --name-only)
+}
+
+# 更新 brew 和 omz
+alias uuupdate_brew_and_omz='brew update; brew upgrade; brew cleanup; omz update; rb'
+
+# 啟動可以用來自動登入的 service, 空掉的話要去 /Users/flyc.chung/btse/chrome-extension 重新打包
+alias t99='node $HOME/btse/try-try/server.js'
+
+# TODO 可以寫一下白牌的?
+
+alias lll="node $HOME/btse/chrome-extension/auto-login/t99.js"
+alias aaww="node $HOME/btse/aws-tools/index.js"
+alias autochrome="cd $HOME/btse/chrome-extension"
+# alias l-btse="node $HOME/btse/chrome-extension/t99.js btse"
+# alias l-lmex="node $HOME/btse/chrome-extension/t99.js lmex"
+# alias l-traiex="node $HOME/btse/chrome-extension/t99.js traiex"
+# alias l-nvx="node $HOME/btse/chrome-extension/t99.js nvx"
+# alias l-btzo="node $HOME/btse/chrome-extension/t99.js btzo"
+# alias l-fedhabit="node $HOME/btse/chrome-extension/t99.js fedhabit"
+# alias l-bitqik="node $HOME/btse/chrome-extension/t99.js bitqik"
+# alias l-autotrader="node $HOME/btse/chrome-extension/t99.js autotrader"
+
+export PATH="$HOME/.docker/bin:$PATH"
+
