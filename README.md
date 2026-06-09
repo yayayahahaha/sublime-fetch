@@ -13,6 +13,9 @@
 5. 拖拉方式修改(雙擊拖拉)
    > Setting -> Accessibility -> Pointer Control -> Trackpad Options -> Use Trackpad for dragging -> Dragging style: With Drag Lock
 6. app 清單位置調整(setting 放第一個，狀態放最後一個等)
+
+   > 目前這個功能在新版的 Mac 已經不存在了..
+
 7. F1-F12 功能鍵變成不用搭配 fn
    > Setting -> Keyboard -> Press and fold fn key to: Show Expanded Control Strip
 8. 快捷鍵: 勿擾模式(opt+s), app 清單(opt+q), spotlight/raycast 快捷鍵, 繁簡轉換, subWord 位移等
