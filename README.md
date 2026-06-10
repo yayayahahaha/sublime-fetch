@@ -401,6 +401,8 @@ zsh set-rc-files.sh
   path = ~/frontend/.gitconfig
 ```
 
+> 要注意！ 新的 Mac 看不到副檔名，所以很容易在這邊覺得已經設定對了，但卻怎樣都不作用，要去 Finder > Settings > Advanced > Show all filenames extensions 才可以看到
+
 > TODO 也要處理備份的東西, 也就是 `zsh set-rc-files.sh` 的反向, 還有上述那些設定檔的反向..  
 > 整理: 這裡要每一個 zshrc 再去看一下, 更新這些項目的東東也要整理一下  
 > 如果使用 `.zprofile` 的話，prompt 相關的項目好像都不會起作用? 也不會換行之類的
