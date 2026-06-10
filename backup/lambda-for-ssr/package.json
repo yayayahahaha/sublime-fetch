@@ -1,0 +1,33 @@
+{
+  "name": "little-tool",
+  "type": "module",
+  "scripts": {
+    "generate-variables": "node build-lambda-server-environment.js",
+    "test-variables": "node test-variables.js",
+    "build": "rollup -c",
+    "upload": "./upload-lambda.sh",
+    "go": "yarn build && yarn upload"
+  },
+  "devDependencies": {
+    "@eslint/js": "8",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "eslint": "^8.29.0",
+    "globals": "^15.0.0",
+    "prettier": "^3.2.5",
+    "rollup": "^4.18.0",
+    "rollup-plugin-delete": "^2.0.0",
+    "serverless-offline": "^13.3.3"
+  },
+  "dependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "cheerio": "^1.0.0-rc.12",
+    "express": "^4.19.2",
+    "node-fetch": "^3.3.2",
+    "serverless-http": "^3.1.1",
+    "vue": "^3.4.31",
+    "vue-i18n": "^9.13.1"
+  },
+  "packageManager": "yarn@3.5.0"
+}

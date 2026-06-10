@@ -1,0 +1,28 @@
+# node nodules
+node_modules/
+
+# yarn and force use yarn
+.yarn
+package-lock.json
+
+# Mac file system cache
+.DS_Store
+
+# build result
+dist/
+*.zip
+
+# serverless stuff
+.serverless
+
+# 本地測試用的參數設定
+variables-setting.sh
+
+# 這個檔案會由 build-lambda-server-environment.js 產生
+index-html-content.js
+
+# 這個檔案會由 build-lambda-server-environment.js 產生
+config-variables.js
+
+# 這個檔案會由 build-lambda-server-environment.js 產生
+i18n-setup.js

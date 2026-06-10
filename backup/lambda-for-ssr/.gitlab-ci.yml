@@ -1,0 +1,60 @@
+# TODO(flyc): 要判斷 pipeline 是被什麼東西 trigger 的: 自己還是 repo frontend
+# TODO(flyc): 需確保已經部署到 s3 上 + 已經清掉 cdn cache，怕會有時差會導致 hash 不同而取不到 s3 的檔案
+# https://docs.gitlab.com/ee/ci/pipelines/downstream_pipelines.html#multi-project-pipelines
+
+stages:
+  - stage-build
+  - stage-deploy
+
+variables:
+  DIST_PATH: dist
+  ZIP_FILE_NAME: render-server.zip
+  ZIP_TARGET_PATH: '$DIST_PATH/$ZIP_FILE_NAME'
+  ZIP_SOURCE_PATH: '$DIST_PATH/*'
+
+job-build:
+  stage: stage-build
+  tags:
+    - nogle-devops
+  needs:
+    - project: btse/frontend
+      job: job-prepare_lambda_variable
+      ref: flyc/test-pipeline # TODO(flyc): branch name or tag name or whatever
+      artifacts: true
+  image:
+    name: gitlab-registry.oa.btse.io/btse/frontend/pod/workspace:nodejs18
+  before_script:
+    - apk add --no-cache zip
+  script:
+    - node build-lambda-server-environment.js --bundle-dir-name $BUNDLE_DIR_NAME
+    - yarn
+    - yarn build
+    - zip -j "$ZIP_TARGET_PATH" $ZIP_SOURCE_PATH
+  artifacts:
+    paths:
+      - $ZIP_TARGET_PATH
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "flyc/test-pipeline"'
+
+job-deploy:
+  stage: stage-deploy
+  tags:
+    - nogle-devops
+  image:
+    name: devopsteamhub/devops-fe-alpine
+    pull_policy: always
+  variables:
+    S3_PATH: 's3://staging-render.btse.co/render-server.zip'
+  script:
+    - echo $AWS_ACCESS_KEY_ID
+    - echo $AWS_SECRET_ACCESS_KEY
+    - aws s3 cp $ZIP_TARGET_PATH $S3_PATH
+    - 'aws lambda update-function-code
+      --function-name staging-render
+      --s3-bucket staging-render.btse.co
+      --s3-key render-server.zip
+      --region ap-northeast-1'
+  dependencies:
+    - job-build
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "flyc/test-pipeline"'
