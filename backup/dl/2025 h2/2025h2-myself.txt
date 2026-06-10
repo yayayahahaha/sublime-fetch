@@ -1,0 +1,36 @@
+I believe I performed very well this year.
+
+My day-to-day task handling has become stable and efficient. I can debug issues smoothly, and when developing new features, I now approach them with a better mindset—allowing me to identify potential problems earlier than before.
+
+One of the most impactful contributions was the Static Resource Separation project. This change successfully shifted the cost of static resources from being fully covered by BTSE to being billed individually to each white-label. As a result, it significantly reduced BTSE’s overall operational expenses.
+
+On the development side, improving the Email template pipeline was another key achievement. The existing email templates had major rendering issues. After fixing them, developers were able to work with a more modern and intuitive setup. Code reusability was also greatly improved by consolidating previously unclear or inconsistent parameters, which reduced the need for developers to “guess” how the code behaves.
+
+Still related to email, I also built a fully automated translation sync script this year. This removed the need for weekly manual translation updates and significantly reduced the workload and mental burden for the assigned team members.
+
+All of the above work was accompanied by proper documentation, ensuring that the knowledge and experience can be easily shared and reused in the future.
+
+Beyond technical contributions, I had many opportunities to collaborate with different teams this year. Whether discussing feature feasibility with the Intra team or aligning workflows with the App team, I believe my cross-team communication skills were strong. I also actively pushed projects forward, which I feel brought clear value to the team.
+
+Overall, I believe my performance this year was solid and meaningful.
+
+我覺得自己今年表現得非常好。
+
+日常需求的處理已上軌道、可以很順利地除錯、在開發新的功能上也可以比先前有更好的 mindset 來提早發現可能的問題。
+
+其中最重要的是 Static Resource 的拆分，這個功能讓原本全由 BTSE 負責支付全白牌的帳單、成功分散給每個白牌自行付費處理，實質上的減輕了 BTSE 的帳務支出；
+
+在開發上，對於 Email 的樣板腳本的更新也是很重要的一環。原本的 Email Template 其實存在著重大的渲染 Bug, 在成功修復後，順利讓工程師可以用最新且更直覺的方式開發。
+而在程式碼的覆用性上這次也有很大的改善，原先不確定來源的參數這次一併整合成功，大幅減少了使用者去「猜測」程式碼行為的成本。
+
+同樣也是 Email 相關的，今年開發的完全自動化的翻譯同步腳本也讓每週都需派人力處理的翻譯流程得到最大程度的改善，讓被指派的人力不用擔心多餘的事情。
+
+而當然，上面提到的全部項目都有撰寫對應的文件，讓這些開發經驗可以順利傳承下去。
+
+除了上述以外，今年也有許多機會和不同部門的人協作。
+不論是與 Intra 團隊共同討論功能的可行性，或是與 App 團隊討論協作模式等，
+我認為自己在與其他部門的溝通這部分上值得很高的評價，也覺得自己在主動推動專案的進行上對團隊帶來很大的助益。
+
+綜合以上，我覺得自己自己今年的表現相當不錯。
+
+

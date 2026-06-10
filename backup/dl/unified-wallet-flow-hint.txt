@@ -1,0 +1,25 @@
+[GET] /api/tutorial/viewedList
+不包含 WALLET_UPGRADE_BANNER 這個字段
+有的話代表看過、所以不會出現
+
+[GET] /api/user/account
+其中的 walletUpgradeStatus 不是 NOT_SUPPORTED 或 UPGRADED
+註: walletUpgradeTime 是 null 但 walletUpgradeStatus 是 UPGRADED 的話代表是新的 user, 剛創完就升級完畢了
+
+---
+
+點擊 Upgrade button 後會去呼叫的 api
+[GET] /futures/api/wallet/upgrade/check
+是否可以自動升級的條件是這些參數:
+openOrders
+activePositions
+activeTradingBot (transexchange 沒有這個)
+activeTwoWayCopyTrading (transexchange 沒有這個)
+
+
+全部的條件都達成後，點 Confirm 會呼叫的 api
+[POST] /futures/api/wallet/upgrade
+這個 api 也會回傳 walletUpgradeStatus, 如果是 IN_PROGRESS 的話 dialog 不會關閉；
+如果 walletUpgradeStatus 是 UPGRADED 的話 dialog 會直接消失 + 跳出成功的框
+
+

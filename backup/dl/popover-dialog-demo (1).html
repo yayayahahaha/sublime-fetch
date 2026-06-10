@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>When Libraries Became the Platform — Popover & Dialog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #f1ebdd;
+    --paper-deep: #e8e0cd;
+    --ink: #14110d;
+    --ink-soft: #2a261e;
+    --muted: #7a6f5a;
+    --rule: #1a1612;
+    --accent: #ff4a1c;
+    --accent-deep: #c93812;
+    --highlight: #ffe66b;
+    --code-bg: #161310;
+    --code-ink: #f1ebdd;
+    --code-comment: #7a7060;
+    --code-tag: #ff7a48;
+    --code-attr: #ffe66b;
+    --code-string: #b3e3a6;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Manrope', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+
+    background-image:
+      radial-gradient(ellipse 80% 50% at 70% 0%, rgba(255, 74, 28, 0.06), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 10% 100%, rgba(20, 17, 13, 0.05), transparent 60%);
+
+    /* Subtle paper grain */
+    background-attachment: fixed;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0 0.04 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mix-blend-mode: multiply;
+  }
+
+  .shell {
+    position: relative;
+    z-index: 1;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 56px 48px 120px;
+  }
+
+  /* ====================== TOPBAR ====================== */
+  .topbar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .topbar .left,
+  .topbar .right {
+    display: flex;
+    gap: 18px;
+    color: var(--muted);
+  }
+
+  .topbar .right {
+    justify-content: flex-end;
+  }
+
+  .topbar .mark {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-variation-settings: 'WONK' 1, 'SOFT' 60;
+    font-size: 18px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ink);
+  }
+
+  .blink {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 1.6s infinite ease-in-out;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.8); }
+  }
+
+  /* ====================== HERO ====================== */
+  .hero {
+    padding: 80px 0 56px;
+    position: relative;
+  }
+
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+
+  .kicker .num {
+    color: var(--ink);
+    background: var(--highlight);
+    padding: 2px 8px;
+    margin-right: 10px;
+  }
+
+  h1.headline {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-variation-settings: 'opsz' 144, 'SOFT' 30, 'WONK' 1;
+    font-size: clamp(64px, 9.5vw, 148px);
+    line-height: 0.86;
+    letter-spacing: -0.035em;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  h1.headline em {
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: 'opsz' 144, 'SOFT' 80, 'WONK' 1;
+    color: var(--accent);
+  }
+
+  h1.headline .stroke {
+    display: inline-block;
+    position: relative;
+  }
+
+  h1.headline .stroke::after {
+    content: '';
+    position: absolute;
+    left: -2%;
+    right: -2%;
+    bottom: 14%;
+    height: 14px;
+    background: var(--highlight);
+    z-index: -1;
+    transform: skewX(-8deg);
+  }
+
+  .lead {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .lead-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.8;
+    border-top: 1px solid var(--rule);
+    padding-top: 14px;
+  }
+
+  .lead-meta .label {
+    color: var(--ink);
+    display: block;
+  }
+
+  .lead-meta a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent);
+  }
+
+  .lead-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 350;
+    font-variation-settings: 'opsz' 18, 'SOFT' 50;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    max-width: 720px;
+  }
+
+  .lead-text strong {
+    font-weight: 500;
+    background: linear-gradient(180deg, transparent 60%, rgba(255, 74, 28, 0.25) 60%);
+    padding: 0 2px;
+  }
+
+  /* ====================== DIVIDER ====================== */
+  .rule-fancy {
+    margin: 96px 0 80px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .rule-fancy::before,
+  .rule-fancy::after {
+    content: '';
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .rule-fancy span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ====================== SECTION ====================== */
+  .section {
+    margin-bottom: 120px;
+    position: relative;
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    align-items: end;
+    gap: 32px;
+    padding-bottom: 28px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: 'opsz' 144, 'WONK' 1;
+    font-size: 110px;
+    line-height: 0.8;
+    color: var(--accent);
+    font-weight: 300;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-variation-settings: 'opsz' 144, 'SOFT' 40;
+    font-size: 64px;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .section-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--muted);
+  }
+
+  .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 6px 10px;
+    margin-bottom: 8px;
+  }
+
+  .section-desc {
+    max-width: 700px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 40px;
+  }
+
+  .section-desc code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    background: var(--paper-deep);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--accent-deep);
+  }
+
+  /* ====================== DEMO GRID ====================== */
+  .demo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .demo-grid.three {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .panel {
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+  }
+
+  .panel:hover {
+    transform: translateY(-4px);
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+
+  .panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .panel-head .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .panel-head .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .panel-old .dot { background: var(--muted); }
+  .panel-new .dot { background: var(--accent); }
+  .panel-new .panel-head { color: var(--accent); }
+
+  .panel-body {
+    padding: 56px 32px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 18px;
+    min-height: 260px;
+  }
+
+  .panel-caption {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: 'opsz' 24, 'SOFT' 80;
+    font-size: 20px;
+    color: var(--ink-soft);
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .panel-caption strong {
+    font-style: normal;
+    font-weight: 500;
+    font-family: 'Manrope';
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0 6px;
+    font-size: 16px;
+    margin-right: 4px;
+    vertical-align: 3px;
+  }
+
+  /* ====================== BUTTONS ====================== */
+  .btn {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 14px 26px;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s, color 0.18s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn::after {
+    content: '↗';
+    font-size: 14px;
+    transition: transform 0.18s ease;
+  }
+
+  .btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+    transform: translate(-3px, -3px);
+    box-shadow: 5px 5px 0 var(--accent);
+  }
+
+  .btn:hover::after { transform: rotate(45deg); }
+
+  .btn:active { transform: translate(0, 0); box-shadow: 0 0 0 var(--accent); }
+
+  .btn-accent {
+    background: var(--accent);
+    color: var(--paper);
+    border-color: var(--accent);
+  }
+
+  .btn-accent:hover {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+    box-shadow: 5px 5px 0 var(--accent);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    border-style: dashed;
+    color: var(--muted);
+    border-color: var(--muted);
+  }
+
+  .btn-ghost::after { content: '✕'; }
+
+  /* ====================== CODE BLOCK ====================== */
+  .code-card {
+    margin-top: 32px;
+    background: var(--code-bg);
+    color: var(--code-ink);
+    border: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .code-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+    border-bottom: 1px solid #2a2620;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--code-comment);
+  }
+
+  .code-head .filename {
+    color: var(--code-attr);
+  }
+
+  .code-head .traffic {
+    display: flex;
+    gap: 6px;
+  }
+
+  .code-head .traffic span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #3a342c;
+  }
+
+  .code-head .traffic span:nth-child(1) { background: #ff4a1c; }
+  .code-head .traffic span:nth-child(2) { background: #ffe66b; }
+  .code-head .traffic span:nth-child(3) { background: #b3e3a6; }
+
+  pre.code {
+    margin: 0;
+    padding: 22px 26px;
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  .tok-comment { color: var(--code-comment); font-style: italic; }
+  .tok-tag { color: var(--code-tag); }
+  .tok-attr { color: var(--code-attr); }
+  .tok-string { color: var(--code-string); }
+  .tok-punct { color: #6f6657; }
+  .tok-text { color: #e8e0cd; }
+
+  /* ====================== POPOVER STYLING ====================== */
+  [popover] {
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    padding: 0;
+    margin: auto;
+    max-width: 340px;
+    box-shadow: 8px 8px 0 var(--accent);
+    color: var(--ink);
+    font-family: 'Manrope';
+    /* opening animation via @starting-style */
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), overlay 0.28s allow-discrete, display 0.28s allow-discrete;
+  }
+
+  [popover]:not(:popover-open) {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+
+  @starting-style {
+    [popover]:popover-open {
+      opacity: 0;
+      transform: translateY(-6px) scale(0.98);
+    }
+  }
+
+  [popover]::backdrop {
+    background: rgba(20, 17, 13, 0.4);
+    backdrop-filter: blur(2px);
+    transition: background 0.3s, backdrop-filter 0.3s;
+  }
+
+  .popover-content {
+    padding: 24px 26px 22px;
+  }
+
+  .popover-content header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .popover-content h4 {
+    margin: 0;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: 'opsz' 24;
+    font-weight: 400;
+    font-size: 22px;
+  }
+
+  .popover-content p {
+    margin: 0 0 6px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  .popover-content kbd {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
+  .pop-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  /* ====================== DIALOG STYLING ====================== */
+  dialog {
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    padding: 0;
+    max-width: 480px;
+    width: 92%;
+    box-shadow: 12px 12px 0 var(--accent);
+    color: var(--ink);
+    font-family: 'Manrope';
+
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.32s ease, transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), overlay 0.32s allow-discrete, display 0.32s allow-discrete;
+  }
+
+  dialog:not([open]) {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+
+  @starting-style {
+    dialog[open] {
+      opacity: 0;
+      transform: translateY(20px) scale(0.96);
+    }
+  }
+
+  dialog::backdrop {
+    background: rgba(20, 17, 13, 0.55);
+    backdrop-filter: blur(3px);
+  }
+
+  .dialog-content {
+    padding: 36px 36px 28px;
+  }
+
+  .dialog-content .dialog-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  .dialog-content h3 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: 'opsz' 96, 'SOFT' 30;
+    font-weight: 400;
+    font-size: 38px;
+    line-height: 1;
+    letter-spacing: -0.015em;
+    margin: 0 0 18px;
+  }
+
+  .dialog-content p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 22px;
+  }
+
+  .dialog-actions {
+    display: flex;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    justify-content: flex-end;
+  }
+
+  .dialog-corner {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ====================== DROPDOWN MENU POPOVER ====================== */
+  .menu-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .menu-stage {
+    position: relative;
+    padding: 56px 32px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .stage-hint {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: 'opsz' 24;
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 360px;
+    line-height: 1.4;
+  }
+
+  .stage-hint code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: var(--paper-deep);
+    color: var(--accent-deep);
+    padding: 2px 6px;
+    font-style: normal;
+  }
+
+  /* Anchor the trigger button */
+  #accountTrigger { anchor-name: --account-anchor; }
+  #sortTrigger    { anchor-name: --sort-anchor; }
+
+  /* Trigger button styled like a chip / menu pill */
+  .menu-trigger {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 12px 18px;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.18s, color 0.18s, transform 0.18s, box-shadow 0.18s;
+  }
+
+  .menu-trigger:hover {
+    background: var(--ink);
+    color: var(--paper);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--accent);
+  }
+
+  .menu-trigger .caret {
+    width: 8px;
+    height: 8px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg) translate(-2px, -2px);
+    transition: transform 0.2s ease;
+  }
+
+  .menu-trigger[aria-expanded="true"] .caret,
+  .menu-trigger:has(+ [popover]:popover-open) .caret {
+    transform: rotate(-135deg) translate(-2px, -2px);
+  }
+
+  /* The dropdown popover itself */
+  .dropdown-menu {
+    margin: 0;                       /* override [popover] default centering */
+    padding: 6px;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    box-shadow: 6px 6px 0 var(--accent);
+    min-width: 240px;
+    font-family: 'Manrope', sans-serif;
+
+    /* Anchor positioning (Chrome 125+, Safari 26+) */
+    position: fixed;
+    inset: auto;
+    margin-top: 8px;
+
+    /* Fallback for browsers without anchor positioning */
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.2s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                overlay 0.22s allow-discrete, display 0.22s allow-discrete;
+  }
+
+  .dropdown-menu:not(:popover-open) {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  @starting-style {
+    .dropdown-menu:popover-open {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+  }
+
+  /* Use CSS anchor positioning where supported */
+  #accountMenu {
+    position-anchor: --account-anchor;
+    top: anchor(bottom);
+    left: anchor(left);
+  }
+
+  #sortMenu {
+    position-anchor: --sort-anchor;
+    top: anchor(bottom);
+    right: anchor(right);
+    left: auto;
+  }
+
+  /* Fallback positioning if anchor() isn't supported */
+  @supports not (top: anchor(bottom)) {
+    .dropdown-menu {
+      position: absolute;
+      top: 56px;
+      left: 0;
+    }
+  }
+
+  .dropdown-menu::backdrop {
+    background: transparent;          /* dropdown should not dim the page */
+  }
+
+  .menu-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 12px 6px;
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.12s, color 0.12s;
+  }
+
+  .menu-item:hover,
+  .menu-item:focus-visible {
+    background: var(--ink);
+    color: var(--paper);
+    outline: none;
+  }
+
+  .menu-item.is-danger { color: var(--accent-deep); }
+  .menu-item.is-danger:hover {
+    background: var(--accent-deep);
+    color: var(--paper);
+  }
+
+  .menu-item kbd {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    background: var(--paper-deep);
+    padding: 2px 6px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 3px;
+  }
+  .menu-item:hover kbd { color: var(--paper); background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
+
+  .menu-item .check {
+    color: var(--accent);
+    font-weight: 700;
+    visibility: hidden;
+  }
+  .menu-item[aria-checked="true"] .check { visibility: visible; }
+
+  .menu-divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 6px 4px;
+    opacity: 0.3;
+  }
+
+  .selected-pill {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--highlight);
+    color: var(--ink);
+    padding: 4px 10px;
+    border: 1px solid var(--ink);
+  }
+
+  /* ====================== FOOTNOTES ====================== */
+  .footnotes {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .footnotes h5 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: 'opsz' 24;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--ink);
+    margin: 0 0 12px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .footnotes a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
+  }
+
+  .colophon {
+    text-align: right;
+  }
+
+  .signoff {
+    text-align: center;
+    margin-top: 80px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: 'opsz' 144, 'WONK' 1, 'SOFT' 100;
+    font-size: 28px;
+    color: var(--muted);
+    letter-spacing: -0.01em;
+  }
+
+  .signoff::before,
+  .signoff::after {
+    content: '✦';
+    display: inline-block;
+    margin: 0 16px;
+    font-size: 16px;
+    color: var(--accent);
+    vertical-align: middle;
+  }
+
+  /* Responsive */
+  @media (max-width: 880px) {
+    .shell { padding: 32px 22px 80px; }
+    .lead { grid-template-columns: 1fr; gap: 24px; }
+    .section-head { grid-template-columns: 1fr; gap: 12px; }
+    .section-num { font-size: 72px; }
+    .section-title { font-size: 40px; }
+    .demo-grid, .demo-grid.three { grid-template-columns: 1fr; }
+    h1.headline { font-size: 56px; }
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- =========== TOPBAR =========== -->
+  <header class="topbar">
+    <div class="left">
+      <span><span class="blink"></span>Live demo</span>
+      <span>2026 / 05</span>
+    </div>
+    <div class="mark">jad&nbsp;·&nbsp;<em>field notes</em></div>
+    <div class="right">
+      <span>HTML / CSS / JS</span>
+      <span>No framework</span>
+    </div>
+  </header>
+
+  <!-- =========== HERO =========== -->
+  <section class="hero">
+    <div class="kicker"><span class="num">№ 001</span>When libraries become standards</div>
+    <h1 class="headline">
+      <span class="stroke">Bootstrap</span> wired<br />
+      it. <em>The platform</em><br />
+      finally <em>caught up.</em>
+    </h1>
+
+    <div class="lead">
+      <aside class="lead-meta">
+        <span class="label">Source</span>
+        <a href="https://jadjoubran.io/blog/web-platform-influenced-by-libraries" target="_blank" rel="noopener">jadjoubran.io ↗</a>
+        <br /><br />
+        <span class="label">Topics</span>
+        Popover API<br />
+        &lt;dialog&gt;<br />
+        invoker commands
+      </aside>
+      <p class="lead-text">
+        多年前 Bootstrap 用 <strong>data-toggle</strong> 跟 <strong>data-target</strong>
+        讓「點按鈕、開元件」變成宣告式的事 — 不必再手寫 JS 監聽。
+        如今同樣的概念已被內建在瀏覽器：<strong>popovertarget</strong>、
+        <strong>commandfor</strong> 與 <strong>command</strong>。下面是兩個可直接互動的範例。
+      </p>
+    </div>
+  </section>
+
+  <div class="rule-fancy"><span>§ Demos</span></div>
+
+  <!-- =========== SECTION 01 — POPOVER =========== -->
+  <section class="section reveal" id="popover">
+    <div class="section-head">
+      <div class="section-num">01</div>
+      <div>
+        <div class="section-tag">native · no JS required</div>
+        <h2 class="section-title">The <em>Popover</em> API</h2>
+      </div>
+      <div></div>
+    </div>
+
+    <p class="section-desc">
+      只要在按鈕加上 <code>popovertarget="id"</code>，再給目標元素 <code>popover</code> 屬性，
+      瀏覽器就會幫你接好開關、ESC 鍵關閉、點空白處 light-dismiss、焦點管理 — 一行 JavaScript 都不用。
+    </p>
+
+    <div class="demo-grid">
+
+      <!-- OLD WAY -->
+      <article class="panel panel-old">
+        <div class="panel-head">
+          <span class="badge"><span class="dot"></span>Before · the library era</span>
+          <span>~2012</span>
+        </div>
+        <div class="panel-body">
+          <p class="panel-caption"><strong>JS</strong> Manual wiring — listeners, state, outside-click handlers, focus traps. All hand-rolled.</p>
+          <button class="btn btn-ghost" id="oldPopBtn" type="button">Open (manual)</button>
+          <div id="oldPop" hidden style="position:absolute; margin-top: 60px; border:1.5px dashed var(--muted); padding:16px 18px; background: var(--paper-deep); font-size:13px; max-width:260px;">
+            <strong style="font-family:'JetBrains Mono'; font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted)">// manual</strong><br />
+            DOM event listeners. State variables. Cleanup logic. Bugs.
+          </div>
+        </div>
+      </article>
+
+      <!-- NEW WAY -->
+      <article class="panel panel-new">
+        <div class="panel-head">
+          <span class="badge"><span class="dot"></span>After · the platform</span>
+          <span>Baseline 2024</span>
+        </div>
+        <div class="panel-body">
+          <p class="panel-caption"><strong>HTML</strong> Two attributes. Done.</p>
+
+          <button class="btn btn-accent" popovertarget="brand-popover" type="button">
+            Open popover
+          </button>
+
+          <div id="brand-popover" popover>
+            <div class="popover-content">
+              <header>
+                <h4>Hello from a popover</h4>
+                <span class="pop-tag">popover</span>
+              </header>
+              <p>This element is shown declaratively. No <code style="font-family:'JetBrains Mono';font-size:12px">addEventListener</code>, no state machine.</p>
+              <p style="margin-top:10px">Press <kbd>Esc</kbd> or click outside to dismiss.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- CODE -->
+    <div class="code-card">
+      <div class="code-head">
+        <div class="traffic"><span></span><span></span><span></span></div>
+        <span class="filename">popover.html</span>
+        <span>declarative</span>
+      </div>
+<pre class="code"><span class="tok-punct">&lt;</span><span class="tok-tag">button</span> <span class="tok-attr">popovertarget</span><span class="tok-punct">=</span><span class="tok-string">"brand-popover"</span><span class="tok-punct">&gt;</span><span class="tok-text">Open popover</span><span class="tok-punct">&lt;/</span><span class="tok-tag">button</span><span class="tok-punct">&gt;</span>
+
+<span class="tok-punct">&lt;</span><span class="tok-tag">div</span> <span class="tok-attr">id</span><span class="tok-punct">=</span><span class="tok-string">"brand-popover"</span> <span class="tok-attr">popover</span><span class="tok-punct">&gt;</span>
+  <span class="tok-punct">&lt;</span><span class="tok-tag">p</span><span class="tok-punct">&gt;</span><span class="tok-text">Hello from a popover.</span><span class="tok-punct">&lt;/</span><span class="tok-tag">p</span><span class="tok-punct">&gt;</span>
+<span class="tok-punct">&lt;/</span><span class="tok-tag">div</span><span class="tok-punct">&gt;</span>
+
+<span class="tok-comment">/* Browser handles: open/close, ESC, light-dismiss, focus, ARIA */</span></pre>
+    </div>
+  </section>
+
+  <!-- =========== SECTION 02 — DIALOG =========== -->
+  <section class="section reveal" id="dialog">
+    <div class="section-head">
+      <div class="section-num">02</div>
+      <div>
+        <div class="section-tag">invoker · commandfor / command</div>
+        <h2 class="section-title">The <em>Dialog</em> + Command</h2>
+      </div>
+      <div></div>
+    </div>
+
+    <p class="section-desc">
+      <code>&lt;dialog&gt;</code> 處理 modal 焦點陷阱、ESC 關閉、backdrop。新的
+      <code>commandfor</code> + <code>command</code> 屬性讓「按鈕開 dialog」也變成純 HTML —
+      連 <code>showModal()</code> 都不用呼叫。下方兩種寫法並列：經典 JS 與新版宣告式。
+    </p>
+
+    <div class="demo-grid three">
+
+      <!-- CLASSIC JS -->
+      <article class="panel">
+        <div class="panel-head">
+          <span class="badge"><span class="dot" style="background:#7a6f5a"></span>Classic JS</span>
+          <span>showModal()</span>
+        </div>
+        <div class="panel-body">
+          <p class="panel-caption">仍然要寫一行 JS，但 <em>&lt;dialog&gt;</em> 已內建焦點與 ESC。</p>
+          <button class="btn" type="button" onclick="document.getElementById('classicDialog').showModal()">
+            Open dialog
+          </button>
+        </div>
+      </article>
+
+      <!-- NEW: command attribute -->
+      <article class="panel panel-new">
+        <div class="panel-head">
+          <span class="badge"><span class="dot"></span>command attribute</span>
+          <span>Chrome 135+</span>
+        </div>
+        <div class="panel-body">
+          <p class="panel-caption"><strong>HTML</strong> 純宣告 — <em>command="show-modal"</em>。</p>
+          <button class="btn btn-accent" type="button" commandfor="commandDialog" command="show-modal">
+            Open dialog
+          </button>
+        </div>
+      </article>
+
+      <!-- Custom command -->
+      <article class="panel">
+        <div class="panel-head">
+          <span class="badge"><span class="dot" style="background:var(--highlight)"></span>Confirm flow</span>
+          <span>danger zone</span>
+        </div>
+        <div class="panel-body">
+          <p class="panel-caption">同樣機制，套在「危險動作」的確認框。</p>
+          <button class="btn" type="button" commandfor="confirmDialog" command="show-modal" style="border-color: var(--accent-deep); color: var(--accent-deep);">
+            Delete project
+          </button>
+        </div>
+      </article>
+    </div>
+
+    <!-- CODE -->
+    <div class="code-card">
+      <div class="code-head">
+        <div class="traffic"><span></span><span></span><span></span></div>
+        <span class="filename">dialog.html</span>
+        <span>invoker commands</span>
+      </div>
+<pre class="code"><span class="tok-comment">// New, declarative — no JavaScript</span>
+<span class="tok-punct">&lt;</span><span class="tok-tag">button</span> <span class="tok-attr">commandfor</span><span class="tok-punct">=</span><span class="tok-string">"my-dialog"</span> <span class="tok-attr">command</span><span class="tok-punct">=</span><span class="tok-string">"show-modal"</span><span class="tok-punct">&gt;</span><span class="tok-text">Open</span><span class="tok-punct">&lt;/</span><span class="tok-tag">button</span><span class="tok-punct">&gt;</span>
+
+<span class="tok-punct">&lt;</span><span class="tok-tag">dialog</span> <span class="tok-attr">id</span><span class="tok-punct">=</span><span class="tok-string">"my-dialog"</span><span class="tok-punct">&gt;</span>
+  <span class="tok-punct">&lt;</span><span class="tok-tag">p</span><span class="tok-punct">&gt;</span><span class="tok-text">Content here</span><span class="tok-punct">&lt;/</span><span class="tok-tag">p</span><span class="tok-punct">&gt;</span>
+  <span class="tok-punct">&lt;</span><span class="tok-tag">button</span> <span class="tok-attr">commandfor</span><span class="tok-punct">=</span><span class="tok-string">"my-dialog"</span> <span class="tok-attr">command</span><span class="tok-punct">=</span><span class="tok-string">"close"</span><span class="tok-punct">&gt;</span><span class="tok-text">Close</span><span class="tok-punct">&lt;/</span><span class="tok-tag">button</span><span class="tok-punct">&gt;</span>
+<span class="tok-punct">&lt;/</span><span class="tok-tag">dialog</span><span class="tok-punct">&gt;</span>
+
+<span class="tok-comment">// Classic — fallback for older browsers</span>
+<span class="tok-punct">&lt;</span><span class="tok-tag">button</span> <span class="tok-attr">onclick</span><span class="tok-punct">=</span><span class="tok-string">"myDialog.showModal()"</span><span class="tok-punct">&gt;</span><span class="tok-text">Open</span><span class="tok-punct">&lt;/</span><span class="tok-tag">button</span><span class="tok-punct">&gt;</span></pre>
+    </div>
+  </section>
+
+  <!-- =========== SECTION 03 — DROPDOWN MENU (popover ≠ dialog) =========== -->
+  <section class="section reveal" id="dropdown">
+    <div class="section-head">
+      <div class="section-num">03</div>
+      <div>
+        <div class="section-tag">popover ≠ dialog · anchored menus</div>
+        <h2 class="section-title">When you <em>don't</em> want a dialog</h2>
+      </div>
+      <div></div>
+    </div>
+
+    <p class="section-desc">
+      Dropdown menu 是 popover 最典型的用例 — 它<strong>不該</strong>擋住整頁、不該困住焦點。
+      搭配 <code>position-anchor</code> + <code>anchor()</code> 把選單錨定在按鈕旁邊，
+      就是一個純 HTML / CSS 的 menu 元件，連定位都不用 JavaScript。
+    </p>
+
+    <div class="menu-row">
+
+      <!-- Account menu -->
+      <article class="panel">
+        <div class="panel-head">
+          <span class="badge"><span class="dot" style="background: var(--accent);"></span>Account menu</span>
+          <span>popover="auto"</span>
+        </div>
+        <div class="menu-stage">
+          <p class="stage-hint">點下方按鈕 — 它是 <code>[popover]</code>，<br />不是 dialog，所以背景仍可互動。</p>
+
+          <button id="accountTrigger" class="menu-trigger" popovertarget="accountMenu" type="button" aria-haspopup="menu">
+            sam.lin@btse
+            <span class="caret"></span>
+          </button>
+
+          <div id="accountMenu" class="dropdown-menu" popover role="menu" aria-labelledby="accountTrigger">
+            <div class="menu-section-label">Workspace</div>
+            <button class="menu-item" role="menuitem" type="button">
+              <span>Switch project</span><kbd>⌘P</kbd>
+            </button>
+            <button class="menu-item" role="menuitem" type="button">
+              <span>Invite teammates</span><kbd>⌘I</kbd>
+            </button>
+            <div class="menu-divider"></div>
+            <div class="menu-section-label">Account</div>
+            <button class="menu-item" role="menuitem" type="button">
+              <span>Preferences</span><kbd>⌘,</kbd>
+            </button>
+            <button class="menu-item" role="menuitem" type="button">
+              <span>Billing</span>
+            </button>
+            <div class="menu-divider"></div>
+            <button class="menu-item is-danger" role="menuitem" type="button" commandfor="confirmDialog" command="show-modal">
+              <span>Delete project…</span><kbd>⇧⌘⌫</kbd>
+            </button>
+            <button class="menu-item is-danger" role="menuitem" type="button">
+              <span>Sign out</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Sort menu (selectable) -->
+      <article class="panel">
+        <div class="panel-head">
+          <span class="badge"><span class="dot" style="background: var(--ink);"></span>Sort by</span>
+          <span>radio-style menu</span>
+        </div>
+        <div class="menu-stage" style="align-items: flex-end;">
+          <p class="stage-hint" style="margin-left: auto; text-align: right;">
+            Popover 可以攜帶<br />選擇狀態 — 真正的<br />「<em>不是 dialog</em>」用例。
+          </p>
+
+          <div style="display:flex; gap:14px; align-items:center; align-self: flex-end;">
+            <span class="selected-pill" id="sortSelected">Newest</span>
+            <button id="sortTrigger" class="menu-trigger" popovertarget="sortMenu" type="button" aria-haspopup="menu">
+              Sort
+              <span class="caret"></span>
+            </button>
+          </div>
+
+          <div id="sortMenu" class="dropdown-menu" popover role="menu" data-sort-menu aria-labelledby="sortTrigger">
+            <div class="menu-section-label">Order by</div>
+            <button class="menu-item" role="menuitemradio" type="button" data-sort="Newest" aria-checked="true">
+              <span>Newest first</span><span class="check">✓</span>
+            </button>
+            <button class="menu-item" role="menuitemradio" type="button" data-sort="Oldest" aria-checked="false">
+              <span>Oldest first</span><span class="check">✓</span>
+            </button>
+            <button class="menu-item" role="menuitemradio" type="button" data-sort="A → Z" aria-checked="false">
+              <span>Alphabetical</span><span class="check">✓</span>
+            </button>
+            <div class="menu-divider"></div>
+            <button class="menu-item" role="menuitemradio" type="button" data-sort="Modified" aria-checked="false">
+              <span>Last modified</span><span class="check">✓</span>
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- CODE -->
+    <div class="code-card">
+      <div class="code-head">
+        <div class="traffic"><span></span><span></span><span></span></div>
+        <span class="filename">dropdown.html</span>
+        <span>popover + anchor positioning</span>
+      </div>
+<pre class="code"><span class="tok-comment">/* HTML — pure declarative */</span>
+<span class="tok-punct">&lt;</span><span class="tok-tag">button</span> <span class="tok-attr">id</span><span class="tok-punct">=</span><span class="tok-string">"acc-btn"</span> <span class="tok-attr">popovertarget</span><span class="tok-punct">=</span><span class="tok-string">"acc-menu"</span><span class="tok-punct">&gt;</span><span class="tok-text">sam.lin@btse ▾</span><span class="tok-punct">&lt;/</span><span class="tok-tag">button</span><span class="tok-punct">&gt;</span>
+
+<span class="tok-punct">&lt;</span><span class="tok-tag">div</span> <span class="tok-attr">id</span><span class="tok-punct">=</span><span class="tok-string">"acc-menu"</span> <span class="tok-attr">popover</span> <span class="tok-attr">role</span><span class="tok-punct">=</span><span class="tok-string">"menu"</span><span class="tok-punct">&gt;</span>
+  <span class="tok-punct">&lt;</span><span class="tok-tag">button</span> <span class="tok-attr">role</span><span class="tok-punct">=</span><span class="tok-string">"menuitem"</span><span class="tok-punct">&gt;</span><span class="tok-text">Preferences</span><span class="tok-punct">&lt;/</span><span class="tok-tag">button</span><span class="tok-punct">&gt;</span>
+  <span class="tok-punct">&lt;</span><span class="tok-tag">button</span> <span class="tok-attr">role</span><span class="tok-punct">=</span><span class="tok-string">"menuitem"</span><span class="tok-punct">&gt;</span><span class="tok-text">Sign out</span><span class="tok-punct">&lt;/</span><span class="tok-tag">button</span><span class="tok-punct">&gt;</span>
+<span class="tok-punct">&lt;/</span><span class="tok-tag">div</span><span class="tok-punct">&gt;</span>
+
+<span class="tok-comment">/* CSS — anchor positioning attaches menu to button */</span>
+<span class="tok-attr">#acc-btn</span>  <span class="tok-punct">{</span> <span class="tok-tag">anchor-name</span><span class="tok-punct">:</span> <span class="tok-string">--acc</span><span class="tok-punct">;</span> <span class="tok-punct">}</span>
+<span class="tok-attr">#acc-menu</span> <span class="tok-punct">{</span>
+  <span class="tok-tag">position</span><span class="tok-punct">:</span> <span class="tok-string">fixed</span><span class="tok-punct">;</span>
+  <span class="tok-tag">position-anchor</span><span class="tok-punct">:</span> <span class="tok-string">--acc</span><span class="tok-punct">;</span>
+  <span class="tok-tag">top</span><span class="tok-punct">:</span>  <span class="tok-string">anchor(bottom)</span><span class="tok-punct">;</span>
+  <span class="tok-tag">left</span><span class="tok-punct">:</span> <span class="tok-string">anchor(left)</span><span class="tok-punct">;</span>
+  <span class="tok-tag">margin</span><span class="tok-punct">:</span> <span class="tok-string">8px 0 0</span><span class="tok-punct">;</span>
+<span class="tok-punct">}</span>
+
+<span class="tok-comment">/* The browser handles: open/close, ESC, click-outside, focus, stacking */</span></pre>
+    </div>
+
+    <!-- Side-by-side comparison -->
+    <div style="margin-top: 48px; padding: 32px; border: 1px dashed var(--rule); background: var(--paper-deep);">
+      <div style="font-family: 'JetBrains Mono'; font-size:11px; letter-spacing:.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px;">▸ Mental model</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+        <div>
+          <h4 style="font-family:'Fraunces';font-style:italic;font-weight:400;font-size:28px;margin:0 0 10px;font-variation-settings:'opsz' 48;">Dialog</h4>
+          <p style="font-size: 15px; color: var(--ink-soft); line-height: 1.55; margin:0;">
+            「<strong>打斷你，請回答</strong>」<br />
+            Modal · 鎖焦點 · 擋背景 · 居中
+          </p>
+        </div>
+        <div>
+          <h4 style="font-family:'Fraunces';font-style:italic;font-weight:400;font-size:28px;margin:0 0 10px;font-variation-settings:'opsz' 48;color:var(--accent);">Popover</h4>
+          <p style="font-size: 15px; color: var(--ink-soft); line-height: 1.55; margin:0;">
+            「<strong>順手給你看個東西</strong>」<br />
+            非 modal · 不鎖焦點 · 點外面就消失 · 錨定按鈕旁
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTNOTES ===== -->
+  <footer class="footnotes">
+    <div>
+      <h5>Why it matters</h5>
+      <p>
+        Userland libraries validate a pattern. The web platform absorbs it —
+        with accessibility, focus management and dismissal behaviours baked in.
+        Less code. Fewer bugs. Same UX.
+      </p>
+    </div>
+    <div class="colophon">
+      <h5>Colophon</h5>
+      <p>
+        Set in <a href="https://fonts.google.com/specimen/Fraunces" target="_blank">Fraunces</a>,
+        <a href="https://fonts.google.com/specimen/Manrope" target="_blank">Manrope</a>,
+        <a href="https://www.jetbrains.com/lp/mono/" target="_blank">JetBrains&nbsp;Mono</a>.<br />
+        Demo by Sam, 2026-05.
+      </p>
+    </div>
+  </footer>
+
+  <div class="signoff">end of transmission</div>
+</div>
+
+<!-- =========== DIALOGS =========== -->
+<dialog id="classicDialog">
+  <div class="dialog-content">
+    <span class="dialog-corner">id: classicDialog</span>
+    <div class="dialog-kicker">▸ Method · showModal()</div>
+    <h3>The classic way.</h3>
+    <p>
+      A native <code style="font-family:'JetBrains Mono';font-size:13px">&lt;dialog&gt;</code> element is opened
+      imperatively via <code style="font-family:'JetBrains Mono';font-size:13px">.showModal()</code>.
+      You still benefit from native focus trap, ESC handling, and backdrop — but you wire the click yourself.
+    </p>
+    <div class="dialog-actions">
+      <button class="btn" type="button" onclick="document.getElementById('classicDialog').close()">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="commandDialog">
+  <div class="dialog-content">
+    <span class="dialog-corner">id: commandDialog</span>
+    <div class="dialog-kicker">▸ command="show-modal"</div>
+    <h3>Zero JavaScript.</h3>
+    <p>
+      Opened entirely through HTML attributes: <code style="font-family:'JetBrains Mono';font-size:13px">commandfor</code>
+      points at me, <code style="font-family:'JetBrains Mono';font-size:13px">command="show-modal"</code> tells the browser
+      what to do. The close button below uses <code style="font-family:'JetBrains Mono';font-size:13px">command="close"</code>.
+    </p>
+    <div class="dialog-actions">
+      <button class="btn btn-accent" type="button" commandfor="commandDialog" command="close">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="confirmDialog">
+  <div class="dialog-content">
+    <span class="dialog-corner">id: confirmDialog</span>
+    <div class="dialog-kicker" style="color: var(--accent-deep)">▸ Confirm · destructive</div>
+    <h3>Delete this project?</h3>
+    <p>
+      This is permanent. Files, history and references will be removed.
+      Both buttons below use the new invoker <code style="font-family:'JetBrains Mono';font-size:13px">command</code> mechanism —
+      no event listeners on this page.
+    </p>
+    <div class="dialog-actions">
+      <button class="btn" type="button" commandfor="confirmDialog" command="close">Cancel</button>
+      <button class="btn btn-accent" type="button" commandfor="confirmDialog" command="close" style="background: var(--accent-deep); border-color: var(--accent-deep);">
+        Yes, delete
+      </button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  // === Manual popover demo (the "old way") — intentionally hand-wired ===
+  (function () {
+    const btn = document.getElementById('oldPopBtn');
+    const pop = document.getElementById('oldPop');
+    let open = false;
+
+    function toggle(force) {
+      open = typeof force === 'boolean' ? force : !open;
+      pop.hidden = !open;
+    }
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggle();
+    });
+    document.addEventListener('click', (e) => {
+      if (open && !pop.contains(e.target) && e.target !== btn) toggle(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (open && e.key === 'Escape') toggle(false);
+    });
+  })();
+
+  // === Sort menu — radio-style selection ===
+  (function () {
+    const menu = document.querySelector('[data-sort-menu]');
+    const pill = document.getElementById('sortSelected');
+    if (!menu || !pill) return;
+    menu.querySelectorAll('[role="menuitemradio"]').forEach((item) => {
+      item.addEventListener('click', () => {
+        menu.querySelectorAll('[role="menuitemradio"]').forEach((i) => i.setAttribute('aria-checked', 'false'));
+        item.setAttribute('aria-checked', 'true');
+        pill.textContent = item.dataset.sort;
+        if (typeof menu.hidePopover === 'function') menu.hidePopover();
+      });
+    });
+  })();
+
+  // === Scroll reveal ===
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+  // === Fallback for browsers without command attribute support ===
+  // If a browser doesn't understand `commandfor`/`command`, wire it up manually.
+  if (!('commandForElement' in HTMLButtonElement.prototype)) {
+    document.querySelectorAll('button[commandfor]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('commandfor');
+        const cmd = btn.getAttribute('command');
+        const target = document.getElementById(targetId);
+        if (!target) return;
+        if (cmd === 'show-modal' && typeof target.showModal === 'function') target.showModal();
+        else if (cmd === 'close' && typeof target.close === 'function') target.close();
+      });
+    });
+  }
+</script>
+
+</body>
+</html>

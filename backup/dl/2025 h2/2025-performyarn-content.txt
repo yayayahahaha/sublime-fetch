@@ -1,0 +1,90 @@
+2025 H2 Department Goals
+Removed outdated and unused code
+- Header Navbar V1 and V2
+
+README or Confluence
+- Support Center
+- Email
+- GTag
+- Group Email
+- Static Resource
+
+===
+- Completed and refined feature documentation, including README files and Confluence pages
+- Removed outdated and unused code while ensuring existing functionality remained stable
+- Reviewed and updated details of existing script workflows
+===
+
+
+
+
+2025 H2 Squad Accomplishments
+Color Scheme System
+[Detail]
+- 添加了全新的通用組件，並套用至全站
+- 創建全新顏色列表系統的 storybook，以利於快速了解使用方式
+- 持續與設計部門協作更新顏色列表
+[Impact and Benefits]
+- 讓開發相同功能的所需程式碼行數減少約莫 60%
+
+White Label SEO Solution
+[Detail]
+- 開發快速客製化 Sitemap 的流程
+- 針對需要特殊 SEO 的頁面做 100% 客製化處理
+[Impact and Benefits]
+- 一般情況可以減少約 30% 的開發時間，客製化需求的情況則比原先所需時間減少約 70%
+
+Error Message Translation Integration
+[Detail]
+- 翻新全站表單的錯誤訊息，成功處理平時不易察覺的多語系特殊場景
+- 整合表單的驗證行為，並添加日後可以統一處理的彈性空間
+[Impact and Benefits]
+- 在需要統一處理表單行為時，至多可以減少 80% 的開發時間
+
+Daily Works
+- Rollout white label Autotrader
+- Enable/Disable customization features
+- Implement white label customization
+
+===
+- Progressed the rollout of the Color Scheme System
+- Handled and integrated SEO configurations across white-labels
+- Improved and streamlined the multilingual translation workflow for email content
+===
+
+
+
+
+
+
+2025 H2 Additional Contributions
+
+Static Resource Seperation
+- 規劃整份需求文件，含自身部門與其他部門的權責規劃與後續開發進度的追蹤等。
+- 拆分靜態資源的請求來源，讓原本須負擔多達 30 個白牌的帳單金額減至僅需付自身 1 個品牌的帳單。
+- 規劃整體流程的部分更新機制，讓整體部署效率提升與節省機器資源達 20 倍以上
+- 撰寫相關功能的測試程式覆蓋率達 85%
+
+Pipeline script maintenance
+- 搭配 Static Resource 資源分費配的需求，重新調整了整個靜態資源管理的 pipeline 腳本，最佳場景可以節省至多 30 倍左右的上傳時間與機器資源
+- 調整 Email 的打包腳本，修復了長時間存在的既存編譯問題，大幅減少開發人員在開發時的心智成本。
+- 調整了 Email 的更新翻譯腳本，大幅減少開發人員的手動作業，平均節省了至少 20 倍的操作時間
+
+Created detailed knowledge base articles
+- 撰寫了逐步截圖介紹的 GTag 設定的詳細文件，讓完全沒有經驗的新人也可以順利處理
+- 撰寫了 Support Center 的詳細文件，其中最難處理的權限問題細節也有一併撰寫
+- 撰寫了如何在 Web 裡開啟 App 的文件與相關需求
+
+Support Center Structure Format and Enhancement
+- 梳理並調整白牌的 Support Center 的整體流程，讓日後單一改動的心智成本減少 50%
+- 主動聯繫與追蹤權限問題，協調後的帳號管理複雜度降至原本的 1/3
+
+App Deeplink Behavior Sorting
+- 主動聯繫與處理 App 的 Deeplink 細節事宜，刪除了近 50% 的相關冗餘頁面
+- 設計全新的 deeplink 流程，讓日後處理 deeplink 需求時所需關心的程式碼數量減少了 70%
+
+===
+- Resolved issues related to shared static resource across white-labels
+- Reviewed and write documents of Support Center workflows
+- Clarified and write documents of "How to open an App in Web" for white-labels
+===
