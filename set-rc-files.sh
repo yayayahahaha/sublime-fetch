@@ -20,7 +20,7 @@ function set_rc_files() {
   cp ./.vimrc-backup "$HOME/.vimrc"
   if [[ $? != 0 ]]; then return; fi
 
-  cp ./for-sublime-eslint-fix-eslint "$HOME/for-sublime-eslint-fix-eslint"
+  cp -r ./for-sublime-eslint-fix-eslint "$HOME/for-sublime-eslint-fix-eslint"
   if [[ $? != 0 ]]; then return; fi
   cd "$HOME/for-sublime-eslint-fix-eslint"
   npm install

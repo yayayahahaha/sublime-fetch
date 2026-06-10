@@ -194,8 +194,10 @@ Iterm 的 `主題` 和 `顏色` 是可以分開設定的。顏色可以從 [這�
 如果要使用 [`agnoster`](https://github.com/agnoster/agnoster-zsh-theme) 這個 `theme` 的話會要額外安裝字型
 
 ```bash
-sudo apt-get install fonts-powerline
+brew install --cask font-powerline-symbols
 ```
+
+然後在 terminal 的 text 裡要選擇 `Powerline Symbols`
 
 > [https://github.com/powerline/fonts](https://github.com/powerline/fonts)
 
