@@ -3,20 +3,51 @@ import checkbox from '@inquirer/checkbox'
 import fs from 'fs'
 import path from 'path'
 import terminalImage from 'terminal-image'
-import { checkSetting, consoleRed, getSize, isDir, readFilesRecursively, readSetting } from './utils.js'
+import {
+  checkSetting,
+  consoleGreen,
+  consolePathHint,
+  consoleRed,
+  consoleStep,
+  ensureDir,
+  getSize,
+  high,
+  isDir,
+  readFilesRecursively,
+  readSetting,
+} from './utils.js'
+import { resolveBrand } from './brand-utils.js'
 
 const exampleImagesFolderPath = path.resolve('.', 'assets-default-images')
 
-export async function assetsStuff() {
+export async function homeAssetsStuff() {
   const settings = readSetting()
   if (settings == null) return
 
-  const { ok, frontendRepoPath, newImagesFolder, targetBrand } = checkSetting(settings)
+  const {
+    ok,
+    frontendRepoPath,
+    newImagesFolder,
+    targetBrand: settingBrand,
+  } = checkSetting(settings, ['frontend-repo-path', 'new-images-folder', 'target-brand'])
   if (!ok) return
+  consoleStep('setting')
+
+  const targetBrand = await resolveBrand({ settingBrand, frontendRepoPath })
+  if (targetBrand == null) return
+  consoleStep(`target-brand = ${high(targetBrand)}`)
+
+  const sourceDir = path.resolve('.', newImagesFolder)
+  const targetDir = path.resolve(frontendRepoPath, 'src', `brand-${targetBrand}`, 'assets')
+  consolePathHint({
+    sourceLines: [high(sourceDir)],
+    targetLines: [high(targetDir)],
+  })
 
   if (!isDir(newImagesFolder)) {
-    return void consoleRed('new-images-folder 需為一個資料夾!')
+    return void consoleRed(`${newImagesFolder} 需為一個資料夾!`)
   }
+  consoleStep(`${newImagesFolder} 為資料夾`)
 
   const figmaPlaceExample = await terminalImage.file(path.resolve('.', 'hint-images/home-hints.png'), {
     width: '50%',
@@ -53,14 +84,18 @@ export async function assetsStuff() {
     pageSize: checkboxOptions.length,
     loop: false,
   }).catch(() => null)
-  if (選擇的圖片們 == null || 選擇的圖片們.length === 0) return void consoleRed('使用者取消勾選')
+  if (選擇的圖片們 == null) return void consoleRed('使用者取消')
+  if (選擇的圖片們.length === 0) return void consoleRed('沒有勾選任何圖片')
 
   const checkNeededImages = await checkAssetsImages(newImagesFolder, {
     選擇的圖片們,
     frontendRepoPath,
     targetBrand,
   })
-  if (checkNeededImages.some((img) => !img.passFormat)) return
+  if (checkNeededImages.some((img) => !img.passFormat)) {
+    return void consoleRed('assets 圖片檢查未通過，請修正以上問題後再執行')
+  }
+  consoleStep(`${checkNeededImages.length} 張圖片存在與尺寸`)
 
   const makeSure = await select({
     message: '檢查完畢，即將開始覆蓋 assets 相關的檔案，請確認清空 frontend repo 的 git status',
@@ -83,22 +118,14 @@ export async function assetsStuff() {
       targetPath,
     } = payload
 
+    ensureDir(path.dirname(targetPath))
     fs.copyFileSync(newImgPath, targetPath)
   })
 
-  console.log(`\x1b[32m共 ${checkNeededImages.length} 張圖片處理完畢!\x1b[0m`)
+  consoleGreen(`共 ${checkNeededImages.length} 張圖片處理完畢!`)
 }
 
 function checkAssetsImages(newImagesFolder, { 選擇的圖片們, frontendRepoPath, targetBrand } = {}) {
-  if (typeof frontendRepoPath !== 'string') {
-    consoleRed('缺少參數 frontendRepoPath')
-    return []
-  }
-  if (typeof targetBrand !== 'string') {
-    consoleRed('缺少參數 targetBrand')
-    return []
-  }
-
   const newImagesList = readFilesRecursively(path.resolve('.', newImagesFolder))
   const newImagesMap = Object.fromEntries(
     newImagesList.map((filePath) => {
@@ -133,9 +160,8 @@ function checkAssetsImages(newImagesFolder, { 選擇的圖片們, frontendRepoPa
             })
           })()
           if (!passFormat) {
-            console.log(otherInfo)
             consoleRed(
-              `${otherInfo.filename} 尺寸不符! 需為 ${requiredSizeArray.map((item) => `${item.width}x${item.height}`).join('或')}, 得到 ${nw}x${nh}`
+              `${otherInfo.filename} 尺寸不符! 需為 ${requiredSizeArray.map((item) => `${item.width}x${item.height}`).join(' 或 ')}, 得到 ${nw}x${nh}`
             )
           }
 
@@ -155,6 +181,14 @@ function checkAssetsImages(newImagesFolder, { 選擇的圖片們, frontendRepoPa
 }
 
 export const ASSETS_IMAGES = [
+  {
+    filename: 'img-token.png',
+    des: `用於首頁的 "Don't just HOLD" 區塊`,
+    size: null,
+    nameInFigma: 'img-token', // 這個不確定
+    ext: '.png',
+    path: 'assets',
+  },
   {
     filename: 'Img-Safe.png',
     des: '用於首頁的 security 區塊, 可能會長得不太一樣',

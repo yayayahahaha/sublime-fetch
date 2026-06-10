@@ -2,22 +2,46 @@ import select from '@inquirer/select'
 import fs from 'fs'
 import path from 'path'
 import terminalImage from 'terminal-image'
-import { checkSetting, consoleRed, isDir, readFilesRecursively, readSetting } from './utils.js'
+import {
+  checkSetting,
+  consoleGreen,
+  consolePathHint,
+  consoleRed,
+  consoleStep,
+  ensureDir,
+  high,
+  isDir,
+  readFilesRecursively,
+  readSetting,
+} from './utils.js'
 
 export async function figmaStuff() {
   const settings = readSetting()
   if (settings == null) return
 
-  const { ok, newImagesFolder, figmaImagesFolders } = checkSetting(settings)
+  const { ok, newImagesFolder, figmaImagesFolders } = checkSetting(settings, [
+    'new-images-folder',
+    'figma-images-folders',
+  ])
   if (!ok) return
+  consoleStep('setting')
+
+  const sourceDir = path.resolve('.', figmaImagesFolders)
+  const targetDir = path.resolve('.', newImagesFolder, 'static')
+  consolePathHint({
+    sourceLines: [high(sourceDir)],
+    targetLines: [high(targetDir)],
+  })
 
   if (!isDir(newImagesFolder)) {
     return void consoleRed(`${newImagesFolder} 需為一個資料夾!`)
   }
+  consoleStep(`${newImagesFolder} 為資料夾`)
 
   if (!isDir(figmaImagesFolders)) {
     return void consoleRed(`${figmaImagesFolders} 需為一個資料夾!`)
   }
+  consoleStep(`${figmaImagesFolders} 為資料夾`)
 
   const hintImagePath = await terminalImage.file(path.resolve('.', 'hint-images', 'figma-images-place.png'), {
     width: '50%',
@@ -27,7 +51,10 @@ export async function figmaStuff() {
   console.log(hintImagePath)
 
   const checkNeededImages = checkFigmaImages({ figmaImagesFolders, newImagesFolder })
-  if (checkNeededImages.some((img) => !img.passFormat)) return
+  if (checkNeededImages.some((img) => !img.passFormat)) {
+    return void consoleRed('Figma 圖片檢查未通過，請修正以上問題後再執行')
+  }
+  consoleStep(`${checkNeededImages.length} 個 Figma 來源檔案存在`)
 
   const makeSure = await select({
     message: `檢查完畢，即將開始覆蓋當前 repo 底下指定的 ${newImagesFolder} 相關的檔案，確定嗎?`,
@@ -44,13 +71,15 @@ export async function figmaStuff() {
   }).catch(() => false)
   if (!makeSure) return
 
+  ensureDir(targetDir)
+
   checkNeededImages.forEach((payload) => {
     const { figmaImgPath, newImgPath } = payload
 
     fs.copyFileSync(figmaImgPath, newImgPath)
   })
 
-  console.log(`\x1b[32m共 ${checkNeededImages.length} 張圖片處理完畢!\x1b[0m`)
+  consoleGreen(`共 ${checkNeededImages.length} 張圖片處理完畢!`)
 }
 
 function checkFigmaImages({ figmaImagesFolders, newImagesFolder } = {}) {
@@ -88,8 +117,8 @@ export const FIGMA_IMAGES = [
   { filename: 'PWA_icon192.png', targetName: 'manifest-icon-192.png' },
   { filename: 'PWA_icon512.png', targetName: 'manifest-icon-512.png' },
 
-  { filename: 'img-social-a.png', targetName: 'meta-image.png' },
-  { filename: 'img-social-b.png', targetName: 'meta-image-og.png' },
+  { filename: 'img-social-a.png', targetName: 'meta-image-og.png' },
+  { filename: 'img-social-b.png', targetName: 'meta-image.png' },
 
   { filename: 'support-logo-a180.png', targetName: 'apple-touch-icon.png' },
   { filename: 'favicon.png', targetName: 'favicon.ico' },

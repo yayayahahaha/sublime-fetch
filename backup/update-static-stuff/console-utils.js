@@ -15,7 +15,7 @@ export function 修改白牌會動到的東西() {
   console.log('2. appDescription')
   console.log('3. websiteUrl')
   console.log('4. structuredData 裡的 name')
-  console.log('5. pwaConfig 裡的 name 和 themeColorf')
+  console.log('5. pwaConfig 裡的 name 和 themeColor')
   console.log('6. pwaConfig 裡的 manifestOptions 裡的 short_name (如果有)')
   console.log('7. pwaConfig 裡的 iconPaths')
   console.log('8. metaConfig 裡各個 social media 的 title 和 site')

@@ -1,0 +1,5 @@
+COMMIT_MSG_FILE=$1
+
+# 手動清除 # 後面的所有訊息
+grep -v '^#' "$COMMIT_MSG_FILE" > "$COMMIT_MSG_FILE.tmp" && mv "$COMMIT_MSG_FILE.tmp" "$COMMIT_MSG_FILE"
+
