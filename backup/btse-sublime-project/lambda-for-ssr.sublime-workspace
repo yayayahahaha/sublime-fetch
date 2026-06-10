@@ -1,0 +1,2193 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"worktree",
+				"worktreePath"
+			],
+			[
+				"work",
+				"worktreeBranch"
+			],
+			[
+				"gene",
+				"generateUrl"
+			],
+			[
+				"iife",
+				"iife-es5\tiife-es5"
+			],
+			[
+				"call",
+				"CallExpression"
+			],
+			[
+				"epx",
+				"export"
+			],
+			[
+				"light",
+				"LightGreen"
+			],
+			[
+				"el",
+				"else"
+			],
+			[
+				"cons",
+				"console"
+			],
+			[
+				"select",
+				"selectAnswer"
+			],
+			[
+				"hoo",
+				"hooksPath"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/Users/flyc.chung/btse/lambda-for-ssr/package.json",
+			"settings":
+			{
+				"buffer_size": 901,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/flyc.chung/btse/lambda-for-ssr/rollup.config.js",
+			"settings":
+			{
+				"buffer_size": 1002,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/flyc.chung/btse/lambda-for-ssr/variables-setting.sh",
+			"settings":
+			{
+				"buffer_size": 290,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					3,
+					1,
+					"left_delete",
+					null,
+					"AQAAAAAAAAAAAAAAAAAAAAAAAAAuAAAAZWNobyAn6ZaL5aeL5Zyo5pys5Zyw5qih5pOs5pW05YCL5rWB56iLJwoKCgoKCg",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					4,
+					1,
+					"insert",
+					{
+						"characters": "export"
+					},
+					"BgAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAACAAAAAAAAAAAAAAACAAAAAAAAAAMAAAAAAAAAAAAAAAMAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAFAAAAAAAAAAAAAAAFAAAAAAAAAAYAAAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					5,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAAYAAAAAAAAABwAAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAYAAAAAAAAABgAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					7,
+					1,
+					"insert",
+					{
+						"characters": "hel"
+					},
+					"AwAAAAcAAAAAAAAACAAAAAAAAAAAAAAACAAAAAAAAAAJAAAAAAAAAAAAAAAJAAAAAAAAAAoAAAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAcAAAAAAAAABwAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					15,
+					1,
+					"paste_and_indent",
+					null,
+					"AgAAAAAAAAAAAAAAFwAAAAAAAAAAAAAAFwAAAAAAAAAXAAAAAAAAAAoAAABleHBvcnQgaGVs",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+				],
+				[
+					19,
+					3,
+					"delete_word",
+					{
+						"forward": false,
+						"sub_words": true
+					},
+					"AwAAAA0AAAAAAAAADQAAAAAAAAAGAAAAVEFSR0VUDAAAAAAAAAAMAAAAAAAAAAEAAABfBwAAAAAAAAAHAAAAAAAAAAUAAABCVUlMRA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAABMAAAAAAAAADQAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					20,
+					1,
+					"insert",
+					{
+						"characters": "frontend"
+					},
+					"CAAAAAcAAAAAAAAACAAAAAAAAAAAAAAACAAAAAAAAAAJAAAAAAAAAAAAAAAJAAAAAAAAAAoAAAAAAAAAAAAAAAoAAAAAAAAACwAAAAAAAAAAAAAACwAAAAAAAAAMAAAAAAAAAAAAAAAMAAAAAAAAAA0AAAAAAAAAAAAAAA0AAAAAAAAADgAAAAAAAAAAAAAADgAAAAAAAAAPAAAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAcAAAAAAAAABwAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					21,
+					1,
+					"insert",
+					{
+						"characters": "RepoPath"
+					},
+					"CAAAAA8AAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAARAAAAAAAAAAAAAAARAAAAAAAAABIAAAAAAAAAAAAAABIAAAAAAAAAEwAAAAAAAAAAAAAAEwAAAAAAAAAUAAAAAAAAAAAAAAAUAAAAAAAAABUAAAAAAAAAAAAAABUAAAAAAAAAFgAAAAAAAAAAAAAAFgAAAAAAAAAXAAAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAA8AAAAAAAAADwAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					22,
+					1,
+					"duplicate_line",
+					null,
+					"AQAAABsAAAAAAAAANwAAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAABcAAAAAAAAAFwAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					34,
+					1,
+					"insert",
+					{
+						"characters": "Branch"
+					},
+					"BwAAAC8AAAAAAAAAMAAAAAAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAAAQAAABQYXRoMAAAAAAAAAAxAAAAAAAAAAAAAAAxAAAAAAAAADIAAAAAAAAAAAAAADIAAAAAAAAAMwAAAAAAAAAAAAAAMwAAAAAAAAA0AAAAAAAAAAAAAAA0AAAAAAAAADUAAAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAC8AAAAAAAAAMwAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					37,
+					1,
+					"left_delete",
+					null,
+					"AQAAACsAAAAAAAAAKwAAAAAAAAAEAAAAUmVwbw",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAC8AAAAAAAAAKwAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					40,
+					1,
+					"left_delete",
+					null,
+					"AQAAAA8AAAAAAAAADwAAAAAAAAAEAAAAUmVwbw",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAA8AAAAAAAAAEwAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					47,
+					1,
+					"paste",
+					null,
+					"BAAAAC4AAAAAAAAALgAAAAAAAAADAAAAbGliLgAAAAAAAAA8AAAAAAAAAAAAAAAUAAAAAAAAABQAAAAAAAAAAwAAAGxpYhQAAAAAAAAAIAAAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAgAAABQAAAAAAAAAFwAAAAAAAAAAAAAAAADwvy4AAAAAAAAAMQAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					52,
+					1,
+					"convert_to_snake",
+					null,
+					"AgAAAAcAAAAAAAAAFAAAAAAAAAAMAAAAZnJvbnRlbmRQYXRoKQAAAAAAAAA4AAAAAAAAAA4AAABmcm9udGVuZEJyYW5jaA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAgAAAAcAAAAAAAAAEwAAAAAAAAAAAAAAAADwvygAAAAAAAAANgAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					53,
+					1,
+					"upper_case",
+					null,
+					"AgAAAAcAAAAAAAAAFAAAAAAAAAANAAAAZnJvbnRlbmRfcGF0aCkAAAAAAAAAOAAAAAAAAAAPAAAAZnJvbnRlbmRfYnJhbmNo",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAgAAAAcAAAAAAAAAFAAAAAAAAAAAAAAAAADwvykAAAAAAAAAOAAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					67,
+					1,
+					"paste",
+					null,
+					"AgAAABUAAAAAAAAANQAAAAAAAAAAAAAANQAAAAAAAAA1AAAAAAAAAAwAAABmcm9udGVuZFBhdGg",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAABUAAAAAAAAAIQAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					68,
+					1,
+					"left_delete",
+					null,
+					"AQAAADQAAAAAAAAANAAAAAAAAAABAAAACg",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAADUAAAAAAAAANQAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					73,
+					1,
+					"insert",
+					{
+						"characters": "$HOME"
+					},
+					"BgAAABUAAAAAAAAAFgAAAAAAAAAAAAAAFgAAAAAAAAAWAAAAAAAAABEAAAAvVXNlcnMvZmx5Yy5jaHVuZxYAAAAAAAAAFwAAAAAAAAAAAAAAFwAAAAAAAAAYAAAAAAAAAAAAAAAYAAAAAAAAABkAAAAAAAAAAAAAABkAAAAAAAAAGgAAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAACYAAAAAAAAAFQAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					77,
+					1,
+					"paste",
+					null,
+					"AgAAAEAAAAAAAAAAUgAAAAAAAAAAAAAAUgAAAAAAAABSAAAAAAAAAA4AAABmcm9udGVuZEJyYW5jaA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAEAAAAAAAAAATgAAAAAAAAAAAAAAAADwvw"
+				]
+			]
+		},
+		{
+			"file": "/Users/flyc.chung/btse/lambda-for-ssr/simulate-whole-flow.sh",
+			"settings":
+			{
+				"buffer_size": 4416,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/flyc.chung/btse/lambda-for-ssr/index.js",
+			"settings":
+			{
+				"buffer_size": 1457,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					12,
+					1,
+					"insert",
+					{
+						"characters": "false"
+					},
+					"BQAAAPYCAAAAAAAA9wIAAAAAAAAAAAAA9wIAAAAAAAD4AgAAAAAAAAAAAAD4AgAAAAAAAPkCAAAAAAAAAAAAAPkCAAAAAAAA+gIAAAAAAAAAAAAA+gIAAAAAAAD7AgAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA9gIAAAAAAAD2AgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					13,
+					1,
+					"insert",
+					{
+						"characters": " **"
+					},
+					"AwAAAPsCAAAAAAAA/AIAAAAAAAAAAAAA/AIAAAAAAAD9AgAAAAAAAAAAAAD9AgAAAAAAAP4CAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA+wIAAAAAAAD7AgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					14,
+					2,
+					"left_delete",
+					null,
+					"AgAAAP0CAAAAAAAA/QIAAAAAAAABAAAAKvwCAAAAAAAA/AIAAAAAAAABAAAAKg",
+					"AQAAAAAAAAABAAAA/gIAAAAAAAD+AgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					15,
+					1,
+					"insert",
+					{
+						"characters": "&&"
+					},
+					"AgAAAPwCAAAAAAAA/QIAAAAAAAAAAAAA/QIAAAAAAAD+AgAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA/AIAAAAAAAD8AgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					16,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAP4CAAAAAAAA/wIAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA/gIAAAAAAAD+AgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					21,
+					1,
+					"left_delete",
+					null,
+					"AQAAAPwCAAAAAAAA/AIAAAAAAAADAAAAJiYg",
+					"AQAAAAAAAAABAAAA/wIAAAAAAAD8AgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					24,
+					1,
+					"insert_snippet",
+					{
+						"contents": "(${0:$SELECTION})"
+					},
+					"AgAAAPYCAAAAAAAA9gIAAAAAAAAFAAAAZmFsc2X2AgAAAAAAAP0CAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA9gIAAAAAAAD7AgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					26,
+					1,
+					"insert",
+					{
+						"characters": "if"
+					},
+					"AgAAAPYCAAAAAAAA9wIAAAAAAAAAAAAA9wIAAAAAAAD4AgAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA9gIAAAAAAAD2AgAAAAAAAAAAAAAAADBA"
+				],
+				[
+					27,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAPgCAAAAAAAA+QIAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA+AIAAAAAAAD4AgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					34,
+					1,
+					"insert_snippet",
+					{
+						"contents": "{${0:$SELECTION}}"
+					},
+					"AgAAAAEDAAAAAAAAAQMAAAAAAAAQAQAAcmV0dXJuICgoKSA9PiB7CiAgICBjb25zdCB7IGkxOG5GbiB9ID0gdmFyaWFibGVzCiAgICBjb25zdCB7IHRpdGxlTWV0YUdlbmVyYXRvciB9ID0gaTE4bkZuCgogICAgY29uc3QgJHJvdXRlID0geyBuYW1lOiAnaG9tZScsIG1ldGE6IHt9IH0KCiAgICBpMThuLmdsb2JhbC5sb2NhbGUudmFsdWUgPSAnemhfVFcnCgogICAgY29uc3QgdGl0bGUgPSB0aXRsZU1ldGFHZW5lcmF0b3IoeyBpMThuLCAkcm91dGUgfSkKICAgIHJldHVybiB2b2lkIHJlcy5zZW5kKHRpdGxlKQogIH0pKCkBAwAAAAAAACcEAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAQMAAAAAAAARBAAAAAAAAP///////+9/"
+				],
+				[
+					36,
+					1,
+					"js_prettier",
+					{
+						"auto_format_prettier_config_path": null,
+						"save_file": true
+					},
+					"AgAAAAAAAAAAAAAAjQUAAAAAAADwBQAAaW1wb3J0IGV4cHJlc3MgZnJvbSAnZXhwcmVzcycKaW1wb3J0IHNlcnZlcmxlc3MgZnJvbSAnc2VydmVybGVzcy1odHRwJwppbXBvcnQgeyBpc0h1bWFuLCB2YXJpYWJsZXMgfSBmcm9tICcuL3V0aWxzLmpzJwppbXBvcnQgaW5kZXhIdG1sQ29udGVudCBmcm9tICcuL2luZGV4LWh0bWwtY29udGVudC5qcycgLy8g5pyD55SxIGJ1aWxkLWxhbWJkYS1zZXJ2ZXItZW52aXJvbm1lbnQuanMg55Si55SfCmltcG9ydCB7IGdlbmVyYXRlUm91dGVMaXN0IH0gZnJvbSAnLi9yb3V0ZXMtdXRpbHMuanMnCgppbXBvcnQgeyBpMThuIH0gZnJvbSAnLi9pMThuLXNldHVwLmpzJwoKY29uc3QgYXBwID0gZXhwcmVzcygpCgovLyBtaWRkbGV3YXJl77yM5qqi5p+l5piv5ZCm5piv5Lq66aGe77yM5piv55qE6Kmx55u05o6lIHNlbmQgaW5kZXguaHRtbAphcHAudXNlKChyZXEsIHJlcywgbmV4dCkgPT4gewogIGlmIChpc0h1bWFuKHJlcSwgZmFsc2UpKSByZXR1cm4gdm9pZCByZXMuc2VuZChpbmRleEh0bWxDb250ZW50KQoKICByZXR1cm4gdm9pZCBuZXh0KCkKfSkKCi8vIG1pZGRsZXdhcmU6IOeUouWHuiB0aXRsZSDlkowgZGVzY3JpcHRpb24KYXBwLnVzZSgocmVxLCByZXMsIG5leHQpID0+IHsKICBpZiAoaXNIdW1hbihyZXEsIGZhbHNlKSkgcmV0dXJuIHZvaWQgcmVzLnNlbmQoaW5kZXhIdG1sQ29udGVudCkKCiAgcmV0dXJuIHZvaWQgbmV4dCgpCn0pCgovLyDnlKLlh7rmiYDmnInpnIDopoEgU0VPIOeahOi3r+eUsQpnZW5lcmF0ZVJvdXRlTGlzdChhcHApCgovLyDlhbbku5bkuI3pnIDopoEgU0VPIOeahOi3r+eUsQphcHAuZ2V0KCcqJywgYXN5bmMgKHJlcSwgcmVzKSA9PiB7CiAgaWYgKGZhbHNlKSB7cmV0dXJuICgoKSA9PiB7CiAgICAgIGNvbnN0IHsgaTE4bkZuIH0gPSB2YXJpYWJsZXMKICAgICAgY29uc3QgeyB0aXRsZU1ldGFHZW5lcmF0b3IgfSA9IGkxOG5GbgogIAogICAgICBjb25zdCAkcm91dGUgPSB7IG5hbWU6ICdob21lJywgbWV0YToge30gfQogIAogICAgICBpMThuLmdsb2JhbC5sb2NhbGUudmFsdWUgPSAnemhfVFcnCiAgCiAgICAgIGNvbnN0IHRpdGxlID0gdGl0bGVNZXRhR2VuZXJhdG9yKHsgaTE4biwgJHJvdXRlIH0pCiAgICAgIHJldHVybiB2b2lkIHJlcy5zZW5kKHRpdGxlKQogICAgfSkoKX0KCiAgcmV0dXJuIHZvaWQgcmVzLnNlbmQoaW5kZXhIdG1sQ29udGVudCkKfSkKCmV4cG9ydCBjb25zdCBoYW5kbGVyID0gc2VydmVybGVzcyhhcHApCgovLyBUT0RPCi8vIOeEoeazleWPluW+lyBxdWVyeS1zdHJpbmcsIOWPr+iDveaYryBhcGlnYXRld2F5IOeahOioreWumuWVj+mhjD8gaHR0cHM6Ly9yZXBvc3QuYXdzL2tub3dsZWRnZS1jZW50ZXIvcGFzcy1hcGktZ2F0ZXdheS1yZXN0LWFwaS1wYXJhbWV0ZXJzCgovLyByZWZlcmVuY2UKLy8gaHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vUmFrYURvYW5rLzA1ZGEzNTg4NzA1MWE4Zjk5OWFhYmMyM2QzMDE5NGUzCi8vIGh0dHBzOi8vd3d3LnNlcnZlcmxlc3MuY29tL2ZyYW1ld29yay9kb2NzL2dldHRpbmctc3RhcnRlZAqNBQAAAAAAAI4FAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAgMAAAAAAAAmBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					41,
+					1,
+					"insert",
+					{
+						"characters": "!console"
+					},
+					"CQAAAPoCAAAAAAAA+wIAAAAAAAAAAAAA+wIAAAAAAAD7AgAAAAAAAAUAAABmYWxzZfsCAAAAAAAA/AIAAAAAAAAAAAAA/AIAAAAAAAD9AgAAAAAAAAAAAAD9AgAAAAAAAP4CAAAAAAAAAAAAAP4CAAAAAAAA/wIAAAAAAAAAAAAA/wIAAAAAAAAAAwAAAAAAAAAAAAAAAwAAAAAAAAEDAAAAAAAAAAAAAAEDAAAAAAAAAgMAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA+gIAAAAAAAD/AgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					43,
+					1,
+					"toggle_comment",
+					{
+						"block": true
+					},
+					"BAAAAAIDAAAAAAAAAwMAAAAAAAAAAAAAAwMAAAAAAAAFAwAAAAAAAAAAAAACAwAAAAAAAAIDAAAAAAAAAQAAAHgCAwAAAAAAAAQDAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAgMAAAAAAAACAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					44,
+					1,
+					"insert",
+					{
+						"characters": "  "
+					},
+					"AgAAAAQDAAAAAAAABQMAAAAAAAAAAAAABQMAAAAAAAAGAwAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAABAMAAAAAAAAEAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					46,
+					1,
+					"insert",
+					{
+						"characters": "TODO"
+					},
+					"BAAAAAUDAAAAAAAABgMAAAAAAAAAAAAABgMAAAAAAAAHAwAAAAAAAAAAAAAHAwAAAAAAAAgDAAAAAAAAAAAAAAgDAAAAAAAACQMAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAABQMAAAAAAAAFAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					47,
+					1,
+					"insert_snippet",
+					{
+						"contents": "($0)"
+					},
+					"AQAAAAkDAAAAAAAACwMAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAACQMAAAAAAAAJAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					48,
+					1,
+					"insert",
+					{
+						"characters": "flyc"
+					},
+					"BAAAAAoDAAAAAAAACwMAAAAAAAAAAAAACwMAAAAAAAAMAwAAAAAAAAAAAAAMAwAAAAAAAA0DAAAAAAAAAAAAAA0DAAAAAAAADgMAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAACgMAAAAAAAAKAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					50,
+					1,
+					"insert",
+					{
+						"characters": ":"
+					},
+					"AQAAAA8DAAAAAAAAEAMAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAADwMAAAAAAAAPAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					51,
+					1,
+					"insert",
+					{
+						"characters": " testing"
+					},
+					"CAAAABADAAAAAAAAEQMAAAAAAAAAAAAAEQMAAAAAAAASAwAAAAAAAAAAAAASAwAAAAAAABMDAAAAAAAAAAAAABMDAAAAAAAAFAMAAAAAAAAAAAAAFAMAAAAAAAAVAwAAAAAAAAAAAAAVAwAAAAAAABYDAAAAAAAAAAAAABYDAAAAAAAAFwMAAAAAAAAAAAAAFwMAAAAAAAAYAwAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAEAMAAAAAAAAQAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					52,
+					1,
+					"insert",
+					{
+						"characters": " codes"
+					},
+					"BgAAABgDAAAAAAAAGQMAAAAAAAAAAAAAGQMAAAAAAAAaAwAAAAAAAAAAAAAaAwAAAAAAABsDAAAAAAAAAAAAABsDAAAAAAAAHAMAAAAAAAAAAAAAHAMAAAAAAAAdAwAAAAAAAAAAAAAdAwAAAAAAAB4DAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAGAMAAAAAAAAYAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					54,
+					1,
+					"js_prettier",
+					{
+						"auto_format_prettier_config_path": null,
+						"save_file": true
+					},
+					"AgAAAAAAAAAAAAAAsAUAAAAAAAAUBgAAaW1wb3J0IGV4cHJlc3MgZnJvbSAnZXhwcmVzcycKaW1wb3J0IHNlcnZlcmxlc3MgZnJvbSAnc2VydmVybGVzcy1odHRwJwppbXBvcnQgeyBpc0h1bWFuLCB2YXJpYWJsZXMgfSBmcm9tICcuL3V0aWxzLmpzJwppbXBvcnQgaW5kZXhIdG1sQ29udGVudCBmcm9tICcuL2luZGV4LWh0bWwtY29udGVudC5qcycgLy8g5pyD55SxIGJ1aWxkLWxhbWJkYS1zZXJ2ZXItZW52aXJvbm1lbnQuanMg55Si55SfCmltcG9ydCB7IGdlbmVyYXRlUm91dGVMaXN0IH0gZnJvbSAnLi9yb3V0ZXMtdXRpbHMuanMnCgppbXBvcnQgeyBpMThuIH0gZnJvbSAnLi9pMThuLXNldHVwLmpzJwoKY29uc3QgYXBwID0gZXhwcmVzcygpCgovLyBtaWRkbGV3YXJl77yM5qqi5p+l5piv5ZCm5piv5Lq66aGe77yM5piv55qE6Kmx55u05o6lIHNlbmQgaW5kZXguaHRtbAphcHAudXNlKChyZXEsIHJlcywgbmV4dCkgPT4gewogIGlmIChpc0h1bWFuKHJlcSwgZmFsc2UpKSByZXR1cm4gdm9pZCByZXMuc2VuZChpbmRleEh0bWxDb250ZW50KQoKICByZXR1cm4gdm9pZCBuZXh0KCkKfSkKCi8vIG1pZGRsZXdhcmU6IOeUouWHuiB0aXRsZSDlkowgZGVzY3JpcHRpb24KYXBwLnVzZSgocmVxLCByZXMsIG5leHQpID0+IHsKICBpZiAoaXNIdW1hbihyZXEsIGZhbHNlKSkgcmV0dXJuIHZvaWQgcmVzLnNlbmQoaW5kZXhIdG1sQ29udGVudCkKCiAgcmV0dXJuIHZvaWQgbmV4dCgpCn0pCgovLyDnlKLlh7rmiYDmnInpnIDopoEgU0VPIOeahOi3r+eUsQpnZW5lcmF0ZVJvdXRlTGlzdChhcHApCgovLyDlhbbku5bkuI3pnIDopoEgU0VPIOeahOi3r+eUsQphcHAuZ2V0KCcqJywgYXN5bmMgKHJlcSwgcmVzKSA9PiB7CiAgaWYgKCFjb25zb2xlLyogVE9ETyhmbHljKTogdGVzdGluZyBjb2RlcyAqLykgewogICAgcmV0dXJuICgoKSA9PiB7CiAgICAgIGNvbnN0IHsgaTE4bkZuIH0gPSB2YXJpYWJsZXMKICAgICAgY29uc3QgeyB0aXRsZU1ldGFHZW5lcmF0b3IgfSA9IGkxOG5GbgoKICAgICAgY29uc3QgJHJvdXRlID0geyBuYW1lOiAnaG9tZScsIG1ldGE6IHt9IH0KCiAgICAgIGkxOG4uZ2xvYmFsLmxvY2FsZS52YWx1ZSA9ICd6aF9UVycKCiAgICAgIGNvbnN0IHRpdGxlID0gdGl0bGVNZXRhR2VuZXJhdG9yKHsgaTE4biwgJHJvdXRlIH0pCiAgICAgIHJldHVybiB2b2lkIHJlcy5zZW5kKHRpdGxlKQogICAgfSkoKQogIH0KCiAgcmV0dXJuIHZvaWQgcmVzLnNlbmQoaW5kZXhIdG1sQ29udGVudCkKfSkKCmV4cG9ydCBjb25zdCBoYW5kbGVyID0gc2VydmVybGVzcyhhcHApCgovLyBUT0RPCi8vIOeEoeazleWPluW+lyBxdWVyeS1zdHJpbmcsIOWPr+iDveaYryBhcGlnYXRld2F5IOeahOioreWumuWVj+mhjD8gaHR0cHM6Ly9yZXBvc3QuYXdzL2tub3dsZWRnZS1jZW50ZXIvcGFzcy1hcGktZ2F0ZXdheS1yZXN0LWFwaS1wYXJhbWV0ZXJzCgovLyByZWZlcmVuY2UKLy8gaHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vUmFrYURvYW5rLzA1ZGEzNTg4NzA1MWE4Zjk5OWFhYmMyM2QzMDE5NGUzCi8vIGh0dHBzOi8vd3d3LnNlcnZlcmxlc3MuY29tL2ZyYW1ld29yay9kb2NzL2dldHRpbmctc3RhcnRlZAqwBQAAAAAAALEFAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAHgMAAAAAAAAeAwAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		},
+		{
+			"file": "/Users/flyc.chung/btse/lambda-for-ssr/_color.sh",
+			"settings":
+			{
+				"buffer_size": 471,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					3,
+					1,
+					"paste_and_indent",
+					null,
+					"AgAAAAAAAAAAAAAAYAEAAAAAAAAAAAAAYAEAAAAAAABgAQAAAAAAAFIAAABleHBvcnQgRlJPTlRFTkRfUEFUSD0kSE9NRS9idHNlL2Zyb250ZW5kCmV4cG9ydCBGUk9OVEVORF9CUkFOQ0g9Zmx5Yy90ZXN0LXBpcGVsaW5l",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAUgAAAAAAAAAAAAAAAADwvw"
+				],
+				[
+					15,
+					1,
+					"insert",
+					{
+						"characters": "export"
+					},
+					"ZgAAAFQBAAAAAAAAVQEAAAAAAAAAAAAAQQEAAAAAAABCAQAAAAAAAAAAAAAqAQAAAAAAACsBAAAAAAAAAAAAABMBAAAAAAAAFAEAAAAAAAAAAAAAAQEAAAAAAAACAQAAAAAAAAAAAADoAAAAAAAAAOkAAAAAAAAAAAAAANQAAAAAAAAA1QAAAAAAAAAAAAAAvQAAAAAAAAC+AAAAAAAAAAAAAACrAAAAAAAAAKwAAAAAAAAAAAAAAJcAAAAAAAAAmAAAAAAAAAAAAAAAgwAAAAAAAACEAAAAAAAAAAAAAABrAAAAAAAAAGwAAAAAAAAAAAAAAFgAAAAAAAAAWQAAAAAAAAAAAAAAQgAAAAAAAABDAAAAAAAAAAAAAAAxAAAAAAAAADIAAAAAAAAAAAAAABsAAAAAAAAAHAAAAAAAAAAAAAAACAAAAAAAAAAJAAAAAAAAAAAAAABlAQAAAAAAAGYBAAAAAAAAAAAAAFEBAAAAAAAAUgEAAAAAAAAAAAAAOQEAAAAAAAA6AQAAAAAAAAAAAAAhAQAAAAAAACIBAAAAAAAAAAAAAA4BAAAAAAAADwEAAAAAAAAAAAAA9AAAAAAAAAD1AAAAAAAAAAAAAADfAAAAAAAAAOAAAAAAAAAAAAAAAMcAAAAAAAAAyAAAAAAAAAAAAAAAtAAAAAAAAAC1AAAAAAAAAAAAAACfAAAAAAAAAKAAAAAAAAAAAAAAAIoAAAAAAAAAiwAAAAAAAAAAAAAAcQAAAAAAAAByAAAAAAAAAAAAAABdAAAAAAAAAF4AAAAAAAAAAAAAAEYAAAAAAAAARwAAAAAAAAAAAAAANAAAAAAAAAA1AAAAAAAAAAAAAAAdAAAAAAAAAB4AAAAAAAAAAAAAAAkAAAAAAAAACgAAAAAAAAAAAAAAdgEAAAAAAAB3AQAAAAAAAAAAAABhAQAAAAAAAGIBAAAAAAAAAAAAAEgBAAAAAAAASQEAAAAAAAAAAAAALwEAAAAAAAAwAQAAAAAAAAAAAAAbAQAAAAAAABwBAAAAAAAAAAAAAAABAAAAAAAAAQEAAAAAAAAAAAAA6gAAAAAAAADrAAAAAAAAAAAAAADRAAAAAAAAANIAAAAAAAAAAAAAAL0AAAAAAAAAvgAAAAAAAAAAAAAApwAAAAAAAACoAAAAAAAAAAAAAACRAAAAAAAAAJIAAAAAAAAAAAAAAHcAAAAAAAAAeAAAAAAAAAAAAAAAYgAAAAAAAABjAAAAAAAAAAAAAABKAAAAAAAAAEsAAAAAAAAAAAAAADcAAAAAAAAAOAAAAAAAAAAAAAAAHwAAAAAAAAAgAAAAAAAAAAAAAAAKAAAAAAAAAAsAAAAAAAAAAAAAAIcBAAAAAAAAiAEAAAAAAAAAAAAAcQEAAAAAAAByAQAAAAAAAAAAAABXAQAAAAAAAFgBAAAAAAAAAAAAAD0BAAAAAAAAPgEAAAAAAAAAAAAAKAEAAAAAAAApAQAAAAAAAAAAAAAMAQAAAAAAAA0BAAAAAAAAAAAAAPUAAAAAAAAA9gAAAAAAAAAAAAAA2wAAAAAAAADcAAAAAAAAAAAAAADGAAAAAAAAAMcAAAAAAAAAAAAAAK8AAAAAAAAAsAAAAAAAAAAAAAAAmAAAAAAAAACZAAAAAAAAAAAAAAB9AAAAAAAAAH4AAAAAAAAAAAAAAGcAAAAAAAAAaAAAAAAAAAAAAAAATgAAAAAAAABPAAAAAAAAAAAAAAA6AAAAAAAAADsAAAAAAAAAAAAAACEAAAAAAAAAIgAAAAAAAAAAAAAACwAAAAAAAAAMAAAAAAAAAAAAAACYAQAAAAAAAJkBAAAAAAAAAAAAAIEBAAAAAAAAggEAAAAAAAAAAAAAZgEAAAAAAABnAQAAAAAAAAAAAABLAQAAAAAAAEwBAAAAAAAAAAAAADUBAAAAAAAANgEAAAAAAAAAAAAAGAEAAAAAAAAZAQAAAAAAAAAAAAAAAQAAAAAAAAEBAAAAAAAAAAAAAOUAAAAAAAAA5gAAAAAAAAAAAAAAzwAAAAAAAADQAAAAAAAAAAAAAAC3AAAAAAAAALgAAAAAAAAAAAAAAJ8AAAAAAAAAoAAAAAAAAAAAAAAAgwAAAAAAAACEAAAAAAAAAAAAAABsAAAAAAAAAG0AAAAAAAAAAAAAAFIAAAAAAAAAUwAAAAAAAAAAAAAAPQAAAAAAAAA+AAAAAAAAAAAAAAAjAAAAAAAAACQAAAAAAAAAAAAAAAwAAAAAAAAADQAAAAAAAAAAAAAAqQEAAAAAAACqAQAAAAAAAAAAAACRAQAAAAAAAJIBAAAAAAAAAAAAAHUBAAAAAAAAdgEAAAAAAAAAAAAAWQEAAAAAAABaAQAAAAAAAAAAAABCAQAAAAAAAEMBAAAAAAAAAAAAACQBAAAAAAAAJQEAAAAAAAAAAAAACwEAAAAAAAAMAQAAAAAAAAAAAADvAAAAAAAAAPAAAAAAAAAAAAAAANgAAAAAAAAA2QAAAAAAAAAAAAAAvwAAAAAAAADAAAAAAAAAAAAAAACmAAAAAAAAAKcAAAAAAAAAAAAAAIkAAAAAAAAAigAAAAAAAAAAAAAAcQAAAAAAAAByAAAAAAAAAAAAAABWAAAAAAAAAFcAAAAAAAAAAAAAAEAAAAAAAAAAQQAAAAAAAAAAAAAAJQAAAAAAAAAmAAAAAAAAAAAAAAANAAAAAAAAAA4AAAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAEQAAAAgAAAAAAAAACAAAAAAAAAAAAAAAAAAAABsAAAAAAAAAGwAAAAAAAAAAAAAAAAAAADEAAAAAAAAAMQAAAAAAAAAAAAAAAAAAAEIAAAAAAAAAQgAAAAAAAAAAAAAAAAAAAFgAAAAAAAAAWAAAAAAAAAAAAAAAAAAAAGsAAAAAAAAAawAAAAAAAAAAAAAAAAAAAIMAAAAAAAAAgwAAAAAAAAAAAAAAAAAAAJcAAAAAAAAAlwAAAAAAAAAAAAAAAAAAAKsAAAAAAAAAqwAAAAAAAAAAAAAAAAAAAL0AAAAAAAAAvQAAAAAAAAAAAAAAAAAAANQAAAAAAAAA1AAAAAAAAAAAAAAAAAAAAOgAAAAAAAAA6AAAAAAAAAAAAAAAAAAAAAEBAAAAAAAAAQEAAAAAAAAAAAAAAAAAABMBAAAAAAAAEwEAAAAAAAAAAAAAAAAAACoBAAAAAAAAKgEAAAAAAAAAAAAAAAAAAEEBAAAAAAAAQQEAAAAAAAAAAAAAAAAAAFQBAAAAAAAAVAEAAAAAAAAAAAAAAAAAAA"
+				],
+				[
+					16,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"EQAAALoBAAAAAAAAuwEAAAAAAAAAAAAAoQEAAAAAAACiAQAAAAAAAAAAAACEAQAAAAAAAIUBAAAAAAAAAAAAAGcBAAAAAAAAaAEAAAAAAAAAAAAATwEAAAAAAABQAQAAAAAAAAAAAAAwAQAAAAAAADEBAAAAAAAAAAAAABYBAAAAAAAAFwEAAAAAAAAAAAAA+QAAAAAAAAD6AAAAAAAAAAAAAADhAAAAAAAAAOIAAAAAAAAAAAAAAMcAAAAAAAAAyAAAAAAAAAAAAAAArQAAAAAAAACuAAAAAAAAAAAAAACPAAAAAAAAAJAAAAAAAAAAAAAAAHYAAAAAAAAAdwAAAAAAAAAAAAAAWgAAAAAAAABbAAAAAAAAAAAAAABDAAAAAAAAAEQAAAAAAAAAAAAAACcAAAAAAAAAKAAAAAAAAAAAAAAADgAAAAAAAAAPAAAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAEQAAAA4AAAAAAAAADgAAAAAAAAAAAAAAAADwvycAAAAAAAAAJwAAAAAAAAAAAAAAAADwv0MAAAAAAAAAQwAAAAAAAAAAAAAAAADwv1oAAAAAAAAAWgAAAAAAAAAAAAAAAADwv3YAAAAAAAAAdgAAAAAAAAAAAAAAAADwv48AAAAAAAAAjwAAAAAAAAAAAAAAAADwv60AAAAAAAAArQAAAAAAAAAAAAAAAADwv8cAAAAAAAAAxwAAAAAAAAAAAAAAAADwv+EAAAAAAAAA4QAAAAAAAAAAAAAAAADwv/kAAAAAAAAA+QAAAAAAAAAAAAAAAADwvxYBAAAAAAAAFgEAAAAAAAAAAAAAAADwvzABAAAAAAAAMAEAAAAAAAAAAAAAAADwv08BAAAAAAAATwEAAAAAAAAAAAAAAADwv2cBAAAAAAAAZwEAAAAAAAAAAAAAAADwv4QBAAAAAAAAhAEAAAAAAAAAAAAAAADwv6EBAAAAAAAAoQEAAAAAAAAAAAAAAADwv7oBAAAAAAAAugEAAAAAAAAAAAAAAADwvw"
+				]
+			]
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Nodejs-adjust/Nodejs.sublime-build",
+					""
+				],
+				[
+					"Packages/User/sublime-build/Nodejs-utf8.sublime-build",
+					""
+				],
+				[
+					"Packages/User/sublime-build/npm-run-dev.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/Nodejs-adjust/Nodejs.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/User/sublime-build/Nodejs-utf8.sublime-build",
+					""
+				],
+				[
+					"Packages/User/sublime-build/npm-run-dev.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/User/sublime-build/Nodejs-utf8.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"duplicate",
+				"File: Duplicate"
+			],
+			[
+				"move",
+				"File: Move"
+			],
+			[
+				"reload",
+				"SublimeLinter: Reload SublimeLinter and its Plugins"
+			],
+			[
+				"ssbash",
+				"Set Syntax: Bash"
+			],
+			[
+				"ssbashs",
+				"Convert Case: separate\\with\\backslash"
+			],
+			[
+				"ssjs",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"cpypat",
+				"File: Copy Path"
+			],
+			[
+				"selectcolor",
+				"UI: Select Color Scheme"
+			],
+			[
+				"selectc",
+				"UI: Select Color Scheme"
+			],
+			[
+				"colorexr",
+				"Color Scheme Editor: Goto next matching scope"
+			],
+			[
+				"gtiaddcurrentfile",
+				"Git: Add Current File"
+			],
+			[
+				"gtaddcure",
+				"Git: Add Current File"
+			],
+			[
+				"gtiaddcurn",
+				"Git: Add Current File"
+			],
+			[
+				"gtiaddcurrent",
+				"Git: Add Current File"
+			],
+			[
+				"keybindin",
+				"Preferences: Key Bindings"
+			],
+			[
+				"packagelist",
+				"Package Control: List Packages"
+			],
+			[
+				"listpackage",
+				"Package Control: List Packages"
+			],
+			[
+				"ssbahs",
+				"Set Syntax: Bash"
+			],
+			[
+				"eslint",
+				"ESLint Fix: Fix this file"
+			],
+			[
+				"sublimelintersetting",
+				"Preferences: SublimeLinter Settings"
+			],
+			[
+				"keybindings",
+				"Preferences: Key Bindings"
+			],
+			[
+				"checkoutcurrentfile",
+				"Git: Checkout Current File"
+			],
+			[
+				"gitpush",
+				"Git: Push"
+			],
+			[
+				"git commit ",
+				"Git: Commit"
+			],
+			[
+				"gitaddcurrent",
+				"Git: Add Current File"
+			],
+			[
+				"gitdiffcurrenftile",
+				"Git: Diff Current File"
+			],
+			[
+				"colorpicker",
+				"Color Picker"
+			],
+			[
+				"gitaddcurrentfile",
+				"Git: Add Current File"
+			],
+			[
+				"enablepackage",
+				"Package Control: Enable Package"
+			],
+			[
+				"packaeglist",
+				"Package Control: List Packages"
+			],
+			[
+				"disablepackge",
+				"Package Control: Disable Package"
+			],
+			[
+				"installpackage",
+				"Package Control: Install Package"
+			],
+			[
+				"nodejssetting",
+				"Nodejs::User File Settings"
+			],
+			[
+				"disablepackage",
+				"Package Control: Disable Package"
+			],
+			[
+				"ssjson",
+				"Set Syntax: JSON"
+			],
+			[
+				"lsprestart",
+				"LSP: Restart Server"
+			],
+			[
+				"ssba",
+				"Set Syntax: Bash"
+			],
+			[
+				"snippet: gitignore",
+				"Snippet: gitignore"
+			],
+			[
+				"snippetgit",
+				"Snippet: gitignore"
+			],
+			[
+				"installtheme",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"sidebyside",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"keybinding",
+				"Preferences: Key Bindings"
+			],
+			[
+				"keybind",
+				"Preferences: SyntaxFold Keybindings - Default"
+			],
+			[
+				"lintersetting",
+				"Preferences: SublimeLinter Settings"
+			],
+			[
+				"lspsetting",
+				"Preferences: LSP Settings"
+			],
+			[
+				"compare",
+				"Compare with..."
+			],
+			[
+				"ssmarkdown",
+				"Set Syntax: Markdown"
+			],
+			[
+				"enable",
+				"Package Control: Enable Package"
+			],
+			[
+				"color",
+				"UI: Select Color Scheme"
+			],
+			[
+				"theme",
+				"UI: Select Theme"
+			],
+			[
+				"packagelistpage",
+				"Package Control: List Packages"
+			],
+			[
+				"key",
+				"Preferences: Key Bindings"
+			],
+			[
+				"restartserver",
+				"LSP: Restart Server"
+			],
+			[
+				"disable",
+				"LSP: Disable Language Server in Project"
+			],
+			[
+				"lspre",
+				"LSP: Restart Server"
+			],
+			[
+				"colorsche",
+				"UI: Select Color Scheme"
+			],
+			[
+				"full",
+				"View: Toggle Full Screen"
+			],
+			[
+				"installpackagecontrol",
+				"Install Package Control"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 314.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/flyc.chung/btse/lambda-for-ssr"
+	],
+	"file_history":
+	[
+		"/Users/flyc.chung/btse/lambda-for-ssr/fff.sh",
+		"/Users/flyc.chung/btse/lambda-for-ssr/utils.js",
+		"/Users/flyc.chung/btse/lambda-for-ssr/flow-local-simuation/index.js",
+		"/Users/flyc.chung/btse/lambda-for-ssr/package.json",
+		"/Users/flyc.chung/btse/lambda-for-ssr/eslint.config.js",
+		"/Users/flyc.chung/btse/lambda-for-ssr/index.js",
+		"/Users/flyc.chung/btse/lambda-for-ssr/.gitlab-ci.yml",
+		"/Users/flyc.chung/btse/lambda-for-ssr/cicd-flow.md",
+		"/Users/flyc.chung/btse/lambda-for-ssr/build-lambda-server-environment-utils.js",
+		"/Users/flyc.chung/btse/lambda-for-ssr/rollup.config.js",
+		"/Users/flyc.chung/btse/lambda-for-ssr/.gitignore",
+		"/Users/flyc.chung/btse/lambda-for-ssr/build-lambda-server-environment.js",
+		"/Users/flyc.chung/btse/lambda-for-ssr/i18n-setup__for_generate.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/git-example-code-folder/_githooks/prepare-commit-msg",
+		"/Users/flyc.chung/flyc/sublime-fetch/git-example-code-folder/_githooks/company-prepare-commit-msg-example",
+		"/Users/flyc.chung/flyc/sublime-fetch/git-tech-center.md",
+		"/Users/flyc.chung/flyc/sublime-fetch/README.md",
+		"/Users/flyc.chung/flyc/sublime-fetch/config-link/.gitconfig",
+		"/Users/flyc.chung/flyc/sublime-fetch/global-node-script/btse-pr.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/.gitconfig-backup",
+		"/Users/flyc.chung/flyc/sublime-fetch/config-link/.bash-work",
+		"/Users/flyc.chung/flyc/sublime-fetch/node-select-demo/package.json",
+		"/Users/flyc.chung/flyc/sublime-fetch/node-select-demo/index.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/創建屬於自己的eslint-plugins.md",
+		"/Users/flyc.chung/flyc/sublime-fetch/temp.txt",
+		"/Users/flyc.chung/flyc/sublime-fetch/怎麼使用karabiner.md",
+		"/Users/flyc.chung/btse/.gitconfig",
+		"/Users/flyc.chung/flyc/sublime-fetch/.gitignore",
+		"/Users/flyc.chung/flyc/sublime-fetch/.bash-git-backup",
+		"/Users/flyc.chung/flyc/sublime-fetch/sublime-text-build-system-chinese-encode.md",
+		"/Users/flyc.chung/btse/_githooks/prepare-commit-msg",
+		"/Users/flyc.chung/flyc/sublime-fetch/.zprofile-backup",
+		"/Users/flyc.chung/flyc/sublime-fetch/jsDocDoc.md",
+		"/Users/flyc.chung/flyc/sublime-fetch/vue-plain-project/eslint.config.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/.eslintrc.js__",
+		"/Users/flyc.chung/flyc/sublime-fetch/vue-plain-project/src/plugins/openDialog.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/karabiner/karabiner.json",
+		"/Users/flyc.chung/flyc/sublime-fetch/.bash-work-paradise-soft",
+		"/Users/flyc.chung/flyc/sublime-fetch/.git-completion.bash",
+		"/Users/flyc.chung/flyc/sublime-fetch/utils-backup.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/code-pieces/html2canvas.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/package.json",
+		"/Users/flyc.chung/flyc/sublime-fetch/node-select/index.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/run.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/obsidian/obsidian/.obsidian/plugins/obsidian-git/main.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/DELETE_THIS_.bashrc",
+		"/Users/flyc.chung/flyc/sublime-fetch/code-pieces/jsonp_example.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/compass-帳號轉移之可以順利付款的方式.md",
+		"/Users/flyc.chung/flyc/sublime-fetch/set-rc-files.sh",
+		"/Users/flyc.chung/Library/Application Support/Sublime Text/Packages/SyntaxFold/Default (OSX).sublime-keymap",
+		"/Users/flyc.chung/flyc/sublime-fetch/code-pieces/simple_worker/worker.js",
+		"/Users/flyc.chung/btse/frontend/.gitlab-ci.whitelabel.config.yml",
+		"/Users/flyc.chung/btse/frontend/package.json",
+		"/Users/flyc.chung/btse/frontend/src/config.js",
+		"/Users/flyc.chung/btse/frontend/src/router/index.js",
+		"/Users/flyc.chung/btse/frontend/build-i18n.js",
+		"/Users/flyc.chung/btse/frontend/src/main.js",
+		"/Users/flyc.chung/btse/frontend/.gitignore",
+		"/Users/flyc.chung/btse/frontend/src/components/Card.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/BtseLogo.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/icons/IconBtseCn.vue",
+		"/Users/flyc.chung/btse/frontend/src/plugins/notification/main.js",
+		"/Users/flyc.chung/btse/frontend/README.md",
+		"/Users/flyc.chung/btse/frontend/.eslintrc.js",
+		"/Users/flyc.chung/btse/frontend/.prettierrc.js",
+		"/Users/flyc.chung/.prettierrc.json",
+		"/Users/flyc.chung/btse/frontend/yarn.lock",
+		"/Users/flyc.chung/flyc/sublime-fetch/set-sublime-text-user.sh"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 313.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"false",
+			"rollup",
+			" -",
+			"DIST_PATH",
+			"currentDir",
+			"echo ''",
+			"DIST_PATH",
+			"BUNDLE_DIR_NAME",
+			"worktreePath",
+			"worktreeBranch",
+			"# mkdir \"$bundleDirName\"",
+			"創建資料夾與移動",
+			"[[ $? != 0 ]] && exit ",
+			"pwd",
+			"mv -f ./dist",
+			"bundleDirName",
+			"LightRed",
+			"LightCyan",
+			"bundleDirName",
+			"buildScript",
+			"[[ $? != 0 ]] && exit ",
+			"currentDir",
+			"echo \"${LightRed}",
+			"echo \"當前 pwd: $(pwd)\"",
+			"worktreeFolder",
+			"$",
+			"worktreePath",
+			"worktreeBranch",
+			"branch",
+			"pwd",
+			"echo ''",
+			"worktreePath",
+			"[[ $? != 0 ]] && exit ",
+			"exit ",
+			"if [[ $? != 0 ]]; then\n  exit 1\nfi",
+			"exit ",
+			"exit 1",
+			"if [[ $? != 0 ]]; then; ",
+			"echo",
+			"FRONTEND_BRANCH",
+			"worktreeBranch",
+			"whitelabeName",
+			"buildScript",
+			"worktreePath",
+			"worktreeFolder",
+			"worktreeFolderName",
+			"FRONTEND_PATH",
+			"dirname",
+			"timestamp",
+			"currentDir",
+			"frontendBranch",
+			"frontendPath",
+			"export",
+			"bash",
+			"FRONTEND_BRANCH",
+			"frontendBranch",
+			"lib",
+			"frontendBranch",
+			"lib",
+			"whitelabelName",
+			"$whitelabelName",
+			"whitelabelName",
+			"whitelabelNAme",
+			"dev",
+			"buildScript",
+			"worktreePath",
+			"$",
+			"frontendBranch",
+			"worktreePath",
+			"worktreeBranch",
+			"time",
+			"worktreePath",
+			"time",
+			"worktreeFolder",
+			"fs",
+			"frontendPath",
+			"Users/flyc.chung/btse/frontend",
+			"script",
+			"frontendPath",
+			"$",
+			"frontendPath",
+			"simuation",
+			"res",
+			"BUNDLE_DIR_NAME",
+			"variables.",
+			"variables",
+			"lambda-server-needed-variables",
+			"build-lambda-server-environment.js",
+			"i18n-setup__for_generate.js",
+			"variables"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/Users/flyc.chung/btse/lambda-for-ssr"
+		}
+	],
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/Users/flyc.chung/btse/lambda-for-ssr/package.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 901,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"VZWC_is_dirty": true,
+							"VZWC_last_update_timestamp": 0,
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.js"
+								},
+								{
+									"selector": "- comment - punctuation.separator - punctuation.definition.string.end - constant.character.escape - invalid.illegal - punctuation.section.mapping - punctuation.section.sequence",
+									"server": "LSP-json"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										85,
+										86
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/double_quote.png",
+										"region.greenish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										75,
+										76
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"lsp_active": true,
+							"lsp_uri": "file:///Users/flyc.chung/btse/lambda-for-ssr/package.json",
+							"show_definitions": false,
+							"syntax": "Packages/zzz A File Icon zzz/aliases/JSON (NPM).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/flyc.chung/btse/lambda-for-ssr/rollup.config.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1002,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"VZWC_is_dirty": false,
+							"VZWC_last_update_timestamp": 0,
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.js"
+								},
+								{
+									"characters": ".\"'/@<",
+									"selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc",
+									"server": "LSP-typescript"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"lsp_active": true,
+							"lsp_uri": "file:///Users/flyc.chung/btse/lambda-for-ssr/rollup.config.js",
+							"show_definitions": false,
+							"syntax": "Packages/zzz A File Icon zzz/aliases/JavaScript (Rollup).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/flyc.chung/btse/lambda-for-ssr/variables-setting.sh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 290,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"VZWC_is_dirty": false,
+							"VZWC_last_update_timestamp": 0,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"lsp_uri": "file:///Users/flyc.chung/btse/lambda-for-ssr/variables-setting.sh",
+							"open_with_edit": true,
+							"syntax": "Packages/ShellScript/Bash.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Users/flyc.chung/btse/lambda-for-ssr/simulate-whole-flow.sh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4416,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"VZWC_is_dirty": false,
+							"VZWC_last_update_timestamp": 0,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"lsp_uri": "file:///Users/flyc.chung/btse/lambda-for-ssr/simulate-whole-flow.sh",
+							"syntax": "Packages/ShellScript/Bash.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/Users/flyc.chung/btse/lambda-for-ssr/index.js",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1457,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								755,
+								755
+							]
+						],
+						"settings":
+						{
+							"VZWC_is_dirty": false,
+							"VZWC_last_update_timestamp": 1736490005.84,
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.js"
+								},
+								{
+									"characters": ".\"'/@<",
+									"selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc",
+									"server": "LSP-typescript"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										1143,
+										1144
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										754,
+										755
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"lsp_active": true,
+							"lsp_uri": "file:///Users/flyc.chung/btse/lambda-for-ssr/index.js",
+							"show_definitions": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 280.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/Users/flyc.chung/btse/lambda-for-ssr/_color.sh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 471,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								373,
+								382
+							]
+						],
+						"settings":
+						{
+							"VZWC_is_dirty": true,
+							"VZWC_last_update_timestamp": 0,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"lsp_uri": "file:///Users/flyc.chung/btse/lambda-for-ssr/_color.sh",
+							"open_with_edit": true,
+							"syntax": "Packages/ShellScript/Bash.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 119.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.LSP Log Panel":
+	{
+		"height": 0.0
+	},
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.SublimeLinter Messages":
+	{
+		"height": 426.0
+	},
+	"output.diagnostics":
+	{
+		"height": 120.0
+	},
+	"output.exec":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 120.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"index.js",
+				"index.js"
+			],
+			[
+				"simuwho",
+				"simulate-whole-flow.sh"
+			],
+			[
+				"rollup.conf",
+				"rollup.config.js"
+			],
+			[
+				"package",
+				"package.json"
+			],
+			[
+				"utils",
+				"utils.js"
+			],
+			[
+				"eslint",
+				"eslint.config.js"
+			],
+			[
+				"pacage",
+				"package.json"
+			],
+			[
+				"gitlab",
+				".gitlab-ci.yml"
+			],
+			[
+				"rollupconfig.js",
+				"rollup.config.js"
+			],
+			[
+				"package.json",
+				"package.json"
+			],
+			[
+				"i18n-setup.js",
+				"i18n-setup__for_generate.js"
+			],
+			[
+				"build-lambda-server-environment.js",
+				"build-lambda-server-environment.js"
+			],
+			[
+				"_githooks/prepare-commit-msg",
+				"sublime-fetch/git-example-code-folder/_githooks/company-prepare-commit-msg-example"
+			],
+			[
+				"git/hooks/prepare-commit-msg",
+				"sublime-fetch/git-example-code-folder/_githooks/prepare-commit-msg"
+			],
+			[
+				"git",
+				"sublime-fetch/git-tech-center.md"
+			],
+			[
+				"readm",
+				"sublime-fetch/README.md"
+			],
+			[
+				"gitconfig",
+				"sublime-fetch/config-link/.gitconfig"
+			],
+			[
+				"readme",
+				"sublime-fetch/README.md"
+			],
+			[
+				"btse.",
+				"sublime-fetch/global-node-script/btse-pr.js"
+			],
+			[
+				"btseps",
+				"sublime-fetch/global-node-script/btse-pr.js"
+			],
+			[
+				"pr.js",
+				"sublime-fetch/global-node-script/btse-pr.js"
+			],
+			[
+				"gitconfigba",
+				"sublime-fetch/.gitconfig-backup"
+			],
+			[
+				".bash",
+				"sublime-fetch/config-link/.bash-work"
+			],
+			[
+				"packag",
+				"sublime-fetch/node-select-demo/package.json"
+			],
+			[
+				"index",
+				"sublime-fetch/node-select-demo/index.js"
+			],
+			[
+				"read",
+				"sublime-fetch/README.md"
+			],
+			[
+				"temp",
+				"sublime-fetch/temp.txt"
+			],
+			[
+				"eslintmd",
+				"sublime-fetch/創建屬於自己的eslint-plugins.md"
+			],
+			[
+				"tmep.",
+				"sublime-fetch/temp.txt"
+			],
+			[
+				"karabiner",
+				"sublime-fetch/怎麼使用karabiner.md"
+			],
+			[
+				"git.md",
+				"sublime-fetch/git-tech-center.md"
+			],
+			[
+				"readme.md",
+				"sublime-fetch/README.md"
+			],
+			[
+				".gitconfig",
+				"sublime-fetch/.gitconfig-backup"
+			],
+			[
+				".gitignore",
+				"sublime-fetch/.gitignore"
+			],
+			[
+				"readmd",
+				"sublime-fetch/README.md"
+			],
+			[
+				"prepare",
+				"sublime-fetch/git-example-code-folder/_githooks/prepare-commit-msg"
+			],
+			[
+				"config-link/.gitconfig",
+				"sublime-fetch/config-link/.gitconfig"
+			],
+			[
+				"gitconfiback",
+				"sublime-fetch/.gitconfig-backup"
+			],
+			[
+				"sublime.md",
+				"sublime-fetch/sublime-text-build-system-chinese-encode.md"
+			],
+			[
+				"work",
+				"sublime-fetch/config-link/.bash-work"
+			],
+			[
+				"preparecommit",
+				"sublime-fetch/git-example-code-folder/_githooks/prepare-commit-msg"
+			],
+			[
+				"gitteccenter",
+				"sublime-fetch/git-tech-center.md"
+			],
+			[
+				"jsdoc",
+				"sublime-fetch/jsDocDoc.md"
+			],
+			[
+				"opendil",
+				"sublime-fetch/vue-plain-project/src/plugins/openDialog.js"
+			],
+			[
+				"configgit",
+				"sublime-fetch/config-link/.gitconfig"
+			],
+			[
+				"karabiner.json",
+				"sublime-fetch/karabiner/karabiner.json"
+			],
+			[
+				"rad",
+				"sublime-fetch/README.md"
+			],
+			[
+				"nodedemopackage.json",
+				"sublime-fetch/node-select-demo/package.json"
+			],
+			[
+				"nodedemo",
+				"sublime-fetch/node-select-demo/index.js"
+			],
+			[
+				"run.js",
+				"sublime-fetch/run.js"
+			],
+			[
+				"gitexample",
+				"git-example-code-folder/_githooks/prepare-commit-msg"
+			],
+			[
+				"js",
+				"code-pieces/jsonp_example.js"
+			],
+			[
+				"giti",
+				".gitignore"
+			],
+			[
+				"gitignore",
+				".gitignore"
+			],
+			[
+				"config",
+				"config-link/.gitconfig"
+			],
+			[
+				"rea",
+				"README.md"
+			],
+			[
+				"gitconfi",
+				".gitconfig-backup"
+			],
+			[
+				"bashwork",
+				"config-link/.bash-work"
+			],
+			[
+				"configwork",
+				"config-link/.bash-work"
+			],
+			[
+				"whitelabeconfig",
+				".gitlab-ci.whitelabel.config.yml"
+			],
+			[
+				"pac",
+				"package.json"
+			],
+			[
+				"pacge",
+				"package.json"
+			],
+			[
+				"i18n",
+				"build-i18n.js"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"/components/icons/IconBtseCn",
+				"src/components/icons/IconBtseCn.vue"
+			],
+			[
+				".vue",
+				"src/components/Card.vue"
+			],
+			[
+				"main.js",
+				"src/main.js"
+			],
+			[
+				"pmain.js",
+				"src/plugins/notification/main.js"
+			],
+			[
+				".js",
+				".eslintrc.js"
+			],
+			[
+				"prettier",
+				".prettierrc.js"
+			],
+			[
+				"yarn",
+				"yarn.lock"
+			],
+			[
+				"ream",
+				"README.md"
+			],
+			[
+				"setsublime",
+				"set-sublime-text-user.sh"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 501.0,
+		"last_filter": "sublime",
+		"selected_items":
+		[
+			[
+				"sublime",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"frontend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"forntend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"frtoned",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"little",
+				"~/flyc/sublime-project/little-tool.sublime-workspace"
+			],
+			[
+				"",
+				"~/btse/little-tool/little-tool.sublime-workspace"
+			],
+			[
+				"email",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"lsp_show_inlay_hints": false
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 309.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -1,0 +1,1618 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"node_o",
+				"node_modules"
+			],
+			[
+				"gene",
+				"generateUrl"
+			],
+			[
+				"iife",
+				"iife-es5\tiife-es5"
+			],
+			[
+				"call",
+				"CallExpression"
+			],
+			[
+				"epx",
+				"export"
+			],
+			[
+				"light",
+				"LightGreen"
+			],
+			[
+				"el",
+				"else"
+			],
+			[
+				"cons",
+				"console"
+			],
+			[
+				"select",
+				"selectAnswer"
+			],
+			[
+				"hoo",
+				"hooksPath"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "\n一個清單，一個表格，有所有的 features, 如 OTC, C2C, trading, futures 等等等等等\n每一個 features 會有自己的 sub config, 像是 OTC 需要設定什麼東西， C2C 需要設定什麼東西，trading/futures 需要設定什麼東西\n設些設定可能會是共用的，像是 trading/futures 可能會有通用的 sub config, C2C/Earn 或是 wallet 會有通用的 sub config\n這邊說的 sub config 就會是 generalConfig 或是 bundleConfig 這種程式方面的東西\n\nPD 這邊的話會有一個比較可讀版的版本，但依舊每個選項都是必填，\n然後每個選項都會對應到 FE 這邊的比較 RD 版本的 sub config 設定\ne.g. header 的 dropdown list, SEO 的文案、圖片等， RD 要寫成可以執行的 variables config\n\n以後新白牌的話只要這整份填寫完畢就可以設定完成\n\n除了 features 以外，其他像是 SEO 的設定還有各種圖片的設定也會需要給 PD or 設計做填寫，\n像是 processing, success, failed 的圖片，還有各種 Logos 和 assets 的圖片等等\n這些部分也可以算是 feature-home 裡面的 sub 項目\n\nEmail 也要有這種表格\n\nstatic resource 的部分也要有\n\n-----\n\n輸入一個 features, 像是 autotrader, futures bot 等\n然後要列出所有與這個 features 相關的所有 routes\n\n輸入一個 routes, 檢查這個 routes 是否存在以外，\n要列出這個 routes 底下有關聯到的所有檔案\n> 有這些檔案之後, 就可以列出全部的 css variables, 或是 i18n 的東西\n\n輸入一個檔案路徑，要列出所有與這個檔案有關聯的 routes, 也就是會影響到的頁面\n\n輸入一個 color scheme, 要列出與這個 color scheme 有關的全部檔案\n> deep 會是個問題\n\n輸入一個 i18n, 要列出與這個 i18n 有關的全部檔案\n\n----\n\n改寫 eslint, 把全部還沒有改寫成準確形式的 color scheme 全部列出來\n> less, vue, js\n\n改寫 eslnit, 把全部沒有用成正確寫法的 i18n 列出來\n\n----\n\n想辦法列出完全沒有在使用的 i18n\n\n----\n\nGemini CLI  的 .md 檔案\n\n---\n\nWebView 的除錯方式: 實體連線 + Chrome Inspect\n\n---\n\n在實體機運行電腦的 localhost 的方式\n\n\n---\n\n",
+			"settings":
+			{
+				"buffer_size": 1220,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					1,
+					1,
+					"paste",
+					null,
+					"AQAAAAAAAAAAAAAAxAQAAAAAAAAAAAAA",
+					"DAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvw"
+				]
+			]
+		},
+		{
+			"file": "/Users/flyc.chung/flyc/sublime-fetch/README.md",
+			"settings":
+			{
+				"buffer_size": 22848,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "\n\n\n\n\n\n\n\n\n\nNEXT\n看能不能先要個 admin 的權限，把該裝的該調整的弄弄\n> README 跑一遍, 含 Iterm theme 等等\n> 要安裝的東西含 Karabiner, snippet, Rectangle 的快捷鍵等等\n\n- Download 資料夾\n- flyc 資料夾\n- 公司的資料夾(update-static 那層)\n- 家目錄下的 git 設定 (快捷與 hook 等, 說不定也有 work ?)\n> 這個要下 commit 試試看\n\n\n上 Staging 後，想想 futures 測驗的 API 格式，然後與後端討論\n\n\n\n\n➜ yarn stylelint 'src/**/*.{vue,less}' --formatter=compact 2>&1 \\\n | grep '(btse/no-unknown-var)' \\\n | awk -F: '{print $1}' \\\n | sort | uniq -c | sort -rn | head -20\n\n 43 /Users/flyc.chung/btse/ff-worktree/src/components/common/BrandDialog.vue\n 37 /Users/flyc.chung/btse/ff-worktree/src/views/one-click-futures/components/trading-view-panel/index.vue\n 36 /Users/flyc.chung/btse/ff-worktree/src/components/trading-event/group-campaign/Masthead.vue\n 32 /Users/flyc.chung/btse/ff-worktree/src/components/trading-event/EarnOverview.vue\n 32 /Users/flyc.chung/btse/ff-worktree/src/components/common/dropdown/DropdownV2.vue\n 32 /Users/flyc.chung/btse/ff-worktree/src/components/common/BaseButton.vue\n 26 /Users/flyc.chung/btse/ff-worktree/src/components/common/Stepper/StepperV2.vue\n 24 /Users/flyc.chung/btse/ff-worktree/src/components/stable-campaign/StableEarnCard.vue\n 24 /Users/flyc.chung/btse/ff-worktree/src/components/stable-campaign-r2/StableEarnCard.vue\n 22 /Users/flyc.chung/btse/ff-worktree/src/components/common/LabelSelector.vue\n 22 /Users/flyc.chung/btse/ff-worktree/src/assets/less/mixins.less\n 20 /Users/flyc.chung/btse/ff-worktree/src/components/common/BrandInput.vue\n 19 /Users/flyc.chung/btse/ff-worktree/src/components/common/slide-button/SlideButton.vue\n 19 /Users/flyc.chung/btse/ff-worktree/src/components/cny-earn-campaign/CnyEarnCard.vue\n 18 /Users/flyc.chung/btse/ff-worktree/src/components/stable-campaign/ReferralToEarn.vue\n 18 /Users/flyc.chung/btse/ff-worktree/src/components/stable-campaign-r2/ReferralToEarn.vue\n 16 /Users/flyc.chung/btse/ff-worktree/src/components/common/Collapse.vue\n 16 /Users/flyc.chung/btse/ff-worktree/src/components/check-in/CheckInContent.vue\n 15 /Users/flyc.chung/btse/ff-worktree/src/components/pagination.vue\n 14 /Users/flyc.chung/btse/ff-worktree/src/components/trading-event/group-campaign/campaign-selector/SelectorItem.vue\n\n",
+			"settings":
+			{
+				"buffer_size": 2166,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					1,
+					1,
+					"paste",
+					null,
+					"AQAAAAAAAAAAAAAAdggAAAAAAAAAAAAA",
+					"AwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvw"
+				]
+			]
+		}
+	],
+	"build_system": "Packages/User/sublime-build/Nodejs-utf8.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Nodejs-adjust/Nodejs.sublime-build",
+					""
+				],
+				[
+					"Packages/User/sublime-build/Nodejs-utf8.sublime-build",
+					""
+				],
+				[
+					"Packages/User/sublime-build/npm-run-dev.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/Nodejs-adjust/Nodejs.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/User/sublime-build/Nodejs-utf8.sublime-build",
+					""
+				],
+				[
+					"Packages/User/sublime-build/npm-run-dev.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/User/sublime-build/Nodejs-utf8.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"duplicate",
+				"File: Duplicate"
+			],
+			[
+				"selectcolor scheme",
+				"UI: Select Color Scheme"
+			],
+			[
+				"ssjs",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"sort",
+				"Sort Lines"
+			],
+			[
+				"gticheckout",
+				"Git: Checkout Current File"
+			],
+			[
+				"comparew",
+				"Compare with..."
+			],
+			[
+				"ssbash",
+				"Set Syntax: Bash"
+			],
+			[
+				"selectcolor",
+				"UI: Select Color Scheme"
+			],
+			[
+				"ssbashs",
+				"Convert Case: separate\\with\\backslash"
+			],
+			[
+				"cpypat",
+				"File: Copy Path"
+			],
+			[
+				"selectc",
+				"UI: Select Color Scheme"
+			],
+			[
+				"colorexr",
+				"Color Scheme Editor: Goto next matching scope"
+			],
+			[
+				"gtiaddcurrentfile",
+				"Git: Add Current File"
+			],
+			[
+				"gtaddcure",
+				"Git: Add Current File"
+			],
+			[
+				"gtiaddcurn",
+				"Git: Add Current File"
+			],
+			[
+				"gtiaddcurrent",
+				"Git: Add Current File"
+			],
+			[
+				"keybindin",
+				"Preferences: Key Bindings"
+			],
+			[
+				"packagelist",
+				"Package Control: List Packages"
+			],
+			[
+				"listpackage",
+				"Package Control: List Packages"
+			],
+			[
+				"ssbahs",
+				"Set Syntax: Bash"
+			],
+			[
+				"eslint",
+				"ESLint Fix: Fix this file"
+			],
+			[
+				"sublimelintersetting",
+				"Preferences: SublimeLinter Settings"
+			],
+			[
+				"keybindings",
+				"Preferences: Key Bindings"
+			],
+			[
+				"checkoutcurrentfile",
+				"Git: Checkout Current File"
+			],
+			[
+				"gitpush",
+				"Git: Push"
+			],
+			[
+				"git commit ",
+				"Git: Commit"
+			],
+			[
+				"gitaddcurrent",
+				"Git: Add Current File"
+			],
+			[
+				"gitdiffcurrenftile",
+				"Git: Diff Current File"
+			],
+			[
+				"colorpicker",
+				"Color Picker"
+			],
+			[
+				"gitaddcurrentfile",
+				"Git: Add Current File"
+			],
+			[
+				"enablepackage",
+				"Package Control: Enable Package"
+			],
+			[
+				"packaeglist",
+				"Package Control: List Packages"
+			],
+			[
+				"disablepackge",
+				"Package Control: Disable Package"
+			],
+			[
+				"installpackage",
+				"Package Control: Install Package"
+			],
+			[
+				"nodejssetting",
+				"Nodejs::User File Settings"
+			],
+			[
+				"disablepackage",
+				"Package Control: Disable Package"
+			],
+			[
+				"ssjson",
+				"Set Syntax: JSON"
+			],
+			[
+				"lsprestart",
+				"LSP: Restart Server"
+			],
+			[
+				"ssba",
+				"Set Syntax: Bash"
+			],
+			[
+				"snippet: gitignore",
+				"Snippet: gitignore"
+			],
+			[
+				"snippetgit",
+				"Snippet: gitignore"
+			],
+			[
+				"installtheme",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"sidebyside",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"keybinding",
+				"Preferences: Key Bindings"
+			],
+			[
+				"keybind",
+				"Preferences: SyntaxFold Keybindings - Default"
+			],
+			[
+				"lintersetting",
+				"Preferences: SublimeLinter Settings"
+			],
+			[
+				"lspsetting",
+				"Preferences: LSP Settings"
+			],
+			[
+				"compare",
+				"Compare with..."
+			],
+			[
+				"ssmarkdown",
+				"Set Syntax: Markdown"
+			],
+			[
+				"enable",
+				"Package Control: Enable Package"
+			],
+			[
+				"color",
+				"UI: Select Color Scheme"
+			],
+			[
+				"theme",
+				"UI: Select Theme"
+			],
+			[
+				"packagelistpage",
+				"Package Control: List Packages"
+			],
+			[
+				"key",
+				"Preferences: Key Bindings"
+			],
+			[
+				"restartserver",
+				"LSP: Restart Server"
+			],
+			[
+				"disable",
+				"LSP: Disable Language Server in Project"
+			],
+			[
+				"lspre",
+				"LSP: Restart Server"
+			],
+			[
+				"colorsche",
+				"UI: Select Color Scheme"
+			],
+			[
+				"full",
+				"View: Toggle Full Screen"
+			],
+			[
+				"installpackagecontrol",
+				"Install Package Control"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 314.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/flyc.chung/flyc/sublime-fetch",
+		"/Users/flyc.chung/flyc/sublime-fetch/config-link",
+		"/Users/flyc.chung/Library/Application Support/Sublime Text/Packages/Nodejs-adjust"
+	],
+	"file_history":
+	[
+		"/Users/flyc.chung/flyc/sublime-fetch/README.md",
+		"/Users/flyc.chung/flyc/sublime-fetch/git-tech-center.md",
+		"/Users/flyc.chung/flyc/sublime-fetch/config-link/.bash-work",
+		"/Users/flyc.chung/flyc/sublime-fetch/.bash-work-btse",
+		"/Users/flyc.chung/flyc/sublime-fetch/set-rc-files.sh",
+		"/Users/flyc.chung/flyc/sublime-fetch/.bash-work-paradise-soft",
+		"/Users/flyc.chung/flyc/sublime-fetch/config-link/.zshrc",
+		"/Users/flyc.chung/flyc/sublime-fetch/karabiner/karabiner.json",
+		"/Users/flyc.chung/flyc/sublime-fetch/config-link/.zprofile",
+		"/Users/flyc.chung/flyc/sublime-fetch/Keymap-K7 Max ANSI.json",
+		"/Users/flyc.chung/flyc/sublime-fetch/config-link/.gitconfig",
+		"/Users/flyc.chung/flyc/sublime-fetch/.gitconfig-backup",
+		"/Users/flyc.chung/flyc/sublime-fetch/怎麼使用karabiner.md",
+		"/Users/flyc.chung/flyc/sublime-fetch/.zprofile-backup",
+		"/Users/flyc.chung/flyc/sublime-fetch/.bash-git-backup",
+		"/Users/flyc.chung/flyc/sublime-fetch/global-node-script/btse-pr.js",
+		"/Users/flyc.chung/Library/Caches/typescript/5.8/node_modules/@types/node/child_process.d.ts",
+		"/Users/flyc.chung/flyc/sublime-fetch/global-node-script/btse-goto-jira.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/.prettierrc.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/jsDocDoc.md",
+		"/Users/flyc.chung/flyc/sublime-fetch/git-example-code-folder/_githooks/company-prepare-commit-msg-example",
+		"/Users/flyc.chung/flyc/sublime-fetch/.zshrc-backup",
+		"/Users/flyc.chung/flyc/sublime-fetch/code-pieces/simple_worker/main.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/backup/chrome-extension/popup.html",
+		"/Users/flyc.chung/flyc/sublime-fetch/創建屬於自己的eslint-plugins.md",
+		"/Users/flyc.chung/flyc/sublime-fetch/git-example-code-folder/_githooks/prepare-commit-msg",
+		"/Users/flyc.chung/flyc/sublime-fetch/node-select-demo/package.json",
+		"/Users/flyc.chung/flyc/sublime-fetch/node-select-demo/index.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/temp.txt",
+		"/Users/flyc.chung/btse/.gitconfig",
+		"/Users/flyc.chung/flyc/sublime-fetch/.gitignore",
+		"/Users/flyc.chung/flyc/sublime-fetch/sublime-text-build-system-chinese-encode.md",
+		"/Users/flyc.chung/btse/_githooks/prepare-commit-msg",
+		"/Users/flyc.chung/flyc/sublime-fetch/vue-plain-project/eslint.config.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/.eslintrc.js__",
+		"/Users/flyc.chung/flyc/sublime-fetch/vue-plain-project/src/plugins/openDialog.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/.git-completion.bash",
+		"/Users/flyc.chung/flyc/sublime-fetch/utils-backup.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/code-pieces/html2canvas.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/package.json",
+		"/Users/flyc.chung/flyc/sublime-fetch/node-select/index.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/run.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/obsidian/obsidian/.obsidian/plugins/obsidian-git/main.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/DELETE_THIS_.bashrc",
+		"/Users/flyc.chung/flyc/sublime-fetch/code-pieces/jsonp_example.js",
+		"/Users/flyc.chung/flyc/sublime-fetch/compass-帳號轉移之可以順利付款的方式.md",
+		"/Users/flyc.chung/Library/Application Support/Sublime Text/Packages/SyntaxFold/Default (OSX).sublime-keymap",
+		"/Users/flyc.chung/flyc/sublime-fetch/code-pieces/simple_worker/worker.js",
+		"/Users/flyc.chung/btse/frontend/.gitlab-ci.whitelabel.config.yml",
+		"/Users/flyc.chung/btse/frontend/package.json",
+		"/Users/flyc.chung/btse/frontend/src/config.js",
+		"/Users/flyc.chung/btse/frontend/src/router/index.js",
+		"/Users/flyc.chung/btse/frontend/build-i18n.js",
+		"/Users/flyc.chung/btse/frontend/src/main.js",
+		"/Users/flyc.chung/btse/frontend/.gitignore",
+		"/Users/flyc.chung/btse/frontend/src/components/Card.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/BtseLogo.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/icons/IconBtseCn.vue",
+		"/Users/flyc.chung/btse/frontend/src/plugins/notification/main.js",
+		"/Users/flyc.chung/btse/frontend/README.md",
+		"/Users/flyc.chung/btse/frontend/.eslintrc.js",
+		"/Users/flyc.chung/btse/frontend/.prettierrc.js",
+		"/Users/flyc.chung/.prettierrc.json",
+		"/Users/flyc.chung/btse/frontend/yarn.lock",
+		"/Users/flyc.chung/flyc/sublime-fetch/set-sublime-text-user.sh"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 313.0,
+		"where_history":
+		[
+			"",
+			"config-link/",
+			"",
+			"config-link/",
+			"*.sh",
+			"",
+			"-*.md",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"config",
+			"alias greset='git reset --hard; git clean -df;' # 讓git head回到乾淨無修正的狀態, 被.gitignore 的檔案不會被刪除",
+			"Accessibility",
+			"ssh-keygen",
+			"keygen",
+			"genkey",
+			"keychron",
+			"keychrone",
+			"node",
+			"          {\n            \"description\": \"Option + Esc to `\",\n            \"manipulators\": [\n              {\n                \"from\": { \"key_code\": \"escape\", \"modifiers\": { \"mandatory\": [\"option\"] } },\n                \"to\": [{ \"key_code\": \"grave_accent_and_tilde\" }],\n                \"type\": \"basic\"\n              }\n            ]\n          },",
+			"escape",
+			"grave_accent_and_tilde",
+			"Esc",
+			"          {\n            \"description\": \"Option + Esc to `\",\n            \"manipulators\": [\n              {\n                \"from\": { \"key_code\": \"escape\", \"modifiers\": { \"mandatory\": [\"option\"] } },\n                \"to\": [{ \"key_code\": \"grave_accent_and_tilde\" }],\n                \"type\": \"basic\"\n              }\n            ]\n          },",
+			"Option + Esc to `",
+			"option + esc",
+			"option + ",
+			"node",
+			"aaww",
+			"chrome",
+			"chrome-extension",
+			"btse/chrome-extension",
+			"iterm",
+			"bsr",
+			"bullstreet",
+			"bullstreetex",
+			"bullstreet",
+			"btse",
+			"atat",
+			"awstools",
+			"aws-tools",
+			"btse",
+			"dl",
+			"deeplink",
+			"sr",
+			"btsestatic",
+			"fd",
+			"aawwss",
+			"lll",
+			"# 清除 node_modules 裡的 .vite folder",
+			"rrrvvv",
+			"yyyaffected",
+			"asdf",
+			"eslint",
+			"yarn 3",
+			"yarn ",
+			"false",
+			"rerere",
+			"LightGreen",
+			"green",
+			"keychron",
+			"exit ",
+			"PLAT-30221|PLAT-29898|PLAT-29895|PLAT-29894|PLAT-26889",
+			"plat-\\d+",
+			"false",
+			"keychron",
+			"rb=",
+			"source",
+			"profile",
+			"profilw",
+			"_git_goto_root",
+			"lll",
+			"loginProfiles",
+			"lll",
+			"t99",
+			"alias lll",
+			"lll=",
+			"lll = ",
+			"lll",
+			"yarn",
+			"https://yarnpkg.com/getting-started/install",
+			"yarn",
+			"BASE_URL_FN",
+			"pr",
+			"ee",
+			"mjml_email_template",
+			"autotrader",
+			"lmex",
+			"autotrader",
+			"btse",
+			"_btse",
+			"v3",
+			"_btse",
+			"open(",
+			"pr =",
+			"pr",
+			"git pr",
+			"git gr",
+			"yarn",
+			"node_op",
+			"diff_copy",
+			"_eeff",
+			"eeff",
+			"master",
+			"SADFASDFASDF",
+			"develop",
+			"5Bsource_branch",
+			"&",
+			"remoteInfo",
+			"branchName",
+			"arg",
+			"pr",
+			"jiraNum",
+			"num",
+			"originalName",
+			"branchName",
+			"branchNameToPrTitle",
+			"generateJiraUrl",
+			"prUrl",
+			"branchName",
+			"jiraNum",
+			"num",
+			"branchName",
+			"guessTargetBranch",
+			"remoteInfo",
+			"WHITE_LABEL_LIST",
+			"pr = ",
+			"pr=",
+			"pr",
+			"alias pr",
+			"pr",
+			"all",
+			"log",
+			"uuupdate_brew_and_omz",
+			"rb",
+			"uuupdate_brew_and_omz",
+			"uuu",
+			"uuupdate_brew_and_omz"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/Users/flyc.chung/flyc/sublime-fetch"
+		},
+		{
+			"path": "/Users/flyc.chung/Library/Application Support/Sublime Text/Packages/Nodejs-adjust"
+		}
+	],
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1220,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1086,
+								1086
+							]
+						],
+						"settings":
+						{
+							"VZWC_is_dirty": true,
+							"VZWC_last_update_timestamp": 1781074811.42,
+							"auto_name": "",
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"default_dir": "/Users/flyc.chung/btse/frontend/src/views",
+							"lsp_uri": "buffer:1393",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/flyc.chung/flyc/sublime-fetch/README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 22848,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"VZWC_is_dirty": false,
+							"VZWC_last_update_timestamp": 0,
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.js"
+								},
+								{
+									"characters": "[#(",
+									"selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc",
+									"server": "marksman"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"lsp_active": true,
+							"lsp_uri": "file:///Users/flyc.chung/flyc/sublime-fetch/README.md",
+							"parser": "markdown",
+							"show_definitions": false,
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax",
+							"tab_size": 2,
+							"target": "browser",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2166,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								567,
+								634
+							]
+						],
+						"settings":
+						{
+							"VZWC_is_dirty": false,
+							"VZWC_last_update_timestamp": 1781074811.43,
+							"auto_name": "",
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"default_dir": "/Users/flyc.chung/btse/ww/src/utils",
+							"lsp_uri": "buffer:3514",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 119.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.LSP Log Panel":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.SublimeLinter":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.SublimeLinter Messages":
+	{
+		"height": 426.0,
+		"history":
+		[
+		]
+	},
+	"output.diagnostics":
+	{
+		"height": 120.0,
+		"history":
+		[
+		]
+	},
+	"output.exec":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.git":
+	{
+		"height": 120.0,
+		"history":
+		[
+		]
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"readme.md",
+				"sublime-fetch/README.md"
+			],
+			[
+				"set rc",
+				"sublime-fetch/set-rc-files.sh"
+			],
+			[
+				"btse bash",
+				"sublime-fetch/.bash-work-btse"
+			],
+			[
+				"bashpara",
+				"sublime-fetch/.bash-work-paradise-soft"
+			],
+			[
+				".bashwork",
+				"sublime-fetch/config-link/.bash-work"
+			],
+			[
+				"git",
+				"sublime-fetch/git-tech-center.md"
+			],
+			[
+				"readme",
+				"sublime-fetch/README.md"
+			],
+			[
+				"readm",
+				"sublime-fetch/README.md"
+			],
+			[
+				"bash-work",
+				"sublime-fetch/config-link/.bash-work"
+			],
+			[
+				"zh",
+				"sublime-fetch/config-link/.zshrc"
+			],
+			[
+				"work",
+				"sublime-fetch/config-link/.bash-work"
+			],
+			[
+				"configprofile",
+				"sublime-fetch/config-link/.zprofile"
+			],
+			[
+				"config work",
+				"sublime-fetch/config-link/.bash-work"
+			],
+			[
+				"keyk",
+				"sublime-fetch/Keymap-K7 Max ANSI.json"
+			],
+			[
+				"gitconfig",
+				"sublime-fetch/config-link/.gitconfig"
+			],
+			[
+				"profile",
+				"sublime-fetch/config-link/.zprofile"
+			],
+			[
+				"key",
+				"sublime-fetch/Keymap-K7 Max ANSI.json"
+			],
+			[
+				"gitconfg",
+				"sublime-fetch/config-link/.gitconfig"
+			],
+			[
+				"global-node-script/btse-pr.js",
+				"sublime-fetch/global-node-script/btse-pr.js"
+			],
+			[
+				"work bash",
+				"sublime-fetch/config-link/.bash-work"
+			],
+			[
+				"btse",
+				"sublime-fetch/global-node-script/btse-pr.js"
+			],
+			[
+				"-fetch/global-node-script/btse-pr.js",
+				"sublime-fetch/global-node-script/btse-pr.js"
+			],
+			[
+				"baswork",
+				"sublime-fetch/config-link/.bash-work"
+			],
+			[
+				"zsh",
+				"sublime-fetch/config-link/.zshrc"
+			],
+			[
+				"karabiner",
+				"sublime-fetch/怎麼使用karabiner.md"
+			],
+			[
+				"bash",
+				"sublime-fetch/config-link/.bash-work"
+			],
+			[
+				"btsepr.js",
+				"sublime-fetch/global-node-script/btse-pr.js"
+			],
+			[
+				"gticne",
+				"sublime-fetch/git-tech-center.md"
+			],
+			[
+				"gitback",
+				"sublime-fetch/.gitconfig-backup"
+			],
+			[
+				"gitconfgi config",
+				"sublime-fetch/config-link/.gitconfig"
+			],
+			[
+				"config git",
+				"sublime-fetch/config-link/.gitconfig"
+			],
+			[
+				"gt.md",
+				"sublime-fetch/git-tech-center.md"
+			],
+			[
+				"reamd",
+				"sublime-fetch/README.md"
+			],
+			[
+				"config",
+				"sublime-fetch/config-link/.gitconfig"
+			],
+			[
+				"gticonback",
+				"sublime-fetch/.gitconfig-backup"
+			],
+			[
+				"basho",
+				"sublime-fetch/config-link/.bash-work"
+			],
+			[
+				"zprofile",
+				"sublime-fetch/.zprofile-backup"
+			],
+			[
+				".prettierrc.js",
+				"sublime-fetch/.prettierrc.js"
+			],
+			[
+				"prettier",
+				"sublime-fetch/.prettierrc.js"
+			],
+			[
+				"rea",
+				"sublime-fetch/README.md"
+			],
+			[
+				"backup gitconfg",
+				"sublime-fetch/.gitconfig-backup"
+			],
+			[
+				"gitconfigback",
+				"sublime-fetch/.gitconfig-backup"
+			],
+			[
+				"gitconfback",
+				"sublime-fetch/.gitconfig-backup"
+			],
+			[
+				"precommit",
+				"sublime-fetch/git-example-code-folder/_githooks/company-prepare-commit-msg-example"
+			],
+			[
+				"readmd",
+				"sublime-fetch/README.md"
+			],
+			[
+				"bask",
+				"sublime-fetch/config-link/.bash-work"
+			],
+			[
+				"gtiback",
+				"sublime-fetch/.bash-git-backup"
+			],
+			[
+				"zhrb",
+				"sublime-fetch/.zshrc-backup"
+			],
+			[
+				"zprpf",
+				"sublime-fetch/.zprofile-backup"
+			],
+			[
+				"configwork",
+				"sublime-fetch/config-link/.bash-work"
+			],
+			[
+				"chromepo",
+				"sublime-fetch/backup/chrome-extension/popup.html"
+			],
+			[
+				"main",
+				"sublime-fetch/code-pieces/simple_worker/main.js"
+			],
+			[
+				"eslint",
+				"sublime-fetch/創建屬於自己的eslint-plugins.md"
+			],
+			[
+				"ream",
+				"sublime-fetch/README.md"
+			],
+			[
+				"_githooks/prepare-commit-msg",
+				"sublime-fetch/git-example-code-folder/_githooks/company-prepare-commit-msg-example"
+			],
+			[
+				"git/hooks/prepare-commit-msg",
+				"sublime-fetch/git-example-code-folder/_githooks/prepare-commit-msg"
+			],
+			[
+				"btse.",
+				"sublime-fetch/global-node-script/btse-pr.js"
+			],
+			[
+				"btseps",
+				"sublime-fetch/global-node-script/btse-pr.js"
+			],
+			[
+				"pr.js",
+				"sublime-fetch/global-node-script/btse-pr.js"
+			],
+			[
+				"gitconfigba",
+				"sublime-fetch/.gitconfig-backup"
+			],
+			[
+				".bash",
+				"sublime-fetch/config-link/.bash-work"
+			],
+			[
+				"packag",
+				"sublime-fetch/node-select-demo/package.json"
+			],
+			[
+				"index",
+				"sublime-fetch/node-select-demo/index.js"
+			],
+			[
+				"index.js",
+				"sublime-fetch/node-select-demo/index.js"
+			],
+			[
+				"read",
+				"sublime-fetch/README.md"
+			],
+			[
+				"temp",
+				"sublime-fetch/temp.txt"
+			],
+			[
+				"eslintmd",
+				"sublime-fetch/創建屬於自己的eslint-plugins.md"
+			],
+			[
+				"tmep.",
+				"sublime-fetch/temp.txt"
+			],
+			[
+				"git.md",
+				"sublime-fetch/git-tech-center.md"
+			],
+			[
+				".gitconfig",
+				"sublime-fetch/.gitconfig-backup"
+			],
+			[
+				".gitignore",
+				"sublime-fetch/.gitignore"
+			],
+			[
+				"prepare",
+				"sublime-fetch/git-example-code-folder/_githooks/prepare-commit-msg"
+			],
+			[
+				"config-link/.gitconfig",
+				"sublime-fetch/config-link/.gitconfig"
+			],
+			[
+				"gitconfiback",
+				"sublime-fetch/.gitconfig-backup"
+			],
+			[
+				"sublime.md",
+				"sublime-fetch/sublime-text-build-system-chinese-encode.md"
+			],
+			[
+				"preparecommit",
+				"sublime-fetch/git-example-code-folder/_githooks/prepare-commit-msg"
+			],
+			[
+				"gitteccenter",
+				"sublime-fetch/git-tech-center.md"
+			],
+			[
+				"jsdoc",
+				"sublime-fetch/jsDocDoc.md"
+			],
+			[
+				"opendil",
+				"sublime-fetch/vue-plain-project/src/plugins/openDialog.js"
+			],
+			[
+				"configgit",
+				"sublime-fetch/config-link/.gitconfig"
+			],
+			[
+				"karabiner.json",
+				"sublime-fetch/karabiner/karabiner.json"
+			],
+			[
+				"rad",
+				"sublime-fetch/README.md"
+			],
+			[
+				"package",
+				"sublime-fetch/node-select-demo/package.json"
+			],
+			[
+				"package.json",
+				"sublime-fetch/package.json"
+			],
+			[
+				"nodedemopackage.json",
+				"sublime-fetch/node-select-demo/package.json"
+			],
+			[
+				"nodedemo",
+				"sublime-fetch/node-select-demo/index.js"
+			],
+			[
+				"run.js",
+				"sublime-fetch/run.js"
+			],
+			[
+				"gitexample",
+				"git-example-code-folder/_githooks/prepare-commit-msg"
+			],
+			[
+				"js",
+				"code-pieces/jsonp_example.js"
+			],
+			[
+				"giti",
+				".gitignore"
+			],
+			[
+				"gitignore",
+				".gitignore"
+			],
+			[
+				"gitconfi",
+				".gitconfig-backup"
+			],
+			[
+				"bashwork",
+				"config-link/.bash-work"
+			],
+			[
+				"whitelabeconfig",
+				".gitlab-ci.whitelabel.config.yml"
+			],
+			[
+				"pac",
+				"package.json"
+			],
+			[
+				"pacge",
+				"package.json"
+			],
+			[
+				"i18n",
+				"build-i18n.js"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"/components/icons/IconBtseCn",
+				"src/components/icons/IconBtseCn.vue"
+			],
+			[
+				".vue",
+				"src/components/Card.vue"
+			],
+			[
+				"main.js",
+				"src/main.js"
+			],
+			[
+				"pmain.js",
+				"src/plugins/notification/main.js"
+			],
+			[
+				".js",
+				".eslintrc.js"
+			],
+			[
+				"yarn",
+				"yarn.lock"
+			],
+			[
+				"setsublime",
+				"set-sublime-text-user.sh"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 502.0,
+		"last_filter": "frontend",
+		"selected_items":
+		[
+			[
+				"frontend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"ff",
+				"~/flyc/sublime-project/ff-worktree.sublime-workspace"
+			],
+			[
+				"ee",
+				"~/flyc/sublime-project/chrome-extension.sublime-workspace"
+			],
+			[
+				"fr",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"fronte",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"frotnen",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"fronted",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"frotne",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"frot",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"forntend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"frtoned",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"little",
+				"~/flyc/sublime-project/little-tool.sublime-workspace"
+			],
+			[
+				"",
+				"~/btse/little-tool/little-tool.sublime-workspace"
+			],
+			[
+				"email",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"sublime",
+				"~/flyc/sublime-fetch/sublime-fetch.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"lsp_show_inlay_hints": false
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 309.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

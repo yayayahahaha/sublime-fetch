@@ -1,0 +1,1698 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"compa",
+				"compareFileContents"
+			],
+			[
+				"xml",
+				"xmlContent"
+			],
+			[
+				"vue",
+				"vueStr"
+			],
+			[
+				"style",
+				"style"
+			],
+			[
+				"parameter",
+				"getParameterSetting"
+			],
+			[
+				"email",
+				"emailData"
+			],
+			[
+				"exis",
+				"fs.existsSync"
+			],
+			[
+				"red",
+				"redCondole"
+			],
+			[
+				"de",
+				"default"
+			],
+			[
+				"veu",
+				"vueStr"
+			],
+			[
+				"att",
+				"attributes"
+			],
+			[
+				"re",
+				"resolve"
+			],
+			[
+				"defa",
+				"#defaultStaticPaths"
+			],
+			[
+				"in",
+				"instanceof"
+			],
+			[
+				"builden",
+				"BUILD_ENV"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"erro",
+				"errorMessage"
+			],
+			[
+				"iife",
+				"iife-es5\tiife-es5"
+			],
+			[
+				"readfile",
+				"fs.readFileSync"
+			],
+			[
+				"json",
+				"JSON"
+			],
+			[
+				"radfile",
+				"fs.readFileSync"
+			],
+			[
+				"consme",
+				"consoleMsg"
+			],
+			[
+				"mkdir",
+				"fs.mkdirSync"
+			],
+			[
+				"templa",
+				"templateName"
+			],
+			[
+				"readdi",
+				"fs.readdirSync"
+			],
+			[
+				"sele",
+				"selectAnswer"
+			],
+			[
+				"cac",
+				"cancel"
+			],
+			[
+				"ca",
+				"catch"
+			],
+			[
+				"fil",
+				"filter"
+			],
+			[
+				"cure",
+				"currentEnExist"
+			],
+			[
+				"newen",
+				"newEnPath"
+			],
+			[
+				"readdir",
+				"fs.readdirSync"
+			],
+			[
+				"u8",
+				"utf8"
+			],
+			[
+				"hash",
+				"hashToDoubleParantheses"
+			],
+			[
+				"var",
+				"variableRegex"
+			],
+			[
+				"rep",
+				"replace"
+			],
+			[
+				"writefile",
+				"fs.writeFileSync"
+			],
+			[
+				"id",
+				"isDir"
+			],
+			[
+				"wri",
+				"fs.writeSync"
+			],
+			[
+				"wirtefil",
+				"fs.writeFileSync"
+			],
+			[
+				"compute",
+				"computedHtml"
+			],
+			[
+				"list",
+				"listData"
+			],
+			[
+				"template",
+				"templateName"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"gtistash",
+				"Git: Stash Changes"
+			],
+			[
+				"track",
+				"Git: Track Remote Branch"
+			],
+			[
+				"gitcheckout current file",
+				"Git: Checkout Current File"
+			],
+			[
+				"duplicate",
+				"File: Duplicate"
+			],
+			[
+				"sshtml",
+				"Set Syntax: HTML"
+			],
+			[
+				"ssjs",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ssjson",
+				"Set Syntax: JSON"
+			],
+			[
+				"gtinewbra",
+				"Git: New Branch"
+			],
+			[
+				"compare",
+				"Compare with..."
+			],
+			[
+				"gticheckout",
+				"Git: Checkout Current File"
+			],
+			[
+				"gitignore",
+				"Snippet: gitignore"
+			],
+			[
+				"rename",
+				"File: Rename"
+			],
+			[
+				"delete",
+				"File: Delete"
+			],
+			[
+				"newfile",
+				"File: New File"
+			],
+			[
+				"uniq",
+				"Permute Lines: Unique"
+			],
+			[
+				"selectcolor",
+				"UI: Select Color Scheme"
+			],
+			[
+				"selectcolorscheme",
+				"UI: Select Color Scheme"
+			],
+			[
+				"selectcol",
+				"UI: Select Color Scheme"
+			],
+			[
+				"gtichecure",
+				"Git: Checkout Current File"
+			],
+			[
+				"format",
+				"LSP: Format File"
+			],
+			[
+				"gtichec",
+				"Git: Checkout Current File"
+			],
+			[
+				"gtichekoucr",
+				"Git: Checkout Current File"
+			],
+			[
+				"gtich",
+				"Git: Checkout Current File"
+			],
+			[
+				"gticheckoutcurrentfile",
+				"Git: Checkout Current File"
+			],
+			[
+				"fromat",
+				"LSP: Format File"
+			],
+			[
+				"git checkout cur",
+				"Git: Checkout Current File"
+			],
+			[
+				"sscss",
+				"Set Syntax: CSS"
+			],
+			[
+				"sort",
+				"Sort Lines"
+			],
+			[
+				"gitaddcure",
+				"Git: Add Current File"
+			],
+			[
+				"gtiaddcure",
+				"Git: Add Current File"
+			],
+			[
+				"sshmlt",
+				"Set Syntax: HTML (Tcl)"
+			],
+			[
+				"theme",
+				"UI: Select Theme"
+			],
+			[
+				"nodered",
+				"Snippet: nodejs-console-red-light"
+			],
+			[
+				"gtiaddcurrentfile",
+				"Git: Add Current File"
+			],
+			[
+				"gtichk",
+				"Git: Checkout Current File"
+			],
+			[
+				"gtichekocut",
+				"Git: Checkout Current File"
+			],
+			[
+				"gticheckoutcurrentf",
+				"Git: Checkout Current File"
+			],
+			[
+				"git checkoutcurrentfile",
+				"Git: Checkout Current File"
+			],
+			[
+				"git addcurrenfile",
+				"Git: Add Current File"
+			],
+			[
+				"gti addcurrentfile",
+				"Git: Add Current File"
+			],
+			[
+				"gtiaddcurrent",
+				"Git: Add Current File"
+			],
+			[
+				"ssjava",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ssjavascript",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"gticheko",
+				"Git: Checkout Current File"
+			],
+			[
+				"gticheckout currentfile",
+				"Git: Checkout Current File"
+			],
+			[
+				"sdiebysid",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"seletcolor",
+				"UI: Select Color Scheme"
+			],
+			[
+				"foramt",
+				"LSP: Format File"
+			],
+			[
+				"gtidiffallfiles",
+				"Git: Diff All Files"
+			],
+			[
+				"git add current file",
+				"Git: Add Current File"
+			],
+			[
+				"gtiad",
+				"Git: Add Current File"
+			],
+			[
+				"gitadd",
+				"Git: Add Current File"
+			],
+			[
+				"gtiaddcuren",
+				"Git: Add Current File"
+			],
+			[
+				"gitaddcufe",
+				"Git: Add Current File"
+			],
+			[
+				"nodejsgre",
+				"Snippet: nodejs-console-green-light"
+			],
+			[
+				"gtiaddcuf",
+				"Git: Add Current File"
+			],
+			[
+				"gtiadcure",
+				"Git: Add Current File"
+			],
+			[
+				"gtiadd",
+				"Git: Add Current File"
+			],
+			[
+				"nodeselect",
+				"Snippet: nodejs-select"
+			],
+			[
+				"readall",
+				"Snippet: nodejs-read-all-files"
+			],
+			[
+				"nodejs",
+				"Snippet: nodejs-console-cyan"
+			],
+			[
+				"nodejsred",
+				"Snippet: nodejs-console-red"
+			],
+			[
+				"trackremo",
+				"Git: Track Remote Branch"
+			],
+			[
+				"trackremote",
+				"Git: Track Remote Branch"
+			],
+			[
+				"move",
+				"File: Move"
+			],
+			[
+				"tack",
+				"Git: Track Remote Branch"
+			],
+			[
+				"gtipullre",
+				"Git: Pull Using Rebase"
+			],
+			[
+				"gtp",
+				"Git: Pull Using Rebase"
+			],
+			[
+				"gitchange",
+				"Git: Change Branch"
+			],
+			[
+				"gtichangebranch",
+				"Git: Change Branch"
+			],
+			[
+				"gtichange",
+				"Git: Change Branch"
+			],
+			[
+				"gtpull",
+				"Git: Pull Using Rebase"
+			],
+			[
+				"gipull ",
+				"Git: Pull Using Rebase"
+			],
+			[
+				"gtipull ",
+				"Git: Pull Using Rebase"
+			],
+			[
+				"sidebysdie",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"sidebysd",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"gtidiffcurrentfile",
+				"Git: Diff Current File"
+			],
+			[
+				"selectcolro",
+				"UI: Select Color Scheme"
+			],
+			[
+				"neon",
+				"History: Next Modification"
+			],
+			[
+				"comare",
+				"Compare with..."
+			],
+			[
+				"lsp",
+				"LSP: Format File"
+			],
+			[
+				"lspform",
+				"LSP: Format File"
+			],
+			[
+				"sidebyside",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"addcure",
+				"Git: Add Current File"
+			],
+			[
+				"comparewith",
+				"Compare with..."
+			],
+			[
+				"lspformat",
+				"LSP: Format File"
+			],
+			[
+				"sideby",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"dele",
+				"File: Delete"
+			],
+			[
+				"isdir",
+				"Snippet: isDir"
+			],
+			[
+				"comparewit",
+				"Compare with..."
+			],
+			[
+				"localhistory",
+				"Local History: Browse in Explorer"
+			],
+			[
+				"gtiaddcur",
+				"Git: Add Current File"
+			],
+			[
+				"gitaddcurre",
+				"Git: Add Current File"
+			],
+			[
+				"gitaddu",
+				"Git: Add Current File"
+			],
+			[
+				"git addcurre",
+				"Git: Add Current File"
+			],
+			[
+				"restart",
+				"LSP: Restart Server"
+			],
+			[
+				"compar",
+				"Compare with..."
+			],
+			[
+				"keybinding",
+				"Preferences: Key Bindings"
+			],
+			[
+				"emmetsetting",
+				"Preferences: Emmet Settings"
+			],
+			[
+				"keybin",
+				"Preferences: SyntaxFold Keybindings - Default"
+			],
+			[
+				"gitblame",
+				"Git: Blame"
+			],
+			[
+				"installpackage",
+				"Package Control: Install Package"
+			],
+			[
+				"gtiblame",
+				"Git: Blame"
+			],
+			[
+				"colorsche",
+				"UI: Select Color Scheme"
+			],
+			[
+				"full",
+				"View: Toggle Full Screen"
+			],
+			[
+				"installpackagecontrol",
+				"Install Package Control"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 314.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/flyc.chung/btse/email-worktree",
+		"/Users/flyc.chung/btse/email-worktree/commons",
+		"/Users/flyc.chung/btse/email-worktree/commons/views",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_3RD_KYC_FAIL_1",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_3RD_KYC_FAIL_1/lang",
+		"/Users/flyc.chung/btse/email-worktree/settings",
+		"/Users/flyc.chung/btse/email-worktree/settings/base",
+		"/Users/flyc.chung/btse/email-worktree/settings/base/lang"
+	],
+	"file_history":
+	[
+		"/Users/flyc.chung/btse/email-worktree/components/btzo/header.mjml",
+		"/Users/flyc.chung/btse/email-worktree/components/nvx/header.mjml",
+		"/Users/flyc.chung/btse/email-worktree/settings/nvx/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/config.js",
+		"/Users/flyc.chung/btse/email-worktree/settings/utils.js",
+		"/Users/flyc.chung/btse/email-worktree/settings/altex/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/src/converter.js",
+		"/Users/flyc.chung/btse/email-worktree/settings/base/lang/en.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/components/signature/signature.mjml",
+		"/Users/flyc.chung/btse/email-worktree/settings/interpay/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_3RD_KYC_FAIL_1/C_3RD_KYC_FAIL_1.mjml",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_3RD_KYC_FAIL_1/lang/id.json",
+		"/Users/flyc.chung/btse/email-worktree/settings/b2z/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK.mjml",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK/lang/en.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_KYC_L1_REJ_5/C_KYC_L1_REJ_5.mjml",
+		"/Users/flyc.chung/btse/email-worktree/settings/freedx/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_LOGIN/C_LOGIN.mjml",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_AUTO_TRADER_DEACTIVATED_LOSS/C_AUTO_TRADER_DEACTIVATED_LOSS.mjml",
+		"/Users/flyc.chung/btse/email-worktree/settings/btse/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/ADMIN_LOGIN/lang/en.json",
+		"/Users/flyc.chung/btse/email-worktree/settings/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/views/btse/C_ONBOARD_EMAIL_SIGN_UP/lang/en.json",
+		"/Users/flyc.chung/btse/email-worktree/views/btse/C_ONBOARD_EMAIL_SIGN_UP/C_ONBOARD_EMAIL_SIGN_UP.mjml",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_MARGIN_CALL_HEDGE/lang/ja-JP.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_MARGIN_CALL_HEDGE/lang/vi.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_MARGIN_CALL_HEDGE/lang/id.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_MARGIN_CALL_HEDGE/lang/zh-CN.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_MARGIN_CALL_HEDGE/lang/zh-TW.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_MARGIN_CALL_HEDGE/lang/ko-KR.json",
+		"/Users/flyc.chung/btse/email-worktree/components/autotrader/mj-head.mjml",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_TRADING_BOT_DEACTIVATED/C_TRADING_BOT_DEACTIVATED.mjml",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_TRADING_BOT_DEACTIVATED/lang/zh-CN.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_TRADING_BOT_DEACTIVATED/lang/zh-TW.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_TRADING_BOT_DEACTIVATED/lang/en.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_TRADING_BOT_DEACTIVATED/lang/id.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_TRADING_BOT_DEACTIVATED/lang/ja-JP.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_TRADING_BOT_DEACTIVATED/lang/ko-KR.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_TRADING_BOT_DEACTIVATED/lang/tr-TR.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_TRADING_BOT_DEACTIVATED/lang/vi.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_PIN_FAIL/C_PIN_FAIL.mjml",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_PIN_FAIL/lang/en.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_PIN_FAIL/lang/id.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_PIN_FAIL/lang/ja-JP.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_PIN_FAIL/lang/ko-KR.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_PIN_FAIL/lang/vi.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_PIN_FAIL/lang/zh-CN.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_PIN_FAIL/lang/zh-TW.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_MARGIN_CALL_HEDGE/C_MARGIN_CALL_HEDGE.mjml",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_MARGIN_CALL_HEDGE/lang/en.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_MARGIN_CALL_HEDGE/lang/tr-TR.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_2FA_FIRST/lang/vn.json",
+		"/Users/flyc.chung/btse/email-worktree/views/bitkub/C_LOGIN/lang/id.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_CARD_SUBSCRIPTION_FINAL_CANCELLATION/lang/zh-CN.json",
+		"/Users/flyc.chung/btse/email-worktree/.gitlab-ci.yml",
+		"/Users/flyc.chung/btse/email-worktree/components/altex/footer.mjml",
+		"/Users/flyc.chung/btse/email-worktree/README.md",
+		"/Users/flyc.chung/btse/email-worktree/settings/btsebroker/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/settings/btsegi/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/settings/btseag/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/settings/btseuab/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_ONBOARD_24H/C_ONBOARD_24H.mjml",
+		"/Users/flyc.chung/btse/email-worktree/settings/traxex/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/components/traxex/footer.mjml",
+		"/Users/flyc.chung/btse/email-worktree/settings/traiex/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/components/traiex/footer.mjml",
+		"/Users/flyc.chung/btse/email-worktree/components/obot/footer.mjml",
+		"/Users/flyc.chung/btse/email-worktree/settings/obot/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/components/freedx/footer.mjml",
+		"/Users/flyc.chung/btse/email-worktree/components/fedhabit/footer.mjml",
+		"/Users/flyc.chung/btse/email-worktree/settings/fedhabit/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/components/bitkub/footer.mjml",
+		"/Users/flyc.chung/btse/email-worktree/components/bitqik/footer.mjml",
+		"/Users/flyc.chung/btse/email-worktree/settings/bitkub/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/components/binoex/footer.mjml",
+		"/Users/flyc.chung/btse/email-worktree/settings/bitqik/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/parameterSetting.mjml",
+		"/Users/flyc.chung/btse/email-worktree/settings/binoex/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/src/compileMjml.js",
+		"/Users/flyc.chung/btse/email-worktree/components/atpro/header.mjml",
+		"/Users/flyc.chung/btse/email-worktree/components/atpro/mj-head.mjml",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_AUTO_TRADER_DEACTIVATED_LOSS/lang/en.json",
+		"/Users/flyc.chung/btse/email-worktree/components/atpro/autotraderStyle.mjml",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_2FA_FIRST/lang/en.json",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_2FA_FIRST/C_2FA_FIRST.mjml",
+		"/Users/flyc.chung/btse/email-worktree/settings/atpro/parameterSetting.js",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/EXPRESS_BUY_IDENTITY_FAIL/EXPRESS_BUY_IDENTITY_FAIL.mjml",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/EXPRESS_SELL_REQUEST/EXPRESS_SELL_REQUEST.mjml",
+		"/Users/flyc.chung/btse/email-worktree/commons/components/bannerImage.mjml",
+		"/Users/flyc.chung/btse/email-worktree/commons/views/C_ONBOARD_EMAIL_SIGN_UP/C_ONBOARD_EMAIL_SIGN_UP.mjml",
+		"/Users/flyc.chung/btse/email-refactor-validator/.prettierrc.js",
+		"/Users/flyc.chung/btse/email-refactor-validator/production-version/atpro/C_KOL_AFFILIATE_SET_PARTNER_COPYWISE/en/C_KOL_AFFILIATE_SET_PARTNER_COPYWISE.html",
+		"/Users/flyc.chung/btse/email-refactor-validator/index.js",
+		"/Users/flyc.chung/btse/email-refactor-validator/refactor-version/atpro/C_KOL_AFFILIATE_SET_PARTNER_COPYWISE/en/C_KOL_AFFILIATE_SET_PARTNER_COPYWISE.html",
+		"/Users/flyc.chung/btse/email-refactor-validator/.gitignore",
+		"/Users/flyc.chung/btse/email-refactor-validator/package.json",
+		"/Users/flyc.chung/btse/email-refactor-validator/yarn.lock",
+		"/Users/flyc.chung/btse/mjml_email_template/src/converter.js",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_CRYPTO_DEPOSIT_SUCC/C_CRYPTO_DEPOSIT_SUCC.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_CRYPTO_WITHDRAWAL_APR/C_CRYPTO_WITHDRAWAL_APR.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_KYC_L1_SUCC/C_KYC_L1_SUCC.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/parameterSetting.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_AUTO_TRADER_DEACTIVATED_LOSS/C_AUTO_TRADER_DEACTIVATED_LOSS.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/btse/mj-head.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/autotrader/mj-head.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/btse/autotraderFooter.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_AUTO_TRADER_REVERSE_SUCCESSFUL/C_AUTO_TRADER_REVERSE_SUCCESSFUL.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/package.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/utils.js",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_KOL_AFFILIATE_SET_PARTNER/C_KOL_AFFILIATE_SET_PARTNER.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_KOL_AFFILIATE_SET_PARTNER/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/components/mj-head.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btse/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btsebroker/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/ctx98/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/nvx/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/traiex/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/binoex/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/autotrader/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/altex/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btsegi/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/atpro/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_KOL_AFFILIATE_APR/C_KOL_AFFILIATE_APR.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_KOL_AFFILIATE_APR/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/emailRenameMap.js",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_KOL_AFFILIATE_APR/lang/zh-CN.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/b2z/parameterSetting.js"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 369.0,
+		"where_history":
+		[
+			"-*.json",
+			"",
+			"parameterSetting.js",
+			"-parameterSetting.js",
+			"",
+			"-*.mjml",
+			"*.mjml",
+			"",
+			"*.mjml",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"alt",
+			"NVX",
+			"config",
+			"nvx",
+			"cdnPayload",
+			"config",
+			"brandName",
+			"cdnPayload",
+			"nvx",
+			"overview",
+			"cdnPayload",
+			"new StaticResource(",
+			"StaticResource",
+			"class",
+			"cdnSetting",
+			"cdnOrigin",
+			"static_resource",
+			"cdnOrigin",
+			"C_AUTO_TRADER_DEACTIVATED_LOSS",
+			"signature",
+			"supportLink",
+			"supportLinkAndTelegram",
+			"support",
+			"supportlink",
+			"supportLink",
+			"Have more questions? Visit our ",
+			"somethingWrongEmailText",
+			"verificationLink",
+			"signature",
+			"<mj-image",
+			"_common",
+			"defaultStaticPaths",
+			"detailCoin",
+			"formatFilePath",
+			"cdnOrigin",
+			"this.env",
+			"this.#env",
+			"env",
+			"cdnSetting",
+			"config",
+			"staticPath",
+			"staticResource",
+			"cdnPayload",
+			"cdnSetting",
+			"custom",
+			"autotraderEn",
+			"signiture",
+			"greeting",
+			"futures/api/inquire/initial/market",
+			"item",
+			"en",
+			"10/09/2025 4:43:43 pm",
+			"id",
+			"10/09",
+			"en",
+			"10/09/2025",
+			"zh",
+			", ",
+			"C_TRADING_BOT_DEACTIVATED",
+			"C_MARGIN_CALL_HEDGE",
+			"contact",
+			"text",
+			"text2",
+			"block",
+			"C_MARGIN_CALL_HEDGE",
+			"C_CARD_SUBSCRIPTION_FINAL_CANCELLATION",
+			"cheerio",
+			"dev",
+			"AWS_S3_BUCKET_NAME: btse-staging-mailtemplate-apn1",
+			".aws staging",
+			"href",
+			"btsebroker",
+			"welcome-banner",
+			"btse",
+			"btsebroker",
+			"btse",
+			"btseag",
+			"btse",
+			"btseuab",
+			"btse",
+			"btsegi",
+			"brandStaticResourceLink",
+			"welcome-banner",
+			"btse",
+			"contactLink",
+			"https://traxex.freshdesk.com/support/tickets/new",
+			"help",
+			"contactLink",
+			"obot",
+			"contactLink",
+			"freedx",
+			"contactLink",
+			"btsebroker",
+			"btseuab",
+			"btsegi",
+			"btsebroker",
+			"btseag",
+			"btse",
+			"brandStaticResourceLink",
+			"btseuab",
+			"btsegi",
+			"v",
+			":",
+			"contactLink",
+			"footer.mjml",
+			"v",
+			":",
+			"https://bitkub.freshdesk.com/support/tickets/new",
+			"contactLink",
+			"white_label",
+			".at-try-label",
+			"try",
+			"tryText",
+			"C_AUTO_TRADER_DEACTIVATED_LOSS",
+			"atpro",
+			"Try Another Strategy!",
+			"Try Another Strategy!\n",
+			"include",
+			"atproStyle.mjml",
+			"contactLink",
+			"autotraderContactLinkWin",
+			"https://support.autotrader.io/support/tickets/new",
+			"tickets/new",
+			"autotrader",
+			"atpro",
+			"/support/tickets/new",
+			"https://support.autotrader.io/support/tickets/new",
+			"tickets/new"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": false,
+		"whole_word": true,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/Users/flyc.chung/btse/email-worktree"
+		}
+	],
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 46.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.LSP Log Panel":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.SublimeLinter":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.SublimeLinter Messages":
+	{
+		"height": 438.0,
+		"history":
+		[
+		]
+	},
+	"output.diagnostics":
+	{
+		"height": 120.0,
+		"history":
+		[
+		]
+	},
+	"output.exec":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.find_results":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.git":
+	{
+		"height": 120.0,
+		"history":
+		[
+		]
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"header.mjml btzo",
+				"components/btzo/header.mjml"
+			],
+			[
+				"nvx paramett",
+				"settings/nvx/parameterSetting.js"
+			],
+			[
+				"settutl",
+				"settings/utils.js"
+			],
+			[
+				"conver",
+				"src/converter.js"
+			],
+			[
+				"baslang.en",
+				"settings/base/lang/en.json"
+			],
+			[
+				"interpay parametersetting.js",
+				"settings/interpay/parameterSetting.js"
+			],
+			[
+				"commons/components/signature/signature.mjml",
+				"commons/components/signature/signature.mjml"
+			],
+			[
+				"C_3RD_KYC_FAIL_1",
+				"commons/views/C_3RD_KYC_FAIL_1/C_3RD_KYC_FAIL_1.mjml"
+			],
+			[
+				"b2zpara",
+				"settings/b2z/parameterSetting.js"
+			],
+			[
+				"C_KYC_L1_REJ_5",
+				"commons/views/C_KYC_L1_REJ_5/C_KYC_L1_REJ_5.mjml"
+			],
+			[
+				"freedx parametersetting.js",
+				"settings/freedx/parameterSetting.js"
+			],
+			[
+				"settingbaselang",
+				"settings/base/lang/en.json"
+			],
+			[
+				"baselangen.json",
+				"settings/base/lang/en.json"
+			],
+			[
+				"sig",
+				"commons/components/signature/signature.mjml"
+			],
+			[
+				"c_login ",
+				"commons/views/C_LOGIN/C_LOGIN.mjml"
+			],
+			[
+				"btse parametersetting.js",
+				"settings/btse/parameterSetting.js"
+			],
+			[
+				"paraseting",
+				"settings/parameterSetting.js"
+			],
+			[
+				"en.json",
+				"commons/views/ADMIN_LOGIN/lang/en.json"
+			],
+			[
+				"views/btse/C_ONBOARD_EMAIL_SIGN_UP/lang/en.json",
+				"views/btse/C_ONBOARD_EMAIL_SIGN_UP/lang/en.json"
+			],
+			[
+				"C_MARGIN_CALL_HEDGE/ja-JP",
+				"commons/views/C_MARGIN_CALL_HEDGE/lang/ja-JP.json"
+			],
+			[
+				"components/autotrader/mj-head.mjml",
+				"components/autotrader/mj-head.mjml"
+			],
+			[
+				"C_TRADING_BOT_DEACTIVATEDC_TRADING_BOT_DEACTIVATED",
+				"commons/views/C_TRADING_BOT_DEACTIVATED/C_TRADING_BOT_DEACTIVATED.mjml"
+			],
+			[
+				"C_PIN_FAILC_PIN_FAIL",
+				"commons/views/C_PIN_FAIL/C_PIN_FAIL.mjml"
+			],
+			[
+				"C_MARGIN_CALL_HEDGEC_MARGIN_CALL_HEDGE",
+				"commons/views/C_MARGIN_CALL_HEDGE/C_MARGIN_CALL_HEDGE.mjml"
+			],
+			[
+				"margincl",
+				"C_MARGIN_CALL_HEDGE"
+			],
+			[
+				"vn.json",
+				"commons/views/C_2FA_FIRST/lang/vn.json"
+			],
+			[
+				"commons/views/C_CARD_SUBSCRIPTION_FINAL_CANCELLATION/lang/zh-CN.json",
+				"commons/views/C_CARD_SUBSCRIPTION_FINAL_CANCELLATION/lang/zh-CN.json"
+			],
+			[
+				".gitlab-ci.yml",
+				".gitlab-ci.yml"
+			],
+			[
+				"footer.mjml",
+				"components/altex/footer.mjml"
+			],
+			[
+				"brokerpara",
+				"settings/btsebroker/parameterSetting.js"
+			],
+			[
+				"btsebroker pare",
+				"settings/btsebroker/parameterSetting.js"
+			],
+			[
+				"btseag",
+				"settings/btseag/parameterSetting.js"
+			],
+			[
+				"btsegi",
+				"settings/btsegi/parameterSetting.js"
+			],
+			[
+				"btseuab",
+				"settings/btseuab/parameterSetting.js"
+			],
+			[
+				"btsegiparameter",
+				"settings/btsegi/parameterSetting.js"
+			],
+			[
+				"traxexfooter",
+				"components/traxex/footer.mjml"
+			],
+			[
+				"traxex para",
+				"settings/traxex/parameterSetting.js"
+			],
+			[
+				"traiexfooter",
+				"components/traiex/footer.mjml"
+			],
+			[
+				"traiexpara",
+				"settings/traiex/parameterSetting.js"
+			],
+			[
+				"obotfooter",
+				"components/obot/footer.mjml"
+			],
+			[
+				"obotpar",
+				"settings/obot/parameterSetting.js"
+			],
+			[
+				"freedxfoote",
+				"components/freedx/footer.mjml"
+			],
+			[
+				"freedxpara",
+				"settings/freedx/parameterSetting.js"
+			],
+			[
+				"fedhabit footer",
+				"components/fedhabit/footer.mjml"
+			],
+			[
+				"fedhabit para",
+				"settings/fedhabit/parameterSetting.js"
+			],
+			[
+				"btseuab pa",
+				"settings/btseuab/parameterSetting.js"
+			],
+			[
+				"btsegiparam",
+				"settings/btsegi/parameterSetting.js"
+			],
+			[
+				"btsebropa",
+				"settings/btsebroker/parameterSetting.js"
+			],
+			[
+				"btseagpara",
+				"settings/btseag/parameterSetting.js"
+			],
+			[
+				"bitqikpara",
+				"settings/bitqik/parameterSetting.js"
+			],
+			[
+				"components/bitqik/footer.mjml",
+				"components/bitqik/footer.mjml"
+			],
+			[
+				"bitkubpara",
+				"settings/bitkub/parameterSetting.js"
+			],
+			[
+				"components/bnoex/footer.mjml",
+				"components/binoex/footer.mjml"
+			],
+			[
+				"components/bitkub/footer.mjml",
+				"components/bitkub/footer.mjml"
+			],
+			[
+				"parametermjml",
+				"commons/views/parameterSetting.mjml"
+			],
+			[
+				"settings/bitku/parameterSetting.js",
+				"settings/bitkub/parameterSetting.js"
+			],
+			[
+				"binoexparame",
+				"settings/binoex/parameterSetting.js"
+			],
+			[
+				"setting.js",
+				"settings/parameterSetting.js"
+			],
+			[
+				"commjml",
+				"src/compileMjml.js"
+			],
+			[
+				"converter.js",
+				"src/converter.js"
+			],
+			[
+				"C_AUTO_TRADER_DEACTIVATED_LOSSC_AUTO_TRADER_DEACTIVATED_LOSS",
+				"commons/views/C_AUTO_TRADER_DEACTIVATED_LOSS/C_AUTO_TRADER_DEACTIVATED_LOSS.mjml"
+			],
+			[
+				"atprohead",
+				"components/atpro/header.mjml"
+			],
+			[
+				"commons/views/C_AUTO_TRADER_DEACTIVATED_LOSS/C_AUTO_TRADER_DEACTIVATED_LOSS.mjml",
+				"commons/views/C_AUTO_TRADER_DEACTIVATED_LOSS/C_AUTO_TRADER_DEACTIVATED_LOSS.mjml"
+			],
+			[
+				"atprostyle",
+				"components/atpro/autotraderStyle.mjml"
+			],
+			[
+				"C_2FA_FIRST",
+				"commons/views/C_2FA_FIRST/C_2FA_FIRST.mjml"
+			],
+			[
+				"atproparam",
+				"settings/atpro/parameterSetting.js"
+			],
+			[
+				"C_2FA_FIRSTC_2FA_FIRST",
+				"commons/views/C_2FA_FIRST/C_2FA_FIRST.mjml"
+			],
+			[
+				"EXPRESS_SELL_REQUESTEXPRESS_SELL_REQUEST",
+				"commons/views/EXPRESS_SELL_REQUEST/EXPRESS_SELL_REQUEST.mjml"
+			],
+			[
+				"commons/views/EXPRESS_BUY_IDENTITY_FAIL/EXPRESS_BUY_IDENTITY_FAIL.mjml",
+				"commons/views/EXPRESS_BUY_IDENTITY_FAIL/EXPRESS_BUY_IDENTITY_FAIL.mjml"
+			],
+			[
+				"EXPRESS_BUY_IDENTITY_FAILEXPRESS_BUY_IDENTITY_FAIL",
+				"commons/views/EXPRESS_BUY_IDENTITY_FAIL/EXPRESS_BUY_IDENTITY_FAIL.mjml"
+			],
+			[
+				"C_ONBOARD_EMAIL_SIGN_UPC_ONBOARD_EMAIL_SIGN_UP",
+				"commons/views/C_ONBOARD_EMAIL_SIGN_UP/C_ONBOARD_EMAIL_SIGN_UP.mjml"
+			],
+			[
+				"C_ONBOARD_24H/C_ONBOARD_24H",
+				"commons/views/C_ONBOARD_24H/C_ONBOARD_24H.mjml"
+			],
+			[
+				"commons/components/bannerImage.mjml",
+				"commons/components/bannerImage.mjml"
+			],
+			[
+				"C_KOL_AFFILIATE_SET_PARTNER_COPYWISEC_KOL_AFFILIATE_SET_PARTNER_COPYWISE atpro",
+				"refactor-version/atpro/C_KOL_AFFILIATE_SET_PARTNER_COPYWISE/en/C_KOL_AFFILIATE_SET_PARTNER_COPYWISE.html"
+			],
+			[
+				"C_KOL_AFFILIATE_SET_PARTNER_COPYWISE atpro C_KOL_AFFILIATE_SET_PARTNER_COPYWISE",
+				"production-version/atpro/C_KOL_AFFILIATE_SET_PARTNER_COPYWISE/en/C_KOL_AFFILIATE_SET_PARTNER_COPYWISE.html"
+			],
+			[
+				"package",
+				"package.json"
+			],
+			[
+				"yar",
+				"yarn.lock"
+			],
+			[
+				"kycl1succ",
+				"commons/views/C_KYC_L1_SUCC/C_KYC_L1_SUCC.mjml"
+			],
+			[
+				"cryptowithdraarapr",
+				"commons/views/C_CRYPTO_WITHDRAWAL_APR/C_CRYPTO_WITHDRAWAL_APR.mjml"
+			],
+			[
+				"C_CRYPTO_DEPOSIT_SUCC",
+				"commons/views/C_CRYPTO_DEPOSIT_SUCC/C_CRYPTO_DEPOSIT_SUCC.mjml"
+			],
+			[
+				"components/btse/mj-head.mjml",
+				"components/btse/mj-head.mjml"
+			],
+			[
+				"components/btse/autotraderFooter.mjml",
+				"components/btse/autotraderFooter.mjml"
+			],
+			[
+				"c_auto_los",
+				"commons/views/C_AUTO_TRADER_DEACTIVATED_LOSS/C_AUTO_TRADER_DEACTIVATED_LOSS.mjml"
+			],
+			[
+				"auto_s",
+				"commons/views/C_AUTO_TRADER_REVERSE_SUCCESSFUL/C_AUTO_TRADER_REVERSE_SUCCESSFUL.mjml"
+			],
+			[
+				"commons/views/parameterSetting.mjml",
+				"commons/views/parameterSetting.mjml"
+			],
+			[
+				"convert",
+				"src/converter.js"
+			],
+			[
+				"package.json",
+				"package.json"
+			],
+			[
+				"utils.js",
+				"settings/utils.js"
+			],
+			[
+				"convert.js",
+				"src/converter.js"
+			],
+			[
+				"caffiliatesetpare",
+				"commons/views/C_KOL_AFFILIATE_SET_PARTNER/C_KOL_AFFILIATE_SET_PARTNER.mjml"
+			],
+			[
+				"C_KOL_AFFILIATE_SET_PARTNERC_KOL_AFFILIATE_SET_PARTNER.mjml",
+				"commons/views/C_KOL_AFFILIATE_SET_PARTNER/C_KOL_AFFILIATE_SET_PARTNER.mjml"
+			],
+			[
+				"C_KOL_AFFILIATE_SET_PARTNERC_KOL_AFFILIATE_SET_PARTNER",
+				"commons/views/C_KOL_AFFILIATE_SET_PARTNER/C_KOL_AFFILIATE_SET_PARTNER.mjml"
+			],
+			[
+				"util.sj",
+				"settings/utils.js"
+			],
+			[
+				"u",
+				"settings/utils.js"
+			],
+			[
+				"parametersetting.js",
+				"settings/altex/parameterSetting.js"
+			],
+			[
+				"utils",
+				"settings/utils.js"
+			],
+			[
+				"utilsj.",
+				"settings/utils.js"
+			],
+			[
+				"utils.j",
+				"settings/utils.js"
+			],
+			[
+				"autotraderpara",
+				"settings/autotrader/parameterSetting.js"
+			],
+			[
+				"C_KOL_AFFILIATE_APR",
+				"commons/views/C_KOL_AFFILIATE_APR/C_KOL_AFFILIATE_APR.mjml"
+			],
+			[
+				"utils.",
+				"settings/utils.js"
+			],
+			[
+				"parameterSetting.js btse",
+				"settings/btse/parameterSetting.js"
+			],
+			[
+				"stylemepar",
+				"settings/styleme/parameterSetting.js"
+			],
+			[
+				"stylemepara",
+				"settings/styleme/parameterSetting.js"
+			],
+			[
+				"paradisein",
+				"settings/paradise/parameterSetting.js"
+			],
+			[
+				"paradiseheadermjml",
+				"components/paradise/header.mjml"
+			],
+			[
+				"autotradestyle.mjml",
+				"components/atpro/autotraderStyle.mjml"
+			],
+			[
+				"cauto",
+				"commons/views/C_AUTO_TRADER_DEACTIVATED_LOSS/C_AUTO_TRADER_DEACTIVATED_LOSS.mjml"
+			],
+			[
+				"btseagheader.mjml",
+				"components/btseag/header.mjml"
+			],
+			[
+				"onboardemailsignupconemasinup btse",
+				"views/btse/C_ONBOARD_EMAIL_SIGN_UP/C_ONBOARD_EMAIL_SIGN_UP.mjml"
+			],
+			[
+				"b2zheader",
+				"components/b2z/header.mjml"
+			],
+			[
+				"uti.",
+				"settings/utils.js"
+			],
+			[
+				"bitqikfootermjm",
+				"components/bitqik/footer.mjml"
+			],
+			[
+				"compilemj",
+				"src/compileMjml.js"
+			],
+			[
+				"admin",
+				"commons/views/ADMIN_LOGIN/ADMIN_LOGIN.mjml"
+			],
+			[
+				"footer",
+				"components/altex/footer.mjml"
+			],
+			[
+				"adminlog",
+				"commons/views/ADMIN_LOGIN/ADMIN_LOGIN.mjml"
+			],
+			[
+				"mjml.",
+				"src/compileMjml.js"
+			],
+			[
+				"parametersetting altex",
+				"settings/altex/parameterSetting.js"
+			],
+			[
+				"uabpara",
+				"settings/btseuab/parameterSetting.js"
+			],
+			[
+				"btseparameter",
+				"settings/btse/parameterSetting.js"
+			],
+			[
+				"autotraderreversucc",
+				"commons/views/C_AUTO_TRADER_REVERSE_SUCCESSFUL/C_AUTO_TRADER_REVERSE_SUCCESSFUL.mjml"
+			],
+			[
+				"commons/views/C_AUTO_TRADER_DEACTIVATED_WIN/C_AUTO_TRADER_DEACTIVATED_WIN.mjml",
+				"commons/views/C_AUTO_TRADER_DEACTIVATED_WIN/C_AUTO_TRADER_DEACTIVATED_WIN.mjml"
+			],
+			[
+				"temp",
+				"temp.json"
+			],
+			[
+				"templ",
+				"delete-views-template.js"
+			],
+			[
+				"adminlo",
+				"commons/views/ADMIN_LOGIN/ADMIN_LOGIN.mjml"
+			],
+			[
+				"settings/",
+				"settings/b2z/parameterSetting.js"
+			],
+			[
+				"config.js",
+				"config.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 502.0,
+		"last_filter": "mjml",
+		"selected_items":
+		[
+			[
+				"mjml",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"email",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"ee",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"ww",
+				"~/flyc/sublime-project/ww-frontend-worktree.sublime-workspace"
+			],
+			[
+				"fronted",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"frontend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"static",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"ermail",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"subli",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"froten",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"tatic",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"stat",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"forntend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"btsestaticresource",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"fronte",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"frotnend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"fron",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"sublimefet",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"frontne",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"fornte",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 197.0,
+		"last_filter": "test",
+		"selected_items":
+		[
+			[
+				"test",
+				"forTest"
+			],
+			[
+				"getAllFiles",
+				"getAllFilesName"
+			]
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"lsp_show_inlay_hints": false
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 299.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
