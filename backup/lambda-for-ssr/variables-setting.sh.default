@@ -1,0 +1,11 @@
+# frontend repo 的絕對 path
+export frontend_path=$HOME/btse/frontend
+
+# frontend repo 要切去的 branch name
+export frontend_branch=flyc/test-pipeline
+
+# 要打包的白牌的 build-script
+export build_script='build-walletdemo-staging'
+
+# 要打包的白牌的 bundle directory name
+export bundle_dir_name="walletdemo.btse.co"

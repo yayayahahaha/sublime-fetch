@@ -1,0 +1,2577 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"test",
+				"testnetLink"
+			],
+			[
+				"padding-",
+				"padding-bottom"
+			],
+			[
+				"is",
+				"fs.existsSync"
+			],
+			[
+				"gren",
+				"greenConsole"
+			],
+			[
+				"exist",
+				"fs.existsSync"
+			],
+			[
+				"view",
+				"VIEWS_PATH"
+			],
+			[
+				"common",
+				"COMMONS_NAME"
+			],
+			[
+				"l",
+				"console.log"
+			],
+			[
+				"ori",
+				"oriValue"
+			],
+			[
+				"newlan",
+				"newLangPath"
+			],
+			[
+				"enpath",
+				"currentEnPath"
+			],
+			[
+				"lang",
+				"langName"
+			],
+			[
+				"curren",
+				"currentLangPath"
+			],
+			[
+				"ligh",
+				"lightRed"
+			],
+			[
+				"fil",
+				"filter"
+			],
+			[
+				"type",
+				"typeDifference"
+			],
+			[
+				"checkdi",
+				"checkJsonDifferences"
+			],
+			[
+				"key",
+				"keyInfo"
+			],
+			[
+				"data",
+				"data1"
+			],
+			[
+				"valu",
+				"valueDifference"
+			],
+			[
+				"json",
+				"json2"
+			],
+			[
+				"name",
+				"name2"
+			],
+			[
+				"temp",
+				"templateName"
+			],
+			[
+				"lighre",
+				"lightGreen"
+			],
+			[
+				"msg",
+				"msgColor"
+			],
+			[
+				"checken",
+				"checkIsEnModified"
+			],
+			[
+				"check",
+				"checkNewLangStructure"
+			],
+			[
+				"blue",
+				"lightBlue"
+			],
+			[
+				"tolo",
+				"toLocaleLowerCase"
+			],
+			[
+				"template",
+				"templateName"
+			],
+			[
+				"comons",
+				"commons"
+			],
+			[
+				"lih",
+				"lightMagenta"
+			],
+			[
+				"lighe",
+				"lightBlue"
+			],
+			[
+				"iscom",
+				"isCommonsLength"
+			],
+			[
+				"comm",
+				"commons"
+			],
+			[
+				"cyna",
+				"lightCyan"
+			],
+			[
+				"yell",
+				"lightYellow"
+			],
+			[
+				"read",
+				"ready"
+			],
+			[
+				"de",
+				"default"
+			],
+			[
+				"repla",
+				"replaced"
+			],
+			[
+				"ever",
+				"everReplaced"
+			],
+			[
+				"res",
+				"result"
+			],
+			[
+				"lnks",
+				"links"
+			],
+			[
+				"set",
+				"setAttribute"
+			],
+			[
+				"queryselec",
+				"querySelectorAll"
+			],
+			[
+				"get",
+				"getAttribute"
+			],
+			[
+				"query",
+				"querySelector"
+			],
+			[
+				"h",
+				"html"
+			],
+			[
+				"dispa",
+				"DIST_PATH"
+			],
+			[
+				"Sta",
+				"Staging"
+			],
+			[
+				"commit",
+				"CI_COMMIT_BRANCH"
+			],
+			[
+				"writefile",
+				"fs.writeFileSync"
+			],
+			[
+				"exi",
+				"fs.existsSync"
+			],
+			[
+				"for",
+				"#forceMessage"
+			],
+			[
+				"mjm",
+				"mjmlContentFilePath"
+			],
+			[
+				"xml",
+				"xmlContent"
+			],
+			[
+				"vue",
+				"vueStr"
+			],
+			[
+				"style",
+				"style"
+			],
+			[
+				"parameter",
+				"getParameterSetting"
+			],
+			[
+				"email",
+				"emailData"
+			],
+			[
+				"exis",
+				"fs.existsSync"
+			],
+			[
+				"red",
+				"redCondole"
+			],
+			[
+				"veu",
+				"vueStr"
+			],
+			[
+				"att",
+				"attributes"
+			],
+			[
+				"re",
+				"resolve"
+			],
+			[
+				"defa",
+				"#defaultStaticPaths"
+			],
+			[
+				"in",
+				"instanceof"
+			],
+			[
+				"builden",
+				"BUILD_ENV"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"erro",
+				"errorMessage"
+			],
+			[
+				"iife",
+				"iife-es5\tiife-es5"
+			],
+			[
+				"readfile",
+				"fs.readFileSync"
+			],
+			[
+				"radfile",
+				"fs.readFileSync"
+			],
+			[
+				"consme",
+				"consoleMsg"
+			],
+			[
+				"mkdir",
+				"fs.mkdirSync"
+			],
+			[
+				"templa",
+				"templateName"
+			],
+			[
+				"readdi",
+				"fs.readdirSync"
+			],
+			[
+				"sele",
+				"selectAnswer"
+			],
+			[
+				"cac",
+				"cancel"
+			],
+			[
+				"ca",
+				"catch"
+			],
+			[
+				"cure",
+				"currentEnExist"
+			],
+			[
+				"newen",
+				"newEnPath"
+			],
+			[
+				"readdir",
+				"fs.readdirSync"
+			],
+			[
+				"u8",
+				"utf8"
+			],
+			[
+				"hash",
+				"hashToDoubleParantheses"
+			],
+			[
+				"var",
+				"variableRegex"
+			],
+			[
+				"rep",
+				"replace"
+			],
+			[
+				"id",
+				"isDir"
+			],
+			[
+				"wri",
+				"fs.writeSync"
+			],
+			[
+				"wirtefil",
+				"fs.writeFileSync"
+			],
+			[
+				"compute",
+				"computedHtml"
+			],
+			[
+				"list",
+				"listData"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/Users/flyc.chung/btse/mjml_email_template/components/btsebt/header.mjml",
+			"settings":
+			{
+				"buffer_size": 687,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					16,
+					1,
+					"revert",
+					null,
+					"AgAAAAAAAAAAAAAAAAAAAAAAAACvAgAAPG1qLXNlY3Rpb24KICBwYWRkaW5nPSIxMnB4IDMycHgiCiAgYmFja2dyb3VuZC1jb2xvcj0iIzAzM0Q5MCIKICBiYWNrZ3JvdW5kLXNpemU9ImNvdmVyIgogIGJhY2tncm91bmQtcmVwZWF0PSJuby1yZXBlYXQiCj4KICA8bWotY29sdW1uIHdpZHRoPSI1MCUiPgogICAgPG1qLWltYWdlCiAgICAgIDpzcmM9InN0YXRpY1Jlc291cmNlLmZvcm1hdEZpbGVQYXRoKHN0YXRpY1Jlc291cmNlLmJyYW5kRW1haWxMb2dvKCdsaWdodCcpKSIKICAgICAgYWx0PSJsb2dvIgogICAgICBhbGlnbj0ibGVmdCIKICAgICAgOmhlaWdodD0ibG9nb0hlaWdodCIKICAgICAgOndpZHRoPSJsb2dvV2lkdGgiCiAgICAgIHBhZGRpbmctdG9wPSIxcHgiCiAgICAgIGhyZWY9IiNmcm9udGVuZERvbWFpbiMiCiAgICAvPgogIDwvbWotY29sdW1uPgogIDxtai1jb2x1bW4gd2lkdGg9IjUwJSI+CiAgICA8bWotdGV4dAogICAgICBjc3MtY2xhc3M9ImhlYWRlci1saW5rcyIKICAgICAgaGVpZ2h0PSIyNXB4IgogICAgICBhbGlnbj0icmlnaHQiCiAgICAgIGZvbnQtc2l6ZT0iMTRweCIKICAgICAgZm9udC13ZWlnaHQ9IjMwMCIKICAgID4KICAgICAgPGEgdGFyZ2V0PSJfYmxhbmsiIGhyZWY9IiNmcm9udGVuZERvbWFpbiMiPiNmcm9udGVuZERvbWFpbiM8L2E+CiAgICA8L21qLXRleHQ+CiAgPC9tai1jb2x1bW4+CjwvbWotc2VjdGlvbj4KAAAAAAAAAACvAgAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAQwEAAAAAAABMAQAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		},
+		{
+			"file": "/Users/flyc.chung/btse/mjml_email_template/settings/btsebt/parameterSetting.js",
+			"settings":
+			{
+				"buffer_size": 758,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					10,
+					1,
+					"insert",
+					{
+						"characters": "324"
+					},
+					"AwAAABYCAAAAAAAAFwIAAAAAAAADAAAAMTM4FwIAAAAAAAAYAgAAAAAAAAAAAAAYAgAAAAAAABkCAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAGQIAAAAAAAAWAgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					11,
+					2,
+					"left_delete",
+					null,
+					"AgAAABgCAAAAAAAAGAIAAAAAAAABAAAANBcCAAAAAAAAFwIAAAAAAAABAAAAMg",
+					"AQAAAAAAAAABAAAAGQIAAAAAAAAZAgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					12,
+					1,
+					"insert",
+					{
+						"characters": "42"
+					},
+					"AgAAABcCAAAAAAAAGAIAAAAAAAAAAAAAGAIAAAAAAAAZAgAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAFwIAAAAAAAAXAgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					14,
+					2,
+					"left_delete",
+					null,
+					"AgAAAAICAAAAAAAAAgIAAAAAAAABAAAANAECAAAAAAAAAQIAAAAAAAABAAAAMg",
+					"AQAAAAAAAAABAAAAAwIAAAAAAAADAgAAAAAAAAAAAAAAAGFA"
+				],
+				[
+					15,
+					1,
+					"insert",
+					{
+						"characters": "48"
+					},
+					"AgAAAAECAAAAAAAAAgIAAAAAAAAAAAAAAgIAAAAAAAADAgAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAQIAAAAAAAABAgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					26,
+					1,
+					"insert",
+					{
+						"characters": "/2"
+					},
+					"BAAAABkCAAAAAAAAGgIAAAAAAAAAAAAAAwIAAAAAAAAEAgAAAAAAAAAAAAAbAgAAAAAAABwCAAAAAAAAAAAAAAQCAAAAAAAABQIAAAAAAAAAAAAA",
+					"AQAAAAAAAAACAAAAAwIAAAAAAAADAgAAAAAAAAAAAAAAAPC/GQIAAAAAAAAZAgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					28,
+					1,
+					"emmet_evaluate_math",
+					null,
+					"AgAAABgCAAAAAAAAGwIAAAAAAAAFAAAAMzQyLzIBAgAAAAAAAAMCAAAAAAAABAAAADQ4LzI",
+					"AQAAAAAAAAACAAAABQIAAAAAAAABAgAAAAAAAAAAAAAAAPC/HQIAAAAAAAAYAgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					32,
+					1,
+					"revert",
+					null,
+					"AgAAAAAAAAAAAAAAAAAAAAAAAAD2AgAAaW1wb3J0IGJhc2VTZXR0aW5nIGZyb20gJy4uL3BhcmFtZXRlclNldHRpbmcuanMnCmltcG9ydCB7IFN0YXRpY1Jlc291cmNlIH0gZnJvbSAnLi4vdXRpbHMuanMnCmltcG9ydCB7IEJVSUxEX0VOViB9IGZyb20gJy4uLy4uL2NvbmZpZy5qcycKaW1wb3J0IHsgbWFya1JhdyB9IGZyb20gJ3Z1ZScKCmNvbnN0IGNkblNldHRpbmcgPSB7CiAgc3RhZ2luZzogJ2h0dHBzOi8vYnRzZS1idC5idHNlLmNvJywKICB0ZXN0bmV0OiAnaHR0cHM6Ly90ZXN0LmJ0c2UtYnQuY29tJywKICBwcm9kdWN0aW9uOiAnaHR0cHM6Ly9kMnJlZnAzMGxhejFnZi5jbG91ZGZyb250Lm5ldCcKfQpjb25zdCBjZG5QYXlsb2FkID0gewogIGNkblNldHRpbmcsCiAgYnJhbmROYW1lOiAnYnRzZWJ0JywKICBlbnY6IEJVSUxEX0VOVgp9Cgpjb25zdCBzdGF0aWNSZXNvdXJjZSA9IG5ldyBTdGF0aWNSZXNvdXJjZShudWxsLCBjZG5QYXlsb2FkKQoKZXhwb3J0IGRlZmF1bHQgewogIC4uLmJhc2VTZXR0aW5nLAoKICBsb2dvSGVpZ2h0OiAnMjRweCcsCiAgbG9nb1dpZHRoOiAnMTcxcHgnLAoKICBzdGF0aWNSZXNvdXJjZTogbWFya1JhdyhzdGF0aWNSZXNvdXJjZSksCgogIHN1cHBvcnRMaW5rOiAnaHR0cHM6Ly9zdXBwb3J0LmJ0c2UuYnQnLAogIGNvbnRhY3RMaW5rOiAnaHR0cHM6Ly90aWNrZXQuYnRzZS5idCcsCgogIHRlc3RuZXRMaW5rOiBjZG5TZXR0aW5nLnRlc3RuZXQsCiAgdGVzdG5ldERvY0xpbms6ICdodHRwczovL3Rlc3QtZG9jcy5idHNlLWJ0LmNvbScKfQoAAAAAAAAAAPYCAAAAAAAAAAAAAA",
+					"AQAAAAAAAAACAAAAAQIAAAAAAAADAgAAAAAAAAAAAAAAAPC/FgIAAAAAAAAZAgAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"duplicate",
+				"File: Duplicate"
+			],
+			[
+				"dupli",
+				"File: Duplicate"
+			],
+			[
+				"uniq",
+				"Permute Lines: Unique"
+			],
+			[
+				"delete",
+				"File: Delete"
+			],
+			[
+				"trackremotebranch",
+				"Git: Track Remote Branch"
+			],
+			[
+				"trackremote",
+				"Git: Track Remote Branch"
+			],
+			[
+				"gtichec",
+				"Git: Checkout Current File"
+			],
+			[
+				"format",
+				"Format: Javascript"
+			],
+			[
+				"ssjs",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"comparewith",
+				"Compare with..."
+			],
+			[
+				"sort",
+				"Sort Lines"
+			],
+			[
+				"sore",
+				"Sublime Merge: Open Repository"
+			],
+			[
+				"compare",
+				"Compare with..."
+			],
+			[
+				"gti add current file",
+				"Git: Add Current File"
+			],
+			[
+				"git add current file",
+				"Git: Add Current File"
+			],
+			[
+				"rename",
+				"File: Rename"
+			],
+			[
+				"nodecolor",
+				"Snippet: nodejs-console-color"
+			],
+			[
+				"sshtml",
+				"Set Syntax: HTML"
+			],
+			[
+				"move",
+				"File: Move"
+			],
+			[
+				"ssvue",
+				"Set Syntax: Vue Component"
+			],
+			[
+				"gticheckout",
+				"Git: Checkout Current File"
+			],
+			[
+				"prettier",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"ssmjml",
+				"Set Syntax: MJML"
+			],
+			[
+				"sideybsi",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"ssmjlm",
+				"Set Syntax: MJML"
+			],
+			[
+				"ssjson",
+				"Set Syntax: JSON"
+			],
+			[
+				"gichecout",
+				"Git: Checkout Current File"
+			],
+			[
+				"gitchec",
+				"Git: Checkout Current File"
+			],
+			[
+				"gticheckoutcurrent",
+				"Git: Checkout Current File"
+			],
+			[
+				"ssmark",
+				"Set Syntax: Markdown"
+			],
+			[
+				"gtiaddcure",
+				"Git: Add Current File"
+			],
+			[
+				"git addcurrentfile",
+				"Git: Add Current File"
+			],
+			[
+				"nodejsconso",
+				"Snippet: nodejs-console-color"
+			],
+			[
+				"reverse",
+				"Permute Lines: Reverse"
+			],
+			[
+				"ssheml",
+				"Set Syntax: HTML (Erlang)"
+			],
+			[
+				"renam",
+				"File: Rename"
+			],
+			[
+				"renamew",
+				"Preferences: MarkdownPreview Settings"
+			],
+			[
+				"selectcolor",
+				"UI: Select Color Scheme"
+			],
+			[
+				"reload",
+				"SublimeLinter: Reload SublimeLinter and its Plugins"
+			],
+			[
+				"node",
+				"Snippet: nodejs-colors"
+			],
+			[
+				"gtiaddcurn",
+				"Git: Add Current File"
+			],
+			[
+				"gitaddcure",
+				"Git: Add Current File"
+			],
+			[
+				"gitaddcu",
+				"Git: Add Current File"
+			],
+			[
+				"Reload",
+				"SublimeLinter: Reload SublimeLinter and its Plugins"
+			],
+			[
+				"get",
+				"Snippet: getPrototype"
+			],
+			[
+				"gitcheckoutcure",
+				"Git: Checkout Current File"
+			],
+			[
+				"trackremo",
+				"Git: Track Remote Branch"
+			],
+			[
+				"dulicate",
+				"File: Duplicate"
+			],
+			[
+				"gticheckoutcurrentfile",
+				"Git: Checkout Current File"
+			],
+			[
+				"forsmt",
+				"Format: Javascript"
+			],
+			[
+				"track",
+				"Git: Track Remote Branch"
+			],
+			[
+				"sscss",
+				"Set Syntax: CSS"
+			],
+			[
+				"gtifetch ",
+				"Git: Fetch"
+			],
+			[
+				"enablepackage",
+				"Package Control: Enable Package"
+			],
+			[
+				"disable",
+				"Package Control: Disable Package"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"disap",
+				"Package Control: Disable Package"
+			],
+			[
+				"packalist",
+				"Package Control: List Packages"
+			],
+			[
+				"gtiche",
+				"Git: Checkout Current File"
+			],
+			[
+				"gitchecuere",
+				"Git: Checkout Current File"
+			],
+			[
+				"gtidiffcure",
+				"Git: Diff Current File"
+			],
+			[
+				"gtichecu",
+				"Git: Checkout Current File"
+			],
+			[
+				"gitchecu",
+				"Git: Checkout Current File"
+			],
+			[
+				"theme",
+				"UI: Select Theme"
+			],
+			[
+				"duplica",
+				"File: Duplicate"
+			],
+			[
+				"dup",
+				"File: Duplicate"
+			],
+			[
+				"selectcolorscheme",
+				"UI: Select Color Scheme"
+			],
+			[
+				"selectcol",
+				"UI: Select Color Scheme"
+			],
+			[
+				"gtichecure",
+				"Git: Checkout Current File"
+			],
+			[
+				"gtichekoucr",
+				"Git: Checkout Current File"
+			],
+			[
+				"gtich",
+				"Git: Checkout Current File"
+			],
+			[
+				"fromat",
+				"LSP: Format File"
+			],
+			[
+				"git checkout cur",
+				"Git: Checkout Current File"
+			],
+			[
+				"sshmlt",
+				"Set Syntax: HTML (Tcl)"
+			],
+			[
+				"nodered",
+				"Snippet: nodejs-console-red-light"
+			],
+			[
+				"gtiaddcurrentfile",
+				"Git: Add Current File"
+			],
+			[
+				"gtichk",
+				"Git: Checkout Current File"
+			],
+			[
+				"gtichekocut",
+				"Git: Checkout Current File"
+			],
+			[
+				"gticheckoutcurrentf",
+				"Git: Checkout Current File"
+			],
+			[
+				"git checkoutcurrentfile",
+				"Git: Checkout Current File"
+			],
+			[
+				"git addcurrenfile",
+				"Git: Add Current File"
+			],
+			[
+				"gti addcurrentfile",
+				"Git: Add Current File"
+			],
+			[
+				"gtiaddcurrent",
+				"Git: Add Current File"
+			],
+			[
+				"ssjava",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ssjavascript",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"gticheko",
+				"Git: Checkout Current File"
+			],
+			[
+				"gticheckout currentfile",
+				"Git: Checkout Current File"
+			],
+			[
+				"sdiebysid",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"seletcolor",
+				"UI: Select Color Scheme"
+			],
+			[
+				"foramt",
+				"LSP: Format File"
+			],
+			[
+				"gtidiffallfiles",
+				"Git: Diff All Files"
+			],
+			[
+				"gtiad",
+				"Git: Add Current File"
+			],
+			[
+				"gitadd",
+				"Git: Add Current File"
+			],
+			[
+				"gtiaddcuren",
+				"Git: Add Current File"
+			],
+			[
+				"gitaddcufe",
+				"Git: Add Current File"
+			],
+			[
+				"nodejsgre",
+				"Snippet: nodejs-console-green-light"
+			],
+			[
+				"gtiaddcuf",
+				"Git: Add Current File"
+			],
+			[
+				"gtiadcure",
+				"Git: Add Current File"
+			],
+			[
+				"gtiadd",
+				"Git: Add Current File"
+			],
+			[
+				"nodeselect",
+				"Snippet: nodejs-select"
+			],
+			[
+				"readall",
+				"Snippet: nodejs-read-all-files"
+			],
+			[
+				"nodejs",
+				"Snippet: nodejs-console-cyan"
+			],
+			[
+				"nodejsred",
+				"Snippet: nodejs-console-red"
+			],
+			[
+				"tack",
+				"Git: Track Remote Branch"
+			],
+			[
+				"gtipullre",
+				"Git: Pull Using Rebase"
+			],
+			[
+				"gtp",
+				"Git: Pull Using Rebase"
+			],
+			[
+				"gitchange",
+				"Git: Change Branch"
+			],
+			[
+				"gtichangebranch",
+				"Git: Change Branch"
+			],
+			[
+				"gtichange",
+				"Git: Change Branch"
+			],
+			[
+				"gtpull",
+				"Git: Pull Using Rebase"
+			],
+			[
+				"gipull ",
+				"Git: Pull Using Rebase"
+			],
+			[
+				"gtipull ",
+				"Git: Pull Using Rebase"
+			],
+			[
+				"sidebysdie",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"sidebysd",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"gtidiffcurrentfile",
+				"Git: Diff Current File"
+			],
+			[
+				"selectcolro",
+				"UI: Select Color Scheme"
+			],
+			[
+				"neon",
+				"History: Next Modification"
+			],
+			[
+				"comare",
+				"Compare with..."
+			],
+			[
+				"lsp",
+				"LSP: Format File"
+			],
+			[
+				"lspform",
+				"LSP: Format File"
+			],
+			[
+				"sidebyside",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"addcure",
+				"Git: Add Current File"
+			],
+			[
+				"lspformat",
+				"LSP: Format File"
+			],
+			[
+				"sideby",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"dele",
+				"File: Delete"
+			],
+			[
+				"isdir",
+				"Snippet: isDir"
+			],
+			[
+				"comparewit",
+				"Compare with..."
+			],
+			[
+				"localhistory",
+				"Local History: Browse in Explorer"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 314.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/flyc.chung/btse/mjml_email_template",
+		"/Users/flyc.chung/btse/mjml_email_template/commons",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_REPORT_BACKGROUND",
+		"/Users/flyc.chung/btse/mjml_email_template/settings",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/base",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/base/lang",
+		"/Users/flyc.chung/btse/mjml_email_template/views",
+		"/Users/flyc.chung/btse/mjml_email_template/views/lmex",
+		"/Users/flyc.chung/btse/mjml_email_template/views/lmex/C_REPORT_BACKGROUND",
+		"/Users/flyc.chung/btse/mjml_email_template/views/lmex/C_REPORT_BACKGROUND/lang"
+	],
+	"file_history":
+	[
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btsebt/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/components/btsebt/header.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/btsebt/footer.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/btsebt/autotraderFooter.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/btsebt/autotraderHeader.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/btsebt/emailTitleDark.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/altex/emailTitleDark.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/altex/autotraderFooter.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/b2z/autotraderFooter.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/b2z/emailTitleDark.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/views/lmex/C_ONBOARD_EMAIL_SIGN_UP/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/utils.js",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/components/btzo/autotraderHeader.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/b2z/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/bitmarkets/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/package.json",
+		"/Users/flyc.chung/btse/mjml_email_template/components/wlx/footer.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btseuab/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/bin/gen.mjs",
+		"/Users/flyc.chung/btse/mjml_email_template/components/btseuab/button.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/fedhabit/footer.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/base/lang/ja-JP.json",
+		"/Users/flyc.chung/btse/mjml_email_template/views/zmo/C_LOGIN_FAIL/lang/ja-JP.json",
+		"/Users/flyc.chung/btse/mjml_email_template/views/zmo/C_ADDRESS_EXPIRY/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/views/zmo/C_LOGIN_FAIL/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_AUTO_TRADER_DEACTIVATED_LOSS/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/base/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_LOGIN_NEW_DEVICE/C_LOGIN_NEW_DEVICE.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_REPORT_GENERATED_SUCCESS/C_REPORT_GENERATED_SUCCESS.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/views/lmex/C_REPORT_BACKGROUND/C_REPORT_BACKGROUND.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/views/lmex/C_REPORT_BACKGROUND/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_REPORT_BACKGROUND/C_REPORT_BACKGROUND.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_KYC_L2_SUCC/C_KYC_L2_SUCC.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/src/compileMjml.js",
+		"/Users/flyc.chung/btse/mjml_email_template/views/atpro/C_KYC_L2_SUCC/C_KYC_L2_SUCC.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/wlx/header.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/exchangedemo/footer.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/wlx/footerSocial.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/wlx/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/altex/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/components/mj-head.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/wlx/button.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/wlx/mj-head.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/views/wlx/C_KYC_L2_REJ/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_BTSE_VESTED/C_BTSE_VESTED.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/nvx/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btseag/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btseag/lang/id.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btseag/lang/ja-JP.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btseag/lang/ko-KR.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btseag/lang/vn.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btseag/lang/zh-CN.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btseag/lang/zh-TW.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btse/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_LIGHT/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_LIGHT/lang/id.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_LIGHT/lang/ja-JP.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_LIGHT/lang/ko-KR.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_LIGHT/lang/vn.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_LIGHT/lang/zh-CN.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_LIGHT/lang/zh-TW.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_ROCKET_DARK/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_ROCKET_DARK/lang/id.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_ROCKET_DARK/lang/ja-JP.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_ROCKET_DARK/lang/ko-KR.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_ROCKET_DARK/lang/vn.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_ROCKET_DARK/lang/zh-CN.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_ROCKET_DARK/lang/zh-TW.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_TASK_REWARD_GET_REWARD/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_TASK_REWARD_GET_REWARD/lang/ko-KR.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_TASK_REWARD_GET_REWARD/lang/zh-CN.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_TASK_REWARD_GET_REWARD/lang/zh-TW.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_TASK_REWARD_GET_REWARD_ADMIN/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_TASK_REWARD_GET_REWARD_ADMIN/lang/id.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_TASK_REWARD_GET_REWARD_ADMIN/lang/ko-KR.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_TASK_REWARD_GET_REWARD_ADMIN/lang/zh-CN.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_TASK_REWARD_GET_REWARD_ADMIN/lang/zh-TW.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btse/lang/zh-TW.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK/lang/zh-TW.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btse/lang/zh-CN.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK/lang/zh-CN.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btse/lang/vn.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK/lang/vn.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btse/lang/ko-KR.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK/lang/ko-KR.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btse/lang/ja-JP.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK/lang/ja-JP.json",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btse/lang/id.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK/lang/id.json",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_TASK_REWARD_GET_REWARD/C_TASK_REWARD_GET_REWARD.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_LIGHT/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_LIGHT.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_ROCKET_DARK/C_EVENT_TRIGGER_EMAIL_TEMPLATE_ROCKET_DARK.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_TASK_REWARD_GET_REWARD_ADMIN/C_TASK_REWARD_GET_REWARD_ADMIN.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btse/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/lmex/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/views/btzo/C_TASK_REWARD_GET_REWARD/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/views/btzo/C_TASK_REWARD_GET_REWARD/C_TASK_REWARD_GET_REWARD.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/views/btzo/C_TASK_REWARD_GET_REWARD_ADMIN/lang/zh-CN.json",
+		"/Users/flyc.chung/btse/mjml_email_template/views/btzo/C_TASK_REWARD_GET_REWARD_ADMIN/lang/en.json",
+		"/Users/flyc.chung/btse/mjml_email_template/views/freedx/C_TASK_REWARD_GET_REWARD_ADMIN/C_TASK_REWARD_GET_REWARD_ADMIN.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/views/btzo/C_TASK_REWARD_GET_REWARD_ADMIN/C_TASK_REWARD_GET_REWARD_ADMIN.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/src/converter.js",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_TASK_REWARD_GET_REWARD_ADMIN/__C_TASK_REWARD_GET_REWARD_ADMIN.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/config.js",
+		"/Users/flyc.chung/btse/mjml_email_template/views/btzo/C_TASK_REWARD_GET_REWARD_ADMIN/helloworld.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/views/traiex/C_P2P_ORDER_UPDATE/C_P2P_ORDER_UPDATE.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/lmex/button.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/lmex/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/freedx/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/components/freedx/footerSupport.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/btseag/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/.prettierrc",
+		"/Users/flyc.chung/btse/mjml_email_template/emailRenameMap.js",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_LOGIN/C_LOGIN.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/components/autotraderStyle.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/.gitlab-ci.yml",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_KYC_FAIL_10DAYS/C_KYC_FAIL_10DAYS.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/commons/views/C_KYC_FAIL_1DAY/C_KYC_FAIL_1DAY.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/coyx/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/views/nexu/C_KYC_L2_REJ/C_KYC_L2_REJ.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/components/styleme/footer.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/styleme/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/components/pixbit/footer.mjml",
+		"/Users/flyc.chung/btse/mjml_email_template/settings/nvx/parameterSetting.js",
+		"/Users/flyc.chung/btse/mjml_email_template/components/nvx/footer.mjml"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 369.0,
+		"where_history":
+		[
+			"",
+			"*.mjml",
+			"",
+			"-*.mjml",
+			"wlx/",
+			"",
+			"wlx/",
+			"wlx",
+			"",
+			"wlx/",
+			"-*.txt, -*.md",
+			"-*.txt",
+			"=*.txt",
+			"",
+			"-*.yml, -*.md",
+			"-*.yml",
+			"",
+			"-*.json",
+			"",
+			"en.json",
+			"",
+			"*.js",
+			"",
+			"-*.js",
+			"*.js",
+			"",
+			"*.js",
+			"",
+			"components/nexu/",
+			"",
+			"components/nexu",
+			"",
+			"components/nexu",
+			"",
+			"-*.md, -*.mjml",
+			"-*.md",
+			"",
+			"*.js, -parameterSetting.js",
+			"*.js",
+			"",
+			"*.mjml",
+			"commons/views/C_TASK_REWARD_GET_REWARD_ADMIN/",
+			"commons/views/C_TASK_REWARD_GET_REWARD/",
+			"commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_ROCKET_DARK/",
+			"commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_LIGHT/lang/",
+			"commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK/lang/",
+			"",
+			"-*.txt",
+			"",
+			"*.mjml",
+			"",
+			"*.js",
+			"",
+			"-*.mjml, -*.lock",
+			"-*.mjml, -*.lock, -*.json",
+			"-*.mjml, -*.lock",
+			"",
+			"parameterSetting.json",
+			"parameters",
+			"-*.lock",
+			"",
+			"settings/coyx/lang/*.json",
+			"",
+			"-parameterSetting.js",
+			"-parameterSetting.json",
+			"",
+			"*.",
+			"*.mjml",
+			"",
+			"*/en.json",
+			"-*.lock",
+			"",
+			"*.mjml",
+			"",
+			"*.mjml",
+			"-*.mjml",
+			"",
+			"*.mjml",
+			"",
+			"components/coyx/",
+			"",
+			"-*.mjml, -*.json",
+			"-*.mjml",
+			"",
+			"-emailTitle.mjml",
+			"",
+			"parameterSetting.js",
+			"",
+			"*.json",
+			"-parameterSetting.js",
+			"",
+			"*.mjml",
+			"",
+			"*.mjml",
+			"",
+			"*.mjml",
+			"*.js",
+			"",
+			"*.JS",
+			"",
+			"*.json",
+			"*.mjml",
+			"*.js",
+			"*.json",
+			"*.mjml",
+			"*.json",
+			"",
+			"*.mjml",
+			"parameterSetting.js",
+			"-parameterSetting.js",
+			"*.mjml",
+			"-parameterSetting.js",
+			"",
+			"-parameterSetting.js",
+			"",
+			"*.mjml",
+			"",
+			"*.mjml",
+			"",
+			"-*.mjml",
+			"",
+			"*.json, *.mjml",
+			"*.json",
+			"parameterSetting.js",
+			"*.mjml",
+			"*.mjml, -*.json",
+			"-*.mjml, -*.json",
+			"-*.mjml"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"logoWidth",
+			"width",
+			"138px",
+			"height",
+			"138plogoWidthx",
+			"54px",
+			"138px",
+			"logoWidth",
+			"138px",
+			"70px",
+			"height=\"",
+			"btsebt",
+			"<mj-column width=\"100%\">\n  <mj-text font-size=\"12px\" line-height=\"150%\" align=\"right\" color=\"#7E8F9F\">\n    #antiPhishingCode#\n  </mj-text>\n</mj-column>\n<mj-text color=\"#FFF\" font-weight=\"bold\" font-size=\"26px\">\n  <span id=\"email-title\">{{ emailTitle }}</span>\n</mj-text>\n",
+			"55px",
+			"<mj-column width=\"100%\">\n  <mj-text font-size=\"12px\" line-height=\"150%\" align=\"right\" color=\"#7E8F9F\">\n    #antiPhishingCode#\n  </mj-text>\n</mj-column>\n<mj-text color=\"#FFF\" font-weight=\"bold\" font-size=\"26px\">\n  <span id=\"email-title\">{{ emailTitle }}</span>\n</mj-text>\n",
+			"footer",
+			":src=\"staticResource.formatFilePath(staticResource.brandLogo('white'))\"",
+			"b2z",
+			"<mj-section css-class=\"autotrader-background-color\" padding=\"32px 0\">\n  <mj-group width=\"100%\" css-class=\"footer-padding-bottom\">\n    <mj-column width=\"100%\">\n      <mj-image\n        css-class=\"footer-logo\"\n        :src=\"staticResource.formatFilePath(staticResource.brandLogo('white'))\"\n        alt=\"Logo\"\n        align=\"center\"\n        height=\"24px\"\n        width=\"55px\"\n        href=\"#frontendDomain#\"\n      />\n    </mj-column>\n  </mj-group>\n\n  <mj-include path=\"./footerSocial.mjml\" />\n  <mj-include path=\"./footerSupport.mjml\" />\n</mj-section>\n",
+			"btzo",
+			"autotraderFooter",
+			".mjml 不存在，跳過。",
+			".mjml",
+			"/Users/flyc.chung/btse/mjml_email_template/",
+			"test-docs",
+			"testnetLink",
+			"testnetDocLink",
+			"testnetDocLink: ",
+			"testnetDocLink",
+			"testnet",
+			"testnetDocLink",
+			"null",
+			"testnet",
+			"null",
+			"testnetLink",
+			"brandDocLink",
+			"testnetDocLink[^:]",
+			"testnetDocLink",
+			"testnetLink",
+			"supportLink",
+			"liquidationSupportLink",
+			"supportlink",
+			"liquidationSupportLink",
+			" li",
+			"li",
+			"liquidationSupportLink",
+			"parameterSetting.",
+			"liquidationSupportLink",
+			"brandName",
+			"config",
+			"pathMap",
+			"StaticResource",
+			"staticResource",
+			"cdnPayload",
+			"btsebt",
+			"b2z",
+			"production: '",
+			"FLYC_TEMP_PLACEHOLDER",
+			"WLX",
+			"FLYUC_TEMP_PLACEHOLDER",
+			"WLX",
+			"alt=\"",
+			"Fed",
+			"sourceBrandDisplayName",
+			"DEFAULT_SOURCE_BRAND_DISPLAY_NAME",
+			"display",
+			"uab",
+			"UAB",
+			"\"t\\.greeting\": \"[^\"]+[^,]\"",
+			"\"t\\.greeting\": \"[^\"]+(.)\"",
+			"\"t\\.greeting\": \"[^\"]+(\\s|\\w)\"",
+			"\"t\\.greeting\": \"[^\"]+(\\s)\"",
+			"\"t\\.greeting\": \"[^\"]+(\\w|\\s)\"",
+			"\"t\\.greeting\": \"[^\"]+\\w|\\s\"",
+			"\"t\\.greeting\": \"[^\"]+\\w\"",
+			"\"t\\.greeting\": \"[^\"]+\"",
+			"\"t\\.greeting\": \"[^\"]+\\w\"",
+			"\"t\\.greeting\": \"[^\"]+[^\\w]\"",
+			"\"t\\.greeting\": \"[^\"]+\"",
+			"\"t\\.greeting\": \"",
+			"\"t\\.greeting\": \"\"",
+			"\"t\\.greeting\"",
+			"\"{t\\.greeting}\"",
+			"\"{t\\.greeting}[^\"]\",",
+			"\"{t\\.greeting}\",",
+			"\"{t.greeting}\",",
+			"\"t.greeting\":",
+			"t.greeting",
+			"You recently attempted to login to #brand# from a new device or location. (#deviceInfo# - #location#).",
+			"t.greeting\": ",
+			"dearText\": ",
+			"dearText: ",
+			"dearText",
+			"C_REPORT_GENERATED_SUCCESS",
+			"please click",
+			"your report",
+			"'your report",
+			"\"your report",
+			"\"you can now",
+			"you can now",
+			"you can now download",
+			"emailTitle",
+			"textIndex",
+			"text",
+			"textList",
+			"<br",
+			">>>>",
+			">>>>>",
+			"替換成功",
+			"~/btse/mjml_email_template/",
+			"<mjml>\n  <mj-include :path=\"`__dirname/../components/${brandName}/mj-head.mjml`\" />\n  <mj-body background-color=\"#F1F5F9\" width=\"600px\">\n    <mj-include :path=\"`__dirname/../components/${brandName}/header.mjml`\" />\n\n    <!-- email content -->\n    <mj-wrapper background-color=\"white\" padding=\"32px\">\n      <mj-section>\n        <!-- email title -->\n        <mj-column width=\"100%\" padding-bottom=\"24px\">\n          <mj-include\n            :path=\"`__dirname/../components/${brandName}/emailTitle.mjml`\"\n          />\n        </mj-column>\n        <mj-column width=\"100%\" padding-top=\"24px\">\n          <mj-text v-html=\"text\" />\n        </mj-column>\n      </mj-section>\n\n      <mj-section padding-top=\"26px\">\n        <mj-column width=\"100%\">\n          <mj-include\n            path=\"__dirname/../commons/components/signature/signature.mjml\"\n          />\n        </mj-column>\n      </mj-section>\n    </mj-wrapper>\n\n    <!-- footer -->\n    <mj-include :path=\"`__dirname/../components/${brandName}/footer.mjml`\" />\n  </mj-body>\n</mjml>\n",
+			"</div",
+			"div",
+			"</mj-section></div>",
+			"production: 'https",
+			"socialFacebook",
+			"facebook",
+			"socialTelegram",
+			"formatFilePath",
+			"socialTiktok",
+			"formatFilePath",
+			"staticResource",
+			"#ffffff",
+			"back",
+			"#033D90",
+			"back",
+			"#",
+			"#3f4ff7"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"BTSE BT",
+			"#033D90",
+			"",
+			"<mj-text v-if=\"bottomSlogan\" padding-bottom=\"16px\">{{ bottomSlogan }}</mj-text>",
+			"#FFC700",
+			"\"supportLinkDefault\"",
+			"\"AI Trader\"",
+			"\"t.autoTrader\": \" AI Trader\"",
+			"<br/>",
+			"output_dir",
+			"featureAutotraderTryBg()",
+			"featureAutotraderYellowLabel()",
+			"brandEmailReferralBannerEn(",
+			"brandEmailRewardBanner()",
+			"brandLogo(",
+			"brandEmailLogo(",
+			"referralKolBannerEN: staticResource.formatFilePath(staticResource.brandEmailReferralBannerEn('$1', '$2', '$3'))",
+			"formatFilePath",
+			"referralKolBannerEN: staticResource.formateFilePath(staticResource.brandEmailReferralBannerEn('$1', '$2'))",
+			"staticResource.formatFilePath(staticResource.brandEmailRewardBanner('$1'))",
+			"}",
+			"",
+			"onboardWelcomeBanner",
+			":src=\"staticResource.formatFilePath(staticResource.brandLogo('$1', ''))\"",
+			"featureAutotraderTryBg",
+			"featureAutotraderYellowLabel",
+			"url({{ staticResource.formatFilePath(staticResource.sharedBrandTryBg('$1')) }});",
+			"url({{ staticResource.formatFilePath(staticResource.sharedBrandYellowLabel('$1')) }});",
+			"$1",
+			":src=\"staticResource.formatFilePath(staticResource.sharedBtseLogo())\"",
+			":src=\"staticResource.formatFilePath(staticResource.brandEmailLogo('$1', '$2'))\"",
+			":src=\"staticResource.formatFilePath(staticResource.sharedBtseLogo('primary'))\"",
+			"staticResource.brandLogo",
+			"staticResource.brandLogoLight('$1', 'light')",
+			":src=\"staticResource.formatFilePath(staticResource.neutral())\"",
+			":src=\"staticResource.formatFilePath(staticResource.bearish())\"",
+			":src=\"staticResource.formatFilePath(staticResource.bullish())\"",
+			":src=\"staticResource.formatFilePath(staticResource.brandLogoLight('$1'))\"",
+			"staticResource.formatFilePath(staticResource.brandLogoLight('$1'))",
+			"(staticResource.detailCoin())",
+			":src=\"staticResource.formatFilePath(staticResource.detailCoin)\"",
+			"hightestCoin",
+			":src=\"staticResource.formatFilePath(staticResource.hightestCoint(i))\""
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": false,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/Users/flyc.chung/btse/mjml_email_template"
+		}
+	],
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/Users/flyc.chung/btse/mjml_email_template/components/btsebt/header.mjml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 687,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								323,
+								332
+							]
+						],
+						"settings":
+						{
+							"VZWC_is_dirty": true,
+							"VZWC_last_update_timestamp": 1780977964.8,
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										332,
+										333
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/double_quote.png",
+										"region.greenish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										322,
+										323
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"lsp_uri": "file:///Users/flyc.chung/btse/mjml_email_template/components/btsebt/header.mjml",
+							"syntax": "Packages/MJML-syntax/MJML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/flyc.chung/btse/mjml_email_template/settings/btsebt/parameterSetting.js",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 758,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								513,
+								515
+							],
+							[
+								534,
+								537
+							]
+						],
+						"settings":
+						{
+							"VZWC_is_dirty": false,
+							"VZWC_last_update_timestamp": 1780977964.8,
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".",
+									"selector": "source.js"
+								},
+								{
+									"characters": ".\"'/@<",
+									"selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc",
+									"server": "LSP-typescript"
+								},
+								{
+									"characters": "\":@.<=/>+^*()#[]$-{}",
+									"selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc",
+									"server": "LSP-vue"
+								}
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										517,
+										518
+									],
+									"2":
+									[
+										539,
+										540
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/single_quote.png",
+										"region.greenish"
+									],
+									"2":
+									[
+										"Packages/BracketHighlighter/icons/single_quote.png",
+										"region.greenish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										512,
+										513
+									],
+									"2":
+									[
+										533,
+										534
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"lsp_active": true,
+							"lsp_uri": "file:///Users/flyc.chung/btse/mjml_email_template/settings/btsebt/parameterSetting.js",
+							"show_definitions": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 49.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.LSP Log Panel":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.SublimeLinter":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.SublimeLinter Messages":
+	{
+		"height": 438.0,
+		"history":
+		[
+		]
+	},
+	"output.diagnostics":
+	{
+		"height": 120.0,
+		"history":
+		[
+		]
+	},
+	"output.exec":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.find_results":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.git":
+	{
+		"height": 120.0,
+		"history":
+		[
+		]
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"parameter btsebt.j",
+				"settings/btsebt/parameterSetting.js"
+			],
+			[
+				"btsebt header.mjm",
+				"components/btsebt/header.mjml"
+			],
+			[
+				"autotrader header btsebt",
+				"components/btsebt/autotraderHeader.mjml"
+			],
+			[
+				"autotraderfooter bt btse",
+				"components/btsebt/autotraderFooter.mjml"
+			],
+			[
+				"footer btsebt",
+				"components/btsebt/footer.mjml"
+			],
+			[
+				"header tsebt",
+				"components/btsebt/header.mjml"
+			],
+			[
+				"autotraderheader.mjml btseb",
+				"components/btsebt/autotraderHeader.mjml"
+			],
+			[
+				"btsebt footer autotr",
+				"components/btsebt/autotraderFooter.mjml"
+			],
+			[
+				"btsebt autotraderf",
+				"components/btsebt/autotraderFooter.mjml"
+			],
+			[
+				"altex emaildark",
+				"components/altex/emailTitleDark.mjml"
+			],
+			[
+				"autotraderFooter.mjml",
+				"components/b2z/autotraderFooter.mjml"
+			],
+			[
+				"autotraderfooter",
+				"components/altex/autotraderFooter.mjml"
+			],
+			[
+				"emailtitled",
+				"components/altex/emailTitleDark.mjml"
+			],
+			[
+				"autotraderHeader",
+				"components/btzo/autotraderHeader.mjml"
+			],
+			[
+				"components//emailTitleDark.mjml",
+				"components/b2z/emailTitleDark.mjml"
+			],
+			[
+				"settingsparametersetting.js",
+				"settings/parameterSetting.js"
+			],
+			[
+				"settings/parameter",
+				"settings/parameterSetting.js"
+			],
+			[
+				"parametersetting.js",
+				"settings/parameterSetting.js"
+			],
+			[
+				"settings/utils.js",
+				"settings/utils.js"
+			],
+			[
+				"parameterSetting.js",
+				"settings/b2z/parameterSetting.js"
+			],
+			[
+				"btsebt parametersetting.js",
+				"settings/btsebt/parameterSetting.js"
+			],
+			[
+				"btsebt footer",
+				"components/btsebt/footer.mjml"
+			],
+			[
+				"package.json",
+				"package.json"
+			],
+			[
+				"btsebtfooter",
+				"components/btsebt/footer.mjml"
+			],
+			[
+				"components/btseuab",
+				"components/btseuab/button.mjml"
+			],
+			[
+				"views/zmo/C_LOGIN_FAIL/lang/ja-JP.json",
+				"views/zmo/C_LOGIN_FAIL/lang/ja-JP.json"
+			],
+			[
+				"views/zmo/C_LOGIN_FAIL/lang/en.json",
+				"views/zmo/C_LOGIN_FAIL/lang/en.json"
+			],
+			[
+				"views/zmo/C_ADDRESS_EXPIRY/lang/en.json",
+				"views/zmo/C_ADDRESS_EXPIRY/lang/en.json"
+			],
+			[
+				"C_LOGIN_NEW_DEVICE",
+				"commons/views/C_LOGIN_NEW_DEVICE/C_LOGIN_NEW_DEVICE.mjml"
+			],
+			[
+				"C_REPORT_GENERATED_SUCCESS",
+				"commons/views/C_REPORT_GENERATED_SUCCESS/C_REPORT_GENERATED_SUCCESS.mjml"
+			],
+			[
+				"C_REPORT_BACKGROUND lmex",
+				"views/lmex/C_REPORT_BACKGROUND/lang/en.json"
+			],
+			[
+				"C_REPORT_BACKGROUND",
+				"views/lmex/C_REPORT_BACKGROUND/lang/en.json"
+			],
+			[
+				"C_REPORT_BACKGROUND/ mjml",
+				"commons/views/C_REPORT_BACKGROUND/C_REPORT_BACKGROUND.mjml"
+			],
+			[
+				"C_REPORT_BACKGROUND en.json lmex",
+				"views/lmex/C_REPORT_BACKGROUND/lang/en.json"
+			],
+			[
+				"C_REPORT_BACKGROUND.mjml lmex",
+				"views/lmex/C_REPORT_BACKGROUND/C_REPORT_BACKGROUND.mjml"
+			],
+			[
+				"reportback",
+				"commons/views/C_REPORT_BACKGROUND/C_REPORT_BACKGROUND.mjml"
+			],
+			[
+				"C_KYC_L2_SUCC.mjml atpro",
+				"views/atpro/C_KYC_L2_SUCC/C_KYC_L2_SUCC.mjml"
+			],
+			[
+				"kycl2succ",
+				"commons/views/C_KYC_L2_SUCC/C_KYC_L2_SUCC.mjml"
+			],
+			[
+				"kyc_l2_succ",
+				"commons/views/C_KYC_L2_SUCC/C_KYC_L2_SUCC.mjml"
+			],
+			[
+				"wlx footer",
+				"components/wlx/footer.mjml"
+			],
+			[
+				"elx footer",
+				"components/exchangedemo/footer.mjml"
+			],
+			[
+				"header wlx",
+				"components/wlx/header.mjml"
+			],
+			[
+				"wlx sertt",
+				"settings/wlx/parameterSetting.js"
+			],
+			[
+				"wlxfooter",
+				"components/wlx/footerSocial.mjml"
+			],
+			[
+				"wlxfooter.mj",
+				"components/wlx/footer.mjml"
+			],
+			[
+				"wlx head",
+				"components/wlx/header.mjml"
+			],
+			[
+				"wlx mjhea",
+				"components/wlx/mj-head.mjml"
+			],
+			[
+				"mj-head.mjml",
+				"components/wlx/mj-head.mjml"
+			],
+			[
+				"commons/components/mj-head.mjml",
+				"commons/components/mj-head.mjml"
+			],
+			[
+				"wlx parametersetting.js",
+				"settings/wlx/parameterSetting.js"
+			],
+			[
+				"wlx/en.js",
+				"views/wlx/C_KYC_L2_REJ/lang/en.json"
+			],
+			[
+				"package",
+				"package.json"
+			],
+			[
+				"cbtsevested",
+				"commons/views/C_BTSE_VESTED/C_BTSE_VESTED.mjml"
+			],
+			[
+				"nvx setting en.json",
+				"settings/nvx/lang/en.json"
+			],
+			[
+				"setting/btse/en.json",
+				"settings/btse/lang/en.json"
+			],
+			[
+				"C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK en.json",
+				"commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK/lang/en.json"
+			],
+			[
+				"settings/btse/lang/e",
+				"settings/btse/lang/en.json"
+			],
+			[
+				"settingbtse/en.json",
+				"settings/btse/lang/en.json"
+			],
+			[
+				"setting/lang/en.json",
+				"settings/lmex/lang/en.json"
+			],
+			[
+				"parametersetting.js btse",
+				"settings/btse/parameterSetting.js"
+			],
+			[
+				"C_TASK_REWARD_GET_REWARDC_TASK_REWARD_GET_REWARD",
+				"commons/views/C_TASK_REWARD_GET_REWARD/C_TASK_REWARD_GET_REWARD.mjml"
+			],
+			[
+				"C_EVENT_TRIGGER_EMAIL_TEMPLATE_ROCKET_DARKmjml",
+				"commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_ROCKET_DARK/C_EVENT_TRIGGER_EMAIL_TEMPLATE_ROCKET_DARK.mjml"
+			],
+			[
+				"C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_LIGHT.mjml",
+				"commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_LIGHT/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_LIGHT.mjml"
+			],
+			[
+				"C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK .mj",
+				"commons/views/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK/C_EVENT_TRIGGER_EMAIL_TEMPLATE_REWARD_DARK.mjml"
+			],
+			[
+				"C_TASK_REWARD_GET_REWARD btzo en.json",
+				"views/btzo/C_TASK_REWARD_GET_REWARD/lang/en.json"
+			],
+			[
+				"C_TASK_REWARD_GET_REWARD.mjml",
+				"views/btzo/C_TASK_REWARD_GET_REWARD/C_TASK_REWARD_GET_REWARD.mjml"
+			],
+			[
+				"C_TASK_REWARD_GET_REWARDC_TASK_REWARD_GET_REWARD.mjml",
+				"commons/views/C_TASK_REWARD_GET_REWARD/C_TASK_REWARD_GET_REWARD.mjml"
+			],
+			[
+				"C_TASK_REWARD_GET_REWARD_ADMIN btzo",
+				"views/btzo/C_TASK_REWARD_GET_REWARD_ADMIN/lang/zh-CN.json"
+			],
+			[
+				"C_TASK_REWARD_GET_REWARD_ADMIN en.json",
+				"commons/views/C_TASK_REWARD_GET_REWARD_ADMIN/lang/en.json"
+			],
+			[
+				"/C_TASK_REWARD_GET_REWARD_ADMIN.mjml",
+				"views/freedx/C_TASK_REWARD_GET_REWARD_ADMIN/C_TASK_REWARD_GET_REWARD_ADMIN.mjml"
+			],
+			[
+				"C_TASK_REWARD_GET_REWARD_ADMIN.mjml",
+				"commons/views/C_TASK_REWARD_GET_REWARD_ADMIN/C_TASK_REWARD_GET_REWARD_ADMIN.mjml"
+			],
+			[
+				"/C_TASK_REWARD_GET_REWARD_ADMIN/lang/en.json",
+				"commons/views/C_TASK_REWARD_GET_REWARD_ADMIN/lang/en.json"
+			],
+			[
+				"btzo C_TASK_REWARD_GET_REWARD_ADMIN en.json",
+				"views/btzo/C_TASK_REWARD_GET_REWARD_ADMIN/lang/en.json"
+			],
+			[
+				"C_TASK_REWARD_GET_REWARD_ADMIN",
+				"commons/views/C_TASK_REWARD_GET_REWARD_ADMIN/C_TASK_REWARD_GET_REWARD_ADMIN.mjml"
+			],
+			[
+				"common/C_TASK_REWARD_GET_REWARD_ADMIN/lang/en.json",
+				"commons/views/C_TASK_REWARD_GET_REWARD_ADMIN/lang/en.json"
+			],
+			[
+				"C_P2P_ORDER_UPDATE",
+				"views/traiex/C_P2P_ORDER_UPDATE/C_P2P_ORDER_UPDATE.mjml"
+			],
+			[
+				"lmex.mjml",
+				"components/lmex/button.mjml"
+			],
+			[
+				"lmex",
+				"settings/lmex/parameterSetting.js"
+			],
+			[
+				"freedx parametersetting",
+				"settings/freedx/parameterSetting.js"
+			],
+			[
+				"cloin",
+				"commons/views/C_LOGIN_NEW_DEVICE/C_LOGIN_NEW_DEVICE.mjml"
+			],
+			[
+				"btseparameterset",
+				"settings/btse/parameterSetting.js"
+			],
+			[
+				"map.js",
+				"emailRenameMap.js"
+			],
+			[
+				"prettier",
+				".prettierrc"
+			],
+			[
+				"packag",
+				"package.json"
+			],
+			[
+				"pacag",
+				"package.json"
+			],
+			[
+				"cogin",
+				"commons/views/C_LOGIN/C_LOGIN.mjml"
+			],
+			[
+				"autotrader style",
+				"commons/components/autotraderStyle.mjml"
+			],
+			[
+				"gitlab",
+				".gitlab-ci.yml"
+			],
+			[
+				"fail 1day",
+				"commons/views/C_KYC_FAIL_10DAYS/C_KYC_FAIL_10DAYS.mjml"
+			],
+			[
+				"ckycfail1day",
+				"commons/views/C_KYC_FAIL_1DAY/C_KYC_FAIL_1DAY.mjml"
+			],
+			[
+				"10day",
+				"commons/views/C_KYC_FAIL_10DAYS/C_KYC_FAIL_10DAYS.mjml"
+			],
+			[
+				"nexu C_KYC_L2_REJ",
+				"views/nexu/C_KYC_L2_REJ/C_KYC_L2_REJ.mjml"
+			],
+			[
+				"styleme para",
+				"settings/styleme/parameterSetting.js"
+			],
+			[
+				"setting parame",
+				"settings/parameterSetting.js"
+			],
+			[
+				"freedx footer",
+				"components/freedx/footerSupport.mjml"
+			],
+			[
+				"freedx footer ",
+				"components/freedx/footer.mjml"
+			],
+			[
+				"freedx parameter",
+				"settings/freedx/parameterSetting.js"
+			],
+			[
+				"bullstreet parametersetting",
+				"settings/bullstreet/parameterSetting.js"
+			],
+			[
+				"cautloss",
+				"commons/views/C_AUTO_TRADER_DEACTIVATED_LOSS/C_AUTO_TRADER_DEACTIVATED_LOSS.mjml"
+			],
+			[
+				"stylemefooter",
+				"components/styleme/footer.mjml"
+			],
+			[
+				"atpro setting ",
+				"settings/atpro/parameterSetting.js"
+			],
+			[
+				"parametersetting setting",
+				"settings/parameterSetting.js"
+			],
+			[
+				"clogin",
+				"commons/views/C_LOGIN/C_LOGIN.mjml"
+			],
+			[
+				"parametersetting autotrader",
+				"settings/autotrader/parameterSetting.js"
+			],
+			[
+				"autotrader parametersetting",
+				"settings/autotrader/parameterSetting.js"
+			],
+			[
+				"btse parame",
+				"settings/btse/parameterSetting.js"
+			],
+			[
+				"stt paramet",
+				"settings/parameterSetting.js"
+			],
+			[
+				"coyx param",
+				"settings/coyx/parameterSetting.js"
+			],
+			[
+				"parameterSetting.js btse",
+				"settings/btse/parameterSetting.js"
+			],
+			[
+				"parmsetting",
+				"settings/parameterSetting.js"
+			],
+			[
+				"lmex paramet",
+				"settings/lmex/parameterSetting.js"
+			],
+			[
+				"lmex parameter",
+				"settings/lmex/parameterSetting.js"
+			],
+			[
+				"coyx setting",
+				"settings/coyx/parameterSetting.js"
+			],
+			[
+				"C_AUTO_TRADER_DEACTIVATED_LOSS",
+				"commons/views/C_AUTO_TRADER_DEACTIVATED_LOSS/C_AUTO_TRADER_DEACTIVATED_LOSS.mjml"
+			],
+			[
+				"settingparameter",
+				"settings/parameterSetting.js"
+			],
+			[
+				"parameterSetting.js lmex",
+				"settings/lmex/parameterSetting.js"
+			],
+			[
+				"coyx parametersetting.js",
+				"settings/coyx/parameterSetting.js"
+			],
+			[
+				"nexufuppot",
+				"components/nexu/footerSupport.mjml"
+			],
+			[
+				"footer nexu",
+				"components/nexu/footer.mjml"
+			],
+			[
+				"utils.",
+				"settings/utils.js"
+			],
+			[
+				"footersocial nexu",
+				"components/nexu/footerSocial.mjml"
+			],
+			[
+				"components/nexufooter",
+				"components/nexu/footer.mjml"
+			],
+			[
+				"login",
+				"commons/views/C_LOGIN/C_LOGIN.mjml"
+			],
+			[
+				"parameterset nexu",
+				"settings/nexu/parameterSetting.js"
+			],
+			[
+				"nexu header.mjml",
+				"components/nexu/header.mjml"
+			],
+			[
+				"components/fedhabit",
+				"components/fedhabit/emailTitle.mjml"
+			],
+			[
+				"nexu",
+				"components/nexu/button.mjml"
+			],
+			[
+				"nexu parametersetting.js",
+				"settings/nexu/parameterSetting.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 502.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ww",
+				"~/flyc/sublime-project/ww-frontend-worktree.sublime-workspace"
+			],
+			[
+				"ff",
+				"~/flyc/sublime-project/ff-worktree.sublime-workspace"
+			],
+			[
+				"frontend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"fe",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"mjml",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"front",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"email",
+				"~/flyc/sublime-project/email-worktree.sublime-workspace"
+			],
+			[
+				"emailwor",
+				"~/flyc/sublime-project/email-worktree.sublime-workspace"
+			],
+			[
+				"frotnend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"frtone",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"fronten",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"static",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"ee",
+				"~/flyc/sublime-project/email-worktree.sublime-workspace"
+			],
+			[
+				"staticresource",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"static resource",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"aws",
+				"~/flyc/sublime-project/aws-tools.sublime-workspace"
+			],
+			[
+				"",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"fronte",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"frotnen",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"emil",
+				"~/flyc/sublime-project/email-worktree.sublime-workspace"
+			],
+			[
+				"sublif",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"froten",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"tatic",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"stat",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"forntend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"btsestaticresource",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"fron",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"sublimefet",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"frontne",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"fornte",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 29.0,
+		"last_filter": "test",
+		"selected_items":
+		[
+			[
+				"test",
+				"forTest"
+			],
+			[
+				"getAllFiles",
+				"getAllFilesName"
+			]
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"lsp_show_inlay_hints": false
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 283.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

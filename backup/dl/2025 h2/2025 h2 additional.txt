@@ -1,0 +1,42 @@
+Static Resource Separation
+[Detail]
+．Planned the whole requirement PRD, including responsibility alignment across teams and follow-up on development progress.
+．Separated static resource request origins.
+．Improved deployment efficiency by implementing partial updates.
+．Implemented automated tests with 85% coverage for the related features.
+[Impact and Benefits]
+．Reducing bill costs from supporting up to 30 white-labels to only 1 brand.
+．Reducing machine usage by over 20x.
+
+Pipeline Script Maintenance
+[Detail]
+．Refactored static resource pipeline scripts to support separated billing.
+．Updated the email template compilation pipeline, fixing long-standing build issues and significantly reducing developers’ cognitive load during development.
+．Improved the email translation update script.
+[Impact and Benefits]
+．Up to 30x improvement in upload speed and machine resource usage in optimal scenarios.
+．Reducing manual work and saving developers an average of 20x operational time.
+
+Created Detailed Knowledge Base Articles
+[Detail]
+．Wrote step-by-step documentation with screenshots for GTag setup.
+．Wrote comprehensive documentation of Support Center, including detailed explanations of complex permission management scenarios.
+．Wrote Documented of "how-to-open-mobile-apps-from-web-pages", along with the related technical requirements.
+[Impact and Benefits]
+．Enabling even newcomers with no prior experience to complete the configuration.
+
+Support Center Structure Formatting and Enhancement
+[Detail]
+．Reviewed and refactored the whole Support Center structure across white-labels.
+．Proactively coordinated permission issues and simplified account management.
+[Impact and Benefits]
+．Reducing the mental effort required for single changes by around 50%.
+．Reducing complexity to 1/3 of the original setup.
+
+App Deeplink Behavior Optimization
+[Detail]
+．Proactively coordinated and resolved deeplink behavior issues.
+．Designed a new deeplink function
+[Impact and Benefits]
+．Removing nearly 50% of redundant deeplink-related pages.
+．Reducing the amount of code developers need to consider for future deeplink requests by 70%.

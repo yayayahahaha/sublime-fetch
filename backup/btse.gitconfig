@@ -1,0 +1,7 @@
+[user]
+    name = flyc.chung
+    email = flyc.chung@btse.com
+
+[core]
+    hooksPath = ~/btse/_githooks
+

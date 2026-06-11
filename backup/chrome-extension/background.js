@@ -25,10 +25,13 @@ chrome.runtime.onMessage.addListener((message /*, sender, sendResponse*/) => {
             window.location = urlArg
           }
 
-          function tokenInLocalStorage() {
+          async function tokenInLocalStorage() {
             Object.keys(window.localStorage).forEach((key) => {
               window.localStorage.removeItem(key)
             })
+
+            await delay(100)
+
             window.localStorage.setItem('token', tokenArg)
             window.location = urlArg
           }

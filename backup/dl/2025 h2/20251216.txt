@@ -1,0 +1,82 @@
+=== Static Resource === Additional
+flyc/PLAT-24748/sync-resource-when-merge
+flyc/PLAT-30820_Resource-FE-Modify-Whitelabel-Matrix
+flyc/PLAT-30827-codereview-and-bugfix
+flyc/PLAT-30827-maintenance-part
+flyc/PLAT-30827-meta-related-part
+flyc/PLAT-30827-new-function-part
+flyc/PLAT-30827-use-new-function-part
+flyc/PLAT-31315_Resource-Email-Update-Production-Url
+包含另外一個 repo 裡面的各種腳本和與 Infra 討論的部分都可以寫
+處理 PJ 與 Infra 中間的協調事情
+
+
+=== Color Scheme === Additional
+flyc/PLAT-29570_FE-Color-Scheme-Apply-New-Color-Scheme-on-Tags
+flyc/PLAT-30698_FE-Color-Scheme-Fetch-and-Format-Figma-Color-Scheme-0707-extended
+flyc/PLAT-32210_FE-Color-Scheme-ColorScheme-Storybook-V2
+flyc/PLAT-32699_FE-Color-Scheme-Use-Const-Value-of-BrandTag-Style
+
+
+=== Support Center === Squad(normal) / Additional(extra)
+溝通、處理權限事宜等
+拆分兩個 branch 等等
+
+
+=== SEO ===
+flyc/PLAT-30438_FE-WL-BTZO-SEO-setup-for-Google-Search-robots-and-sitemap
+flyc/PLAT-30710_EXTRA-UPDATE_Format-HOST_NAME
+flyc/PLAT-30710_FE-BTZO-Support-Sitemap-with-En-Prefix
+flyc/PLAT-31330_Freedx-FE-Enable-Individual-Trading-Pair-Pages-for-SEO-result
+
+
+=== 特殊 === Squad
+flyc/PLAT-30288_FE-WL-Remove-Related-Codes-of-Header-Navbar-v1-and-V2
+flyc/PLAT-31152_AT-pro-FE-Add-the-Entry-Points-for-Chat-Widget-and-Support-Center
+flyc/PLAT-31245_FE-Email-Update-Translation-Script
+flyc/PLAT-31328_BTSE-ID-FE-GA4-Implementation
+flyc/PLAT-31331_Freedx-FE-GA4-Integration-Event-Tracking-Implementation
+flyc/PLAT-31603_AT-Pro-Web-FE-Fraud-Detection-SHIELD-Integration
+flyc/PLAT-31670_BTSE-GI-get-parameters-error: max leverage 錯誤訊息狂跳的那個
+flyc/PLAT-31765_CTX98-FE-User-Onboarding-Quiz-Popup-for-DeFi-Knowledge-Cambodia-SERC
+flyc/PLAT-31934_BTSE-ID-FE-Integrate-T-C-Content-API-to-The-Consent-Pop-up
+flyc/PLAT-32316_BTSE-ID-Switching-Languages-Did-Not-Update-the-Error-Message-On-Registration-Page
+flyc/PLAT-32513_BTZO-FE-App-Download-Banner-on-Mobile-Web-View
+
+
+=== 日常需求 ===
+flyc/PLAT-29894_WL-NVX-BTSE-ID-FE-Adjust-Repair-links-of-footer-and-header-and-wallet-deposit-page-Except-Topic-5
+flyc/PLAT-30051_FE-Core-Update-wording-2FA-and-Registration
+flyc/PLAT-30157_WL-Bitkub-FE-Front-end-adjustmants-for-launch
+flyc/PLAT-30971_FE-Email-Update-translation-20250728
+flyc/PLAT-31089_FE-Email-Update-translation-20250804
+flyc/PLAT-31152_AT-pro-FE-Add-the-Entry-Points-for-Chat-Widget-and-Support-Center
+flyc/PLAT-31370_Freedx-FE-Enable-Futures-Bot-Wallet-Function
+flyc/PLAT-31420_Traiex-FE-Resume-Futures
+flyc/PLAT-31432_WL-AutoTrader-io-FE-Add-Email-Template-Support-More-Languages
+flyc/PLAT-31497_Fedhabit-Web-FE-Page-Design-and-Content-Update-Phase-2
+flyc/PLAT-31498_Freedx-Web-FE-The-AutoTrader-Rollout
+flyc/PLAT-31499_Freedx-FE-Page-Design-and-Content-Update-Phase2
+flyc/PLAT-31667_Freedx-Web-FE-Enable-P2P-Function
+flyc/PLAT-31773_FE-Freedx-Update-AboutUs-Url
+flyc/PLAT-31799_Freedx-FE-Disable-Campaign-Page
+flyc/PLAT-31801_BTSE-ID-FE-Update-Trading-View-Logo-Text
+flyc/PLAT-31821_FE-Email-Update-Email-content-Weekly
+flyc/PLAT-31829_Freedx-Staging-Enable-Campaign-page
+flyc/PLAT-31870_LMEX-Web-Enable-Futures-Bot-Wallet-Function
+flyc/PLAT-31895_Freedx-Web-FE-Disable-P2P-Function
+flyc/PLAT-31917_Freedx-Staging-Enable-P2P-Function
+flyc/PLAT-32007_FE-Fix-wrong-setting-of-CSS-default-value
+flyc/PLAT-32312_Freedx-FE-Update-Support-Center-Domain-to-help-freedx-com
+flyc/PLAT-32321_BTSE-ID-WL-TWAP-Order-Cannot-be-Cancelled
+flyc/PLAT-32512_WL-FE-Enhance-KYC-Verification-Status-Display-on-Account-Page
+flyc/PLAT-32515_CTX98-FE-Onboarding-Quiz-Popup-Broken-in-Other-Language
+flyc/PLAT-32516_BTZO-Web-FE-Open-Futures-Bot-Wallet-for-all-env
+flyc/PLAT-32653_Freedx-FE-Email-Message-Content-Amendment-and-UI-Adjustment
+flyc/PLAT-32758_COYX-FE-The-AutoTrader-Rollout-and-Customization
+flyc/PLAT-32846_Freedx-FE-Adjustments-to-reward-hub-task-bonus
+flyc/PLAT-32888_LMEX-FE-There-is-no-manage-address-button-in-the-Select-from-Saved-Addresses-popup-window
+
+
+=== 還沒分類 ===
+

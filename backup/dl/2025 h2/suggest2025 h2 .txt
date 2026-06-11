@@ -1,0 +1,71 @@
+I believe there are some fundamental issues with the current task allocation model.
+
+At the moment, squads are divided by functional domains, such as Trading, Marketing, Payment, and ACE.
+In general, members within each squad only need deep knowledge of their own domain,and are not expected to fully understand the know-how of other squads.
+
+However, for the white-label (WL) enterprise, the situation is very different.
+WL team members are expected to understand the know-how of all other squads.
+The reasons and example are as follows:
+
+When BTSE Trading introduces a new feature:
+The Trading PD has deep domain knowledge and can produce a well-defined PRD.
+Trading RDs are already familiar with the codebase, so there ramp-up cost is little.
+Trading QAs also understand expected behaviors well, making it less likely to miss the edge cases.
+
+But when a white-label client requests a customized Trading feature:
+The PRD is created by a WL PD. Since they were not involved in the original Trading PRDs, they must relearn the entire Trading flow. Due to unfamiliarity, important details are easily missed.
+Similarly, WL RDs are not the maintainers of the Trading codebase, so they need extra time just to become familiar with it.
+WL QAs face the same challenge, they must relearn what the expected behavior is, which increases the risk of missing test scenarios.
+
+The old assumption that "BTSE leads, and WL only adjusts existing BTSE features", no longer holds.
+Today's white-label clients have so many requirements that BTSE's existing features cannot fully cover.
+
+Tough it is reasonable to expect members to understand, modify, and test the company's products, the scope of knowledge required for WL members is clearly much broader than that of other squads.
+Although WL members can ask other squads for help, but: Why not assign these requirements to the squads that already own the domain from the start?
+
+In addition, because WL members are responsible for handling changes across all squads' features, they often have no time left for tasks such as website optimization.
+
+Ironically, these improvements are frequently emphasized during performance reviews.
+
+This puts WL members at a disadvantage, they spend significant time understanding other squads' PRDs and codebases, sacrificing opportunities to make other valuable contributions to the company.
+This is, in my view, an unfortunate and unfair situation.
+
+Therefore, my suggestion is to assign tasks based on domain ownership rather than client type, for example:
+- WL Trading related requirements should be handled by the Trading squad. Trading PDs are better positioned to judge whether WL requests are reasonable.
+- WL Marketing requirements should be handled by the Marketing squad, whose RDs best understand their own code.
+- WL Payment requirements should be handled by the Payment squad, whose QAs are more familiar with testing details.
+
+As for the WL team itself, I believe it could be merged into the Core team and continue focusing on more general WL responsibilities, such as onboarding new white-labels and improving overall WL architecture.
+
+既存的工作分配方式存在著很大的問題
+目前公司是以「功能」去區分 squads 的: 像是 trading, marketing, payment 和 ace 等。
+一般來說，每個 squad 的成員僅需深入了解自己 squad 的需求即可，對其他 squad 的 know-how 並不需要非常要求。
+但對 ace 的 enterprise 來說，他們卻得深入了解其他所有 squards 的 know-how, 原因如下:
+
+如果是 BTSE 的 Trading 有一個新需求，Trading Squad 的 PD 非常了解 Trading, 所以可以寫出非常完善的 PRD,
+而 Trading 的 RD 也很熟悉這個區塊的程式碼，因此不需要去重新讀懂這部分的程式碼。
+而 Trading 的 QA 也在很多次的測試下已經了解什麼是可預期的行為，所以不太容易出現沒有測到的場景。
+
+但如果是白牌想要客製化一個 Trading 的需求，這個時候會是由白牌的 PD 來開 PRD:
+由於先前的 Trading PRD 並不是白牌的 PD 寫的，所以他得要去重新了解一次整個 Trading 的流程，畢竟不熟悉、很容易有遺漏的部分；
+白牌的 RD 也因為不是維護這段 code 的人，所以需要更多的時間去「熟悉」Trading 的程式碼；
+白牌的 QA 也有一樣的問題: QA 必須去重新學習什麼是可預期的行為，也因此很容易有遺漏的部分沒有想到；
+
+原先的「BTSE 總是走在前面、 WL 只需要調整 BTSE 的既有功能就好」的場景已經不復存在，
+現在的白牌客戶有相當多樣的想法，早已不是 BTSE 的功能可以完美支援的了。
+
+的確，每個人都應該可以「看得懂」或「改得動」、「測得好」公司的產品，
+但目前白牌的所有成員他們所需要熟悉的範圍，很明顯遠高於其他 squads,
+而當然，白牌的成員可以向其他 squads 的人請益該怎麼處理: 那為什麼不一開始就由其他 squads 的人來處理需求呢?
+
+不僅如此，也因為 WL 的成員基本上需要囊括全部 WL 針對全部 squad features 的改動，導致沒有額外的時間去做「網站優化」等等的部分，
+而偏偏這部分又是每次考核時相當重要的一塊，我認為這對 WL 的成員是相當不公平的: 明明去看的是其他 squad 的 PRD、的程式碼，
+花了很多時間看懂了別人早就知道的事情，犧牲的則是自己潛在對公司網站可以有的其他貢獻，這是一件很可惜的事情。
+
+因此我的建議是: 工作需求依照需求來分給各自的 squads:
+WL 的 Trading 需求就給 Trading squad 處理，Trading 的 PD 一定可以比 WL 的 PD 更容易看出來 WL 提的 Trading 需求是否不合理；
+WL 的 Marketing 需求就給 Marketing squad 處理，Marketing 的 RD 一定可以比 WL 的 RD 更熟悉他自己寫的程式碼；
+WL 的 Payment 需求就給 Payment squad 處理，Payment 的 QA 一定比 WL 的 QA 更知道測試細節等；
+
+而白牌本身我認為可以合併進 Core, 繼續處理更為 general 的 WL 任務，如創建新的白牌、調整白牌架構等
+

@@ -9,27 +9,20 @@
   </Icon>
 </template>
 
-<script>
+<script setup>
 import Icon from '@/components/icons/Icon'
 ___REPLACE_UTILS_IMPORT___
 
-export default {
-  name: '___REPLACE_VUE_COMPONENT_NAME___',
-  components: { Icon },
-  props: {
-    width: {
-      type: [Number, String],
-      default: ___REPLACE_ICON_WIDTH___
-    },
-    height: {
-      type: [Number, String],
-      default: ___REPLACE_ICON_HEIGHT___
-    }
+defineProps({
+  width: {
+    type: [Number, String],
+    default: ___REPLACE_ICON_WIDTH___
   },
-  data() {
-    return {
-      ___REPLACE_ID_LIST___
-    }
+  height: {
+    type: [Number, String],
+    default: ___REPLACE_ICON_HEIGHT___
   }
-}
+})
+
+___REPLACE_ID_LIST___
 </script>

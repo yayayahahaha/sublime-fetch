@@ -22,90 +22,128 @@ export function isDir(path) {
   return fs.lstatSync(path).isDirectory()
 }
 
-export function checkSetting(setting) {
-  let {
-    'frontend-repo-path': frontendRepoPath,
-    's3-repo-path': s3RepoPath,
-    'new-images-folder': newImagesFolder,
-    'figma-images-folders': figmaImagesFolders,
-    'target-brand': targetBrand,
-  } = setting
+export function ensureDir(dirPath) {
+  if (isDir(dirPath)) return false
+  fs.mkdirSync(dirPath, { recursive: true })
+  consoleGreen(`📁 已建立資料夾: ${dirPath}`)
+  return true
+}
 
-  let ok = true
+const SETTING_KEYS = {
+  'frontend-repo-path': { type: 'absolutePath', camel: 'frontendRepoPath' },
+  's3-repo-path': { type: 'absolutePath', camel: 's3RepoPath' },
+  'new-images-folder': { type: 'relativePath', camel: 'newImagesFolder' },
+  'figma-images-folders': { type: 'relativePath', camel: 'figmaImagesFolders' },
+  // target-brand 是 optional: 沒設就會在 runtime 用 selector 從 frontend repo 挑
+  'target-brand': { type: 'string', camel: 'targetBrand', optional: true },
+}
 
-  if (typeof frontendRepoPath !== 'string') {
-    consoleRed('frontendRepoPath 需為 string!')
-    frontendRepoPath = null
-    ok = false
-  } else if (frontendRepoPath.match(/\//) == null) {
-    consoleRed('frontendRepoPath 需為絕對路徑!')
-    frontendRepoPath = null
-    ok = false
+export function checkSetting(setting, requiredKeys) {
+  if (!Array.isArray(requiredKeys)) {
+    consoleRed('checkSetting: requiredKeys 需為 array!')
+    return { ok: false }
   }
 
-  if (typeof s3RepoPath !== 'string') {
-    consoleRed('s3RepoPath 需為 string!')
-    s3RepoPath = null
-    ok = false
-  } else if (s3RepoPath.match(/\//) == null) {
-    consoleRed('s3RepoPath 需為絕對路徑!')
-    s3RepoPath = null
-    ok = false
+  const result = {
+    ok: true,
+    frontendRepoPath: null,
+    s3RepoPath: null,
+    newImagesFolder: null,
+    figmaImagesFolders: null,
+    targetBrand: null,
   }
 
-  if (typeof newImagesFolder !== 'string') {
-    consoleRed('newImagesFolder 需為 string!')
-    newImagesFolder = null
-    ok = false
-  } else if (newImagesFolder.match(/^\./) == null) {
-    consoleRed('newImagesFolder 需為相對路徑!')
-    newImagesFolder = null
-    ok = false
+  for (const key of requiredKeys) {
+    const meta = SETTING_KEYS[key]
+    if (meta == null) {
+      consoleRed(`checkSetting: 未知的 key "${key}"`)
+      result.ok = false
+      continue
+    }
+
+    const val = setting[key]
+    if (val == null && meta.optional) {
+      continue
+    }
+    if (typeof val !== 'string') {
+      consoleRed(`${key} 需為 string!`)
+      result.ok = false
+      continue
+    }
+    if (meta.type === 'absolutePath' && val.match(/\//) == null) {
+      consoleRed(`${key} 需為絕對路徑!`)
+      result.ok = false
+      continue
+    }
+    if (meta.type === 'relativePath' && val.match(/^\./) == null) {
+      consoleRed(`${key} 需為相對路徑!`)
+      result.ok = false
+      continue
+    }
+
+    result[meta.camel] = val
   }
 
-  if (typeof figmaImagesFolders !== 'string') {
-    consoleRed('figmaImagesFolders 需為 string!')
-    figmaImagesFolders = null
-    ok = false
-  } else if (figmaImagesFolders.match(/^\./) == null) {
-    consoleRed('figmaImagesFolders 需為相對路徑!')
-    figmaImagesFolders = null
-    ok = false
-  }
-
-  let targetBrandExist = true
-  if (typeof targetBrand !== 'string') {
-    consoleRed('targetBrand 需為 string!')
-    targetBrand = null
-    ok = false
-    targetBrandExist = false
-  }
-  if (targetBrandExist) {
-    if (frontendRepoPath != null) {
-      const brandPath = path.resolve(frontendRepoPath, 'src', `brand-${targetBrand}`)
+  if (requiredKeys.includes('target-brand') && result.targetBrand != null) {
+    if (requiredKeys.includes('frontend-repo-path') && result.frontendRepoPath != null) {
+      const brandPath = path.resolve(result.frontendRepoPath, 'src', `brand-${result.targetBrand}`)
       if (!fs.existsSync(brandPath)) {
-        consoleRed(`targetBrand "${targetBrand}" 不存在於 ${brandPath}`)
-        targetBrand = null
-        ok = false
+        consoleRed(`target-brand "${result.targetBrand}" 不存在於 ${brandPath}`)
+        result.targetBrand = null
+        result.ok = false
       }
     }
 
-    if (s3RepoPath != null) {
-      const s3BrandPath = path.resolve(s3RepoPath, targetBrand)
+    if (requiredKeys.includes('s3-repo-path') && result.s3RepoPath != null) {
+      const s3BrandPath = path.resolve(result.s3RepoPath, result.targetBrand)
       if (!fs.existsSync(s3BrandPath)) {
-        consoleRed(`targetBrand "${targetBrand}" 不存在於 ${s3BrandPath}`)
-        targetBrand = null
-        ok = false
+        consoleRed(`target-brand "${result.targetBrand}" 不存在於 ${s3BrandPath}`)
+        result.targetBrand = null
+        result.ok = false
       }
     }
   }
 
-  return { ok, frontendRepoPath, s3RepoPath, newImagesFolder, figmaImagesFolders, targetBrand }
+  return result
 }
 
 export function consoleRed(message) {
   console.log(`\x1b[31m${message}\x1b[0m`)
 }
+export function consoleYellow(message) {
+  console.log(yellow(message))
+}
+export function consoleGreen(message) {
+  console.log(green(message))
+}
+export function consoleStep(message) {
+  console.log(`檢查 ${message} : ${green('✅')}`)
+}
+export function consolePathHint({ sourceLines = [], targetLines = [] } = {}) {
+  console.log()
+  if (sourceLines.length > 0) {
+    console.log(`📂 來源檔案請放置於:`)
+    sourceLines.forEach((line) => console.log(`   ${line}`))
+  }
+  if (targetLines.length > 0) {
+    console.log(`📁 將輸出到:`)
+    targetLines.forEach((line) => console.log(`   ${line}`))
+  }
+  console.log()
+}
+export function green(msg) {
+  return `\x1b[32m${msg}\x1b[0m`
+}
+export function lightGreen(msg) {
+  return `\x1b[1m\x1b[32m${msg}\x1b[0m`
+}
+export function yellow(msg) {
+  return `\x1b[33m${msg}\x1b[0m`
+}
+export function lightYellow(msg) {
+  return `\x1b[1m\x1b[33m${msg}\x1b[0m`
+}
+
 
 export function high(msg) {
   const hStart = '\x1b[34m'

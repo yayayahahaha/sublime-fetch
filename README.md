@@ -13,12 +13,21 @@
 5. 拖拉方式修改(雙擊拖拉)
    > Setting -> Accessibility -> Pointer Control -> Trackpad Options -> Use Trackpad for dragging -> Dragging style: With Drag Lock
 6. app 清單位置調整(setting 放第一個，狀態放最後一個等)
+
+   > 目前這個功能在新版的 Mac 已經不存在了..
+
 7. F1-F12 功能鍵變成不用搭配 fn
    > Setting -> Keyboard -> Press and fold fn key to: Show Expanded Control Strip
 8. 快捷鍵: 勿擾模式(opt+s), app 清單(opt+q), spotlight/raycast 快捷鍵, 繁簡轉換, subWord 位移等
+
    > Setting -> Keyboard -> Keyboard shortcut
-9. 如果是有 touchbar 的 MacBook 的話，Fn 的行為會比沒有的多打一個勾
-   > https://superuser.com/questions/1755750/how-can-i-toggle-between-fn-and-function-f-keys-on-mac
+
+9. 按著 ctrl + scroll 可以 zoom in
+
+   > Setting -> Accessibility -> Zoom -> Use Scroll gesture with modifier keys to zoom
+
+10. 如果是有 touchbar 的 MacBook 的話，Fn 的行為會比沒有的多打一個勾
+    > https://superuser.com/questions/1755750/how-can-i-toggle-between-fn-and-function-f-keys-on-mac
 
 會根據不同的 Mac 型號 (如有沒有 touchbar 等) 有些不同
 
@@ -141,6 +150,10 @@ cp com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
 `git` 權限的部分參考[這裡](./git-tech-center.md)
 
+有可能會出現像是 `xcode-select: No developer tools were found` 的錯誤訊息，運行這個 command 即可: `xcode-select --install`.
+
+> 會跳出一個 GUI 執行安裝流程
+
 ### 安裝 brew
 
 > 安裝 `brew` 之前要裝 `git`, `brew` 在安裝的時候會需要
@@ -181,8 +194,10 @@ Iterm 的 `主題` 和 `顏色` 是可以分開設定的。顏色可以從 [這�
 如果要使用 [`agnoster`](https://github.com/agnoster/agnoster-zsh-theme) 這個 `theme` 的話會要額外安裝字型
 
 ```bash
-sudo apt-get install fonts-powerline
+brew install --cask font-powerline-symbols
 ```
+
+然後在 terminal 的 text 裡要選擇 `Powerline Symbols`
 
 > [https://github.com/powerline/fonts](https://github.com/powerline/fonts)
 
@@ -385,6 +400,8 @@ zsh set-rc-files.sh
 [includeIf "gitdir:~/go/src/gitlab.paradise-soft.com.tw/frontend/"]
   path = ~/frontend/.gitconfig
 ```
+
+> 要注意！ 新的 Mac 看不到副檔名，所以很容易在這邊覺得已經設定對了，但卻怎樣都不作用，要去 Finder > Settings > Advanced > Show all filenames extensions 才可以看到
 
 > TODO 也要處理備份的東西, 也就是 `zsh set-rc-files.sh` 的反向, 還有上述那些設定檔的反向..  
 > 整理: 這裡要每一個 zshrc 再去看一下, 更新這些項目的東東也要整理一下  

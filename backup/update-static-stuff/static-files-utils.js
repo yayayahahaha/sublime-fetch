@@ -1,25 +1,59 @@
 import select from '@inquirer/select'
 import fs from 'fs'
 import path from 'path'
-import { checkSetting, consoleRed, getSize, isDir, readFilesRecursively, readSetting } from './utils.js'
+import {
+  checkSetting,
+  consoleGreen,
+  consolePathHint,
+  consoleRed,
+  consoleStep,
+  ensureDir,
+  getSize,
+  high,
+  isDir,
+  readFilesRecursively,
+  readSetting,
+} from './utils.js'
+import { resolveBrand } from './brand-utils.js'
 
 export async function staticStuff() {
   const settings = readSetting()
   if (settings == null) return
 
-  const { ok, frontendRepoPath, newImagesFolder, targetBrand } = checkSetting(settings)
+  const {
+    ok,
+    frontendRepoPath,
+    newImagesFolder,
+    targetBrand: settingBrand,
+  } = checkSetting(settings, ['frontend-repo-path', 'new-images-folder', 'target-brand'])
   if (!ok) return
+  consoleStep('setting')
+
+  const targetBrand = await resolveBrand({ settingBrand, frontendRepoPath })
+  if (targetBrand == null) return
+  consoleStep(`target-brand = ${high(targetBrand)}`)
+
+  const sourceDir = path.resolve('.', newImagesFolder, 'static')
+  const targetDir = path.resolve(frontendRepoPath, 'src', `brand-${targetBrand}`, 'bundle/public/static/img')
+  consolePathHint({
+    sourceLines: [high(sourceDir)],
+    targetLines: [high(targetDir), `${high(path.resolve(frontendRepoPath, 'src', `brand-${targetBrand}`, 'bundle/public'))} (favicon.ico)`],
+  })
 
   if (!isDir(newImagesFolder)) {
-    return void consoleRed('new-images-folder 需為一個資料夾!')
+    return void consoleRed(`${newImagesFolder} 需為一個資料夾!`)
   }
+  consoleStep(`${newImagesFolder} 為資料夾`)
 
   const checkNeededImages = await checkStaticImages(newImagesFolder, {
     frontendRepoPath,
     targetBrand,
   })
   if (checkNeededImages == null) return
-  if (checkNeededImages.some((img) => !img.passFormat)) return
+  if (checkNeededImages.some((img) => !img.passFormat)) {
+    return void consoleRed('static 圖片檢查未通過，請修正以上問題後再執行')
+  }
+  consoleStep(`${checkNeededImages.length} 張圖片存在與尺寸`)
 
   const makeSure = await select({
     message: '檢查完畢，即將開始覆蓋 static 相關的檔案，請確認清空 frontend repo 的 git status',
@@ -42,22 +76,14 @@ export async function staticStuff() {
       targetPath,
     } = payload
 
+    ensureDir(path.dirname(targetPath))
     fs.copyFileSync(newImgPath, targetPath)
   })
 
-  console.log(`\x1b[32m共 ${checkNeededImages.length} 張圖片處理完畢!\x1b[0m`)
+  consoleGreen(`共 ${checkNeededImages.length} 張圖片處理完畢!`)
 }
 
 function checkStaticImages(newImagesFolder, { frontendRepoPath, targetBrand } = {}) {
-  if (typeof frontendRepoPath !== 'string') {
-    consoleRed('缺少參數 frontendRepoPath')
-    return null
-  }
-  if (typeof targetBrand !== 'string') {
-    consoleRed('缺少參數 targetBrand')
-    return null
-  }
-
   const resourcePath = path.resolve('.', newImagesFolder, 'static')
   if (!isDir(resourcePath)) {
     consoleRed(`${resourcePath} 需為一個資料夾!`)
@@ -92,14 +118,16 @@ function checkStaticImages(newImagesFolder, { frontendRepoPath, targetBrand } = 
           const passFormat = (function () {
             return requiredSizeArray.some((requiredSizeInfo) => {
               if (requiredSizeInfo == null) return true
-              const { width: rw, height: rh } = requiredSizeInfo
               if (typeof requiredSizeInfo === 'function') return requiredSizeInfo(nw, nh)
+              const { width: rw, height: rh } = requiredSizeInfo
               return rw === nw && rh === nh
             })
           })()
           if (!passFormat) {
-            console.log(otherInfo)
-            consoleRed(`${otherInfo.filename} 尺寸不符! 得到 ${nw}x${nh}`)
+            const expectedDesc = requiredSizeArray
+              .map((item) => (typeof item === 'function' ? '(自訂規則)' : `${item.width}x${item.height}`))
+              .join(' 或 ')
+            consoleRed(`${otherInfo.filename} 尺寸不符! 需為 ${expectedDesc}, 得到 ${nw}x${nh}`)
           }
 
           const targetPath = path.resolve(
@@ -119,7 +147,7 @@ function checkStaticImages(newImagesFolder, { frontendRepoPath, targetBrand } = 
 
 export const STATIC_IMAGES = [
   {
-    filename: 'meta-image.png',
+    filename: 'meta-image-og.png',
     size: {
       width: 400,
       height: 400,
@@ -129,7 +157,7 @@ export const STATIC_IMAGES = [
     path: 'bundle/public/static/img',
   },
   {
-    filename: 'meta-image-og.png',
+    filename: 'meta-image.png',
     size: {
       width: 1200,
       height: 675,

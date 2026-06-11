@@ -1,0 +1,2833 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"--primary",
+				"--brand-primary-light"
+			],
+			[
+				"ctoken400",
+				"ctoken-content-neutral-400"
+			],
+			[
+				"json",
+				"JSON"
+			],
+			[
+				"decodeu",
+				"decodeURIComponent"
+			],
+			[
+				"par",
+				"parentName"
+			],
+			[
+				"writefil",
+				"fs.writeFileSync"
+			],
+			[
+				"ut",
+				"utf8"
+			],
+			[
+				"refal",
+				"recursiveFlatRoutes"
+			],
+			[
+				"route",
+				"routeName?"
+			],
+			[
+				"hasop",
+				"hashOptions"
+			],
+			[
+				"hash",
+				"hashElement"
+			],
+			[
+				"source",
+				"sourcesContent"
+			],
+			[
+				"path",
+				"pathData"
+			],
+			[
+				"compo",
+				"componentPath"
+			],
+			[
+				"compone",
+				"componentPath"
+			],
+			[
+				"exis",
+				"fs.existsSync"
+			],
+			[
+				"mkdi",
+				"fs.mkdirSync"
+			],
+			[
+				"mkd",
+				"fs.mkdirSync"
+			],
+			[
+				"target",
+				"targetRoute"
+			],
+			[
+				"spo",
+				"SPOT"
+			],
+			[
+				"future",
+				"FUTURES_V2"
+			],
+			[
+				"uuid",
+				"randomUUID"
+			],
+			[
+				"primary",
+				"--app--color--primary-darker"
+			],
+			[
+				"accountid",
+				"ACCOUNT_ID"
+			],
+			[
+				"appfly",
+				"Appsflyer"
+			],
+			[
+				"account",
+				"#isAccountInfoLoaded"
+			],
+			[
+				"rejectdata",
+				"rejectDataAndCodeOnCatch"
+			],
+			[
+				"reject",
+				"rejectDataAndCodeOnCatch"
+			],
+			[
+				"ROUND_",
+				"ROUND_HALF_EVEN"
+			],
+			[
+				"round",
+				"ROUND_DOWN"
+			],
+			[
+				"trace",
+				"trace"
+			],
+			[
+				"regi",
+				"REGISTER"
+			],
+			[
+				"log",
+				"LOGIN"
+			],
+			[
+				"use",
+				"useRoute"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"brand",
+				"BRAND_TAG_TYPES"
+			],
+			[
+				"BRAND",
+				"BRAND_TAG_TYPES"
+			],
+			[
+				"BRAND_",
+				"BRAND_TAG_TYPES"
+			],
+			[
+				"brandtag",
+				"BRAND_TAG_TYPES"
+			],
+			[
+				"yell",
+				"YELLOW"
+			],
+			[
+				"brand_",
+				"BRAND_TAG_TYPES"
+			],
+			[
+				"line",
+				"line-height"
+			],
+			[
+				"ctokenneutralbluegra",
+				"ctoken-neutral-blue-grey-dark"
+			],
+			[
+				"ref",
+				"ref"
+			],
+			[
+				"risklilis",
+				"RISK_LIMIT_LIST"
+			],
+			[
+				"unref",
+				"unref"
+			],
+			[
+				"lo",
+				"console.log"
+			],
+			[
+				"testn",
+				"testnetList"
+			],
+			[
+				"testin",
+				"testnetInfo"
+			],
+			[
+				"error",
+				"errorInfo"
+			],
+			[
+				"item",
+				"items"
+			],
+			[
+				"brandma",
+				"brandNameMapFn"
+			],
+			[
+				"image",
+				"image-src"
+			],
+			[
+				"stor",
+				"store"
+			],
+			[
+				"kycstatu",
+				"KYC_STATUS"
+			],
+			[
+				"timems",
+				"timeoutMs"
+			],
+			[
+				"app",
+				"appIntro"
+			],
+			[
+				"get",
+				"getRoutes"
+			],
+			[
+				"column",
+				"columns"
+			],
+			[
+				"ab",
+				"abs"
+			],
+			[
+				"scrol",
+				"scrollLeft"
+			],
+			[
+				"isstic",
+				"isStickyEdge"
+			],
+			[
+				"calcu",
+				"calculatedResult"
+			],
+			[
+				"check",
+				"checkStickyColumns"
+			],
+			[
+				"ne",
+				"nextTick"
+			],
+			[
+				"isedge",
+				"isStickyEdge"
+			],
+			[
+				"style",
+				"stickStylesheets"
+			],
+			[
+				"edge",
+				"edgeStickyIndex"
+			],
+			[
+				"respon",
+				"responsiveRef"
+			],
+			[
+				"issi",
+				"isStickyColumn"
+			],
+			[
+				"stick",
+				"stick-left"
+			],
+			[
+				"assid",
+				"assetId"
+			],
+			[
+				"emit",
+				"emits?"
+			],
+			[
+				"disabled",
+				"disableBackground"
+			],
+			[
+				"v-f",
+				"v-if"
+			],
+			[
+				"suppo",
+				"supportConfig"
+			],
+			[
+				"Validate",
+				"ValidateI18nErrorMsg"
+			],
+			[
+				"errorM",
+				"errorMsg"
+			],
+			[
+				"erro",
+				"errorMsg"
+			],
+			[
+				"i18n",
+				"i18nParams"
+			],
+			[
+				"line-",
+				"line-height"
+			],
+			[
+				"overfl",
+				"overflow-x"
+			],
+			[
+				"dir",
+				"fs.mkdirSync"
+			],
+			[
+				"readsyn",
+				"fs.readFileSync"
+			],
+			[
+				"basictheme",
+				"basicThemeLessContent"
+			],
+			[
+				"iife",
+				"iife-es5\tiife-es5"
+			],
+			[
+				"ou",
+				"outline"
+			],
+			[
+				"white",
+				"app--color--white"
+			],
+			[
+				"status",
+				"statusClass"
+			],
+			[
+				"ctokenbgne70",
+				"ctoken-compbg-neutral-700"
+			],
+			[
+				"contentnu400",
+				"ctoken-content-neutral-400"
+			],
+			[
+				"suffixIcon",
+				"suffixIconTooltip"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"cardstatus",
+				"CARD_STATUS"
+			],
+			[
+				"prim",
+				"primary_light"
+			],
+			[
+				"ctokenred300",
+				"ctoken-compbg-red-300"
+			],
+			[
+				"ctokencompbggree",
+				"ctoken-compbg-green-200"
+			],
+			[
+				"toUpp",
+				"toUpperCase"
+			],
+			[
+				"item-",
+				"item-number"
+			],
+			[
+				"routename",
+				"ROUTE_NAME"
+			],
+			[
+				"appdimdak",
+				"--app--color--denim-darker"
+			],
+			[
+				"in",
+				"inherit"
+			],
+			[
+				"bg",
+				"background-color"
+			],
+			[
+				"appcolorbluegre",
+				"--app--color--blue-grey-lighter"
+			],
+			[
+				"--appcolordidaer",
+				"--app--color--denim-darker"
+			],
+			[
+				"--app--color--d",
+				"--app--color--denim-darker"
+			],
+			[
+				"--app--color--denida",
+				"--app--color--denim-darker"
+			],
+			[
+				"lan",
+				"language"
+			],
+			[
+				"addtion",
+				"additionalEventParametersFn"
+			],
+			[
+				"default",
+				"defaultCoinTickerClick"
+			],
+			[
+				"bind",
+				"binding"
+			],
+			[
+				"backgrou",
+				"background-color"
+			],
+			[
+				"all",
+				"allSettled"
+			],
+			[
+				"mo",
+				"mock"
+			],
+			[
+				"getroo",
+				"getRootCdnPath"
+			],
+			[
+				"defaul",
+				"default"
+			],
+			[
+				"to",
+				"toString"
+			],
+			[
+				"getroot",
+				"getRootCdnPath"
+			],
+			[
+				"wrifile",
+				"fs.writeFileSync"
+			],
+			[
+				"matrix",
+				"matrixResult"
+			],
+			[
+				"st",
+				"stdout"
+			],
+			[
+				"fo",
+				"folder"
+			],
+			[
+				"comman",
+				"commandError"
+			],
+			[
+				"fil",
+				"filter"
+			],
+			[
+				"find",
+				"findIndex"
+			],
+			[
+				"arv",
+				"argv"
+			],
+			[
+				"exi",
+				"process.exit"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"cutom",
+				"Git: Custom Command"
+			],
+			[
+				"selectcolor",
+				"UI: Select Color Scheme"
+			],
+			[
+				"setting fc: ",
+				"FC: File Management Settings (開啟檔案管理外掛設定檔)"
+			],
+			[
+				"regex",
+				"FC: Open Files by Regex (使用正規表達式批次開啟檔案)"
+			],
+			[
+				"fc: regex",
+				"FC: Open Files by Regex (使用正規表達式批次開啟檔案)"
+			],
+			[
+				"fc rege",
+				"FC: Open Files by Regex (使用正規表達式批次開啟檔案)"
+			],
+			[
+				"fc: reg",
+				"FC: Open Files by Regex (使用正規表達式批次開啟檔案)"
+			],
+			[
+				"format",
+				"LSP: Format File"
+			],
+			[
+				"ssjson",
+				"Set Syntax: JSON"
+			],
+			[
+				"git checkout curren tfile",
+				"Git: Checkout Current File"
+			],
+			[
+				"git checou",
+				"Git: Checkout Tag"
+			],
+			[
+				"selectcolorscheme",
+				"UI: Select Color Scheme"
+			],
+			[
+				"bor",
+				"Snippet: style-border"
+			],
+			[
+				"bord",
+				"Snippet: style-border"
+			],
+			[
+				"ssvuecom",
+				"Set Syntax: Vue Component"
+			],
+			[
+				"boer",
+				"Set Syntax: Bower JSON"
+			],
+			[
+				"sideyb",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"staged",
+				"FC: Lint Staged Files (修復 Git 已暫存的檔案 - ESLint & Stylelint)"
+			],
+			[
+				"cus git",
+				"Git: Custom Command"
+			],
+			[
+				"git stat",
+				"Git: Status"
+			],
+			[
+				"fc stag",
+				"FC: Lint Staged Files (修復 Git 已暫存的檔案 - ESLint & Stylelint)"
+			],
+			[
+				"uniq",
+				"Permute Lines: Unique"
+			],
+			[
+				"sidebys",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"ssplainte",
+				"Set Syntax: Plain Text"
+			],
+			[
+				"ss less",
+				"Set Syntax: Less"
+			],
+			[
+				"gtiaddcure",
+				"Git: Add Current File"
+			],
+			[
+				"duplicate",
+				"File: Duplicate"
+			],
+			[
+				"trackremote",
+				"Git: Track Remote Branch"
+			],
+			[
+				"keybi",
+				"Preferences: Key Bindings"
+			],
+			[
+				"lspsetting",
+				"Preferences: LSP Settings"
+			],
+			[
+				"lspgo",
+				"LSP: Goto Diagnostic"
+			],
+			[
+				"lsp",
+				"LSP: Goto Diagnostic"
+			],
+			[
+				"reload",
+				"SublimeLinter: Reload SublimeLinter and its Plugins"
+			],
+			[
+				"trackremotebranch",
+				"Git: Track Remote Branch"
+			],
+			[
+				"move",
+				"File: Move"
+			],
+			[
+				"delete",
+				"File: Delete"
+			],
+			[
+				"rename",
+				"File: Rename"
+			],
+			[
+				"ssjs",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"git add current file",
+				"Git: Add Current File"
+			],
+			[
+				"gtiaddcurrentfile",
+				"Git: Add Current File"
+			],
+			[
+				"gtiaddcurrentfil",
+				"Git: Add Current File"
+			],
+			[
+				"gitaddcurr",
+				"Git: Add Current File"
+			],
+			[
+				"gitcheckoutcu",
+				"Git: Checkout Current File"
+			],
+			[
+				"gtichecoutcure",
+				"Git: Checkout Current File"
+			],
+			[
+				"gtiaddcu",
+				"Git: Add Current File"
+			],
+			[
+				"gtiaddcurrent",
+				"Git: Add Current File"
+			],
+			[
+				"restart",
+				"LSP: Restart Server"
+			],
+			[
+				"border",
+				"Snippet: style-border"
+			],
+			[
+				"noderea",
+				"Snippet: nodejs-read-all-files"
+			],
+			[
+				"duplica",
+				"File: Duplicate"
+			],
+			[
+				"reanm",
+				"File: Rename"
+			],
+			[
+				"nodecolor",
+				"Snippet: nodejs-console-color"
+			],
+			[
+				"reame",
+				"File: Rename"
+			],
+			[
+				"sshtml",
+				"Set Syntax: HTML"
+			],
+			[
+				"gticheckoutcure",
+				"Git: Checkout Current File"
+			],
+			[
+				"gtiche",
+				"Git: Checkout Current File"
+			],
+			[
+				"trackremo",
+				"Git: Track Remote Branch"
+			],
+			[
+				"sidebyside",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"git: checkout current file",
+				"Git: Checkout Current File"
+			],
+			[
+				"gticheckoutcurent",
+				"Git: Checkout Current File"
+			],
+			[
+				"gticheckout",
+				"Git: Checkout Current File"
+			],
+			[
+				"gitchecout",
+				"Git: Checkout Current File"
+			],
+			[
+				"bore",
+				"Local History: Browse in Explorer"
+			],
+			[
+				"compare",
+				"Compare with..."
+			],
+			[
+				"renam",
+				"File: Rename"
+			],
+			[
+				"dulicate",
+				"File: Duplicate"
+			],
+			[
+				"sscss",
+				"Set Syntax: CSS"
+			],
+			[
+				"forms",
+				"Format: Javascript"
+			],
+			[
+				"ssdotenv",
+				"Set Syntax: DotENV"
+			],
+			[
+				"ssyml",
+				"Set Syntax: Markdown (Liquid)"
+			],
+			[
+				"setsyntaxgitdif",
+				"Set Syntax: Git Diff"
+			],
+			[
+				"gitaddcur",
+				"Git: Add Current File"
+			],
+			[
+				"gitaddcurrentfile",
+				"Git: Add Current File"
+			],
+			[
+				"git checkout current file",
+				"Git: Checkout Current File"
+			],
+			[
+				"gitblame",
+				"Git: Blame"
+			],
+			[
+				"ssjavascript",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"sshs",
+				"Set Syntax: Haskell"
+			],
+			[
+				"sswjson",
+				"Set Syntax: Bower JSON"
+			],
+			[
+				"track",
+				"Git: Track Remote Branch"
+			],
+			[
+				"git chean",
+				"Git: Change Branch"
+			],
+			[
+				"checkotu",
+				"Git: Checkout Current File"
+			],
+			[
+				"select",
+				"UI: Select Color Scheme"
+			],
+			[
+				"ssmad",
+				"Set Syntax: Markdown"
+			],
+			[
+				"ssmd",
+				"Set Syntax: Markdown"
+			],
+			[
+				"gticheckoutcurrent",
+				"Git: Checkout Current File"
+			],
+			[
+				"gitchecou",
+				"Git: Checkout Current File"
+			],
+			[
+				"sidebar",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"open",
+				"Local History: Open"
+			],
+			[
+				"reset ",
+				"Terminus: Reset"
+			],
+			[
+				"restrart",
+				"Git: Reset (unstage) Current File"
+			],
+			[
+				"vbor",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"bvor",
+				"BracketHighlighter: Remove Brackets"
+			],
+			[
+				"git checkout currentfile",
+				"Git: Checkout Current File"
+			],
+			[
+				"git add currentfile",
+				"Git: Add Current File"
+			],
+			[
+				"ssenv",
+				"Set Syntax: DotENV"
+			],
+			[
+				"flex",
+				"Snippet: css-flex"
+			],
+			[
+				"ssmarkdown",
+				"Set Syntax: Markdown"
+			],
+			[
+				"syngitdiff",
+				"Set Syntax: Git Diff"
+			],
+			[
+				"ssgitdiff",
+				"Set Syntax: Git Diff"
+			],
+			[
+				"gcheckout",
+				"Git: Checkout Current File"
+			],
+			[
+				"selectcolo",
+				"UI: Select Color Scheme"
+			],
+			[
+				"gitdic",
+				"Git: Diff Current File"
+			],
+			[
+				"setsyntagitdiff",
+				"Set Syntax: Git Diff"
+			],
+			[
+				"gitdiffcure",
+				"Git: Diff Current File"
+			],
+			[
+				"setsyntaxgit",
+				"Set Syntax: Git"
+			],
+			[
+				"selectcolro",
+				"UI: Select Color Scheme"
+			],
+			[
+				"selectcol",
+				"UI: Select Color Scheme"
+			],
+			[
+				"gitcurren diff",
+				"Git: Diff Current File"
+			],
+			[
+				"gitdiffcurrent",
+				"Git: Diff Current File"
+			],
+			[
+				"setsyntaxplain",
+				"Set Syntax: Plain Text"
+			],
+			[
+				"setsyntax:git",
+				"Set Syntax: Git"
+			],
+			[
+				"setsyntax: git",
+				"Set Syntax: Git Rebase Todo"
+			],
+			[
+				"gitlog",
+				"Git: Log Current File"
+			],
+			[
+				"gitgraph",
+				"Git: Graph All"
+			],
+			[
+				"syntaxgit",
+				"Set Syntax: Git Graph"
+			],
+			[
+				"gitfifcurren",
+				"Git: Diff Current File"
+			],
+			[
+				"gitblam",
+				"Git: Blame"
+			],
+			[
+				"gitshow",
+				"Git: Show Commit By Hash"
+			],
+			[
+				"custom",
+				"Git: Custom Command"
+			],
+			[
+				"sort",
+				"Sort Lines"
+			],
+			[
+				"ssxml",
+				"Set Syntax: XML"
+			],
+			[
+				"gticheckoutcu",
+				"Git: Checkout Current File"
+			],
+			[
+				"consocolor",
+				"Snippet: nodejs-console-color"
+			],
+			[
+				"sideby",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"dup",
+				"File: Duplicate"
+			],
+			[
+				"sideb syd",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"uniw",
+				"Build: New Build System"
+			],
+			[
+				"gitidcu",
+				"Git: Diff Current File"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 646.0,
+		"history":
+		[
+			"sublime.log_commands(False)",
+			"sublime.log_commands(True)",
+			"git_branch",
+			"sublime.log_commands(True)",
+			"Clean",
+			"CLEAN",
+			"clean"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/flyc.chung/btse/frontend",
+		"/Users/flyc.chung/btse/frontend/bin",
+		"/Users/flyc.chung/btse/frontend/env",
+		"/Users/flyc.chung/btse/frontend/src",
+		"/Users/flyc.chung/btse/frontend/src/baseConfig",
+		"/Users/flyc.chung/btse/frontend/src/baseConfig/colorScheme",
+		"/Users/flyc.chung/btse/frontend/src/brand",
+		"/Users/flyc.chung/btse/frontend/src/brand/component",
+		"/Users/flyc.chung/btse/frontend/src/brand/component/about-us",
+		"/Users/flyc.chung/btse/frontend/src/brand/component/about-us/images",
+		"/Users/flyc.chung/btse/frontend/src/brand-b2z",
+		"/Users/flyc.chung/btse/frontend/src/brand-b2z/component",
+		"/Users/flyc.chung/btse/frontend/src/brand-b2z/component/copy-wise",
+		"/Users/flyc.chung/btse/frontend/src/brand-freedx",
+		"/Users/flyc.chung/btse/frontend/src/brand-freedx/bundle",
+		"/Users/flyc.chung/btse/frontend/src/brand-freedx/bundle/public",
+		"/Users/flyc.chung/btse/frontend/src/brand-lmex",
+		"/Users/flyc.chung/btse/frontend/src/brand-lmex/component",
+		"/Users/flyc.chung/btse/frontend/src/brand-lmex/component/copy-wise",
+		"/Users/flyc.chung/btse/frontend/src/brand-zmo",
+		"/Users/flyc.chung/btse/frontend/src/brand-zmo/assets",
+		"/Users/flyc.chung/btse/frontend/src/brand-zmo/component",
+		"/Users/flyc.chung/btse/frontend/src/brand-zmo/component/copy-wise"
+	],
+	"file_history":
+	[
+		"/Users/flyc.chung/btse/frontend/src/App.vue",
+		"/Users/flyc.chung/btse/frontend/src/views/referral-v2/affiliate/ApplyFormV2.vue",
+		"/Users/flyc.chung/btse/frontend/.gitlab-ci.staging-whitelabel-matrix.config.yml",
+		"/Users/flyc.chung/btse/frontend/src/brand-zmo/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-zmo/color.scheme.js",
+		"/Users/flyc.chung/btse/frontend/src/brand/component/about-us/PartOfEcosystem.vue",
+		"/Users/flyc.chung/btse/frontend/src/brand/views/about-us/css.less",
+		"/Users/flyc.chung/btse/frontend/src/brand/component/about-us/images/imageEcoDesktop.png",
+		"/Users/flyc.chung/Library/Application Support/Sublime Text/Packages/User/Flyc/FC_FileManagement.sublime-settings",
+		"/Users/flyc.chung/btse/frontend/src/brand-nvx/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-interpay/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-traxex/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-bitmarkets/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-autotrader/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-bullstreet/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-traiex/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-coyx/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-freedx/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-testnet/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-bitmarketsalpha/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-bitqik/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-btseuab/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-b2z/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-walletdemo/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-fedhabit/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-exchangedemo/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-btzo/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-nexu/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-altex/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-atpro/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-btseag/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-bestpay/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-bitkub/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-binoex/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-ctx98/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-pixbit/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-transexchange/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-cryptomarket/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/src/brand-lmex/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/frontend/.yarn/cache/extend-npm-3.0.2-e1ca07ac54-a50a8309ca.zip",
+		"/Users/flyc.chung/btse/frontend/src/components/fantasy-crypto/CurrencyDropdown.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/common/currency-dropdown/composables/useCurrencyDropdown.js",
+		"/Users/flyc.chung/btse/frontend/src/components/markets/markets-table/CurrencyDropdown.vue",
+		"/Users/flyc.chung/btse/frontend/src/pages/wallets/common/WalletCurrencyDropdown.vue",
+		"/Users/flyc.chung/btse/frontend/src/pages/wallets/common/wallet-transaction-history/WalletCurrencyDropdown.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/futures/futures-disclaimer/index.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/common/language/const.js",
+		"/Users/flyc.chung/btse/frontend/src/views/trading/futures/index.vue",
+		"/Users/flyc.chung/btse/frontend/src/brand-bitqik/components/futures/futures-disclaimer/FuturesDisclaimerContent.vue",
+		"/Users/flyc.chung/btse/frontend/src/i18n/en.json",
+		"/Users/flyc.chung/btse/frontend/src/const.js",
+		"/Users/flyc.chung/btse/frontend/src/utils/viewedList.js",
+		"/Users/flyc.chung/btse/frontend/src/components/futures/futures-disclaimer/FuturesDisclaimerContent.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/c2c/createAds/modal/CreateAdsPreModal.vue",
+		"/Users/flyc.chung/btse/frontend/vite.config.js",
+		"/Users/flyc.chung/btse/frontend/src/components/common/BrandDialog.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/c2c/common/BottomFixedPanel.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/c2c/chat/ChatUserMessage.vue",
+		"/Users/flyc.chung/btse/frontend/env/.env.atpro",
+		"/Users/flyc.chung/btse/frontend/src/brand-zmo/generalConfig.js",
+		"/Users/flyc.chung/btse/frontend/src/views/app-intro/AppIntro.vue",
+		"/Users/flyc.chung/btse/frontend/config/envConfig.js",
+		"/Users/flyc.chung/btse/frontend/src/composables/useApkDownloadUrl.ts",
+		"/Users/flyc.chung/btse/frontend/src/components/appDownloadButton/AppDownloadButtonGroup.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/appDownloadButton/index.vue",
+		"/Users/flyc.chung/btse/frontend/src/routes/app.js",
+		"/Users/flyc.chung/btse/frontend/src/baseConfig/appIntroConfig.js",
+		"/Users/flyc.chung/btse/frontend/src/brand-lmex/appIntroConfig.js",
+		"/Users/flyc.chung/btse/frontend/src/config.js",
+		"/Users/flyc.chung/btse/frontend/env/.env.lmex",
+		"/Users/flyc.chung/btse/frontend/.gitlab-ci.production-whitelabel-matrix.config.yml",
+		"/Users/flyc.chung/btse/frontend/.gitlab-ci.testnet-whitelabel-matrix.config.yml",
+		"/Users/flyc.chung/btse/frontend/.gitlab-ci.dev-whitelabel-matrix.config.yml",
+		"/Users/flyc.chung/btse/frontend/src/components/home/app-download-section/AppDownloadSection.vue",
+		"/Users/flyc.chung/btse/frontend/src/assets/less/default.less",
+		"/Users/flyc.chung/btse/frontend/src/colorScheme/theme.less",
+		"/Users/flyc.chung/btse/frontend/src/baseConfig/colorScheme/basic-theme.less",
+		"/Users/flyc.chung/btse/frontend/src/colorScheme/revolution-token.less",
+		"/Users/flyc.chung/btse/frontend/src/colorScheme/revolution-foundation.less",
+		"/Users/flyc.chung/btse/frontend/src/assets/theme/theme.less",
+		"/Users/flyc.chung/btse/frontend/src/assets/theme/theme-day/theme.less",
+		"/Users/flyc.chung/btse/frontend/src/components/common/dropdown/DropdownV2.vue",
+		"/Users/flyc.chung/btse/frontend/src/pages/account/verification/common/QuestionnaireDropdown.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/common/radio/RadioInput.vue",
+		"/Users/flyc.chung/btse/frontend/src/baseConfig/colorScheme/index.js",
+		"/Users/flyc.chung/btse/frontend/src/components/account/api/CreateApiKeyDialog.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/account/api/DetailDialog.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/account/sub-account/account-management/create-sub-account/AdvancedSettingsDialog.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/account/sub-account/api-management/CreateApiKeyDialog.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/account/sub-account/api-management/DetailDialog.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/wallet/send-to/dialog/FailDialog.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/wallet/send-to/dialog/FailedIcon.vue",
+		"/Users/flyc.chung/btse/frontend/src/brand-zmo/components/wallet/send-to/dialog/FailedIcon.vue",
+		"/Users/flyc.chung/btse/frontend/src/brand-zmo/assets/unsuccessful.png",
+		"/Users/flyc.chung/btse/frontend/src/components/common/Tooltip.vue",
+		"/Users/flyc.chung/btse/frontend/src/pages/wallets/common/earn/CellPayoutDateTootipBlock.vue",
+		"/Users/flyc.chung/btse/frontend/src/pages/wallets/common/earn/CurrencyValueBlock.vue",
+		"/Users/flyc.chung/btse/frontend/package.json",
+		"/Users/flyc.chung/btse/frontend/src/components/icons/IconLongShortArrow.vue",
+		"/Users/flyc.chung/btse/frontend/src/brand-b2z/component/copy-wise/auto-trader-meta.png",
+		"/Users/flyc.chung/btse/frontend/src/brand-zmo/component/copy-wise/auto-trader-meta.png",
+		"/Users/flyc.chung/btse/frontend/src/baseConfig/generalConfig.js",
+		"/Users/flyc.chung/btse/frontend/src/views/copy-wise/components/Animation.vue",
+		"/Users/flyc.chung/btse/frontend/src/brand-lmex/component/copy-wise/robot.png",
+		"/Users/flyc.chung/btse/frontend/src/brand-zmo/component/copy-wise/robot.png",
+		"/Users/flyc.chung/btse/frontend/src/views/one-click-futures/components/trading-view-panel/SymbolDropdown.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/header/headerTrack.ts",
+		"/Users/flyc.chung/btse/frontend/bin/color-revolution/sync.js",
+		"/Users/flyc.chung/btse/frontend/bin/color-revolution/README.md",
+		"/Users/flyc.chung/.zshrc",
+		"/Users/flyc.chung/btse/frontend/src/components/develop-tool/SearchBar.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/develop-tool/DevelopPanel.vue",
+		"/Users/flyc.chung/btse/frontend/src/brand/component/home/App.vue",
+		"/Users/flyc.chung/btse/frontend/src/brand-zmo/views/Home.vue",
+		"/Users/flyc.chung/btse/frontend/src/brand-zmo/component/home/App.vue",
+		"/Users/flyc.chung/btse/frontend/src/views/Otc.vue",
+		"/Users/flyc.chung/btse/frontend/src/brand-zmo/component/basic/login/CustomLoginByQRcode.vue",
+		"/Users/flyc.chung/btse/frontend/public/static/lottie/token_ecosystem_en.json",
+		"/Users/flyc.chung/btse/frontend/src/routes/binaryOptions.js",
+		"/Users/flyc.chung/btse/frontend/src/views/BinaryOptions.vue",
+		"/Users/flyc.chung/btse/frontend/src/views/UpOrDown.vue",
+		"/Users/flyc.chung/btse/frontend/src/components/payment/NetworkDropdown.vue",
+		"/Users/flyc.chung/btse/frontend/src/registerServiceWorker.js",
+		"/Users/flyc.chung/btse/frontend/src/brand-freedx/components/useEventTracker.js",
+		"/Users/flyc.chung/btse/frontend/bin/vite/buildPwaPlugin.js",
+		"/Users/flyc.chung/btse/frontend/src/main.js"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 306.0,
+		"where_history":
+		[
+			"",
+			"*.vue",
+			"",
+			"*.vue, *.less",
+			"*.vue",
+			"",
+			"src/router",
+			"src/route",
+			"",
+			"-appIntroConfig.js",
+			"",
+			"-*.json",
+			"",
+			"-*.json",
+			"",
+			"*.yml",
+			"",
+			"useDesktopNav.js",
+			"-*.json",
+			"",
+			"-generalConfig.js, -*.json, -legal/, -color.scheme.js, -cny-earn-campaign/, -check-in/, -stable-campaign/",
+			"-generalConfig.js, -*.json, -legal/, -color.scheme.js, -cny-earn-campaign/, -check-in/",
+			"-generalConfig.js, -*.json, -legal/, -color.scheme.js, -cny-earn-campaign/",
+			"-generalConfig.js, -*.json, -legal/, -color.scheme.js, -cny-earn-campaign",
+			"-generalConfig.js, -*.json, -legal/, -color.scheme.js",
+			"-generalConfig.js, -*.json, -legal/",
+			"-generalConfig.js, -*.json",
+			"-generalConfig.js",
+			"*.js",
+			"",
+			"-useDesktopNav.js, -useNavigationDisplay.js, -useMobileNav.js",
+			"-useDesktopNav.js, -useNavigationDisplay.js",
+			"-useDesktopNav.js, -useNavigationDisplay",
+			"-useDesktopNav.js",
+			"useDesktopNav.js",
+			"",
+			"src/routes",
+			"*.js",
+			"",
+			"*.vue",
+			"",
+			"src/routes",
+			"src/router",
+			"",
+			"src/router",
+			"src/routesr",
+			"src/routes",
+			"route/",
+			"route",
+			"*.js",
+			"",
+			"-*.json",
+			"",
+			"-bundle/config.js, -*.md",
+			"-bundle/config.js",
+			"-generalConfig.js, -*.md",
+			"-generalConfig.js",
+			"",
+			"-*.json",
+			"",
+			"*.js",
+			"-*.yml, -*.html",
+			"",
+			"src/routes",
+			"src/route",
+			"",
+			"*.js",
+			"",
+			"-*.json",
+			"",
+			"src/pages/account/security",
+			"-*.json",
+			"src/brand-altex/generalConfig.js,src/brand-atpro/generalConfig.js,src/brand-autotrader/generalConfig.js,src/brand-b2z/generalConfig.js,src/brand-bestpay/generalConfig.js,src/brand-binoex/generalConfig.js,src/brand-bitkub/generalConfig.js,src/brand-bitmarkets/generalConfig.js,src/brand-bitmarketsalpha/generalConfig.js,src/brand-bitqik/generalConfig.js,src/brand-btseag/generalConfig.js,src/brand-btsegi/generalConfig.js,src/brand-btseuab/generalConfig.js,src/brand-btzo/generalConfig.js,src/brand-bullstreet/generalConfig.js,src/brand-coinwise/generalConfig.js,src/brand-coyx/generalConfig.js,src/brand-cryptomarket/generalConfig.js,src/brand-ctx98/generalConfig.js,src/brand-exchangedemo/generalConfig.js,src/brand-fedhabit/generalConfig.js,src/brand-freedx/generalConfig.js,src/brand-interpay/generalConfig.js,src/brand-lmex/generalConfig.js,src/brand-nexu/generalConfig.js,src/brand-nvx/generalConfig.js,src/brand-obot/generalConfig.js,src/brand-paradise/generalConfig.js,src/brand-pixbit/generalConfig.js,src/brand-testnet/generalConfig.js,src/brand-traiex/generalConfig.js,src/brand-transexchange/generalConfig.js,src/brand-traxex/generalConfig.js,src/brand-walletdemo/generalConfig.js",
+			"",
+			"-*.json, -color.scheme.js",
+			"-*.json",
+			"",
+			"-sitemapConfig.js, -*.json",
+			"-sitemapConfig.js",
+			"-s9temapConfig.js",
+			"",
+			"-*.json",
+			"",
+			"src/i18n/en.json",
+			"",
+			"<current file>",
+			"",
+			"-*.env*",
+			"-*.env",
+			"",
+			"-*.vue, -generalConfig.js",
+			"-*.vue",
+			"*.vue",
+			"",
+			"supportConfig.js",
+			"",
+			"-*.svg, -legal/",
+			"-*.svg",
+			"",
+			"generalConfig.js",
+			"",
+			"-generalConfig.js",
+			"",
+			"generalConfig.js",
+			"-generalConfig.js",
+			"-*.json",
+			"",
+			"*.vue",
+			"-*.vue",
+			"",
+			"-*.svg, -*.png, -*icon*.*",
+			"-*.svg, -*.png",
+			"-*.svg",
+			"-*.json",
+			"",
+			"*.vue",
+			"",
+			"src/routes, src/router",
+			"",
+			"-*.json",
+			"",
+			"-footerConfig.js",
+			"",
+			"*.vue",
+			"",
+			"src/routes",
+			"src/route",
+			"src/router"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"btse",
+			"uab",
+			"UAB",
+			"--app--theme--legal-content-text-title-color",
+			"accent-red",
+			"src/brand/component/about-us/images/imageEcoDesktop.png",
+			"'../",
+			"FUTURES_DISCLAIMER_SIGNED",
+			"lo-LA",
+			"x. ",
+			"x.",
+			"`",
+			"FuturesDisclaimerDialog",
+			"/components/futures/futures-disclaimer",
+			"// ",
+			"/FuturesDisclaimerContent.v",
+			"setup",
+			"const renderer = ",
+			"/FuturesDisclaimerContent",
+			"futures.disclaimer.content",
+			"futures.disclaimer.content\n\n",
+			"\"continue\"",
+			"\"continue",
+			"\"accept",
+			"\"accept\"",
+			"\"accept",
+			"accept",
+			"FUTURES_DISCLAIMER_SIGNED",
+			"--real-100vh",
+			"height: calc(var(--vh) * 100);",
+			"height: 100vh;",
+			"100vh;",
+			"100vh",
+			"height: calc(var(--vh) * 100)",
+			"100vh",
+			"flatly-vacant-kitty.ngrok-free.dev",
+			"basicSsl",
+			"server: ",
+			"server",
+			"setVhProperty",
+			"--vh",
+			"560px",
+			"width",
+			"fullStyle",
+			" height",
+			"560",
+			"560px",
+			"width: 560px",
+			"position",
+			"BrandDialog",
+			"\n  ",
+			"position",
+			"template",
+			"bottom-fixed-panel",
+			"BottomFixedPanel",
+			"bottom-fixed-panel",
+			"100vh",
+			"create-ads-pre-modal",
+			"enableWalletCopyWise",
+			"appLink",
+			"apk",
+			"AppDownloadButton",
+			"AppDownloadButtonGroup",
+			"          ",
+			"appLink",
+			"AppDownloadButton",
+			"HEAD",
+			"' ",
+			"'head'",
+			"deeplink",
+			"-stage",
+			"lmex",
+			"app_version.txt",
+			"apk",
+			"appLink",
+			"onDownloadClick",
+			"apk",
+			"AppDownloadButton",
+			"buttonProps",
+			"downloadProps",
+			"buttonProps",
+			"AppDownloadButtonGroup",
+			"Monitor and manage your ",
+			"Monitor and manage your LMEX account while on the move",
+			"qrcode",
+			"apk",
+			"otherDropdownVisible",
+			"apk",
+			"AppIntro",
+			"/app'",
+			"/app",
+			"src/route",
+			"app-disabled",
+			"'app-disabled':",
+			"initializeVersionedApkUrl",
+			"resolveVersionedApkUrl",
+			"lmex",
+			"APP_DEEPLINK_URL",
+			"$",
+			"APK",
+			"appLinks",
+			"E1V6JFBYSK4TLJ",
+			"E26EQFIEKW8JQG",
+			"testnet",
+			"test.zmo.com",
+			"extend-color-scheme.less",
+			".base-dark-theme-set()",
+			".base-theme-set()",
+			".base-color-set()",
+			".theme()",
+			"// ",
+			"() {",
+			"@import",
+			"<style",
+			"--dropdown-toggle-color",
+			"--app--theme--radio-icon-bg-selected",
+			"--app--theme--radio-icon-bg",
+			"--radio-input-icon-background-color",
+			"--app--theme--radio-icon-bg",
+			"transparent",
+			"--app--theme--radio-icon-bg",
+			"--radio-input-icon-background-color",
+			"input-icon",
+			"background",
+			"name=\"whitelist\"",
+			"IconFail",
+			"img",
+			"IconFail"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"\\\"",
+			"HOW_TO_EXPRESS_BUY",
+			"isTradingRulesRiskLimitRequiredLogin",
+			"taskRewardsDesktopLoggedOutMastheadAlign",
+			"isAppPromoterBtnLoading",
+			"handleAppPromoterBtnClicked",
+			"description",
+			"extraLegalTabsFn",
+			"",
+			"websiteUrl}static_resource/$1/",
+			"",
+			"import bundleConfig from '@/brand/bundle/config.js'\nconst { websiteUrl } = bundleConfig\n",
+			"${websiteUrl}/",
+			"${websiteUrl}",
+			"",
+			"const metaDefaultImage = `${websiteUrl}${process.env.VUE_APP_BRAND_CDN_PATH}",
+			"`${VUE_APP_BRAND_CDN_PATH}btse/meta-image/meta-image.jpeg`,",
+			"const VUE_APP_BRAND_CDN_PATH = process.env.VUE_APP_BRAND_CDN_PATH",
+			"defaultCdnMetaTagImage",
+			"content-neutral-onColor-0",
+			"graph_green-onColor-400",
+			"graph_primary-onColor-400",
+			"graph_primary-onColor-300",
+			"content_primary-onColor-400",
+			"content_neutral-onColor-500",
+			"content_neutral-onColor-400",
+			"content_neutral-onColor-0-40a",
+			"content_neutral-onColor-0",
+			"content_onPrimary",
+			"compbg_hover-onColor-400",
+			"'t.verifyEmailAddress'",
+			"'t.logIn'",
+			"t.logIn",
+			"extend-color-scheme.less",
+			".theme() {\n  .generate-color-mixin(.color-set(), true);\n\n  .base-styleVariable-set();\n\n  .generate-color-mixin(.theme-set());",
+			".theme() {\n  .generate-color-mixin(.color-set(), true);\n\n  .base-styleVariable-set();",
+			".theme() {\n  .generate-color-mixin(.color-set(), true);\n\n  .base-styleVariable-set();\n",
+			"revolution-dark-tokens()",
+			".revolution-light-tokens()",
+			"// base-brand-set",
+			"--app--theme--radio-hollow-icon-bg-selected",
+			"--app--theme--radio-hollow-icon-bg",
+			"--app--theme--radio-hollow-icon-dot",
+			"variables",
+			"imageWithUserName",
+			"liveChatBot",
+			"",
+			"--custom-no-data-gap-between-img-and-text",
+			"--custom-no-data-container-height: auto;",
+			"--custom-no-data-container-height",
+			"--no-data-container-height",
+			"--account-panel-title-mobile-line-height-when-title-next-to-back_btn",
+			"resetUserQuizStatus",
+			"ResetUserQuizStatus",
+			"@/brand/",
+			"$t-parameters-check-in-js",
+			"enableRegisterReferralCode",
+			"--app--theme--basic-container-box-background",
+			"--app--theme--basic-container-content-box-login-form-link-button-text-color",
+			"--app-theme--login-form-link-button-text-color",
+			"--app--theme--basic-container-content-box-did-not-receive-code-text-color",
+			"--app--theme--basic-container-content-box-password-checklist-default-text-color",
+			"--app--theme--basic-container-content-box-form-field-title-block-default-text-color",
+			"--app--theme--basic-container-content-box-message-text-color",
+			"--app--theme--basic-container-content-box-text-button-color",
+			"--app--theme--basic-container-content-box-bg",
+			"--app--theme--login-form-link-button-text-color",
+			"--app--theme--basic-content-email-verification-code-text-color",
+			"--app--theme--basic-content-email-text-color",
+			"--app--theme--basic-content-box-message-text-color",
+			"--app--theme--basic-content-box-did-not-receive-code-text-color",
+			"--app--theme--basic-content-box-input-disabled-border-color",
+			"--brand-input-custom-inline-input-spelling-error-text-color",
+			"--app--theme--basic-content-box-forget-password-input-label-text-color",
+			"--custom-brand-button-button-type-text-text-color",
+			"--app--theme--basic-content-box-border",
+			"--app--theme--basic-content-box-backdrop-filter",
+			"--app--theme--basic-content-box-bg",
+			"--app--theme--basic-container-box-login-background",
+			"--app--theme--container-box-login-background",
+			"--app--theme--market-token-detail-market-trade-item-hover-bg",
+			"--brand-new-style-brand-input-wrapper-bg",
+			"--currency-dropdown-bar-icon-text-color",
+			"--app--theme--trading-rules-futures-trading-rule-table-row-hover-bg",
+			"--app--theme--trading-rules-futures-trading-rule-header-border-color",
+			"--app--theme--trading-rules-spot-future-table-header-bg",
+			"--app--theme--trading-rules-spot-future-table-header-text-color",
+			"--app--theme--trading-rules-search-filter-input-text-color",
+			"--app--theme--trading-rules-search-filter-placeholder-color",
+			"--app--theme--trading-rules-search-filter-icon-color",
+			"--app--theme--trading-rules-search-filter-bg",
+			"--app--theme--trading-rules-spot-markets-active-bar-color",
+			"--app--theme--trading-rules-spot-markets-text-color",
+			"--app--theme--trading-rules-main-title",
+			"--app--theme--trading-rules-market-type-tab-active-bar-color",
+			"--app--theme--all-in-one-orderbook-section-2n-1-bg",
+			"enableReferralCodeInputField",
+			"--app--theme--futures2-",
+			".with-reflection",
+			"--app--theme--futures2_0-landing-block-bg-img",
+			"getCopywiseMetaSharedImageUrl",
+			"@/composables/useDialog.js",
+			"enableSubscriptionAccount",
+			"subscription-account",
+			"SUBSCRIPTION_ACCOUNT",
+			"api/autoTradingSubscription.js",
+			"overMaxInvestAmount",
+			"focusInput",
+			"handleInputBlur",
+			"getSubscribeAutoTradingFee",
+			"subscribeAutoTrading",
+			"setInvestmentFeeTableLoading",
+			"",
+			"autoTradingMarketList",
+			"--app--theme--auto-trading-subscription-content-bg",
+			"--app--theme--auto-trading-subscription-bg",
+			"import tradingConfig from '@/brand/tradingConfig'",
+			"Platform",
+			"setIsScroll",
+			"--app--theme--global-search-default-result-title-text",
+			"--app--theme--global-search-text",
+			"--app--theme--global-search-background",
+			"@/components/grid-layout/GridLayoutComponent.vue",
+			"getCurrentSourceOfFundKycInfo",
+			"getSourceOfFundKycDraft",
+			"getSourceOfFundKycStatus",
+			"getSourceOfFundKycUserInfo",
+			"SOURCE_OF_FUND_KYC_"
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": false,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/Users/flyc.chung/btse/frontend"
+		}
+	],
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 78.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.LSP Log Panel":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.SublimeLinter":
+	{
+		"height": 330.0,
+		"history":
+		[
+		]
+	},
+	"output.SublimeLinter Messages":
+	{
+		"height": 438.0,
+		"history":
+		[
+		]
+	},
+	"output.diagnostics":
+	{
+		"height": 415.0,
+		"history":
+		[
+		]
+	},
+	"output.exec":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.find_results":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.git":
+	{
+		"height": 630.0,
+		"history":
+		[
+		]
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.my_custom_terminal":
+	{
+		"height": 124.0,
+		"history":
+		[
+		]
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"appv.ue",
+				"src/App.vue"
+			],
+			[
+				"appv.eu",
+				"src/views/referral-v2/affiliate/ApplyFormV2.vue"
+			],
+			[
+				"stagin .yml",
+				".gitlab-ci.staging-whitelabel-matrix.config.yml"
+			],
+			[
+				"src/brand-zmo/colorScheme/extend-color-scheme.less",
+				"src/brand-zmo/colorScheme/extend-color-scheme.less"
+			],
+			[
+				"zmo colo.js",
+				"src/brand-zmo/color.scheme.js"
+			],
+			[
+				"src/brand/component/about-us/images/imageEcoDesktop.png",
+				"src/brand/component/about-us/images/imageEcoDesktop.png"
+			],
+			[
+				"src/brand/views/about-us/css.less",
+				"src/brand/views/about-us/css.less"
+			],
+			[
+				"currencydop",
+				"src/components/fantasy-crypto/CurrencyDropdown.vue"
+			],
+			[
+				"futureindex.vue",
+				"src/views/trading/futures/index.vue"
+			],
+			[
+				"app.vu",
+				"src/App.vue"
+			],
+			[
+				"FuturesDisclaimerContent.vue",
+				"src/brand-bitqik/components/futures/futures-disclaimer/FuturesDisclaimerContent.vue"
+			],
+			[
+				"en.json",
+				"src/i18n/en.json"
+			],
+			[
+				"const.js",
+				"src/const.js"
+			],
+			[
+				"viewlist.",
+				"src/utils/viewedList.js"
+			],
+			[
+				"viteconfig.js",
+				"vite.config.js"
+			],
+			[
+				"BrandDialog",
+				"src/components/common/BrandDialog.vue"
+			],
+			[
+				"src/components/c2c/common/BottomFixedPanel.vue",
+				"src/components/c2c/common/BottomFixedPanel.vue"
+			],
+			[
+				"env.atpro",
+				"env/.env.atpro"
+			],
+			[
+				"zmo generalcon",
+				"src/brand-zmo/generalConfig.js"
+			],
+			[
+				"src/components/appDownloadButton/index.vue",
+				"src/components/appDownloadButton/index.vue"
+			],
+			[
+				"src/components/appDownloadButton/AppDownloadButtonGroup.vue",
+				"src/components/appDownloadButton/AppDownloadButtonGroup.vue"
+			],
+			[
+				"use .ts apk",
+				"src/composables/useApkDownloadUrl.ts"
+			],
+			[
+				"envco",
+				"config/envConfig.js"
+			],
+			[
+				"src/views/app-intro/AppIntro.vue",
+				"src/views/app-intro/AppIntro.vue"
+			],
+			[
+				"src/composables/useApkDownloadUrl.ts",
+				"src/composables/useApkDownloadUrl.ts"
+			],
+			[
+				"dev .yml",
+				".gitlab-ci.dev-whitelabel-matrix.config.yml"
+			],
+			[
+				"testnet yml",
+				".gitlab-ci.testnet-whitelabel-matrix.config.yml"
+			],
+			[
+				"production ",
+				".gitlab-ci.production-whitelabel-matrix.config.yml"
+			],
+			[
+				"stagin lemx",
+				".gitlab-ci.staging-whitelabel-matrix.config.yml"
+			],
+			[
+				"lmex e.vn",
+				"env/.env.lmex"
+			],
+			[
+				"appIntroConfig.js lmex",
+				"src/brand-lmex/appIntroConfig.js"
+			],
+			[
+				"appintroconfig.js",
+				"src/baseConfig/appIntroConfig.js"
+			],
+			[
+				"src/brand-fedhabit/colorScheme/extend-color-scheme.less",
+				"src/brand-fedhabit/colorScheme/extend-color-scheme.less"
+			],
+			[
+				".gitlab-ci.production-whitelabel-matrix.config.yml",
+				".gitlab-ci.production-whitelabel-matrix.config.yml"
+			],
+			[
+				"gitlabtest ",
+				".gitlab-ci.testnet-whitelabel-matrix.config.yml"
+			],
+			[
+				"baseConfig/colorScheme/basic-theme.less",
+				"src/baseConfig/colorScheme/basic-theme.less"
+			],
+			[
+				"extend",
+				"src/colorScheme/extend-color-scheme.less"
+			],
+			[
+				"colorScheme/revolution-foundation.less",
+				"src/colorScheme/revolution-foundation.less"
+			],
+			[
+				"colorScheme/revolution-token.less",
+				"src/colorScheme/revolution-token.less"
+			],
+			[
+				"colorScheme/extend-color-scheme.less",
+				"src/colorScheme/extend-color-scheme.less"
+			],
+			[
+				"colorScheme/theme.less",
+				"src/colorScheme/theme.less"
+			],
+			[
+				"assets/less/default.less",
+				"src/assets/less/default.less"
+			],
+			[
+				"theme-day/theme.less",
+				"src/assets/theme/theme-day/theme.less"
+			],
+			[
+				"assets/theme/theme.less",
+				"src/assets/theme/theme.less"
+			],
+			[
+				"app.vue",
+				"src/App.vue"
+			],
+			[
+				"basic theme .less",
+				"src/baseConfig/colorScheme/basic-theme.less"
+			],
+			[
+				"dropdownv2.vue",
+				"src/components/common/dropdown/DropdownV2.vue"
+			],
+			[
+				"zmo colorscheme",
+				"src/brand-zmo/color.scheme.js"
+			],
+			[
+				"src/components/common/radio/RadioInput.vue",
+				"src/components/common/radio/RadioInput.vue"
+			],
+			[
+				"src/components/account/sub-account/account-management/create-sub-account/AdvancedSettingsDialog.vue",
+				"src/components/account/sub-account/account-management/create-sub-account/AdvancedSettingsDialog.vue"
+			],
+			[
+				"brand-zmo/ .png",
+				"src/brand-zmo/assets/unsuccessful.png"
+			],
+			[
+				"package.json",
+				"package.json"
+			],
+			[
+				"currencyvalue",
+				"src/pages/wallets/common/earn/CurrencyValueBlock.vue"
+			],
+			[
+				"cellpayoutlock",
+				"src/pages/wallets/common/earn/CellPayoutDateTootipBlock.vue"
+			],
+			[
+				"tooltip.vue",
+				"src/components/common/Tooltip.vue"
+			],
+			[
+				"src/components/icons/IconLongShortArrow.vue",
+				"src/components/icons/IconLongShortArrow.vue"
+			],
+			[
+				"auto-trader-meta.png zmo",
+				"src/brand-zmo/component/copy-wise/auto-trader-meta.png"
+			],
+			[
+				"autot",
+				"src/brand-b2z/component/copy-wise/auto-trader-meta.png"
+			],
+			[
+				"package",
+				"package.json"
+			],
+			[
+				"app",
+				"src/App.vue"
+			],
+			[
+				"autotrader me b2z",
+				"src/brand-b2z/component/copy-wise/auto-trader-meta.png"
+			],
+			[
+				"brand/component/copy-wise/robot",
+				"src/brand-lmex/component/copy-wise/robot.png"
+			],
+			[
+				"zmo generalconfig.js",
+				"src/brand-zmo/generalConfig.js"
+			],
+			[
+				"src/components/header/headerTrack.ts",
+				"src/components/header/headerTrack.ts"
+			],
+			[
+				"packge",
+				"package.json"
+			],
+			[
+				"src/currencdropdown wallet",
+				"src/pages/wallets/common/WalletCurrencyDropdown.vue"
+			],
+			[
+				"sync.js",
+				"bin/color-revolution/sync.js"
+			],
+			[
+				"src/views/one-click-futures/components/trading-view-panel/SymbolDropdown.vue",
+				"src/views/one-click-futures/components/trading-view-panel/SymbolDropdown.vue"
+			],
+			[
+				"generalcin zmo",
+				"src/brand-zmo/generalConfig.js"
+			],
+			[
+				"home/ap.vue",
+				"src/brand/component/home/App.vue"
+			],
+			[
+				"zmo home.vue",
+				"src/brand-zmo/views/Home.vue"
+			],
+			[
+				"src/brand-zmo/component/home/App.vue",
+				"src/brand-zmo/component/home/App.vue"
+			],
+			[
+				"zmohome.vue",
+				"src/brand-zmo/views/Home.vue"
+			],
+			[
+				"otc.vue",
+				"src/views/Otc.vue"
+			],
+			[
+				"en.josn",
+				"src/i18n/en.json"
+			],
+			[
+				"zmo generalcoin",
+				"src/brand-zmo/generalConfig.js"
+			],
+			[
+				"config.js",
+				"src/config.js"
+			],
+			[
+				"views/BinaryOptions.vue",
+				"src/views/BinaryOptions.vue"
+			],
+			[
+				"views/UpOrDown.vue",
+				"src/views/UpOrDown.vue"
+			],
+			[
+				"src/components/payment/NetworkDropdown.vue",
+				"src/components/payment/NetworkDropdown.vue"
+			],
+			[
+				"serviceworker",
+				"src/service-worker.js"
+			],
+			[
+				"service-worker.js",
+				"service-worker.js"
+			],
+			[
+				"clevertap_sw.js",
+				"clevertap_sw.js"
+			],
+			[
+				"registerServiceWorker.js",
+				"src/registerServiceWorker.js"
+			],
+			[
+				"cleverta",
+				"src/brand-freedx/bundle/public/clevertap_sw.js"
+			],
+			[
+				"srcregisterser",
+				"src/registerServiceWorker.js"
+			],
+			[
+				"avatar",
+				"src/components/common/Avatar.vue"
+			],
+			[
+				"track basic",
+				"src/components/eventTracker/TrackerBasicClass.js"
+			],
+			[
+				"usetrack freeds.js",
+				"src/brand-freedx/components/useEventTracker.js"
+			],
+			[
+				"freedx ",
+				"env/.env.freedx-stage"
+			],
+			[
+				"clever",
+				"src/brand-freedx/bundle/public/clevertap_sw.js"
+			],
+			[
+				"usetrack freedx",
+				"src/brand-freedx/components/useEventTracker.js"
+			],
+			[
+				"useeventracker",
+				"src/brand-freedx/components/useEventTracker.js"
+			],
+			[
+				"containerindex.vue",
+				"src/pages/basic/container-box/index.vue"
+			],
+			[
+				"pnl dialog ",
+				"src/components/futures/SharePnlDialog.vue"
+			],
+			[
+				"clver_",
+				"src/brand-freedx/bundle/public/clevertap_sw.js"
+			],
+			[
+				"freedx usetracker",
+				"src/brand-freedx/components/useEventTracker.js"
+			],
+			[
+				"index.vue notfound",
+				"src/pages/notFound/index.vue"
+			],
+			[
+				"vite",
+				"vite.config.js"
+			],
+			[
+				"servicewor",
+				"src/registerServiceWorker.js"
+			],
+			[
+				"clevertap",
+				"src/brand-freedx/bundle/public/clevertap_sw.js"
+			],
+			[
+				"clevertap.js",
+				"src/components/eventTracker/CleverTap.js"
+			],
+			[
+				"freedx public",
+				"src/brand-freedx/bundle/public/favicon.ico"
+			],
+			[
+				"service-worker",
+				"src/service-worker.js"
+			],
+			[
+				"actions.js",
+				"src/store/actions.js"
+			],
+			[
+				"storeindex.js",
+				"src/store/index.js"
+			],
+			[
+				"trabasic",
+				"src/components/eventTracker/TrackerBasicClass.js"
+			],
+			[
+				"components/eventTracker/Appsflyer.",
+				"src/components/eventTracker/Appsflyer.js"
+			],
+			[
+				"env freedx",
+				"env/.env.freedx"
+			],
+			[
+				"env. freedx",
+				"env/.env.freedx"
+			],
+			[
+				"components/eventTracker/CleverTap.js",
+				"src/components/eventTracker/CleverTap.js"
+			],
+			[
+				"components/eventTracker/eventTrackerList.js",
+				"src/components/eventTracker/eventTrackerList.js"
+			],
+			[
+				"freedx useeventtracker",
+				"src/brand-freedx/components/useEventTracker.js"
+			],
+			[
+				"getter.js",
+				"src/store/getters.js"
+			],
+			[
+				"useheav3",
+				"src/components/header/composables/useHeaderConfigV3.js"
+			],
+			[
+				"useDesktopNav.js  bitkub",
+				"src/brand-bitqik/components/header/composables/useDesktopNav.js"
+			],
+			[
+				"usedesktopnav wlx",
+				"src/brand-wlx/components/header/composables/useDesktopNav.js"
+			],
+			[
+				"/brand/general",
+				"src/brand/generalConfig.js"
+			],
+			[
+				"/brand/generalcon",
+				"src/brand/generalConfig.js"
+			],
+			[
+				"useheav",
+				"src/components/header/composables/useHeaderConfigV3.js"
+			],
+			[
+				"generalConfig.js baseconf",
+				"src/baseConfig/generalConfig.js"
+			],
+			[
+				"generalconfig wlx",
+				"src/brand-wlx/generalConfig.js"
+			],
+			[
+				"usecombine",
+				"src/components/header/composables/useCombinedNavigationInfo.js"
+			],
+			[
+				"components/header/mobile-menu/MobileHeaderDropdown",
+				"src/components/header/mobile-menu/MobileHeaderDropdown.vue"
+			],
+			[
+				"usena cons",
+				"src/components/header/composables/useNavigationDisplay.js"
+			],
+			[
+				"wlx usenav",
+				"src/brand-wlx/components/header/composables/useDesktopNav.js"
+			],
+			[
+				"account/const.js components",
+				"src/components/account/const.js"
+			],
+			[
+				"/color.scheme.js /brand/",
+				"src/brand/color.scheme.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 502.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ww",
+				"~/flyc/sublime-project/ww-frontend-worktree.sublime-workspace"
+			],
+			[
+				"frontend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"ff",
+				"~/flyc/sublime-project/ff-worktree.sublime-workspace"
+			],
+			[
+				"fet",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"fetch",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"fec",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"mjml",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"email",
+				"~/flyc/sublime-project/email-worktree.sublime-workspace"
+			],
+			[
+				"chrome",
+				"~/flyc/sublime-project/chrome-extension.sublime-workspace"
+			],
+			[
+				"",
+				"~/flyc/sublime-project/ff-worktree.sublime-workspace"
+			],
+			[
+				"sublime fetch",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"fhrome",
+				"~/flyc/sublime-project/chrome-extension.sublime-workspace"
+			],
+			[
+				"static",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"fresh",
+				"~/flyc/sublime-project/freshdesk-btse-theme.sublime-workspace"
+			],
+			[
+				"fronten",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"chro",
+				"~/flyc/sublime-project/chrome-extension.sublime-workspace"
+			],
+			[
+				"mjmlemailtmeplate",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"ema",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"aws",
+				"~/flyc/sublime-project/aws-tools.sublime-workspace"
+			],
+			[
+				"sublimefetch",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"awst",
+				"~/flyc/sublime-project/aws-tools.sublime-workspace"
+			],
+			[
+				"sublim",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"sublimfe",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"btse",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"fresk",
+				"~/flyc/sublime-project/freshdesk-btse-theme.sublime-workspace"
+			],
+			[
+				"freshdeskbtsetheme",
+				"~/flyc/sublime-project/freshdesk-btse-theme.sublime-workspace"
+			],
+			[
+				"fred",
+				"~/flyc/sublime-project/freshdesk-btse-theme.sublime-workspace"
+			],
+			[
+				"fronted",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"fronte",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"frotned",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"sublm",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"stati",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"staticresource",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"meil",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"mjmlemailtemplate",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"btsestaticrsrouce",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"btsestati",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"btsestaticresouce",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"btsestat",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"btsestaticresource",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"btr",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"frontr",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"forntend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"frntend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"fe",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"mess",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"sulbim",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"fredsh",
+				"~/flyc/sublime-project/freshdesk-btse-theme.sublime-workspace"
+			],
+			[
+				"usb",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"subli",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"sublime",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"ee",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"us",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"lam",
+				"~/flyc/sublime-project/lambda-for-ssr.sublime-workspace"
+			],
+			[
+				"lambdaforsser",
+				"~/flyc/sublime-project/lambda-for-ssr.sublime-workspace"
+			],
+			[
+				"labm",
+				"~/flyc/sublime-project/lambda-for-ssr.sublime-workspace"
+			],
+			[
+				"lamb",
+				"~/flyc/sublime-project/lambda-for-ssr.sublime-workspace"
+			],
+			[
+				"sub",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"litt",
+				"~/flyc/sublime-project/little-tool.sublime-workspace"
+			],
+			[
+				"fech",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"lite",
+				"~/flyc/sublime-project/little-tool.sublime-workspace"
+			],
+			[
+				"subliefetch",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"little",
+				"~/flyc/sublime-project/little-tool.sublime-workspace"
+			],
+			[
+				"sublime fetch ",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"mail",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"sublime fet",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"sublime ",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"subliefe",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"lit",
+				"~/flyc/sublime-project/little-tool.sublime-workspace"
+			],
+			[
+				"fetc",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"litle",
+				"~/btse/little-tool/little-tool.sublime-workspace"
+			],
+			[
+				"sublie",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"s",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"sublimf",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"su",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"littletool",
+				"~/btse/little-tool/little-tool.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 29.0,
+		"last_filter": "defaultStartTradingClick",
+		"selected_items":
+		[
+			[
+				"defaultStartTradingClick",
+				"defaultStartTradingClick"
+			],
+			[
+				"them",
+				"theme"
+			],
+			[
+				"routeneed",
+				"routeNeededParams"
+			],
+			[
+				"currentHeaderLogoTheme",
+				"currentHeaderLogoTheme"
+			],
+			[
+				"",
+				"logo"
+			],
+			[
+				"fetchAdvancedKycStatus",
+				"fetchAdvancedKycStatus"
+			],
+			[
+				"isadvanced",
+				"isNeededAdvancedKycFlow"
+			],
+			[
+				"titleMetaGenerator",
+				"titleMetaGenerator"
+			],
+			[
+				"getcdn",
+				"getCdnImgPath"
+			],
+			[
+				"isSupportWebp",
+				"isSupportWebp"
+			],
+			[
+				"gettaskover",
+				"getTaskOverview"
+			],
+			[
+				"handlemeta",
+				"handleMetaVersion"
+			],
+			[
+				"descriptionMetaGenerator",
+				"descriptionMetaGenerator"
+			],
+			[
+				"rewardHubFaQList",
+				"rewardHubFaQList"
+			],
+			[
+				"getmeta",
+				"getMeta"
+			],
+			[
+				"setWalletData",
+				"setWalletData"
+			],
+			[
+				"getAllowedCurrencyList",
+				"getAllowedPlatformCurrencyTypeList"
+			],
+			[
+				"c2cInitInfo",
+				"setC2CInitInfo"
+			],
+			[
+				"getAllowedPlatformCurrencyTypeList",
+				"getAllowedPlatformCurrencyTypeList"
+			],
+			[
+				"routfinal",
+				"routeFinalFilter"
+			],
+			[
+				"setTargetRewardCard",
+				"setTargetRewardCard"
+			],
+			[
+				"appIsReconnecting",
+				"appIsReconnecting"
+			],
+			[
+				"checkIsVerifiedMerchantWebsite",
+				"checkIsVerifiedMerchantWebsite"
+			],
+			[
+				"checkisverfimerc",
+				"checkIsVerifiedMerchantWebsite"
+			],
+			[
+				"getDisplayActionMap",
+				"getDisplayActionMap"
+			],
+			[
+				"setwalletAction",
+				"setWalletAction"
+			],
+			[
+				"isEmailNotVerified",
+				"isEmailNotVerified"
+			],
+			[
+				"isBsKyc",
+				"isBsKyc"
+			],
+			[
+				"userVerifyStatus",
+				"setUserVerifyStatus"
+			],
+			[
+				"allowst",
+				"allowSendTo"
+			],
+			[
+				"currencyMap",
+				"currencyMap"
+			],
+			[
+				"$mq",
+				"$mq"
+			],
+			[
+				"generateSupportUrl",
+				"getGenerateSupportUrl"
+			],
+			[
+				"generateli",
+				"generateList"
+			],
+			[
+				"showlogos",
+				"showDebitCardLogos"
+			],
+			[
+				"debitCardLinks",
+				"debitCardLinks"
+			],
+			[
+				"checkemail",
+				"checkEmail"
+			],
+			[
+				"getroutelist",
+				"getRouteList"
+			],
+			[
+				"getroulist",
+				"getRouteList"
+			],
+			[
+				"geroutelist",
+				"getRouteList"
+			],
+			[
+				"getroutlist",
+				"getRouteList"
+			],
+			[
+				"getroute",
+				"getRoute"
+			],
+			[
+				"isEnableUnifiedWalletUpgrade",
+				"isEnableUnifiedWalletUpgrade"
+			],
+			[
+				"onStorageChange",
+				"onStorageChange"
+			],
+			[
+				"isVerificationBySmsOtp",
+				"isVerificationBySmsOtp"
+			],
+			[
+				"getAffiliateApplication",
+				"getAffiliateApplication"
+			],
+			[
+				"isAffiliateUser",
+				"isAffiliateUser"
+			],
+			[
+				"setAffiliateApplication",
+				"setAffiliateApplication"
+			],
+			[
+				"isAffiliateApplied",
+				"isAffiliateApplied"
+			],
+			[
+				"setWindowHeight",
+				"setWindowHeight"
+			],
+			[
+				"userLoginStatus",
+				"userLoginStatus"
+			],
+			[
+				"onDrawerImgTab",
+				"onDrawerImgTab"
+			],
+			[
+				"isUnifiedWallet",
+				"isUnifiedWallet"
+			],
+			[
+				"isunifiedwallet",
+				"isUnifiedWallet"
+			]
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"lsp_show_inlay_hints": false
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 260.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

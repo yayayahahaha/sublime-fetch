@@ -1,0 +1,2851 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ctokencomb",
+				"ctoken-compbg-neutral-500"
+			],
+			[
+				"watch",
+				"watch"
+			],
+			[
+				"--",
+				"--neutral-white"
+			],
+			[
+				"ctokencontentprimary",
+				"ctoken-content-primary-400"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"combg400",
+				"ctoken-compbg-neutral-400"
+			],
+			[
+				"border-50",
+				"ctoken-border-neutral-50"
+			],
+			[
+				"ctoken400",
+				"ctoken-content-neutral-400"
+			],
+			[
+				"borer5",
+				"ctoken-border-neutral-50"
+			],
+			[
+				"ctoken6",
+				"ctoken-sysbg-neutral-600"
+			],
+			[
+				"ctoken600",
+				"ctoken-sysbg-neutral-600"
+			],
+			[
+				"ctokenneu40",
+				"ctoken-content-neutral-400"
+			],
+			[
+				"header",
+				"HEADER_NEEDED_THEME_KEYS"
+			],
+			[
+				"border400",
+				"ctoken-border-primary-400"
+			],
+			[
+				"ctokenlinkp",
+				"ctoken-link-primary-400"
+			],
+			[
+				"neutral400",
+				"ctoken-sysbg-neutral-400"
+			],
+			[
+				"ctokenne300",
+				"ctoken-compbg-neutral-300"
+			],
+			[
+				"backgrou",
+				"background-color"
+			],
+			[
+				"ctokenconprimary",
+				"ctoken-content-primary-500"
+			],
+			[
+				"ctokebgprimary",
+				"ctoken-compbg-primary-600"
+			],
+			[
+				"--content",
+				"--content-onPrimary"
+			],
+			[
+				"ctokenbgprimary",
+				"ctoken-compbg-primary-600"
+			],
+			[
+				"ctokencompbghover",
+				"ctoken-compbg-hover-400"
+			],
+			[
+				"find",
+				"find"
+			],
+			[
+				"--hover",
+				"--compbg-hover-400"
+			],
+			[
+				"ctokencom400",
+				"ctoken-compbg-neutral-400"
+			],
+			[
+				"ctokenlink",
+				"ctoken-link-primary-400"
+			],
+			[
+				"sys",
+				"ctoken-sysbg-neutral-300"
+			],
+			[
+				"combhover400",
+				"ctoken-compbg-hover-400"
+			],
+			[
+				"ctokenneutral",
+				"ctoken-neutral-white-dark-40a"
+			],
+			[
+				"ctokenprim400",
+				"ctoken-link-primary-400"
+			],
+			[
+				"link",
+				"ctoken-link-primary-400"
+			],
+			[
+				"contentonprimar",
+				"--content-onPrimary"
+			],
+			[
+				"contentneu500",
+				"ctoken-content-neutral-500"
+			],
+			[
+				"--primary",
+				"--content-onPrimary"
+			],
+			[
+				"--color-primar",
+				"app--color--primary-light"
+			],
+			[
+				"--color",
+				"app--color--denim-light"
+			],
+			[
+				"taskand",
+				"TASKS_AND_REWARDS_ALL_REWARDS"
+			],
+			[
+				"routename",
+				"ROUTE_NAME"
+			],
+			[
+				"icongif",
+				"IconGift"
+			],
+			[
+				"task",
+				"TASKS_AND_REWARDS_ALL_REWARDS"
+			],
+			[
+				"IconGif",
+				"IconGift"
+			],
+			[
+				"allres",
+				"TASKS_AND_REWARDS_ALL_REWARDS"
+			],
+			[
+				"oncolor",
+				"ctoken-content-primary-onColor-400"
+			],
+			[
+				"contenton",
+				"ctoken-content-neutral-onColor-400"
+			],
+			[
+				"style",
+				"style lang=\"less\""
+			],
+			[
+				"border",
+				"ctoken-border-neutral-100"
+			],
+			[
+				"sysneu40",
+				"--sysbg-neutral-400"
+			],
+			[
+				"sys400",
+				"ctoken-sysbg-neutral-400"
+			],
+			[
+				"bor100",
+				"ctoken-border-neutral-100"
+			],
+			[
+				"cote400",
+				"ctoken-content-neutral-400"
+			],
+			[
+				"ctokencomb500",
+				"ctoken-compbg-neutral-500"
+			],
+			[
+				"ctokenonprimar",
+				"ctoken-content-onPrimary"
+			],
+			[
+				"ver",
+				"verification-mobile-text"
+			],
+			[
+				"--sysbg-neutral-",
+				"--sysbg-neutral-600"
+			],
+			[
+				"--comb40",
+				"--compbg-neutral-400"
+			],
+			[
+				"--sysg",
+				"--sysbg-neutral-400"
+			],
+			[
+				"conten",
+				"content-neutral-400"
+			],
+			[
+				"content",
+				"content-neutral-800"
+			],
+			[
+				"sysbg",
+				"--sysbg-neutral-600"
+			],
+			[
+				"--app--color--",
+				"--app--color--denim"
+			],
+			[
+				"--lighter",
+				"--app--color--blue-grey-lighter"
+			],
+			[
+				"--appbluegre",
+				"--app--color--blue-grey-dark"
+			],
+			[
+				"ctokenhover40",
+				"ctoken-compbg-hover-400"
+			],
+			[
+				"--sys",
+				"--sysbg-neutral-200"
+			],
+			[
+				"--sysbg",
+				"--sysbg-neutral-200"
+			],
+			[
+				"--content-",
+				"--content-neutral-500"
+			],
+			[
+				"ctokenhover",
+				"ctoken-compbg-hover-400"
+			],
+			[
+				"border-left",
+				"border-left-color"
+			],
+			[
+				"ctokencom",
+				"ctoken-compbg-neutral-400"
+			],
+			[
+				"ctokencomhover",
+				"ctoken-compbg-hover-400"
+			],
+			[
+				"stylelsco",
+				"style lang=\"less\" scoped"
+			],
+			[
+				"neutralon",
+				"ctoken-content-neutral-onColor-400"
+			],
+			[
+				"ctokensysbg400",
+				"ctoken-sysbg-neutral-400"
+			],
+			[
+				"ctokensys400",
+				"ctoken-sysbg-neutral-400"
+			],
+			[
+				"ctokenlinpri",
+				"ctoken-link-primary-400"
+			],
+			[
+				"ctokensys",
+				"ctoken-sysbg-neutral-200"
+			],
+			[
+				"ctokenprimary",
+				"ctoken-link-primary-400"
+			],
+			[
+				"compbnea",
+				"ctoken-compbg-neutral-400"
+			],
+			[
+				"combgnetr",
+				"ctoken-compbg-neutral-600"
+			],
+			[
+				"primar40",
+				"ctoken-sysbg-primary-400"
+			],
+			[
+				"ctokenn400",
+				"ctoken-sysbg-neutral-400"
+			],
+			[
+				"contentprimary",
+				"ctoken-content-onPrimary"
+			],
+			[
+				"combgne500",
+				"ctoken-compbg-neutral-500"
+			],
+			[
+				"consys",
+				"ctoken-sysbg-neutral-400"
+			],
+			[
+				"comp",
+				"ctoken-compbg-neutral-400"
+			],
+			[
+				"ctoken200",
+				"ctoken-sysbg-neutral-200"
+			],
+			[
+				"ctoken500",
+				"ctoken-content-neutral-500"
+			],
+			[
+				"ctokencomp",
+				"ctoken-compbg-neutral-300"
+			],
+			[
+				"--compbg-neu",
+				"--compbg-neutral-300"
+			],
+			[
+				"cotken500",
+				"ctoken-content-neutral-500"
+			],
+			[
+				"ctokencompbg",
+				"ctoken-compbg-neutral-300"
+			],
+			[
+				"ctokensysbg",
+				"ctoken-sysbg-neutral-200"
+			],
+			[
+				"ctokencombg300",
+				"ctoken-compbg-neutral-300"
+			],
+			[
+				"ctokenbg300",
+				"ctoken-sysbg-neutral-300"
+			],
+			[
+				"ctokenbg400",
+				"ctoken-sysbg-neutral-400"
+			],
+			[
+				"combg500",
+				"ctoken-compbg-neutral-500"
+			],
+			[
+				"ctokenborder",
+				"ctoken-border-primary-400"
+			],
+			[
+				"ctokencontenprim",
+				"ctoken-content-onPrimary"
+			],
+			[
+				"contentprimar",
+				"ctoken-content-onPrimary"
+			],
+			[
+				"ctokenlinpr0",
+				"ctoken-link-primary-400"
+			],
+			[
+				"ctokencotneprimar",
+				"ctoken-content-primary-500"
+			],
+			[
+				"ctokenne50",
+				"ctoken-content-neutral-500"
+			],
+			[
+				"ctokenneutral50",
+				"ctoken-content-neutral-500"
+			],
+			[
+				"ctokenneutral500",
+				"ctoken-content-neutral-500"
+			],
+			[
+				"--app--co",
+				"--app--color--primary"
+			],
+			[
+				"ctokennr400",
+				"ctoken-content-neutral-400"
+			],
+			[
+				"neutral",
+				"--content-neutral-800"
+			],
+			[
+				"--content-neutra",
+				"--content-neutral-500"
+			],
+			[
+				"ctokenne500",
+				"ctoken-content-neutral-500"
+			],
+			[
+				"ctokenlinkpri",
+				"ctoken-link-primary-400"
+			],
+			[
+				"content400",
+				"ctoken-content-neutral-400"
+			],
+			[
+				"ctokennetrual",
+				"ctoken-content-neutral-400"
+			],
+			[
+				"ctokenconteprima",
+				"ctoken-content-primary-400"
+			],
+			[
+				"ctokenconte500",
+				"ctoken-content-neutral-500"
+			],
+			[
+				"ctokencontent500",
+				"ctoken-content-neutral-500"
+			],
+			[
+				"cotent",
+				"--content-neutral-500"
+			],
+			[
+				"ctokenconten400",
+				"ctoken-content-neutral-400"
+			],
+			[
+				"ctokencontent400",
+				"ctoken-content-neutral-400"
+			],
+			[
+				"ctoken-sysbg",
+				"ctoken-sysbg-neutral-600"
+			],
+			[
+				"nll",
+				"null"
+			],
+			[
+				"telegra",
+				"telegramUrl"
+			],
+			[
+				"currentheader",
+				"currentHeaderLogoTheme"
+			],
+			[
+				"exter",
+				"EXTERNAL_URL"
+			],
+			[
+				"supporttype",
+				"SupportArticleType"
+			],
+			[
+				"parent",
+				"parentChain"
+			],
+			[
+				"update",
+				"updateComputedCode"
+			],
+			[
+				"search",
+				"searchParams"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "更新 Email, 順序的話可以看 commit 的順序\n> logo 的尺寸會需要額外先去 figma 找\n> 其他像是 support links 的部分也要去 jira 的其他單上找\n\nstatic resource 的部分比較麻煩，因為會跟著 staging branch 上的 yml 的 brand list 走，所以要想一下部署順序。\n> 但至少最開始的那個 domain 會可以作用\n> 可以先複製 wlx, 然後替換 png 和 svg 的共 4 個 logo 嘗試\n\n\n",
+			"settings":
+			{
+				"buffer_size": 245,
+				"line_ending": "Unix",
+				"name": "更新 Email, 順序的話可以看 commit 的順序"
+			},
+			"undo_stack":
+			[
+				[
+					1,
+					1,
+					"paste",
+					null,
+					"AQAAAAAAAAAAAAAA9QAAAAAAAAAAAAAA",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+				]
+			]
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"selectcolor",
+				"UI: Select Color Scheme"
+			],
+			[
+				"gitaddcurrent file",
+				"Git: Add Current File"
+			],
+			[
+				"fc eslint",
+				"FC: Run ESLint Fix (執行 ESLint 修復)"
+			],
+			[
+				"fc: styleint",
+				"FC: Run Stylelint Fix (執行 Stylelint 修復)"
+			],
+			[
+				"lint staged",
+				"FC: Lint Staged Files (修復 Git 已暫存的檔案 - ESLint & Stylelint)"
+			],
+			[
+				"move",
+				"File: Move"
+			],
+			[
+				"scope",
+				"Color Scheme Editor: Goto next matching scope"
+			],
+			[
+				"side",
+				"Preferences: JsPrettier Settings - Side-by-Side"
+			],
+			[
+				"duplicate",
+				"File: Duplicate"
+			],
+			[
+				"sort",
+				"Sort Lines"
+			],
+			[
+				"uniq",
+				"Permute Lines: Unique"
+			],
+			[
+				"bor",
+				"Snippet: style-border"
+			],
+			[
+				"comare",
+				"Compare with..."
+			],
+			[
+				"compares",
+				"Compare selections"
+			],
+			[
+				"git custom",
+				"Git: Custom Command"
+			],
+			[
+				"gti chec",
+				"Git: Checkout Current File"
+			],
+			[
+				"git checkoutucre",
+				"Git: Checkout Current File"
+			],
+			[
+				"git checkout current file",
+				"Git: Checkout Current File"
+			],
+			[
+				"gticheckout",
+				"Git: Checkout Current File"
+			],
+			[
+				"fc: stage ",
+				"FC: Lint Staged Files (修復 Git 已暫存的檔案 - ESLint & Stylelint)"
+			],
+			[
+				"fc staged",
+				"FC: Lint Staged Files (修復 Git 已暫存的檔案 - ESLint & Stylelint)"
+			],
+			[
+				"fc: ",
+				"FC: Git Fold Conflicts (折疊 Git 衝突區塊內容)"
+			],
+			[
+				"git add curren tfile",
+				"Git: Add Current File"
+			],
+			[
+				"git add currnet file",
+				"Git: Add Current File"
+			],
+			[
+				"fc: sytli",
+				"FC: Run Stylelint Fix (執行 Stylelint 修復)"
+			],
+			[
+				"gticheckout cur",
+				"Git: Checkout Current File"
+			],
+			[
+				"stylelint",
+				"FC: Run Stylelint Fix (執行 Stylelint 修復)"
+			],
+			[
+				"compare",
+				"Compare selections"
+			],
+			[
+				"comaprewi",
+				"Compare with..."
+			],
+			[
+				"comafre",
+				"FindKeyConflicts: All Key Maps to Buffer"
+			],
+			[
+				"packagelist",
+				"Package Control: List Packages"
+			],
+			[
+				"com",
+				"Compare with..."
+			],
+			[
+				"gtiadd currentfile",
+				"Git: Add Current File"
+			],
+			[
+				"delete",
+				"File: Delete"
+			],
+			[
+				"conver",
+				"ColorConverter: Convert to rgb"
+			],
+			[
+				"ssle",
+				"Set Syntax: Less"
+			],
+			[
+				"converr",
+				"ColorConverter: Convert to rgb"
+			],
+			[
+				"convertrg",
+				"ColorConverter: Convert to rgb"
+			],
+			[
+				"convert",
+				"ColorConverter: Convert to hwb"
+			],
+			[
+				"ssless",
+				"Set Syntax: Less"
+			],
+			[
+				"converttorg",
+				"ColorConverter: Convert to rgb"
+			],
+			[
+				"colorconvert rgb",
+				"ColorConverter: Convert to rgb"
+			],
+			[
+				"reload",
+				"SublimeLinter: Reload SublimeLinter and its Plugins"
+			],
+			[
+				"conhex",
+				"ColorConverter: Copy as hex"
+			],
+			[
+				"git checkout current",
+				"Git: Checkout Current File"
+			],
+			[
+				"ssbash",
+				"Set Syntax: Bash"
+			],
+			[
+				"git checkr",
+				"Git: Checkout Current File"
+			],
+			[
+				"gtiaddcure",
+				"Git: Add Current File"
+			],
+			[
+				"openfile",
+				"FC: Open Files by Regex (使用正規表達式批次開啟檔案)"
+			],
+			[
+				"fcopen",
+				"FC: Open Files by Regex (使用正規表達式批次開啟檔案)"
+			],
+			[
+				"convethe",
+				"ColorConverter: Convert to hex"
+			],
+			[
+				"converhex",
+				"ColorConverter: Copy as hex"
+			],
+			[
+				"gtichecu",
+				"Git: Checkout Current File"
+			],
+			[
+				"fc stage",
+				"FC: Lint Staged Files (修復 Git 已暫存的檔案 - ESLint & Stylelint)"
+			],
+			[
+				"fc sta",
+				"FC: Lint Staged Files (修復 Git 已暫存的檔案 - ESLint & Stylelint)"
+			],
+			[
+				"staged",
+				"FC: Lint Staged Files (修復 Git 已暫存的檔案 - ESLint & Stylelint)"
+			],
+			[
+				"restart",
+				"LSP: Restart Server"
+			],
+			[
+				"trackremote",
+				"Git: Track Remote Branch"
+			],
+			[
+				"gitpullre",
+				"Git: Pull Using Rebase"
+			],
+			[
+				"gitaddcurent",
+				"Git: Add Current File"
+			],
+			[
+				"dup",
+				"File: Duplicate"
+			],
+			[
+				"gticheckoutcure",
+				"Git: Checkout Current File"
+			],
+			[
+				"gtiadd",
+				"Git: Add Current File"
+			],
+			[
+				"gtiaddcurrent",
+				"Git: Add Current File"
+			],
+			[
+				"gitaddcurrent",
+				"Git: Add Current File"
+			],
+			[
+				"gitad",
+				"Git: Add Current File"
+			],
+			[
+				"gitaddcurne",
+				"Git: Add Current File"
+			],
+			[
+				"border",
+				"Snippet: css-border"
+			],
+			[
+				"convertrgb",
+				"ColorConverter: Convert to rgb"
+			],
+			[
+				"git checkoutu",
+				"Git: Checkout Current File"
+			],
+			[
+				"gitaddcr",
+				"Git: Add Current File"
+			],
+			[
+				"ssjs",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"format",
+				"LSP: Format File"
+			],
+			[
+				"comparewi",
+				"Compare with..."
+			],
+			[
+				"comapre",
+				"Compare with..."
+			],
+			[
+				"gitchrue",
+				"Git: Checkout Current File"
+			],
+			[
+				"gtichcure",
+				"Git: Checkout Current File"
+			],
+			[
+				"ssjson",
+				"Set Syntax: JSON"
+			],
+			[
+				"gitaddcuren",
+				"Git: Add Current File"
+			],
+			[
+				"sshtml",
+				"Set Syntax: HTML"
+			],
+			[
+				"compasec",
+				"Compare selections"
+			],
+			[
+				"comparese",
+				"Compare selections"
+			],
+			[
+				"git checkut curret",
+				"Git: Checkout Current File"
+			],
+			[
+				"trackremo",
+				"Git: Track Remote Branch"
+			],
+			[
+				"track",
+				"Git: Track Remote Branch"
+			],
+			[
+				"gti checcure",
+				"Git: Checkout Current File"
+			],
+			[
+				"staged fc:",
+				"FC: Lint Staged Files (修復 Git 已暫存的檔案 - ESLint & Stylelint)"
+			],
+			[
+				"fc openre",
+				"FC: Open Files by Regex (使用正規表達式批次開啟檔案)"
+			],
+			[
+				"opensele",
+				"FC: Open Selected File Names (開啟選取範圍中的所有檔案)"
+			],
+			[
+				"openselec",
+				"FC: Open Selected File Names (開啟選取範圍中的所有檔案)"
+			],
+			[
+				"fc: open",
+				"FC: Open Selected File Names (開啟選取範圍中的所有檔案)"
+			],
+			[
+				"gtichecou",
+				"Git: Checkout Current File"
+			],
+			[
+				"git checkoutn",
+				"Git: Checkout Current File"
+			],
+			[
+				"lspenable",
+				"LSP: Enable Language Server Globally"
+			],
+			[
+				"lspdisable",
+				"LSP: Disable Language Server Globally"
+			],
+			[
+				"disable globall",
+				"LSP: Disable Language Server Globally"
+			],
+			[
+				"lsp server",
+				"LSP: Enable Language Server in Project"
+			],
+			[
+				"lsp ser",
+				"LSP: Enable Language Server Globally"
+			],
+			[
+				"git show ",
+				"Git: Show Commit By Hash"
+			],
+			[
+				"gitaddcure",
+				"Git: Add Current File"
+			],
+			[
+				"gtichecure",
+				"Git: Checkout Current File"
+			],
+			[
+				"gticheckoutcurrentfile",
+				"Git: Checkout Current File"
+			],
+			[
+				"gtiaddcurr",
+				"Git: Add Current File"
+			],
+			[
+				"sscss",
+				"Set Syntax: SCSS"
+			],
+			[
+				"fold",
+				"Fold Comments"
+			],
+			[
+				"gitaddcurrentfile",
+				"Git: Add Current File"
+			],
+			[
+				"seleccol",
+				"UI: Select Color Scheme"
+			],
+			[
+				"gtiche",
+				"Git: Checkout Current File"
+			],
+			[
+				"gtichk",
+				"Git: Checkout Current File"
+			],
+			[
+				"git checkoutcurrent file",
+				"Git: Checkout Current File"
+			],
+			[
+				"trackremotebranch",
+				"Git: Track Remote Branch"
+			],
+			[
+				"comparetih",
+				"Compare with..."
+			],
+			[
+				"rename",
+				"File: Rename"
+			],
+			[
+				"delte",
+				"File: Delete"
+			],
+			[
+				"git checkoutcure",
+				"Git: Checkout Current File"
+			],
+			[
+				"bore",
+				"Local History: Browse in Explorer"
+			],
+			[
+				"git add current file",
+				"Git: Add Current File"
+			],
+			[
+				"gtiaddcurrentfile",
+				"Git: Add Current File"
+			],
+			[
+				"git chec",
+				"Git: Checkout Current File"
+			],
+			[
+				"vuetr",
+				"Snippet: vue-structure"
+			],
+			[
+				"ssdoten",
+				"Set Syntax: DotENV"
+			],
+			[
+				"ssdot",
+				"Set Syntax: DotENV"
+			],
+			[
+				"vuestru",
+				"Snippet: vue-structure"
+			],
+			[
+				"disabl",
+				"LSP: Disable Language Server in Project"
+			],
+			[
+				"ssdnot",
+				"Set Syntax: DotENV"
+			],
+			[
+				"gitadcure",
+				"Git: Add Current File"
+			],
+			[
+				"gti checkout current file",
+				"Git: Checkout Current File"
+			],
+			[
+				"book",
+				"Bookmarks: Toggle"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 319.0,
+		"history":
+		[
+			"Clean",
+			"CLEAN",
+			"clean"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/flyc.chung/btse/ff-worktree",
+		"/Users/flyc.chung/btse/ff-worktree/bin",
+		"/Users/flyc.chung/btse/ff-worktree/bin/color-revolution",
+		"/Users/flyc.chung/btse/ff-worktree/src",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-pixbit",
+		"/Users/flyc.chung/btse/ff-worktree/tools"
+	],
+	"file_history":
+	[
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-zmo/views/Home.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/pages/wallets/desktop/transaction-history/deposit-and-withdraw/DepositAndWithdraw.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/pages/wallets/mobile/transaction-history/deposit-and-withdraw/DepositAndWithdraw.vue",
+		"/Users/flyc.chung/btse/ff-worktree/bin/color-revolution/stylelint-plugin/rules/prop-requires-fallback.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/header/headerConfig.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/baseConfig/routeConfig.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand/generalConfig.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/routes/event.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/home/market-table/MarketTable.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-bitqik/component/legal/TermsAndConditions.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/legal/composables/useLegal.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/cny-earn-campaign/TermsAndConditions.vue",
+		"/Users/flyc.chung/btse/ff-worktree/tests/unit/color-revolution/stylelint-plugin/secondary-options-schema.spec.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-b2z/assets/app-preview.png",
+		"/Users/flyc.chung/btse/ff-worktree/bin/color-revolution/sync.js",
+		"/Users/flyc.chung/btse/ff-worktree/bin/color-revolution/figma-plugin/manifest.json",
+		"/Users/flyc.chung/btse/ff-worktree/.stylelintrc",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/futures/order-management/CancelAllButton.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-nvx/supportConfig.js",
+		"/Users/flyc.chung/btse/ff-worktree/package.json",
+		"/Users/flyc.chung/btse/ff-worktree/.gitlab-ci.staging-whitelabel-matrix.config.yml",
+		"/Users/flyc.chung/btse/ff-worktree/bin/color-revolution/stylelint-plugin/rules/no-token-property-mismatch.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/baseConfig/colorScheme/basic-theme.less",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-fedhabit/component/Footer.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-atpro/component/how-it-works/Banner.vue",
+		"/Users/flyc.chung/btse/ff-worktree/bin/color-revolution/stylelint-plugin/index.js",
+		"/Users/flyc.chung/btse/ff-worktree/bin/color-revolution/stylelint-plugin/rules/no-legacy-color-var.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/App.vue",
+		"/Users/flyc.chung/btse/ff-worktree/tools/affected-paths-ui/client/src/App.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/futures/order-management/orders/Orders.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/views/trading/futures/index.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/views/trading/futures/widgets/trade/FuturesMarginInfoList.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/utils/context-helper.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-zmo/LoginPromotion.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-pixbit/routeConfig.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-btzo/router/index.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/utils/routerUtils.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-zmo/routeConfig.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand/README.md",
+		"/Users/flyc.chung/btse/ff-worktree/tools/tag-suggester/README.md",
+		"/Users/flyc.chung/btse/ff-worktree/src/pages/history/spot/desktop/history-spot-summary/SpotSummary.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/store/index.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/baseConfig/generalConfig.js",
+		"/Users/flyc.chung/btse/ff-worktree/tools/tag-suggester/precise-routes.mjs",
+		"/Users/flyc.chung/btse/ff-worktree/tools/tag-suggester/output/flag-routes-precise.btse.87bdcd45dd.json",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-altex/components/header/composables/useDesktopNav.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-altex/components/header/composables/useMobileNav.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/baseConfig/accountConfig.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/store/getters.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-bullstreet/accountConfig.js",
+		"/Users/flyc.chung/btse/ff-worktree/tools/tag-suggester/output/flag-routes-pivot.btse.b1ea92634f.56dfb37c.json",
+		"/Users/flyc.chung/btse/ff-worktree/tools/tag-suggester/output/flag-routes-pivot.btse.1c7d4303f6.json",
+		"/Users/flyc.chung/btse/ff-worktree/src/routes/wallets/accountStatement.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/pages/wallets/common/WalletNav.vue",
+		"/Users/flyc.chung/btse/ff-worktree/tools/tag-suggester/output/flag-classification.btse.b1ea92634f.56dfb37c.json",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/header/composables/useHeaderConfigV3.ts",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/account-statement/Filters.vue",
+		"/Users/flyc.chung/btse/ff-worktree/tools/tag-suggester/output/flag-routes.btse.1c7d4303f6.md",
+		"/Users/flyc.chung/btse/ff-worktree/tools/tag-suggester/output/flag-routes.btse.0fb96557c7.c0ce5a00.md",
+		"/Users/flyc.chung/btse/ff-worktree/convert-snippets-to-sublime.js",
+		"/Users/flyc.chung/btse/ff-worktree/sublime-text-snippet-format.json",
+		"/Users/flyc.chung/btse/ff-worktree/.vscode/color-scheme.code-snippets",
+		"/Users/flyc.chung/btse/ff-worktree/scripts/convert-snippets-to-sublime.js",
+		"/Users/flyc.chung/btse/ff-worktree/bin/whitelabel-generator/utils/script.mjs",
+		"/Users/flyc.chung/btse/ff-worktree/src/views/trading/spot/order-form/order-dca/index.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/colorScheme/revolution-token.less",
+		"/Users/flyc.chung/btse/ff-worktree/src/colorScheme/revolution-parent.less",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/futures/order-management/positions/Positions.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/views/trading-bot/History.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/markets/markets-table/FuturesPromoIcon.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-coyx/generalConfig.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-nvx/generalConfig.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-atpro/generalConfig.js",
+		"/Users/flyc.chung/btse/ff-worktree/.gitignore",
+		"/Users/flyc.chung/btse/ff-worktree/graphify-out/graph.json",
+		"/Users/flyc.chung/btse/ff-worktree/src/views/tasks-and-rewards/TasksAndRewards.vue",
+		"/Users/flyc.chung/btse/ff-worktree/.gitlab-ci.production-whitelabel-matrix.config.yml",
+		"/Users/flyc.chung/btse/ff-worktree/src/baseConfig/tradingConfig.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/store/mutations.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/router/tasksAndRewards.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/router/routes.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/stores/rewards-hub/useRewardsHubStore.ts",
+		"/Users/flyc.chung/btse/ff-worktree/src/api/tasksAndRewards.ts",
+		"/Users/flyc.chung/btse/ff-worktree/src/api/index.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/store/actions.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/trade/LastPrice.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/views/Earn.vue",
+		"/Users/flyc.chung/btse/ff-worktree/bin/color-revolution/stylelint-plugin/lint-rules-demo.less",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/futures/WalletStatusCard.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-zmo/bundle/public/static/css/tradingViewCustomStyle.css",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-zmo/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/trade/FundingCard.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/trade/market-info-card/index.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/trade/recent-trades-card/index.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/views/trading/futures/widgets/trade/BotDisclaimerBlock.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/views/trading/spot/components/QuoteSelector/QuoteSelectorTopMenu.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/colorScheme/revolution-foundation.less",
+		"/Users/flyc.chung/btse/ff-worktree/src/composables/useApkDownloadUrl.ts",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/markets/markets-table/favorite/spot/Spot.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/wallet/convert/ConvertDialog.vue",
+		"/Users/flyc.chung/btse/ff-worktree/bin/color-revolution/stylelint-plugin/rules/valid-var-syntax.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/views/copy-wise/components/CopyWiseShareDialog/SharePanel.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/views/one-click-futures/components/my-trade/common/demo-button.less",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/payment/deposit/Web3WalletSelector.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/pages/wallets/mobile/futures-assets/FuturesAssetsListRowDetail.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/ff-worktree/src/views/trading-event/GroupCampaign.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/trading-event/group-campaign/SubCampaign.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/stores/trading-event/useGroupCampaignStore.ts",
+		"/Users/flyc.chung/btse/ff-worktree/src/api/tradingEvent.ts",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-bitmarkets/colorScheme/extend-color-scheme.less",
+		"/Users/flyc.chung/btse/ff-worktree/.gitlab-ci.build.pipeline.yml",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-zmo/generalConfig.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-zmo/rewardConfig.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/order/futures/TradeHistoryMobileItem.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/views/account/Dashboard.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/wallet/history/FuturesWalletFilterDialog.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/views/trading/futures/widgets/trade/orderTypes/FuturesGridForm.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/wallet/pnl-analysis/WalletPnlList.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/wallet/pnl-analysis/CumulativeTrendChart.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/Card.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/pages/wallets/mobile/futures-bots/BotList.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/pages/wallets/mobile/futures-assets/FuturesAssetsListRowAsset.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/pages/wallets/mobile/WalletMainRow.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/chatbot/CxgBot.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-zmo/color.scheme.js",
+		"/Users/flyc.chung/btse/ff-worktree/src/components/common/BrandButton.vue",
+		"/Users/flyc.chung/btse/ff-worktree/src/brand-altex/colorScheme/extend-color-scheme.less"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 339.0,
+		"where_history":
+		[
+			"",
+			"*.js",
+			"-*.js",
+			"",
+			"*.vue",
+			"",
+			"-routeConfig.js",
+			"",
+			"-generalConfig.js, -*.json, -graphify-out/, -.claude/, -routeConfig.js, -*.md, -*.vue",
+			"-generalConfig.js, -*.json, -graphify-out/, -.claude/, -routeConfig.js, -*.md",
+			"-generalConfig.js, -*.json, -graphify-out/, -.claude/, -routeConfig.js",
+			"-generalConfig.js, -*.json, -graphify-out/, -.claude/",
+			"-generalConfig.js, -*.json, -graphify-out, -.claude/",
+			"-generalConfig.js, -*.json, -graphify-out, -.claude",
+			"-generalConfig.js, -*.json, -graphify-out",
+			"-generalConfig.js, -*.json",
+			"-generalConfig.js",
+			"-*.json",
+			"",
+			"-*.md",
+			"",
+			"-*.json",
+			"",
+			"*.vue, *.js",
+			"",
+			"*.js",
+			"",
+			"-*.js",
+			"-*.vue",
+			"",
+			"-*.vue",
+			"",
+			"*.vue",
+			"",
+			"src/brand-altex/colorScheme/extend-color-scheme.less,src/brand-atpro/colorScheme/extend-color-scheme.less,src/brand-b2z/colorScheme/extend-color-scheme.less,src/brand-binoex/colorScheme/extend-color-scheme.less,src/brand-bitkub/colorScheme/extend-color-scheme.less,src/brand-bitmarkets/colorScheme/extend-color-scheme.less,src/brand-bitqik/colorScheme/extend-color-scheme.less,src/brand-btzo/colorScheme/extend-color-scheme.less,src/brand-bullstreet/colorScheme/extend-color-scheme.less,src/brand-coyx/colorScheme/extend-color-scheme.less,src/brand-cryptomarket/colorScheme/extend-color-scheme.less,src/brand-ctx98/colorScheme/extend-color-scheme.less,src/brand-exchangedemo/colorScheme/extend-color-scheme.less,src/brand-fedhabit/colorScheme/extend-color-scheme.less,src/brand-interpay/colorScheme/extend-color-scheme.less,src/brand-nexu/colorScheme/extend-color-scheme.less,src/brand-pixbit/colorScheme/extend-color-scheme.less,src/brand-transexchange/colorScheme/extend-color-scheme.less,src/brand-traxex/colorScheme/extend-color-scheme.less,src/brand-walletdemo/colorScheme/extend-color-scheme.less",
+			"*.less",
+			"",
+			"*.less",
+			"",
+			"*.less",
+			"",
+			"-*.md, -*.html, *.less",
+			"-*.md, -*.html",
+			"-*.md",
+			"",
+			"*.less",
+			"",
+			"src/components/common/",
+			"",
+			"<open files>",
+			"-*.json",
+			"",
+			"-*.json",
+			"",
+			"-*.json",
+			"",
+			"-color.scheme.js",
+			"-*.json",
+			"",
+			"*.vue",
+			"",
+			"tradingViewCustomStyle.css",
+			"",
+			"*.less",
+			"-*.json",
+			"",
+			"generalConfig.js",
+			"",
+			"-*.less",
+			"",
+			"color.scheme.js",
+			"",
+			"src/components/payment/",
+			"src/components/payment/deposit/",
+			"",
+			"src/components/payment/common/",
+			"",
+			"-bundle/config.js",
+			"",
+			"src/components/payment/",
+			"",
+			"src/brand-bitkub/colorScheme/extend-color-scheme.less,src/brand-bitqik/colorScheme/extend-color-scheme.less,src/brand-btzo/colorScheme/extend-color-scheme.less,src/brand-traiex/colorScheme/extend-color-scheme.less,src/brand-traxex/colorScheme/extend-color-scheme.less,src/brand-freedx/colorScheme/extend-color-scheme.less",
+			"src/brand-bitkub/color.scheme.js,src/brand-bitqik/color.scheme.js,src/brand-btzo/color.scheme.js,src/brand-traiex/color.scheme.js,src/brand-traxex/color.scheme.js,src/brand-freedx/color.scheme.js",
+			"",
+			"-public/",
+			"-*.json",
+			"",
+			"*.less",
+			"",
+			"src/brand-bitqik/",
+			"-*.json",
+			"",
+			"src/pages/wallets/common/wallet-futures-history/",
+			"src/pages/wallets/common/HistoryDetailDialogs/common",
+			"*.js",
+			"",
+			"src/components/earn/dialog/",
+			"",
+			"-*.vue",
+			"",
+			"*.less",
+			"*.vue",
+			"-*.json",
+			"",
+			"*.less",
+			"",
+			"src/pages/history/futures",
+			"-generalConfig.js",
+			"",
+			"*.js",
+			"",
+			"*.js",
+			"",
+			"*.vue",
+			"",
+			"*.yml",
+			"",
+			"src/components/popups/",
+			"",
+			"*.js",
+			"",
+			"-yarn.lock, -*.yml, -*.png",
+			"-yarn.lock, -*.yml",
+			"",
+			"*.yml",
+			"",
+			"*.yml",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			">>>>>",
+			">>>>",
+			"ROUTE_NAME.LOTTERY",
+			"/lottery'",
+			"/lottery",
+			"lottery",
+			"anchor",
+			"red",
+			"--custom--",
+			"  ⚠  ",
+			"DEPOSIT_FIAT",
+			"DEPOSIT_CRYPTO",
+			">>>>>",
+			"lint-staged",
+			"wlx",
+			"content-100",
+			"key-value",
+			"(--custom-",
+			"--custom-",
+			"secondaryOptions",
+			"home",
+			"homeProps",
+			"futuresId",
+			"routeProps",
+			"createContext",
+			"LoginPromotionContext",
+			"context",
+			"LoginPromotionContext",
+			"loginPromotionComponent",
+			"/LoginPromotion",
+			"folder",
+			"/LoginPromotion",
+			"/brand-zmo/LoginPromotion",
+			"/brand-zmo/LoginPromotion.vue",
+			"routeProps",
+			"route",
+			"props",
+			"route",
+			"props",
+			"route",
+			"record",
+			"decoProps",
+			"routeProps",
+			"baseconfig",
+			"routeProps",
+			"futuresId",
+			"loginPromotionComponent",
+			"LoginPromotion",
+			"zmo",
+			"/LoginPromotion",
+			"LoginPromotion",
+			"/LoginPromotion",
+			"LoginPromotion",
+			"enableAccountAvatar",
+			"enableFuturesTrade",
+			"DEFAULT_LOCALE",
+			"lang",
+			"buildVuexRegistry",
+			"vuexRegistry",
+			"SELECTED_REFERRAL_ROUTE_NAME",
+			"headerTitlesData",
+			"enableGstAndTds",
+			"Template-only 引用沒追蹤",
+			"enableThirdPartyAccountAuth",
+			"vipListDecimals",
+			"isSubAccount",
+			"enableSubAccount",
+			"enableSupportCenter",
+			"enableHistoryPdfDownload",
+			"routes",
+			"enableHistoryPdfDownload",
+			"true",
+			"\"enablesubaccount\"",
+			"\"enablesubaccount",
+			"enableAccountStatement",
+			"src/components/header/composables/useHeaderConfigV3.ts",
+			"\"enableAccountStatement\"",
+			"src/store/getters.js",
+			"enablesubaccount",
+			"src/components/account-statement/Filters.vue",
+			"enableSubAccount",
+			"enableBinaryOptions",
+			"src/store/getters.js",
+			"enableSubAccount",
+			"subaccount",
+			"leaderboarden",
+			"leaderboard",
+			"LeaderboardEntry",
+			"showLeaderboardEntry",
+			"snippets",
+			"entry",
+			"PREFIX_FROM",
+			"entry",
+			"snippets",
+			"json",
+			"--parent-content-primary-5",
+			"--parent-con",
+			"parent-con",
+			"--parent",
+			"parent",
+			"primary",
+			"color: ",
+			"/CancelAllButton",
+			"--custom-brand-button-background-color",
+			".tab-switcher",
+			"tab-switcher",
+			"--promo-new-label-color",
+			"promo-new-label",
+			"marketFuturesFavoriteQuoteCurrency = ",
+			"marketFuturesFavoriteQuoteCurrency",
+			"apple-button",
+			"rewardHubFaQList",
+			"graph.json",
+			"rewardHubFaQList",
+			"enableAutoTraderAppMarketplaceTitle",
+			"accessibleFunctions",
+			"tasks",
+			"isEnableTasksAndRewards",
+			"enableTasksAndRewards",
+			"isEnableTasksAndRewards",
+			"enableTasksAndRewards",
+			"isEnableTasksAndRewards",
+			"accessibleFunctions",
+			"isEnableTasksAndRewards",
+			"accessibleFunctions",
+			"setAccessibleFunctions",
+			"updateAccessibleFunctions",
+			"setAccessibleFunctions"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"--trading-color-$1",
+			"--trading-color-$:{S1}",
+			"--trading-color-$S1",
+			"--trading-color-S1",
+			"--trading-color-200",
+			"--trading-color-100",
+			"{",
+			"",
+			"--trading-futures-margin-mode-robot-btn-border-color",
+			"",
+			"const enableNewDeposit = false",
+			" color: var(--content-neutral-500);",
+			" color: var(--content-neutral-400);",
+			"border: 1px solid var(--border-neutral-200);",
+			" color: var(--content-neutral-800);",
+			" color: var(--content-neutral-500);",
+			" color: var(--content-neutral-800);",
+			"--otc-v2-support-currency-support-currency-bg",
+			"--otc-v2-what-we-offer-feature-card-bg",
+			"--otc-v2-why-trade-with-us-competitive-pricing-bg",
+			" color: var(--content-neutral-400);",
+			" color: var(--content-neutral-500);",
+			" color: var(--content-neutral-800);",
+			"background-color: var(--sysbg-neutral-600);",
+			"border-bottom: 1px solid var(--border-neutral-100);",
+			" color: var(--content-neutral-500);",
+			" color: var(--content-neutral-400);",
+			" color: var(--content-neutral-500);",
+			" color: var(--content-neutral-400);",
+			"border-top: 1px var(--border-neutral-100) solid;",
+			"'tradeHistory.fullHistory.text'",
+			" color: var(--content-neutral-400);",
+			" color: var(--content-neutral-500);",
+			" color: var(--content-neutral-400);",
+			" color: var(--content-neutral-800);",
+			" border: 1px solid var(--border-neutral-100);",
+			" color: var(--content-neutral-400);",
+			" color: var(--content-neutral-800);",
+			"border-bottom: solid 1px var(--border-neutral-100);",
+			" color: var(--content-neutral-800);",
+			" color: var(--content-neutral-400);",
+			" color: var(--content-neutral-800);",
+			" color: var(--content-neutral-500);",
+			" color: var(--content-neutral-800);",
+			" color: var(--content-neutral-400);",
+			" color: var(--content-neutral-500);",
+			"color: var(--content-neutral-500);",
+			"color: var(--content-neutral-500",
+			"border-left: 1px solid var(--border-neutral-100);",
+			"border: 1px solid var(--border-neutral-100);",
+			"background-color: var(--sysbg-neutral-400);",
+			" border-bottom: solid 1px var(--border-neutral-100);",
+			"border: 1px solid var(--border-neutral-100);",
+			"background-color: var(--sysbg-neutral-400);",
+			" color: var(--content-neutral-500);",
+			" color: var(--content-neutral-400);",
+			" border: 1px solid var(--border-neutral-100);",
+			" color: var(--content-neutral-400);",
+			" color: var(--content-neutral-500);",
+			"border: 1px solid var(--border-neutral-200);",
+			" border-top: solid 1px var(--border-neutral-100);",
+			" color: var(--content-neutral-400);",
+			" color: var(--content-neutral-500);",
+			" border-bottom: 1px solid var(--border-neutral-100);",
+			" border-left: 1px solid var(--border-neutral-200);",
+			" color: var(--content-neutral-500);",
+			" color: var(--content-neutral-400);",
+			"border: 1px solid var(--border-neutral-200);",
+			" color: var(--content-neutral-500);",
+			" color: var(--content-neutral-400);",
+			" color: var(--content-neutral-500);",
+			" color: var(--content-neutral-400);",
+			" color: var(--content-neutral-500);",
+			" color: var(--content-neutral-800);",
+			" color: var(--content-neutral-500);",
+			" border: 2px solid var(--border-neutral-200);",
+			"border-top: 1px solid var(--border-neutral-200);",
+			" color: var(--content-neutral-500);",
+			"color: var(--content-neutral-400);",
+			"hr {\n    height: 1px;\n    background-color: var(--border-neutral-200);",
+			"background-color: var(--sysbg-neutral-400);",
+			"border: 1px solid var(--border-neutral-200);",
+			" color: var(--content-neutral-400);",
+			" color: var(--content-neutral-800);",
+			"border-bottom: solid 1px var(--border-neutral-100);",
+			"border-top: solid 1px var(--border-neutral-100);",
+			" color: var(--content-neutral-800);",
+			" color: var(--content-neutral-400);",
+			" border-color: var(--border-neutral-100);",
+			" color: var(--content-neutral-800);",
+			" color: var(--content-neutral-500);",
+			"border-bottom: 1px solid var(--border-neutral-100);",
+			" color: var(--content-neutral-400);",
+			" color: var(--content-neutral-500);",
+			" color: var(--content-neutral-800);",
+			"border-top: 1px solid var(--border-neutral-100);",
+			" background: var(--sysbg-neutral-400);",
+			"  color: var(--content-neutral-400);",
+			" color: var(--content-neutral-500);",
+			" color: var(--content-neutral-800);",
+			" color: var(--content-neutral-500);",
+			" color: var(--content-neutral-400);",
+			"border-top: 1px solid var(--border-neutral-100);",
+			" color: var(--content-neutral-500);",
+			"border-top: 1px solid var(--border-neutral-100);",
+			"border: 1px solid var(--border-neutral-100);",
+			"border-top: 8px solid var(--border-neutral-100);",
+			"border-top: solid 1px var(--border-neutral-100);",
+			"border: 1px solid var(--border-neutral-100);",
+			"border-bottom: 1px solid var(--border-neutral-100);",
+			"border: 1px solid var(--border-neutral-100);",
+			"border-bottom: solid 1px var(--border-neutral-100);",
+			" color: var(--content-neutral-500);",
+			"border-bottom: solid 1px var(--border-neutral-100);",
+			"border-top: solid 1px var(--border-neutral-100);",
+			"var(--compbg-hover-400)",
+			" color: var(--content-neutral-800);",
+			"border-right: 1px solid var(--border-neutral-100);",
+			"border-top: 1px solid var(--border-neutral-100);",
+			" color: var(--content-neutral-500);",
+			"border: 1px solid var(--border-neutral-100);",
+			"border-left: 1px solid var(--border-neutral-100);",
+			"border-right: 1px solid var(--border-neutral-100);",
+			" color: var(--content-neutral-500);",
+			"border-top: solid 1px var(--border-neutral-100);",
+			"border-bottom: 1px solid var(--border-neutral-100);",
+			"border: 1px solid var(--border-neutral-100);",
+			"color: var(--content-neutral-500);"
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": false,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/Users/flyc.chung/btse/ff-worktree"
+		}
+	],
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 245,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								245,
+								245
+							]
+						],
+						"settings":
+						{
+							"VZWC_is_dirty": false,
+							"VZWC_last_update_timestamp": 1780995409.87,
+							"auto_name": "更新 Email, 順序的話可以看 commit 的順序",
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"default_dir": "/Users/flyc.chung/btse/ff-worktree/bin/color-revolution/stylelint-plugin/rules",
+							"lsp_uri": "buffer:2656",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 70.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.LSP Log Panel":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.SublimeLinter":
+	{
+		"height": 330.0,
+		"history":
+		[
+		]
+	},
+	"output.SublimeLinter Messages":
+	{
+		"height": 120.0,
+		"history":
+		[
+		]
+	},
+	"output.diagnostics":
+	{
+		"height": 415.0,
+		"history":
+		[
+		]
+	},
+	"output.exec":
+	{
+		"height": 0.0
+	},
+	"output.fc_terminal":
+	{
+		"height": 316.0,
+		"history":
+		[
+		]
+	},
+	"output.find_results":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.git":
+	{
+		"height": 120.0,
+		"history":
+		[
+		]
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.my_custom_terminal":
+	{
+		"height": 283.0,
+		"history":
+		[
+		]
+	},
+	"output.unsaved_changes":
+	{
+		"height": 124.0,
+		"history":
+		[
+		]
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"DepositAndWithdraw.vue",
+				"src/pages/wallets/mobile/transaction-history/deposit-and-withdraw/DepositAndWithdraw.vue"
+			],
+			[
+				"deposit and withdraw trans",
+				"src/pages/wallets/desktop/transaction-history/deposit-and-withdraw/DepositAndWithdraw.vue"
+			],
+			[
+				"zmo home.vue",
+				"src/brand-zmo/views/Home.vue"
+			],
+			[
+				"bitqik termsa",
+				"src/brand-bitqik/component/legal/TermsAndConditions.vue"
+			],
+			[
+				"term",
+				"src/components/cny-earn-campaign/TermsAndConditions.vue"
+			],
+			[
+				"src/components/home/market-table/MarketTable.vue",
+				"src/components/home/market-table/MarketTable.vue"
+			],
+			[
+				"app",
+				"src/brand-b2z/assets/app-preview.png"
+			],
+			[
+				"binsync",
+				"bin/color-revolution/sync.js"
+			],
+			[
+				"nvx support",
+				"src/brand-nvx/supportConfig.js"
+			],
+			[
+				"srcnvxsupprtc",
+				"src/brand-nvx/supportConfig.js"
+			],
+			[
+				"cancelallbutton",
+				"src/components/futures/order-management/CancelAllButton.vue"
+			],
+			[
+				"stylelinr",
+				".stylelintrc"
+			],
+			[
+				"stylelint",
+				".stylelintrc"
+			],
+			[
+				"package.json",
+				"package.json"
+			],
+			[
+				"staging .yml",
+				".gitlab-ci.staging-whitelabel-matrix.config.yml"
+			],
+			[
+				"basictheme.les",
+				"src/baseConfig/colorScheme/basic-theme.less"
+			],
+			[
+				"bin/color-revolution/stylelint-plugin/rules/no-token-property-mismatch.js",
+				"bin/color-revolution/stylelint-plugin/rules/no-token-property-mismatch.js"
+			],
+			[
+				"app.vue",
+				"src/App.vue"
+			],
+			[
+				"nolegacycolor",
+				"bin/color-revolution/stylelint-plugin/rules/no-legacy-color-var.js"
+			],
+			[
+				"tools/affected-paths-ui/client/src/App.vue",
+				"tools/affected-paths-ui/client/src/App.vue"
+			],
+			[
+				"prom",
+				"src/brand-zmo/LoginPromotion.vue"
+			],
+			[
+				"src/utils/context-helper",
+				"src/utils/context-helper.js"
+			],
+			[
+				"views/trading/futures/widgets/trade/FuturesMarginInfoList",
+				"src/views/trading/futures/widgets/trade/FuturesMarginInfoList.vue"
+			],
+			[
+				"loginpromotion.vue zmo",
+				"src/brand-zmo/LoginPromotion.vue"
+			],
+			[
+				"generalco",
+				"src/baseConfig/generalConfig.js"
+			],
+			[
+				"genralconfig",
+				"src/baseConfig/generalConfig.js"
+			],
+			[
+				"storeinde",
+				"src/store/index.js"
+			],
+			[
+				"spotsummary.vue",
+				"src/pages/history/spot/desktop/history-spot-summary/SpotSummary.vue"
+			],
+			[
+				"tools readme",
+				"tools/tag-suggester/README.md"
+			],
+			[
+				"SpotSummary.vue",
+				"src/pages/history/spot/desktop/history-spot-summary/SpotSummary.vue"
+			],
+			[
+				"tools/tag-suggester/output/flag-routes-precise.btse.87bdcd45dd.json",
+				"tools/tag-suggester/output/flag-routes-precise.btse.87bdcd45dd.json"
+			],
+			[
+				"tool .md readme",
+				"tools/tag-suggester/README.md"
+			],
+			[
+				"getter.js",
+				"src/store/getters.js"
+			],
+			[
+				"account base config",
+				"src/baseConfig/accountConfig.js"
+			],
+			[
+				"general",
+				"src/baseConfig/generalConfig.js"
+			],
+			[
+				"tools/tag-suggester/output/flag-routes-pivot.btse.b1ea92634f.56dfb37c.json",
+				"tools/tag-suggester/output/flag-routes-pivot.btse.b1ea92634f.56dfb37c.json"
+			],
+			[
+				"pakcage",
+				"package.json"
+			],
+			[
+				"src/brand-bullstreet/accountConfig.js",
+				"src/brand-bullstreet/accountConfig.js"
+			],
+			[
+				"tools/tag-suggester/output/flag-classification.btse.b1ea92634f.56dfb37c.json",
+				"tools/tag-suggester/output/flag-classification.btse.b1ea92634f.56dfb37c.json"
+			],
+			[
+				"src/routes/wallets/accountStatement.js",
+				"src/routes/wallets/accountStatement.js"
+			],
+			[
+				"src/pages/wallets/common/WalletNav.vue",
+				"src/pages/wallets/common/WalletNav.vue"
+			],
+			[
+				"src/components/header/composables/useHeaderConfigV3.ts",
+				"src/components/header/composables/useHeaderConfigV3.ts"
+			],
+			[
+				"src/components/account-statement/Filters.vue",
+				"src/components/account-statement/Filters.vue"
+			],
+			[
+				"src/store/getters.js",
+				"src/store/getters.js"
+			],
+			[
+				"accountconfig.js",
+				"src/baseConfig/accountConfig.js"
+			],
+			[
+				"pivot.btse.1c7d4303f6.json",
+				"tools/tag-suggester/output/flag-routes-pivot.btse.1c7d4303f6.json"
+			],
+			[
+				"tools/tag-suggester/output/flag-routes.btse.1c7d4303f6.md",
+				"tools/tag-suggester/output/flag-routes.btse.1c7d4303f6.md"
+			],
+			[
+				"package",
+				"package.json"
+			],
+			[
+				"tools/tag-suggester/output/flag-routes.btse.0fb96557c7.c0ce5a00.md",
+				"tools/tag-suggester/output/flag-routes.btse.0fb96557c7.c0ce5a00.md"
+			],
+			[
+				"format.json",
+				"sublime-text-snippet-format.json"
+			],
+			[
+				"scripts/convert-snippets-to-sublime.js",
+				"scripts/convert-snippets-to-sublime.js"
+			],
+			[
+				"scripts/conver",
+				"scripts/convert-snippets-to-sublime.js"
+			],
+			[
+				"scrips",
+				"bin/whitelabel-generator/utils/script.mjs"
+			],
+			[
+				"basctheme",
+				"src/baseConfig/colorScheme/basic-theme.less"
+			],
+			[
+				"vssnippet",
+				".vscode/color-scheme.code-snippets"
+			],
+			[
+				"reparent.",
+				"src/colorScheme/revolution-parent.less"
+			],
+			[
+				"revolutoken.le",
+				"src/colorScheme/revolution-token.less"
+			],
+			[
+				"src/views/trading/spot/order-form/order-dca/index.vue",
+				"src/views/trading/spot/order-form/order-dca/index.vue"
+			],
+			[
+				"generalconfig.js",
+				"src/baseConfig/generalConfig.js"
+			],
+			[
+				"src/components/futures/order-management/CancelAllButton.vue",
+				"src/components/futures/order-management/CancelAllButton.vue"
+			],
+			[
+				"baseconfig gener",
+				"src/baseConfig/generalConfig.js"
+			],
+			[
+				"generalConfig.js nvx",
+				"src/brand-nvx/generalConfig.js"
+			],
+			[
+				"src/brand-coyx/generalConfig.js",
+				"src/brand-coyx/generalConfig.js"
+			],
+			[
+				"produc m",
+				".gitlab-ci.production-whitelabel-matrix.config.yml"
+			],
+			[
+				"tradingconfi",
+				"src/baseConfig/tradingConfig.js"
+			],
+			[
+				"accountconfig",
+				"src/baseConfig/accountConfig.js"
+			],
+			[
+				"getters.j",
+				"src/store/getters.js"
+			],
+			[
+				"headerco v3",
+				"src/components/header/composables/useHeaderConfigV3.ts"
+			],
+			[
+				"a",
+				"src/App.vue"
+			],
+			[
+				"src/views/tasks-and-rewards/TasksAndRewards.vue",
+				"src/views/tasks-and-rewards/TasksAndRewards.vue"
+			],
+			[
+				"nvx generalcofng",
+				"src/brand-nvx/generalConfig.js"
+			],
+			[
+				"earn v.ue",
+				"src/views/Earn.vue"
+			],
+			[
+				"general nvx",
+				"src/brand-nvx/generalConfig.js"
+			],
+			[
+				"basictheme.less",
+				"src/baseConfig/colorScheme/basic-theme.less"
+			],
+			[
+				"lint ",
+				"bin/color-revolution/stylelint-plugin/lint-rules-demo.less"
+			],
+			[
+				"stylelintr",
+				".stylelintrc"
+			],
+			[
+				"zmo homevue",
+				"src/brand-zmo/views/Home.vue"
+			],
+			[
+				"revofoundation",
+				"src/colorScheme/revolution-foundation.less"
+			],
+			[
+				"basicthemeless",
+				"src/baseConfig/colorScheme/basic-theme.less"
+			],
+			[
+				"revolition foundation",
+				"src/colorScheme/revolution-foundation.less"
+			],
+			[
+				"token revolu",
+				"src/colorScheme/revolution-token.less"
+			],
+			[
+				"zmo extendcolorscheme.less",
+				"src/brand-zmo/colorScheme/extend-color-scheme.less"
+			],
+			[
+				"revoltion",
+				"src/colorScheme/revolution-foundation.less"
+			],
+			[
+				"basic themel",
+				"src/baseConfig/colorScheme/basic-theme.less"
+			],
+			[
+				"lastprice.vue",
+				"src/components/trade/LastPrice.vue"
+			],
+			[
+				"convertdial.",
+				"src/components/wallet/convert/ConvertDialog.vue"
+			],
+			[
+				"spot.vue",
+				"src/components/markets/markets-table/favorite/spot/Spot.vue"
+			],
+			[
+				"demo.less",
+				"bin/color-revolution/stylelint-plugin/lint-rules-demo.less"
+			],
+			[
+				"demo less",
+				"src/views/one-click-futures/components/my-trade/common/demo-button.less"
+			],
+			[
+				"valid",
+				"bin/color-revolution/stylelint-plugin/rules/valid-var-syntax.js"
+			],
+			[
+				"lin demo .le",
+				"bin/color-revolution/stylelint-plugin/lint-rules-demo.less"
+			],
+			[
+				"src/views/copy-wise/components/CopyWiseShareDialog/SharePanel.vue",
+				"src/views/copy-wise/components/CopyWiseShareDialog/SharePanel.vue"
+			],
+			[
+				"sharepanel.vue",
+				"src/views/copy-wise/components/CopyWiseShareDialog/SharePanel.vue"
+			],
+			[
+				"revolution token",
+				"src/colorScheme/revolution-token.less"
+			],
+			[
+				"Web3WalletSelector.vue",
+				"src/components/payment/deposit/Web3WalletSelector.vue"
+			],
+			[
+				"SubCampaign",
+				"src/components/trading-event/group-campaign/SubCampaign.vue"
+			],
+			[
+				"src/views/trading-event/GroupCampaign.vue",
+				"src/views/trading-event/GroupCampaign.vue"
+			],
+			[
+				"extend",
+				"src/colorScheme/extend-color-scheme.less"
+			],
+			[
+				"bitmarket less extend",
+				"src/brand-bitmarkets/colorScheme/extend-color-scheme.less"
+			],
+			[
+				"zmo less extendcolor scheme.",
+				"src/brand-zmo/colorScheme/extend-color-scheme.less"
+			],
+			[
+				"zmo general",
+				"src/brand-zmo/generalConfig.js"
+			],
+			[
+				"rewardconfig.js zmo ",
+				"src/brand-zmo/rewardConfig.js"
+			],
+			[
+				"tradehistorytem.vue",
+				"src/components/order/futures/TradeHistoryMobileItem.vue"
+			],
+			[
+				"FuturesWalletFilterDialog.vue",
+				"src/components/wallet/history/FuturesWalletFilterDialog.vue"
+			],
+			[
+				"zmo extend",
+				"src/brand-zmo/colorScheme/extend-color-scheme.less"
+			],
+			[
+				"futuresgridrm.vue",
+				"src/views/trading/futures/widgets/trade/orderTypes/FuturesGridForm.vue"
+			],
+			[
+				"src/components/wallet/pnl-analysis/CumulativeTrendChart.vue",
+				"src/components/wallet/pnl-analysis/CumulativeTrendChart.vue"
+			],
+			[
+				"card.vue",
+				"src/components/Card.vue"
+			],
+			[
+				"walletpnllist.vue",
+				"src/components/wallet/pnl-analysis/WalletPnlList.vue"
+			],
+			[
+				"botlist.vue",
+				"src/pages/wallets/mobile/futures-bots/BotList.vue"
+			],
+			[
+				"FuturesAssetsListRowDetail.vue",
+				"src/pages/wallets/mobile/futures-assets/FuturesAssetsListRowDetail.vue"
+			],
+			[
+				"src/pages/wallets/mobile/futures-assets/FuturesAssetsListRowAsset.vue",
+				"src/pages/wallets/mobile/futures-assets/FuturesAssetsListRowAsset.vue"
+			],
+			[
+				"WalletMainRow.vue",
+				"src/pages/wallets/mobile/WalletMainRow.vue"
+			],
+			[
+				"src/brand-zmo/color.scheme.js",
+				"src/brand-zmo/color.scheme.js"
+			],
+			[
+				"src/components/futures/order-management/positions/Positions.vue",
+				"src/components/futures/order-management/positions/Positions.vue"
+			],
+			[
+				"src/components/chatbot/CxgBot.js",
+				"src/components/chatbot/CxgBot.js"
+			],
+			[
+				"extend-color-scheme.less",
+				"src/brand-atpro/colorScheme/extend-color-scheme.less"
+			],
+			[
+				"extendcolor",
+				"src/colorScheme/extend-color-scheme.less"
+			],
+			[
+				"revolt foundation",
+				"src/colorScheme/revolution-foundation.less"
+			],
+			[
+				"revo token .l",
+				"src/colorScheme/revolution-token.less"
+			],
+			[
+				"/brand/extend.less",
+				"src/brand/colorScheme/extend-color-scheme.less"
+			],
+			[
+				"src/utils/paymentiqTool.js",
+				"src/utils/paymentiqTool.js"
+			],
+			[
+				"zmo generalc",
+				"src/brand-zmo/generalConfig.js"
+			],
+			[
+				"generalconi",
+				"src/baseConfig/generalConfig.js"
+			],
+			[
+				"src/components/payment/deposit/Web3WalletSelector.vue",
+				"src/components/payment/deposit/Web3WalletSelector.vue"
+			],
+			[
+				"geeral",
+				"src/baseConfig/generalConfig.js"
+			],
+			[
+				"empty extend",
+				"src/colorScheme/empty-placeholder-extend-color-scheme.less"
+			],
+			[
+				"staging",
+				".gitlab-ci.staging-whitelabel-matrix.config.yml"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 502.0,
+		"last_filter": "ww",
+		"selected_items":
+		[
+			[
+				"ww",
+				"~/flyc/sublime-project/ww-frontend-worktree.sublime-workspace"
+			],
+			[
+				"chrome",
+				"~/flyc/sublime-project/chrome-extension.sublime-workspace"
+			],
+			[
+				"ff",
+				"~/flyc/sublime-project/ff-worktree.sublime-workspace"
+			],
+			[
+				"fe",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"frontend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"chrom",
+				"~/flyc/sublime-project/chrome-extension.sublime-workspace"
+			],
+			[
+				"static",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"fronend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"mjml",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"fronte",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"ex",
+				"~/flyc/sublime-project/chrome-extension.sublime-workspace"
+			],
+			[
+				"tool",
+				"~/flyc/sublime-project/aws-tools.sublime-workspace"
+			],
+			[
+				"email",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"sub",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"fron",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"fetch",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"fronten",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"frotnend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"frontr",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"frtone",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"emi",
+				"~/flyc/sublime-project/email-worktree.sublime-workspace"
+			],
+			[
+				"awstools",
+				"~/flyc/sublime-project/aws-tools.sublime-workspace"
+			],
+			[
+				"btse",
+				"~/flyc/sublime-project/btse-static-resource.sublime-workspace"
+			],
+			[
+				"fres",
+				"~/flyc/sublime-project/freshdesk-btse-theme.sublime-workspace"
+			],
+			[
+				"freshdeskbtsetheme",
+				"~/flyc/sublime-project/freshdesk-btse-theme.sublime-workspace"
+			],
+			[
+				"fresk",
+				"~/flyc/sublime-project/freshdesk-btse-theme.sublime-workspace"
+			],
+			[
+				"frees",
+				"~/flyc/sublime-project/freshdesk-btse-theme.sublime-workspace"
+			],
+			[
+				"fonte",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"work",
+				"~/flyc/sublime-project/ff-worktree.sublime-workspace"
+			],
+			[
+				"frotnen",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"fr",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"sublime",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"forntend",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"fronted",
+				"~/flyc/sublime-project/frontend.sublime-workspace"
+			],
+			[
+				"sublimefetch",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"little",
+				"~/flyc/sublime-project/little-tool.sublime-workspace"
+			],
+			[
+				"sublime fetch ",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"mail",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"ee",
+				"~/flyc/sublime-project/mjml-email-template.sublime-workspace"
+			],
+			[
+				"sublim",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"sublime fet",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"sublime ",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"subliefe",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"lit",
+				"~/flyc/sublime-project/little-tool.sublime-workspace"
+			],
+			[
+				"fetc",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"litle",
+				"~/btse/little-tool/little-tool.sublime-workspace"
+			],
+			[
+				"sublie",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"s",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"sublimf",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"su",
+				"~/flyc/sublime-project/sublime-fetch.sublime-workspace"
+			],
+			[
+				"littletool",
+				"~/btse/little-tool/little-tool.sublime-workspace"
+			],
+			[
+				"subli",
+				"~/flyc/sublime-fetch/sublime-fetch.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 317.0,
+		"last_filter": "updatepro",
+		"selected_items":
+		[
+			[
+				"updatepro",
+				"updateProviderList"
+			],
+			[
+				"currentHeaderLogoTheme",
+				"currentHeaderLogoTheme"
+			],
+			[
+				"",
+				"logo"
+			],
+			[
+				"fetchAdvancedKycStatus",
+				"fetchAdvancedKycStatus"
+			],
+			[
+				"isadvanced",
+				"isNeededAdvancedKycFlow"
+			],
+			[
+				"titleMetaGenerator",
+				"titleMetaGenerator"
+			],
+			[
+				"getcdn",
+				"getCdnImgPath"
+			],
+			[
+				"isSupportWebp",
+				"isSupportWebp"
+			],
+			[
+				"gettaskover",
+				"getTaskOverview"
+			],
+			[
+				"handlemeta",
+				"handleMetaVersion"
+			],
+			[
+				"descriptionMetaGenerator",
+				"descriptionMetaGenerator"
+			],
+			[
+				"rewardHubFaQList",
+				"rewardHubFaQList"
+			],
+			[
+				"getmeta",
+				"getMeta"
+			],
+			[
+				"setWalletData",
+				"setWalletData"
+			],
+			[
+				"getAllowedCurrencyList",
+				"getAllowedPlatformCurrencyTypeList"
+			],
+			[
+				"c2cInitInfo",
+				"setC2CInitInfo"
+			],
+			[
+				"getAllowedPlatformCurrencyTypeList",
+				"getAllowedPlatformCurrencyTypeList"
+			],
+			[
+				"routfinal",
+				"routeFinalFilter"
+			],
+			[
+				"setTargetRewardCard",
+				"setTargetRewardCard"
+			],
+			[
+				"appIsReconnecting",
+				"appIsReconnecting"
+			],
+			[
+				"checkIsVerifiedMerchantWebsite",
+				"checkIsVerifiedMerchantWebsite"
+			],
+			[
+				"checkisverfimerc",
+				"checkIsVerifiedMerchantWebsite"
+			],
+			[
+				"getDisplayActionMap",
+				"getDisplayActionMap"
+			],
+			[
+				"setwalletAction",
+				"setWalletAction"
+			],
+			[
+				"isEmailNotVerified",
+				"isEmailNotVerified"
+			],
+			[
+				"isBsKyc",
+				"isBsKyc"
+			],
+			[
+				"userVerifyStatus",
+				"setUserVerifyStatus"
+			],
+			[
+				"allowst",
+				"allowSendTo"
+			],
+			[
+				"currencyMap",
+				"currencyMap"
+			],
+			[
+				"$mq",
+				"$mq"
+			],
+			[
+				"generateSupportUrl",
+				"getGenerateSupportUrl"
+			],
+			[
+				"generateli",
+				"generateList"
+			],
+			[
+				"showlogos",
+				"showDebitCardLogos"
+			],
+			[
+				"debitCardLinks",
+				"debitCardLinks"
+			],
+			[
+				"checkemail",
+				"checkEmail"
+			],
+			[
+				"getroutelist",
+				"getRouteList"
+			],
+			[
+				"getroulist",
+				"getRouteList"
+			],
+			[
+				"geroutelist",
+				"getRouteList"
+			],
+			[
+				"getroutlist",
+				"getRouteList"
+			],
+			[
+				"getroute",
+				"getRoute"
+			],
+			[
+				"isEnableUnifiedWalletUpgrade",
+				"isEnableUnifiedWalletUpgrade"
+			],
+			[
+				"onStorageChange",
+				"onStorageChange"
+			],
+			[
+				"isVerificationBySmsOtp",
+				"isVerificationBySmsOtp"
+			],
+			[
+				"getAffiliateApplication",
+				"getAffiliateApplication"
+			],
+			[
+				"isAffiliateUser",
+				"isAffiliateUser"
+			],
+			[
+				"setAffiliateApplication",
+				"setAffiliateApplication"
+			],
+			[
+				"isAffiliateApplied",
+				"isAffiliateApplied"
+			],
+			[
+				"setWindowHeight",
+				"setWindowHeight"
+			],
+			[
+				"userLoginStatus",
+				"userLoginStatus"
+			],
+			[
+				"onDrawerImgTab",
+				"onDrawerImgTab"
+			],
+			[
+				"isUnifiedWallet",
+				"isUnifiedWallet"
+			],
+			[
+				"isunifiedwallet",
+				"isUnifiedWallet"
+			]
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"lsp_show_inlay_hints": false
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 240.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

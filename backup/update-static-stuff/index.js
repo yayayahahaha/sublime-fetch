@@ -1,11 +1,12 @@
 import select, { Separator } from '@inquirer/select'
 
 import { 修改白牌會動到的東西 } from './console-utils.js'
-import { s3LogStuff, svgLogoStuff } from './logo-svg-format-utils.js'
+import { s3LogStuff, svgLogoStuff, svgToVue } from './logo-svg-format-utils.js'
 import { staticStuff } from './static-files-utils.js'
 import { consoleRed } from './utils.js'
-import { assetsStuff } from './assets-files-utils.js'
+import { homeAssetsStuff } from './assets-files-utils.js'
 import { figmaStuff } from './figma-utils.js'
+import { cleanLocalFolders } from './clean-utils.js'
 
 const CHOICES_LIST = [
   'LIST_ITEMS_LOG',
@@ -14,6 +15,8 @@ const CHOICES_LIST = [
   'S3_LOGO',
   'STATIC_FILES',
   'GENERATE_NEW_IMAGES_FROM_FIGMA_FOLDER',
+  'SVG_TO_VUE',
+  'CLEAN_LOCAL_FOLDERS',
 ]
 const CHOICES_MAP = Object.fromEntries(CHOICES_LIST.map((item) => [item, item]))
 
@@ -25,7 +28,7 @@ async function start() {
   const 現在要做啥 = await select({
     message: '你想做什麼: ',
     loop: false,
-    pageSize: 10,
+    pageSize: 15,
     choices: [
       {
         name: '我想要看白牌要調整的項目的清單',
@@ -36,7 +39,15 @@ async function start() {
       new Separator(),
 
       {
-        name: '同步 assets 相關的檔案',
+        name: '把 svg 換成可用的 vue icon',
+        value: CHOICES_MAP.SVG_TO_VUE,
+        description: '外面包一層 <Icon>, 替換 id 等等',
+      },
+
+      new Separator(),
+
+      {
+        name: '同步 home assets 相關的檔案',
         value: CHOICES_MAP.ASSETS_FILES,
         description: '首頁相關的那些',
       },
@@ -60,7 +71,7 @@ async function start() {
       {
         name: '將從 figma 上載下來的檔案直接轉換到 new-images/static 資料夾中',
         value: CHOICES_MAP.GENERATE_NEW_IMAGES_FROM_FIGMA_FOLDER,
-        description: '解壓縮相關的檔案到指定路徑，就可以動態產生可用的 static 靜態檔案',
+        description: 'icon 和 meta 的那些。解壓縮相關的檔案到指定路徑，就可以動態產生可用的 static 靜態檔案',
       },
 
       {
@@ -69,6 +80,15 @@ async function start() {
         description:
           '各種尺寸的 logo, 像是 PWA 和 favicon 等等, 在執行之前推薦執行「將從 figma 上載下來的檔案直接轉換到 new-images/static 資料夾中」',
       },
+
+      new Separator(),
+
+      {
+        name: '清除本機 source / 暫存資料夾',
+        value: CHOICES_MAP.CLEAN_LOCAL_FOLDERS,
+        description:
+          'svg-to-vue-images, svg-to-vue-images-result, new-images-folder, figma-images-folders 的內容 (此動作不會動到 frontend / s3 repo)',
+      },
     ],
   }).catch(Function.prototype)
 
@@ -76,8 +96,11 @@ async function start() {
     case CHOICES_MAP.LIST_ITEMS_LOG:
       return void 修改白牌會動到的東西()
 
+    case CHOICES_MAP.SVG_TO_VUE:
+      return void svgToVue()
+
     case CHOICES_MAP.ASSETS_FILES:
-      return void assetsStuff()
+      return void homeAssetsStuff()
 
     case CHOICES_MAP.SVG_LOGO:
       return void svgLogoStuff()
@@ -90,6 +113,9 @@ async function start() {
 
     case CHOICES_MAP.STATIC_FILES:
       return void staticStuff()
+
+    case CHOICES_MAP.CLEAN_LOCAL_FOLDERS:
+      return void cleanLocalFolders()
 
     default:
       consoleRed('使用者取消')
