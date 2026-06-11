@@ -94,6 +94,16 @@ sh set-sublime-text-user.sh
 >
 > 1 missing dependency was just installed. Sublime Text should be restarted, otherwise one or more of the installed packages may not function properly.
 
+### Sublime Text 出現了「某些 packages is not available」 的錯誤
+
+目前不知道造成的原因， Sublime Text 的版本和其他設定都清空了，也沒辦法讓 pakcages 出現在 install list 或是已安裝的 list 裡之類的。
+處理的方式是透過 `Package Control: Add Repository` 添加那些遺失的 packages 的 repo, 接著在 install 裡就可以查到、就也可以順利安裝了
+
+> 之前 miss 的是 `SublimeLinter`, 和其相關的 `eslint`, `stylelint`  
+> https://github.com/SublimeLinter/SublimeLinter  
+> https://github.com/SublimeLinter/SublimeLinter-eslint  
+> https://github.com/SublimeLinter/SublimeLinter-stylelint
+
 ## Sublime Merge
 
 [官網](https://www.sublimemerge.com/) 安裝後，執行以下腳本
