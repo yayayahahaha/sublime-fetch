@@ -201,15 +201,16 @@ Iterm 的 `主題` 和 `顏色` 是可以分開設定的。顏色可以從 [這�
 
 ###### 字型設定
 
-如果要使用 [`agnoster`](https://github.com/agnoster/agnoster-zsh-theme) 這個 `theme` 的話會要額外安裝字型
+如果要使用 [`agnoster`](https://github.com/agnoster/agnoster-zsh-theme) 這個 `theme` 的話會要額外安裝字型, 
+這邊可選 [font-fira-code-nerd-font](https://formulae.brew.sh/cask/font-fira-code-nerd-font) 這個有特殊符號的 font:
 
 ```bash
-brew install --cask font-powerline-symbols
+brew install --cask font-fira-code-nerd-font
 ```
 
-然後在 terminal 的 text 裡要選擇 `Powerline Symbols`
+然後在 terminal 裡面選 `FiraCode Nerd Font Mono` 就可以了
 
-> [https://github.com/powerline/fonts](https://github.com/powerline/fonts)
+> 之前會選擇 [font-powerline-symbols](https://github.com/powerline/fonts) 這個字型，但是這個字型的 `--` 會變成一條，不習慣所以替換
 
 > 安裝/同步完上述的項目後 `iterm2` 應該已經可以用 `option` 按鍵左右移動像是 `helloWorld` 等的字串單位了
 
@@ -220,10 +221,10 @@ brew install --cask font-powerline-symbols
 > /usr/local/bin/node  
 > /usr/local/bin/npm
 
-安裝完 NodeJs 後，就安裝 `pnpm` 和 `n` 吧
+安裝完 NodeJs 後，就安裝 `pnpm` 和 `fnm` 吧
 
 ```bash
-sudo npm install --global pnpm n
+sudo npm install --global pnpm
 ```
 
 #### 關於 n 和 fnm
