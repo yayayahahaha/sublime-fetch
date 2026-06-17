@@ -12,6 +12,8 @@ import { registerByList } from './register-stuff.js'
 import { twoFaHelper } from './2fa-helper.js'
 import { jiraBranchHelper } from './jira-helper.js'
 import { chromeWindowHelper } from './refresh-tabs-helper.js'
+import { operateRedis } from '../isolated-operate-redis/index.js'
+import { mockServer } from '../mock-server/index.js'
 
 const GET_WHITELABEL_INFO = 'GET_WHITELABEL_INFO'
 const REGISTER_BY_LIST = 'REGISTER_BY_LIST'
@@ -20,6 +22,8 @@ const CLEAR_EMAIL_CACHE = 'CLEAR_EMAIL_CACHE'
 const TWO_FA_HELPER = 'TWO_FA_HELPER'
 const JIRA_BRANCH_HELPER = 'JIRA_BRANCH_HELPER'
 const CHROME_WINDOW_HELPER = 'CHROME_WINDOW_HELPER'
+const OPERATE_REDIS = 'OPERATE_REDIS'
+const RUN_MOCK_SERVER = 'RUN_MOCK_SERVER'
 
 const supportedCmdArgs = ['port', 'profile']
 
@@ -76,6 +80,16 @@ async function start() {
       },
       new Separator(),
       {
+        name: '對 Redis 操作',
+        value: OPERATE_REDIS,
+        description: '對 dev 或 staging 的 redis 做查找 or 刪除等',
+      },
+      {
+        name: '啟動 Mock Server',
+        value: RUN_MOCK_SERVER,
+        description: '啟動 Mock Server',
+      },
+      {
         name: '2FA 助手',
         value: TWO_FA_HELPER,
         description: '讀取、生成、編輯或刪除 2FA Code',
@@ -118,6 +132,8 @@ async function start() {
   if (answer === REGISTER_BY_LIST) return void registerByList()
   if (answer === LOGIN_STAGING_ADIN) return void loginStagingAdmin()
   if (answer === CLEAR_EMAIL_CACHE) return void clearEmailCache()
+  if (answer === OPERATE_REDIS) return void operateRedis()
+  if (answer === RUN_MOCK_SERVER) return void mockServer()
   
   if (answer === TWO_FA_HELPER) {
     await twoFaHelper()
