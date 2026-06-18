@@ -365,15 +365,23 @@ export class LoginNeeded {
 
     async function _resendOtp() {
       subTitleConsole(`重新寄送 OTP: `)
-      const { error: resendError } = await this.resendOtp(firstToken)
+      const resendResult = await this.resendOtp(firstToken)
+      const { error: resendError, data: resendData } = resendResult
+      console.log('resendOtp 的 response: ', resendResult)
+      console.log('resendOtp 的 data.success: ', resendData?.success)
+      console.log('resendOtp 的 data.msg: ', resendData?.msg)
+
       if (resendError != null) {
         errorConsole('在 resendError 發生錯誤', this)
         errorConsole(resendError)
         return { error: resendError }
-      } else {
-        console.log('✅ 重新寄送 otp 成功')
-        return { error: null }
       }
+      if (resendData?.success === false) {
+        errorConsole('resendOtp HTTP 200 但 success=false', resendData?.msg)
+        return { error: new Error(`resendOtp 失敗: ${resendData?.msg ?? 'unknown'}`) }
+      }
+      console.log('✅ 重新寄送 otp 成功')
+      return { error: null }
     }
   }
 

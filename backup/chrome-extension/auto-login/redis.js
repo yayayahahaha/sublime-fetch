@@ -49,12 +49,21 @@ class StagingRedis {
 
     console.log(`🫙 Redis 金鑰: ${key}`)
 
-    return this.#redis.get(key).then((value) => {
-      if (value == null) {
-        throw new Error('在 Redis 中找不到 OTP，可能已過期或從未發送。')
-      }
-      return { ok: true, value, error: null }
-    })
+    return this.#redis
+      .get(key)
+      .then((value) => {
+        if (value == null) {
+          return {
+            ok: false,
+            value: null,
+            error: new Error(
+              `在 Redis 中找不到 OTP (key: ${key})。可能原因: (1) OTP 已過期或從未發送 (2) settings.json 的 redis.host 已過時 (例如 staging Redis 換了 IP) — 可用 isolated-operate-redis 連看看實際的 staging Redis 確認。`,
+            ),
+          }
+        }
+        return { ok: true, value, error: null }
+      })
+      .catch((error) => ({ ok: false, value: null, error }))
   }
 
   getCaptcha(captchaId) {

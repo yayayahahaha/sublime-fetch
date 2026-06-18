@@ -8,6 +8,8 @@ import { loginStagingAdmin } from './login-staging-admin.js'
 import { parseArgs } from './args-parser.js'
 import { blue } from '../color.js'
 import { clearEmailCache } from '../admin-related/admin-utils.js'
+import { runDepositCli } from '../admin-related/deposit.js'
+import { runAddRoleCli } from '../admin-related/add-role.js'
 import { registerByList } from './register-stuff.js'
 import { twoFaHelper } from './2fa-helper.js'
 import { jiraBranchHelper } from './jira-helper.js'
@@ -19,6 +21,8 @@ const GET_WHITELABEL_INFO = 'GET_WHITELABEL_INFO'
 const REGISTER_BY_LIST = 'REGISTER_BY_LIST'
 const LOGIN_STAGING_ADIN = 'LOGIN_STAGING_ADIN'
 const CLEAR_EMAIL_CACHE = 'CLEAR_EMAIL_CACHE'
+const DEPOSIT_TO_USER = 'DEPOSIT_TO_USER'
+const ADD_ROLE_TO_SELF = 'ADD_ROLE_TO_SELF'
 const TWO_FA_HELPER = 'TWO_FA_HELPER'
 const JIRA_BRANCH_HELPER = 'JIRA_BRANCH_HELPER'
 const CHROME_WINDOW_HELPER = 'CHROME_WINDOW_HELPER'
@@ -112,19 +116,30 @@ async function start() {
       },
       new Separator(),
       {
-        name: '登入 Staging Admin',
+        name: 'Admin Login 登入 Staging Admin',
         value: LOGIN_STAGING_ADIN,
         description: '登入 Staging 環境的 Admin 帳號',
       },
       {
-        name: '清除 Email Staging 環境的 Cache',
+        name: 'Email Cache 清除 Email Staging 環境的 Cache',
         value: CLEAR_EMAIL_CACHE,
         description: '由於 Email 樣板是靜態資源，上完 Staging 後要手動清除 Cache',
+      },
+      {
+        name: 'Deposit 儲值 USDT 給 user',
+        value: DEPOSIT_TO_USER,
+        description: '透過 Staging Admin 自動 deposit USDT 給指定 user (含切 role + approve)',
+      },
+      {
+        name: 'Role add 幫自己加 Admin Role',
+        value: ADD_ROLE_TO_SELF,
+        description: '透過 Staging Admin 幫當前登入者新增指定 brand 的 role (需有 Administrator)',
       },
       new Separator(),
       ...loginProfiles.map((item) => ({ name: `${item.displayName}`, value: item.displayName })),
     ],
     loop: false,
+    pageSize: 15,
   }).catch(() => null)
   if (answer == null) return void errorConsole('使用者取消')
 
@@ -132,6 +147,8 @@ async function start() {
   if (answer === REGISTER_BY_LIST) return void registerByList()
   if (answer === LOGIN_STAGING_ADIN) return void loginStagingAdmin()
   if (answer === CLEAR_EMAIL_CACHE) return void clearEmailCache()
+  if (answer === DEPOSIT_TO_USER) return void runDepositCli()
+  if (answer === ADD_ROLE_TO_SELF) return void runAddRoleCli()
   if (answer === OPERATE_REDIS) return void operateRedis()
   if (answer === RUN_MOCK_SERVER) return void mockServer()
   
@@ -184,7 +201,10 @@ async function start() {
   const payload = profileMap[profileKey]
   if (payload == null) return errorConsole('沒有找到匹配的 profile:', profileKey)
 
-  loginDisposable(payload, { port }).catch((err) => errorConsole('Error during login:', err))
+  loginDisposable(payload, { port }).catch((err) => {
+    errorConsole('Error during login:', err?.message ?? err)
+    if (err?.stack) errorConsole(err.stack)
+  })
 }
 
 function colorMessage(message) {
