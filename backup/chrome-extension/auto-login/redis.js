@@ -5,13 +5,16 @@ import { errorConsole } from './t99-utils.js'
 
 class StagingRedis {
   #redis
-  constructor(redis) {
+  #onDisconnect
+  constructor(redis, onDisconnect) {
     this.#redis = redis
+    this.#onDisconnect = onDisconnect ?? (() => {})
   }
 
   disconnect() {
     this.#redis.quit()
     this.#redis.disconnect()
+    this.#onDisconnect()
     console.log(green('已中斷 redis 連線'))
   }
 
@@ -85,6 +88,30 @@ class StagingRedis {
   }
 }
 
+// 全域追蹤目前還沒 disconnect 的 redis 連線, SIGINT 時統一斷開
+// 用 module-level state 避免每次 connectRedis 都新增 SIGINT listener (那會導致 MaxListenersExceededWarning)
+const activeRedisConnections = new Set()
+let sigintRegistered = false
+
+function ensureSigintHandlerRegistered() {
+  if (sigintRegistered) return
+  if (process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    console.log('在 AWS Lambda 環境中運行，無法處理 SIGINT 信號。')
+    return
+  }
+  sigintRegistered = true
+  process.on('SIGINT', async () => {
+    if (activeRedisConnections.size === 0) process.exit(0)
+    console.log('\n正在斷開與 Redis 的連線...')
+    await Promise.all(
+      [...activeRedisConnections].map((r) =>
+        Promise.resolve(r.quit()).catch(() => {}),
+      ),
+    )
+    process.exit(0)
+  })
+}
+
 export function connectRedis() {
   const settings = loadSettings()
   const redis = new Cluster([
@@ -95,19 +122,10 @@ export function connectRedis() {
   ])
 
   redis.on('connect', () => console.log(green('Redis 叢集連線成功')))
-
   redis.on('error', (err) => errorConsole('Redis 叢集錯誤:', err))
 
-  if (process.env.AWS_LAMBDA_FUNCTION_NAME) {
-    console.log('在 AWS Lambda 環境中運行，無法處理 SIGINT 信號。')
-    // 在 AWS Lambda 環境中，無法處理 SIGINT 信號，因此不需要斷開連線
-  } else {
-    process.on('SIGINT', async () => {
-      console.log('\n正在斷開與 Redis 的連線...')
-      await redis.quit() // 或 redis.disconnect()
-      process.exit(0)
-    })
-  }
+  activeRedisConnections.add(redis)
+  ensureSigintHandlerRegistered()
 
-  return new StagingRedis(redis)
+  return new StagingRedis(redis, () => activeRedisConnections.delete(redis))
 }

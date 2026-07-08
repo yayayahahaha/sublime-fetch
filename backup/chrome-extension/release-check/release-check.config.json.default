@@ -1,0 +1,49 @@
+{
+  "//": "非機密設定。複製本檔為 release-check.config.json 後填寫。",
+
+  "jira": {
+    "baseUrl": "https://btse.atlassian.net",
+    "//projects": "要撈 ticket 的 Jira project key 清單，用來組 JQL 範圍",
+    "projects": ["PLAT"]
+  },
+
+  "gitlab": {
+    "//baseUrl": "你們 GitLab 的網址，例如 https://gitlab.example.com",
+    "baseUrl": "https://gitlab.example.com"
+  },
+
+  "//requiredRepos": "這套工具必須檢查的 repo 清單（必填）。可寫成 namespace/project 或完整 git URL，比對時會正規化。",
+  "requiredRepos": ["group/repo-a", "group/sub/repo-b"],
+
+  "//localRepoPaths": "你本機實際 clone 好的 repo 路徑清單。工具會在每個路徑跑 git remote，確認上面的 requiredRepos 是否都在本機。",
+  "localRepoPaths": ["/Users/you/work/repo-a", "/Users/you/work/repo-b"],
+
+  "//targetBranches": "要檢查 branch 有沒有合併進去的目標分支",
+  "targetBranches": ["dev", "staging", "develop"],
+
+  "//defaultAssignee": "撈 ticket 時 assignee 的預設值（名字或 email），執行時可互動覆寫或清空。留 null 代表預設不限 assignee。",
+  "defaultAssignee": null,
+
+  "//notDoneStatuses": "被視為「還沒完成」的 Jira 狀態。可用陣列（所有 issue type 通用），或物件依 issue type 區分（default 為 fallback，type key 比對忽略大小寫）。",
+  "notDoneStatuses": {
+    "default": ["Open", "Code Review", "Dev Doing"],
+    "Job Order": ["Open", "Dev Doing"]
+  },
+
+  "//urgentWithinDays": "staging deadline 在今天起幾天內算「緊迫（黃）」。",
+  "urgentWithinDays": 3,
+
+  "//statusEmoji": "opened MR 旁標注該單 QA 狀態的 emoji。key=Jira 狀態，value=emoji；保留 key __default__ 對應未列出的狀態。",
+  "statusEmoji": {
+    "QA": "👀",
+    "Verified": "✅",
+    "__default__": "❔"
+  },
+
+  "//fixVersionMatch": "依今天日期挑選 fix version 的規則。daysAhead：往後幾天內（date token 落在 [今天, 今天+daysAhead]）的版本會被選中，執行時可互動覆寫。",
+  "//fixVersionMatch.dateTokenRegex": "選填。版本名稱抽日期的自訂 regex，第 1 個 capture group 應為 8 碼 YYYYMMDD；留 null 則預設掃描名稱中的 8 碼數字。",
+  "fixVersionMatch": {
+    "daysAhead": 30,
+    "dateTokenRegex": null
+  }
+}

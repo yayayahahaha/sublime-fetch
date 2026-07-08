@@ -1,0 +1,34 @@
+{
+  "jira": {
+    "baseUrl": "https://btse.atlassian.net",
+    "projects": ["PLAT"]
+  },
+
+  "gitlab": {
+    "baseUrl": "https://gitlab.com/"
+  },
+
+  "//requiredRepos": "這套工具必須檢查的 repo 清單（必填）。可寫成 namespace/project 或完整 git URL，比對時會正規化。",
+  "requiredRepos": ["https://gitlab.com/nogle/btsecom/btse-frontend/exchange-app", "https://gitlab.com/nogle/btsecom/btse-frontend/mjml_email_template"],
+
+  "//localRepoPaths": "你本機實際 clone 好的 repo 路徑清單。工具會在每個路徑跑 git remote，確認上面的 requiredRepos 是否都在本機。",
+  "localRepoPaths": ["/Users/flyc.chung/btse/frontend", "/Users/flyc.chung/btse/mjml_email_template"],
+
+  "defaultAssignee": "flyc",
+
+  "targetBranches": ["dev", "staging"],
+
+  "notDoneStatuses": {
+    "default": ["Open", "Code Review", "Dev Doing"],
+    "Job Order": ["Open", "Dev Doing"]
+  },
+
+  "statusEmoji": {
+    "QA": "👀",
+    "Verified": "✅",
+    "__default__": "❔"
+  },
+
+  "//fixVersionMatch": "TODO：依今天日期挑選 fix version 的規則，之後再討論。目前 preflight 不會用到。",
+  "fixVersionMatch": null
+}

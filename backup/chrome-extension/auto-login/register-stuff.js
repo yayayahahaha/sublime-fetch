@@ -33,7 +33,7 @@ const genMockFingerprint = (oriPayload) => {
   return `_${fingerprintPrefix}${fingerprintNumber}`
 }
 
-class RegistrationNeeded {
+export class RegistrationNeeded {
   constructor(account, config) {
     if (!account.email || !account.password) {
       throw new Error('註冊物件缺少 email 或 password 屬性')
@@ -118,14 +118,15 @@ class RegistrationNeeded {
     }
   }
 
-  async #doRegister(otherPayload = {}, { isRecursive = false, stepToRetry = 'all' } = {}) {
+  async #doRegister(otherPayload = {}, { isRecursive = false, stepToRetry = 'all', retryCount = 0 } = {}) {
+    const MAX_CAPTCHA_RETRIES = 3
     try {
       if (!isRecursive) {
         console.log()
         console.log(blue('初次嘗試註冊'))
       } else {
         console.log()
-        console.log(blue('取得 captcha 後的再次註冊'))
+        console.log(blue(`取得 captcha 後的再次註冊 (retry ${retryCount}/${MAX_CAPTCHA_RETRIES})`))
       }
 
       const apiUrl = this.wl.getApiUrl()
@@ -152,6 +153,15 @@ class RegistrationNeeded {
       if (preRegResponse.error) {
         const errorDetails = preRegResponse.error.message || JSON.stringify(preRegResponse.error)
         if (errorDetails.includes('Captcha is required')) {
+          if (otherPayload.captchaId) {
+            console.log(lightYellow(`⚠ 已送 captcha (id=${otherPayload.captchaId}, num="${otherPayload.captchaNumber}") 但後端仍回 "Captcha is required"`))
+            console.log(lightYellow(`  完整 backend error response: ${JSON.stringify(preRegResponse.error)}`))
+          }
+          if (retryCount >= MAX_CAPTCHA_RETRIES) {
+            errorConsole(`[${this.email}] otpEmail captcha 重試 ${MAX_CAPTCHA_RETRIES} 次都失敗, 中止`)
+            errorConsole(`  ↳ 可能是這個 brand 啟用了 Geetest, 純 API 沒辦法繞過 (需要瀏覽器解 challenge 才拿得到 passToken). 暫時請手動到 staging 註冊頁面完成註冊.`)
+            return { error: new Error(`captcha 重試 ${MAX_CAPTCHA_RETRIES} 次後仍失敗 (step=otp_email)`) }
+          }
           console.log('🏞️ 需要輸入 captcha')
           const { error: captchaError, data: captchaData } = await this.getCaptchaImage()
           if (captchaError != null) {
@@ -176,7 +186,7 @@ class RegistrationNeeded {
           console.log('captchaId: ', captchaId)
           console.log('captchaNumber: ', captchaNumber)
 
-          return await this.#doRegister({ captchaId, captchaNumber }, { isRecursive: true, stepToRetry: 'otp_email' })
+          return await this.#doRegister({ captchaId, captchaNumber }, { isRecursive: true, stepToRetry: 'otp_email', retryCount: retryCount + 1 })
         }
         throw new Error(`請求 OTP 失敗: ${errorDetails}`)
       }
@@ -228,6 +238,15 @@ class RegistrationNeeded {
       if (signUpResponse.error) {
         const errorDetails = signUpResponse.error.message || JSON.stringify(signUpResponse.error)
         if (errorDetails.includes('Captcha is required')) {
+          if (otherPayload.captchaId) {
+            console.log(lightYellow(`⚠ 已送 captcha (id=${otherPayload.captchaId}, num="${otherPayload.captchaNumber}") 但後端仍回 "Captcha is required"`))
+            console.log(lightYellow(`  完整 backend error response: ${JSON.stringify(signUpResponse.error)}`))
+          }
+          if (retryCount >= MAX_CAPTCHA_RETRIES) {
+            errorConsole(`[${this.email}] signup captcha 重試 ${MAX_CAPTCHA_RETRIES} 次都失敗, 中止`)
+            errorConsole(`  ↳ 可能是這個 brand 啟用了 Geetest, 純 API 沒辦法繞過 (需要瀏覽器解 challenge 才拿得到 passToken). 暫時請手動到 staging 註冊頁面完成註冊.`)
+            return { error: new Error(`captcha 重試 ${MAX_CAPTCHA_RETRIES} 次後仍失敗 (step=signup)`) }
+          }
           console.log('🏞️ 需要輸入 captcha')
           const { error: captchaError, data: captchaData } = await this.getCaptchaImage()
           if (captchaError != null) {
@@ -252,7 +271,7 @@ class RegistrationNeeded {
           console.log('captchaId: ', captchaId)
           console.log('captchaNumber: ', captchaNumber)
 
-          return await this.#doRegister({ captchaId, captchaNumber }, { isRecursive: true, stepToRetry: 'signup' })
+          return await this.#doRegister({ captchaId, captchaNumber }, { isRecursive: true, stepToRetry: 'signup', retryCount: retryCount + 1 })
         }
         throw new Error(`註冊失敗: ${errorDetails}`)
       }
@@ -265,7 +284,7 @@ class RegistrationNeeded {
   }
 }
 
-async function updateCacheFile(accountsToCache) {
+export async function updateCacheFile(accountsToCache) {
   if (accountsToCache.length === 0) return
 
   try {
@@ -291,7 +310,7 @@ async function updateCacheFile(accountsToCache) {
   }
 }
 
-async function updateSettingsFile(profilesToAdd) {
+export async function updateSettingsFile(profilesToAdd) {
   if (profilesToAdd.length === 0) return
 
   try {
@@ -329,6 +348,10 @@ export async function registerByList() {
 
   const count = registrationList.length
   titleConsole(`偵測到 ${count} 個帳號準備註冊。`)
+  console.log()
+  console.log(lightYellow('⚠️  注意: 對啟用 Geetest 的 brand (例如 btse) 此功能會失敗.'))
+  console.log(lightYellow('    後端要 passToken (瀏覽器解 challenge 才拿得到), 純 API 繞不過去.'))
+  console.log(lightYellow('    這類 brand 目前請手動到 staging 頁面註冊.'))
   console.log()
 
   const go = await confirm({ message: '是否開始進行批量註冊?' }).catch(() => null)

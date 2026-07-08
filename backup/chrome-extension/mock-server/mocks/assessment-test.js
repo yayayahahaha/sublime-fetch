@@ -27,9 +27,9 @@ const TOTAL_QUESTIONS = 5
 const PASS_THRESHOLD = 0.6 // 0 ~ 1；5 題就是答對 ≥ 3 才 pass
 const ATTEMPTS_ALLOWED = 3 // 每 tier 最多失敗幾次後被 LOCK
 const ATTEMPT_WINDOW_HOURS = 24
-const TIME_LIMIT_SECONDS = 900 // 每輪 quiz 從第一次 GET /quiz 開始倒數
+const TIME_LIMIT_SECONDS = 20 // 每輪 quiz 從第一次 GET /quiz 開始倒數
 const LOCKED_SECONDS = 3600 // LOCK 後給的 lockedRemainingSeconds（前端 LockDialog 自己倒數）
-const INITIAL_TIER = 1 // 想直接從 F2 開始測就改成 2
+const INITIAL_TIER = 2 // 想直接從 F2 開始測就改成 2
 const F1_TO_F2_UNLOCK_SECONDS = 30 // F1 PASSED 後等多久自動解鎖 F2（真實環境是 30 天）
 const CURRENT_EXAM = 'future_1'
 
@@ -86,11 +86,28 @@ function getRemainingSeconds() {
   return Math.max(0, Math.ceil((quizDeadline - Date.now()) / 1000))
 }
 
+// 上一輪 quiz 超時但客戶端還沒消化 EXPIRED → 在這次 status 把它當失敗結帳:
+// 扣一次 attempt、重置 session；扣到 0 變 LOCK，否則回 INIT 讓前端拿到新一輪
+// 的 start dialog 資訊。每次 statusHandler 開頭呼叫一次即可，idempotent。
+function maybeConsumeExpiredAttempt() {
+  if (quizDeadline === null || Date.now() <= quizDeadline) return
+  attemptsRemaining = Math.max(0, attemptsRemaining - 1)
+  if (attemptsRemaining === 0) {
+    userStatus = 'LOCK'
+    lockedRemainingSeconds = LOCKED_SECONDS
+  } else {
+    userStatus = 'INIT'
+  }
+  resetQuizSession()
+}
+
 // ─── GET /assessment/trading/status（動態）─────────────────
 // 回應隨 attemptsRemaining / userStatus 動態變化。LOCK 也是這裡判斷。
 const statusHandler = (req, res) => {
   // 先看 F1 PASSED 是不是已經等夠久該升級
   maybePromoteToTier2()
+  // 再看上一輪 quiz 是不是超時了沒結帳
+  maybeConsumeExpiredAttempt()
   const isLocked = userStatus === 'LOCK'
   const maxLeverage = currentTier === 2 ? 50 : 20
   const payload = {
@@ -135,15 +152,15 @@ const buildQuizQuestion = (qNum) => ({
     description: `[Q${qNum}/${TOTAL_QUESTIONS}] API keys with trading permissions should be:`,
     note: null,
     explanation: null,
-    options: [
-      { description: 'Shared with trusted trading groups for efficiency' },
-      {
-        description:
-          'Kept strictly private, IP-whitelisted, and given only the minimum permissions required',
-      },
-      { description: 'Posted in public repositories for transparency' },
-      { description: 'Regenerated only once per year' },
-    ],
+    options: [{
+      description: 'Shared with trusted trading groups for efficiency'
+    }, {
+      description: 'Kept strictly private, IP-whitelisted, and given only the minimum permissions required',
+    }, {
+      description: 'Posted in public repositories for transparency'
+    }, {
+      description: 'Regenerated only once per year'
+    }, ],
   },
 })
 
@@ -283,11 +300,25 @@ export const generalError = errorEnvelope('ASSESSMENT_NOT_ELIGIBLE')
 //   import { respond } from './_helpers.js'
 //   app.get('...status', respond('status notSupport', statusVariants.notSupport))
 export default function register(app) {
+  app.get('/futures/api/trading/assignedMaxLeverage', (_, res) => {
+    const assignedMaxLeverage = 10
+    res.locals._mockLabel = `assignedMaxLeverage: ${assignedMaxLeverage}`
+
+    res.json({
+      code: 1,
+      msg: "Success",
+      time: Date.now(),
+      data: { assignedMaxLeverage },
+      success: true
+    })
+  })
+
   app.get('/futures/api/assessment/trading/status', statusHandler)
-
   app.get('/futures/api/assessment/trading/quiz', quizHandler)
-
-  app.post('/futures/api/assessment/trading/quiz/answer', jsonParser, answerHandler)
-
+  app.post(
+    '/futures/api/assessment/trading/quiz/answer',
+    jsonParser,
+    answerHandler
+  )
   app.delete('/futures/api/assessment/trading/quiz', abandonHandler)
 }

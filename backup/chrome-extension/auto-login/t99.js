@@ -11,14 +11,17 @@ import { clearEmailCache } from '../admin-related/admin-utils.js'
 import { runDepositCli } from '../admin-related/deposit.js'
 import { runAddRoleCli } from '../admin-related/add-role.js'
 import { registerByList } from './register-stuff.js'
+import { generateAndLogin } from './generate-and-login.js'
 import { twoFaHelper } from './2fa-helper.js'
 import { jiraBranchHelper } from './jira-helper.js'
 import { chromeWindowHelper } from './refresh-tabs-helper.js'
 import { operateRedis } from '../isolated-operate-redis/index.js'
 import { mockServer } from '../mock-server/index.js'
+import { releaseCheckHelper } from '../release-check/index.js'
 
 const GET_WHITELABEL_INFO = 'GET_WHITELABEL_INFO'
 const REGISTER_BY_LIST = 'REGISTER_BY_LIST'
+const GENERATE_AND_LOGIN = 'GENERATE_AND_LOGIN'
 const LOGIN_STAGING_ADIN = 'LOGIN_STAGING_ADIN'
 const CLEAR_EMAIL_CACHE = 'CLEAR_EMAIL_CACHE'
 const DEPOSIT_TO_USER = 'DEPOSIT_TO_USER'
@@ -28,6 +31,7 @@ const JIRA_BRANCH_HELPER = 'JIRA_BRANCH_HELPER'
 const CHROME_WINDOW_HELPER = 'CHROME_WINDOW_HELPER'
 const OPERATE_REDIS = 'OPERATE_REDIS'
 const RUN_MOCK_SERVER = 'RUN_MOCK_SERVER'
+const RELEASE_CHECK = 'RELEASE_CHECK'
 
 const supportedCmdArgs = ['port', 'profile']
 
@@ -84,12 +88,12 @@ async function start() {
       },
       new Separator(),
       {
-        name: '對 Redis 操作',
+        name: 'Redis 對 Redis 操作',
         value: OPERATE_REDIS,
         description: '對 dev 或 staging 的 redis 做查找 or 刪除等',
       },
       {
-        name: '啟動 Mock Server',
+        name: 'Mock Server 啟動有 mock api 的 server',
         value: RUN_MOCK_SERVER,
         description: '啟動 Mock Server',
       },
@@ -108,11 +112,21 @@ async function start() {
         value: CHROME_WINDOW_HELPER,
         description: '列出 Chrome 視窗並執行刷新、複製 URL 或執行 JS',
       },
+      {
+        name: 'Release Check 版本檢查',
+        value: RELEASE_CHECK,
+        description: '依 Jira fix version 檢查各 repo 的 branch / 合併 / MR 狀態',
+      },
       new Separator(),
       {
-        name: '批量註冊帳號',
+        name: 'Register 批量註冊帳號',
         value: REGISTER_BY_LIST,
         description: '批量註冊帳號',
+      },
+      {
+        name: 'Generate + Login 生成並自動登入某個 brand',
+        value: GENERATE_AND_LOGIN,
+        description: '選 brand + 輸入 email 前綴, 自動註冊後寫回 settings.json 並登入',
       },
       new Separator(),
       {
@@ -145,6 +159,7 @@ async function start() {
 
   if (answer === GET_WHITELABEL_INFO) return void generateBrandInfo()
   if (answer === REGISTER_BY_LIST) return void registerByList()
+  if (answer === GENERATE_AND_LOGIN) return void generateAndLogin()
   if (answer === LOGIN_STAGING_ADIN) return void loginStagingAdmin()
   if (answer === CLEAR_EMAIL_CACHE) return void clearEmailCache()
   if (answer === DEPOSIT_TO_USER) return void runDepositCli()
@@ -164,6 +179,11 @@ async function start() {
 
   if (answer === CHROME_WINDOW_HELPER) {
     await chromeWindowHelper()
+    return
+  }
+
+  if (answer === RELEASE_CHECK) {
+    await releaseCheckHelper()
     return
   }
 
