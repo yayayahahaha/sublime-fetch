@@ -2,7 +2,7 @@ import { fetchTargetTickets } from './tickets.js'
 import { checkRepoCoverage } from './repos.js'
 import { analyzeTicketsAcrossRepos } from './branches.js'
 import { enrichWithMergeRequests } from './mergeRequests.js'
-import { computeUrgency, assessCompleteness, resolveNotDoneStatuses, resolveStatusEmoji } from './assess.js'
+import { computeUrgency, assessCompleteness, resolveStatusList, resolveStatusEmoji } from './assess.js'
 
 /**
  * 純運算：撈 ticket → repo 涵蓋 → 分支分析 →（withMr 時）補 MR。
@@ -73,7 +73,10 @@ export function buildReportModel(compute, meta = {}) {
     jiraUrl: meta.jiraBaseUrl ? `${meta.jiraBaseUrl}/browse/${t.key}` : null,
     statusEmoji: resolveStatusEmoji(meta.statusEmoji, t.status),
     urgency: computeUrgency(t.fixVersions, urgencyOpts),
-    completeness: assessCompleteness(t, { notDoneStatuses: resolveNotDoneStatuses(meta.notDoneStatuses, t.type) }),
+    completeness: assessCompleteness(t, {
+      notDoneStatuses: resolveStatusList(meta.notDoneStatuses, t.type),
+      doneStatuses: resolveStatusList(meta.doneStatuses, t.type),
+    }),
   }))
 
   return {

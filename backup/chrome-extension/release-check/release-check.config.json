@@ -18,6 +18,8 @@
 
   "targetBranches": ["dev", "staging"],
 
+  "doneStatuses": ["Verified"],
+
   "notDoneStatuses": {
     "default": ["Open", "Code Review", "Dev Doing"],
     "Job Order": ["Open", "Dev Doing"]

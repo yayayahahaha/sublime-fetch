@@ -24,6 +24,9 @@
   "//defaultAssignee": "撈 ticket 時 assignee 的預設值（名字或 email），執行時可互動覆寫或清空。留 null 代表預設不限 assignee。",
   "defaultAssignee": null,
 
+  "//doneStatuses": "前置條件：ticket 狀態在此清單內就「直接算完成」（跳過 git/MR 檢查）。格式同 notDoneStatuses（陣列或依 issue type 的物件）。優先於 notDoneStatuses。",
+  "doneStatuses": ["Verified"],
+
   "//notDoneStatuses": "被視為「還沒完成」的 Jira 狀態。可用陣列（所有 issue type 通用），或物件依 issue type 區分（default 為 fallback，type key 比對忽略大小寫）。",
   "notDoneStatuses": {
     "default": ["Open", "Code Review", "Dev Doing"],

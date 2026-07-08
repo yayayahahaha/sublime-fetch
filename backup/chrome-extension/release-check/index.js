@@ -124,6 +124,7 @@ function buildMeta(config, daysAhead, assigneeDisplayName) {
     generatedAt: new Date().toISOString(),
     today: new Date(),
     notDoneStatuses: config.notDoneStatuses ?? [],
+    doneStatuses: config.doneStatuses ?? [],
     urgentWithinDays: config.urgentWithinDays ?? 3,
     dateTokenRegex: config.fixVersionMatch?.dateTokenRegex ?? null,
     jiraBaseUrl: config.jira?.baseUrl ?? null,

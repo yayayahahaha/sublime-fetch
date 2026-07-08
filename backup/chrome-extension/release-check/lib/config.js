@@ -63,6 +63,7 @@ export function loadConfig() {
     fixVersionMatch: config.fixVersionMatch ?? null,
     defaultAssignee: config.defaultAssignee ?? null,
     notDoneStatuses: config.notDoneStatuses ?? ['Open'],
+    doneStatuses: config.doneStatuses ?? [],
     urgentWithinDays: config.urgentWithinDays ?? 3,
     statusEmoji: config.statusEmoji ?? {},
   }

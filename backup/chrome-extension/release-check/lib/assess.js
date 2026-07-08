@@ -73,10 +73,10 @@ export function computeUrgency(fixVersionNames, { today = new Date(), urgentWith
 }
 
 /**
- * 依 issue type 解析出該用哪份「未完成」狀態清單。
+ * 依 issue type 解析出一份狀態清單。
  * spec 可為陣列（所有 type 通用）或物件（{ default, "<type>": [...] }，type 比對忽略大小寫）。
  */
-export function resolveNotDoneStatuses(spec, type) {
+export function resolveStatusList(spec, type) {
   if (Array.isArray(spec)) return spec
   if (spec && typeof spec === 'object') {
     if (type) {
@@ -117,16 +117,20 @@ function branchIssues(b) {
  * 判定一張 ticket 的完成度。
  * 回傳 { done, jiraNotDone, hasAnyBranch, repos: [{ required, branches: [{name, issues}] }] }
  */
-export function assessCompleteness(ticket, { notDoneStatuses = [] } = {}) {
-  const jiraNotDone = notDoneStatuses.includes(ticket.status)
-
+export function assessCompleteness(ticket, { notDoneStatuses = [], doneStatuses = [] } = {}) {
   const repos = (ticket.repos ?? []).map((r) => ({
     required: r.required,
     branches: (r.branches ?? []).map((b) => ({ name: b.name, issues: branchIssues(b) })),
   }))
-
   const allBranches = repos.flatMap((r) => r.branches)
   const hasAnyBranch = allBranches.length > 0
+
+  // 前置條件：狀態在 doneStatuses → 直接算完成（跳過 git / MR 檢查）
+  if (doneStatuses.includes(ticket.status)) {
+    return { done: true, jiraNotDone: false, hasAnyBranch, repos }
+  }
+
+  const jiraNotDone = notDoneStatuses.includes(ticket.status)
   const gitClean = hasAnyBranch && allBranches.every((b) => b.issues.length === 0)
 
   return { done: !jiraNotDone && gitClean, jiraNotDone, hasAnyBranch, repos }
