@@ -8,7 +8,7 @@ import { runPreflight } from './lib/preflight.js'
 import { fetchTargetTickets, searchAssignee } from './lib/tickets.js'
 import { computeFullAnalysis, buildReportModel } from './lib/report.js'
 import { renderTickets, renderReport, renderPreflight } from './lib/render.js'
-import { lightRed, yellow, lightCyan, green } from '../color.js'
+import { lightRed, yellow, lightCyan, green, blue } from '../color.js'
 
 const HELP = `
 release-check — 依 Jira fix version 檢查各 repo 的 branch / 合併 / MR 狀態
@@ -62,6 +62,7 @@ async function resolveAssigneeInteractive(config, rawInput) {
   const query = (rawInput ?? '').trim()
   if (!query) return { skip: true }
 
+  console.log(blue('🔍 驗證 assignee（查詢 Jira 使用者）…'))
   let users
   try {
     users = await searchAssignee(config, query)
@@ -93,13 +94,10 @@ async function resolveAssigneeInteractive(config, rawInput) {
 }
 
 /**
- * 互動詢問 daysAhead + assignee 並驗證。
- * 回傳 { daysAhead, assigneeAccountId, assigneeDisplayName } ｜ null（取消 / 驗證失敗）。
+ * 互動詢問 assignee 並驗證（會打 Jira API）。
+ * 回傳 { assigneeAccountId, assigneeDisplayName } ｜ null（取消 / 驗證失敗）。
  */
-async function promptTicketParams(config) {
-  const daysAhead = await askDaysAhead(config)
-  if (daysAhead == null) return null
-
+async function askAssignee(config) {
   const assigneeInput = await input({
     message: `指派人 assignee（名字或 email；Enter 用預設${config.defaultAssignee ? ` ${config.defaultAssignee}` : '「不限」'}，清空則不限）`,
     default: config.defaultAssignee ?? '',
@@ -110,10 +108,31 @@ async function promptTicketParams(config) {
   if (resolved == null) return null // 查無此人或取消 → 中止
 
   return {
-    daysAhead,
     assigneeAccountId: resolved.skip ? null : resolved.accountId,
     assigneeDisplayName: resolved.skip ? null : resolved.displayName,
   }
+}
+
+/**
+ * 互動詢問 daysAhead + assignee 並驗證（供「只撈 ticket」使用）。
+ * 回傳 { daysAhead, assigneeAccountId, assigneeDisplayName } ｜ null。
+ */
+async function promptTicketParams(config) {
+  const daysAhead = await askDaysAhead(config)
+  if (daysAhead == null) return null
+  const assignee = await askAssignee(config)
+  if (assignee == null) return null
+  return { daysAhead, ...assignee }
+}
+
+// 打 API 各階段的進度提示（避免畫面看起來卡住）
+function logProgress(phase) {
+  const msg = {
+    tickets: '📥 從 Jira 撈取符合的 ticket…',
+    branches: '🌿 分析各 repo 分支狀態…',
+    mr: '🔗 查詢 GitLab MR…',
+  }[phase]
+  if (msg) console.log(blue(msg))
 }
 
 // meta：組出 model 需要的展示用中繼資料 + 判定用參數
@@ -136,19 +155,25 @@ function buildMeta(config, daysAhead, assigneeDisplayName) {
  * 互動流程：問參數 → 問是否 fetch → 運算 → 產 model → 彩色報表。
  */
 async function runAnalysis(config, { withMr }) {
-  const params = await promptTicketParams(config)
-  if (params == null) return
+  // 先把不打 API 的提問問完（天數、是否 fetch），最後才問會打 Jira API 的 assignee，
+  // 避免 API 卡頓夾在兩個提問中間。
+  const daysAhead = await askDaysAhead(config)
+  if (daysAhead == null) return
 
   const doFetch = await confirm({ message: '分析前先對各 repo 執行 git fetch --all --prune？' }).catch(() => null)
   if (doFetch == null) return void console.log(yellow('使用者取消'))
 
+  const assignee = await askAssignee(config)
+  if (assignee == null) return
+
   let data
   try {
     data = await computeFullAnalysis(config, {
-      daysAhead: params.daysAhead,
-      assigneeAccountId: params.assigneeAccountId,
+      daysAhead,
+      assigneeAccountId: assignee.assigneeAccountId,
       doFetch,
       withMr,
+      onProgress: logProgress,
     })
   } catch (err) {
     return void console.error(lightRed(`❌ 分析失敗：${err.message}`))
@@ -158,7 +183,7 @@ async function runAnalysis(config, { withMr }) {
     console.log(lightRed('❌ 沒有任何必檢 repo 對應到本地路徑，分支/MR 資訊會缺，請先跑 Preflight 修正。'))
   }
 
-  const model = buildReportModel(data, buildMeta(config, params.daysAhead, params.assigneeDisplayName))
+  const model = buildReportModel(data, buildMeta(config, daysAhead, assignee.assigneeDisplayName))
   renderReport(model)
 }
 
@@ -213,10 +238,10 @@ export async function releaseCheckHelper() {
   const action = await select({
     message: 'release-check：要做什麼？',
     choices: [
+      { name: '完整檢查流程（含 GitLab MR）', value: ACTION_FULL, description: '撈 ticket + 分支分析 + 查 GitLab MR，輸出彙整報表' },
       { name: 'Preflight 前置檢查', value: ACTION_PREFLIGHT, description: '檢查 Jira / GitLab 認證與本地 repo 涵蓋' },
       { name: '撈取目標 ticket（Jira）', value: ACTION_FETCH_TICKETS, description: '依 fix version 時間窗撈出 ticket 清單' },
       { name: '分支 / 合併分析', value: ACTION_ANALYZE, description: '撈 ticket 後，檢查各 repo 的 branch 是否存在、合併與未 push 狀態' },
-      { name: '完整檢查流程（含 GitLab MR）', value: ACTION_FULL, description: '撈 ticket + 分支分析 + 查 GitLab MR，輸出彙整報表' },
     ],
     loop: false,
   }).catch(() => null)

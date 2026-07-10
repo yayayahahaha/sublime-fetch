@@ -9,15 +9,18 @@ import { computeUrgency, assessCompleteness, resolveStatusList, resolveStatusEmo
  * 不做任何 console 輸出（讓 model / JSON 輸出保持乾淨）。
  * 回傳 { ticketsResult, coverage, analysis, targetBranches }（analysis 可能為 null）。
  */
-export async function computeFullAnalysis(config, { daysAhead, assigneeAccountId, doFetch, withMr }) {
+export async function computeFullAnalysis(config, { daysAhead, assigneeAccountId, doFetch, withMr, onProgress = () => {} }) {
+  onProgress('tickets')
   const ticketsResult = await fetchTargetTickets(config, { daysAhead, assigneeAccountId })
   const coverage = await checkRepoCoverage(config.requiredRepos, config.localRepoPaths)
 
   let analysis = null
   if (ticketsResult.tickets.length > 0 && coverage.matched.length > 0) {
+    onProgress('branches')
     analysis = await analyzeTicketsAcrossRepos(coverage.matched, ticketsResult.tickets, config.targetBranches, { doFetch })
     if (withMr) {
       try {
+        onProgress('mr')
         await enrichWithMergeRequests(analysis, coverage.matched, config)
       } catch {
         // MR 整體查詢失敗就維持沒有 MR 欄位（分支分析仍可用）

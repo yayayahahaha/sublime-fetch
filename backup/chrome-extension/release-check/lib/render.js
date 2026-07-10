@@ -85,7 +85,7 @@ function renderIncompleteTicket(t) {
   console.log(`     ${u ? `${deadlinePhrase(u)}  ← ${u.drivingVersion}` : yellow('（無法判定 deadline）')}`)
 
   const c = t.completeness
-  if (c.jiraNotDone) console.log(`     ${red('✗')} Jira 狀態：${t.status}`)
+  if (c.jiraNotDone) console.log(`     ${red('✗')} Jira 狀態：${t.statusEmoji ? `${t.statusEmoji} ` : ''}${t.status}`)
 
   if (!c.hasAnyBranch) {
     console.log(`     ${red('✗')} 找不到任何對應 branch（可能還沒開始）`)
@@ -103,15 +103,33 @@ function renderIncompleteTicket(t) {
   console.log('') // 每張 ticket 之間空一行
 }
 
-function renderCompleted(complete) {
-  if (complete.length === 0) return
-  console.log(lightCyan(`── ✅ 已完成（${complete.length}）──`))
-  for (const t of complete) {
+// 該單有 MR 且全部都 merged
+function allMrsMerged(t) {
+  const mrs = collectMrs(t)
+  return mrs.length > 0 && mrs.every((m) => m.state === 'merged')
+}
+
+// 已上 staging：done 但 MR 尚未全部 merged
+function renderStaged(staged) {
+  if (staged.length === 0) return
+  console.log(lightCyan(`── ✅ 已上 staging（${staged.length}）──`))
+  for (const t of staged) {
     const mrs = collectMrs(t)
     const merged = mrs.filter((m) => m.state === 'merged').length
     const mrNote = mrs.length ? `MR ${merged}/${mrs.length} merged` : 'MR: -'
-    console.log(`  ${green(t.key)}  ${t.summary}${typeTag(t)}  ${blue(`[${t.status}]`)}  ${mrNote}`)
+    const st = t.statusEmoji ? `${t.statusEmoji} ` : ''
+    console.log(`  ${green(t.key)}  ${t.summary}${typeTag(t)}  ${st}${blue(`[${t.status}]`)}  ${mrNote}`)
+    const urls = [...new Set(mrs.map((m) => m.webUrl).filter(Boolean))]
+    for (const url of urls) console.log(`    PR: ${url}`)
   }
+  console.log('')
+}
+
+// 已完成合併：done 且 MR 全部 merged，只列一行（單號 + 標題）
+function renderMerged(merged) {
+  if (merged.length === 0) return
+  console.log(lightCyan(`── 🎉 已完成合併（${merged.length}）──`))
+  for (const t of merged) console.log(`  ${green(t.key)}  ${t.summary}`)
   console.log('')
 }
 
@@ -137,38 +155,7 @@ function renderDiscussions(model) {
   console.log('')
 }
 
-// MR 連結（可整段複製貼給 reviewer），分成 opened 與其他兩區
-function renderMrLinks(model) {
-  const seen = new Set()
-  const opened = []
-  const others = []
-  for (const t of model.tickets) {
-    for (const r of t.repos ?? []) {
-      for (const b of r.branches ?? []) {
-        if (!Array.isArray(b.mergeRequests)) continue
-        for (const mr of b.mergeRequests) {
-          if (!mr.webUrl || seen.has(mr.webUrl)) continue
-          seen.add(mr.webUrl)
-          if (mr.state === 'opened') opened.push({ url: mr.webUrl, emoji: t.statusEmoji, status: t.status })
-          else others.push(mr.webUrl)
-        }
-      }
-    }
-  }
-
-  if (opened.length) {
-    console.log(lightCyan(`── 待 review 的 MR 連結（opened，${opened.length}）──`))
-    for (const o of opened) console.log(o.emoji ? `${o.url}  ${o.emoji} ${o.status}` : o.url)
-    console.log('')
-  }
-  if (others.length) {
-    console.log(lightCyan(`── 其他 MR 連結（已 merged / closed，${others.length}）──`))
-    for (const url of others) console.log(url)
-    console.log('')
-  }
-}
-
-// 主報表：待完成（依緊急度分桶）+ 已完成 + MR discussions
+// 主報表：待完成（依緊急度分桶）+ 已上 staging + 已完成合併 + MR discussions
 export function renderReport(model) {
   const assigneeSuffix = model.assignee ? `, assignee=${model.assignee}` : ''
   console.log('\n' + lightCyan(`=== Release Check（往後 ${model.daysAhead} 天${assigneeSuffix}）===`) + '\n')
@@ -183,7 +170,9 @@ export function renderReport(model) {
   }
 
   const incomplete = model.tickets.filter((t) => !t.completeness.done)
-  const complete = model.tickets.filter((t) => t.completeness.done)
+  const done = model.tickets.filter((t) => t.completeness.done)
+  const merged = done.filter(allMrsMerged)
+  const staged = done.filter((t) => !allMrsMerged(t))
 
   console.log(lightCyan('── 待完成（依緊急度）──') + '\n')
   if (incomplete.length === 0) {
@@ -199,8 +188,8 @@ export function renderReport(model) {
     }
   }
 
-  renderCompleted(complete)
-  renderMrLinks(model)
+  renderStaged(staged)
+  renderMerged(merged)
   renderDiscussions(model)
 }
 

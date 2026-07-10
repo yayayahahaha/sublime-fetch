@@ -69,9 +69,8 @@ async function aheadBehind(repoPath, localRef, remoteRef) {
 async function analyzeBranch(repoPath, entry, targetBranches) {
   const tip = entry.remoteRef ?? entry.localRef
   const containing = await listContaining(repoPath, tip)
-  const mergedInto = targetBranches.filter(
-    (t) => containing.has(`refs/remotes/${REMOTE}/${t}`) || containing.has(`refs/heads/${t}`)
-  )
+  // 只認 remote：以 server 上的 origin/<target> 是否包含此 commit 為準（發版語意）
+  const mergedInto = targetBranches.filter((t) => containing.has(`refs/remotes/${REMOTE}/${t}`))
 
   const hasLocal = !!entry.localRef
   const hasRemote = !!entry.remoteRef
