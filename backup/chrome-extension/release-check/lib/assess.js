@@ -3,7 +3,6 @@ import { extractVersionDate } from './fixVersion.js'
 
 const HOTFIX_RE = /hotfix/i
 const STAGING_RE = /staging/i
-const REQUIRED_MERGE = ['dev', 'staging'] // 完成所需 merge 的目標分支（嚴格）
 
 function fmtLocalDate(date) {
   const y = date.getFullYear()
@@ -96,42 +95,83 @@ export function resolveStatusEmoji(map, status) {
   return map[status] ?? map.__default__ ?? ''
 }
 
-// 單一 branch 還缺哪些（merge dev/staging、push、MR）
-function branchIssues(b) {
-  const issues = []
-  for (const target of REQUIRED_MERGE) {
-    if (!b.mergedInto?.includes(target)) issues.push(`未 merge ${target}`)
-  }
-  if (!b.hasRemote) issues.push('本地分支尚未 push')
-  else if (b.hasLocal && b.ahead > 0) issues.push(`本地領先 ${b.ahead} 未 push`)
+// 單一 branch「真的」進了哪些 target：git contains，且排除空 branch（tip = 該 target head → 不算）。
+export function branchReachedTargets(b) {
+  const reached = new Set(b.mergedInto ?? [])
+  for (const t of b.tipIsHeadOf ?? []) reached.delete(t)
+  return reached
+}
 
-  // 只有做過 MR enrich 才判定「開 MR」；opened 或 merged 皆算已開
-  if (b.mergeRequests !== undefined) {
-    const hasMr = Array.isArray(b.mergeRequests) && b.mergeRequests.some((m) => m.state === 'opened' || m.state === 'merged')
-    if (!hasMr) issues.push('未開 MR')
-  }
-  return issues
+// 一個 repo 的 branch 們合起來「真的」進了哪些 target
+export function repoReachedTargets(repo) {
+  const s = new Set()
+  for (const b of repo.branches ?? []) for (const t of branchReachedTargets(b)) s.add(t)
+  return s
+}
+
+// 一個 repo 有沒有「送出過」的 MR（opened 或 merged）
+export function repoHasSubmittedMr(repo) {
+  return (repo.branches ?? []).some((b) => Array.isArray(b.mergeRequests) && b.mergeRequests.some((m) => m.state === 'opened' || m.state === 'merged'))
 }
 
 /**
- * 判定一張 ticket 的完成度。
- * 回傳 { done, jiraNotDone, hasAnyBranch, repos: [{ required, branches: [{name, issues}] }] }
+ * 把 ticket 分成 done / sentToTest / other。
+ * 判定順序：步驟 0 未 push override → 步驟 1 已完成 → 步驟 2 已送測 → 其他。
+ * 回傳 { category, unpushed:[{repo,branch,ahead}], oddMrTargets:[...] }
  */
-export function assessCompleteness(ticket, { notDoneStatuses = [], doneStatuses = [] } = {}) {
-  const repos = (ticket.repos ?? []).map((r) => ({
-    required: r.required,
-    branches: (r.branches ?? []).map((b) => ({ name: b.name, issues: branchIssues(b) })),
-  }))
-  const allBranches = repos.flatMap((r) => r.branches)
-  const hasAnyBranch = allBranches.length > 0
+export function classifyTicket(ticket, { stagingBranches = [], doneBranches = [], doneStatuses = [], sentToTestStatuses = [] } = {}) {
+  const repos = ticket.repos ?? []
+  const involvedRepos = repos.filter((r) => (r.branches ?? []).length > 0)
+  const hasAnyBranch = involvedRepos.length > 0
 
-  // 前置條件：狀態在 doneStatuses → 直接算完成（跳過 git / MR 檢查）
-  if (doneStatuses.includes(ticket.status)) {
-    return { done: true, jiraNotDone: false, hasAnyBranch, repos }
+  const allMrs = [
+    ...repos.flatMap((r) => (r.branches ?? []).flatMap((b) => (Array.isArray(b.mergeRequests) ? b.mergeRequests : []))),
+    ...(ticket.extraMergeRequests ?? []),
+  ]
+  const hasOpenMrAnywhere = allMrs.some((m) => m.state === 'opened')
+
+  // 送出過 / merged 的 MR 若 target 不是已知分支（dev/staging/done）→ 提示（協作 base-branch）
+  const known = new Set([...stagingBranches, ...doneBranches])
+  const oddMrTargets = [
+    ...new Set(
+      allMrs
+        .filter((m) => (m.state === 'opened' || m.state === 'merged') && m.targetBranch && !known.has(m.targetBranch))
+        .map((m) => m.targetBranch)
+    ),
+  ]
+
+  // 步驟 0：本地超前未 push → 其他（override）
+  const unpushed = []
+  for (const r of repos) for (const b of r.branches ?? []) {
+    if (b.hasRemote && b.ahead > 0) unpushed.push({ repo: r.required, branch: b.name, ahead: b.ahead })
   }
+  if (unpushed.length) return { category: 'other', unpushed, oddMrTargets }
 
-  const jiraNotDone = notDoneStatuses.includes(ticket.status)
-  const gitClean = hasAnyBranch && allBranches.every((b) => b.issues.length === 0)
+  // 步驟 1：已完成（Jira 狀態必要 + 無 open MR + 每 branch 進 doneBranches；沒 branch 信 Jira）
+  const isDone = (() => {
+    if (!doneStatuses.includes(ticket.status)) return false
+    if (hasOpenMrAnywhere) return false
+    if (!hasAnyBranch) return true
+    return involvedRepos.every((r) => {
+      const reached = repoReachedTargets(r)
+      return doneBranches.every((db) => reached.has(db))
+    })
+  })()
+  if (isDone) return { category: 'done', unpushed: [], oddMrTargets }
 
-  return { done: !jiraNotDone && gitClean, jiraNotDone, hasAnyBranch, repos }
+  // 步驟 2：已送測（有 branch → 每 repo 上 staging + 每 repo 送出過 MR；沒 branch → 靠 Jira 狀態）
+  const isSentToTest = (() => {
+    if (hasAnyBranch) {
+      const mergedStaging = involvedRepos.every((r) => {
+        const reached = repoReachedTargets(r)
+        return stagingBranches.every((sb) => reached.has(sb))
+      })
+      const submitted = involvedRepos.every((r) => repoHasSubmittedMr(r))
+      return mergedStaging && submitted
+    }
+    return sentToTestStatuses.includes(ticket.status)
+  })()
+  if (isSentToTest) return { category: 'sentToTest', unpushed: [], oddMrTargets }
+
+  return { category: 'other', unpushed: [], oddMrTargets }
 }

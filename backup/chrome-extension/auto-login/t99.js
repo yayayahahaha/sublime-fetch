@@ -18,6 +18,7 @@ import { chromeWindowHelper } from './refresh-tabs-helper.js'
 import { operateRedis } from '../isolated-operate-redis/index.js'
 import { mockServer } from '../mock-server/index.js'
 import { releaseCheckHelper } from '../release-check/index.js'
+import { writeActionHelper, watchersHelper } from '../release-check/writeActions.js'
 
 const GET_WHITELABEL_INFO = 'GET_WHITELABEL_INFO'
 const REGISTER_BY_LIST = 'REGISTER_BY_LIST'
@@ -32,6 +33,10 @@ const CHROME_WINDOW_HELPER = 'CHROME_WINDOW_HELPER'
 const OPERATE_REDIS = 'OPERATE_REDIS'
 const RUN_MOCK_SERVER = 'RUN_MOCK_SERVER'
 const RELEASE_CHECK = 'RELEASE_CHECK'
+const WRITE_MR = 'WRITE_MR'
+const WRITE_PIPELINE = 'WRITE_PIPELINE'
+const WRITE_JIRA_LINK = 'WRITE_JIRA_LINK'
+const WATCHERS = 'WATCHERS'
 
 const supportedCmdArgs = ['port', 'profile']
 
@@ -117,6 +122,26 @@ async function start() {
         value: RELEASE_CHECK,
         description: '依 Jira fix version 檢查各 repo 的 branch / 合併 / MR 狀態',
       },
+      {
+        name: '開 MR（GitLab）',
+        value: WRITE_MR,
+        description: '快速開 MR（目前：權限預檢；操作 UI 待接）',
+      },
+      {
+        name: 'Pipeline（GitLab）',
+        value: WRITE_PIPELINE,
+        description: '觸發 / 排程 pipeline（目前：權限預檢；操作 UI 待接）',
+      },
+      {
+        name: 'Jira 關聯單',
+        value: WRITE_JIRA_LINK,
+        description: '批量開 child 關聯單（目前：權限預檢；操作 UI 待接）',
+      },
+      {
+        name: 'Watchers 背景監看任務',
+        value: WATCHERS,
+        description: '列出 / kill / 清除背景 pipeline 監看程序',
+      },
       new Separator(),
       {
         name: 'Register 批量註冊帳號',
@@ -184,6 +209,26 @@ async function start() {
 
   if (answer === RELEASE_CHECK) {
     await releaseCheckHelper()
+    return
+  }
+
+  if (answer === WRITE_MR) {
+    await writeActionHelper('mr')
+    return
+  }
+
+  if (answer === WRITE_PIPELINE) {
+    await writeActionHelper('pipeline')
+    return
+  }
+
+  if (answer === WRITE_JIRA_LINK) {
+    await writeActionHelper('jira')
+    return
+  }
+
+  if (answer === WATCHERS) {
+    await watchersHelper()
     return
   }
 

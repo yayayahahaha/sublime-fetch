@@ -1,0 +1,24 @@
+{
+  "pid": 46384,
+  "label": "重新部署 I18n",
+  "projectPath": "nogle/btsecom/btse-frontend/translation-management",
+  "pipelineId": 2684495691,
+  "url": "https://gitlab.com/nogle/btsecom/btse-frontend/translation-management/-/pipelines/2684495691",
+  "startedAt": "2026-07-17T10:27:30.424Z",
+  "status": "success",
+  "pipelineCount": 2,
+  "pipelines": [
+    {
+      "id": 2684495691,
+      "status": "success",
+      "webUrl": "https://gitlab.com/nogle/btsecom/btse-frontend/translation-management/-/pipelines/2684495691"
+    },
+    {
+      "id": 2684495740,
+      "status": "success",
+      "webUrl": "https://gitlab.com/nogle/btsecom/btse-frontend/translation-management/-/pipelines/2684495740"
+    }
+  ],
+  "finishedAt": "2026-07-17T10:31:13.665Z",
+  "updatedAt": "2026-07-17T10:31:13.665Z"
+}

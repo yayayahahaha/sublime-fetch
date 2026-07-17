@@ -29,7 +29,8 @@ export class JiraClient {
       err.status = res.status
       throw err
     }
-    return res.json()
+    const text = await res.text()
+    return text ? JSON.parse(text) : null // 容忍空 body（如 issueLink 回 201 無內容）
   }
 
   // 驗證認證是否有效，回傳目前登入者資訊
@@ -62,5 +63,38 @@ export class JiraClient {
       nextPageToken = data.nextPageToken
     } while (nextPageToken)
     return issues
+  }
+
+  // 所有 issue link type（給「is child of」的查找+select 用），回 [{id, name, inward, outward}]
+  async getIssueLinkTypes() {
+    const data = await this.request('/rest/api/3/issueLinkType')
+    return data.issueLinkTypes ?? []
+  }
+
+  // 某專案可用的 issue type，回 [{id, name, subtask}]
+  async getProjectIssueTypes(projectKey) {
+    const data = await this.request(`/rest/api/3/project/${encodeURIComponent(projectKey)}`)
+    return (data.issueTypes ?? []).map((t) => ({ id: t.id, name: t.name, subtask: !!t.subtask }))
+  }
+
+  // 建立 issue（fields 需符合 Jira v3 格式；description 為 ADF）。回 { id, key, self }
+  async createIssue(fields) {
+    return this.request('/rest/api/3/issue', { method: 'POST', body: { fields } })
+  }
+
+  // 查目前使用者在某專案的權限（回 { PERM: { havePermission } }）。新版 Jira 需帶 permissions 參數。
+  async getMyPermissions(projectKey, permissions) {
+    const data = await this.request('/rest/api/3/mypermissions', {
+      query: { projectKey, permissions: permissions.join(',') },
+    })
+    return data?.permissions ?? {}
+  }
+
+  // 建立 issue 間的 link（type 用名稱；方向由 inward/outward 決定）
+  async createIssueLink({ typeName, inwardKey, outwardKey }) {
+    return this.request('/rest/api/3/issueLink', {
+      method: 'POST',
+      body: { type: { name: typeName }, inwardIssue: { key: inwardKey }, outwardIssue: { key: outwardKey } },
+    })
   }
 }

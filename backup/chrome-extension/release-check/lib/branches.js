@@ -30,18 +30,35 @@ async function listBranchRefs(repoPath) {
     .filter((r) => r && r.short !== 'HEAD')
 }
 
-// 找出名稱含 ticket key（不拘位置、忽略大小寫）的分支，local / remote 合併成同一個邏輯分支
+function escapeRegex(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+// 建立「有邊界」的 key 比對：前面不接英數、後面不接數字（避免 PLAT-1 誤中 PLAT-10）
+function keyMatcher(key) {
+  return new RegExp(`(?<![A-Za-z0-9])${escapeRegex(key)}(?![0-9])`, 'i')
+}
+
+// 找出名稱含 ticket key（有邊界、忽略大小寫）的分支，local / remote 合併成同一個邏輯分支
 function matchBranches(refs, key) {
-  const lower = key.toLowerCase()
+  const re = keyMatcher(key)
   const map = new Map()
   for (const r of refs) {
-    if (!r.short.toLowerCase().includes(lower)) continue
+    if (!re.test(r.short)) continue
     const entry = map.get(r.short) ?? { short: r.short, localRef: null, remoteRef: null }
     if (r.kind === 'local') entry.localRef = r.full
     else if (r.kind === 'remote' && r.remote === REMOTE) entry.remoteRef = r.full
     map.set(r.short, entry)
   }
   return [...map.values()]
+}
+
+async function revParse(repoPath, ref) {
+  try {
+    return await git(repoPath, ['rev-parse', ref])
+  } catch {
+    return null
+  }
 }
 
 // 這個 commit 被哪些分支包含（用來判斷是否已合併進 target 分支）
@@ -66,11 +83,15 @@ async function aheadBehind(repoPath, localRef, remoteRef) {
   }
 }
 
-async function analyzeBranch(repoPath, entry, targetBranches) {
+async function analyzeBranch(repoPath, entry, targetBranches, targetHeads) {
   const tip = entry.remoteRef ?? entry.localRef
   const containing = await listContaining(repoPath, tip)
   // 只認 remote：以 server 上的 origin/<target> 是否包含此 commit 為準（發版語意）
   const mergedInto = targetBranches.filter((t) => containing.has(`refs/remotes/${REMOTE}/${t}`))
+
+  // 空 branch 防呆：branch tip 若等於某 target 的 head commit（＝沒做事、tip 剛好落在 mainline 上）
+  const tipSha = await revParse(repoPath, tip)
+  const tipIsHeadOf = targetBranches.filter((t) => targetHeads[t] && tipSha && targetHeads[t] === tipSha)
 
   const hasLocal = !!entry.localRef
   const hasRemote = !!entry.remoteRef
@@ -89,14 +110,14 @@ async function analyzeBranch(repoPath, entry, targetBranches) {
     behind = null
   }
 
-  return { name: entry.short, hasLocal, hasRemote, pushed, ahead, behind, mergedInto }
+  return { name: entry.short, hasLocal, hasRemote, pushed, ahead, behind, mergedInto, tipIsHeadOf }
 }
 
 /**
  * 對每個（已對應到本地的）repo：可選 git fetch → 針對每張 ticket 找對應分支並分析合併/未 push 狀態。
  * matchedRepos：checkRepoCoverage() 回傳的 matched（含 required 與 local.path）。
  */
-export async function analyzeTicketsAcrossRepos(matchedRepos, tickets, targetBranches, { doFetch = true } = {}) {
+export async function analyzeTicketsAcrossRepos(matchedRepos, tickets, targetBranches, { doFetch = true, debug = null } = {}) {
   // 每個 repo 先 fetch 一次並讀出所有 ref
   const repoCtx = []
   for (const m of matchedRepos) {
@@ -115,6 +136,12 @@ export async function analyzeTicketsAcrossRepos(matchedRepos, tickets, targetBra
     }
     const remoteShorts = new Set(ctx.refs.filter((r) => r.kind === 'remote' && r.remote === REMOTE).map((r) => r.short))
     ctx.missingTargets = targetBranches.filter((t) => !remoteShorts.has(t))
+    // 每個 target 分支的 head commit（供空 branch 防呆用）
+    ctx.targetHeads = {}
+    for (const t of targetBranches) {
+      if (remoteShorts.has(t)) ctx.targetHeads[t] = await revParse(ctx.path, `refs/remotes/${REMOTE}/${t}`)
+    }
+    if (debug) debug.repos[ctx.required] = { path: ctx.path, fetchError: ctx.fetchError, targetHeads: ctx.targetHeads, refs: ctx.refs.map((r) => r.full) }
     repoCtx.push(ctx)
   }
 
@@ -123,7 +150,7 @@ export async function analyzeTicketsAcrossRepos(matchedRepos, tickets, targetBra
     const repos = []
     for (const ctx of repoCtx) {
       const entries = matchBranches(ctx.refs, t.key)
-      const branches = await Promise.all(entries.map((e) => analyzeBranch(ctx.path, e, targetBranches)))
+      const branches = await Promise.all(entries.map((e) => analyzeBranch(ctx.path, e, targetBranches, ctx.targetHeads)))
       repos.push({ required: ctx.required, fetchError: ctx.fetchError, missingTargets: ctx.missingTargets, branches })
     }
     perTicket.push({ key: t.key, summary: t.summary, repos })

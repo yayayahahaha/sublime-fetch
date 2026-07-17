@@ -16,21 +16,48 @@
 
   "defaultAssignee": "flyc",
 
-  "targetBranches": ["dev", "staging"],
+  "//stagingBranches": "『已送測』的條件：branch 需 merge 進這裡「全部」分支（測試環境）。",
+  "stagingBranches": ["dev", "staging"],
 
-  "doneStatuses": ["Verified"],
+  "//doneBranches": "『已完成』的條件：develop MR merged（git 驗證 develop 包含此 branch）。",
+  "doneBranches": ["develop"],
 
-  "notDoneStatuses": {
-    "default": ["Open", "Code Review", "Dev Doing"],
-    "Job Order": ["Open", "Dev Doing"]
+  "//doneStatuses": "Jira 狀態命中 → 視為『已完成』的必要條件（還會用 git 驗證 develop 是否包含此 branch）。陣列或依 issue type 的物件（default 為 fallback，type key 忽略大小寫）。",
+  "doneStatuses": {
+    "default": ["Verified", "Testnet", "Testnet Verified"],
+    "Job Order": ["Code Review"]
   },
 
+  "//sentToTestStatuses": "Jira 狀態命中 → 沒 branch 時視為『已送測』（不用改 code / branch 已刪的情境）。格式同上。※ 新概念，請依實際狀態調整。",
+  "sentToTestStatuses": {
+    "default": ["QA", "Verified", "Testnet", "Testnet Verified"],
+    "Job Order": ["Code Review"]
+  },
+
+  "//urgentWithinDays": "staging deadline 在今天起幾天內算「緊迫（黃）」。",
+  "urgentWithinDays": 3,
+
+  "//statusEmoji": "opened MR 旁標注該單 QA 狀態的 emoji。key=Jira 狀態，value=emoji；保留 key __default__ 對應未列出的狀態。",
   "statusEmoji": {
     "QA": "👀",
     "Verified": "✅",
     "__default__": "❔"
   },
 
-  "//fixVersionMatch": "TODO：依今天日期挑選 fix version 的規則，之後再討論。目前 preflight 不會用到。",
-  "fixVersionMatch": null
+  "deploy": {
+    "repo": "https://gitlab.com/nogle/btsecom/btse-frontend/exchange-app"
+  },
+
+  "i18nRedeploy": {
+    "repo": "https://gitlab.com/nogle/btsecom/btse-frontend/translation-management",
+    "scheduleName": "upload i18n",
+    "scheduleId": null
+  },
+
+  "//fixVersionMatch": "依今天日期挑選 fix version 的規則。daysAhead：往後幾天內（date token 落在 [今天, 今天+daysAhead]）的版本會被選中，執行時可互動覆寫。",
+  "//fixVersionMatch.dateTokenRegex": "選填。版本名稱抽日期的自訂 regex，第 1 個 capture group 應為 8 碼 YYYYMMDD；留 null 則預設掃描名稱中的 8 碼數字。",
+  "fixVersionMatch": {
+    "daysAhead": 30,
+    "dateTokenRegex": null
+  }
 }

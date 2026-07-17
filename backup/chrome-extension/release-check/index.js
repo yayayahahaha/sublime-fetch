@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import select from '@inquirer/select'
@@ -7,8 +8,24 @@ import { loadConfig } from './lib/config.js'
 import { runPreflight } from './lib/preflight.js'
 import { fetchTargetTickets, searchAssignee } from './lib/tickets.js'
 import { computeFullAnalysis, buildReportModel } from './lib/report.js'
-import { renderTickets, renderReport, renderPreflight } from './lib/render.js'
+import { renderTickets, renderReport, renderPreflight, renderRules } from './lib/render.js'
 import { lightRed, yellow, lightCyan, green, blue } from '../color.js'
+
+const MODULE_DIR = path.dirname(fileURLToPath(import.meta.url))
+
+// 把這次 Jira/GitLab 的原始 fetch data 存成 log（除錯用）
+function writeDebugLog(debug) {
+  try {
+    const dir = path.join(MODULE_DIR, 'logs')
+    fs.mkdirSync(dir, { recursive: true })
+    const ts = new Date().toISOString().replace(/[:.]/g, '-')
+    const file = path.join(dir, `fetch-data-${ts}.json`)
+    fs.writeFileSync(file, JSON.stringify(debug, null, 2), 'utf8')
+    console.log(green(`📝 fetch data log 已存到：${file}`))
+  } catch (err) {
+    console.error(lightRed(`❌ 寫入 log 失敗：${err.message}`))
+  }
+}
 
 const HELP = `
 release-check — 依 Jira fix version 檢查各 repo 的 branch / 合併 / MR 狀態
@@ -131,6 +148,7 @@ function logProgress(phase) {
     tickets: '📥 從 Jira 撈取符合的 ticket…',
     branches: '🌿 分析各 repo 分支狀態…',
     mr: '🔗 查詢 GitLab MR…',
+    'mr-extra': '🔎 補查已 merged 的 MR（短路完成的單）…',
   }[phase]
   if (msg) console.log(blue(msg))
 }
@@ -142,8 +160,8 @@ function buildMeta(config, daysAhead, assigneeDisplayName) {
     assignee: assigneeDisplayName ?? null,
     generatedAt: new Date().toISOString(),
     today: new Date(),
-    notDoneStatuses: config.notDoneStatuses ?? [],
     doneStatuses: config.doneStatuses ?? [],
+    sentToTestStatuses: config.sentToTestStatuses ?? [],
     urgentWithinDays: config.urgentWithinDays ?? 3,
     dateTokenRegex: config.fixVersionMatch?.dateTokenRegex ?? null,
     jiraBaseUrl: config.jira?.baseUrl ?? null,
@@ -155,6 +173,9 @@ function buildMeta(config, daysAhead, assigneeDisplayName) {
  * 互動流程：問參數 → 問是否 fetch → 運算 → 產 model → 彩色報表。
  */
 async function runAnalysis(config, { withMr }) {
+  // 流程開始前先印出判定規則，方便確認 config
+  renderRules(config)
+
   // 先把不打 API 的提問問完（天數、是否 fetch），最後才問會打 Jira API 的 assignee，
   // 避免 API 卡頓夾在兩個提問中間。
   const daysAhead = await askDaysAhead(config)
@@ -163,8 +184,13 @@ async function runAnalysis(config, { withMr }) {
   const doFetch = await confirm({ message: '分析前先對各 repo 執行 git fetch --all --prune？' }).catch(() => null)
   if (doFetch == null) return void console.log(yellow('使用者取消'))
 
+  const wantLog = await confirm({ message: '是否將 Jira 與 GitLab 的 fetch data 存成 log？', default: false }).catch(() => null)
+  if (wantLog == null) return void console.log(yellow('使用者取消'))
+
   const assignee = await askAssignee(config)
   if (assignee == null) return
+
+  const debug = wantLog ? { jira: { versions: {}, jql: null, issues: [] }, repos: {}, mrQueries: [] } : null
 
   let data
   try {
@@ -174,10 +200,13 @@ async function runAnalysis(config, { withMr }) {
       doFetch,
       withMr,
       onProgress: logProgress,
+      debug,
     })
   } catch (err) {
     return void console.error(lightRed(`❌ 分析失敗：${err.message}`))
   }
+
+  if (debug) writeDebugLog(debug)
 
   if (data.ticketsResult.tickets.length > 0 && data.coverage.matched.length === 0) {
     console.log(lightRed('❌ 沒有任何必檢 repo 對應到本地路徑，分支/MR 資訊會缺，請先跑 Preflight 修正。'))
@@ -259,7 +288,7 @@ export async function releaseCheckHelper() {
     try {
       const ticketsResult = await fetchTargetTickets(config, { daysAhead: params.daysAhead, assigneeAccountId: params.assigneeAccountId })
       const model = buildReportModel(
-        { ticketsResult, coverage: { missing: [] }, analysis: null, targetBranches: config.targetBranches },
+        { ticketsResult, coverage: { missing: [] }, analysis: null, stagingBranches: config.stagingBranches, doneBranches: config.doneBranches },
         buildMeta(config, params.daysAhead, params.assigneeDisplayName)
       )
       renderTickets(model)
@@ -332,7 +361,7 @@ async function main() {
         process.exit(1)
       }
       const model = buildReportModel(
-        { ticketsResult, coverage: { missing: [] }, analysis: null, targetBranches: config.targetBranches },
+        { ticketsResult, coverage: { missing: [] }, analysis: null, stagingBranches: config.stagingBranches, doneBranches: config.doneBranches },
         meta
       )
       if (wantPretty) renderTickets(model)
@@ -341,6 +370,7 @@ async function main() {
     }
 
     // --full：撈 ticket + 分支分析 + MR
+    if (wantPretty) renderRules(config)
     let data
     try {
       data = await computeFullAnalysis(config, { daysAhead, assigneeAccountId, doFetch: !flags['no-fetch'], withMr: true })

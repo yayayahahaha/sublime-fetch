@@ -32,7 +32,7 @@ function countUnresolvedDiscussions(discussions) {
  * 會在每個 branch 掛上 b.mergeRequests（陣列 / null 代表查詢失敗）。
  * matchedRepos：checkRepoCoverage() 的 matched（用 remoteUrl 推導 GitLab project path）。
  */
-export async function enrichWithMergeRequests(analysis, matchedRepos, config) {
+export async function enrichWithMergeRequests(analysis, matchedRepos, config, { debug = null } = {}) {
   const gitlab = new GitlabClient(config.gitlab)
 
   // required -> GitLab project 路徑（保留大小寫，優先用本地 origin remote 的真實路徑）
@@ -47,12 +47,11 @@ export async function enrichWithMergeRequests(analysis, matchedRepos, config) {
 
       await Promise.all(
         repo.branches.map(async (b) => {
-          if (!b.hasRemote) {
-            b.mergeRequests = [] // 沒 push 就不可能有 MR
-            return
-          }
+          // 一律用 branch 名查 MR（不看 hasRemote）：
+          // remote branch 被刪但曾 push+merge 的，GitLab 仍查得到；純本地未 push 的會回空陣列。
           try {
             const mrs = await gitlab.getMergeRequestsBySourceBranch(projectPath, b.name)
+            if (debug) debug.mrQueries.push({ repo: repo.required, projectPath, sourceBranch: b.name, count: mrs.length, mrs })
             const mapped = mrs.map(mapMr)
             // 只對還開著的 MR 數未解決討論（已 merged/closed 的討論狀態無意義）
             await Promise.all(
@@ -77,4 +76,32 @@ export async function enrichWithMergeRequests(analysis, matchedRepos, config) {
   }
 
   return analysis
+}
+
+/**
+ * 用 jira key 到各 repo 搜尋「已 merged」的 MR（title/description 含 key）。
+ * 給短路完成、但 branch 已刪查不到 MR 的 ticket 補上 merged MR 資訊。
+ */
+export async function findMergedMrsByKey(config, matchedRepos, key, { debug = null } = {}) {
+  const gitlab = new GitlabClient(config.gitlab)
+  const lower = key.toLowerCase()
+  const seen = new Set()
+  const found = []
+  for (const m of matchedRepos) {
+    const projectPath = extractRepoPath(m.local?.remoteUrl) ?? extractRepoPath(m.required)
+    try {
+      const mrs = await gitlab.searchMergedMergeRequests(projectPath, key)
+      if (debug) debug.mrQueries.push({ repo: m.required, projectPath, searchKey: key, state: 'merged', count: mrs.length, mrs })
+      for (const mr of mrs) {
+        const hay = `${mr.source_branch ?? ''} ${mr.title ?? ''}`.toLowerCase()
+        if (hay.includes(lower) && !seen.has(mr.web_url)) {
+          seen.add(mr.web_url)
+          found.push(mapMr(mr))
+        }
+      }
+    } catch {
+      // 單一 repo 搜尋失敗就略過
+    }
+  }
+  return found
 }

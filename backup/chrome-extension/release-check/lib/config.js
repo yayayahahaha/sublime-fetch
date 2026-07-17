@@ -43,7 +43,7 @@ export function loadConfig() {
   const config = readJson(CONFIG_PATH, 'release-check.config.json.default')
   const secrets = readJson(SECRETS_PATH, 'secrets.json.default')
 
-  requireFields(config, ['jira.baseUrl', 'jira.projects', 'gitlab.baseUrl', 'requiredRepos', 'localRepoPaths', 'targetBranches'], 'release-check.config.json')
+  requireFields(config, ['jira.baseUrl', 'jira.projects', 'gitlab.baseUrl', 'requiredRepos', 'localRepoPaths', 'stagingBranches'], 'release-check.config.json')
   requireFields(secrets, ['jira.email', 'jira.apiToken', 'gitlab.token'], 'secrets.json')
 
   return {
@@ -59,12 +59,17 @@ export function loadConfig() {
     },
     requiredRepos: config.requiredRepos,
     localRepoPaths: config.localRepoPaths,
-    targetBranches: config.targetBranches,
+    stagingBranches: config.stagingBranches,
+    doneBranches: config.doneBranches ?? [],
     fixVersionMatch: config.fixVersionMatch ?? null,
     defaultAssignee: config.defaultAssignee ?? null,
-    notDoneStatuses: config.notDoneStatuses ?? ['Open'],
     doneStatuses: config.doneStatuses ?? [],
+    sentToTestStatuses: config.sentToTestStatuses ?? [],
     urgentWithinDays: config.urgentWithinDays ?? 3,
     statusEmoji: config.statusEmoji ?? {},
+    deploy: config.deploy ?? null,
+    i18nRedeploy: config.i18nRedeploy ?? null,
+    mrTargetOverrides: config.mrTargetOverrides ?? { 'btse-static-resource': 'master' },
+    mrWhitelabels: config.mrWhitelabels ?? null,
   }
 }

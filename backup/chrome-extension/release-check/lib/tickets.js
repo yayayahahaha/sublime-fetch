@@ -34,7 +34,7 @@ function mapIssue(issue) {
  * 依「今天 + daysAhead」挑出目標 fix version，再撈出這些版本底下的所有 ticket（不過濾狀態）。
  * 回傳 { versions, tickets, jql }。
  */
-export async function fetchTargetTickets(config, { daysAhead, today = new Date(), assigneeAccountId = null } = {}) {
+export async function fetchTargetTickets(config, { daysAhead, today = new Date(), assigneeAccountId = null, debug = null } = {}) {
   const jira = new JiraClient(config.jira)
   const customRegex = config.fixVersionMatch?.dateTokenRegex ?? null
   const effectiveDaysAhead = daysAhead ?? config.fixVersionMatch?.daysAhead ?? 30
@@ -43,6 +43,7 @@ export async function fetchTargetTickets(config, { daysAhead, today = new Date()
   const versions = []
   for (const project of config.jira.projects) {
     const projectVersions = await jira.getProjectVersions(project)
+    if (debug) debug.jira.versions[project] = projectVersions
     const inWindow = selectVersionsInWindow(projectVersions, { today, daysAhead: effectiveDaysAhead, customRegex })
     for (const v of inWindow) versions.push({ project, name: v.name, releaseDate: v.releaseDate })
   }
@@ -54,6 +55,10 @@ export async function fetchTargetTickets(config, { daysAhead, today = new Date()
   const versionNames = [...new Set(versions.map((v) => v.name))]
   const jql = buildJql(config.jira.projects, versionNames, assigneeAccountId)
   const issues = await jira.searchIssues(jql)
+  if (debug) {
+    debug.jira.jql = jql
+    debug.jira.issues = issues
+  }
   const tickets = issues.map(mapIssue)
 
   return { versions, tickets, jql, daysAhead: effectiveDaysAhead }
