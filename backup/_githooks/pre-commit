@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# 合併有衝突、需要手動 git commit 完成合併時，Git 呼叫的是這個 hook（不是 pre-merge-commit）
+# .git/MERGE_HEAD 存在時代表現在正在完成一個 merge
+source "$(dirname "$0")/lib/check-staging-guard.sh"
+check_staging_guard
+exit $?
