@@ -16,6 +16,7 @@ import { getAdminTokenWithCache, getLastApproveOtp, saveLastApproveOtp, selectAd
 
 const CURRENCY = 'USDT'
 const APPROVE_OPERATION = 3
+const CATEGORY_DEPOSIT = 1 // /api/apiGateway/payment/admin/v1/adjustment/categories: 1 = "Deposit"
 
 async function searchUserByUsername(token, username) {
   const resp = await makeAdminRequest({
@@ -43,6 +44,7 @@ async function searchUserByUsername(token, username) {
 async function submitAdjustment(token, { username, amount, remarks, memo }) {
   const fd = new FormData()
   fd.append('currency', CURRENCY)
+  fd.append('category', String(CATEGORY_DEPOSIT))
   fd.append('cashChangeDate', '')
   fd.append('bankRef', '')
   fd.append('remarks', remarks)

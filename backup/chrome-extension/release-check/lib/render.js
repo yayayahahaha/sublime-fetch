@@ -169,6 +169,16 @@ function renderOtherTicket(t, stagingBranches, doneBranches) {
       }
       if (!submitted) console.log(`       ${red('有 branch 但還沒開任何 MR')}`)
       else for (const db of missingDoneMr) console.log(`       ${red(`未開 ${db} 的 MR`)}`)
+
+      // 已經有的 MR 也列出連結（去重）
+      const seen = new Set()
+      for (const b of branches) {
+        for (const mr of b.mergeRequests ?? []) {
+          if (!mr.webUrl || seen.has(mr.webUrl)) continue
+          seen.add(mr.webUrl)
+          console.log(`       MR: ${mr.webUrl}  [${colorMrState(mr.state)}]`)
+        }
+      }
     }
   }
   console.log('') // 每張 ticket 之間空一行
