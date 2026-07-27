@@ -8,7 +8,7 @@ import { loadConfig } from './lib/config.js'
 import { runPreflight } from './lib/preflight.js'
 import { fetchTargetTickets, searchAssignee } from './lib/tickets.js'
 import { computeFullAnalysis, buildReportModel } from './lib/report.js'
-import { renderTickets, renderReport, renderPreflight, renderRules } from './lib/render.js'
+import { renderTickets, renderReport, renderPreflight, renderRules, setHyperlinks } from './lib/render.js'
 import { lightRed, yellow, lightCyan, green, blue } from '../color.js'
 
 const MODULE_DIR = path.dirname(fileURLToPath(import.meta.url))
@@ -40,7 +40,8 @@ release-check — 依 Jira fix version 檢查各 repo 的 branch / 合併 / MR �
   --days <n>         往後幾天的 fix version（預設取 config.fixVersionMatch.daysAhead）
   --assignee <name>  指派人（名字或 email，預設取 config.defaultAssignee；需唯一命中）
   --no-fetch         分析前不執行 git fetch
-  --pretty           彩色文字輸出（否則輸出 JSON）
+  --pretty           彩色表格輸出（否則輸出 JSON）
+  --no-link          關閉 OSC 8 超連結（終端機不支援時改印純文字+URL）
   --help, -h         顯示說明
 
 設定檔（放在 release-check/ 底下）：
@@ -267,7 +268,7 @@ export async function releaseCheckHelper() {
   const action = await select({
     message: 'release-check：要做什麼？',
     choices: [
-      { name: '完整檢查流程（含 GitLab MR）', value: ACTION_FULL, description: '撈 ticket + 分支分析 + 查 GitLab MR，輸出彙整報表' },
+      { name: '完整檢查流程（含 GitLab MR）', value: ACTION_FULL, description: '撈 ticket + 分支分析 + 查 GitLab MR，輸出表格彙整報表' },
       { name: 'Preflight 前置檢查', value: ACTION_PREFLIGHT, description: '檢查 Jira / GitLab 認證與本地 repo 涵蓋' },
       { name: '撈取目標 ticket（Jira）', value: ACTION_FETCH_TICKETS, description: '依 fix version 時間窗撈出 ticket 清單' },
       { name: '分支 / 合併分析', value: ACTION_ANALYZE, description: '撈 ticket 後，檢查各 repo 的 branch 是否存在、合併與未 push 狀態' },
@@ -320,6 +321,7 @@ async function main() {
 
   const flags = parseCliArgs(argv)
   const wantPretty = !!flags.pretty
+  if (flags['no-link']) setHyperlinks(false) // 終端機不支援 OSC 8 / CI → 退回純文字+URL
 
   if (flags.preflight) {
     const config = loadConfigOrReport()

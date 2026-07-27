@@ -24,7 +24,7 @@
 
   "//doneStatuses": "Jira 狀態命中 → 視為『已完成』的必要條件（還會用 git 驗證 develop 是否包含此 branch）。陣列或依 issue type 的物件（default 為 fallback，type key 忽略大小寫）。",
   "doneStatuses": {
-    "default": ["Verified", "Testnet", "Testnet Verified"],
+    "default": ["Verified", "Testnet", "Testnet Verified", "Production Resolved"],
     "Job Order": ["Code Review"]
   },
 

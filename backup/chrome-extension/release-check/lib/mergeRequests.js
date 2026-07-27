@@ -53,15 +53,22 @@ export async function enrichWithMergeRequests(analysis, matchedRepos, config, { 
             const mrs = await gitlab.getMergeRequestsBySourceBranch(projectPath, b.name)
             if (debug) debug.mrQueries.push({ repo: repo.required, projectPath, sourceBranch: b.name, count: mrs.length, mrs })
             const mapped = mrs.map(mapMr)
-            // 只對還開著的 MR 數未解決討論（已 merged/closed 的討論狀態無意義）
+            // opened / merged 都補查未解決討論數 + 核准數（merged 也可能殘留沒處理的 comments）
             await Promise.all(
               mapped.map(async (mr) => {
-                if (mr.state !== 'opened') return
+                if (mr.state !== 'opened' && mr.state !== 'merged') return
                 try {
                   const discussions = await gitlab.getMergeRequestDiscussions(projectPath, mr.iid)
                   mr.unresolvedCount = countUnresolvedDiscussions(discussions)
                 } catch {
                   mr.unresolvedCount = null // 討論查詢失敗
+                }
+                try {
+                  const approvals = await gitlab.getMergeRequestApprovals(projectPath, mr.iid)
+                  mr.approvedCount = Array.isArray(approvals?.approved_by) ? approvals.approved_by.length : null
+                  mr.approvalsRequired = approvals?.approvals_required ?? null
+                } catch {
+                  mr.approvedCount = null // 核准查詢失敗
                 }
               })
             )

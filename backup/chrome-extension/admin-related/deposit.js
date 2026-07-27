@@ -11,7 +11,7 @@ import {
   stageLog,
   switchRole,
 } from './admin-api.js'
-import { addRoleToSelf } from './add-role.js'
+import { addRoleToAccount } from './add-role.js'
 import { getAdminTokenWithCache, getLastApproveOtp, saveLastApproveOtp, selectAdminAccount } from './admin-token-cache.js'
 
 const CURRENCY = 'USDT'
@@ -158,7 +158,7 @@ function buildRemarks(adminname) {
 }
 
 // 共用: 確保當前 admin 有 brand 的 role, 並切換到該 role (含優先順序 _root > _admin > 其他)
-// allowAutoAddRole=true 時, 沒 role 會自動透過 addRoleToSelf 補上
+// allowAutoAddRole=true 時, 沒 role 會自動透過 addRoleToAccount 補上
 export async function ensureAndSwitchToBrandRole({ token, adminname, brandName, allowAutoAddRole = false }) {
   stageLog(`確認 ${brandName} 的 role`)
   let assigned = await getAssignedRoles(token)
@@ -169,7 +169,7 @@ export async function ensureAndSwitchToBrandRole({ token, adminname, brandName, 
       throw new Error(`當前 admin 沒有 brand "${brandName}" 的 role, 使用者選擇不自動新增, 中止`)
     }
     console.log(yellow(`  ⚠ 沒有 ${brandName} 的 role, 自動新增中...`))
-    await addRoleToSelf({ token, adminname, brandName })
+    await addRoleToAccount({ token, adminname, brandName })
     assigned = await getAssignedRoles(token)
     brandRoles = assigned.filter((r) => r.platform === brandName)
     if (brandRoles.length === 0) {

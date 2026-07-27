@@ -13,5 +13,6 @@
   "otpauth://totp/zmo-tiffany2-staging:zmo-tiffany2-staging?secret=76X2TOFLHRAFQOCN&issuer=zmo-tiffany2-staging",
   "otpauth://totp/fedhabit-nathan:fedhabit-nathan?secret=W4YJV66OROEEGOI3&issuer=fedhabit-nathan",
   "otpauth://totp/btse-fc2:btse-fc2?secret=ZNZ2H5ZWM7LDPWLE&issuer=btse-fc2",
-  "otpauth://totp/fedhabit-staging:fedhabit-staging?secret=RAI4EFIJVONOZGXC&issuer=fedhabit-staging"
+  "otpauth://totp/fedhabit-staging:fedhabit-staging?secret=RAI4EFIJVONOZGXC&issuer=fedhabit-staging",
+  "otpauth://totp/zmo-staging:zmo-staging?secret=V2E33ZQ4NDONXV56&issuer=zmo-staging"
 ]

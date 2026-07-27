@@ -129,6 +129,12 @@ export class GitlabClient {
     return this.requestPaged(`/projects/${id}/merge_requests/${iid}/discussions`)
   }
 
+  // 取得某 MR 的核准資訊（approved_by / approvals_required）。
+  async getMergeRequestApprovals(projectPath, iid) {
+    const id = encodeURIComponent(projectPath)
+    return this.request(`/projects/${id}/merge_requests/${iid}/approvals`)
+  }
+
   // 取得目前 token 的資訊（含 scopes）。舊版 GitLab 可能沒有這個 endpoint。
   async getTokenScopes() {
     try {

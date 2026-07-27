@@ -1,8 +1,30 @@
 // View 層：只消費 model（buildReportModel 的輸出）與 preflight 結果，負責彩色輸出。
 // 這裡不做任何運算 / 打 API，純 render。
+import Table from 'cli-table3'
 import { lightCyan, green, yellow, blue, red, lightGreen, lightRed, magenta } from '../../color.js'
 import { extractVersionDate } from './fixVersion.js'
-import { branchReachedTargets, repoHasSubmittedMr } from './assess.js'
+import { branchReachedTargets, repoReachedTargets, repoHasSubmittedMr } from './assess.js'
+
+// OSC 8 終端機超連結；不支援的終端機/CI 可用 setHyperlinks(false) 退回純文字+URL
+let useHyperlinks = true
+export function setHyperlinks(on) {
+  useHyperlinks = on
+}
+function link(text, url) {
+  if (!url) return text
+  if (!useHyperlinks) return `${text} (${url})`
+  return `\x1b]8;;${url}\x07${text}\x1b]8;;\x07`
+}
+
+// ticket 單號 → 可點的 jira 連結（點擊開 jira）
+function keyLabel(t) {
+  return link(green(t.key), t.jiraUrl)
+}
+
+// MR 短標籤（可點）：MR !iid → target
+function mrLabel(mr) {
+  return link(`MR !${mr.iid} → ${mr.targetBranch}`, mr.webUrl)
+}
 
 // 把狀態設定（陣列或依 issue type 的物件）格式化成可讀多行
 function formatStatusSpec(spec) {
@@ -67,7 +89,7 @@ export function renderTickets(model) {
 
   console.log(blue(`Ticket（${model.tickets.length}）：`))
   for (const t of model.tickets) {
-    console.log(`  ${green(t.key)}  ${t.summary}`)
+    console.log(`  ${keyLabel(t)}  ${t.summary}`)
     console.log(`      status: ${t.status}   fixVersions: ${t.fixVersions.join(', ')}`)
   }
   console.log('')
@@ -95,15 +117,6 @@ function shortRepo(required) {
     .pop()
 }
 
-function deadlinePhrase(u) {
-  const d = u.daysRemaining
-  let when
-  if (u.kind === 'hotfix') when = lightRed('hotfix')
-  else if (d < 0) when = lightRed(`逾期 ${-d} 天`)
-  else if (d === 0) when = red('今天到期')
-  else when = `剩 ${d} 天`
-  return `staging 截止 ${u.deadline}（${when}）`
-}
 
 function collectMrs(t) {
   const out = []
@@ -134,54 +147,92 @@ function repoMissingDoneMr(repo, doneBranches) {
   return doneBranches.filter((db) => !mrs.some((m) => m.targetBranch === db && (m.state === 'opened' || m.state === 'merged')))
 }
 
-// 「其他」（連送測都還沒）：列出為什麼還沒送測完成
-function renderOtherTicket(t, stagingBranches, doneBranches) {
+// 緊急度 cell：icon + 剩/逾期天數
+function urgencyCell(t) {
   const u = t.urgency
-  const em = t.statusEmoji ? `${t.statusEmoji} ` : ''
-  console.log(`  ${em}${green(t.key)}  ${t.summary}${typeTag(t)}`)
-  if (t.jiraUrl) console.log(`     jira: ${t.jiraUrl}`)
-  console.log(`     ${u ? `${deadlinePhrase(u)}  ← ${u.drivingVersion}` : yellow('（無法判定 deadline）')}`)
-  console.log(`     Jira 狀態：${t.status}`)
+  if (!u) return TIER_META.unknown.icon
+  const meta = TIER_META[u.tier] ?? TIER_META.unknown
+  let when
+  if (u.kind === 'hotfix') when = 'hotfix'
+  else if (u.daysRemaining < 0) when = `逾期${-u.daysRemaining}天`
+  else if (u.daysRemaining === 0) when = '今天'
+  else when = `剩${u.daysRemaining}天`
+  return meta.color(`${meta.icon} ${when}`)
+}
 
-  const c = t.classification ?? {}
-  // 步驟 0：本地超前未 push（override，最危險）
-  for (const up of c.unpushed ?? []) {
-    console.log(`     ${lightRed('✗ 本地超前未 push')}：${shortRepo(up.repo)} · ${up.branch} 領先 ${up.ahead} commit（merge 後又改 / 忘記推）`)
+// Merge 狀態 cell：每個 stagingBranch 一個 ✅/❌（每個有 branch 的 repo 都達成才 ✅）
+function mergeCell(t, stagingBranches) {
+  const involved = (t.repos ?? []).filter((r) => (r.branches ?? []).length > 0)
+  if (!involved.length) return '-'
+  return stagingBranches.map((sb) => (involved.every((r) => repoReachedTargets(r).has(sb)) ? green('✅') : red('❌'))).join('/')
+}
+
+// Push 狀態 cell：任一 branch 有未 push 就 ❌
+function pushCell(t) {
+  const branches = (t.repos ?? []).flatMap((r) => r.branches ?? [])
+  if (!branches.length) return '-'
+  const anyIssue = branches.some((b) => {
+    const hasMergedMr = (b.mergeRequests ?? []).some((m) => m.state === 'merged')
+    if (!b.hasRemote && !hasMergedMr) return true
+    if (b.hasRemote && b.hasLocal && b.ahead > 0) return true
+    return false
+  })
+  return anyIssue ? red('❌') : green('✅')
+}
+
+// MR cell：列出 MR 連結（去重），無則 '-'
+function mrCellCompact(t) {
+  const mrs = uniqueMrs(t)
+  if (!mrs.length) return '-'
+  return mrs.map((mr) => `${mrLabel(mr)} [${colorMrState(mr.state)}]`).join('\n')
+}
+
+// 一張「其他」ticket 的原因（給表格下方註解用）
+function otherReasons(t, stagingBranches, doneBranches) {
+  const out = []
+  for (const up of t.classification?.unpushed ?? []) {
+    out.push(`本地超前未 push：${shortRepo(up.repo)}·${up.branch} 領先 ${up.ahead}（最危險）`)
   }
-
   const repos = t.repos ?? []
-  const hasAnyBranch = repos.some((r) => (r.branches ?? []).length > 0)
-  if (!hasAnyBranch) {
-    console.log(`     ${red('✗')} 找不到任何對應 branch（可能還沒開始 / 不用改 code / branch 已刪但 Jira 未標完成）`)
-  } else {
-    for (const repo of repos) {
-      const branches = repo.branches ?? []
-      if (!branches.length) continue
-      const branchIssues = branches.map((b) => ({ b, issues: branchStagingIssues(b, stagingBranches) })).filter((x) => x.issues.length)
-      const submitted = repoHasSubmittedMr(repo)
-      const missingDoneMr = repoMissingDoneMr(repo, doneBranches)
-      if (!branchIssues.length && submitted && !missingDoneMr.length) continue
-
-      console.log(`     ${red('✗')} ${blue(shortRepo(repo.required))}`)
-      for (const { b, issues } of branchIssues) {
-        console.log(`       branch: ${lightCyan(b.name)}`)
-        for (const issue of issues) console.log(`         ${issue}`)
-      }
-      if (!submitted) console.log(`       ${red('有 branch 但還沒開任何 MR')}`)
-      else for (const db of missingDoneMr) console.log(`       ${red(`未開 ${db} 的 MR`)}`)
-
-      // 已經有的 MR 也列出連結（去重）
-      const seen = new Set()
-      for (const b of branches) {
-        for (const mr of b.mergeRequests ?? []) {
-          if (!mr.webUrl || seen.has(mr.webUrl)) continue
-          seen.add(mr.webUrl)
-          console.log(`       MR: ${mr.webUrl}  [${colorMrState(mr.state)}]`)
-        }
-      }
+  if (!repos.some((r) => (r.branches ?? []).length > 0)) {
+    out.push('找不到對應 branch（可能還沒開始 / 不用改 code / branch 已刪但 Jira 未標完成）')
+    return out
+  }
+  for (const repo of repos) {
+    const branches = repo.branches ?? []
+    if (!branches.length) continue
+    for (const b of branches) {
+      const issues = branchStagingIssues(b, stagingBranches)
+      if (issues.length) out.push(`${shortRepo(repo.required)}·${b.name}：${issues.join('、')}`)
+    }
+    if (!repoHasSubmittedMr(repo)) out.push(`${shortRepo(repo.required)}：有 branch 但還沒開任何 MR`)
+    else {
+      const missing = repoMissingDoneMr(repo, doneBranches)
+      if (missing.length) out.push(`${shortRepo(repo.required)}：未開 ${missing.join('/')} 的 MR`)
     }
   }
-  console.log('') // 每張 ticket 之間空一行
+  return out
+}
+
+// 「其他」整區用一張表呈現（依緊急度排序），原因收在表格下方
+function renderOtherTable(tickets, model) {
+  const stagingBranches = model.stagingBranches ?? []
+  const doneBranches = model.doneBranches ?? []
+  const table = new Table({
+    head: ['緊急', 'Ticket', '標題', 'Status', `Merge(${stagingBranches.join('/')})`, 'Push', 'MR'].map((h) => blue(h)),
+    style: { head: [], border: ['dim'] },
+  })
+  for (const t of tickets) {
+    table.push([urgencyCell(t), keyLabel(t), truncate(t.summary, 40), `${t.statusEmoji ? t.statusEmoji + ' ' : ''}${t.status}`, mergeCell(t, stagingBranches), pushCell(t), mrCellCompact(t)])
+  }
+  console.log(table.toString())
+
+  const withReasons = tickets.map((t) => ({ t, reasons: otherReasons(t, stagingBranches, doneBranches) })).filter((x) => x.reasons.length)
+  if (withReasons.length) {
+    console.log('\n' + yellow('原因參考：'))
+    for (const { t, reasons } of withReasons) console.log(`  ${green(t.key)}  ${yellow(reasons.join('；'))}`)
+  }
+  console.log('')
 }
 
 function colorMrState(state) {
@@ -189,16 +240,6 @@ function colorMrState(state) {
   if (state === 'opened') return blue('opened')
   if (state === 'closed') return red('closed')
   return yellow(state)
-}
-
-// 已送測的單「為什麼還沒到已完成」的簡述
-function sentToTestNote(t, doneBranches) {
-  const hasAnyBranch = (t.repos ?? []).some((r) => (r.branches ?? []).length > 0)
-  if (!hasAnyBranch) return `等 Jira 標成完成狀態（目前：${t.status}；此單無 branch，可能不用改 code）`
-  const allMrs = collectMrs(t)
-  const notMergedDone = doneBranches.filter((db) => !allMrs.some((m) => m.targetBranch === db && m.state === 'merged'))
-  if (notMergedDone.length) return `等 ${notMergedDone.join('/')} MR merged`
-  return `等 Jira 標成完成狀態（目前：${t.status}）`
 }
 
 // 依 fix version 分組（一張 ticket 有多個版本就在多組重複出現），群組依版本日期排序
@@ -217,49 +258,32 @@ function groupByFixVersion(tickets) {
   })
 }
 
-// 已上 staging（但還沒進 develop）：依 fix version 分組列出 jira + 未進已完成合併原因 + PR
-function renderStaged(staged, doneBranches) {
-  if (staged.length === 0) return
-  console.log(lightCyan(`── ✅ 已送測（${staged.length}）──`) + '\n')
-
-  for (const [name, tickets] of groupByFixVersion(staged)) {
+// 依 fix version 分組，每組一張表（Ticket / Status / MR / 討論核准 / 標題 / 類型）
+function renderFixVersionTables(tickets) {
+  for (const [name, group] of groupByFixVersion(tickets)) {
     const date = extractVersionDate(name)
     console.log(blue(`▍ ${name}${date ? `  (${fmtLocalDate(date)})` : ''}`))
-    for (const t of tickets) {
-      const mrs = collectMrs(t)
-      const merged = mrs.filter((m) => m.state === 'merged').length
-      const mrNote = mrs.length ? `MR ${merged}/${mrs.length} merged` : 'MR: -'
-      const em = t.statusEmoji ? `${t.statusEmoji} ` : ''
-      console.log(`  ${em}${green(t.key)}  ${t.summary}${typeTag(t)}  ${blue(`[${t.status}]`)}  ${mrNote}`)
-      if (t.jiraUrl) console.log(`    jira: ${t.jiraUrl}`)
-
-      console.log(`    ${yellow('待完成：')}${yellow(sentToTestNote(t, doneBranches))}`)
-      if (t.classification?.oddMrTargets?.length) {
-        console.log(`    ${yellow(`⚠ 有 MR 合併到非 dev/staging/develop：${t.classification.oddMrTargets.join(', ')}（base-branch? 請確認接續合併）`)}`)
-      }
-
-      const seen = new Set()
-      for (const mr of mrs) {
-        if (!mr.webUrl || seen.has(mr.webUrl)) continue
-        seen.add(mr.webUrl)
-        console.log(`    PR: ${mr.webUrl}  [${colorMrState(mr.state)}]`)
-      }
+    const table = new Table({
+      head: ['Ticket', '標題', 'Status', 'MR / 狀態', '討論/核准', '類型'].map((h) => blue(h)),
+      style: { head: [], border: ['dim'] },
+    })
+    for (const t of group) {
+      const mrs = uniqueMrs(t)
+      const mrCell = mrs.length ? mrs.map((mr) => `${mrLabel(mr)}  [${colorMrState(mr.state)}]`).join('\n') : '-'
+      const countCell = mrs.length
+        ? mrs.map((mr) => {
+            const parts = []
+            if (typeof mr.unresolvedCount === 'number') parts.push(mr.unresolvedCount > 0 ? red(`💬${mr.unresolvedCount}`) : `💬0`)
+            if (typeof mr.approvedCount === 'number') parts.push(`✅${mr.approvedCount}`)
+            return parts.length ? parts.join('  ') : '-'
+          }).join('\n')
+        : '-'
+      const status = `${t.statusEmoji ? t.statusEmoji + ' ' : ''}${t.status}`
+      table.push([keyLabel(t), truncate(t.summary, 48), status, mrCell, countCell, t.type ?? '-'])
     }
+    console.log(table.toString())
     console.log('')
   }
-}
-
-// 已完成：只列一行（單號 + 標題）；若合併目標含非 develop 才附警告
-function renderDone(done) {
-  if (done.length === 0) return
-  console.log(lightCyan(`── 🎉 已完成（${done.length}）──`))
-  for (const t of done) {
-    console.log(`  ${green(t.key)}  ${t.summary}`)
-    if (t.classification?.oddMrTargets?.length) {
-      console.log(`     ${yellow(`⚠ 合併目標含非 develop：${t.classification.oddMrTargets.join(', ')}（base-branch? 請確認接續合併）`)}`)
-    }
-  }
-  console.log('')
 }
 
 function renderDiscussions(model) {
@@ -269,8 +293,8 @@ function renderDiscussions(model) {
       for (const b of r.branches ?? []) {
         if (!Array.isArray(b.mergeRequests)) continue
         for (const mr of b.mergeRequests) {
-          if (mr.state === 'opened' && typeof mr.unresolvedCount === 'number' && mr.unresolvedCount > 0) {
-            rows.push({ key: t.key, repo: r.required, mr })
+          if ((mr.state === 'opened' || mr.state === 'merged') && typeof mr.unresolvedCount === 'number' && mr.unresolvedCount > 0) {
+            rows.push({ t, repo: r.required, mr })
           }
         }
       }
@@ -278,8 +302,8 @@ function renderDiscussions(model) {
   }
   if (rows.length === 0) return
   console.log(lightCyan('── 需處理的 MR discussions ──'))
-  for (const { key, repo, mr } of rows) {
-    console.log(`  ${green(key)}  ${shortRepo(repo)}  MR !${mr.iid} → ${mr.targetBranch}  ${red(`未解決 ${mr.unresolvedCount}`)}  ${mr.webUrl}`)
+  for (const { t, repo, mr } of rows) {
+    console.log(`  ${keyLabel(t)}  ${shortRepo(repo)}  ${mrLabel(mr)}  [${colorMrState(mr.state)}]  ${red(`未解決 ${mr.unresolvedCount}`)}`)
   }
   console.log('')
 }
@@ -327,19 +351,37 @@ export function renderReport(model) {
   if (other.length === 0) {
     console.log(lightGreen('  🎉 沒有待處理項目') + '\n')
   } else {
-    for (const tier of TIER_SEQUENCE) {
-      const group = other.filter((t) => (t.urgency?.tier ?? 'unknown') === tier)
-      if (group.length === 0) continue
-      group.sort(byDeadline)
-      const meta = TIER_META[tier]
-      console.log(meta.color(`${meta.icon} ${meta.label}（${group.length}）`) + '\n')
-      for (const t of group) renderOtherTicket(t, model.stagingBranches ?? [], model.doneBranches ?? [])
-    }
+    const sorted = []
+    for (const tier of TIER_SEQUENCE) sorted.push(...other.filter((t) => (t.urgency?.tier ?? 'unknown') === tier).sort(byDeadline))
+    renderOtherTable(sorted, model)
   }
 
-  renderStaged(sentToTest, model.doneBranches ?? [])
-  renderDone(done)
+  if (sentToTest.length) {
+    console.log(lightCyan(`── ✅ 已送測（${sentToTest.length}，依 fix version）──`) + '\n')
+    renderFixVersionTables(sentToTest)
+  }
+  if (done.length) {
+    console.log(lightCyan(`── 🎉 已完成（${done.length}，依 fix version）──`) + '\n')
+    renderFixVersionTables(done)
+  }
   renderDiscussions(model)
+}
+
+function truncate(s, n) {
+  s = s ?? ''
+  return s.length > n ? s.slice(0, n - 1) + '…' : s
+}
+
+// 去重後的 MR（依 webUrl）
+function uniqueMrs(t) {
+  const seen = new Set()
+  const out = []
+  for (const mr of collectMrs(t)) {
+    if (!mr.webUrl || seen.has(mr.webUrl)) continue
+    seen.add(mr.webUrl)
+    out.push(mr)
+  }
+  return out
 }
 
 // Preflight 檢查結果
