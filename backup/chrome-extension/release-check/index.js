@@ -8,6 +8,7 @@ import { loadConfig } from './lib/config.js'
 import { runPreflight } from './lib/preflight.js'
 import { fetchTargetTickets, searchAssignee } from './lib/tickets.js'
 import { computeFullAnalysis, buildReportModel } from './lib/report.js'
+import { parseFixVersionWindow, describeWindow } from './lib/fixVersion.js'
 import { renderTickets, renderReport, renderPreflight, renderRules, setHyperlinks } from './lib/render.js'
 import { lightRed, yellow, lightCyan, green, blue } from '../color.js'
 
@@ -37,7 +38,8 @@ release-check — 依 Jira fix version 檢查各 repo 的 branch / 合併 / MR �
   node release-check/index.js --full               撈 ticket + 分支分析 + GitLab MR
 
 非互動旗標（CLI 預設輸出 JSON，加 --pretty 才彩色）：
-  --days <n>         往後幾天的 fix version（預設取 config.fixVersionMatch.daysAhead）
+  --days <win>       時間窗：往後天數（如 30）或日期區間（如 20260101-20260110）
+                     （預設取 config.fixVersionMatch.daysAhead）
   --assignee <name>  指派人（名字或 email，預設取 config.defaultAssignee；需唯一命中）
   --no-fetch         分析前不執行 git fetch
   --pretty           彩色表格輸出（否則輸出 JSON）
@@ -54,16 +56,22 @@ const ACTION_FETCH_TICKETS = 'FETCH_TICKETS'
 const ACTION_ANALYZE = 'ANALYZE'
 const ACTION_FULL = 'FULL'
 
-// 讓使用者互動覆寫「往後幾天」，Enter 則用 config 預設
-async function askDaysAhead(config) {
-  const fallback = config.fixVersionMatch?.daysAhead ?? 30
+// 讓使用者互動覆寫時間窗，Enter 則用 config 預設。
+// 支援兩種輸入：往後天數（如 30）或 8 碼日期區間（如 20260101-20260110）。
+// 格式不符時 inquirer 會用 validate 的錯誤字串就地要求重新輸入。
+// 回傳正規化後的 window 物件，或 null（使用者取消）。
+async function askWindow(config) {
+  const fallbackDays = config.fixVersionMatch?.daysAhead ?? 30
   const answer = await input({
-    message: `往後幾天內的 fix version？（Enter 用預設 ${fallback}）`,
-    default: String(fallback),
-    validate: (v) => v == null || v === '' || /^\d+$/.test(v) || '請輸入正整數天數',
+    message: `時間窗：往後天數（如 30）或日期區間（如 20260101-20260110）？（Enter 用預設 ${fallbackDays} 天）`,
+    default: String(fallbackDays),
+    validate: (v) => {
+      const r = parseFixVersionWindow(v, { fallbackDays })
+      return r.ok || r.error
+    },
   }).catch(() => null)
   if (answer == null) return null
-  return answer === '' ? fallback : Number(answer)
+  return parseFixVersionWindow(answer, { fallbackDays }).window
 }
 
 function formatUser(u) {
@@ -132,15 +140,15 @@ async function askAssignee(config) {
 }
 
 /**
- * 互動詢問 daysAhead + assignee 並驗證（供「只撈 ticket」使用）。
- * 回傳 { daysAhead, assigneeAccountId, assigneeDisplayName } ｜ null。
+ * 互動詢問時間窗 + assignee 並驗證（供「只撈 ticket」使用）。
+ * 回傳 { window, assigneeAccountId, assigneeDisplayName } ｜ null。
  */
 async function promptTicketParams(config) {
-  const daysAhead = await askDaysAhead(config)
-  if (daysAhead == null) return null
+  const window = await askWindow(config)
+  if (window == null) return null
   const assignee = await askAssignee(config)
   if (assignee == null) return null
-  return { daysAhead, ...assignee }
+  return { window, ...assignee }
 }
 
 // 打 API 各階段的進度提示（避免畫面看起來卡住）
@@ -155,9 +163,10 @@ function logProgress(phase) {
 }
 
 // meta：組出 model 需要的展示用中繼資料 + 判定用參數
-function buildMeta(config, daysAhead, assigneeDisplayName) {
+function buildMeta(config, window, assigneeDisplayName) {
   return {
-    daysAhead,
+    daysAhead: window?.kind === 'days' ? window.daysAhead : null,
+    windowLabel: describeWindow(window),
     assignee: assigneeDisplayName ?? null,
     generatedAt: new Date().toISOString(),
     today: new Date(),
@@ -179,8 +188,8 @@ async function runAnalysis(config, { withMr }) {
 
   // 先把不打 API 的提問問完（天數、是否 fetch），最後才問會打 Jira API 的 assignee，
   // 避免 API 卡頓夾在兩個提問中間。
-  const daysAhead = await askDaysAhead(config)
-  if (daysAhead == null) return
+  const window = await askWindow(config)
+  if (window == null) return
 
   const doFetch = await confirm({ message: '分析前先對各 repo 執行 git fetch --all --prune？' }).catch(() => null)
   if (doFetch == null) return void console.log(yellow('使用者取消'))
@@ -196,7 +205,7 @@ async function runAnalysis(config, { withMr }) {
   let data
   try {
     data = await computeFullAnalysis(config, {
-      daysAhead,
+      window,
       assigneeAccountId: assignee.assigneeAccountId,
       doFetch,
       withMr,
@@ -213,7 +222,7 @@ async function runAnalysis(config, { withMr }) {
     console.log(lightRed('❌ 沒有任何必檢 repo 對應到本地路徑，分支/MR 資訊會缺，請先跑 Preflight 修正。'))
   }
 
-  const model = buildReportModel(data, buildMeta(config, daysAhead, assignee.assigneeDisplayName))
+  const model = buildReportModel(data, buildMeta(config, window, assignee.assigneeDisplayName))
   renderReport(model)
 }
 
@@ -287,10 +296,10 @@ export async function releaseCheckHelper() {
     const params = await promptTicketParams(config)
     if (params == null) return
     try {
-      const ticketsResult = await fetchTargetTickets(config, { daysAhead: params.daysAhead, assigneeAccountId: params.assigneeAccountId })
+      const ticketsResult = await fetchTargetTickets(config, { window: params.window, assigneeAccountId: params.assigneeAccountId })
       const model = buildReportModel(
         { ticketsResult, coverage: { missing: [] }, analysis: null, stagingBranches: config.stagingBranches, doneBranches: config.doneBranches },
-        buildMeta(config, params.daysAhead, params.assigneeDisplayName)
+        buildMeta(config, params.window, params.assigneeDisplayName)
       )
       renderTickets(model)
     } catch (err) {
@@ -336,11 +345,14 @@ async function main() {
     const config = loadConfigOrReport()
     if (config == null) process.exit(1)
 
-    const daysAhead = flags.days != null && flags.days !== true ? Number(flags.days) : config.fixVersionMatch?.daysAhead ?? 30
-    if (!Number.isFinite(daysAhead) || daysAhead < 0) {
-      console.error(lightRed('❌ --days 需為非負整數'))
+    const fallbackDays = config.fixVersionMatch?.daysAhead ?? 30
+    const rawDays = flags.days != null && flags.days !== true ? flags.days : ''
+    const parsedWindow = parseFixVersionWindow(rawDays, { fallbackDays })
+    if (!parsedWindow.ok) {
+      console.error(lightRed(`❌ --days ${parsedWindow.error}`))
       process.exit(1)
     }
+    const window = parsedWindow.window
 
     let resolved
     try {
@@ -351,13 +363,13 @@ async function main() {
       process.exit(1)
     }
     const assigneeAccountId = resolved.skip ? null : resolved.accountId
-    const meta = buildMeta(config, daysAhead, resolved.skip ? null : resolved.displayName)
+    const meta = buildMeta(config, window, resolved.skip ? null : resolved.displayName)
 
     // --tickets（且沒帶 --full）：只撈 ticket
     if (flags.tickets && !flags.full) {
       let ticketsResult
       try {
-        ticketsResult = await fetchTargetTickets(config, { daysAhead, assigneeAccountId })
+        ticketsResult = await fetchTargetTickets(config, { window, assigneeAccountId })
       } catch (err) {
         console.error(lightRed(`❌ 撈取 ticket 失敗：${err.message}`))
         process.exit(1)
@@ -375,7 +387,7 @@ async function main() {
     if (wantPretty) renderRules(config)
     let data
     try {
-      data = await computeFullAnalysis(config, { daysAhead, assigneeAccountId, doFetch: !flags['no-fetch'], withMr: true })
+      data = await computeFullAnalysis(config, { window, assigneeAccountId, doFetch: !flags['no-fetch'], withMr: true })
     } catch (err) {
       console.error(lightRed(`❌ 分析失敗：${err.message}`))
       process.exit(1)

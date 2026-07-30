@@ -31,25 +31,27 @@ function mapIssue(issue) {
 }
 
 /**
- * 依「今天 + daysAhead」挑出目標 fix version，再撈出這些版本底下的所有 ticket（不過濾狀態）。
- * 回傳 { versions, tickets, jql }。
+ * 依時間窗（往後 N 天，或明確的日期區間）挑出目標 fix version，再撈出這些版本底下的所有 ticket（不過濾狀態）。
+ * window：{ kind: 'days', daysAhead } 或 { kind: 'range', start, end }；未給時退回 daysAhead / config 預設。
+ * 回傳 { versions, tickets, jql, window }。
  */
-export async function fetchTargetTickets(config, { daysAhead, today = new Date(), assigneeAccountId = null, debug = null } = {}) {
+export async function fetchTargetTickets(config, { daysAhead, window = null, today = new Date(), assigneeAccountId = null, debug = null } = {}) {
   const jira = new JiraClient(config.jira)
   const customRegex = config.fixVersionMatch?.dateTokenRegex ?? null
-  const effectiveDaysAhead = daysAhead ?? config.fixVersionMatch?.daysAhead ?? 30
+  const fallbackDays = config.fixVersionMatch?.daysAhead ?? 30
+  const win = window ?? { kind: 'days', daysAhead: daysAhead ?? fallbackDays }
 
   // 跨專案收集落在時間窗內的版本
   const versions = []
   for (const project of config.jira.projects) {
     const projectVersions = await jira.getProjectVersions(project)
     if (debug) debug.jira.versions[project] = projectVersions
-    const inWindow = selectVersionsInWindow(projectVersions, { today, daysAhead: effectiveDaysAhead, customRegex })
+    const inWindow = selectVersionsInWindow(projectVersions, { today, customRegex, window: win })
     for (const v of inWindow) versions.push({ project, name: v.name, releaseDate: v.releaseDate })
   }
 
   if (versions.length === 0) {
-    return { versions: [], tickets: [], jql: null, daysAhead: effectiveDaysAhead }
+    return { versions: [], tickets: [], jql: null, window: win }
   }
 
   const versionNames = [...new Set(versions.map((v) => v.name))]
@@ -61,5 +63,5 @@ export async function fetchTargetTickets(config, { daysAhead, today = new Date()
   }
   const tickets = issues.map(mapIssue)
 
-  return { versions, tickets, jql, daysAhead: effectiveDaysAhead }
+  return { versions, tickets, jql, window: win }
 }

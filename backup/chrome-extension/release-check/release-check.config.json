@@ -25,7 +25,7 @@
   "//doneStatuses": "Jira 狀態命中 → 視為『已完成』的必要條件（還會用 git 驗證 develop 是否包含此 branch）。陣列或依 issue type 的物件（default 為 fallback，type key 忽略大小寫）。",
   "doneStatuses": {
     "default": ["Verified", "Testnet", "Testnet Verified", "Production Resolved"],
-    "Job Order": ["Code Review"]
+    "Job Order": ["Code Review", "COMPLETE"]
   },
 
   "//sentToTestStatuses": "Jira 狀態命中 → 沒 branch 時視為『已送測』（不用改 code / branch 已刪的情境）。格式同上。※ 新概念，請依實際狀態調整。",
@@ -39,8 +39,12 @@
 
   "//statusEmoji": "opened MR 旁標注該單 QA 狀態的 emoji。key=Jira 狀態，value=emoji；保留 key __default__ 對應未列出的狀態。",
   "statusEmoji": {
+    "Open": "🍽️",
+    "Dev Doing": "📝",
     "QA": "👀",
     "Verified": "✅",
+    "COMPLETE": "✅",
+    "Testnet Verified": "✅",
     "__default__": "❔"
   },
 

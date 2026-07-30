@@ -69,10 +69,10 @@ function fmtLocalDate(date) {
 // ticket 清單（fix version + ticket 摘要），供「只撈 ticket」使用
 export function renderTickets(model) {
   const assigneeSuffix = model.assignee ? `，assignee = ${model.assignee}` : ''
-  console.log('\n' + lightCyan(`=== Jira ticket（往後 ${model.daysAhead} 天的 fix version${assigneeSuffix}）===`) + '\n')
+  console.log('\n' + lightCyan(`=== Jira ticket（${model.windowLabel} 的 fix version${assigneeSuffix}）===`) + '\n')
 
   if (model.versions.length === 0) {
-    console.log(yellow(`找不到 date token 落在往後 ${model.daysAhead} 天內的 fix version。`))
+    console.log(yellow(`找不到 date token 落在時間窗（${model.windowLabel}）內的 fix version。`))
     return
   }
 
@@ -215,15 +215,35 @@ function otherReasons(t, stagingBranches, doneBranches) {
 }
 
 // 「其他」整區用一張表呈現（依緊急度排序），原因收在表格下方
+// 是否為 Staging 版本（這類要往後排）
+function isStagingVersion(name) {
+  return /staging/i.test(name ?? '')
+}
+
+// 一張 ticket 的 fix version 顯示：非 Staging 依日期由近到遠在前，Staging 版本一律往後排。
+function fixVersionCell(t) {
+  const names = t.fixVersions ?? []
+  if (names.length === 0) return '-'
+  const sorted = [...names].sort((a, b) => {
+    const sa = isStagingVersion(a) ? 1 : 0
+    const sb = isStagingVersion(b) ? 1 : 0
+    if (sa !== sb) return sa - sb // 非 Staging 在前
+    const da = extractVersionDate(a)?.getTime() ?? Infinity
+    const db = extractVersionDate(b)?.getTime() ?? Infinity
+    return da - db || a.localeCompare(b)
+  })
+  return sorted.map((name) => (isStagingVersion(name) ? name : yellow(name))).join('\n')
+}
+
 function renderOtherTable(tickets, model) {
   const stagingBranches = model.stagingBranches ?? []
   const doneBranches = model.doneBranches ?? []
   const table = new Table({
-    head: ['緊急', 'Ticket', '標題', 'Status', `Merge(${stagingBranches.join('/')})`, 'Push', 'MR'].map((h) => blue(h)),
+    head: ['緊急', 'Ticket', '標題', 'Fix Version', 'Status', `Merge(${stagingBranches.join('/')})`, 'Push', 'MR'].map((h) => blue(h)),
     style: { head: [], border: ['dim'] },
   })
   for (const t of tickets) {
-    table.push([urgencyCell(t), keyLabel(t), truncate(t.summary, 40), `${t.statusEmoji ? t.statusEmoji + ' ' : ''}${t.status}`, mergeCell(t, stagingBranches), pushCell(t), mrCellCompact(t)])
+    table.push([urgencyCell(t), keyLabel(t), truncate(t.summary, 40), fixVersionCell(t), `${t.statusEmoji ? t.statusEmoji + ' ' : ''}${t.status}`, mergeCell(t, stagingBranches), pushCell(t), mrCellCompact(t)])
   }
   console.log(table.toString())
 
@@ -330,7 +350,7 @@ function renderWarnings(warnings) {
 // 主報表：警告 + 待完成（依緊急度分桶）+ 已上 staging + 已完成合併 + MR discussions
 export function renderReport(model) {
   const assigneeSuffix = model.assignee ? `, assignee=${model.assignee}` : ''
-  console.log('\n' + lightCyan(`=== Release Check（往後 ${model.daysAhead} 天${assigneeSuffix}）===`) + '\n')
+  console.log('\n' + lightCyan(`=== Release Check（${model.windowLabel}${assigneeSuffix}）===`) + '\n')
 
   if (model.tickets.length === 0) {
     console.log(yellow('本次沒有符合的 ticket。\n'))

@@ -13,9 +13,9 @@ function checkBranchesOf(config) {
  * 純運算：撈 ticket → repo 涵蓋 → 分支分析 →（withMr 時）補 MR。
  * 不做任何 console 輸出（讓 model / JSON 輸出保持乾淨）。
  */
-export async function computeFullAnalysis(config, { daysAhead, assigneeAccountId, doFetch, withMr, onProgress = () => {}, debug = null }) {
+export async function computeFullAnalysis(config, { daysAhead, window = null, assigneeAccountId, doFetch, withMr, onProgress = () => {}, debug = null }) {
   onProgress('tickets')
-  const ticketsResult = await fetchTargetTickets(config, { daysAhead, assigneeAccountId, debug })
+  const ticketsResult = await fetchTargetTickets(config, { daysAhead, window, assigneeAccountId, debug })
   const coverage = await checkRepoCoverage(config.requiredRepos, config.localRepoPaths)
   const checkBranches = checkBranchesOf(config)
 
@@ -118,6 +118,7 @@ export function buildReportModel(compute, meta = {}) {
   return {
     generatedAt: meta.generatedAt ?? null,
     daysAhead: meta.daysAhead ?? null,
+    windowLabel: meta.windowLabel ?? null,
     assignee: meta.assignee ?? null,
     jql: ticketsResult.jql ?? null,
     stagingBranches,
