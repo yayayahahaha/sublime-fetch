@@ -32,7 +32,7 @@ const WHITE_LABEL_LIST = [
 ]
 
 function generateJiraUrl(branchName) {
-  const [, num] = branchName.match(/(PLAT-\d+)_.+/) || ['', '', '']
+  const [, num] = branchName.match(/(PLAT-\d+)[\D].+/) || ['', '', '']
 
   const jiraNum = num
 

@@ -54,7 +54,7 @@ export async function operateRedis() {
         message: 'what would you like to do?',
         choices: [
           {
-            name: `1. Device OTP  ${gray('(OTP_MAIL__key_* + OTP_MAIL_LOGIN_NEW_DEVICE_*)')}`,
+            name: `1. Device OTP  ${gray('(OTP_MAIL__key_* + OTP_MAIL_LOGIN_NEW_DEVICE_* + spot:otp-mail*)')}`,
             value: 'device-otp',
           },
           { name: '2. List keys', value: 'list' },
@@ -108,7 +108,7 @@ async function actionList(client) {
   await listKeys(client, pattern, limit)
 }
 
-const DEVICE_OTP_PATTERNS = ['OTP_MAIL__key_*', 'OTP_MAIL_LOGIN_NEW_DEVICE_*']
+const DEVICE_OTP_PATTERNS = ['OTP_MAIL__key_*', 'OTP_MAIL_LOGIN_NEW_DEVICE_*', 'spot:otp-mail*']
 
 async function actionDeviceOtp(client) {
   for (const pattern of DEVICE_OTP_PATTERNS) {
