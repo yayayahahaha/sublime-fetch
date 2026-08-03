@@ -215,9 +215,10 @@ export class RegistrationNeeded {
       }
       console.log(lightGreen(`[${this.email}] 步驟 2: 成功獲取 OTP: ${otpCode}`))
 
-      if (stepToRetry === 'all' || stepToRetry === 'signup') {
-        // Step 3: Final registration call with OTP
-        const signUpUrl = `${apiUrl}/api/v2/signup`
+      // Step 3: Final registration call with OTP
+      // 不管 stepToRetry 是哪種 (all / otp_email 重試 / signup 重試) 最後都要打 signup,
+      // 否則 otp_email 的 captcha 重試路徑會在這裡默默結束, register() 回傳 undefined
+      const signUpUrl = `${apiUrl}/api/v2/signup`
       console.log(lightCyan(`[${this.email}] 步驟 3: 最終註冊 -> ${signUpUrl}`))
       const signUpFormData = new FormData()
       signUpFormData.append('userName', this.userName)
@@ -228,8 +229,10 @@ export class RegistrationNeeded {
       signUpFormData.append('lang', 'en')
       signUpFormData.append('deviceFingerprint', this.deviceFingerprint)
 
-      // Add captcha to signUpFormData if present
-      if (otherPayload.captchaId && otherPayload.captchaNumber) {
+      // captcha 是一次性的: otp_email 步驟用過的那張已被後端消耗, 不能帶到 signup。
+      // 跟真實頁面一致 — signup 第一次先不帶 captcha, 被回 "Captcha is required" 時
+      // 才走自己的重試分支領一張新的 (stepToRetry === 'signup')
+      if (stepToRetry === 'signup' && otherPayload.captchaId && otherPayload.captchaNumber) {
         signUpFormData.append('captchaId', otherPayload.captchaId)
         signUpFormData.append('captchaNumber', otherPayload.captchaNumber)
       }
@@ -277,7 +280,6 @@ export class RegistrationNeeded {
       }
       console.log(lightGreen(`[${this.email}] 步驟 3: 註冊成功!`))
       return signUpResponse
-      }
     } finally {
       // No disconnect here, it's handled by the public register method
     }
@@ -371,6 +373,8 @@ export async function registerByList() {
       const token = signUpResponse?.data?.data?.token
 
       if (!token) {
+        console.log(lightYellow(`[${account.email}] 完整的 signUpResponse (供人工判斷):`))
+        console.dir(signUpResponse, { depth: null })
         throw new Error('註冊成功，但未在 Response 中找到 token')
       }
 

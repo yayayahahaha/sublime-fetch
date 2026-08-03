@@ -60,7 +60,11 @@ export async function generateAndLogin() {
       const registration = new RegistrationNeeded(account, config)
       const signUpResponse = await registration.register()
       token = signUpResponse?.data?.data?.token
-      if (!token) throw new Error('註冊成功，但未在 Response 中找到 token')
+      if (!token) {
+        console.log(lightYellow('完整的 signUpResponse (供人工判斷):'))
+        console.dir(signUpResponse, { depth: null })
+        throw new Error('註冊成功，但未在 Response 中找到 token')
+      }
     } catch (error) {
       errorConsole(`註冊失敗: ${error.message}`)
       console.log()
