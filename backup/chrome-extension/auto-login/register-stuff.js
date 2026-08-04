@@ -59,54 +59,12 @@ export class RegistrationNeeded {
   }
 
   async getCaptcha(captchaId) {
-    const params = { captchaId }
-
-    switch (this.config.getRedisBy) {
-      case 'api': {
-        const queryString = new URLSearchParams(params).toString()
-        return get(`http://localhost:9999/getCaptcha?${queryString}`)
-      }
-
-      case 'disposableFn': {
-        const redis = connectRedis()
-        try {
-          const { error, value } = await redis.getCaptcha(params.captchaId)
-          return new Response({ error, data: { data: value } })
-        } finally {
-          redis.disconnect()
-        }
-      }
-    }
-  }
-
-  get #ConfigInstance() {
-    return class ConfigInstance {
-      static GET_REDIS_BY__ENUM = ['api', 'disposableFn']
-
-      get GET_REDIS_BY__MAP() {
-        return Object.fromEntries(this.constructor.GET_REDIS_BY__ENUM.map((key) => [key, true]))
-      }
-
-      errorMessage(type) {
-        let message = ''
-        switch (type) {
-          case 'wrong-getRedisBy':
-            message = ` 'getRedisBy' should be one of these following: ${this.constructor.GET_REDIS_BY__ENUM.join(', ')}`
-            break
-        }
-
-        return `[${this.constructor.name}]${message}`
-      }
-
-      constructor(config) {
-        const { getRedisBy = 'api' } = config ?? {}
-
-        if (this.GET_REDIS_BY__MAP[getRedisBy] == null) {
-          throw new Error(this.errorMessage('wrong-getRedisBy'))
-        }
-
-        this.getRedisBy = getRedisBy
-      }
+    const redis = connectRedis()
+    try {
+      const { error, value } = await redis.getCaptcha(captchaId)
+      return new Response({ error, data: { data: value } })
+    } finally {
+      redis.disconnect()
     }
   }
 
@@ -332,7 +290,7 @@ export async function updateSettingsFile(profilesToAdd) {
 }
 
 export async function registerByList() {
-  const config = { getRedisBy: 'disposableFn' }
+  const config = {}
   try {
     const settings = loadSettings()
     config.registrationList = settings?.registrationList ?? []

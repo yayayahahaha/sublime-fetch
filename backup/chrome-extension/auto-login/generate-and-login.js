@@ -11,7 +11,7 @@ const DEFAULT_PASSWORD = '!QAZ1qaz'
 // 生成 (註冊) + 自動登入某個 brand:
 // 選 brand -> 輸入 email 前綴 -> 註冊 (失敗可重輸前綴或結束) -> 寫回 settings.json -> 自動登入
 export async function generateAndLogin() {
-  const config = { getRedisBy: 'disposableFn' }
+  const config = {}
   let allWl = {}
   try {
     const settings = loadSettings()

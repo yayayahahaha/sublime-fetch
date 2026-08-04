@@ -9,7 +9,7 @@ import { JiraClient } from './lib/jira.js'
 import { extractRepoPath } from './lib/repos.js'
 import { checkGitlabWrite, checkJiraWrite } from './lib/writePreflight.js'
 import { readAllWatchers, killWatcher, cleanupDead } from './lib/watchers.js'
-import { runDeployStaging } from './deployActions.js'
+import { runDeployStaging, runDeployDev } from './deployActions.js'
 import { runSchedulePlay } from './scheduleActions.js'
 import { red, green, yellow, lightCyan, lightRed, blue } from '../color.js'
 
@@ -83,6 +83,7 @@ export async function writeActionHelper(feature) {
       ? [
           { name: '權限預檢（preflight）', value: 'preflight', description: '確認 token scope / 專案角色是否足夠寫入' },
           { name: '部署 brand 到 staging', value: 'deploy-staging', description: '從 matrix 檔多選 brand → dry-run → 觸發 → 可背景監看' },
+          { name: '部署 brand 到 dev', value: 'deploy-dev', description: '同 staging 流程，但分支/matrix 檔換成 dev（含 storybook）' },
           { name: '重新部署 I18n', value: 'i18n', description: 'Play I18n 排程（需 config.i18nRedeploy）' },
         ]
       : [
@@ -95,6 +96,7 @@ export async function writeActionHelper(feature) {
 
   if (action === 'preflight') return void (await runPreflight(feature, config))
   if (action === 'deploy-staging') return void (await runDeployStaging(config))
+  if (action === 'deploy-dev') return void (await runDeployDev(config))
   if (action === 'i18n') {
     const c = config.i18nRedeploy
     if (!c?.repo || (c.scheduleId == null && !c.scheduleName)) {

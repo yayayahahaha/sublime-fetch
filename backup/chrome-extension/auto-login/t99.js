@@ -42,7 +42,6 @@ const supportedCmdArgs = ['port', 'profile']
 
 start()
 async function start() {
-  const config = { getRedisBy: 'disposableFn' }
   const cmdArgs = parseArgs()
 
   Object.keys(cmdArgs).forEach((arg) => {
@@ -68,7 +67,7 @@ async function start() {
       try {
         return {
           displayName,
-          value: new LoginNeeded({ ...item, config }),
+          value: new LoginNeeded({ ...item }),
         }
       } catch (error) {
         errorConsole(`生成 profile 失敗: ${error.message}`)
