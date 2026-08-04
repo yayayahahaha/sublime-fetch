@@ -1,27 +1,45 @@
-// 「部署 brand 到 staging」的 engine：從指定 repo 的固定 matrix 檔取出可部署清單。
+// 「部署 brand 到 dev / staging」的 engine：從指定 repo 的固定 matrix 檔取出可部署清單。
 // 這裡只做資料取得 + 嚴謹檢查，不含互動、不觸發 pipeline（觸發沿用 pipelineActions.triggerPipeline）。
 //
-// 部署固定條件：
-//   - branch 一律 staging
+// 部署固定條件（dev / staging 機制同構，見 frontend 的 .gitlab-ci.whitelabel.config.yml：
+// `.parallel dev` / `.parallel staging` 都是 `$WHITELABEL_NAME == $RECIPE` + 限定各自分支）：
+//   - branch：目標環境的同名分支（dev / staging）
 //   - pipeline variable：type=Variable、key=RECIPE、value=選到的 WHITELABEL_NAME
-//   - 選項來源：staging 分支裡固定檔案 .gitlab-ci.staging-whitelabel-matrix.config.yml
-//     結構固定為 .staging-whitelabel-matrix.parallel.matrix[].WHITELABEL_NAME
+//   - 選項來源：該分支裡的固定 matrix 檔
+//     結構固定為 <rootKey>.parallel.matrix[].WHITELABEL_NAME
 
-export const MATRIX_FILE = '.gitlab-ci.staging-whitelabel-matrix.config.yml'
-export const DEPLOY_BRANCH = 'staging'
 export const RECIPE_VAR_KEY = 'RECIPE'
-// 每個選項都要長成「<非空白><空白>staging」結尾，例如 "Btse staging"
-export const RECIPE_PATTERN = /[^\s]\sstaging$/
+
+export const DEPLOY_TARGETS = {
+  staging: {
+    key: 'staging',
+    branch: 'staging',
+    matrixFile: '.gitlab-ci.staging-whitelabel-matrix.config.yml',
+    rootKey: '.staging-whitelabel-matrix',
+    // 每個選項都要長成「<非空白><空白>staging」結尾，例如 "Btse staging"
+    recipePattern: /[^\s]\sstaging$/,
+    patternHint: '需符合 /[^\\s]\\sstaging$/',
+  },
+  dev: {
+    key: 'dev',
+    branch: 'dev',
+    matrixFile: '.gitlab-ci.dev-whitelabel-matrix.config.yml',
+    rootKey: '.dev-whitelabel-matrix',
+    // dev 比照 staging 命名（例如 "Btse dev"），另有一個特殊項目 storybook 也是合法部署目標
+    recipePattern: /^storybook$|[^\s]\sdev$/,
+    patternHint: '需符合 /[^\\s]\\sdev$/（或 storybook）',
+  },
+}
 
 const indentOf = (line) => line.length - line.trimStart().length
 
 /**
  * 嚴謹地解析固定結構的 whitelabel matrix 檔，取出所有 WHITELABEL_NAME。
- * 只認 .staging-whitelabel-matrix → parallel → matrix → list item 這個階層，
+ * 只認 <rootKey> → parallel → matrix → list item 這個階層，
  * 結構對不上就回格式錯誤，不做寬鬆猜測。
  * 回 { ok:true, names:[...] } | { ok:false, error }
  */
-export function parseWhitelabelMatrix(text) {
+export function parseWhitelabelMatrix(text, rootKey = DEPLOY_TARGETS.staging.rootKey) {
   if (typeof text !== 'string' || text.trim() === '') {
     return { ok: false, error: '檔案內容是空的' }
   }
@@ -32,15 +50,15 @@ export function parseWhitelabelMatrix(text) {
     .map((line, n) => ({ line: line.replace(/\s+$/, ''), n }))
     .filter(({ line }) => line.trim() !== '' && !/^\s*#/.test(line))
 
-  // 1) 頂層 key（縮排 0）
-  const root = lines.find(({ line }) => indentOf(line) === 0 && /^\.staging-whitelabel-matrix:\s*$/.test(line))
-  if (!root) return { ok: false, error: '找不到頂層 key「.staging-whitelabel-matrix:」' }
+  // 1) 頂層 key（縮排 0）。行尾空白已被去掉，所以直接全等比對
+  const root = lines.find(({ line }) => indentOf(line) === 0 && line === `${rootKey}:`)
+  if (!root) return { ok: false, error: `找不到頂層 key「${rootKey}:」` }
 
   // root 底下的區塊：root 之後、下一個縮排 0 之前的所有行
   const after = lines.filter(({ n }) => n > root.n)
   const rootEndPos = after.findIndex(({ line }) => indentOf(line) === 0)
   const rootBlock = rootEndPos === -1 ? after : after.slice(0, rootEndPos)
-  if (rootBlock.length === 0) return { ok: false, error: '「.staging-whitelabel-matrix」底下沒有內容' }
+  if (rootBlock.length === 0) return { ok: false, error: `「${rootKey}」底下沒有內容` }
 
   // 2) parallel:
   const parallel = rootBlock.find(({ line }) => /^\s*parallel:\s*$/.test(line))
@@ -75,16 +93,17 @@ export function parseWhitelabelMatrix(text) {
 }
 
 /**
- * 取得可部署到 staging 的 recipe 清單，逐層嚴謹檢查：
+ * 取得指定環境可部署的 recipe 清單，逐層嚴謹檢查：
  *   1. repo 存不存在
- *   2. remote staging 分支存不存在
- *   3. staging 分支裡的 matrix 檔存不存在
+ *   2. remote 目標分支存不存在
+ *   3. 目標分支裡的 matrix 檔存不存在
  *   4. matrix 檔格式正不正確
- *   5. 每個選項是否符合 RECIPE_PATTERN
+ *   5. 每個選項是否符合該環境的 recipePattern
  * 任一層失敗即回 { ok:false, stage, error }；stage ∈ config|repo|branch|file|format|pattern
  * 成功回 { ok:true, recipes:[...], repoPath, branch, filePath }
  */
-export async function loadStagingRecipes(gitlab, { repoPath, branch = DEPLOY_BRANCH, filePath = MATRIX_FILE } = {}) {
+export async function loadDeployRecipes(gitlab, { repoPath, target = DEPLOY_TARGETS.staging } = {}) {
+  const { branch, matrixFile: filePath, rootKey, recipePattern, patternHint } = target
   if (!repoPath) return { ok: false, stage: 'config', error: '未設定部署 repo（config.deploy.repo）' }
   const id = encodeURIComponent(repoPath)
 
@@ -96,7 +115,7 @@ export async function loadStagingRecipes(gitlab, { repoPath, branch = DEPLOY_BRA
     return { ok: false, stage: 'repo', error: `檢查 repo 失敗：${err.message}`, status: err.status }
   }
 
-  // 2) remote staging 分支存不存在
+  // 2) remote 目標分支存不存在
   try {
     await gitlab.getBranch(repoPath, branch)
   } catch (err) {
@@ -114,16 +133,16 @@ export async function loadStagingRecipes(gitlab, { repoPath, branch = DEPLOY_BRA
   }
 
   // 4) 格式正不正確
-  const parsed = parseWhitelabelMatrix(content)
+  const parsed = parseWhitelabelMatrix(content, rootKey)
   if (!parsed.ok) return { ok: false, stage: 'format', error: `${filePath} 格式錯誤：${parsed.error}` }
 
   // 5) 每個選項都要符合命名規則
-  const invalid = parsed.names.filter((name) => !RECIPE_PATTERN.test(name))
+  const invalid = parsed.names.filter((name) => !recipePattern.test(name))
   if (invalid.length > 0) {
     return {
       ok: false,
       stage: 'pattern',
-      error: `以下 WHITELABEL_NAME 不符合命名規則（需符合 /[^\\s]\\sstaging$/）：${invalid.join('、')}`,
+      error: `以下 WHITELABEL_NAME 不符合命名規則（${patternHint}）：${invalid.join('、')}`,
       names: parsed.names,
       invalid,
     }

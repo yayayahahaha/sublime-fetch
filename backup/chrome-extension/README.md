@@ -2,9 +2,7 @@
 
 > Less is more.
 
-這個專案包含了兩主要部分:
-
-#### 1. 透過 terminal 操作的多功能腳本
+這個專案是一套透過 terminal 操作的多功能腳本:
 
 - 自動登入 staging 各 brand
   - 支持多個登入 profile 設定 (一個 WL 多帳號 OK)
@@ -18,17 +16,6 @@
 - Redis 操作 (對 dev / staging 的 key 做 list / 查 / 刪)
 - 小工具: 2FA 助手、Jira branch 名生成器、Chrome 視窗助手、Mock Server、批量註冊
 
-#### 2. 協助日常開發的 Chrome Extension
-
-- Jira 分支名稱生成器
-  > 一鍵生成包含 jira 編號和描述的 branch name, 支持客製化與自動記憶使用者名稱
-- 半自動登入系統(半殘)
-  > 透過呼叫本地啟動的 api server 達成動態登入手動輸入的帳密
-- Token 管理(半殘)
-  > 快速取得/複寫當前頁面的 token 狀態
-
-接著將針對這兩個功能做解說
-
 ---
 
 ## 透過 terminal 操作的自動登入腳本
@@ -37,20 +24,7 @@
 
 > 繁瑣的手把手
 
-#### 事前準備 1: 從本地安裝當前 Chrome Extension 到瀏覽器
-
-1. 造訪 [chrome://extensions/](chrome://extensions/)
-2. 開始右上角的 `Developer mode`
-3. 選擇左側的 `Load unpacked`
-4. 直接選擇這整個專案的資料夾
-5. 如果看到 `My Awesome` 出現在下面，就代表成功了
-
-![how-to-upload-extension](./readme-image/how-to-upload-extension.png)
-
-> 如果常用的話也可以點進 Detail 之後 pin 起來 ![pin-extension.png](./readme-image/pin-extension.png)
-> 如果後面有更新的話，可以點擊右上角的 🔄 重新整理
-
-#### 事前準備 2: 填好用於登入的 login profile 資料
+#### 事前準備 1: 填好用於登入的 login profile 資料
 
 1. 複製 `settings.json.default` 成 `settings.json`, 並修改其內容
 
@@ -125,7 +99,7 @@ cp settings.json.default settings.json
 > 註1: 這邊對應的是 frontend repo 的 config/envConfig.js 裡面的 key, 如果要登入 BTSE 的話會是用 "btse"  
 > 註2: 如果是用 [這個](https://chromewebstore.google.com/detail/authenticator/bhghoamapcdpbohphigoooaddinpkbai) 瀏覽器套件的話，可以透過他的 export 功能取得 secret code
 
-#### 事前準備 3: 設定 terminal 的 alias 以利透過 terminal 指令執行腳本
+#### 事前準備 2: 設定 terminal 的 alias 以利透過 terminal 指令執行腳本
 
 > 這邊以 [`zsh`](https://www.zsh.org/) 作為範例 (註3)
 
@@ -211,7 +185,7 @@ my_alias
 | ------------------------------------------ | ------------------------------------------------------------------------------------- |
 | 重新生成 WL 的資訊                         | 從 frontend repo 撈各 brand 的 API URL / WS / Chart-feed 等資訊, 寫回 `brand-list`    |
 | Redis 對 Redis 操作                        | 對 dev / staging 的 redis 做 list / 查 / 刪等 (自動偵測 cluster / standalone)         |
-| Mock Server 啟動有 mock api 的 server      | 啟動本地 mock server (給 chrome extension 的半自動登入用)                             |
+| Mock Server 啟動有 mock api 的 server      | 啟動本地 mock server (mock 指定 api / websocket, 其餘 proxy 到真實後端)               |
 | 2FA 助手                                   | 讀取 / 生成 / 編輯 / 刪除 2FA Code (來源是 settings 裡的 secret)                      |
 | Jira Branch 生成器                         | 透過 Jira 標題生成 git branch name                                                    |
 | Chrome 視窗助手                            | 列出 Chrome 視窗、刷新、複製 URL、執行 JS                                             |
@@ -237,43 +211,3 @@ Admin 系列功能 (Login / Email Cache / Deposit / Role add) 共用一份 cache
 - 💥 是有可能登入失敗的，這個時候可以參考 terminal 裡的錯誤訊息，通常是 opt 的問題，可以去 admin 那邊解除
   > ![login-failed](./readme-image/login-failed.png)
 - 💥 `Register 批量註冊帳號` 對**啟用 Geetest 的 brand (例如 btse)** 目前無法用 — 後端要 `passToken` (瀏覽器解 challenge 才拿得到), 純 API 沒辦法繞。會在 captcha retry 3 次後失敗。這類 brand 暫時只能手動到 staging 頁面註冊。
-
----
-
-## 協助日常開發的 Chrome Extension (WIP)
-
-#### Jira 分支名稱生成器
-
-停在 jira 的頁面，然後給他點下去就好了，記得寫名字喔
-
-![gen-jira-name](./readme-image/gen-jira-name.png)
-
-#### 半自動登入系統(半殘)
-
-目的為在瀏覽器套件上就可以輸入想要登入的地點和帳號密碼，不過因為需要一台 server 做 redis 的連線，所以目前半殘。
-
-> 本地啟動的話是可以，但就沒有那麼方便
-
-##### 本地啟動的方式
-
-```bash
-node auto-login/server.js
-```
-
-接著填入需要的資料就可以登入了
-
-![chrome-login](./readme-image/chrome-login.png)
-
-#### Token 管理(半殘)
-
-可以取得當前頁面存在 localStorage 裡的 token 的小工具, 在想要直接將 token 從一個頁籤取出 or 同步到其他頁籤的時候有一點點點用處。
-
-### TODO
-
-修改 brand 的替換邏輯
-
-- btse -> 可以輸入 null 也可以輸入 "btse"
-- nvx -> 可以輸入 "nvx" 也可以輸入 "btseid"
-
-添加快捷
--> 登入 BTSE -> 可以輸入 'btse' 就會自動跳到 btse 的 option

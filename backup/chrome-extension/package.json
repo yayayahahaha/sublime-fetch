@@ -4,9 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "build": "rollup -c"
-  },
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",

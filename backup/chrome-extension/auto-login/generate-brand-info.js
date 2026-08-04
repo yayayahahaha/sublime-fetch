@@ -44,6 +44,7 @@ export function generateBrandInfo() {
   }, {})
 
   console.log(`🎉 取得品牌資訊成功, 一共有 ${Object.keys(result).length} 個品牌`)
+  console.log(`取得的來源檔: ${envFilePath}`)
   console.log('詳情請見 settings.json 的 brand-list 欄位')
 
   settings['brand-list'] = result
