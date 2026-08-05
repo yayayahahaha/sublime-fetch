@@ -6,6 +6,7 @@ import {
 
 import registerAssessmentTest from './mocks/assessment-test.js'
 import registerInitWallet from './mocks/init-wallet.js'
+import registerAffiliate from './mocks/affiliate.js'
 import { ts, pad, dim, red, green, cyan } from './log-utils.js'
 import { attachWsRouter } from './ws/router.js'
 
@@ -69,8 +70,11 @@ export function startServer({
   // ─── Mock routes ──────────────────────────────────────────
   // 每個 domain 自己一個檔，export default function (app) {...}
   // 想加新 domain：建 mocks/xxx.js → 在這邊 import 然後 register
-  registerAssessmentTest(app)
-  registerInitWallet(app)
+  // 統一把 { defaultApiDomain } 傳給所有 register，讓任何 mock 都能用 tamper
+  // (proxy 真後端後改回應)；不需要的 mock 忽略這個參數即可。
+  // registerAssessmentTest(app, { defaultApiDomain })
+  // registerInitWallet(app, { defaultApiDomain })
+  registerAffiliate(app, { defaultApiDomain })
 
   // ─── Catch-all proxy ──────────────────────────────────────
   // 任何沒被上面 mock 命中的 request 都 forward 到 default-api-domain

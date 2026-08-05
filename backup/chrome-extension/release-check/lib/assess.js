@@ -159,7 +159,9 @@ export function classifyTicket(ticket, { stagingBranches = [], doneBranches = []
   })()
   if (isDone) return { category: 'done', unpushed: [], oddMrTargets }
 
-  // 步驟 2：已送測（有 branch → 每 repo 上 staging + 每 repo 送出過 MR；沒 branch → 靠 Jira 狀態）
+  // 步驟 2：已送測
+  //   有 branch → 每 repo 上 staging + 每 repo 送出過 MR + Jira 狀態也到位（sentToTestStatuses）
+  //   沒 branch → 純靠 Jira 狀態（sentToTestStatuses）
   const isSentToTest = (() => {
     if (hasAnyBranch) {
       const mergedStaging = involvedRepos.every((r) => {
@@ -167,7 +169,8 @@ export function classifyTicket(ticket, { stagingBranches = [], doneBranches = []
         return stagingBranches.every((sb) => reached.has(sb))
       })
       const submitted = involvedRepos.every((r) => repoHasSubmittedMr(r))
-      return mergedStaging && submitted
+      // 光 code 上 staging + 送過 MR 還不夠，Jira 狀態也得推到送測階段才算（逼狀態與實際同步）
+      return mergedStaging && submitted && sentToTestStatuses.includes(ticket.status)
     }
     return sentToTestStatuses.includes(ticket.status)
   })()

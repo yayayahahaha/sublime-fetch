@@ -196,6 +196,9 @@ my_alias
 | Role add 幫自己加 Admin Role               | 幫當前 admin 加上指定 brand 的 role (需有 Administrator)                              |
 | `<profile displayName>`                    | 對該 profile 跑自動登入                                                               |
 
+> **Mock Server** 的完整用法（怎麼啟動、hot reload、四種 mock 方式與範例、怎麼加新 mock、怎麼測）
+> 都寫在 [`mock-server/README.md`](./mock-server/README.md)。
+
 #### Admin Token Cache + Health Check
 
 Admin 系列功能 (Login / Email Cache / Deposit / Role add) 共用一份 cache 在 `cache/admin-token-cache.json`:

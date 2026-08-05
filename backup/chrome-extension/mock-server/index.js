@@ -1,8 +1,13 @@
+import { fork } from 'node:child_process'
+import fs from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import { input, confirm } from '@inquirer/prompts'
 import select from '@inquirer/select'
-import { lightGreen, red } from '../color.js'
+import { lightGreen, red, yellow, cyan } from '../color.js'
 import { startServer } from './server.js'
 import { readDomainHistory, saveDomainHistory } from './domain-history.js'
+
+const RESTART_DEBOUNCE_MS = 150
 
 const NEW_DOMAIN = Symbol('new-domain')
 const NO_WS = Symbol('no-ws')
@@ -74,6 +79,7 @@ export async function mockServer() {
   let defaultApiDomain
   let showBypass
   let wsDomain
+  let hotReload
 
   try {
     defaultApiDomain = await promptDefaultApiDomain()
@@ -84,6 +90,11 @@ export async function mockServer() {
     })
 
     wsDomain = await promptWsDomain()
+
+    hotReload = await confirm({
+      message: '要啟用 hot reload 嗎? (改動 mock-server 檔案會自動重啟 server)',
+      default: true,
+    })
   } catch (e) {
     if (e?.name === 'ExitPromptError') return
     console.error(red(`prompt error: ${e.message}`))
@@ -98,6 +109,11 @@ export async function mockServer() {
   console.log(lightGreen('啟動 Mock Server...'))
   console.log()
 
+  if (hotReload) {
+    runWithHotReload({ defaultApiDomain: domain, showBypass, wsDomain })
+    return
+  }
+
   try {
     await startServer({
       defaultApiDomain: domain,
@@ -107,4 +123,63 @@ export async function mockServer() {
   } catch (e) {
     console.error(red(`啟動失敗: ${e.message}`))
   }
+}
+
+// 讓 server 跑在 child process，監看 mock-server 目錄，一有變動就 kill 掉重 fork。
+// ESM 的 module 一旦載入就 cache 住，唯一保證任何改動都生效的做法就是全新 process。
+function runWithHotReload({ defaultApiDomain, showBypass, wsDomain }) {
+  const runPath = fileURLToPath(new URL('./run.js', import.meta.url))
+  const watchDir = fileURLToPath(new URL('.', import.meta.url)) // mock-server/ 目錄本身
+
+  const childEnv = {
+    ...process.env,
+    MOCK_DEFAULT_API_DOMAIN: defaultApiDomain,
+    MOCK_SHOW_BYPASS: showBypass ? '1' : '0',
+    MOCK_WS_DOMAIN: wsDomain ?? '',
+  }
+
+  let child = null
+  let restarting = false // 「是我們主動 kill、要接著重開」的旗標
+
+  const spawnChild = () => {
+    child = fork(runPath, { env: childEnv, stdio: 'inherit' })
+    child.on('exit', () => {
+      const wasRestarting = restarting
+      restarting = false
+      child = null
+      // 只有「主動重啟」才自動重開；child 自己 crash (例如 mock 檔寫壞) 就停著，
+      // 等下次存檔修好再由 watcher 觸發重開
+      if (wasRestarting) spawnChild()
+    })
+  }
+
+  const restart = () => {
+    if (child) {
+      restarting = true
+      child.kill('SIGTERM') // 等它 exit 事件觸發後才重 fork，避免 port 還沒釋放
+    } else {
+      spawnChild() // 上一個 child 已經死了 (crash 過)，直接開新的
+    }
+  }
+
+  spawnChild()
+
+  let debounceTimer = null
+  const watcher = fs.watch(watchDir, { recursive: true }, (_eventType, filename) => {
+    if (!filename) return
+    clearTimeout(debounceTimer)
+    debounceTimer = setTimeout(() => {
+      console.log('\n' + yellow(`🔄 偵測到變動 (${filename})，重啟 mock server…`) + '\n')
+      restart()
+    }, RESTART_DEBOUNCE_MS)
+  })
+
+  console.log(cyan('🔥 hot reload 已啟用：改動 mock-server 檔案會自動重啟 (Ctrl+C 結束)\n'))
+
+  // Ctrl+C：收掉 watcher 和 child 再退出，避免留下佔 port 的孤兒 process
+  process.on('SIGINT', () => {
+    watcher.close()
+    if (child) child.kill('SIGTERM')
+    process.exit(0)
+  })
 }
