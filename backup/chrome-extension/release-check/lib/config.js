@@ -70,6 +70,5 @@ export function loadConfig() {
     deploy: config.deploy ?? null,
     i18nRedeploy: config.i18nRedeploy ?? null,
     mrTargetOverrides: config.mrTargetOverrides ?? { 'btse-static-resource': 'master' },
-    mrWhitelabels: config.mrWhitelabels ?? null,
   }
 }

@@ -21,7 +21,7 @@
     "inProgressToken": null
   },
   "lmex-flyc.chung@btse.com-!QAZ1qaz-TBLGEDVCFKTNY7TH-my-finger-print-test-2": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3ODIyODcxOTMsImV4cCI6MTc4NDg3OTE5MywiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWNsbWV4c3RhZ2luZ0BsbWV4IiwiY2xpZW50SWQiOiJsbWV4IiwicmFuZG9tIjoiMC4yNzc0MzcxMDc2NzY5NjQ1IiwiZGV2aWNlVHlwZSI6IndlYiIsImRldmljZUlkIjoibXktZmluZ2VyLXByaW50LXRlc3QtMiIsInNjb3BlcyI6WyJ0cnVzdGVkIl19.JNwqbpK9cGhQSTOJNnRfNVlNe_xDKj3D7OEjcODSN18",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3ODYwMTAzODksImV4cCI6MTc4ODYwMjM4OSwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZseWNsbWV4c3RhZ2luZ0BsbWV4IiwiY2xpZW50SWQiOiJsbWV4IiwicmFuZG9tIjoiMC45OTE4MjA3MDgyODc2MDc1IiwiZGV2aWNlVHlwZSI6IndlYiIsImRldmljZUlkIjoibXktZmluZ2VyLXByaW50LXRlc3QtMiIsInNjb3BlcyI6WyJ0cnVzdGVkIl19.llxeXAQYpm9uSaQGfYr8SG3DYGYVZc_dhm3Zm9qYstM",
     "deviceFingerprint": "my-finger-print-test-2",
     "isInProgress": false,
     "inProgressTimestamp": null,
@@ -301,7 +301,7 @@
     "inProgressToken": null
   },
   "wlx-fc1@mailto.plus-!QAZ1qaz--_eacfb7758274744707": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3ODUzODQxMzQsImV4cCI6MTc4NTQ3MDU5NCwiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZjMXdseHN0Z0B3bHgiLCJjbGllbnRJZCI6IndseCIsInJhbmRvbSI6IjAuMzM2NTE2OTIyMTIzODY5OTciLCJkZXZpY2VUeXBlIjoid2ViIiwiZGV2aWNlSWQiOiJfZWFjZmI3NzU4Mjc0NzQ0NzA3Iiwic2NvcGVzIjpbInRydXN0ZWQiXX0.hBaxM82fdTsppdvPVRLEqikBHrVBCgcVrH4A5B3afOk",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3ODYwMTAzOTMsImV4cCI6MTc4ODYwMjM5MywiaXNzIjoiYnRzZS5zdGFnaW5nIiwiYXVkIjoiY2xpZW50LnNlcnZpY2UiLCJ1c2VybmFtZSI6ImZjMXdseHN0Z0B3bHgiLCJjbGllbnRJZCI6IndseCIsInJhbmRvbSI6IjAuNzQ3NTY3NjExNzExNzkzMyIsImRldmljZVR5cGUiOiJ3ZWIiLCJkZXZpY2VJZCI6Il9lYWNmYjc3NTgyNzQ3NDQ3MDciLCJzY29wZXMiOlsidHJ1c3RlZCJdfQ.IYkGW-ib2Qjd5gFA9UDRC0Lj2VZYo6qW02lwssbWYBk",
     "deviceFingerprint": "_eacfb7758274744707",
     "isInProgress": false,
     "inProgressTimestamp": null,

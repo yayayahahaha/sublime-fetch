@@ -1,63 +1,54 @@
 // 開 MR 用的純函式：由 branch 名生成 PR 標題、猜 target 分支、組 GitLab「新 MR」預填 URL。
-// 沿用舊 script 的邏輯，並把寫死的部分（jira key、target override、whitelabel 清單）改成可傳入。
-import fs from 'fs'
-import path from 'path'
-
-// 預設 whitelabel 清單（用來把 branch 名裡的 brand 段落抓成 [btse] 這種標籤）。可由 config 覆寫。
-export const DEFAULT_WHITELABELS = [
-  'btse', 'altex', 'autotrader', 'b2z', 'bestpay', 'binoex', 'bitkub', 'bitmarkets',
-  'bitmarketsalpha', 'bitqik', 'btseag', 'btsegi', 'btseuab', 'bullstreet', 'coinwise',
-  'cryptomarket', 'exchangedemo', 'fedhabit', 'interpay', 'lmex', 'nvx', 'obot', 'paradise',
-  'pixbit', 'testnet', 'traiex', 'transexchange', 'walletdemo',
-]
 
 // MR 描述樣板（沿用舊 script）。
 export const DESCRIPTION_TEMPLATE = '#### 背景\n\n\n#### 怎麼處理\n\n\n#### 其他\n掛上 draft 避免誤觸'
 
+// branch 名開頭可被抓成 [tag] 的「範圍」標籤。只認這幾個（brand 清單比對太不準，已不參與）。
+// 比對忽略大小寫（Web / WEB / web 都算）；輸出用這裡的正規寫法，順序也依此陣列（一定 [FE] 在 [Web] 前）。
+// 要加新的（例如 BE）就往這裡塞。
+export const SCOPE_TAGS = ['FE', 'Web']
+
 const escapeRegex = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
 /**
- * 掃某個 repo 根目錄的 src/brand-*／取 brand 名（排除裸的 src/brand）。
- * 掃不到（沒有 src 或沒有 brand-* 目錄）回空陣列，讓呼叫端決定退回內建清單。
- */
-export function discoverBrandsFromRepo(repoRoot, { srcDir = 'src', prefix = 'brand-' } = {}) {
-  const dir = path.join(repoRoot, srcDir)
-  let entries
-  try {
-    entries = fs.readdirSync(dir, { withFileTypes: true })
-  } catch {
-    return []
-  }
-  return entries
-    .filter((e) => e.isDirectory() && e.name.startsWith(prefix) && e.name.length > prefix.length)
-    .map((e) => e.name.slice(prefix.length))
-    .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }))
-}
-
-/**
  * 由 branch 名生成 PR 標題。
- *   PLAT-1234_FE-btse-fix-something  →  PLAT-1234 [FE][btse] fix something
+ *   flyc/PLAT-37462-Web-FE-BTSE-ID-KWAI  →  [FE][Web] PLAT-37462 BTSE ID KWAI
+ * 規則：
+ *  1. 去掉「作者/」前綴（flyc/…）。
+ *  2. 抓開頭的 <KEY>-<num>（後面接 - 或 _ 都可），ticket key 以原形保留（PLAT-37462）。
+ *  3. 從 ticket 後面「只取開頭連續的 scope tag（SCOPE_TAGS）」，遇到第一個非 tag 就停 →
+ *     中間 / 後面剛好等於 tag 的字（例如描述裡的第二個 Web）不會被誤抓。
+ *  4. tag 依 SCOPE_TAGS 的順序輸出，其餘段落原樣接成描述。
  * jiraKeys：專案 key 清單（例如 ['PLAT']），用來抓開頭的 <KEY>-<num>；空則用 [A-Z]+。
- * whitelabels：branch 名中要抓成 [xxx] 標籤的 brand 段落。
  */
-export function branchNameToPrTitle(branchName, { jiraKeys = [], whitelabels = DEFAULT_WHITELABELS } = {}) {
+export function branchNameToPrTitle(branchName, { jiraKeys = [] } = {}) {
+  const raw = String(branchName)
+  // 1. 去掉作者前綴（第一個 / 之前的東西，例如 flyc/）
+  const noPrefix = raw.includes('/') ? raw.slice(raw.indexOf('/') + 1) : raw
+
+  // 2. 抓 <KEY>-<num>，後面接 - 或 _ 都接受
   const keyAlt = jiraKeys.length ? `(?:${jiraKeys.map(escapeRegex).join('|')})` : '[A-Z]+'
-  const m = String(branchName).match(new RegExp(`(${keyAlt}-\\d+)_(.+)`))
-  const [, num, originalName] = m || ['', '', '']
+  const m = noPrefix.match(new RegExp(`^(${keyAlt}-\\d+)[-_](.+)`))
+  const ticket = m ? m[1] : ''
+  const rest = m ? m[2] : noPrefix
 
-  const wlSet = new Set(whitelabels.map((w) => w.toLowerCase()))
-  const { keys, last } = (originalName || branchName).split('-').reduce(
-    (acc, str) => {
-      if (str === 'FE' || wlSet.has(str.toLowerCase())) acc.keys.push(str)
-      else acc.last.push(str)
-      return acc
-    },
-    { keys: [], last: [] }
-  )
+  const segments = rest.split(/[-_]/).filter(Boolean)
 
-  const keysText = keys.map((k) => `[${k}]`).join('')
-  const titleText = last.join(' ')
-  return `${num} ${keysText} ${titleText}`.replace(/\s+/g, ' ').trim()
+  // 3. 從開頭連續抓 scope tag，遇到第一個非 tag 就停
+  const canonical = new Map(SCOPE_TAGS.map((t) => [t.toLowerCase(), t]))
+  const foundTags = new Set()
+  let i = 0
+  for (; i < segments.length; i++) {
+    const hit = canonical.get(segments[i].toLowerCase())
+    if (!hit) break
+    foundTags.add(hit)
+  }
+  const descText = segments.slice(i).join(' ')
+
+  // 4. tag 依 SCOPE_TAGS 定義順序輸出（FE 在 Web 前）
+  const tagsText = SCOPE_TAGS.filter((t) => foundTags.has(t)).map((t) => `[${t}]`).join('')
+
+  return `${tagsText} ${ticket} ${descText}`.replace(/\s+/g, ' ').trim()
 }
 
 /**

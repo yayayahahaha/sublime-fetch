@@ -76,6 +76,35 @@ export function startServer({
   // registerInitWallet(app, { defaultApiDomain })
   registerAffiliate(app, { defaultApiDomain })
 
+  app.get('/__api/init/wallet', (_, res) => res.json({
+    "code": 1,
+    "msg": "Success",
+    "time": 1786001189809,
+    "data": {
+        "fiatList": [],
+        "cryptoList": [],
+        "informationOfClientIp": {
+            "ip": "60.251.95.99",
+            "currency": "TWD",
+            "currencySupported": false,
+            "country": "TW",
+            "citySupported": true,
+            "countrySupported": true,
+            "kycSupported": true,
+            "loginSupported": true,
+            "registrationSupported": true,
+            "redirectUri": null,
+            "marketConsentRequired": null
+        },
+        "forceDisplayInWallet": [
+            "USDT",
+            "BTC",
+            "ETH"
+        ],
+        "redeemedBonusCurrencies": []
+    }
+}))
+
   // ─── Catch-all proxy ──────────────────────────────────────
   // 任何沒被上面 mock 命中的 request 都 forward 到 default-api-domain
   app.use(

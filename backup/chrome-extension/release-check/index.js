@@ -38,8 +38,8 @@ release-check — 依 Jira fix version 檢查各 repo 的 branch / 合併 / MR �
   node release-check/index.js --full               撈 ticket + 分支分析 + GitLab MR
 
 非互動旗標（CLI 預設輸出 JSON，加 --pretty 才彩色）：
-  --days <win>       時間窗：往後天數（如 30）或日期區間（如 20260101-20260110）
-                     （預設取 config.fixVersionMatch.daysAhead）
+  --days <win>       時間窗：往後天數（如 30，只往後）或日期區間（如 20260101-20260110）
+                     （未給時預設 前 config.fixVersionMatch.daysBehind(14) ~ 後 daysAhead(30) 天）
   --assignee <name>  指派人（名字或 email，預設取 config.defaultAssignee；需唯一命中）
   --no-fetch         分析前不執行 git fetch
   --pretty           彩色表格輸出（否則輸出 JSON）
@@ -62,16 +62,18 @@ const ACTION_FULL = 'FULL'
 // 回傳正規化後的 window 物件，或 null（使用者取消）。
 async function askWindow(config) {
   const fallbackDays = config.fixVersionMatch?.daysAhead ?? 30
+  const fallbackDaysBehind = config.fixVersionMatch?.daysBehind ?? 14
+  // 不設 default，讓按 Enter 送出空字串 → 走「留空用預設」分支（前 fallbackDaysBehind ~ 後 fallbackDays）。
+  // 若設了 default 字串，Enter 會被當成輸入該數字（只往後），就吃不到往前的區間。
   const answer = await input({
-    message: `時間窗：往後天數（如 30）或日期區間（如 20260101-20260110）？（Enter 用預設 ${fallbackDays} 天）`,
-    default: String(fallbackDays),
+    message: `時間窗：往後天數（如 30）或日期區間（如 20260101-20260110）？（Enter 用預設 前 ${fallbackDaysBehind} ~ 後 ${fallbackDays} 天）`,
     validate: (v) => {
-      const r = parseFixVersionWindow(v, { fallbackDays })
+      const r = parseFixVersionWindow(v, { fallbackDays, fallbackDaysBehind })
       return r.ok || r.error
     },
   }).catch(() => null)
   if (answer == null) return null
-  return parseFixVersionWindow(answer, { fallbackDays }).window
+  return parseFixVersionWindow(answer, { fallbackDays, fallbackDaysBehind }).window
 }
 
 function formatUser(u) {
@@ -151,8 +153,30 @@ async function promptTicketParams(config) {
   return { window, ...assignee }
 }
 
-// 打 API 各階段的進度提示（避免畫面看起來卡住）
-function logProgress(phase) {
+function shortRepoName(required) {
+  return String(required).replace(/\.git$/i, '').replace(/\/+$/, '').split('/').pop()
+}
+
+// 打 API 各階段的進度提示（避免畫面看起來卡住）。
+// MR 階段逐 branch 印起訖 + 耗時：卡住時最後一筆只有「→」沒有「✓」的就是元兇。
+function logProgress(phase, detail = {}) {
+  if (phase === 'mr-start') {
+    console.log(lightCyan(`   共 ${detail.total} 個 branch 要查（${detail.tickets} 張單）`))
+    return
+  }
+  if (phase === 'mr-item-start') {
+    console.log(lightCyan(`   → (${detail.n}/${detail.total}) ${shortRepoName(detail.repo)}  ${detail.branch}`))
+    return
+  }
+  if (phase === 'mr-item-done') {
+    if (detail.error) {
+      console.log(lightRed(`     ✗ (${detail.done}/${detail.total}) ${detail.branch} — ${detail.error} (${detail.ms}ms)`))
+    } else {
+      const slow = detail.ms >= 3000 ? `${detail.ms}ms ⏱慢` : `${detail.ms}ms`
+      console.log(green(`     ✓ (${detail.done}/${detail.total}) ${detail.branch} → ${detail.mrCount} MR (${slow})`))
+    }
+    return
+  }
   const msg = {
     tickets: '📥 從 Jira 撈取符合的 ticket…',
     branches: '🌿 分析各 repo 分支狀態…',
@@ -166,6 +190,7 @@ function logProgress(phase) {
 function buildMeta(config, window, assigneeDisplayName) {
   return {
     daysAhead: window?.kind === 'days' ? window.daysAhead : null,
+    daysBehind: window?.kind === 'days' ? (window.daysBehind ?? 0) : null,
     windowLabel: describeWindow(window),
     assignee: assigneeDisplayName ?? null,
     generatedAt: new Date().toISOString(),
@@ -346,8 +371,9 @@ async function main() {
     if (config == null) process.exit(1)
 
     const fallbackDays = config.fixVersionMatch?.daysAhead ?? 30
+    const fallbackDaysBehind = config.fixVersionMatch?.daysBehind ?? 14
     const rawDays = flags.days != null && flags.days !== true ? flags.days : ''
-    const parsedWindow = parseFixVersionWindow(rawDays, { fallbackDays })
+    const parsedWindow = parseFixVersionWindow(rawDays, { fallbackDays, fallbackDaysBehind })
     if (!parsedWindow.ok) {
       console.error(lightRed(`❌ --days ${parsedWindow.error}`))
       process.exit(1)

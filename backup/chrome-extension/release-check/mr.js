@@ -7,7 +7,7 @@ import { input, confirm, checkbox, search } from '@inquirer/prompts'
 import { loadConfig } from './lib/config.js'
 import { git, extractRepoPath } from './lib/repos.js'
 import { GitlabClient } from './lib/gitlab.js'
-import { branchNameToPrTitle, guessTargetBranch, buildNewMrUrl, discoverBrandsFromRepo, DEFAULT_WHITELABELS, DESCRIPTION_TEMPLATE } from './lib/mrUrl.js'
+import { branchNameToPrTitle, guessTargetBranch, buildNewMrUrl, DESCRIPTION_TEMPLATE } from './lib/mrUrl.js'
 import { green, yellow, lightCyan, lightRed, blue, cyan } from '../color.js'
 
 async function detectCwdRepo() {
@@ -51,17 +51,9 @@ async function main() {
   if (!okBranch) return void console.log(yellow('取消（請先切到你要開 MR 的分支再跑一次）'))
 
   const jiraKeys = config.jira?.projects ?? []
-  // brand 清單：優先掃當前 repo 的 src/brand-*；掃不到才退回半寫死清單 + 提示
-  let whitelabels = discoverBrandsFromRepo(detected.cwd)
-  if (whitelabels.length > 0) {
-    console.log(cyan(`（brand 清單：從 src/brand-* 掃到 ${whitelabels.length} 個）`))
-  } else {
-    whitelabels = config.mrWhitelabels ?? DEFAULT_WHITELABELS
-    console.log(yellow(`（沒掃到 src/brand-* 目錄，改用內建的半寫死清單 ${whitelabels.length} 個）`))
-  }
 
   // 標題（預設 Draft: + 由 branch 生成，可編輯）
-  const defaultTitle = `Draft: ${branchNameToPrTitle(branch, { jiraKeys, whitelabels })}`
+  const defaultTitle = `Draft: ${branchNameToPrTitle(branch, { jiraKeys })}`
   const title = await input({ message: '標題：', default: defaultTitle }).catch(() => null)
   if (title == null) return void console.log(yellow('取消'))
 

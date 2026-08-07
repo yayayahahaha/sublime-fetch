@@ -27,7 +27,7 @@ export async function computeFullAnalysis(config, { daysAhead, window = null, as
     if (withMr) {
       try {
         onProgress('mr')
-        await enrichWithMergeRequests(analysis, coverage.matched, config, { debug })
+        await enrichWithMergeRequests(analysis, coverage.matched, config, { debug, onProgress })
       } catch (err) {
         // MR 整體查詢失敗：記下來讓報表提示（分支分析仍可用）
         mrError = err.message
@@ -118,6 +118,7 @@ export function buildReportModel(compute, meta = {}) {
   return {
     generatedAt: meta.generatedAt ?? null,
     daysAhead: meta.daysAhead ?? null,
+    daysBehind: meta.daysBehind ?? null,
     windowLabel: meta.windowLabel ?? null,
     assignee: meta.assignee ?? null,
     jql: ticketsResult.jql ?? null,

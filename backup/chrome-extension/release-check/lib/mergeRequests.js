@@ -32,7 +32,7 @@ function countUnresolvedDiscussions(discussions) {
  * 會在每個 branch 掛上 b.mergeRequests（陣列 / null 代表查詢失敗）。
  * matchedRepos：checkRepoCoverage() 的 matched（用 remoteUrl 推導 GitLab project path）。
  */
-export async function enrichWithMergeRequests(analysis, matchedRepos, config, { debug = null } = {}) {
+export async function enrichWithMergeRequests(analysis, matchedRepos, config, { debug = null, onProgress = () => {} } = {}) {
   const gitlab = new GitlabClient(config.gitlab)
 
   // required -> GitLab project 路徑（保留大小寫，優先用本地 origin remote 的真實路徑）
@@ -41,6 +41,13 @@ export async function enrichWithMergeRequests(analysis, matchedRepos, config, { 
     pathByRequired.set(m.required, extractRepoPath(m.local?.remoteUrl) ?? extractRepoPath(m.required))
   }
 
+  // 先數總共要查幾個 branch（跨所有 ticket / repo），讓使用者對耗時與進度有底
+  let total = 0
+  for (const ticket of analysis.perTicket) for (const repo of ticket.repos) total += repo.branches.length
+  onProgress('mr-start', { total, tickets: analysis.perTicket.length })
+
+  let started = 0
+  let done = 0
   for (const ticket of analysis.perTicket) {
     for (const repo of ticket.repos) {
       const projectPath = pathByRequired.get(repo.required)
@@ -49,6 +56,10 @@ export async function enrichWithMergeRequests(analysis, matchedRepos, config, { 
         repo.branches.map(async (b) => {
           // 一律用 branch 名查 MR（不看 hasRemote）：
           // remote branch 被刪但曾 push+merge 的，GitLab 仍查得到；純本地未 push 的會回空陣列。
+          const n = ++started
+          const startedAt = Date.now()
+          // 先發 start：萬一某個 branch 卡住（GitLab 沒回應），最後一筆沒有對應 done 的就是元兇
+          onProgress('mr-item-start', { n, total, ticket: ticket.key, repo: repo.required, branch: b.name })
           try {
             const mrs = await gitlab.getMergeRequestsBySourceBranch(projectPath, b.name)
             if (debug) debug.mrQueries.push({ repo: repo.required, projectPath, sourceBranch: b.name, count: mrs.length, mrs })
@@ -73,9 +84,11 @@ export async function enrichWithMergeRequests(analysis, matchedRepos, config, { 
               })
             )
             b.mergeRequests = mapped
+            onProgress('mr-item-done', { n, total, done: ++done, ticket: ticket.key, repo: repo.required, branch: b.name, mrCount: mapped.length, ms: Date.now() - startedAt })
           } catch (err) {
             b.mergeRequests = null
             repo.gitlabError = shortErr(err)
+            onProgress('mr-item-done', { n, total, done: ++done, ticket: ticket.key, repo: repo.required, branch: b.name, error: shortErr(err), ms: Date.now() - startedAt })
           }
         })
       )

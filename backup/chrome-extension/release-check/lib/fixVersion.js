@@ -46,15 +46,16 @@ function fmtYmd(date) {
 
 /**
  * 解析「時間窗」輸入，支援兩種格式：
- *  - 純數字天數（如 `30`）→ { kind: 'days', daysAhead }
+ *  - 純數字天數（如 `30`）→ { kind: 'days', daysAhead, daysBehind: 0 }（只往後）
  *  - 8 碼日期區間（如 `20260101-20260110`，固定用 `-` 連接）→ { kind: 'range', start, end }
- * 空字串則套用 fallbackDays。
+ * 空字串（留空 / 沒給）→ 套用預設，含 fallbackDaysBehind（往前）＋ fallbackDays（往後）。
  * 回傳 { ok: true, window } 或 { ok: false, error }（error 為給使用者的提示字串）。
  */
-export function parseFixVersionWindow(raw, { fallbackDays = 30 } = {}) {
+export function parseFixVersionWindow(raw, { fallbackDays = 30, fallbackDaysBehind = 0 } = {}) {
   const s = String(raw ?? '').trim()
-  if (s === '') return { ok: true, window: { kind: 'days', daysAhead: fallbackDays } }
-  if (/^\d+$/.test(s)) return { ok: true, window: { kind: 'days', daysAhead: Number(s) } }
+  if (s === '') return { ok: true, window: { kind: 'days', daysAhead: fallbackDays, daysBehind: fallbackDaysBehind } }
+  // 明確輸入天數時只往後（daysBehind: 0）；往前只在「留空用預設」時才套用
+  if (/^\d+$/.test(s)) return { ok: true, window: { kind: 'days', daysAhead: Number(s), daysBehind: 0 } }
 
   const m = s.match(/^(\d{8})-(\d{8})$/)
   if (m) {
@@ -71,12 +72,14 @@ export function parseFixVersionWindow(raw, { fallbackDays = 30 } = {}) {
 export function describeWindow(window) {
   if (!window) return ''
   if (window.kind === 'range') return `${fmtYmd(window.start)} ~ ${fmtYmd(window.end)}`
+  const behind = window.daysBehind ?? 0
+  if (behind > 0) return `前 ${behind} ~ 後 ${window.daysAhead} 天`
   return `往後 ${window.daysAhead} 天`
 }
 
 /**
  * 依時間窗篩選版本。window 可為：
- *  - { kind: 'days', daysAhead }：窗為 [今天 00:00, 今天 + daysAhead 23:59]
+ *  - { kind: 'days', daysAhead, daysBehind }：窗為 [今天 − daysBehind 00:00, 今天 + daysAhead 23:59]
  *  - { kind: 'range', start, end }：窗為 [start 00:00, end 23:59]
  * 為相容舊呼叫，未給 window 時退回用 daysAhead 參數。
  * 回傳含解析日期的版本，依日期由近到遠排序。
@@ -92,9 +95,11 @@ export function selectVersionsInWindow(versions, { today = new Date(), daysAhead
     end = new Date(win.end)
     end.setHours(23, 59, 59, 999)
   } else {
+    // start / end 都以「今天」為基準：往前 daysBehind、往後 daysAhead
     start = new Date(today)
+    start.setDate(start.getDate() - (win.daysBehind ?? 0))
     start.setHours(0, 0, 0, 0)
-    end = new Date(start)
+    end = new Date(today)
     end.setDate(end.getDate() + (win.daysAhead ?? 30))
     end.setHours(23, 59, 59, 999)
   }
