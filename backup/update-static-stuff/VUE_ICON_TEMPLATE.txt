@@ -2,7 +2,7 @@
   <Icon
     :width="width"
     :height="height"
-    viewBox="0 0 ___REPLACE_ICON_WIDTH___ ___REPLACE_ICON_HEIGHT___"
+    viewBox="___REPLACE_VIEW_BOX___"
     fill="none"
     aria-label="___REPLACE_ARIA_LABEL___"
   >___REPLACE_SVG_CONTENT___  </Icon>

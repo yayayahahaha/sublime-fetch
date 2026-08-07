@@ -17,6 +17,16 @@ export function readFilesRecursively(pathStr, list = []) {
   return list
 }
 
+// 遞迴讀取資料夾, 回傳以檔名 (含 ext) 為 key 的 map
+export function readFilesMapByName(dirPath) {
+  return Object.fromEntries(
+    readFilesRecursively(dirPath).map((filePath) => {
+      const { base, ...others } = path.parse(filePath)
+      return [base, { base, ...others, filePath }]
+    })
+  )
+}
+
 export function isDir(path) {
   if (!fs.existsSync(path)) return false
   return fs.lstatSync(path).isDirectory()
@@ -27,6 +37,12 @@ export function ensureDir(dirPath) {
   fs.mkdirSync(dirPath, { recursive: true })
   consoleGreen(`📁 已建立資料夾: ${dirPath}`)
   return true
+}
+
+// 寫入的當下才建立資料夾, 避免檢查階段就產生副作用
+export function copyFileEnsureDir(sourcePath, targetPath) {
+  ensureDir(path.dirname(targetPath))
+  fs.copyFileSync(sourcePath, targetPath)
 }
 
 const SETTING_KEYS = {
