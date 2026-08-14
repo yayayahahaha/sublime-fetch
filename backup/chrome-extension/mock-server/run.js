@@ -5,10 +5,16 @@ import { startServer } from './server.js'
 import { red } from '../color.js'
 
 const defaultApiDomain = process.env.MOCK_DEFAULT_API_DOMAIN
+const port = Number(process.env.MOCK_PORT) || 3000
 const showBypass = process.env.MOCK_SHOW_BYPASS === '1'
 const wsDomain = process.env.MOCK_WS_DOMAIN || null
+// 有設 MOCK_MODULES（含空字串）→ 用它（空字串 = 都不載入）；完全沒設 → null（全部載入）
+const parseModulesEnv = (v) =>
+  v != null ? v.split(',').map((s) => s.trim()).filter(Boolean) : null
+const modules = parseModulesEnv(process.env.MOCK_MODULES)
+const wsModules = parseModulesEnv(process.env.MOCK_WS_MODULES)
 
-startServer({ defaultApiDomain, showBypass, wsDomain }).catch((e) => {
+startServer({ defaultApiDomain, port, showBypass, wsDomain, modules, wsModules }).catch((e) => {
   console.error(red(`啟動失敗: ${e.message}`))
   process.exit(1)
 })

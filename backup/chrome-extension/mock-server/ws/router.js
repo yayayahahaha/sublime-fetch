@@ -5,16 +5,12 @@
 //        mode: 'tamper' → 中間人轉發到真後端，hook 可篡改（需要 ws-domain 或模組自帶 upstreamDomain）
 //   2. 沒被認領 → 有 ws-domain 就透明 proxy 過去；沒有就關閉連線
 //
-// 想加新的 ws mock：建 ws/mocks/xxx.js → 在下面 import 然後加進 WS_MOCKS
+// 想加新的 ws mock：在 ws/mocks/ 丟一個檔即可（自動掃描；.js 物件 或 .ws.json 宣告式）。
+// wsMocks 由 server.js 依「選到的模組」載入後傳進來（見 load-ws-mocks.js）。
 import { WebSocketServer } from 'ws'
 import { createProxyMiddleware } from 'http-proxy-middleware'
 import { ts, pad, dim, red, green, yellow, cyan } from '../log-utils.js'
 import { createTamperPair } from './tamper.js'
-
-import demoFeed from './mocks/demo-feed.js'
-import demoTamper from './mocks/demo-tamper.js'
-
-const WS_MOCKS = [demoFeed, demoTamper]
 
 const VALID_MODES = ['mock', 'tamper']
 
@@ -46,12 +42,13 @@ function logLine(symbol, path, label) {
  * @param {import('http').Server} server
  * @param {object} options
  * @param {string|null} options.wsDomain - ws(s):// 開頭的真實後端。null = 不啟用轉發
+ * @param {Array} [options.wsMocks=[]] - 已載入的 ws mock 物件（server.js 依選到的模組載入後傳入）
  */
-export function attachWsRouter(server, { wsDomain = null } = {}) {
-  validateMocks(WS_MOCKS)
+export function attachWsRouter(server, { wsDomain = null, wsMocks = [] } = {}) {
+  validateMocks(wsMocks)
 
   // 啟動時先把「因為沒 upstream 而停用」的 tamper mock 警告出來
-  for (const mock of WS_MOCKS) {
+  for (const mock of wsMocks) {
     if (mock.mode === 'tamper' && !(mock.upstreamDomain ?? wsDomain)) {
       console.log(
         yellow(`⚠ ws mock ${mock.path} (mode: tamper) 已停用: 未設定 ws-domain 且模組沒有 upstreamDomain`)
@@ -79,7 +76,7 @@ export function attachWsRouter(server, { wsDomain = null } = {}) {
 
   server.on('upgrade', (req, socket, head) => {
     const { pathname } = new URL(req.url, 'http://localhost')
-    const mock = WS_MOCKS.find((m) => m.path === pathname)
+    const mock = wsMocks.find((m) => m.path === pathname)
 
     // ─── 沒被認領 → catch-all proxy 或關閉 ───
     if (!mock) {

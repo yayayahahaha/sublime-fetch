@@ -1,4 +1,8 @@
+import { readFileSync } from 'node:fs'
+import path from 'node:path'
 import { createProxyMiddleware, responseInterceptor } from 'http-proxy-middleware'
+
+const DECL_METHODS = new Set(['get', 'post', 'put', 'delete', 'patch'])
 
 // 共享 helper：給 mock route 用的 response handler
 // 主要功能是把 mock label 寫進 res.locals，讓 server.js 的 logger middleware 知道
@@ -40,6 +44,11 @@ export function tamper(defaultApiDomain, { label, modify } = {}) {
     selfHandleResponse: true, // responseInterceptor 必須搭配這個
     logger: { info: () => {}, warn: console.warn, error: console.error },
     on: {
+      // 跟 catch-all proxy 一致：拿掉 Origin，避免嚴格的 brand gateway（如 btse api.btse.co）
+      // 把帶 Origin 的 proxy 請求當跨域擋掉（400/403）。
+      proxyReq: (proxyReq) => {
+        proxyReq.removeHeader('origin')
+      },
       proxyRes: responseInterceptor(async (responseBuffer, proxyRes, req, res) => {
         let out
         try {
@@ -91,5 +100,44 @@ export function asJson(fn) {
     }
     const out = fn(body, ctx)
     return JSON.stringify(out === undefined ? body : out)
+  }
+}
+
+/**
+ * 由「宣告式 spec」建出 register(app)。給 .mock.json 模組用（由「新增 Mock API」產生）。
+ * 只支援 mode: 'respond'——每次 request 重讀 responseFile 再整包回傳（真實 API 完全不會被呼叫）。
+ * tamper（proxy 後改）因為要寫邏輯，走獨立 .js 模組，不在宣告式範圍。
+ *
+ * @param {{routes: Array<{method, path, mode?, responseFile, label?}>}} spec
+ * @param {{dir: string}} opts - spec 檔所在目錄（mocks/），responseFile 相對於它解析
+ */
+export function buildDeclarativeRegister(spec, { dir }) {
+  const routes = Array.isArray(spec?.routes) ? spec.routes : []
+  return function register(app) {
+    for (const r of routes) {
+      const method = String(r.method || 'get').toLowerCase()
+      const label = r.label || `${method.toUpperCase()} ${r.path}`
+      if (!DECL_METHODS.has(method)) {
+        throw new Error(`宣告式 mock route ${label}: 不支援的 method '${r.method}'`)
+      }
+      if (r.mode && r.mode !== 'respond') {
+        throw new Error(`宣告式 mock 只支援 mode: 'respond'（拿到 '${r.mode}'）；tamper 請用獨立 .js 模組`)
+      }
+      if (!r.path) throw new Error('宣告式 mock route 缺少 path')
+      if (!r.responseFile) throw new Error(`宣告式 mock route ${label} 缺少 responseFile`)
+
+      const filePath = path.resolve(dir, r.responseFile)
+      app[method](r.path, (req, res) => {
+        let payload
+        try {
+          payload = JSON.parse(readFileSync(filePath, 'utf8')) // 每次 request 重讀，改 json 免重啟
+        } catch (err) {
+          res.locals._mockLabel = `${label} (responseFile 讀取失敗: ${err.message})`
+          return res.status(500).json({ error: `mock data 讀取失敗: ${err.message}` })
+        }
+        res.locals._mockLabel = label
+        res.json(payload)
+      })
+    }
   }
 }

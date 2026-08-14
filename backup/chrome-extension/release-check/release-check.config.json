@@ -61,12 +61,12 @@
     "scheduleId": null
   },
 
-  "//fixVersionMatch": "依今天日期挑選 fix version 的規則。留空 / 未給 --days 時，窗為 [今天−daysBehind, 今天+daysAhead]；明確輸入天數（如 30）則只往後。執行時可互動覆寫。",
-  "//fixVersionMatch.daysBehind": "留空 / 未給時往前涵蓋幾天（date token 落在 [今天−daysBehind, 今天+daysAhead]）。多數已進 Done 的舊版本會被納入，屬預期。",
+  "//fixVersionMatch": "依今天日期挑選 fix version 的規則。互動模式分兩題問（Q1 往後天數或日期區間、Q2 往前幾天）；非互動 --days 未給時，窗為 [今天−daysBehind, 今天+daysAhead]。執行時可互動覆寫。",
+  "//fixVersionMatch.daysBehind": "往前涵蓋幾天的預設值：互動 Q2『往前幾天』的預設值，以及非互動 --days 未給時的往前天數。設 >0 會納入近幾天已發的版本（多半已進 Done，屬預期）。",
   "//fixVersionMatch.dateTokenRegex": "選填。版本名稱抽日期的自訂 regex，第 1 個 capture group 應為 8 碼 YYYYMMDD；留 null 則預設掃描名稱中的 8 碼數字。",
   "fixVersionMatch": {
     "daysAhead": 30,
-    "daysBehind": 14,
+    "daysBehind": 0,
     "dateTokenRegex": null
   }
 }

@@ -16,7 +16,7 @@ import { twoFaHelper } from './2fa-helper.js'
 import { jiraBranchHelper } from './jira-helper.js'
 import { chromeWindowHelper } from './refresh-tabs-helper.js'
 import { operateRedis } from '../isolated-operate-redis/index.js'
-import { mockServer } from '../mock-server/index.js'
+import { mockServerMenu } from '../mock-server/index.js'
 import { releaseCheckHelper } from '../release-check/index.js'
 import { writeActionHelper, watchersHelper } from '../release-check/writeActions.js'
 
@@ -189,7 +189,7 @@ async function start() {
   if (answer === DEPOSIT_TO_USER) return void runDepositCli()
   if (answer === ADD_ROLE_TO_SELF) return void runAddRoleCli()
   if (answer === OPERATE_REDIS) return void operateRedis()
-  if (answer === RUN_MOCK_SERVER) return void mockServer()
+  if (answer === RUN_MOCK_SERVER) return void mockServerMenu()
   
   if (answer === TWO_FA_HELPER) {
     await twoFaHelper()

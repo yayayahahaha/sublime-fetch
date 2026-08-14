@@ -1,10 +1,14 @@
 import { fork } from 'node:child_process'
 import fs from 'node:fs'
+import net from 'node:net'
 import { fileURLToPath } from 'node:url'
-import { input, confirm } from '@inquirer/prompts'
+import { input, confirm, checkbox } from '@inquirer/prompts'
 import select from '@inquirer/select'
 import { lightGreen, red, yellow, cyan } from '../color.js'
 import { startServer } from './server.js'
+import { listMockNames } from './load-mocks.js'
+import { listWsMockNames } from './ws/load-ws-mocks.js'
+import { scaffoldMock, scaffoldWsMock } from './scaffold.js'
 import { readDomainHistory, saveDomainHistory } from './domain-history.js'
 
 const RESTART_DEBOUNCE_MS = 150
@@ -75,14 +79,96 @@ async function promptWsDomain() {
   return normalizeWsDomain(typed)
 }
 
+// 試綁一個 port：能 listen → 可用；EADDRINUSE → 已被占用。回 { ok, code }。
+function checkPort(port) {
+  return new Promise((resolve) => {
+    const srv = net.createServer()
+    srv.once('error', (err) => resolve({ ok: false, code: err.code }))
+    srv.once('listening', () => srv.close(() => resolve({ ok: true })))
+    srv.listen(port)
+  })
+}
+
+// 問 port（預設 3000）。同時開多個 mock server 時各給不同 port；被占用的 port 會就地要求重輸。
+async function promptPort() {
+  const answer = await input({
+    message: '要用哪個 port？（同時開多個 mock server 就各給不同 port）',
+    default: '3000',
+    validate: async (v) => {
+      const s = String(v ?? '').trim()
+      if (!/^\d+$/.test(s)) return '請輸入數字 port'
+      const n = Number(s)
+      if (n < 1 || n > 65535) return 'port 需在 1–65535 之間'
+      const r = await checkPort(n)
+      if (r.ok) return true
+      if (r.code === 'EADDRINUSE') return `port ${n} 已被占用，請換一個`
+      return `port ${n} 無法使用（${r.code ?? '未知錯誤'}）`
+    },
+  })
+  return Number(String(answer).trim())
+}
+
+// 問這次要載入哪些 mock 模組（掃 mocks/，預設全選）。回傳選到的模組名陣列（可能是空陣列）。
+async function promptModules() {
+  const names = listMockNames()
+  if (names.length === 0) {
+    console.log(yellow('（mocks/ 沒有可載入的模組，全部 request 都會走 proxy）'))
+    return []
+  }
+  return checkbox({
+    message: '這次要載入哪些 HTTP mock 模組？（空白鍵勾選，預設全選）',
+    choices: names.map((n) => ({ name: n, value: n, checked: true })),
+    loop: false,
+    pageSize: 20,
+  })
+}
+
+// 問這次要載入哪些 WS mock（掃 ws/mocks/，預設全選）。回傳選到的名稱陣列（可能是空陣列）。
+async function promptWsMocks() {
+  const names = listWsMockNames()
+  if (names.length === 0) return []
+  return checkbox({
+    message: '這次要載入哪些 WS mock？（空白鍵勾選，預設全選）',
+    choices: names.map((n) => ({ name: n, value: n, checked: true })),
+    loop: false,
+    pageSize: 20,
+  })
+}
+
+// Mock Server 的兩層入口：先問「啟動 / 新增 Mock API」，再進對應流程。t99 呼叫這個。
+export async function mockServerMenu() {
+  const action = await select({
+    message: 'Mock Server：要做什麼？',
+    choices: [
+      { name: '啟動 mock server', value: 'run' },
+      { name: '新增 Mock API（HTTP：產生模組 / route）', value: 'scaffold-http' },
+      { name: '新增 Mock WS（產生 feed / tamper）', value: 'scaffold-ws' },
+    ],
+    loop: false,
+  }).catch(() => null)
+  if (action == null) return
+  if (action === 'scaffold-http') return void (await scaffoldMock())
+  if (action === 'scaffold-ws') return void (await scaffoldWsMock())
+  await mockServer()
+}
+
 export async function mockServer() {
   let defaultApiDomain
+  let port
+  let modules
+  let wsModules
   let showBypass
   let wsDomain
   let hotReload
 
   try {
     defaultApiDomain = await promptDefaultApiDomain()
+
+    port = await promptPort()
+
+    modules = await promptModules()
+
+    wsModules = await promptWsMocks()
 
     showBypass = await confirm({
       message: '是否顯示 proxy 的 log? (mock hit 一律會印)',
@@ -110,13 +196,16 @@ export async function mockServer() {
   console.log()
 
   if (hotReload) {
-    runWithHotReload({ defaultApiDomain: domain, showBypass, wsDomain })
+    runWithHotReload({ defaultApiDomain: domain, port, modules, wsModules, showBypass, wsDomain })
     return
   }
 
   try {
     await startServer({
       defaultApiDomain: domain,
+      port,
+      modules,
+      wsModules,
       showBypass,
       wsDomain,
     })
@@ -127,13 +216,17 @@ export async function mockServer() {
 
 // 讓 server 跑在 child process，監看 mock-server 目錄，一有變動就 kill 掉重 fork。
 // ESM 的 module 一旦載入就 cache 住，唯一保證任何改動都生效的做法就是全新 process。
-function runWithHotReload({ defaultApiDomain, showBypass, wsDomain }) {
+function runWithHotReload({ defaultApiDomain, port, modules, wsModules, showBypass, wsDomain }) {
   const runPath = fileURLToPath(new URL('./run.js', import.meta.url))
   const watchDir = fileURLToPath(new URL('.', import.meta.url)) // mock-server/ 目錄本身
 
   const childEnv = {
     ...process.env,
     MOCK_DEFAULT_API_DOMAIN: defaultApiDomain,
+    MOCK_PORT: String(port ?? ''),
+    // 一律設（含空字串 = 都不載入）：run.js 用「有沒有設」區分「都不載入」vs「未指定→全部」
+    MOCK_MODULES: (modules ?? []).join(','),
+    MOCK_WS_MODULES: (wsModules ?? []).join(','),
     MOCK_SHOW_BYPASS: showBypass ? '1' : '0',
     MOCK_WS_DOMAIN: wsDomain ?? '',
   }

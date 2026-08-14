@@ -1,0 +1,417 @@
+{
+  "data": [
+    {
+      "baseCurrency": "USDT",
+      "price": 63700.100000000006,
+      "change": -0.0011399844447789196,
+      "volume": 15276029.517785998,
+      "circulatingSupply": 20053978,
+      "sortId": 51,
+      "labels": [
+        "BITCOIN"
+      ],
+      "categories": [],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "ETH",
+      "price": 1890.5900000000001,
+      "change": 0.00044979732661643213,
+      "volume": 3477714.6621270003,
+      "circulatingSupply": 120683100.5692562,
+      "sortId": 52,
+      "labels": [
+        "ETHEREUM"
+      ],
+      "categories": [
+        "LAYER_1",
+        "ETHEREUM_ECOSYSTEM"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "LTC",
+      "price": 44.89,
+      "change": -0.01232123212321237,
+      "volume": 45397.41507,
+      "circulatingSupply": 0,
+      "sortId": 0,
+      "labels": [
+        "LITECOIN"
+      ],
+      "categories": [],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "ATOM",
+      "price": 4.49,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 0,
+      "sortId": 80,
+      "labels": [
+        "COSMOS"
+      ],
+      "categories": [
+        "LAYER_1"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "DOT",
+      "price": 10,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 1692443612.617125,
+      "sortId": 0,
+      "labels": [
+        "POLKADOT"
+      ],
+      "categories": [
+        "LAYER_1"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "XRP",
+      "price": 1.4063,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 62466503703,
+      "sortId": 65,
+      "labels": [
+        "RIPPLE"
+      ],
+      "categories": [],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "TRX",
+      "price": 0.36717,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 94860883651.40309,
+      "sortId": 67,
+      "labels": [
+        "TRON"
+      ],
+      "categories": [
+        "LAYER_1"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "SHIB",
+      "price": 0.00001123,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 0,
+      "sortId": 0,
+      "labels": [
+        "ERC20"
+      ],
+      "categories": [
+        "MEME",
+        "ETHEREUM_ECOSYSTEM"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "ADA",
+      "price": 0.19,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 0,
+      "sortId": 117,
+      "labels": [
+        "CARDANO"
+      ],
+      "categories": [
+        "LAYER_1"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "BAL",
+      "price": 5,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 0,
+      "sortId": 120,
+      "labels": [
+        "ERC20"
+      ],
+      "categories": [
+        "DE_FI"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "BNB",
+      "price": 571.46,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 134782226.62,
+      "sortId": 124,
+      "labels": [],
+      "categories": [
+        "LAYER_1"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "DOGE",
+      "price": 0.13661,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 0,
+      "sortId": 125,
+      "labels": [
+        "DOGECOIN"
+      ],
+      "categories": [
+        "MEME"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "AVAX",
+      "price": 39.982,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 0,
+      "sortId": 133,
+      "labels": [
+        "AVAX"
+      ],
+      "categories": [
+        "LAYER_1",
+        "RWA",
+        "DE_FI"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "SOL",
+      "price": 76.1,
+      "change": -0.003926701570680776,
+      "volume": 799439.5419000001,
+      "circulatingSupply": 820394850.052939,
+      "sortId": 139,
+      "labels": [
+        "SOLANA"
+      ],
+      "categories": [
+        "LAYER_1",
+        "SOLANA_ECOSYSTEM"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "GALA",
+      "price": 0.01896,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 48670496549.0948,
+      "sortId": 10007,
+      "labels": [
+        "ERC20"
+      ],
+      "categories": [
+        "GAME_FI"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "NEAR",
+      "price": 3.266,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 3422507.64293673,
+      "sortId": 10024,
+      "labels": [
+        "NEAR"
+      ],
+      "categories": [
+        "LAYER_1",
+        "AI"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "PENDLE",
+      "price": 2.84942,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 171131447.7067258,
+      "sortId": 10126,
+      "labels": [
+        "ERC20"
+      ],
+      "categories": [],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "C98",
+      "price": 0.18,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 0,
+      "sortId": 10133,
+      "labels": [
+        "ERC20"
+      ],
+      "categories": [
+        "SOLANA_ECOSYSTEM"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "TIA",
+      "price": 1.5522,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 940430228.328837,
+      "sortId": 10170,
+      "labels": [
+        "CELESTIA"
+      ],
+      "categories": [],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "WIF",
+      "price": 0.1382,
+      "change": -0.030855539971949612,
+      "volume": 0.011052,
+      "circulatingSupply": 998926392,
+      "sortId": 10185,
+      "labels": [
+        "SPL"
+      ],
+      "categories": [
+        "MEME",
+        "SOLANA_ECOSYSTEM"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "BONK",
+      "price": 0.0000173,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 87994713129518.94,
+      "sortId": 10182,
+      "labels": [
+        "SPL"
+      ],
+      "categories": [
+        "MEME",
+        "SOLANA_ECOSYSTEM"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "ORDI",
+      "price": 21.484,
+      "change": 0,
+      "volume": 0,
+      "circulatingSupply": 0,
+      "sortId": 10190,
+      "labels": [
+        "BRC20"
+      ],
+      "categories": [
+        "BRC20"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "POPCAT",
+      "price": 0.0426,
+      "change": -0.027397260273972598,
+      "volume": 1.7322,
+      "circulatingSupply": 0,
+      "sortId": 10250,
+      "labels": [
+        "SPL"
+      ],
+      "categories": [
+        "MEME"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "POL",
+      "price": 0,
+      "change": null,
+      "volume": 0,
+      "circulatingSupply": 10675229034.48189,
+      "sortId": 10316,
+      "labels": [
+        "POLYGON"
+      ],
+      "categories": [
+        "GAME_FI",
+        "MEME",
+        "LAYER_1",
+        "AI",
+        "BRC20",
+        "SOLANA_ECOSYSTEM",
+        "RWA",
+        "DE_FI",
+        "LAYER_2",
+        "ETHEREUM_ECOSYSTEM"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "THE",
+      "price": 0,
+      "change": null,
+      "volume": 0,
+      "circulatingSupply": 0,
+      "sortId": 10378,
+      "labels": [
+        "BEP20"
+      ],
+      "categories": [
+        "DE_FI"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "AWE",
+      "price": 0,
+      "change": null,
+      "volume": 0,
+      "circulatingSupply": 0,
+      "sortId": 10521,
+      "labels": [],
+      "categories": [
+        "DE_FI"
+      ],
+      "categoryId": 0
+    },
+    {
+      "baseCurrency": "TRUMP",
+      "price": 0,
+      "change": null,
+      "volume": 0,
+      "circulatingSupply": 0,
+      "sortId": 10257,
+      "labels": [
+        "ERC20"
+      ],
+      "categories": [
+        "MEME",
+        "SOLANA_ECOSYSTEM"
+      ],
+      "categoryId": 0
+    }
+  ],
+  "code": 1,
+  "msg": "Success",
+  "success": true,
+  "time": 1786596141589
+}

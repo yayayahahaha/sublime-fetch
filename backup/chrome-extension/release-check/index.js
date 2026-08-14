@@ -39,7 +39,7 @@ release-check — 依 Jira fix version 檢查各 repo 的 branch / 合併 / MR �
 
 非互動旗標（CLI 預設輸出 JSON，加 --pretty 才彩色）：
   --days <win>       時間窗：往後天數（如 30，只往後）或日期區間（如 20260101-20260110）
-                     （未給時預設 前 config.fixVersionMatch.daysBehind(14) ~ 後 daysAhead(30) 天）
+                     （未給時預設 前 config.fixVersionMatch.daysBehind ~ 後 daysAhead 天）
   --assignee <name>  指派人（名字或 email，預設取 config.defaultAssignee；需唯一命中）
   --no-fetch         分析前不執行 git fetch
   --pretty           彩色表格輸出（否則輸出 JSON）
@@ -56,24 +56,41 @@ const ACTION_FETCH_TICKETS = 'FETCH_TICKETS'
 const ACTION_ANALYZE = 'ANALYZE'
 const ACTION_FULL = 'FULL'
 
-// 讓使用者互動覆寫時間窗，Enter 則用 config 預設。
-// 支援兩種輸入：往後天數（如 30）或 8 碼日期區間（如 20260101-20260110）。
+// 讓使用者互動覆寫時間窗，分兩題問：
+//   Q1：往後天數（如 30）或日期區間（如 20260101-20260110），預設往後 fallbackDays 天。
+//   Q2：只有 Q1 回「數字」時才問「往前幾天」（預設取 config.daysBehind）；Q1 回「區間」則起訖已定、跳過 Q2。
 // 格式不符時 inquirer 會用 validate 的錯誤字串就地要求重新輸入。
 // 回傳正規化後的 window 物件，或 null（使用者取消）。
 async function askWindow(config) {
   const fallbackDays = config.fixVersionMatch?.daysAhead ?? 30
-  const fallbackDaysBehind = config.fixVersionMatch?.daysBehind ?? 14
-  // 不設 default，讓按 Enter 送出空字串 → 走「留空用預設」分支（前 fallbackDaysBehind ~ 後 fallbackDays）。
-  // 若設了 default 字串，Enter 會被當成輸入該數字（只往後），就吃不到往前的區間。
-  const answer = await input({
-    message: `時間窗：往後天數（如 30）或日期區間（如 20260101-20260110）？（Enter 用預設 前 ${fallbackDaysBehind} ~ 後 ${fallbackDays} 天）`,
+  const fallbackDaysBehind = config.fixVersionMatch?.daysBehind ?? 0
+
+  // Q1：往後天數 或 日期區間
+  const q1 = await input({
+    message: '時間窗：往後天數（如 30）或日期區間（如 20260101-20260110）？',
+    default: String(fallbackDays),
     validate: (v) => {
-      const r = parseFixVersionWindow(v, { fallbackDays, fallbackDaysBehind })
+      const s = String(v ?? '').trim()
+      if (s === '') return '請輸入天數（如 30）或日期區間（如 20260101-20260110）'
+      const r = parseFixVersionWindow(s, { fallbackDays })
       return r.ok || r.error
     },
   }).catch(() => null)
-  if (answer == null) return null
-  return parseFixVersionWindow(answer, { fallbackDays, fallbackDaysBehind }).window
+  if (q1 == null) return null
+
+  const window = parseFixVersionWindow(q1, { fallbackDays }).window
+  // Q1 回日期區間 → 起訖已定，不用問往前幾天
+  if (window.kind === 'range') return window
+
+  // Q1 回數字 → Q2：往前幾天（預設取 config.fixVersionMatch.daysBehind，沒設則 0）
+  const behindRaw = await input({
+    message: '往前幾天？（0 = 只看今天以後）',
+    default: String(fallbackDaysBehind),
+    validate: (v) => /^\d+$/.test(String(v ?? '').trim()) || '請輸入 0 或正整數',
+  }).catch(() => null)
+  if (behindRaw == null) return null
+
+  return { ...window, daysBehind: Number(String(behindRaw).trim()) }
 }
 
 function formatUser(u) {
@@ -371,7 +388,7 @@ async function main() {
     if (config == null) process.exit(1)
 
     const fallbackDays = config.fixVersionMatch?.daysAhead ?? 30
-    const fallbackDaysBehind = config.fixVersionMatch?.daysBehind ?? 14
+    const fallbackDaysBehind = config.fixVersionMatch?.daysBehind ?? 0
     const rawDays = flags.days != null && flags.days !== true ? flags.days : ''
     const parsedWindow = parseFixVersionWindow(rawDays, { fallbackDays, fallbackDaysBehind })
     if (!parsedWindow.ok) {
