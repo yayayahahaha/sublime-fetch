@@ -1,8 +1,23 @@
-// Mock for the Affiliate (referral v3) 頁面 —— PLAT-36976 / WLB-361。
-// 改這個檔案 → hot reload 自動生效。
+// Mock for the Affiliate (referral v3) 頁面 —— **共享版形狀**（非 NexU 品牌用，例如 CTX-98）。
+// 從 affiliate.js 複製出來改的；改這個檔案 → hot reload 自動生效。
 //
-// ─── 定位與邊界（先讀這段）─────────────────────────────────
-// 這支 mock 是 **NexU 專用**的。存在的理由只有兩個：
+// ─── 這支跟 affiliate.js 的差別（只有三個欄位）────────────────
+// 2026-08-20 的改名只發生在 nexu 重寫的端點上，共享版永遠是舊名字。這支就是用來驗
+// 「其他品牌讀共享版欄位」這條路徑（例如 Referrals.vue 的 firstDeposit ?? firstExpressBuy
+// 兩邊都要能走通）。
+//
+//   userList  : firstExpressBuyTime  → 不給（共享版只有 firstTradingTime）
+//   selfLink  : expressBuyUsers      → 不給（共享版只有 tradedUsers）
+//   referrals : firstExpressBuy      → firstDeposit（並補上 firstTrade）
+//
+// ⚠️ 其餘端點（performance/summary、transaction/detail…）**仍然是 nexu 形狀**，沒有改成
+// 共享版的嵌套結構。要驗那些頁面請不要用這支，會得到錯的結論。
+//
+// ⚠️ 這支跟 affiliate.js 宣告同一批 route，兩個一起載入會在啟動時報路徑衝突。
+// 要同時用就開兩個 mock server instance、各給不同 port、各自只勾一支（見 README）。
+//
+// ─── 以下沿用 affiliate.js 的說明 ──────────────────────────
+// 存在的理由只有兩個：
 //   1. 繞過測試帳號拿不到的前置條件（referralIdentity 是 basic、沒有下線資料、
 //      ops 的 function_control 還沒配好之類）
 //   2. 在後端 API 還沒好之前先讓前端能開發
@@ -274,18 +289,8 @@ const USER_ROWS = [
     cwTakerRate: 0.09,
     registrationTime: 1750000000000,
     firstTradingTime: 1755000000000,
-    // firstExpressBuyTime 取代 firstTradingTime。兩個都留著：NexU 只會看到
-    // firstExpressBuyTime、其他品牌只會看到 firstTradingTime，所以兩個都給值才驗得出
-    // 「該藏的藏了、該顯示的顯示了」。
-    //
-    // ⚠️ 2026-08-20 改名（first-express-buy-前端字段变更.md）：
-    //   firstDepositTime → firstExpressBuyTime
-    //   口径也翻轉：原本是「一般入金 type=1、排除 Express Buy」，
-    //   現在是「首筆 Express Buy type=49、排除所有 fiat/crypto 存款與 P2P」。
-    //   UI 文案對外叫 "Cash Teller"（客戶用語），欄位名維持內部詞 expressBuy。
-    // ⚠️ staging (nexu-api.btse.co) 2026-08-20 實測仍回舊名 firstDepositTime —— 後端還在
-    //   code review。所以這裡先走新名，前端接 staging 會是壞的，等後端部署才會對上。
-    firstExpressBuyTime: 1756000000000,
+    // 共享版不回 firstExpressBuyTime（那是 nexu 重寫端點才有的），其他品牌看的是
+    // firstTradingTime 那一欄。
     // kycStatus 是 int（8081 實測：0 / 2），不是 string enum
     kycStatus: 2,
     note: 'mock user A',
@@ -306,7 +311,6 @@ const USER_ROWS = [
     cwTakerRate: 0.05,
     registrationTime: 1752000000000,
     firstTradingTime: null,
-    firstExpressBuyTime: null, // 沒做過 Express Buy → 表格該顯示 '-'
     kycStatus: 0,
     note: '',
     roleStatus: 'DIRECT_USER',
@@ -345,10 +349,7 @@ const LINK_ROWS = [
     myCwTakerCommissionRate: 0.15,
     refereeCwTakerCommissionRate: 0.05,
     referredUsers: 42,
-    tradedUsers: 17,
-    // ⚠️ 2026-08-20 改名：depositedUsers → expressBuyUsers（口径同步翻成 type=49）。
-    // UI 文案對外叫 "Cash Teller"。staging 實測仍回舊名，後端還在 code review。
-    expressBuyUsers: 20 // 取代 tradedUsers
+    tradedUsers: 17 // 共享版只有 tradedUsers，不回 expressBuyUsers
   },
   {
     referralCode: 'NEXU02',
@@ -369,8 +370,7 @@ const LINK_ROWS = [
     myCwTakerCommissionRate: 0.12,
     refereeCwTakerCommissionRate: 0.06,
     referredUsers: 8,
-    tradedUsers: 3,
-    expressBuyUsers: 5
+    tradedUsers: 3
   }
 ]
 
@@ -550,7 +550,9 @@ const buildSeries = (base) =>
 // 圖例文案對外叫 "Cash Teller"。staging 實測仍回舊名，後端還在 code review。
 const REFERRAL_OVERVIEW = {
   registration: { periodTotal: '7', gain: '25', data: buildSeries(2000) },
-  firstExpressBuy: { data: buildSeries(1200) }
+  firstDeposit: { data: buildSeries(1200) },
+  // 共享版會回 firstTrade（有開現貨/合約的品牌），nexu 才不回
+  firstTrade: { data: buildSeries(800) }
 }
 
 // ─── Register routes ──────────────────────────────────────

@@ -8,9 +8,13 @@ import { homeAssetsStuff } from './assets-files-utils.js'
 import { figmaStuff } from './figma-utils.js'
 import { cleanLocalFolders } from './clean-utils.js'
 import { fullSyncFromFigma } from './full-sync-utils.js'
+import { pullFromFigma } from './figma/pull-from-figma.js'
+import { pullAndSyncFromFigma } from './figma/pull-and-sync.js'
 
 const CHOICES_LIST = [
   'LIST_ITEMS_LOG',
+  'PULL_AND_SYNC_FROM_FIGMA',
+  'PULL_FROM_FIGMA',
   'FULL_SYNC_FROM_FIGMA',
   'ASSETS_FILES',
   'SVG_LOGO',
@@ -36,6 +40,24 @@ async function start() {
         name: '我想要看白牌要調整的項目的清單',
         value: CHOICES_MAP.LIST_ITEMS_LOG,
         description: '列出各種需要留意的地方，但可能還是沒辦法齊全',
+      },
+
+      new Separator(),
+
+      {
+        name: '★ 從 Figma 網址一路同步到 frontend / s3 repo（抓圖 + 同步）',
+        value: CHOICES_MAP.PULL_AND_SYNC_FROM_FIGMA,
+        description:
+          '下面那兩個指令串起來, 全自動: 貼 Figma 網址 → 選 brand → 抓圖到 figma-images → 檢查 → 同步 static / Logo / AppIcon / 維護頁 logo / s3 Logo。會問兩次確認 (寫入 figma-images、覆蓋 repo)。任何一段出問題都可以退回用下面兩個指令分開跑',
+      },
+
+      new Separator(),
+
+      {
+        name: '從 Figma 網址直接抓圖到 figma-images 資料夾',
+        value: CHOICES_MAP.PULL_FROM_FIGMA,
+        description:
+          '取代「人工去 Figma 拖選 layer → export → 下載 → 解壓縮到 figma-images」這一段。會用 REST API 找到 assets page 的 export-area, 依 mapping 表檢查每個節點 (缺漏 / 尺寸 / 同名 / 底色 等), 再出圖到 figma-images。抓完之後照原本流程跑下面的「一次同步」即可, 這兩件事是分開的, 出問題隨時可以退回人工',
       },
 
       new Separator(),
@@ -107,6 +129,12 @@ async function start() {
   switch (現在要做啥) {
     case CHOICES_MAP.LIST_ITEMS_LOG:
       return void 修改白牌會動到的東西()
+
+    case CHOICES_MAP.PULL_AND_SYNC_FROM_FIGMA:
+      return void pullAndSyncFromFigma()
+
+    case CHOICES_MAP.PULL_FROM_FIGMA:
+      return void pullFromFigma()
 
     case CHOICES_MAP.FULL_SYNC_FROM_FIGMA:
       return void fullSyncFromFigma()

@@ -31,7 +31,12 @@ import {
 // 產生 vue 元件 / s3 圖片所需的來源檔案, 全部都是必要的
 const COMPONENT_SOURCE_FILE_NAMES = [...LOGO_SOURCE_FILE_NAMES, APP_ICON_SOURCE_FILE_NAME]
 
-export async function fullSyncFromFigma() {
+/**
+ * @param {object} [options]
+ * @param {string} [options.targetBrand] 呼叫端已經選好 brand 的話直接傳進來, 不會再問一次。
+ *                                       「從 Figma 抓圖 + 同步」那個指令會把問題全問在前面, 用得到這個。
+ */
+export async function fullSyncFromFigma({ targetBrand: presetBrand = null } = {}) {
   const settings = readSetting()
   if (settings == null) return
 
@@ -52,7 +57,7 @@ export async function fullSyncFromFigma() {
   if (!ok) return
   consoleStep('setting')
 
-  const targetBrand = await resolveBrand({ settingBrand, frontendRepoPath, s3RepoPath })
+  const targetBrand = presetBrand ?? (await resolveBrand({ settingBrand, frontendRepoPath, s3RepoPath }))
   if (targetBrand == null) return
   consoleStep(`target-brand = ${high(targetBrand)}`)
 

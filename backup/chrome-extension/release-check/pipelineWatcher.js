@@ -69,10 +69,15 @@ async function main() {
     record({ status: overall, pipelineCount: entries.length, pipelines: entries.map((e) => ({ id: e.id, status: e.status, webUrl: e.webUrl })) })
 
     if (overall !== 'running') {
-      const emoji = overall === 'success' ? '✅' : overall === 'failed' ? '❌' : '⚠️'
       const extra = entries.length > 1 ? `（含 ${entries.length - 1} 條 downstream）` : ''
       // title 帶上 name（brand），避免 macOS 對「相同 title」的通知做去重/取代橫幅
-      await notifyDesktop(`${name} ${emoji}`, `pipeline ${overall}${extra}`, { sound: 'Ping' })
+      // failed 用更顯眼的 emoji + 警示音效（Basso），避免跟 success 一樣容易被忽略
+      if (overall === 'failed') {
+        await notifyDesktop(`🚨🔥 ${name} 失敗！🔥🚨`, `❌❌ pipeline failed${extra} ❌❌`, { sound: 'Basso' })
+      } else {
+        const emoji = overall === 'success' ? '✅' : '⚠️'
+        await notifyDesktop(`${name} ${emoji}`, `pipeline ${overall}${extra}`, { sound: 'Ping' })
+      }
       record({ status: overall, pipelineCount: entries.length, pipelines: entries.map((e) => ({ id: e.id, status: e.status, webUrl: e.webUrl })), finishedAt: new Date().toISOString() })
       return
     }

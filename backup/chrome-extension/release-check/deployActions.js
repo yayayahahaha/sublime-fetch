@@ -49,7 +49,7 @@ async function runDeployBrand(config, target) {
   const chosen = await checkbox({
     message: `選要部署到 ${envLabel} 的 brand（空白鍵勾選，Enter 確認）：`,
     choices: sortedRecipes.map((name) => ({ name, value: name })),
-    loop: false,
+    loop: true,
     required: true,
     pageSize: 25,
   }).catch(() => null)
