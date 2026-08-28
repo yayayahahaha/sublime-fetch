@@ -1,3 +1,6 @@
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { spawnSync } from 'child_process'
 import { loadSettings } from './settings-loader.js'
 import { LoginNeeded } from './login-stuff.js'
 import { errorConsole, loginDisposable, warnConsole } from './t99-utils.js'
@@ -37,8 +40,11 @@ const WRITE_MR = 'WRITE_MR'
 const WRITE_PIPELINE = 'WRITE_PIPELINE'
 const WRITE_JIRA_LINK = 'WRITE_JIRA_LINK'
 const WATCHERS = 'WATCHERS'
+const CONFIG_SERVER = 'CONFIG_SERVER'
 
 const supportedCmdArgs = ['port', 'profile']
+const dirname = path.dirname(fileURLToPath(import.meta.url))
+const hatDevScriptPath = path.join(dirname, '..', 'scripts', 'hat-dev.sh')
 
 start()
 async function start() {
@@ -141,6 +147,11 @@ async function start() {
         value: WATCHERS,
         description: '列出 / kill / 清除背景 pipeline 監看程序',
       },
+      {
+        name: 'Config Server 啟動 🎩 dev server',
+        value: CONFIG_SERVER,
+        description: 'checkout flyc/🎩-tree-skaking-with-claude, rebase 到 origin/develop^{commit} 後跑 yarn cm:dev',
+      },
       new Separator(),
       {
         name: 'Register 批量註冊帳號',
@@ -228,6 +239,11 @@ async function start() {
 
   if (answer === WATCHERS) {
     await watchersHelper()
+    return
+  }
+
+  if (answer === CONFIG_SERVER) {
+    spawnSync(hatDevScriptPath, [], { stdio: 'inherit' })
     return
   }
 

@@ -4,11 +4,34 @@
 // token / jira projects 沿用 release-check 的 config（路徑相對於本檔，跟 cwd 無關）。
 import { execFile } from 'child_process'
 import { input, confirm, checkbox, search } from '@inquirer/prompts'
+import select from '@inquirer/select'
 import { loadConfig } from './lib/config.js'
 import { git, extractRepoPath } from './lib/repos.js'
 import { GitlabClient } from './lib/gitlab.js'
 import { branchNameToPrTitle, guessTargetBranch, buildNewMrUrl, DESCRIPTION_TEMPLATE } from './lib/mrUrl.js'
 import { green, yellow, lightCyan, lightRed, blue, cyan } from '../color.js'
+
+const DEFAULT_LABEL = 'ACE-WL'
+
+async function fetchLabelNames(gitlab, repoPath) {
+  const id = encodeURIComponent(repoPath)
+  const all = await gitlab.requestPaged(`/projects/${id}/labels`)
+  return (all ?? []).map((l) => l.name)
+}
+
+async function pickLabelsFromNames(names) {
+  if (names.length === 0) {
+    console.log(yellow('（這個 repo 沒有可選的 label）'))
+    return []
+  }
+  const chosen = await checkbox({
+    message: '選 label（空白鍵勾選）：',
+    choices: names.map((name) => ({ name, value: name })),
+    loop: false,
+    pageSize: 20,
+  }).catch(() => null)
+  return chosen ?? []
+}
 
 async function detectCwdRepo() {
   const cwd = process.cwd()
@@ -88,18 +111,31 @@ async function main() {
     }
   }
 
-  // labels：選填，從 repo 的 label 清單多選
+  // labels：選填，預設加 ACE-WL / 手動從 repo 的 label 清單多選 / 不加
   let labels = []
-  const wantLabels = await confirm({ message: '要加 label 嗎？', default: false }).catch(() => null)
-  if (wantLabels) {
+  const labelChoice = await select({
+    message: '要加 label 嗎？',
+    choices: [
+      { name: `添加預設的 labels（${DEFAULT_LABEL}）`, value: 'default' },
+      { name: '手動選擇添加的 labels', value: 'manual' },
+      { name: '不添加 labels', value: 'none' },
+    ],
+    loop: false,
+  }).catch(() => null)
+
+  if (labelChoice === 'default' || labelChoice === 'manual') {
     try {
-      const id = encodeURIComponent(repoPath)
-      const all = await gitlab.requestPaged(`/projects/${id}/labels`)
-      const choices = (all ?? []).map((l) => ({ name: l.name, value: l.name }))
-      if (choices.length === 0) console.log(yellow('（這個 repo 沒有可選的 label）'))
-      else {
-        const chosen = await checkbox({ message: '選 label（空白鍵勾選）：', choices, loop: false, pageSize: 20 }).catch(() => null)
-        if (chosen) labels = chosen
+      const names = await fetchLabelNames(gitlab, repoPath)
+      if (labelChoice === 'default') {
+        if (names.includes(DEFAULT_LABEL)) {
+          labels = [DEFAULT_LABEL]
+          console.log(green(`✅ 找到「${DEFAULT_LABEL}」，已自動加入`))
+        } else {
+          console.log(yellow(`（這個 repo 沒有「${DEFAULT_LABEL}」這個 label，改成手動選擇）`))
+          labels = await pickLabelsFromNames(names)
+        }
+      } else {
+        labels = await pickLabelsFromNames(names)
       }
     } catch (err) {
       console.log(yellow(`（讀取 label 失敗，略過：${err.message}）`))
