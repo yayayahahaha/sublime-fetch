@@ -1,7 +1,6 @@
 [
   "otpauth://totp/lmex-stage:?secret=TBLGEDVCFKTNY7TH&issuer=lmex-stage",
   "otpauth://totp/CleverTap%20Production:frontend%40btse.com?secret=GMVGYNDWFYRWCJRBFRHVGL3CNZRCQN3C&issuer=CleverTap%20Production",
-  "otpauth://totp/Fedhabit-staging:?secret=GWGQ4HLLGZ67ERPM&issuer=Fedhabit-staging",
   "otpauth://totp/fedhabit-fc1-staging:?secret=APR4OTATZ2ZL3FJN&issuer=fedhabit-fc1-staging",
   "otpauth://totp/freedx.btse.co:flycfreedxstaging?secret=V2F5UKBX4WGBDEJL&issuer=freedx.btse.co",
   "otpauth://totp/traiex-stage:?secret=LBNWTLGLIUKYJ2XJ&issuer=traiex-stage",
@@ -12,5 +11,8 @@
   "otpauth://totp/nexu-staging-flycchung:nexu-staging-flycchung?secret=SWEEBNLEUTVPLVVB&issuer=nexu-staging-flycchung",
   "otpauth://totp/btse-flycchung-staging:btse-flycchung-staging?secret=3SP26Y3YRF64FTN6&issuer=btse-flycchung-staging",
   "otpauth://totp/zmo-tiffany2-staging:zmo-tiffany2-staging?secret=76X2TOFLHRAFQOCN&issuer=zmo-tiffany2-staging",
-  "otpauth://totp/fedhabit-nathan:fedhabit-nathan?secret=W4YJV66OROEEGOI3&issuer=fedhabit-nathan"
+  "otpauth://totp/fedhabit-nathan:fedhabit-nathan?secret=W4YJV66OROEEGOI3&issuer=fedhabit-nathan",
+  "otpauth://totp/btse-fc2:btse-fc2?secret=ZNZ2H5ZWM7LDPWLE&issuer=btse-fc2",
+  "otpauth://totp/fedhabit-staging:fedhabit-staging?secret=RAI4EFIJVONOZGXC&issuer=fedhabit-staging",
+  "otpauth://totp/zmo-staging:zmo-staging?secret=V2E33ZQ4NDONXV56&issuer=zmo-staging"
 ]

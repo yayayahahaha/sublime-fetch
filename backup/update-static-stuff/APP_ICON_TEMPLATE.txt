@@ -1,0 +1,29 @@
+<template>
+  <Icon
+    :width="width"
+    :height="height"
+    viewBox="___REPLACE_VIEW_BOX___"
+    fill="none"
+    aria-label="___REPLACE_ARIA_LABEL___"
+    v-bind="$attrs"
+  >
+    ___REPLACE_SVG_CONTENT___
+  </Icon>
+</template>
+
+<script setup lang="ts">
+import Icon from '@/components/icons/Icon.vue'
+___REPLACE_UTILS_IMPORT___
+
+interface Props {
+  width?: number | string
+  height?: number | string
+}
+
+withDefaults(defineProps<Props>(), {
+  width: ___REPLACE_ICON_WIDTH___,
+  height: ___REPLACE_ICON_HEIGHT___
+})
+
+___REPLACE_ID_LIST___
+</script>

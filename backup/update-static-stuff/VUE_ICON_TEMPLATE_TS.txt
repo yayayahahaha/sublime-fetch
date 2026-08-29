@@ -1,0 +1,27 @@
+<template>
+  <Icon
+    :width="width"
+    :height="height"
+    viewBox="___REPLACE_VIEW_BOX___"
+    fill="none"
+    aria-label="___REPLACE_ARIA_LABEL___"
+  >___REPLACE_SVG_CONTENT___  </Icon>
+</template>
+
+<script setup lang="ts">
+import Icon from '@/components/icons/Icon'
+___REPLACE_UTILS_IMPORT___
+
+defineProps({
+  width: {
+    type: [Number, String],
+    default: ___REPLACE_ICON_WIDTH___
+  },
+  height: {
+    type: [Number, String],
+    default: ___REPLACE_ICON_HEIGHT___
+  }
+})
+
+___REPLACE_ID_LIST___
+</script>

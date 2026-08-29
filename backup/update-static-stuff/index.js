@@ -7,9 +7,15 @@ import { consoleRed } from './utils.js'
 import { homeAssetsStuff } from './assets-files-utils.js'
 import { figmaStuff } from './figma-utils.js'
 import { cleanLocalFolders } from './clean-utils.js'
+import { fullSyncFromFigma } from './full-sync-utils.js'
+import { pullFromFigma } from './figma/pull-from-figma.js'
+import { pullAndSyncFromFigma } from './figma/pull-and-sync.js'
 
 const CHOICES_LIST = [
   'LIST_ITEMS_LOG',
+  'PULL_AND_SYNC_FROM_FIGMA',
+  'PULL_FROM_FIGMA',
+  'FULL_SYNC_FROM_FIGMA',
   'ASSETS_FILES',
   'SVG_LOGO',
   'S3_LOGO',
@@ -39,6 +45,33 @@ async function start() {
       new Separator(),
 
       {
+        name: '★ 從 Figma 網址一路同步到 frontend / s3 repo（抓圖 + 同步）',
+        value: CHOICES_MAP.PULL_AND_SYNC_FROM_FIGMA,
+        description:
+          '下面那兩個指令串起來, 全自動: 貼 Figma 網址 → 選 brand → 抓圖到 figma-images → 檢查 → 同步 static / Logo / AppIcon / 維護頁 logo / s3 Logo。會問兩次確認 (寫入 figma-images、覆蓋 repo)。任何一段出問題都可以退回用下面兩個指令分開跑',
+      },
+
+      new Separator(),
+
+      {
+        name: '從 Figma 網址直接抓圖到 figma-images 資料夾',
+        value: CHOICES_MAP.PULL_FROM_FIGMA,
+        description:
+          '取代「人工去 Figma 拖選 layer → export → 下載 → 解壓縮到 figma-images」這一段。會用 REST API 找到 assets page 的 export-area, 依 mapping 表檢查每個節點 (缺漏 / 尺寸 / 同名 / 底色 等), 再出圖到 figma-images。抓完之後照原本流程跑下面的「一次同步」即可, 這兩件事是分開的, 出問題隨時可以退回人工',
+      },
+
+      new Separator(),
+
+      {
+        name: '一次同步 Figma 匯出的 static 圖片 + Logo（含 s3 repo）',
+        value: CHOICES_MAP.FULL_SYNC_FROM_FIGMA,
+        description:
+          '整合「將 figma 檔案轉 static」+「同步 static 檔案」+「同步 LogoLight/Dark/AppIcon/維護頁 logo」+「同步 S3 Logo」, 會一次檢查完所有來源檔案再一次寫入, 需要 figma-images 資料夾裡有齊全的 static 來源 + logo-light/dark 的 svg 和 png + qrcode-logo.svg',
+      },
+
+      new Separator(),
+
+      {
         name: '把 svg 換成可用的 vue icon',
         value: CHOICES_MAP.SVG_TO_VUE,
         description: '外面包一層 <Icon>, 替換 id 等等',
@@ -55,9 +88,10 @@ async function start() {
       new Separator(),
 
       {
-        name: '同步 LogoLight 和 LogoDark',
+        name: '同步 LogoLight / LogoDark / AppIcon / 維護頁 logo',
         value: CHOICES_MAP.SVG_LOGO,
-        description: '將 SVG 的 Logo 轉成可用的 .vue 的形式並放到正確的位置',
+        description:
+          '將 SVG 的 Logo 轉成可用的 .vue 的形式並放到正確的位置, 並用 logo-dark.svg 產生維護頁的 <brand>-logo.svg。需要 logo-light.svg, logo-dark.svg, qrcode-logo.svg',
       },
 
       {
@@ -95,6 +129,15 @@ async function start() {
   switch (現在要做啥) {
     case CHOICES_MAP.LIST_ITEMS_LOG:
       return void 修改白牌會動到的東西()
+
+    case CHOICES_MAP.PULL_AND_SYNC_FROM_FIGMA:
+      return void pullAndSyncFromFigma()
+
+    case CHOICES_MAP.PULL_FROM_FIGMA:
+      return void pullFromFigma()
+
+    case CHOICES_MAP.FULL_SYNC_FROM_FIGMA:
+      return void fullSyncFromFigma()
 
     case CHOICES_MAP.SVG_TO_VUE:
       return void svgToVue()

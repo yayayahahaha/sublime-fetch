@@ -13,7 +13,7 @@
     gra = !"git gr --all" # 不知道哪天起無法 auto-complete branch name 了
     grf = !"git gr --first-parent"
 
-    gr2 = log --graph --abbrev-commit --decorate --date=format:'%a %Y/%m/%d %H:%M:%S%z %s' --format=format:'%C(magenta)%h%C(reset) - ''%C(green)Author Date: %ad (%ar)%C(reset)%n''          %C(blue)Commit Date: %cd (%cr)%C(reset)%n''          %C(Cyan)%s%C(reset) %C(red)- %an%C(reset)%C(yellow)%d%C(reset)%n'
+    gr2 = log --graph --abbrev-commit --decorate --date=format:'%a %Y/%m/%d %H:%M:%S%z %s' --format=format:'%C(magenta)%h%C(reset) - ''%C(green)Author: %an%C(reset)%n''          %C(blue)Committer: %cn%C(reset)%n''          %C(green)Author Date: %ad (%ar)%C(reset)%n''          %C(blue)Commit Date: %cd (%cr)%C(reset)%n''          %C(Cyan)%s%C(reset) %C(red)- %an%C(reset)%C(yellow)%d%C(reset)%n'
     gra2 = !"git gr2 --all" # 不知道哪天起無法 auto-complete branch name 了
     grf2 = !"git gr2 --first-parent" # 不知道哪天起無法 auto-complete branch name 了
 
@@ -45,7 +45,8 @@
     cc = "!git checkout $(git rev-parse HEAD)"
 
     # 這個是寫給 BTSE 的，可以看看怎麼寫得通俗些
-    pr = "!node $HOME/flyc/sublime-fetch/global-node-script/btse-pr.js $(git branch --show-current) $(git remote get-url --all origin)"
+    pr = !node $HOME/btse/chrome-extension/release-check/mr.js
+    # pr = "!node $HOME/flyc/sublime-fetch/global-node-script/btse-pr.js $(git branch --show-current) $(git remote get-url --all origin)"
     jira = "!node $HOME/flyc/sublime-fetch/global-node-script/btse-goto-jira.js $(git branch --show-current)"
 
 [merge]

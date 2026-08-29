@@ -1,0 +1,72 @@
+{
+  "jira": {
+    "baseUrl": "https://btse.atlassian.net",
+    "projects": ["PLAT"]
+  },
+
+  "gitlab": {
+    "baseUrl": "https://gitlab.com/"
+  },
+
+  "//requiredRepos": "這套工具必須檢查的 repo 清單（必填）。可寫成 namespace/project 或完整 git URL，比對時會正規化。",
+  "requiredRepos": ["https://gitlab.com/nogle/btsecom/btse-frontend/exchange-app", "https://gitlab.com/nogle/btsecom/btse-frontend/mjml_email_template"],
+
+  "//localRepoPaths": "你本機實際 clone 好的 repo 路徑清單。工具會在每個路徑跑 git remote，確認上面的 requiredRepos 是否都在本機。",
+  "localRepoPaths": ["/Users/flyc.chung/btse/frontend", "/Users/flyc.chung/btse/mjml_email_template"],
+
+  "defaultAssignee": "flyc",
+
+  "//stagingBranches": "『已送測』的條件：branch 需 merge 進這裡「全部」分支（測試環境）。",
+  "stagingBranches": ["dev", "staging"],
+
+  "//doneBranches": "『已完成』的條件：develop MR merged（git 驗證 develop 包含此 branch）。",
+  "doneBranches": ["develop"],
+
+  "//doneStatuses": "Jira 狀態命中 → 視為『已完成』的必要條件（還會用 git 驗證 develop 是否包含此 branch）。陣列或依 issue type 的物件（default 為 fallback，type key 忽略大小寫）。",
+  "doneStatuses": {
+    "default": ["Verified", "Testnet", "Testnet Verified", "Production", "Production Resolved"],
+    "Job Order": ["Code Review", "COMPLETE"]
+  },
+
+  "//sentToTestStatuses": "Jira 狀態命中 → 沒 branch 時視為『已送測』（不用改 code / branch 已刪的情境）。格式同上。※ 新概念，請依實際狀態調整。",
+  "sentToTestStatuses": {
+    "default": ["Ready for QA", "QA", "Verified", "Testnet", "Testnet Verified", "Production"],
+    "Job Order": ["Code Review"]
+  },
+
+  "//urgentWithinDays": "staging deadline 在今天起幾天內算「緊迫（黃）」。",
+  "urgentWithinDays": 3,
+
+  "//statusEmoji": "opened MR 旁標注該單 QA 狀態的 emoji。key=Jira 狀態，value=emoji；保留 key __default__ 對應未列出的狀態。",
+  "statusEmoji": {
+    "Open": "🍽️",
+    "Dev Doing": "📝",
+    "QA": "👀",
+    "Ready for QA": "🙌",
+    "Verified": "✅",
+    "COMPLETE": "✅",
+    "Production": "✅",
+    "Production Resolved": "✅",
+    "Testnet Verified": "✅",
+    "__default__": "❔"
+  },
+
+  "deploy": {
+    "repo": "https://gitlab.com/nogle/btsecom/btse-frontend/exchange-app"
+  },
+
+  "i18nRedeploy": {
+    "repo": "https://gitlab.com/nogle/btsecom/btse-frontend/translation-management",
+    "scheduleName": "upload i18n",
+    "scheduleId": null
+  },
+
+  "//fixVersionMatch": "依今天日期挑選 fix version 的規則。互動模式分兩題問（Q1 往後天數或日期區間、Q2 往前幾天）；非互動 --days 未給時，窗為 [今天−daysBehind, 今天+daysAhead]。執行時可互動覆寫。",
+  "//fixVersionMatch.daysBehind": "往前涵蓋幾天的預設值：互動 Q2『往前幾天』的預設值，以及非互動 --days 未給時的往前天數。設 >0 會納入近幾天已發的版本（多半已進 Done，屬預期）。",
+  "//fixVersionMatch.dateTokenRegex": "選填。版本名稱抽日期的自訂 regex，第 1 個 capture group 應為 8 碼 YYYYMMDD；留 null 則預設掃描名稱中的 8 碼數字。",
+  "fixVersionMatch": {
+    "daysAhead": 30,
+    "daysBehind": 0,
+    "dateTokenRegex": null
+  }
+}

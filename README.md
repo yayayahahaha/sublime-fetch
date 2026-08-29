@@ -94,6 +94,16 @@ sh set-sublime-text-user.sh
 >
 > 1 missing dependency was just installed. Sublime Text should be restarted, otherwise one or more of the installed packages may not function properly.
 
+### Sublime Text 出現了「某些 packages is not available」 的錯誤
+
+目前不知道造成的原因， Sublime Text 的版本和其他設定都清空了，也沒辦法讓 pakcages 出現在 install list 或是已安裝的 list 裡之類的。
+處理的方式是透過 `Package Control: Add Repository` 添加那些遺失的 packages 的 repo, 接著在 install 裡就可以查到、就也可以順利安裝了
+
+> 之前 miss 的是 `SublimeLinter`, 和其相關的 `eslint`, `stylelint`  
+> https://github.com/SublimeLinter/SublimeLinter  
+> https://github.com/SublimeLinter/SublimeLinter-eslint  
+> https://github.com/SublimeLinter/SublimeLinter-stylelint
+
 ## Sublime Merge
 
 [官網](https://www.sublimemerge.com/) 安裝後，執行以下腳本
@@ -191,15 +201,16 @@ Iterm 的 `主題` 和 `顏色` 是可以分開設定的。顏色可以從 [這�
 
 ###### 字型設定
 
-如果要使用 [`agnoster`](https://github.com/agnoster/agnoster-zsh-theme) 這個 `theme` 的話會要額外安裝字型
+如果要使用 [`agnoster`](https://github.com/agnoster/agnoster-zsh-theme) 這個 `theme` 的話會要額外安裝字型, 
+這邊可選 [font-fira-code-nerd-font](https://formulae.brew.sh/cask/font-fira-code-nerd-font) 這個有特殊符號的 font:
 
 ```bash
-brew install --cask font-powerline-symbols
+brew install --cask font-fira-code-nerd-font
 ```
 
-然後在 terminal 的 text 裡要選擇 `Powerline Symbols`
+然後在 terminal 裡面選 `FiraCode Nerd Font Mono` 就可以了
 
-> [https://github.com/powerline/fonts](https://github.com/powerline/fonts)
+> 之前會選擇 [font-powerline-symbols](https://github.com/powerline/fonts) 這個字型，但是這個字型的 `--` 會變成一條，不習慣所以替換
 
 > 安裝/同步完上述的項目後 `iterm2` 應該已經可以用 `option` 按鍵左右移動像是 `helloWorld` 等的字串單位了
 
@@ -210,10 +221,10 @@ brew install --cask font-powerline-symbols
 > /usr/local/bin/node  
 > /usr/local/bin/npm
 
-安裝完 NodeJs 後，就安裝 `pnpm` 和 `n` 吧
+安裝完 NodeJs 後，就安裝 `pnpm` 和 `fnm` 吧
 
 ```bash
-sudo npm install --global pnpm n
+sudo npm install --global pnpm
 ```
 
 #### 關於 n 和 fnm

@@ -1,3 +1,6 @@
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { spawnSync } from 'child_process'
 import { loadSettings } from './settings-loader.js'
 import { LoginNeeded } from './login-stuff.js'
 import { errorConsole, loginDisposable, warnConsole } from './t99-utils.js'
@@ -8,24 +11,43 @@ import { loginStagingAdmin } from './login-staging-admin.js'
 import { parseArgs } from './args-parser.js'
 import { blue } from '../color.js'
 import { clearEmailCache } from '../admin-related/admin-utils.js'
+import { runDepositCli } from '../admin-related/deposit.js'
+import { runAddRoleCli } from '../admin-related/add-role.js'
 import { registerByList } from './register-stuff.js'
+import { generateAndLogin } from './generate-and-login.js'
 import { twoFaHelper } from './2fa-helper.js'
 import { jiraBranchHelper } from './jira-helper.js'
 import { chromeWindowHelper } from './refresh-tabs-helper.js'
+import { operateRedis } from '../isolated-operate-redis/index.js'
+import { mockServerMenu } from '../mock-server/index.js'
+import { releaseCheckHelper } from '../release-check/index.js'
+import { writeActionHelper, watchersHelper } from '../release-check/writeActions.js'
 
 const GET_WHITELABEL_INFO = 'GET_WHITELABEL_INFO'
 const REGISTER_BY_LIST = 'REGISTER_BY_LIST'
+const GENERATE_AND_LOGIN = 'GENERATE_AND_LOGIN'
 const LOGIN_STAGING_ADIN = 'LOGIN_STAGING_ADIN'
 const CLEAR_EMAIL_CACHE = 'CLEAR_EMAIL_CACHE'
+const DEPOSIT_TO_USER = 'DEPOSIT_TO_USER'
+const ADD_ROLE_TO_SELF = 'ADD_ROLE_TO_SELF'
 const TWO_FA_HELPER = 'TWO_FA_HELPER'
 const JIRA_BRANCH_HELPER = 'JIRA_BRANCH_HELPER'
 const CHROME_WINDOW_HELPER = 'CHROME_WINDOW_HELPER'
+const OPERATE_REDIS = 'OPERATE_REDIS'
+const RUN_MOCK_SERVER = 'RUN_MOCK_SERVER'
+const RELEASE_CHECK = 'RELEASE_CHECK'
+const WRITE_MR = 'WRITE_MR'
+const WRITE_PIPELINE = 'WRITE_PIPELINE'
+const WRITE_JIRA_LINK = 'WRITE_JIRA_LINK'
+const WATCHERS = 'WATCHERS'
+const CONFIG_SERVER = 'CONFIG_SERVER'
 
 const supportedCmdArgs = ['port', 'profile']
+const dirname = path.dirname(fileURLToPath(import.meta.url))
+const hatDevScriptPath = path.join(dirname, '..', 'scripts', 'hat-dev.sh')
 
 start()
 async function start() {
-  const config = { getRedisBy: 'disposableFn' }
   const cmdArgs = parseArgs()
 
   Object.keys(cmdArgs).forEach((arg) => {
@@ -51,7 +73,7 @@ async function start() {
       try {
         return {
           displayName,
-          value: new LoginNeeded({ ...item, config }),
+          value: new LoginNeeded({ ...item }),
         }
       } catch (error) {
         errorConsole(`生成 profile 失敗: ${error.message}`)
@@ -76,6 +98,16 @@ async function start() {
       },
       new Separator(),
       {
+        name: 'Redis 對 Redis 操作',
+        value: OPERATE_REDIS,
+        description: '對 dev 或 staging 的 redis 做查找 or 刪除等',
+      },
+      {
+        name: 'Mock Server 啟動有 mock api 的 server',
+        value: RUN_MOCK_SERVER,
+        description: '啟動 Mock Server',
+      },
+      {
         name: '2FA 助手',
         value: TWO_FA_HELPER,
         description: '讀取、生成、編輯或刪除 2FA Code',
@@ -90,34 +122,85 @@ async function start() {
         value: CHROME_WINDOW_HELPER,
         description: '列出 Chrome 視窗並執行刷新、複製 URL 或執行 JS',
       },
-      new Separator(),
       {
-        name: '批量註冊帳號',
-        value: REGISTER_BY_LIST,
-        description: '批量註冊帳號',
+        name: 'Release Check 版本檢查',
+        value: RELEASE_CHECK,
+        description: '依 Jira fix version 檢查各 repo 的 branch / 合併 / MR 狀態',
+      },
+      {
+        name: '開 MR（GitLab）',
+        value: WRITE_MR,
+        description: '快速開 MR（目前：權限預檢；操作 UI 待接）',
+      },
+      {
+        name: 'Pipeline（GitLab）',
+        value: WRITE_PIPELINE,
+        description: '觸發 / 排程 pipeline（目前：權限預檢；操作 UI 待接）',
+      },
+      {
+        name: 'Jira 關聯單',
+        value: WRITE_JIRA_LINK,
+        description: '批量開 child 關聯單（目前：權限預檢；操作 UI 待接）',
+      },
+      {
+        name: 'Watchers 背景監看任務',
+        value: WATCHERS,
+        description: '列出 / kill / 清除背景 pipeline 監看程序',
+      },
+      {
+        name: 'Config Server 啟動 🎩 dev server',
+        value: CONFIG_SERVER,
+        description: 'checkout flyc/🎩-tree-skaking-with-claude, rebase 到 origin/develop^{commit} 後跑 yarn cm:dev',
       },
       new Separator(),
       {
-        name: '登入 Staging Admin',
+        name: 'Register 批量註冊帳號',
+        value: REGISTER_BY_LIST,
+        description: '批量註冊帳號',
+      },
+      {
+        name: 'Generate + Login 生成並自動登入某個 brand',
+        value: GENERATE_AND_LOGIN,
+        description: '選 brand + 輸入 email 前綴, 自動註冊後寫回 settings.json 並登入',
+      },
+      new Separator(),
+      {
+        name: 'Admin Login 登入 Staging Admin',
         value: LOGIN_STAGING_ADIN,
         description: '登入 Staging 環境的 Admin 帳號',
       },
       {
-        name: '清除 Email Staging 環境的 Cache',
+        name: 'Email Cache 清除 Email Staging 環境的 Cache',
         value: CLEAR_EMAIL_CACHE,
         description: '由於 Email 樣板是靜態資源，上完 Staging 後要手動清除 Cache',
+      },
+      {
+        name: 'Deposit 儲值 USDT 給 user',
+        value: DEPOSIT_TO_USER,
+        description: '透過 Staging Admin 自動 deposit USDT 給指定 user (含切 role + approve)',
+      },
+      {
+        name: 'Role add 幫自己加 Admin Role',
+        value: ADD_ROLE_TO_SELF,
+        description: '透過 Staging Admin 幫當前登入者新增指定 brand 的 role (需有 Administrator)',
       },
       new Separator(),
       ...loginProfiles.map((item) => ({ name: `${item.displayName}`, value: item.displayName })),
     ],
     loop: false,
+    pageSize: 15,
   }).catch(() => null)
   if (answer == null) return void errorConsole('使用者取消')
 
   if (answer === GET_WHITELABEL_INFO) return void generateBrandInfo()
   if (answer === REGISTER_BY_LIST) return void registerByList()
+  if (answer === GENERATE_AND_LOGIN) return void generateAndLogin()
   if (answer === LOGIN_STAGING_ADIN) return void loginStagingAdmin()
   if (answer === CLEAR_EMAIL_CACHE) return void clearEmailCache()
+  if (answer === DEPOSIT_TO_USER) return void runDepositCli()
+  if (answer === ADD_ROLE_TO_SELF) return void runAddRoleCli()
+  if (answer === OPERATE_REDIS) return void operateRedis()
+  if (answer === RUN_MOCK_SERVER) return void mockServerMenu()
   
   if (answer === TWO_FA_HELPER) {
     await twoFaHelper()
@@ -131,6 +214,36 @@ async function start() {
 
   if (answer === CHROME_WINDOW_HELPER) {
     await chromeWindowHelper()
+    return
+  }
+
+  if (answer === RELEASE_CHECK) {
+    await releaseCheckHelper()
+    return
+  }
+
+  if (answer === WRITE_MR) {
+    await writeActionHelper('mr')
+    return
+  }
+
+  if (answer === WRITE_PIPELINE) {
+    await writeActionHelper('pipeline')
+    return
+  }
+
+  if (answer === WRITE_JIRA_LINK) {
+    await writeActionHelper('jira')
+    return
+  }
+
+  if (answer === WATCHERS) {
+    await watchersHelper()
+    return
+  }
+
+  if (answer === CONFIG_SERVER) {
+    spawnSync(hatDevScriptPath, [], { stdio: 'inherit' })
     return
   }
 
@@ -168,7 +281,10 @@ async function start() {
   const payload = profileMap[profileKey]
   if (payload == null) return errorConsole('沒有找到匹配的 profile:', profileKey)
 
-  loginDisposable(payload, { port }).catch((err) => errorConsole('Error during login:', err))
+  loginDisposable(payload, { port }).catch((err) => {
+    errorConsole('Error during login:', err?.message ?? err)
+    if (err?.stack) errorConsole(err.stack)
+  })
 }
 
 function colorMessage(message) {

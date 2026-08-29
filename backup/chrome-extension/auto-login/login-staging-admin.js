@@ -3,6 +3,7 @@ import { cyan, lightBlue, lightCyan, lightGreen, lightRed, red } from '../color.
 import select from '@inquirer/select'
 import { gen2FaCode } from './2fa.js'
 import { EncodeDecode, errorConsole } from './t99-utils.js'
+import { getAdminTokenWithCache } from '../admin-related/admin-token-cache.js'
 import { exec } from 'child_process'
 
 import crypto from 'crypto'
@@ -23,7 +24,7 @@ function encryptPassword(username, password, random) {
   }
 }
 
-async function loginAdmin(adminLoginInfo, { getTokenOnly } = {}) {
+export async function loginAdmin(adminLoginInfo, { getTokenOnly } = {}) {
   const { error: randomCodeError, ...randomCodeRes } = await getRandomCode(adminLoginInfo)
   if (randomCodeError != null) {
     return void errorConsole('初次 login 取得 random code 失敗!', randomCodeError)
@@ -51,11 +52,14 @@ async function loginAdmin(adminLoginInfo, { getTokenOnly } = {}) {
     return token
   }
 
-  // 讀取設定判斷是否使用 extension
+  openBrowserWithAdminToken(token)
+  return token
+}
+
+export function openBrowserWithAdminToken(token) {
   const settings = loadSettings()
   const useExtension = settings.useExtension ?? true
 
-  // 開啟瀏覽器的部分
   console.log()
   console.log(lightCyan('開啟瀏覽器..'))
 
@@ -143,7 +147,7 @@ async function getRandomCode(adminLoginInfo) {
     .catch((error) => ({ error }))
 }
 
-function settingCheck() {
+export function settingCheck() {
   const settings = loadSettings()
   const { adminAccounts } = settings
   if (!Array.isArray(adminAccounts)) {
@@ -190,5 +194,19 @@ export async function loginStagingAdmin({ getTokenOnly = false } = {}) {
   }).catch(() => null)
   if (answer == null) return void console.log(lightRed('使用者取消'))
 
-  return loginAdmin(answer, { getTokenOnly })
+  // 用 cache + health check; cache 命中就跳過完整登入 (省 3 個 API call + 不用 2FA)
+  // 注意: getAdminTokenWithCache 內部用的是 loginAdmin({ getTokenOnly: true }), 所以 cache miss
+  // 也不會自己開瀏覽器, 由我們這層統一處理
+  const { token, usedCache } = await getAdminTokenWithCache(answer)
+
+  if (usedCache) {
+    // cache 命中沒走 loginAdmin, 補印 encoded / cookie 指令 (留著手動 fallback 用)
+    console.log(lightGreen(`encode 過後是 ${encodeURIComponent(token)}`))
+    console.log(lightGreen(`失敗的直接貼這個吧: document.cookie='admin-token=${encodeURIComponent(token)}'`))
+  }
+
+  if (getTokenOnly) return token
+
+  openBrowserWithAdminToken(token)
+  return token
 }

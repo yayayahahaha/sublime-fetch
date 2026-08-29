@@ -1,4 +1,11 @@
+#!/usr/bin/env bash
 # Git commit add Jira ID
+
+# 在跑 lint-staged 之前先擋：merge 進 staging 但來源還沒進過 dev 的情況
+source "$(dirname "$0")/lib/check-staging-guard.sh"
+if ! check_staging_guard; then
+  exit 1
+fi
 
 # color
 Black="\033[0;30m"

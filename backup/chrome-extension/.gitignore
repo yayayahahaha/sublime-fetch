@@ -2,6 +2,10 @@ cache/
 # 用於快速測試的場景
 just-run.js
 
+# release-check 的實際設定檔（只保留 .default）
+release-check/secrets.json
+release-check/release-check.config.json
+
 # Reference: https://www.npmjs.com/package/create-gitignore
 
 # MacOS
@@ -139,3 +143,9 @@ dist
 .pnp.*
 
 settings.json
+
+# release-check 的除錯 log
+release-check/logs/
+
+# release-check 背景監看的 registry
+release-check/.watchers/

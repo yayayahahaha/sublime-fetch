@@ -73,10 +73,7 @@ export class LoginNeeded {
       isInProgress,
       inProgressTimestamp,
       inProgressToken,
-
-      config: oriConfig = null,
     } = payload
-    const config = new this.#ConfigInstance(oriConfig)
 
     if (email == null || password == null) {
       throw new Error(`[${this.constructor.name}] email 和 password 都為必填`)
@@ -98,8 +95,6 @@ export class LoginNeeded {
     this.isInProgress = isInProgress ?? false
     this.inProgressTimestamp = inProgressTimestamp ?? null
     this.inProgressToken = inProgressToken ?? null
-
-    this.config = config
   }
 
   #brandMap = loadSettings()['brand-list'] ?? {}
@@ -156,6 +151,9 @@ export class LoginNeeded {
 
         case 'btseuab':
           return 'btse-lt'
+
+        case 'btsebt':
+          return 'btse-bt'
 
         case 'transexchange':
           return 'trans-exchange'
@@ -240,20 +238,12 @@ export class LoginNeeded {
   async getOtp(username) {
     const params = { username, brandName: this.brandName ?? '' }
 
-    switch (this.config.getRedisBy) {
-      case 'api': {
-        const queryString = new URLSearchParams(params).toString()
-        return get(`http://localhost:9999/getOtp?${queryString}`)
-      }
-
-      case 'disposableFn': {
-        const redis = connectRedis()
-
-        const { error, value } = await redis.getOtp(params.username, { brandName: params.brandName })
-        redis.disconnect()
-
-        return new Response({ error, data: { data: value } })
-      }
+    const redis = connectRedis()
+    try {
+      const { error, value } = await redis.getOtp(params.username, { brandName: params.brandName })
+      return new Response({ error, data: { data: value } })
+    } finally {
+      redis.disconnect()
     }
   }
 
@@ -263,21 +253,12 @@ export class LoginNeeded {
   }
 
   async getCaptcha(captchaId) {
-    const params = { captchaId }
-
-    switch (this.config.getRedisBy) {
-      case 'api': {
-        const queryString = new URLSearchParams(params).toString()
-        return get(`http://localhost:9999/getCaptcha?${queryString}`)
-      }
-
-      case 'disposableFn': {
-        const redis = connectRedis()
-        const { error, value } = await redis.getCaptcha(params.captchaId)
-        redis.disconnect()
-
-        return new Response({ error, data: { data: value } })
-      }
+    const redis = connectRedis()
+    try {
+      const { error, value } = await redis.getCaptcha(captchaId)
+      return new Response({ error, data: { data: value } })
+    } finally {
+      redis.disconnect()
     }
   }
 
@@ -365,15 +346,23 @@ export class LoginNeeded {
 
     async function _resendOtp() {
       subTitleConsole(`重新寄送 OTP: `)
-      const { error: resendError } = await this.resendOtp(firstToken)
+      const resendResult = await this.resendOtp(firstToken)
+      const { error: resendError, data: resendData } = resendResult
+      console.log('resendOtp 的 response: ', resendResult)
+      console.log('resendOtp 的 data.success: ', resendData?.success)
+      console.log('resendOtp 的 data.msg: ', resendData?.msg)
+
       if (resendError != null) {
         errorConsole('在 resendError 發生錯誤', this)
         errorConsole(resendError)
         return { error: resendError }
-      } else {
-        console.log('✅ 重新寄送 otp 成功')
-        return { error: null }
       }
+      if (resendData?.success === false) {
+        errorConsole('resendOtp HTTP 200 但 success=false', resendData?.msg)
+        return { error: new Error(`resendOtp 失敗: ${resendData?.msg ?? 'unknown'}`) }
+      }
+      console.log('✅ 重新寄送 otp 成功')
+      return { error: null }
     }
   }
 
@@ -577,34 +566,4 @@ export class LoginNeeded {
     return new this.LoginResult({ token: others.data.data.token, websiteLink: this.websiteLink })
   }
 
-  get #ConfigInstance() {
-    return class ConfigInstance {
-      static GET_REDIS_BY__ENUM = ['api', 'disposableFn']
-
-      get GET_REDIS_BY__MAP() {
-        return Object.fromEntries(this.constructor.GET_REDIS_BY__ENUM.map((key) => [key, true]))
-      }
-
-      errorMessage(type) {
-        let message = ''
-        switch (type) {
-          case 'wrong-getRedisBy':
-            message = ` 'getRedisBy' should be one of these following: ${this.constructor.GET_REDIS_BY__ENUM.join(', ')}`
-            break
-        }
-
-        return `[${this.constructor.name}]${message}`
-      }
-
-      constructor(config) {
-        const { getRedisBy = 'api' } = config ?? {}
-
-        if (this.GET_REDIS_BY__MAP[getRedisBy] == null) {
-          throw new Error(this.errorMessage('wrong-getRedisBy'))
-        }
-
-        this.getRedisBy = getRedisBy
-      }
-    }
-  }
 }
