@@ -183,6 +183,16 @@ export async function switchRole(token, roleId) {
   console.log(green(`  ✓ 已切換到 roleId=${roleId}`))
 }
 
+// settings.json 的 brand-list key 有時候跟後台 role 系統實際用的 whitelabel/platform 名字不一樣,
+// 跟 auto-login/redis.js 裡 OTP key 的 brand 對應保持一致 (目前唯一已知的: autotrader → copywise)
+const BRAND_TO_ADMIN_ROLE_WHITELABEL = {
+  autotrader: 'copywise',
+}
+
+export function toAdminRoleWhitelabel(brandName) {
+  return BRAND_TO_ADMIN_ROLE_WHITELABEL[brandName] ?? brandName
+}
+
 // 共用的優先級: 同一個 platform 有多個 role 時, _Root > _Admin > 其他
 export function pickRoleByPriority(roles, { nameKey = 'roleName' } = {}) {
   if (!roles || roles.length === 0) return null

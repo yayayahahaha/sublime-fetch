@@ -59,7 +59,11 @@ function generateCacheData() {
   }
 }
 
-export async function loginDisposable(payload, { port = null } = {}) {
+// 共用的「合併既有 cache (deviceFingerprint/token) 後登入, 成功就存回 cache」邏輯。
+// 除了 loginDisposable 之外, 其他不需要開瀏覽器、只是要拿 token 的流程 (例如 2fa-profile-helper.js)
+// 也該透過這個函式登入, 才能吃到 healthCheck、避免每次都重新觸發 device OTP / 2FA
+// TODO(flyc): 這裡要有不使用 cache 的選項
+export async function loginWithCache(payload) {
   generateNeededFolders()
   generateNeededFiles()
   const cache = generateCacheData()
@@ -69,19 +73,16 @@ export async function loginDisposable(payload, { port = null } = {}) {
     throw new Error('Invalid payload type')
   }
 
-  // TODO(flyc): 這裡要有不使用 cache 的選項
   const currentUseCache = new CacheInstance(cache[payload.potentialPk], payload)
-
   payload.mergeCache(currentUseCache)
 
   const { error, token, websiteLink, isInProgress, inProgressTimestamp } = await payload.login()
   if (error != null) {
-    if (isInProgress == null) return console.error('登入失敗: ', error)
-    else {
+    if (isInProgress != null) {
       console.log('登入失敗，但有 isInProgress 的中間態, 將其狀態同步到 cache 檔案')
       currentUseCache.update({ ...payload, isInProgress, inProgressTimestamp })
-      return
     }
+    return { error, isInProgress, inProgressTimestamp }
   }
 
   // 更新存入 cache 等
@@ -91,6 +92,16 @@ export async function loginDisposable(payload, { port = null } = {}) {
   cache[payload.potentialPk] = currentUseCache
   fs.writeFileSync(cacheFilePath, JSON.stringify(cache, null, 2), 'utf8')
   console.log('Cache 儲存成功')
+
+  return { token, websiteLink }
+}
+
+export async function loginDisposable(payload, { port = null } = {}) {
+  const { error, token, websiteLink, isInProgress } = await loginWithCache(payload)
+  if (error != null) {
+    if (isInProgress == null) return console.error('登入失敗: ', error)
+    return
+  }
 
   // 讀取設定判斷是否使用 extension
   const settings = loadSettings()

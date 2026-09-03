@@ -9,6 +9,7 @@ import {
   pickRoleByPriority,
   stageLog,
   switchRole,
+  toAdminRoleWhitelabel,
 } from './admin-api.js'
 import { getAdminTokenWithCache, selectAdminAccount } from './admin-token-cache.js'
 
@@ -164,14 +165,15 @@ async function assignRoles(token, adminName, assignRoleIds) {
 // 查目標帳號在 brandName 下現有的 role
 // targetAdminName === adminname (自己) 時用 assignedRoles (可拿到 id); 查別人時用 adminProfile (查不到 id, 只有 role name)
 async function findExistingRoleForBrand(token, { adminname, targetAdminName, brandName, selfAssigned }) {
+  const roleWhitelabel = toAdminRoleWhitelabel(brandName)
   if (targetAdminName === adminname) {
-    const existing = selfAssigned.filter((r) => r.platform === brandName)
+    const existing = selfAssigned.filter((r) => r.platform === roleWhitelabel)
     if (existing.length === 0) return null
     const picked = pickRoleByPriority(existing)
     return { roleName: picked.roleName, idSuffix: ` (id=${picked.id})` }
   }
   const targetRoles = await getAdminProfileRoles(token, targetAdminName)
-  const existing = targetRoles.filter((r) => r.whitelabel === brandName)
+  const existing = targetRoles.filter((r) => r.whitelabel === roleWhitelabel)
   if (existing.length === 0) return null
   const picked = pickRoleByPriority(existing, { nameKey: 'role' })
   return { roleName: picked.role, idSuffix: '' }
@@ -210,7 +212,7 @@ export async function addRoleToAccount({ token, adminname, brandName, targetAdmi
 
   stageLog(`查詢可加入的 role 清單 (目標: ${targetAdminName})`)
   const available = await roleListForAdminInfo(token, targetAdminName)
-  const candidates = available.filter((r) => r.whitelabel === brandName)
+  const candidates = available.filter((r) => r.whitelabel === toAdminRoleWhitelabel(brandName))
   if (candidates.length === 0) {
     throw new Error(
       `在「可指派 role 清單」中找不到 brand "${brandName}" 的任何 role (共 ${available.length} 筆可用 role)`,
@@ -268,16 +270,27 @@ export async function runAddRoleCli() {
   console.log(lightCyan(`👤 當前 admin: ${adminname}`))
 
   // 目標帳號要在拿到 token 之後才能問, 才能用同一個 token 去搜尋確認帳號存在
-  const targetInput = await input({
-    message: '目標帳號 username (空白 = 加給自己):',
-    default: '',
-  }).then((v) => v.trim()).catch(() => null)
-  if (targetInput == null) return console.log(yellow('使用者取消'))
+  const SELF = '__self__'
+  const OTHER = '__other__'
+  const targetChoice = await select({
+    message: '這個 role 要加給誰?',
+    choices: [
+      { name: `自己 (${adminname})`, value: SELF },
+      { name: '其他 admin 帳號', value: OTHER },
+    ],
+  }).catch(() => null)
+  if (targetChoice == null) return console.log(yellow('使用者取消'))
 
   let targetAdminName = adminname
-  if (targetInput) {
+  if (targetChoice === OTHER) {
+    const targetQuery = await input({
+      message: '輸入目標帳號 username (可以模糊, 之後會讓你選):',
+      validate: (value) => (value.trim().length > 0 ? true : '不能空白'),
+    }).then((v) => v.trim()).catch(() => null)
+    if (!targetQuery) return console.log(yellow('使用者取消'))
+
     try {
-      const resolved = await resolveAdminUsername(token, targetInput)
+      const resolved = await resolveAdminUsername(token, targetQuery)
       if (!resolved) return console.log(yellow('未選定目標帳號, 取消'))
       targetAdminName = resolved.fname
     } catch (e) {

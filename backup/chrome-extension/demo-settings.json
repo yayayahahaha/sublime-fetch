@@ -1,0 +1,21 @@
+{
+  "loginProfiles": [{
+    "displayName": "btse-account-1",
+    "brandName": "btse",
+    "email": "jennylin3",
+    "password": "my-password-example",
+    "secretCode2Fa": ""
+  }, {
+    "displayName": "rollaxx-account-1",
+    "brandName": "rollaxx",
+    "email": "flyc.chung@btse.com",
+    "password": "my-password-example",
+    "secretCode2Fa": "mySecretCodeExample"
+  }, {
+    "displayName": "btse-account-2",
+    "brandName": "btse",
+    "email": "fc3@mailto.plus",
+    "password": "my-password-example",
+    "secretCode2Fa": "mySecretCodeExample"
+  }]
+}

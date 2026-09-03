@@ -1,8 +1,6 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { spawnSync } from 'child_process'
-import { loadSettings } from './settings-loader.js'
-import { LoginNeeded } from './login-stuff.js'
 import { errorConsole, loginDisposable, warnConsole } from './t99-utils.js'
 import select, { Separator } from '@inquirer/select'
 import { input, confirm } from '@inquirer/prompts'
@@ -13,15 +11,21 @@ import { blue } from '../color.js'
 import { clearEmailCache } from '../admin-related/admin-utils.js'
 import { runDepositCli } from '../admin-related/deposit.js'
 import { runAddRoleCli } from '../admin-related/add-role.js'
+import { runGrantUserOpsAccessCli } from '../admin-related/grant-user-ops-access.js'
+import { runResetUserOtpLimitCli } from '../admin-related/reset-user-otp-limit.js'
+import { runBackfillProfileIdentifiersCli } from './backfill-profile-identifiers.js'
 import { registerByList } from './register-stuff.js'
 import { generateAndLogin } from './generate-and-login.js'
 import { twoFaHelper } from './2fa-helper.js'
+import { twoFaProfileHelper } from './2fa-profile-helper.js'
 import { jiraBranchHelper } from './jira-helper.js'
 import { chromeWindowHelper } from './refresh-tabs-helper.js'
 import { operateRedis } from '../isolated-operate-redis/index.js'
 import { mockServerMenu } from '../mock-server/index.js'
+import { otpProxyMenu } from '../otp-proxy/index.js'
 import { releaseCheckHelper } from '../release-check/index.js'
 import { writeActionHelper, watchersHelper } from '../release-check/writeActions.js'
+import { loadLoginProfiles } from './profile-loader.js'
 
 const GET_WHITELABEL_INFO = 'GET_WHITELABEL_INFO'
 const REGISTER_BY_LIST = 'REGISTER_BY_LIST'
@@ -29,12 +33,17 @@ const GENERATE_AND_LOGIN = 'GENERATE_AND_LOGIN'
 const LOGIN_STAGING_ADIN = 'LOGIN_STAGING_ADIN'
 const CLEAR_EMAIL_CACHE = 'CLEAR_EMAIL_CACHE'
 const DEPOSIT_TO_USER = 'DEPOSIT_TO_USER'
-const ADD_ROLE_TO_SELF = 'ADD_ROLE_TO_SELF'
+const ADD_ROLE_TO_ADMIN = 'ADD_ROLE_TO_ADMIN'
+const GRANT_USER_OPS_ACCESS = 'GRANT_USER_OPS_ACCESS'
+const RESET_USER_OTP_LIMIT = 'RESET_USER_OTP_LIMIT'
+const BACKFILL_PROFILE_IDENTIFIERS = 'BACKFILL_PROFILE_IDENTIFIERS'
 const TWO_FA_HELPER = 'TWO_FA_HELPER'
+const TWO_FA_PROFILE_HELPER = 'TWO_FA_PROFILE_HELPER'
 const JIRA_BRANCH_HELPER = 'JIRA_BRANCH_HELPER'
 const CHROME_WINDOW_HELPER = 'CHROME_WINDOW_HELPER'
 const OPERATE_REDIS = 'OPERATE_REDIS'
 const RUN_MOCK_SERVER = 'RUN_MOCK_SERVER'
+const OTP_PROXY_SERVER = 'OTP_PROXY_SERVER'
 const RELEASE_CHECK = 'RELEASE_CHECK'
 const WRITE_MR = 'WRITE_MR'
 const WRITE_PIPELINE = 'WRITE_PIPELINE'
@@ -55,35 +64,13 @@ async function start() {
   })
 
   let loginProfiles = []
+  let profileMap = {}
   try {
-    loginProfiles = loadSettings()?.loginProfiles ?? []
+    ;({ loginProfiles, profileMap } = loadLoginProfiles())
   } catch (error) {
     errorConsole(error.message)
     return
   }
-
-  loginProfiles = loginProfiles
-    .map((item, index) => {
-      let displayName = item.displayName ?? `「動態生成的-display-name-${index + 0}」`
-
-      if (item.displayName == null) {
-        warnConsole(`👽警告👽 第 ${index} 個 profile 缺少 displayName, 將使用 ${displayName}\n`)
-      }
-
-      try {
-        return {
-          displayName,
-          value: new LoginNeeded({ ...item }),
-        }
-      } catch (error) {
-        errorConsole(`生成 profile 失敗: ${error.message}`)
-        return null
-      }
-    })
-    .filter(Boolean)
-    .sort((a, b) => a.displayName.localeCompare(b.displayName, undefined, { numeric: true }))
-
-  const profileMap = Object.fromEntries(loginProfiles.map((item) => [item.displayName, item.value]))
 
   // 檢查是否從命令列提供了 profile 參數
   let profileKey = null
@@ -108,9 +95,24 @@ async function start() {
         description: '啟動 Mock Server',
       },
       {
+        name: 'OTP Proxy Server 啟動 2FA / OTP 取碼 proxy',
+        value: OTP_PROXY_SERVER,
+        description: 'POST /get-otp：同時查 QA 的 payment/spot OTP，併上本地存的 2FA secret 算出的 code',
+      },
+      {
         name: '2FA 助手',
         value: TWO_FA_HELPER,
         description: '讀取、生成、編輯或刪除 2FA Code',
+      },
+      {
+        name: 'Profile 2FA 操作',
+        value: TWO_FA_PROFILE_HELPER,
+        description: '選擇一個 loginProfile, 對它在網站上的 2FA 做讀取、移除或強制重新綁定',
+      },
+      {
+        name: 'Profile 補齊 username',
+        value: BACKFILL_PROFILE_IDENTIFIERS,
+        description: '透過後台 userList 查詢, 幫 settings.json 裡缺 username 的 profile 批量補齊',
       },
       {
         name: 'Jira Branch 生成器',
@@ -180,9 +182,19 @@ async function start() {
         description: '透過 Staging Admin 自動 deposit USDT 給指定 user (含切 role + approve)',
       },
       {
-        name: 'Role add 幫自己加 Admin Role',
-        value: ADD_ROLE_TO_SELF,
-        description: '透過 Staging Admin 幫當前登入者新增指定 brand 的 role (需有 Administrator)',
+        name: 'Role add 幫 admin 帳號加 Role',
+        value: ADD_ROLE_TO_ADMIN,
+        description: '透過 Staging Admin 幫自己或其他 admin 帳號新增指定 brand 的 role (需有 Administrator)',
+      },
+      {
+        name: 'Role 加 OTP/Device 解除權限',
+        value: GRANT_USER_OPS_ACCESS,
+        description: '幫指定 brand 的 role 加上「解除使用者 OTP 限制 / 解除綁定 device」的 access (需有 Administrator)',
+      },
+      {
+        name: '解除使用者 OTP 限制',
+        value: RESET_USER_OTP_LIMIT,
+        description: '對指定 user 執行 unlockOTPLimit; 權限不足時可直接串接上面那個加權限流程再重試',
       },
       new Separator(),
       ...loginProfiles.map((item) => ({ name: `${item.displayName}`, value: item.displayName })),
@@ -198,13 +210,26 @@ async function start() {
   if (answer === LOGIN_STAGING_ADIN) return void loginStagingAdmin()
   if (answer === CLEAR_EMAIL_CACHE) return void clearEmailCache()
   if (answer === DEPOSIT_TO_USER) return void runDepositCli()
-  if (answer === ADD_ROLE_TO_SELF) return void runAddRoleCli()
+  if (answer === ADD_ROLE_TO_ADMIN) return void runAddRoleCli()
+  if (answer === GRANT_USER_OPS_ACCESS) return void runGrantUserOpsAccessCli()
+  if (answer === RESET_USER_OTP_LIMIT) return void runResetUserOtpLimitCli()
+  if (answer === BACKFILL_PROFILE_IDENTIFIERS) return void runBackfillProfileIdentifiersCli()
   if (answer === OPERATE_REDIS) return void operateRedis()
   if (answer === RUN_MOCK_SERVER) return void mockServerMenu()
+
+  if (answer === OTP_PROXY_SERVER) {
+    await otpProxyMenu()
+    return
+  }
   
   if (answer === TWO_FA_HELPER) {
     await twoFaHelper()
-    return 
+    return
+  }
+
+  if (answer === TWO_FA_PROFILE_HELPER) {
+    await twoFaProfileHelper()
+    return
   }
 
   if (answer === JIRA_BRANCH_HELPER) {

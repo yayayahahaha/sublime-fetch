@@ -10,6 +10,7 @@ import {
   pickRoleByPriority,
   stageLog,
   switchRole,
+  toAdminRoleWhitelabel,
 } from './admin-api.js'
 import { addRoleToAccount } from './add-role.js'
 import { getAdminTokenWithCache, getLastApproveOtp, saveLastApproveOtp, selectAdminAccount } from './admin-token-cache.js'
@@ -160,9 +161,10 @@ function buildRemarks(adminname) {
 // 共用: 確保當前 admin 有 brand 的 role, 並切換到該 role (含優先順序 _root > _admin > 其他)
 // allowAutoAddRole=true 時, 沒 role 會自動透過 addRoleToAccount 補上
 export async function ensureAndSwitchToBrandRole({ token, adminname, brandName, allowAutoAddRole = false }) {
+  const roleWhitelabel = toAdminRoleWhitelabel(brandName)
   stageLog(`確認 ${brandName} 的 role`)
   let assigned = await getAssignedRoles(token)
-  let brandRoles = assigned.filter((r) => r.platform === brandName)
+  let brandRoles = assigned.filter((r) => r.platform === roleWhitelabel)
 
   if (brandRoles.length === 0) {
     if (!allowAutoAddRole) {
@@ -171,7 +173,7 @@ export async function ensureAndSwitchToBrandRole({ token, adminname, brandName, 
     console.log(yellow(`  ⚠ 沒有 ${brandName} 的 role, 自動新增中...`))
     await addRoleToAccount({ token, adminname, brandName })
     assigned = await getAssignedRoles(token)
-    brandRoles = assigned.filter((r) => r.platform === brandName)
+    brandRoles = assigned.filter((r) => r.platform === roleWhitelabel)
     if (brandRoles.length === 0) {
       throw new Error(`新增完 role 後仍找不到 ${brandName} 的 role, 中止`)
     }
@@ -354,7 +356,7 @@ export async function runDepositCli() {
   try {
     // 1) 先檢查 role, 沒有的話 prompt 是否要自動加
     const assigned = await getAssignedRoles(token)
-    const hasBrandRole = assigned.some((r) => r.platform === brandName)
+    const hasBrandRole = assigned.some((r) => r.platform === toAdminRoleWhitelabel(brandName))
     let allowAutoAddRole = false
     if (!hasBrandRole) {
       console.log(yellow(`⚠ 當前 admin (${adminname}) 沒有 brand "${brandName}" 的 role`))
