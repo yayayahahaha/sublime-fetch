@@ -32,6 +32,22 @@ my_alias  →  選「Mock Server 啟動有 mock api 的 server」
 
 ### 直接跑（跳過選單）
 
+`mock-server/run.js` 是非互動的薄 entry，不會卡在 inquirer 問答，適合 CLI / script / agent 呼叫。兩種傳參方式都支援，`--flag` 優先於環境變數：
+
+**用 `--flag`（推薦）：**
+
+```bash
+node mock-server/run.js \
+  --default-api-domain https://xxx-api.btse.co \
+  --port 3000 \
+  --modules affiliate,chart-markets-list \   # 逗號分隔；不給這個 flag = 全部、給空字串 = 都不載入
+  --ws-modules demo-feed \                   # 規則同上
+  --ws-domain wss://ws.xxx.btse.io \
+  --show-bypass                              # boolean flag，不用接值
+```
+
+**用環境變數（舊語法；hot reload 內部 fork child 時就是這樣傳的，一樣可以自己直接用）：**
+
 ```bash
 MOCK_DEFAULT_API_DOMAIN=https://xxx-api.btse.co \
 MOCK_PORT=3000 \
@@ -41,6 +57,14 @@ MOCK_WS_DOMAIN=wss://ws.xxx.btse.io \
 MOCK_SHOW_BYPASS=0 \
 node mock-server/run.js
 ```
+
+啟動成功後會自動在 repo 根目錄的 `.pid/mock-server-<port>.pid` 寫一份 pid 檔（記錄 pid、port、啟動指令、時間），process 結束（正常退出 / Ctrl+C / 被 SIGTERM）時會自動清掉。想從外部精準關掉某個自己開的 instance，用同層的 `pid-file.js`：
+
+```bash
+node pid-file.js kill mock-server 3000
+```
+
+只會砍 pid 檔裡記錄的那個 PID，不靠 port 或 process 名稱模糊比對，不會誤殺別的 instance（例如你手動從 t99 開的那個）。
 
 ---
 
@@ -255,7 +279,7 @@ tamper 需要 ws-domain（或宣告 `upstreamDomain`）；啟動時選「🚫 �
 ```
 mock-server/
   index.js            啟動選單（Mock Server：啟動 / 新增 Mock API / 新增 Mock WS）+ 啟動問設定 + hot reload 的 fork/watch launcher
-  run.js              被 fork 的薄 entry（從 env 讀設定起 server）
+  run.js              非互動薄 entry（吃 --flag 或環境變數起 server）；hot reload fork child 走 env var，也可以自己直接呼叫
   server.js           建 express app、載入選到的 HTTP + WS mock、catch-all proxy、掛 ws router
   load-mocks.js       掃 mocks/（.js + .mock.json）、載入選到的、掛載 + 跨模組路徑衝突偵測
   scaffold.js         「新增 Mock API / WS」產生器（寫 .mock.json / .ws.json，或吐 tamper .js 骨架）
@@ -274,3 +298,5 @@ mock-server/
     mocks/*.js        手寫 ws mock（宣告物件）；*.ws.json 宣告式 feed；data/*.json payload
     examples/demo-client.js  測試用探針 client
 ```
+
+`pid-file.js`（repo 根目錄，跟 `otp-proxy/` 共用）：`run.js` 啟動成功時會呼叫它寫 pid 檔，收尾時可以用 `node pid-file.js kill mock-server <port>` 精準關掉，見上面「直接跑（跳過選單）」。

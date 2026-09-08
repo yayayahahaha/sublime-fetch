@@ -16,6 +16,26 @@ my_alias  →  選「OTP Proxy Server 啟動 2FA / OTP 取碼 proxy」
 
 會問你要用哪個 port（預設 `4021`），即時檢查是否被占用，被占用會要你換一個。啟動後會印出下面兩個端點的用法跟範例 curl。
 
+### 直接跑（跳過選單）
+
+`otp-proxy/run.js` 是非互動的薄 entry，不會卡在 inquirer 問答，適合 CLI / script / agent 呼叫。跟互動選單不一樣，**不會自動偵測 port 衝突幫你換一個**，撞到就直接噴 `EADDRINUSE`，啟動前自己先 `lsof -i :<port>` 確認一下：
+
+```bash
+node otp-proxy/run.js --port 4021
+# 或用環境變數：
+OTP_PORT=4021 node otp-proxy/run.js
+```
+
+沒帶 port 就用預設 `4021`（跟互動選單一致）。
+
+啟動成功後會自動在 repo 根目錄的 `.pid/otp-proxy-<port>.pid` 寫一份 pid 檔（記錄 pid、port、啟動指令、時間），process 結束（正常退出 / Ctrl+C / 被 SIGTERM）時會自動清掉。想從外部精準關掉某個自己開的 instance，用同層的 `pid-file.js`：
+
+```bash
+node pid-file.js kill otp-proxy 4021
+```
+
+只會砍 pid 檔裡記錄的那個 PID，不靠 port 或 process 名稱模糊比對，不會誤殺別的 instance（例如你手動從 t99 開的那個）。
+
 ---
 
 ## `POST /get-otp`
@@ -99,7 +119,11 @@ curl 'http://localhost:4021/profiles?brand=btse&username=fc4'
 ```
 otp-proxy/
   index.js              t99 選單進來的入口: 問 port → 啟動 → 印使用說明
+  run.js                非互動薄 entry（吃 --port 或 OTP_PORT 起 server），CLI / agent 直接呼叫用
   server.js             express app: /get-otp、/profiles 兩條路由
   qaClient.js           打 QA 內部 OTP 服務 (payment/spot)
   secrets-storage.js    讀 settings.json 的 loginProfiles、依 username/email + brand 找 secretCode2Fa
+  browser-helpers.js    給瀏覽器 context import 的登入輔助（見 GET /browser-helpers.js）
 ```
+
+`pid-file.js`（repo 根目錄，跟 `mock-server/` 共用）：`run.js` 啟動成功時會呼叫它寫 pid 檔，收尾時可以用 `node pid-file.js kill otp-proxy <port>` 精準關掉，見上面「直接跑（跳過選單）」。

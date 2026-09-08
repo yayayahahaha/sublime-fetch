@@ -5,6 +5,7 @@ import { fetchQaOtp } from './qaClient.js'
 import { loadLoginProfiles, getSecret } from './secrets-storage.js'
 import { gen2FaCode } from '../auto-login/2fa.js'
 import { blue, green, red } from '../color.js'
+import { registerPidFile } from '../pid-file.js'
 
 function pluckOtp(settled) {
   if (settled.status !== 'fulfilled') return { value: null, error: settled.reason?.message ?? String(settled.reason) }
@@ -130,6 +131,7 @@ export async function startServer({ port }) {
 
   return new Promise((resolve) => {
     const server = app.listen(port, () => {
+      registerPidFile('otp-proxy', port)
       console.log(`\n🚀 OTP proxy listening on http://localhost:${port}`)
       resolve(server)
     })

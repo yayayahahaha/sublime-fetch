@@ -17,6 +17,7 @@ import {
 import {
   attachWsRouter
 } from './ws/router.js'
+import { registerPidFile } from '../pid-file.js'
 
 /**
  * 啟動 mock server。
@@ -124,6 +125,7 @@ export async function startServer({
 
   return new Promise((resolve) => {
     const server = app.listen(port, () => {
+      registerPidFile('mock-server', port)
       console.log(`\n🚀 Mock server listening on http://localhost:${port}`)
       console.log(`📡 Proxying unmocked requests to: ${defaultApiDomain}`)
       console.log(`🧩 已載入 HTTP mock: ${loaded.length ? loaded.map((m) => m.name).join(', ') : '（無，全部走 proxy）'}`)
