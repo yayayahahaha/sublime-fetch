@@ -92,34 +92,70 @@ const SCENARIOS = {
 */
 const FORCE_IS_GOOGLE_BIND = null
 
+/*
+  人為延遲 kyc/status 的回應（毫秒）。0 = 不延遲。
+
+  ─── 為什麼要這個 knob ───────────────────────────────────
+  用來驗「2FA 框會不會被 App.vue 清 event_config_id 的那次導航提前關掉」
+  （openDialog 的 watch($route) 對 query-only 變化也會 resolve(null)）。
+
+  那是一場競賽，而勝負取決於**落地時 accountInfo 到了沒有**：
+
+    沒到 → 框要等 user/account 這個網路回應（macrotask），
+           而清理只等一個 $nextTick（microtask）→ 清理必然贏, 測不到風險
+    到了 → 框那條鏈變成純 microtask → 才真的跟清理競爭
+
+  user/account 是在 loginState(true) → dispatch('initial') 的 Promise.all
+  裡發出的, 也就是 session 寫入的那一刻; 而落地要等 prepareLanding 先
+  await 完 kyc/status。所以**把 kyc/status 拖慢就等於讓 accountInfo 一定先到**,
+  逼出「最有利於框」的那一半世界。
+
+  ⚠️ 只加延遲、不動 body, 所以驗證頁看到的資料還是真的。
+  ⚠️ 延遲寫在 tamper 的 modify 裡面（tamper 會 await 它）, 不是另外掛一層
+  middleware —— mock server 不允許同一條 path 被註冊兩次, 會直接判定路徑衝突。
+*/
+const DELAY_KYC_STATUS_MS = 0
+
 export default function register(app, { defaultApiDomain }) {
-  if (SCENARIO !== 'off') {
-    const scenario = SCENARIOS[SCENARIO]
-    if (!scenario) {
-      throw new Error(
-        `nvx-kyc-landing: 不認識的 SCENARIO '${SCENARIO}'，可選：${Object.keys(
-          SCENARIOS
-        ).join(' / ')} / off`
-      )
-    }
+  const scenario = SCENARIO === 'off' ? null : SCENARIOS[SCENARIO]
+  if (SCENARIO !== 'off' && !scenario) {
+    throw new Error(
+      `nvx-kyc-landing: 不認識的 SCENARIO '${SCENARIO}'，可選：${Object.keys(
+        SCENARIOS
+      ).join(' / ')} / off`
+    )
+  }
+
+  // 兩個 knob 任一個開著就要接手這條 path（但只能註冊一次）
+  if (scenario || DELAY_KYC_STATUS_MS > 0) {
+    const rewrite = asJson(body => {
+      if (!scenario) return // 只延遲、不改內容
+      const data = body?.data
+      if (!data) return // 真後端回錯誤（未登入之類）→ 原樣放行
+
+      data.level = scenario.level
+
+      if (Array.isArray(data.levelStatus)) {
+        for (const item of data.levelStatus) {
+          const next = scenario.statusByLevel[item.level]
+          if (next !== undefined) item.status = next
+        }
+      }
+    })
 
     app.use(
       '/api/kyc/status',
       tamper(defaultApiDomain, {
-        label: `kyc/status → ${SCENARIO}`,
-        modify: asJson(body => {
-          const data = body?.data
-          if (!data) return // 真後端回錯誤（未登入之類）→ 原樣放行
-
-          data.level = scenario.level
-
-          if (Array.isArray(data.levelStatus)) {
-            for (const item of data.levelStatus) {
-              const next = scenario.statusByLevel[item.level]
-              if (next !== undefined) item.status = next
-            }
+        label: `kyc/status → ${SCENARIO}${
+          DELAY_KYC_STATUS_MS > 0 ? ` +${DELAY_KYC_STATUS_MS}ms` : ''
+        }`,
+        modify: async (text, ctx) => {
+          if (DELAY_KYC_STATUS_MS > 0) {
+            await new Promise(r => setTimeout(r, DELAY_KYC_STATUS_MS))
           }
-        })
+
+          return rewrite(text, ctx)
+        }
       })
     )
   }
