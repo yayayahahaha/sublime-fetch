@@ -239,6 +239,50 @@ export function keyPrefix(key, depth) {
   return key.split(sep).slice(0, depth).join(sep)
 }
 
+export async function scanByValuePattern(
+  client,
+  { pattern = '*', count = 1000, valueRegex, depths = [1, 2, 3], sampleLimit = 5, onProgress } = {}
+) {
+  const nodes = getMasterNodes(client)
+  const byDepth = depths.map(() => new Map())
+  let scanned = 0
+  let matched = 0
+
+  await Promise.all(
+    nodes.map(async (node) => {
+      let cursor = '0'
+      do {
+        const [next, batch] = await node.scan(cursor, 'MATCH', pattern, 'COUNT', count)
+        cursor = next
+        scanned += batch.length
+
+        if (batch.length) {
+          // pipeline GET，非 string type 的 key 會回 err，直接跳過即可
+          const pipeline = node.pipeline()
+          batch.forEach((key) => pipeline.get(key))
+          const results = await pipeline.exec()
+          results.forEach(([err, value], i) => {
+            if (err || value == null || !valueRegex.test(value)) return
+            matched += 1
+            const key = batch[i]
+            depths.forEach((d, di) => {
+              const prefix = keyPrefix(key, d)
+              const entry = byDepth[di].get(prefix) ?? { count: 0, samples: [] }
+              entry.count += 1
+              if (entry.samples.length < sampleLimit) entry.samples.push({ key, value })
+              byDepth[di].set(prefix, entry)
+            })
+          })
+        }
+
+        if (onProgress) onProgress({ scanned, matched })
+      } while (cursor !== '0')
+    })
+  )
+
+  return { scanned, matched, byDepth: depths.map((depth, i) => ({ depth, map: byDepth[i] })) }
+}
+
 export async function countByPrefix(
   client,
   { depths = [1, 2, 3], pattern = '*', count = 1000, onProgress } = {}

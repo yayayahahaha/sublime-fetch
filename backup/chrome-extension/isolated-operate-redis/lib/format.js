@@ -54,6 +54,17 @@ export function printKey({ key, type, ttl, value }) {
   }
 }
 
+export function printValueMatches(map, { maxGroups = 10 } = {}) {
+  const sorted = [...map.entries()].sort((a, b) => b[1].count - a[1].count).slice(0, maxGroups)
+  for (const [prefix, { count, samples }] of sorted) {
+    console.log(`  ${lightCyan(prefix)}  ${gray(`(${count} match(es))`)}`)
+    for (const { key, value } of samples) {
+      console.log(`    ${gray(key)} ${green('=>')} ${preview(value)}`)
+    }
+  }
+  console.log()
+}
+
 export function printPrefixTable(title, countMap, total, minCount = 1) {
   console.log(bold(title))
   const sorted = [...countMap.entries()]

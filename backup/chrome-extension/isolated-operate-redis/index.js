@@ -8,11 +8,12 @@ import {
   resolveKeys,
   delKeys,
   countByPrefix,
+  scanByValuePattern,
   getDbSize,
   getServerVersion,
   isPattern,
 } from './lib/ops.js'
-import { gray, bold, dim, printKey, printPrefixTable } from './lib/format.js'
+import { gray, bold, dim, printKey, printPrefixTable, printValueMatches } from './lib/format.js'
 
 const DEL_PREVIEW_MAX = 20
 const LIST_DEFAULT_LIMIT = 50
@@ -59,7 +60,11 @@ export async function operateRedis() {
           },
           { name: '2. List keys', value: 'list' },
           { name: '3. Prefix stats', value: 'stats' },
-          { name: '4. Delete key(s)', value: 'delete' },
+          {
+            name: `4. Find keys by value pattern  ${gray('(掃全部 key，比對 value，找 OTP-like key 現在長什麼樣)')}`,
+            value: 'value-pattern',
+          },
+          { name: '5. Delete key(s)', value: 'delete' },
           { name: '0. Exit', value: 'exit' },
         ],
       })
@@ -68,6 +73,7 @@ export async function operateRedis() {
       if (action === 'device-otp') await actionDeviceOtp(client)
       if (action === 'list') await actionList(client)
       if (action === 'stats') await actionPrefixStats(client)
+      if (action === 'value-pattern') await actionValuePattern(client)
       if (action === 'delete') await actionDelete(client)
       console.log()
     }
@@ -151,6 +157,56 @@ async function actionPrefixStats(client) {
     const minCount = depth >= 3 ? 2 : 1
     const suffix = minCount > 1 ? ` (count >= ${minCount})` : ''
     printPrefixTable(`=== by first ${depth} segment(s)${suffix} ===`, map, scanned, minCount)
+  }
+}
+
+async function actionValuePattern(client) {
+  const pattern = await input({
+    message: 'pattern to scan (default = all keys):',
+    default: '*',
+  })
+  const regexStr = await input({
+    message: 'value regex (default = 6 位數字 OTP):',
+    default: '^\\d{6}$',
+  })
+  let valueRegex
+  try {
+    valueRegex = new RegExp(regexStr)
+  } catch (e) {
+    console.log(`${red(`invalid regex: ${e.message}`)}`)
+    return
+  }
+  const depthsStr = await input({
+    message: 'depths to group by (comma-separated):',
+    default: '1,2,3',
+  })
+  const depths = depthsStr
+    .split(',')
+    .map((s) => Number(s.trim()))
+    .filter((n) => Number.isInteger(n) && n > 0)
+  if (!depths.length) {
+    console.log(`${yellow('no valid depths, aborted.')}`)
+    return
+  }
+
+  console.log()
+  const { scanned, matched, byDepth } = await scanByValuePattern(client, {
+    pattern,
+    valueRegex,
+    depths,
+    onProgress: ({ scanned: s, matched: m }) =>
+      process.stderr.write(`\r  ${gray(`scanned ${s} keys, ${m} match(es)`)}`),
+  })
+  process.stderr.write('\n\n')
+
+  if (matched === 0) {
+    console.log(`${yellow(`no value matched ${regexStr} among ${scanned} key(s)`)}`)
+    return
+  }
+
+  for (const { depth, map } of byDepth) {
+    console.log(bold(`=== by first ${depth} segment(s) (matched ${matched}/${scanned}) ===`))
+    printValueMatches(map)
   }
 }
 
