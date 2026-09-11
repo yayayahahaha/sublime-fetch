@@ -83,11 +83,30 @@ async function aheadBehind(repoPath, localRef, remoteRef) {
   }
 }
 
+// 這個 branch 名字曾不曾出現在 target 歷史裡的 merge commit 訊息（例如 GitLab 預設的
+// "Merge branch 'xxx' into 'dev'"）。跟 --contains 不同：即使 branch tip 之後被 rebase/force-push
+// 改掉了，當年那個 merge commit 只要還留在 target 的歷史上就查得到 —— 用來在 rebase 前確認「有沒有真的曾經進過」。
+// 缺點：squash 或 fast-forward merge 不會留下含分支名的 merge commit，這種情況查不到。
+async function everMergedGrep(repoPath, branchName, targetBranches, targetHeads) {
+  const result = []
+  for (const t of targetBranches) {
+    if (!targetHeads[t]) continue // target 在 remote 上不存在就跳過
+    try {
+      const out = await git(repoPath, ['log', `refs/remotes/${REMOTE}/${t}`, '--merges', '--fixed-strings', '--grep', branchName, '--format=%H'])
+      if (out) result.push(t)
+    } catch {
+      // 查詢失敗就當作沒找到，不擋主流程
+    }
+  }
+  return result
+}
+
 async function analyzeBranch(repoPath, entry, targetBranches, targetHeads) {
   const tip = entry.remoteRef ?? entry.localRef
   const containing = await listContaining(repoPath, tip)
   // 只認 remote：以 server 上的 origin/<target> 是否包含此 commit 為準（發版語意）
   const mergedInto = targetBranches.filter((t) => containing.has(`refs/remotes/${REMOTE}/${t}`))
+  const everMergedInto = await everMergedGrep(repoPath, entry.short, targetBranches, targetHeads)
 
   // 空 branch 防呆：branch tip 若等於某 target 的 head commit（＝沒做事、tip 剛好落在 mainline 上）
   const tipSha = await revParse(repoPath, tip)
@@ -110,7 +129,7 @@ async function analyzeBranch(repoPath, entry, targetBranches, targetHeads) {
     behind = null
   }
 
-  return { name: entry.short, hasLocal, hasRemote, pushed, ahead, behind, mergedInto, tipIsHeadOf }
+  return { name: entry.short, hasLocal, hasRemote, pushed, ahead, behind, mergedInto, tipIsHeadOf, everMergedInto }
 }
 
 /**

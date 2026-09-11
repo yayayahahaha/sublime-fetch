@@ -109,6 +109,19 @@ export function repoReachedTargets(repo) {
   return s
 }
 
+// 單一 branch「曾經」被 merge 進哪些 target（見 branches.js 的 everMergedGrep：
+// 不受後續 rebase/force-push branch tip 影響，但 squash / fast-forward merge 查不到）
+export function branchEverMergedInto(b) {
+  return new Set(b.everMergedInto ?? [])
+}
+
+// 一個 repo 的 branch 們合起來「曾經」進了哪些 target
+export function repoEverMergedTargets(repo) {
+  const s = new Set()
+  for (const b of repo.branches ?? []) for (const t of branchEverMergedInto(b)) s.add(t)
+  return s
+}
+
 // 一個 repo 有沒有「送出過」的 MR（opened 或 merged）
 export function repoHasSubmittedMr(repo) {
   return (repo.branches ?? []).some((b) => Array.isArray(b.mergeRequests) && b.mergeRequests.some((m) => m.state === 'opened' || m.state === 'merged'))

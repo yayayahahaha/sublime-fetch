@@ -17,6 +17,13 @@
 > `git branch --all --contains` 判斷是否已合併進 target 分支（dev/staging/…），
 > 同時比對本地與 `origin/同名` 分支偵測「尚未 push」或「領先 N commit」。
 >
+> 「曾經 merge 過」：用 `git log <target> --merges --grep <branch>` 找 target 歷史裡
+> 有沒有含此分支名的 merge commit（例如 GitLab 預設訊息 `Merge branch 'xxx' into 'dev'`）。
+> 跟即時的 `--contains` 不同，即使之後把分支 rebase / force-push 換掉 tip，只要當年那個
+> merge commit 還留在 target 歷史上就查得到——適合在 rebase 前確認「有沒有真的曾經進過」。
+> 缺點：squash 或 fast-forward merge 不會留下含分支名的 merge commit，這種情況查不到。
+> 報表的 `Merge(dev/曾dev|staging/曾staging)` 欄，每個 target 顯示「即時/曾經」兩個 ✅/❌。
+>
 > fix version 挑選規則：從版本名稱抽出 8 碼 `YYYYMMDD`，選出 date token 落在
 > 「今天 ~ 今天 + `daysAhead` 天」的版本（預設 30 天，執行時可互動覆寫），
 > 再撈這些版本底下的所有 ticket（不過濾狀態）。

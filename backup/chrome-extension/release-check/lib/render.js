@@ -3,7 +3,7 @@
 import Table from 'cli-table3'
 import { lightCyan, green, yellow, blue, red, lightGreen, lightRed, magenta } from '../../color.js'
 import { extractVersionDate } from './fixVersion.js'
-import { branchReachedTargets, repoReachedTargets, repoHasSubmittedMr } from './assess.js'
+import { branchReachedTargets, repoReachedTargets, repoEverMergedTargets, repoHasSubmittedMr } from './assess.js'
 
 // OSC 8 終端機超連結；不支援的終端機/CI 可用 setHyperlinks(false) 退回純文字+URL
 let useHyperlinks = true
@@ -160,11 +160,20 @@ function urgencyCell(t) {
   return meta.color(`${meta.icon} ${when}`)
 }
 
-// Merge 狀態 cell：每個 stagingBranch 一個 ✅/❌（每個有 branch 的 repo 都達成才 ✅）
+// Merge 狀態 cell：每個 stagingBranch 顯示「即時/曾經」兩個 ✅/❌（每個有 branch 的 repo 都達成才 ✅）。
+// 即時 = git --contains 現在的 tip；曾經 = target 歷史裡有沒有含分支名的 merge commit（見 branches.js
+// 的 everMergedGrep），不受後續 rebase/force-push tip 影響。rebase 前若「即時 ❌ / 曾經 ✅」，
+// 代表「曾經真的 merge 過，只是現在的 tip 是 rebase 後的新 commit，contains 查不到」，可以放心 rebase。
 function mergeCell(t, stagingBranches) {
   const involved = (t.repos ?? []).filter((r) => (r.branches ?? []).length > 0)
   if (!involved.length) return '-'
-  return stagingBranches.map((sb) => (involved.every((r) => repoReachedTargets(r).has(sb)) ? green('✅') : red('❌'))).join('/')
+  return stagingBranches
+    .map((sb) => {
+      const now = involved.every((r) => repoReachedTargets(r).has(sb)) ? green('✅') : red('❌')
+      const ever = involved.every((r) => repoEverMergedTargets(r).has(sb)) ? green('✅') : red('❌')
+      return `${now}/${ever}`
+    })
+    .join('|')
 }
 
 // Push 狀態 cell：任一 branch 有未 push 就 ❌
@@ -239,11 +248,11 @@ function renderOtherTable(tickets, model) {
   const stagingBranches = model.stagingBranches ?? []
   const doneBranches = model.doneBranches ?? []
   const table = new Table({
-    head: ['緊急', 'Ticket', '標題', 'Fix Version', 'Status', `Merge(${stagingBranches.join('/')})`, 'Push', 'MR'].map((h) => blue(h)),
+    head: ['緊急', 'Ticket', '標題', 'Fix Version', 'Status', `Merge(${stagingBranches.map((b) => `${b}/曾${b}`).join('|')})`, 'Push', 'MR'].map((h) => blue(h)),
     style: { head: [], border: ['dim'] },
   })
   for (const t of tickets) {
-    table.push([urgencyCell(t), keyLabel(t), truncate(t.summary, 40), fixVersionCell(t), `${t.statusEmoji ? t.statusEmoji + ' ' : ''}${t.status}`, mergeCell(t, stagingBranches), pushCell(t), mrCellCompact(t)])
+    table.push([urgencyCell(t), keyLabel(t), truncate(t.summary, 28), fixVersionCell(t), `${t.statusEmoji ? t.statusEmoji + ' ' : ''}${t.status}`, mergeCell(t, stagingBranches), pushCell(t), mrCellCompact(t)])
   }
   console.log(table.toString())
 
@@ -299,7 +308,7 @@ function renderFixVersionTables(tickets) {
           }).join('\n')
         : '-'
       const status = `${t.statusEmoji ? t.statusEmoji + ' ' : ''}${t.status}`
-      table.push([keyLabel(t), truncate(t.summary, 48), status, mrCell, countCell, t.type ?? '-'])
+      table.push([keyLabel(t), truncate(t.summary, 34), status, mrCell, countCell, t.type ?? '-'])
     }
     console.log(table.toString())
     console.log('')
