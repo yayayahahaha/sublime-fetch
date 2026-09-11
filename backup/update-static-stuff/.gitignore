@@ -1,5 +1,7 @@
 # 設定檔
 setting.json
+# 批量同步用的 brand + figma 網址清單 (機器/工作階段自己的清單, 不共用)
+batch-sync.json
 # 放新的圖片的資料夾
 new-images/
 # 從 figma export 下來的原始圖片 source

@@ -3,7 +3,6 @@ import fs from 'fs'
 import path from 'path'
 import terminalImage from 'terminal-image'
 import {
-  checkSetting,
   consoleGreen,
   consolePathHint,
   consoleRed,
@@ -13,19 +12,17 @@ import {
   high,
   isDir,
   readFilesMapByName,
-  readSetting,
+  requireParams,
 } from './utils.js'
 
-export async function figmaStuff() {
-  const settings = readSetting()
-  if (settings == null) return
-
-  const { ok, newImagesFolder, figmaImagesFolders } = checkSetting(settings, [
-    'new-images-folder',
-    'figma-images-folders',
-  ])
-  if (!ok) return
-  consoleStep('setting')
+/**
+ * @param {object} options
+ * @param {string} options.newImagesFolder
+ * @param {string} options.figmaImagesFolders
+ * @param {boolean} [options.skipConfirm] 略過「即將覆蓋 repo」的確認步驟, 直接視為同意。
+ */
+export async function figmaStuff({ newImagesFolder, figmaImagesFolders, skipConfirm = false } = {}) {
+  if (!requireParams({ newImagesFolder, figmaImagesFolders }, ['newImagesFolder', 'figmaImagesFolders'])) return
 
   const sourceDir = path.resolve('.', figmaImagesFolders)
   const targetDir = path.resolve('.', newImagesFolder, 'static')
@@ -58,19 +55,21 @@ export async function figmaStuff() {
   }
   consoleStep(`${checkNeededImages.length} 個 Figma 來源檔案存在`)
 
-  const makeSure = await select({
-    message: `檢查完畢，即將開始覆蓋當前 repo 底下指定的 ${newImagesFolder} 相關的檔案，確定嗎?`,
-    choices: [
-      {
-        name: '等等等等等等等等等等',
-        value: false,
-      },
-      {
-        name: '清除完畢，開始吧',
-        value: true,
-      },
-    ],
-  }).catch(() => false)
+  const makeSure = skipConfirm
+    ? true
+    : await select({
+      message: `檢查完畢，即將開始覆蓋當前 repo 底下指定的 ${newImagesFolder} 相關的檔案，確定嗎?`,
+      choices: [
+        {
+          name: '等等等等等等等等等等',
+          value: false,
+        },
+        {
+          name: '清除完畢，開始吧',
+          value: true,
+        },
+      ],
+    }).catch(() => false)
   if (!makeSure) return
 
   ensureDir(targetDir)

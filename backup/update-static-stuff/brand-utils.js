@@ -32,11 +32,34 @@ export async function pickBrand(frontendRepoPath) {
   }).catch(() => null)
 }
 
-export async function resolveBrand({ settingBrand, frontendRepoPath, s3RepoPath } = {}) {
-  if (settingBrand != null) return settingBrand
+/**
+ * 解析並驗證要用哪個 brand。
+ *
+ * 消費端自己驗證參數的正確性: 不管 targetBrand 是從 setting.json 讀到的、還是呼叫端直接寫死傳進來的,
+ * 都要在這裡驗證它是否真的存在於 frontendRepoPath / s3RepoPath 底下, 不會因為「有給值就相信它」而漏檢查。
+ * 沒給 targetBrand 才會跳互動選單, 選出來的一樣會驗證 s3RepoPath 那邊 (frontend 那邊天生就存在, 因為是從那個資料夾列出來的)。
+ */
+export async function resolveBrand({ targetBrand = null, frontendRepoPath, s3RepoPath } = {}) {
+  if (targetBrand != null) {
+    if (frontendRepoPath != null) {
+      const brandPath = path.resolve(frontendRepoPath, 'src', `${BRAND_PREFIX}${targetBrand}`)
+      if (!isDir(brandPath)) {
+        consoleRed(`target-brand "${targetBrand}" 不存在於 ${brandPath}`)
+        return null
+      }
+    }
+    if (s3RepoPath != null) {
+      const s3BrandPath = path.resolve(s3RepoPath, targetBrand)
+      if (!fs.existsSync(s3BrandPath)) {
+        consoleRed(`target-brand "${targetBrand}" 不存在於 ${s3BrandPath}`)
+        return null
+      }
+    }
+    return targetBrand
+  }
 
   if (frontendRepoPath == null) {
-    consoleRed('需要 frontend-repo-path 才能挑選 brand (或在 setting.json 設定 target-brand)')
+    consoleRed('需要 frontend-repo-path 才能挑選 brand (或直接提供 target-brand)')
     return null
   }
 

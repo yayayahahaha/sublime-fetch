@@ -4,7 +4,6 @@ import fs from 'fs'
 import path from 'path'
 import terminalImage from 'terminal-image'
 import {
-  checkSetting,
   consoleGreen,
   consolePathHint,
   consoleRed,
@@ -14,26 +13,31 @@ import {
   high,
   isDir,
   readFilesRecursively,
-  readSetting,
+  requireParams,
 } from './utils.js'
 import { resolveBrand } from './brand-utils.js'
 
 const exampleImagesFolderPath = path.resolve('.', 'assets-default-images')
 
-export async function homeAssetsStuff() {
-  const settings = readSetting()
-  if (settings == null) return
+/**
+ * @param {object} options
+ * @param {string} options.frontendRepoPath
+ * @param {string} options.newImagesFolder
+ * @param {string} [options.targetBrand] 沒給就跳互動選單, 有給的話這裡會驗證它是否真的存在於 frontendRepoPath 底下。
+ * @param {string[]} [options.selectedImages] 呼叫端已經決定要哪些圖片的話, 傳入 ASSETS_IMAGES 的 filename 陣列,
+ *                                            會直接依這份清單處理, 不會再跳互動勾選。
+ * @param {boolean} [options.skipConfirm] 略過「即將覆蓋 repo」的確認步驟, 直接視為同意。
+ */
+export async function homeAssetsStuff({
+  frontendRepoPath,
+  newImagesFolder,
+  targetBrand: presetBrand = null,
+  selectedImages: presetSelectedImages = null,
+  skipConfirm = false,
+} = {}) {
+  if (!requireParams({ frontendRepoPath, newImagesFolder }, ['frontendRepoPath', 'newImagesFolder'])) return
 
-  const {
-    ok,
-    frontendRepoPath,
-    newImagesFolder,
-    targetBrand: settingBrand,
-  } = checkSetting(settings, ['frontend-repo-path', 'new-images-folder', 'target-brand'])
-  if (!ok) return
-  consoleStep('setting')
-
-  const targetBrand = await resolveBrand({ settingBrand, frontendRepoPath })
+  const targetBrand = await resolveBrand({ targetBrand: presetBrand, frontendRepoPath })
   if (targetBrand == null) return
   consoleStep(`target-brand = ${high(targetBrand)}`)
 
@@ -49,43 +53,51 @@ export async function homeAssetsStuff() {
   }
   consoleStep(`${newImagesFolder} 為資料夾`)
 
-  const figmaPlaceExample = await terminalImage.file(path.resolve('.', 'hint-images/home-hints.png'), {
-    width: '50%',
-    height: '50%',
-  })
-
-  console.log('這些圖片是 home 頁面這裡的圖片')
-  console.log(figmaPlaceExample)
-
-  const imageResults = await Promise.all(
-    ASSETS_IMAGES.map((imageInfo) => {
-      const imageConsole = terminalImage.file(imageInfo.demoImagePath, {
-        width: '10%',
-        height: '10%',
-        preserveAspectRatio: false,
-      })
-      return Promise.all([imageConsole, imageInfo])
-    })
-  )
-
-  const checkboxOptions = imageResults.map((result, index) => {
-    const [imageConsole, imageInfo] = result
-    return {
-      name: `${index + 1}. ${imageInfo.filename}: ${imageInfo.des}`,
-      description: imageConsole,
-      value: imageInfo,
-      checked: true,
+  let 選擇的圖片們
+  if (presetSelectedImages != null) {
+    選擇的圖片們 = ASSETS_IMAGES.filter((imageInfo) => presetSelectedImages.includes(imageInfo.filename))
+    if (選擇的圖片們.length === 0) {
+      return void consoleRed('selectedImages 沒有對應到任何已知圖片, 請確認 filename 是否正確')
     }
-  })
+  } else {
+    const figmaPlaceExample = await terminalImage.file(path.resolve('.', 'hint-images/home-hints.png'), {
+      width: '50%',
+      height: '50%',
+    })
 
-  const 選擇的圖片們 = await checkbox({
-    message: '請把不需要的 images 取消勾選',
-    choices: checkboxOptions,
-    pageSize: checkboxOptions.length,
-    loop: false,
-  }).catch(() => null)
-  if (選擇的圖片們 == null) return void consoleRed('使用者取消')
-  if (選擇的圖片們.length === 0) return void consoleRed('沒有勾選任何圖片')
+    console.log('這些圖片是 home 頁面這裡的圖片')
+    console.log(figmaPlaceExample)
+
+    const imageResults = await Promise.all(
+      ASSETS_IMAGES.map((imageInfo) => {
+        const imageConsole = terminalImage.file(imageInfo.demoImagePath, {
+          width: '10%',
+          height: '10%',
+          preserveAspectRatio: false,
+        })
+        return Promise.all([imageConsole, imageInfo])
+      })
+    )
+
+    const checkboxOptions = imageResults.map((result, index) => {
+      const [imageConsole, imageInfo] = result
+      return {
+        name: `${index + 1}. ${imageInfo.filename}: ${imageInfo.des}`,
+        description: imageConsole,
+        value: imageInfo,
+        checked: true,
+      }
+    })
+
+    選擇的圖片們 = await checkbox({
+      message: '請把不需要的 images 取消勾選',
+      choices: checkboxOptions,
+      pageSize: checkboxOptions.length,
+      loop: false,
+    }).catch(() => null)
+    if (選擇的圖片們 == null) return void consoleRed('使用者取消')
+    if (選擇的圖片們.length === 0) return void consoleRed('沒有勾選任何圖片')
+  }
 
   const checkNeededImages = await checkAssetsImages(newImagesFolder, {
     選擇的圖片們,
@@ -97,19 +109,21 @@ export async function homeAssetsStuff() {
   }
   consoleStep(`${checkNeededImages.length} 張圖片存在與尺寸`)
 
-  const makeSure = await select({
-    message: '檢查完畢，即將開始覆蓋 assets 相關的檔案，請確認清空 frontend repo 的 git status',
-    choices: [
-      {
-        name: '我還沒清完，等等再做',
-        value: false,
-      },
-      {
-        name: '清除完畢，開始吧',
-        value: true,
-      },
-    ],
-  }).catch(() => false)
+  const makeSure = skipConfirm
+    ? true
+    : await select({
+      message: '檢查完畢，即將開始覆蓋 assets 相關的檔案，請確認清空 frontend repo 的 git status',
+      choices: [
+        {
+          name: '我還沒清完，等等再做',
+          value: false,
+        },
+        {
+          name: '清除完畢，開始吧',
+          value: true,
+        },
+      ],
+    }).catch(() => false)
   if (!makeSure) return
 
   checkNeededImages.forEach((payload) => {

@@ -3,7 +3,6 @@ import fs from 'fs'
 import select from '@inquirer/select'
 import { JSDOM } from 'jsdom'
 import {
-  checkSetting,
   consoleGreen,
   consolePathHint,
   consoleRed,
@@ -13,7 +12,7 @@ import {
   ensureDir,
   high,
   isDir,
-  readSetting,
+  requireParams,
 } from './utils.js'
 import { resolveBrand } from './brand-utils.js'
 
@@ -58,20 +57,17 @@ const VUE_ICON_TEMPLATE_BY_LANG = {
 const LOGO_TEMPLATE_FILE_NAME = 'LOGO_TEMPLATE.txt'
 const APP_ICON_TEMPLATE_FILE_NAME = 'APP_ICON_TEMPLATE.txt'
 
-export async function svgLogoStuff() {
-  const settings = readSetting()
-  if (settings == null) return
+/**
+ * @param {object} options
+ * @param {string} options.frontendRepoPath
+ * @param {string} options.newImagesFolder
+ * @param {string} [options.targetBrand] 沒給就跳互動選單, 有給的話這裡會驗證它是否真的存在於 frontendRepoPath 底下。
+ * @param {boolean} [options.skipConfirm] 略過「即將覆蓋 repo」的確認步驟, 直接視為同意。
+ */
+export async function svgLogoStuff({ frontendRepoPath, newImagesFolder, targetBrand: presetBrand = null, skipConfirm = false } = {}) {
+  if (!requireParams({ frontendRepoPath, newImagesFolder }, ['frontendRepoPath', 'newImagesFolder'])) return
 
-  const {
-    ok,
-    frontendRepoPath,
-    newImagesFolder,
-    targetBrand: settingBrand,
-  } = checkSetting(settings, ['frontend-repo-path', 'new-images-folder', 'target-brand'])
-  if (!ok) return
-  consoleStep('setting')
-
-  const targetBrand = await resolveBrand({ settingBrand, frontendRepoPath })
+  const targetBrand = await resolveBrand({ targetBrand: presetBrand, frontendRepoPath })
   if (targetBrand == null) return
   consoleStep(`target-brand = ${high(targetBrand)}`)
 
@@ -115,19 +111,21 @@ export async function svgLogoStuff() {
     return void consoleRed('維護頁 logo 來源檢查未通過，請修正以上問題後再執行')
   }
 
-  const makeSure = await select({
-    message: '檢查完畢，即將開始修改 LogoLight / LogoDark / AppIcon / 維護頁 logo，請確認清空 frontend repo 的 git status',
-    choices: [
-      {
-        name: '我還沒清完，等等再做',
-        value: false,
-      },
-      {
-        name: '清除完畢，開始吧',
-        value: true,
-      },
-    ],
-  }).catch(() => false)
+  const makeSure = skipConfirm
+    ? true
+    : await select({
+      message: '檢查完畢，即將開始修改 LogoLight / LogoDark / AppIcon / 維護頁 logo，請確認清空 frontend repo 的 git status',
+      choices: [
+        {
+          name: '我還沒清完，等等再做',
+          value: false,
+        },
+        {
+          name: '清除完畢，開始吧',
+          value: true,
+        },
+      ],
+    }).catch(() => false)
   if (!makeSure) return
 
   await syncLogoLightAndDark(logoInstanceList, {
@@ -144,21 +142,25 @@ export async function svgLogoStuff() {
 }
 
 // S3 那邊的
-export async function s3LogStuff() {
-  const settings = readSetting()
-  if (settings == null) return
+/**
+ * @param {object} options
+ * @param {string} options.frontendRepoPath 純粹用來驗證 brand 在 frontend repo 那邊也存在, 不會拿來組路徑。
+ * @param {string} options.s3RepoPath
+ * @param {string} options.newImagesFolder
+ * @param {string} [options.targetBrand] 沒給就跳互動選單, 有給的話這裡會驗證它是否真的存在於 frontendRepoPath / s3RepoPath 底下。
+ * @param {boolean} [options.skipConfirm] 略過「即將覆蓋 repo」的確認步驟, 直接視為同意。
+ */
+export async function s3LogStuff({
+  frontendRepoPath,
+  s3RepoPath,
+  newImagesFolder,
+  targetBrand: presetBrand = null,
+  skipConfirm = false,
+} = {}) {
+  if (!requireParams({ frontendRepoPath, s3RepoPath, newImagesFolder }, ['frontendRepoPath', 's3RepoPath', 'newImagesFolder']))
+    return
 
-  const {
-    ok,
-    frontendRepoPath,
-    s3RepoPath,
-    newImagesFolder,
-    targetBrand: settingBrand,
-  } = checkSetting(settings, ['frontend-repo-path', 's3-repo-path', 'new-images-folder', 'target-brand'])
-  if (!ok) return
-  consoleStep('setting')
-
-  const targetBrand = await resolveBrand({ settingBrand, frontendRepoPath, s3RepoPath })
+  const targetBrand = await resolveBrand({ targetBrand: presetBrand, frontendRepoPath, s3RepoPath })
   if (targetBrand == null) return
   consoleStep(`target-brand = ${high(targetBrand)}`)
 
@@ -186,19 +188,21 @@ export async function s3LogStuff() {
   }
   consoleStep(`Logo 來源檔案存在 (png + svg)`)
 
-  const makeSure = await select({
-    message: '檢查完畢，即將開始把 Logo 寫入 s3 repo，請確認清空 s3 repo 的 git status',
-    choices: [
-      {
-        name: '我還沒清完，等等再做',
-        value: false,
-      },
-      {
-        name: '清除完畢，開始吧',
-        value: true,
-      },
-    ],
-  }).catch(() => false)
+  const makeSure = skipConfirm
+    ? true
+    : await select({
+      message: '檢查完畢，即將開始把 Logo 寫入 s3 repo，請確認清空 s3 repo 的 git status',
+      choices: [
+        {
+          name: '我還沒清完，等等再做',
+          value: false,
+        },
+        {
+          name: '清除完畢，開始吧',
+          value: true,
+        },
+      ],
+    }).catch(() => false)
   if (!makeSure) return
 
   logoInstanceList.forEach((payload) => {
@@ -258,23 +262,29 @@ export function checkS3Logos(newImagesFolder, { s3RepoPath, targetBrand, sourceF
   return allExist ? formatedLogoInfo : []
 }
 
-export async function svgToVue() {
+/**
+ * @param {object} [options]
+ * @param {'js'|'ts'} [options.scriptLang] 呼叫端已經決定要哪種語言的話直接傳進來, 不會再問一次。
+ */
+export async function svgToVue({ scriptLang: presetScriptLang = null } = {}) {
   const svgFolder = 'svg-to-vue-images'
   const resultFolder = 'svg-to-vue-images-result'
 
-  const scriptLang = await select({
-    message: '產生的 vue 裡的 script 要用哪種語言?',
-    choices: [
-      {
-        name: 'JavaScript (<script setup>)',
-        value: 'js',
-      },
-      {
-        name: 'TypeScript (<script setup lang="ts">)',
-        value: 'ts',
-      },
-    ],
-  }).catch(() => null)
+  const scriptLang =
+    presetScriptLang ??
+    (await select({
+      message: '產生的 vue 裡的 script 要用哪種語言?',
+      choices: [
+        {
+          name: 'JavaScript (<script setup>)',
+          value: 'js',
+        },
+        {
+          name: 'TypeScript (<script setup lang="ts">)',
+          value: 'ts',
+        },
+      ],
+    }).catch(() => null))
   if (scriptLang == null) return void consoleRed('使用者取消')
   consoleStep(`script 語言 = ${high(scriptLang)}`)
 

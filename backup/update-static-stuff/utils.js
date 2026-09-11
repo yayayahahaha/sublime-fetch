@@ -100,27 +100,21 @@ export function checkSetting(setting, requiredKeys) {
     result[meta.camel] = val
   }
 
-  if (requiredKeys.includes('target-brand') && result.targetBrand != null) {
-    if (requiredKeys.includes('frontend-repo-path') && result.frontendRepoPath != null) {
-      const brandPath = path.resolve(result.frontendRepoPath, 'src', `brand-${result.targetBrand}`)
-      if (!fs.existsSync(brandPath)) {
-        consoleRed(`target-brand "${result.targetBrand}" 不存在於 ${brandPath}`)
-        result.targetBrand = null
-        result.ok = false
-      }
-    }
-
-    if (requiredKeys.includes('s3-repo-path') && result.s3RepoPath != null) {
-      const s3BrandPath = path.resolve(result.s3RepoPath, result.targetBrand)
-      if (!fs.existsSync(s3BrandPath)) {
-        consoleRed(`target-brand "${result.targetBrand}" 不存在於 ${s3BrandPath}`)
-        result.targetBrand = null
-        result.ok = false
-      }
-    }
-  }
-
   return result
+}
+
+// 消費端 (實際做事的 function) 用: 檢查呼叫端傳進來的參數是不是非空字串。
+// 這跟 checkSetting 不同 —— checkSetting 是 interface 層讀 setting.json 時的淺層檢查,
+// 這個是消費端自己收到參數時的防呆, 不管參數是從 setting.json、互動選單、還是其他腳本硬寫死傳進來的都要過。
+export function requireParams(params, keys) {
+  let ok = true
+  keys.forEach((key) => {
+    if (typeof params[key] !== 'string' || params[key].trim() === '') {
+      consoleRed(`缺少必要參數 "${key}"!`)
+      ok = false
+    }
+  })
+  return ok
 }
 
 export function consoleRed(message) {

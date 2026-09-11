@@ -1,7 +1,6 @@
 import path from 'path'
 import select from '@inquirer/select'
 import {
-  checkSetting,
   consoleGreen,
   consolePathHint,
   consoleRed,
@@ -11,7 +10,7 @@ import {
   high,
   isDir,
   readFilesMapByName,
-  readSetting,
+  requireParams,
 } from './utils.js'
 import { resolveBrand } from './brand-utils.js'
 import { checkFigmaImages, consoleFigmaSourceHint } from './figma-utils.js'
@@ -32,37 +31,40 @@ import {
 const COMPONENT_SOURCE_FILE_NAMES = [...LOGO_SOURCE_FILE_NAMES, APP_ICON_SOURCE_FILE_NAME]
 
 /**
- * @param {object} [options]
- * @param {string} [options.targetBrand] 呼叫端已經選好 brand 的話直接傳進來, 不會再問一次。
+ * @param {object} options
+ * @param {string} options.frontendRepoPath
+ * @param {string} options.s3RepoPath
+ * @param {string} options.newImagesFolder
+ * @param {string} options.figmaImagesFolders
+ * @param {string} [options.targetBrand] 沒給就跳互動選單, 有給的話這裡會驗證它是否真的存在於 frontendRepoPath / s3RepoPath 底下。
  *                                       「從 Figma 抓圖 + 同步」那個指令會把問題全問在前面, 用得到這個。
+ * @param {boolean} [options.skipConfirm] 略過「即將覆蓋 repo」的確認步驟, 直接視為同意。
+ * @returns {Promise<{ok: boolean, reason: string|null}>} 給批量/併發呼叫端判斷成功與否用,
+ *                                                        互動選單呼叫端可以直接忽略這個回傳值。
  */
-export async function fullSyncFromFigma({ targetBrand: presetBrand = null } = {}) {
-  const settings = readSetting()
-  if (settings == null) return
+export async function fullSyncFromFigma({
+  frontendRepoPath,
+  s3RepoPath,
+  newImagesFolder,
+  figmaImagesFolders,
+  targetBrand: presetBrand = null,
+  skipConfirm = false,
+} = {}) {
+  if (
+    !requireParams(
+      { frontendRepoPath, s3RepoPath, newImagesFolder, figmaImagesFolders },
+      ['frontendRepoPath', 's3RepoPath', 'newImagesFolder', 'figmaImagesFolders']
+    )
+  )
+    return { ok: false, reason: '缺少必要參數' }
 
-  const {
-    ok,
-    frontendRepoPath,
-    s3RepoPath,
-    newImagesFolder,
-    figmaImagesFolders,
-    targetBrand: settingBrand,
-  } = checkSetting(settings, [
-    'frontend-repo-path',
-    's3-repo-path',
-    'new-images-folder',
-    'figma-images-folders',
-    'target-brand',
-  ])
-  if (!ok) return
-  consoleStep('setting')
-
-  const targetBrand = presetBrand ?? (await resolveBrand({ settingBrand, frontendRepoPath, s3RepoPath }))
-  if (targetBrand == null) return
+  const targetBrand = await resolveBrand({ targetBrand: presetBrand, frontendRepoPath, s3RepoPath })
+  if (targetBrand == null) return { ok: false, reason: 'target-brand 未解析成功' }
   consoleStep(`target-brand = ${high(targetBrand)}`)
 
   if (!isDir(figmaImagesFolders)) {
-    return void consoleRed(`${figmaImagesFolders} 需為一個資料夾!`)
+    consoleRed(`${figmaImagesFolders} 需為一個資料夾!`)
+    return { ok: false, reason: `${figmaImagesFolders} 不為資料夾` }
   }
   consoleStep(`${figmaImagesFolders} 為資料夾`)
 
@@ -90,7 +92,8 @@ export async function fullSyncFromFigma({ targetBrand: presetBrand = null } = {}
   const staticSourceOk = staticSourceChecks.every((img) => img.passFormat)
   const logoSourceOk = logoSourceChecks.every((img) => img.exist)
   if (!staticSourceOk || !logoSourceOk) {
-    return void consoleRed('Figma 來源檔案檢查未通過，請修正以上問題後再執行')
+    consoleRed('Figma 來源檔案檢查未通過，請修正以上問題後再執行')
+    return { ok: false, reason: 'Figma 來源檔案檢查未通過' }
   }
   consoleStep(`${staticSourceChecks.length + logoSourceChecks.length} 個 Figma 來源檔案存在`)
 
@@ -132,18 +135,21 @@ export async function fullSyncFromFigma({ targetBrand: presetBrand = null } = {}
   const appIconOk = appIconInstance.exist
   const maintenanceLogoOk = maintenanceLogo == null || maintenanceLogo.exist
   if (!staticImageOk || !logoOk || !s3LogoOk || !appIconOk || !maintenanceLogoOk) {
-    return void consoleRed('格式 / 尺寸檢查未通過，請修正以上問題後再執行')
+    consoleRed('格式 / 尺寸檢查未通過，請修正以上問題後再執行')
+    return { ok: false, reason: '格式 / 尺寸檢查未通過' }
   }
   consoleStep('格式 / 尺寸檢查全數通過')
 
-  const makeSure = await select({
-    message: `檢查完畢，即將一次覆蓋 frontend 的 static 圖片、Logo 元件，以及 s3 repo 的 Logo，請確認清空 frontend / s3 repo 的 git status，確定嗎?`,
-    choices: [
-      { name: '等等等等等等等等等等', value: false },
-      { name: '清除完畢，開始吧', value: true },
-    ],
-  }).catch(() => false)
-  if (!makeSure) return
+  const makeSure = skipConfirm
+    ? true
+    : await select({
+      message: `檢查完畢，即將一次覆蓋 frontend 的 static 圖片、Logo 元件，以及 s3 repo 的 Logo，請確認清空 frontend / s3 repo 的 git status，確定嗎?`,
+      choices: [
+        { name: '等等等等等等等等等等', value: false },
+        { name: '清除完畢，開始吧', value: true },
+      ],
+    }).catch(() => false)
+  if (!makeSure) return { ok: false, reason: '使用者取消' }
 
   copySourcesToStaging({ staticSourceChecks, logoSourceChecks, newImagesFolder })
   consoleStep('已將來源檔案整理到 new-images 資料夾')
@@ -172,6 +178,7 @@ export async function fullSyncFromFigma({ targetBrand: presetBrand = null } = {}
   consoleGreen(`共 ${s3LogoInstanceList.length} 個 Logo 同步到 s3 repo 完畢!`)
 
   consoleGreen('全部完成!')
+  return { ok: true, reason: null }
 }
 
 function checkLogoSources({ figmaImagesFolders, figmaSourceMap }) {

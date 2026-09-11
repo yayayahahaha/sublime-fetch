@@ -3,12 +3,12 @@ import path from 'path'
 import readline from 'readline/promises'
 import select from '@inquirer/select'
 
-import { checkSetting, consolePathHint, consoleRed, consoleStep, consoleYellow, high, readSetting } from '../utils.js'
+import { consolePathHint, consoleRed, consoleYellow, high, requireParams } from '../utils.js'
 import { STATUS, fetchFigmaAssets } from './fetch-assets.js'
 import { formatFetchResult, formatSummary } from './report.js'
 import { consoleTokenHint } from './rest.js'
 
-/** setting.json 裡的 figma-token, 沒設就印提示並回 null */
+/** setting.json 裡的 figma-token, 沒設就印提示並回 null。給 interface 層讀完 setting.json 後呼叫。 */
 export function readFigmaToken(settings) {
   const token = settings['figma-token']
   if (typeof token !== 'string' || token.trim() === '') {
@@ -18,17 +18,29 @@ export function readFigmaToken(settings) {
   return token
 }
 
-/** 只抓圖的獨立指令 */
-export async function pullFromFigma() {
-  const settings = readSetting()
-  if (settings == null) return
-
-  const { ok, figmaImagesFolders } = checkSetting(settings, ['figma-images-folders'])
-  if (!ok) return
-
-  const token = readFigmaToken(settings)
-  if (token == null) return
-  consoleStep('setting')
+/**
+ * 只抓圖的獨立指令
+ *
+ * @param {object} options
+ * @param {string} options.figmaImagesFolders
+ * @param {string} options.figmaToken
+ * @param {string} [options.figmaUrl] 呼叫端已經有網址的話直接傳進來, 不會再問一次。
+ * @param {boolean} [options.clearOutputDir] 寫入前是否清空 outputDir, 傳了就不會再跳「怎麼處理目標資料夾」的互動選單。
+ *                                          跟 skipConfirm 分開, 因為這個會真的刪檔案。
+ * @param {number} [options.maxRetries] 撞到 Figma API 的 429 rate limit 時最多重試幾次, 轉給 fetchFigmaAssets。
+ *                                     不給就用 rest.js 的預設值 (目前是 3)。
+ * @param {number} [options.retryDelaySeconds] 每次重試至少等這麼多秒, 轉給 fetchFigmaAssets。
+ *                                            不給就用 rest.js 的預設值 (目前是 30)。
+ */
+export async function pullFromFigma({
+  figmaImagesFolders,
+  figmaToken,
+  figmaUrl = null,
+  clearOutputDir = null,
+  maxRetries = undefined,
+  retryDelaySeconds = undefined,
+} = {}) {
+  if (!requireParams({ figmaImagesFolders, figmaToken }, ['figmaImagesFolders', 'figmaToken'])) return
 
   consolePathHint({
     sourceLines: [high('Figma (REST API)')],
@@ -38,7 +50,14 @@ export async function pullFromFigma() {
   console.log(`抓完之後照原本的流程跑「${high('一次同步 Figma 匯出的 static 圖片 + Logo')}」就好。`)
   console.log()
 
-  await runInteractiveFetch({ figmaToken: token, outputDir: figmaImagesFolders })
+  await runInteractiveFetch({
+    figmaToken,
+    outputDir: figmaImagesFolders,
+    figmaUrl,
+    clearOutputDir,
+    maxRetries,
+    retryDelaySeconds,
+  })
 }
 
 /**
@@ -49,27 +68,42 @@ export async function pullFromFigma() {
  *
  * 「抓圖 + 同步」那個指令也是走這裡。
  *
+ * @param {object} options
+ * @param {string} [options.figmaUrl] 呼叫端已經有網址的話直接傳進來, 不會再問一次。
+ * @param {boolean} [options.clearOutputDir] 寫入前是否清空 outputDir, 傳了 (true/false) 就不會再跳
+ *                                          「怎麼處理目標資料夾」的互動選單, 直接照這個值處理。
+ * @param {number} [options.maxRetries] 撞到 Figma API 的 429 rate limit 時最多重試幾次, 轉給 fetchFigmaAssets。
+ * @param {number} [options.retryDelaySeconds] 每次重試至少等這麼多秒, 轉給 fetchFigmaAssets。
  * @returns {Promise<object|null>} 真正寫入那一次的結果物件, 中途取消回 null
  */
-export async function runInteractiveFetch({ figmaToken, outputDir, figmaUrl: presetUrl = null }) {
+export async function runInteractiveFetch({
+  figmaToken,
+  outputDir,
+  figmaUrl: presetUrl = null,
+  clearOutputDir: presetClear = null,
+  maxRetries = undefined,
+  retryDelaySeconds = undefined,
+}) {
   const figmaUrl = presetUrl ?? (await askFigmaUrl())
   if (figmaUrl == null) {
     consoleRed('使用者取消')
     return null
   }
 
-  const base = { figmaUrl, figmaToken, outputDir }
+  const base = { figmaUrl, figmaToken, outputDir, maxRetries, retryDelaySeconds }
 
   // ---- 先看報告再決定要不要寫 ----
   const preview = await fetchFigmaAssets({ ...base, dryRun: true })
   printResult(preview)
 
   if (preview.status !== STATUS.DRY_RUN) {
-    // 找不到 page / 多個 export-area / API 出錯 之類, 報告裡已經寫清楚了
-    return null
+    // 找不到 page / 多個 export-area / API 出錯 之類, 報告裡已經印出細節了,
+    // 但還是把整個結果物件回傳出去 (而不是 null), 讓呼叫端 (例如批量同步) 可以用
+    // describeFetchFailure() 組出比「沒有完成」更詳細的失敗原因
+    return preview
   }
 
-  const decision = await askWriteDecision(preview)
+  const decision = presetClear != null ? { clear: presetClear } : await askWriteDecision(preview)
   if (decision == null) {
     consoleRed('使用者取消')
     return null

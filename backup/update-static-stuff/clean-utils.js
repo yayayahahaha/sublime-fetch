@@ -1,13 +1,16 @@
 import path from 'path'
 import fs from 'fs'
 import select from '@inquirer/select'
-import { consoleGreen, consoleRed, consoleStep, high, readSetting } from './utils.js'
+import { consoleGreen, consoleRed, consoleStep, high } from './utils.js'
 
-export async function cleanLocalFolders() {
-  const settings = readSetting() ?? {}
-  const newImagesFolder = settings['new-images-folder']
-  const figmaImagesFolders = settings['figma-images-folders']
-
+/**
+ * @param {object} [options]
+ * @param {string} [options.newImagesFolder] 有給才會清這個資料夾, 沒給就跳過。
+ * @param {string} [options.figmaImagesFolders] 有給才會清這個資料夾, 沒給就跳過。
+ * @param {boolean} [options.forceClean] 略過兩次「確定要清除 / 無法復原」的確認, 直接視為同意。
+ *                                       跟其他功能的 skipConfirm 分開, 這個動作無法復原, 故意要用不同的參數名避免共用預設值。
+ */
+export async function cleanLocalFolders({ newImagesFolder = null, figmaImagesFolders = null, forceClean = false } = {}) {
   const candidates = [
     path.resolve('.', 'svg-to-vue-images'),
     path.resolve('.', 'svg-to-vue-images-result'),
@@ -27,22 +30,26 @@ export async function cleanLocalFolders() {
   existing.forEach((p) => console.log(`   ${high(p)}`))
   console.log()
 
-  const confirm1 = await select({
-    message: '確定要清除這些資料夾嗎?',
-    choices: [
-      { name: '等等再說', value: false },
-      { name: '我確定', value: true },
-    ],
-  }).catch(() => false)
+  const confirm1 = forceClean
+    ? true
+    : await select({
+      message: '確定要清除這些資料夾嗎?',
+      choices: [
+        { name: '等等再說', value: false },
+        { name: '我確定', value: true },
+      ],
+    }).catch(() => false)
   if (!confirm1) return void consoleRed('使用者取消')
 
-  const confirm2 = await select({
-    message: '再次確認: 此動作無法復原',
-    choices: [
-      { name: '不要清除', value: false },
-      { name: '是的，清除', value: true },
-    ],
-  }).catch(() => false)
+  const confirm2 = forceClean
+    ? true
+    : await select({
+      message: '再次確認: 此動作無法復原',
+      choices: [
+        { name: '不要清除', value: false },
+        { name: '是的，清除', value: true },
+      ],
+    }).catch(() => false)
   if (!confirm2) return void consoleRed('使用者取消')
 
   existing.forEach((p) => {

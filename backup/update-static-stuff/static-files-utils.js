@@ -2,7 +2,6 @@ import select from '@inquirer/select'
 import fs from 'fs'
 import path from 'path'
 import {
-  checkSetting,
   consoleGreen,
   consolePathHint,
   consoleRed,
@@ -13,24 +12,21 @@ import {
   high,
   isDir,
   readFilesMapByName,
-  readSetting,
+  requireParams,
 } from './utils.js'
 import { resolveBrand } from './brand-utils.js'
 
-export async function staticStuff() {
-  const settings = readSetting()
-  if (settings == null) return
+/**
+ * @param {object} options
+ * @param {string} options.frontendRepoPath
+ * @param {string} options.newImagesFolder
+ * @param {string} [options.targetBrand] 沒給就跳互動選單, 有給的話這裡會驗證它是否真的存在於 frontendRepoPath 底下。
+ * @param {boolean} [options.skipConfirm] 略過「即將覆蓋 repo」的確認步驟, 直接視為同意。
+ */
+export async function staticStuff({ frontendRepoPath, newImagesFolder, targetBrand: presetBrand = null, skipConfirm = false } = {}) {
+  if (!requireParams({ frontendRepoPath, newImagesFolder }, ['frontendRepoPath', 'newImagesFolder'])) return
 
-  const {
-    ok,
-    frontendRepoPath,
-    newImagesFolder,
-    targetBrand: settingBrand,
-  } = checkSetting(settings, ['frontend-repo-path', 'new-images-folder', 'target-brand'])
-  if (!ok) return
-  consoleStep('setting')
-
-  const targetBrand = await resolveBrand({ settingBrand, frontendRepoPath })
+  const targetBrand = await resolveBrand({ targetBrand: presetBrand, frontendRepoPath })
   if (targetBrand == null) return
   consoleStep(`target-brand = ${high(targetBrand)}`)
 
@@ -56,19 +52,21 @@ export async function staticStuff() {
   }
   consoleStep(`${checkNeededImages.length} 張圖片存在與尺寸`)
 
-  const makeSure = await select({
-    message: '檢查完畢，即將開始覆蓋 static 相關的檔案，請確認清空 frontend repo 的 git status',
-    choices: [
-      {
-        name: '我還沒清完，等等再做',
-        value: false,
-      },
-      {
-        name: '清除完畢，開始吧',
-        value: true,
-      },
-    ],
-  }).catch(() => false)
+  const makeSure = skipConfirm
+    ? true
+    : await select({
+      message: '檢查完畢，即將開始覆蓋 static 相關的檔案，請確認清空 frontend repo 的 git status',
+      choices: [
+        {
+          name: '我還沒清完，等等再做',
+          value: false,
+        },
+        {
+          name: '清除完畢，開始吧',
+          value: true,
+        },
+      ],
+    }).catch(() => false)
   if (!makeSure) return
 
   checkNeededImages.forEach((payload) => {

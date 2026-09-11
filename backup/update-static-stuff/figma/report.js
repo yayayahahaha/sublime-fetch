@@ -170,6 +170,43 @@ function formatWritten(result, paint) {
   return lines
 }
 
+/**
+ * 抓圖階段沒有寫入任何檔案時, 組一句話說明原因 (不上色, 純文字), 給 pullAndSyncFromFigma 的
+ * `reason` 欄位、批量同步的失敗報告用——這兩個地方沒辦法印 formatFetchResult() 的完整多行報告,
+ * 只有一行可以放, 但還是要看得出「為什麼」, 不能只寫「沒有完成」。
+ */
+export function describeFetchFailure(result) {
+  switch (result.status) {
+    case STATUS.INVALID_INPUT:
+      return `參數不對: ${result.error.message}`
+    case STATUS.INVALID_URL:
+      return `網址看不懂: ${result.error.message}`
+    case STATUS.API_ERROR:
+      return `Figma API 出錯: ${result.error.message}`
+    case STATUS.PAGE_NOT_FOUND:
+      return `找不到名字含 "asset" 的 page (該檔案的 page: ${result.allPageNames.join(', ') || '(沒有 page)'})`
+    case STATUS.EXPORT_AREA_NOT_FOUND:
+      return (
+        `找到 ${result.candidates.length} 個 assets page` +
+        (result.candidates.length === 0 ? '' : ` (${result.candidates.map((item) => item.pageName).join(', ')})`) +
+        `, 但裡面沒有 "${EXPORT_AREA_NAME}" 節點`
+      )
+    case STATUS.MULTIPLE_EXPORT_AREAS:
+      return (
+        `有 ${result.candidates.length} 個 page 都含 "${EXPORT_AREA_NAME}"` +
+        ` (${result.candidates.map((item) => item.pageName).join(', ')}), 無法判斷要用哪一個`
+      )
+    case STATUS.NO_ASSETS:
+      return '沒有任何資產通過檢查, 沒有寫入任何檔案'
+    case STATUS.PARTIAL:
+      return result.failures.length > 0
+        ? `有 ${result.failures.length} 個檔案處理失敗: ${result.failures.map((item) => `${item.fileName} (${item.reason})`).join('; ')}`
+        : `部分資產被跳過 (${result.skipped.length} 個), 沒有任何檔案成功寫入`
+    default:
+      return `未知狀態 (status=${result.status})`
+  }
+}
+
 /** 一行總結, 給 CLI 收尾和互動式接續用 */
 export function formatSummary(result) {
   const counts = `寫入 ${result.written.length} 個檔案, 失敗 ${result.failures.length} 個, 跳過 ${result.skipped.length} 個資產`

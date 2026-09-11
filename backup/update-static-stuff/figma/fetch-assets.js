@@ -55,6 +55,10 @@ export const STATUS = {
  *                                           互動式指令用這個先給人看報告再問要不要寫入
  * @param {boolean} [options.verbose]        印進行到哪的步驟 log (前綴 [figma])。
  *                                           預設 false = 完全靜默, 結果全部在回傳值裡
+ * @param {number}  [options.maxRetries]     撞到 Figma API 的 429 rate limit 時最多重試幾次,
+ *                                           預設見 rest.js 的 DEFAULT_MAX_RETRIES (目前是 3)。
+ * @param {number}  [options.retryDelaySeconds] 每次重試至少等這麼多秒 (跟 Figma 回的 Retry-After 取較大值),
+ *                                              預設見 rest.js 的 DEFAULT_RETRY_DELAY_SECONDS (目前是 30)。
  * @returns {Promise<object>} 見 SPEC.md 的結果物件說明
  */
 export async function fetchFigmaAssets(options = {}) {
@@ -129,12 +133,13 @@ function emptyResult({ outputDir }) {
   }
 }
 
-async function run({ figmaToken, outputDir, clearOutputDir, dryRun, fileKey, result, log }) {
+async function run({ figmaToken, outputDir, clearOutputDir, dryRun, fileKey, result, log, maxRetries, retryDelaySeconds }) {
   const token = figmaToken
   result.dryRun = dryRun
+  const retryOptions = { maxRetries, retryDelaySeconds }
 
   // ---- 1. 找 page (名字含 asset) ----
-  const pageInfo = await fetchAssetPageCandidates(fileKey, token)
+  const pageInfo = await fetchAssetPageCandidates(fileKey, token, retryOptions)
   result.file.name = pageInfo.fileName
   result.file.version = pageInfo.version
   result.allPageNames = pageInfo.allPageNames
@@ -151,7 +156,8 @@ async function run({ figmaToken, outputDir, clearOutputDir, dryRun, fileKey, res
   const areas = await fetchExportAreas(
     fileKey,
     pageInfo.candidates.map((page) => page.id),
-    token
+    token,
+    retryOptions
   )
   result.candidates = areas.map((area) => ({
     pageId: area.pageId,
@@ -178,7 +184,7 @@ async function run({ figmaToken, outputDir, clearOutputDir, dryRun, fileKey, res
   log(`export-area 在 "${area.pageName}" (${area.nodeId})`)
 
   // ---- 3. 抓完整 subtree 並檢查 ----
-  const tree = await fetchExportAreaTree(fileKey, area.nodeId, token)
+  const tree = await fetchExportAreaTree(fileKey, area.nodeId, token, retryOptions)
   const firstLevel = tree.children ?? []
   const { assets, findings, ignoredTextNames } = runChecks(tree)
 
@@ -194,7 +200,7 @@ async function run({ figmaToken, outputDir, clearOutputDir, dryRun, fileKey, res
       `丟棄 ${ignoredTextNames.length} 個 TEXT 標註, 實際檢查 ${firstLevel.length - ignoredTextNames.length} 個`
   )
 
-  const resolutionFindings = await checkSourceResolutions(fileKey, assets, token, log)
+  const resolutionFindings = await checkSourceResolutions(fileKey, assets, token, log, retryOptions)
   result.findings = [...findings, ...resolutionFindings]
 
   result.assets = assets.map((asset) => describeAsset(asset))
@@ -224,7 +230,14 @@ async function run({ figmaToken, outputDir, clearOutputDir, dryRun, fileKey, res
   }
   fs.mkdirSync(resolvedOutputDir, { recursive: true })
 
-  const { written, failures } = await renderAndWrite({ fileKey, assets, token, outputDir: resolvedOutputDir, log })
+  const { written, failures } = await renderAndWrite({
+    fileKey,
+    assets,
+    token,
+    outputDir: resolvedOutputDir,
+    log,
+    ...retryOptions,
+  })
   result.written = written
   result.failures = failures
 
@@ -282,7 +295,7 @@ function clearDir(dir) {
 }
 
 /** 下載原始點陣圖來量解析度, 純提醒性質, 失敗就跳過 */
-async function checkSourceResolutions(fileKey, assets, token, log) {
+async function checkSourceResolutions(fileKey, assets, token, log, retryOptions) {
   const needing = assets
     .map((asset) => ({ asset, refs: [...collectVisibleImageRefs(asset.node)] }))
     .filter((item) => item.refs.length > 0)
@@ -294,7 +307,7 @@ async function checkSourceResolutions(fileKey, assets, token, log) {
 
   let refUrls
   try {
-    refUrls = await fetchImageRefUrls(fileKey, token)
+    refUrls = await fetchImageRefUrls(fileKey, token, retryOptions)
   } catch {
     // 量不到就算了, 這條本來就只是提醒
     log('拿不到原始點陣圖清單, 跳過解析度檢查')
@@ -326,7 +339,7 @@ async function checkSourceResolutions(fileKey, assets, token, log) {
  * 先把所有輸出攤成 render job, 依 (format, scale) 分組向 Figma 要圖,
  * 這樣同倍率的多個節點可以一次要完, 不用一個檔案一個 request。
  */
-async function renderAndWrite({ fileKey, assets, token, outputDir, log }) {
+async function renderAndWrite({ fileKey, assets, token, outputDir, log, maxRetries, retryDelaySeconds }) {
   const jobs = []
   for (const asset of assets) {
     for (const exportItem of asset.spec.exports) {
@@ -356,7 +369,10 @@ async function renderAndWrite({ fileKey, assets, token, outputDir, log }) {
   const rendered = new Map()
   for (const [groupKey, group] of groups) {
     const nodeIds = [...group.nodeIds]
-    const urls = await fetchRenderUrls(fileKey, nodeIds, { format: group.format, scale: group.scale }, token)
+    const urls = await fetchRenderUrls(fileKey, nodeIds, { format: group.format, scale: group.scale }, token, {
+      maxRetries,
+      retryDelaySeconds,
+    })
     for (const nodeId of nodeIds) {
       const url = urls[nodeId]
       if (url == null) continue
